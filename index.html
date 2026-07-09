@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رؤى — بنية تحتية إعلامية ومالية ذكية للمؤسسات</title>
+<meta name="description" content="الذكاء يقرأ السوق.. أنت تتخذ القرار. منظومة رؤى المالية: أخبار + تحليل + تنفيذ في 5 لغات.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   رؤى Corporate — Design Tokens
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --bg-void: #06080F;
+  --bg-deep: #0D1117;
+  --bg-elevated: #161B22;
+  --bg-glass: rgba(22, 27, 34, 0.65);
+  --gold: #D9A653;
+  --gold-light: #F0D590;
+  --gold-glow: rgba(217, 166, 83, 0.15);
+  --teal: #34D8B8;
+  --teal-light: #6FE7D1;
+  --teal-glow: rgba(52, 216, 184, 0.15);
+  --text: #F4F2EC;
+  --text-secondary: #8B949E;
+  --text-muted: #484F58;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-gold: rgba(217, 166, 83, 0.3);
+  --blur: blur(20px) saturate(180%);
+  --gradient-gold: linear-gradient(135deg, #D9A653 0%, #F0D590 50%, #D9A653 100%);
+  --gradient-teal: linear-gradient(135deg, #34D8B8 0%, #6FE7D1 50%, #34D8B8 100%);
+  --shadow-gold: 0 0 60px rgba(217, 166, 83, 0.12);
+  --shadow-teal: 0 0 60px rgba(52, 216, 184, 0.12);
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═════ Reset ═════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  background: var(--bg-void);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+
+/* ═════ Scrollbar ═════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--gold), var(--teal)); border-radius: 3px; }
+
+/* ═════ Scroll Progress ═════ */
+.scroll-progress {
+  position: fixed; top: 0; right: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  z-index: 9999; transform-origin: right; transform: scaleX(0);
+  transition: transform 0.1s;
+}
+
+/* ═════ Background Canvas ═════ */
+#bg-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none; opacity: 0.4;
+}
+
+/* ═════ Navigation ═════ */
+.nav {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 1000;
+  background: rgba(6, 8, 15, 0.8);
+  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--border-glass);
+  transition: var(--transition);
+}
+.nav-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.nav-logo {
+  font-size: 1.5rem; font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.9rem; color: var(--text-secondary);
+  transition: var(--transition); position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; right: 0; left: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transition: var(--transition);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  padding: 0.6rem 1.5rem; border-radius: 8px;
+  background: var(--gradient-gold); color: var(--bg-void);
+  font-weight: 600; font-size: 0.9rem;
+  transition: var(--transition);
+}
+.nav-cta:hover { box-shadow: var(--shadow-gold); transform: translateY(-2px); }
+.nav-mobile { display: none; font-size: 1.5rem; background: none; border: none; color: var(--text); cursor: pointer; }
+
+/* ═════ Hero ═════ */
+.hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 6rem 2rem 4rem; z-index: 1;
+}
+.hero-content { max-width: 900px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1.2rem; border-radius: 50px;
+  background: rgba(52, 216, 184, 0.08); border: 1px solid rgba(52, 216, 184, 0.2);
+  font-size: 0.85rem; color: var(--teal); margin-bottom: 2rem;
+}
+.hero-badge .dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--teal-glow); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px transparent; }
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 700;
+  line-height: 1.2; margin-bottom: 1.5rem;
+  background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero h1 .highlight {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem); color: var(--gold);
+  margin-bottom: 1rem; font-weight: 500;
+}
+.hero-desc {
+  font-size: 1.1rem; color: var(--text-secondary);
+  max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.8;
+}
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  padding: 1rem 2.5rem; border-radius: 10px;
+  background: var(--gradient-gold); color: var(--bg-void);
+  font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
+  transition: var(--transition);
+}
+.btn-primary:hover { box-shadow: var(--shadow-gold); transform: translateY(-3px); }
+.btn-outline {
+  padding: 1rem 2.5rem; border-radius: 10px;
+  background: transparent; color: var(--text);
+  font-weight: 600; font-size: 1rem;
+  border: 1px solid var(--border-glass); cursor: pointer;
+  transition: var(--transition);
+}
+.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ═════ Stats ═════ */
+.stats {
+  position: relative; z-index: 1;
+  padding: 4rem 2rem; max-width: 1400px; margin: 0 auto;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+.stat-card {
+  background: var(--bg-glass); backdrop-filter: var(--blur);
+  border: 1px solid var(--border-glass); border-radius: 16px;
+  padding: 2rem 1.5rem; text-align: center;
+  transition: var(--transition);
+}
+.stat-card:hover {
+  border-color: var(--border-gold); transform: translateY(-4px);
+  box-shadow: var(--shadow-gold);
+}
+.stat-number {
+  font-size: 2.5rem; font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ═════ Section General ═════ */
+.section {
+  position: relative; z-index: 1;
+  padding: 6rem 2rem; max-width: 1400px; margin: 0 auto;
+}
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-label {
+  font-size: 0.8rem; color: var(--teal); text-transform: uppercase;
+  letter-spacing: 3px; margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+  margin-bottom: 1rem; line-height: 1.3;
+}
+.section-title .highlight {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-desc {
+  font-size: 1.1rem; color: var(--text-secondary);
+  max-width: 700px; margin: 0 auto;
+}
+
+/* ═════ Architecture Diagram ═════ */
+.arch-layer {
+  background: var(--bg-glass); backdrop-filter: var(--blur);
+  border: 1px solid var(--border-glass); border-radius: 20px;
+  padding: 2rem; margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+.arch-layer:hover { border-color: var(--border-gold); }
+.arch-layer-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+}
+.arch-layer-num {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.2rem; flex-shrink: 0;
+}
+.arch-layer-num.gold { background: var(--gold-glow); color: var(--gold); border: 1px solid var(--border-gold); }
+.arch-layer-num.teal { background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(52,216,184,0.3); }
+.arch-layer-title { font-size: 1.3rem; font-weight: 600; }
+.arch-layer-desc { color: var(--text-secondary); font-size: 0.9rem; }
+.arch-items {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+}
+.arch-item {
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem; transition: var(--transition);
+}
+.arch-item:hover { background: rgba(255,255,255,0.04); border-color: var(--border-glass); }
+.arch-item-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.arch-item-meta { font-size: 0.8rem; color: var(--text-muted); }
+.arch-arrow { text-align: center; color: var(--text-muted); font-size: 1.5rem; margin: -0.5rem 0; }
+
+/* ═════ Services ═════ */
+.services-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+.service-card {
+  background: var(--bg-glass); backdrop-filter: var(--blur);
+  border: 1px solid var(--border-glass); border-radius: 20px;
+  padding: 2.5rem; transition: var(--transition); position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px;
+  background: var(--gradient-gold); opacity: 0; transition: var(--transition);
+}
+.service-card:hover { transform: translateY(-6px); border-color: var(--border-gold); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 1.5rem;
+  background: var(--gold-glow); border: 1px solid var(--border-gold);
+}
+.service-icon.teal { background: var(--teal-glow); border-color: rgba(52,216,184,0.3); }
+.service-num {
+  position: absolute; top: 1.5rem; left: 1.5rem;
+  font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.03);
+  line-height: 1;
+}
+.service-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; }
+.service-problem { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.7; }
+.service-problem strong { color: var(--gold); }
+.service-numbers {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;
+}
+.service-tag {
+  padding: 0.3rem 0.8rem; border-radius: 6px;
+  background: rgba(52, 216, 184, 0.08); border: 1px solid rgba(52, 216, 184, 0.15);
+  font-size: 0.8rem; color: var(--teal);
+}
+.service-delivery {
+  font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;
+  padding-top: 1rem; border-top: 1px solid var(--border);
+}
+.service-delivery strong { color: var(--text-secondary); }
+
+/* ═════ Exclusive Tech ═════ */
+.exclusive-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.exclusive-card {
+  background: rgba(217, 166, 83, 0.03); border: 1px solid var(--border-gold);
+  border-radius: 16px; padding: 2rem; transition: var(--transition);
+}
+.exclusive-card:hover { background: rgba(217, 166, 83, 0.06); transform: translateY(-4px); }
+.exclusive-badge {
+  display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px;
+  background: var(--gold-glow); color: var(--gold);
+  font-size: 0.7rem; font-weight: 600; margin-bottom: 1rem;
+}
+.exclusive-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.exclusive-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ═════ Comparison ═════ */
+.comparison-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--bg-glass); border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border-glass);
+}
+.comparison-table th, .comparison-table td {
+  padding: 1.2rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border);
+}
+.comparison-table th {
+  background: rgba(255,255,255,0.03); font-weight: 600; font-size: 0.9rem;
+}
+.comparison-table th.rouaa {
+  background: var(--gold-glow); color: var(--gold);
+}
+.comparison-table td:first-child { text-align: right; font-weight: 500; }
+.comparison-table .check { color: var(--teal); font-size: 1.2rem; }
+.comparison-table .cross { color: var(--text-muted); font-size: 1.2rem; }
+.comparison-table .partial { color: var(--gold); font-size: 1.2rem; }
+
+/* ═════ Pricing ═════ */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.pricing-card {
+  background: var(--bg-glass); backdrop-filter: var(--blur);
+  border: 1px solid var(--border-glass); border-radius: 20px;
+  padding: 2.5rem; transition: var(--transition); position: relative;
+}
+.pricing-card.featured {
+  border-color: var(--border-gold); box-shadow: var(--shadow-gold);
+}
+.pricing-card.featured::before {
+  content: 'الأكثر طلباً'; position: absolute; top: -12px; right: 50%;
+  transform: translateX(50%); padding: 0.3rem 1rem; border-radius: 20px;
+  background: var(--gradient-gold); color: var(--bg-void);
+  font-size: 0.75rem; font-weight: 600; white-space: nowrap;
+}
+.pricing-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+.pricing-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+.pricing-features { list-style: none; margin-bottom: 2rem; }
+.pricing-features li {
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem; color: var(--text-secondary);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pricing-features li::before { content: '✓'; color: var(--teal); font-weight: 700; }
+.pricing-cta {
+  display: block; text-align: center; padding: 0.8rem;
+  border-radius: 10px; border: 1px solid var(--border-glass);
+  color: var(--text); font-weight: 600; transition: var(--transition);
+}
+.pricing-cta:hover { background: var(--gradient-gold); color: var(--bg-void); border-color: transparent; }
+
+/* ═════ Contact ═════ */
+.contact-form {
+  max-width: 600px; margin: 0 auto;
+  background: var(--bg-glass); backdrop-filter: var(--blur);
+  border: 1px solid var(--border-glass); border-radius: 20px;
+  padding: 3rem;
+}
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 0.8rem 1rem; border-radius: 10px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  color: var(--text); font-family: inherit; font-size: 0.95rem;
+  transition: var(--transition);
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--gold); background: rgba(255,255,255,0.05);
+}
+.form-textarea { min-height: 120px; resize: vertical; }
+.form-submit {
+  width: 100%; padding: 1rem; border-radius: 10px; border: none;
+  background: var(--gradient-gold); color: var(--bg-void);
+  font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition);
+}
+.form-submit:hover { box-shadow: var(--shadow-gold); transform: translateY(-2px); }
+.form-message {
+  margin-top: 1rem; padding: 1rem; border-radius: 10px; text-align: center;
+  display: none;
+}
+.form-message.success { display: block; background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(52,216,184,0.3); }
+
+/* ═════ Footer ═════ */
+.footer {
+  position: relative; z-index: 1;
+  padding: 4rem 2rem 2rem; border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer-logo {
+  font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-tagline { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; }
+.footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+
+/* ═════ Animations ═════ */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ═════ Responsive ═════ */
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: 1fr; }
+  .exclusive-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 70px; right: 0; left: 0; background: var(--bg-deep);
+    padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-glass);
+  }
+  .stats-grid { grid-template-columns: 1fr; }
+  .exclusive-grid { grid-template-columns: 1fr; }
+  .arch-items { grid-template-columns: 1fr; }
+  .section { padding: 4rem 1rem; }
+  .hero { padding: 5rem 1rem 3rem; }
+  .contact-form { padding: 2rem 1.5rem; }
+  .comparison-table { font-size: 0.8rem; }
+  .comparison-table th, .comparison-table td { padding: 0.8rem 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═════ Navigation ═════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">رؤى</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#architecture">البنية</a></li>
+      <li><a href="#services">الخدمات</a></li>
+      <li><a href="#exclusive">تكنولوجيا حصرية</a></li>
+      <li><a href="#why">لماذا رؤى</a></li>
+      <li><a href="#pricing">التسعير</a></li>
+      <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
+    </ul>
+    <button class="nav-mobile" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- ═════ Hero ═════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span>منظومة مالية ذكية متكاملة</span>
+    </div>
+    <h1>بنية تحتية إعلامية<br>ومالية ذكية <span class="highlight">للمؤسسات</span></h1>
+    <p class="hero-tagline">الذكاء يقرأ السوق.. أنت تتخذ القرار</p>
+    <p class="hero-desc">
+      منظومة رؤى تجمع الأخبار الرسمية بـ 5 لغات، وتحليل السوق بـ 64 محرك ذكاء، ومجلس 9 نماذج AI يتخذ القرار، و3 منفذين مستقلين ينفذونه — في حلقة واحدة من الخبر إلى الصفقة.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">احجز عرضاً توضيحياً</a>
+      <a href="#architecture" class="btn-outline">اكتشف البنية</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Stats ═════ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-card fade-in">
+      <div class="stat-number" data-target="5">0</div>
+      <div class="stat-label">لغات أخبار + 32 لغة تداول</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number" data-target="65">0</div>
+      <div class="stat-label">مصدر رسمي + 14 محول بيانات</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number" data-target="9">0</div>
+      <div class="stat-label">نماذج AI في مجلس الحكماء</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number" data-target="64">0</div>
+      <div class="stat-label">محرك تحليل شارت ذكي</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Architecture ═════ -->
+<section class="section" id="architecture">
+  <div class="section-header fade-in">
+    <div class="section-label">المعمارية</div>
+    <h2 class="section-title">أربع طبقات من <span class="highlight">الخبر إلى التنفيذ</span></h2>
+    <p class="section-desc">كل طبقة تغذي ما بعدها — الأخبار تُحلَّل، التحليل يُوصَّى، التوصية تُنفَّذ. حلقة واحدة مغلقة.</p>
+  </div>
+
+  <!-- Layer 1: Inputs -->
+  <div class="arch-layer fade-in">
+    <div class="arch-layer-header">
+      <div class="arch-layer-num gold">1</div>
+      <div>
+        <div class="arch-layer-title">المدخلات — Data Ingestion</div>
+        <div class="arch-layer-desc">جمع البيانات من المصادر الرسمية والأسواق الحية</div>
+      </div>
+    </div>
+    <div class="arch-items">
+      <div class="arch-item">
+        <div class="arch-item-name">أنابيب الأخبار</div>
+        <div class="arch-item-meta">65 مصدر رسمي × 5 لغات (ar/en/fr/tr/es)، أنابيب تعمل كل 5 دقائق، وكيل نشر مستقل بـ 14 محول</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">بيانات الأسواق الحية</div>
+        <div class="arch-item-meta">17 أداة مالية (أسهم، فوركس، كريبتو، سلع، مؤشرات) + 15 بنك مركزي + تقويم اقتصادي</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">المخاطر الجيوسياسية</div>
+        <div class="arch-item-meta">24 محرك تحليل (GNN, Bayesian, SIR, Monte Carlo) + خريطة حرارية عالمية</div>
+      </div>
+    </div>
+  </div>
+  <div class="arch-arrow">↓</div>
+
+  <!-- Layer 2: Intelligence -->
+  <div class="arch-layer fade-in">
+    <div class="arch-layer-header">
+      <div class="arch-layer-num teal">2</div>
+      <div>
+        <div class="arch-layer-title">الذكاء — Intelligence Layer</div>
+        <div class="arch-layer-desc">تحليل البيانات وإصدار القرارات عبر محركات AI متعددة</div>
+      </div>
+    </div>
+    <div class="arch-items">
+      <div class="arch-item">
+        <div class="arch-item-name">مجلس الحكماء الذكي</div>
+        <div class="arch-item-meta">9 نماذج AI (8 متخصصين + محامي الشيطان) × 8 مزودين، 9 خدمات ذكاء مجالسي، 32 زوج، 8 أطر زمنية</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">لوحة الشارت الذكية</div>
+        <div class="arch-item-meta">64 محرك تحليل: Wyckoff + Elliott + SMC + Harmonic + Footprint + Bayesian تكيفي + جسر AI Council</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">مختبر Neural Lab</div>
+        <div class="arch-item-meta">4 معمارات (LSTM/GRU/Transformer/Ensemble) + Swarm ذكاء أسراب (10 وكلاء يصوتون ديمقراطياً)</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">سوق التنبؤ</div>
+        <div class="arch-item-meta">تكامل Polymarket — يحسب الفجوة بين احتمال السوق واحتمال AI، يصوت كالنموذج العاشر</div>
+      </div>
+    </div>
+  </div>
+  <div class="arch-arrow">↓</div>
+
+  <!-- Layer 3: Recommendation -->
+  <div class="arch-layer fade-in">
+    <div class="arch-layer-header">
+      <div class="arch-layer-num gold">3</div>
+      <div>
+        <div class="arch-layer-title">التوصية — Recommendation</div>
+        <div class="arch-layer-desc">تحويل التحليل لتوصيات قابلة للتنفيذ</div>
+      </div>
+    </div>
+    <div class="arch-items">
+      <div class="arch-item">
+        <div class="arch-item-name">مساعد رؤى Copilot</div>
+        <div class="arch-item-meta">32 لغة، 6 بناة سياق، function calling، Intent Classifier، Financial Glossary</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">التقارير الاستراتيجية</div>
+        <div class="arch-item-meta">13 فئة أصول × 4 أنواع (يومي/أسبوعي/شهري/استراتيجي) × 5 لغات = 260 نوع تقرير</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">بريفات المجلس</div>
+        <div class="arch-item-meta">توصيات مع entry/SL/TP/confidence/timeframe، تتبع النتائج (WIN/LOSS)</div>
+      </div>
+    </div>
+  </div>
+  <div class="arch-arrow">↓</div>
+
+  <!-- Layer 4: Execution -->
+  <div class="arch-layer fade-in">
+    <div class="arch-layer-header">
+      <div class="arch-layer-num teal">4</div>
+      <div>
+        <div class="arch-layer-title">التنفيذ — Execution</div>
+        <div class="arch-layer-desc">ثلاثة منفذين مستقلون + جسر MetaTrader</div>
+      </div>
+    </div>
+    <div class="arch-items">
+      <div class="arch-item">
+        <div class="arch-item-name">الوكيل (Autonomous Trader)</div>
+        <div class="arch-item-meta">"العقل المدبر" — حلقة كاملة: تحليل → تقييم → مخاطر → تنفيذ. كل 60 ثانية، 7 استراتيجيات</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">المنفذ الذكي (Smart Executor)</div>
+        <div class="arch-item-meta">"الجندي في الميدان" — يلتزم ببريفات المجلس وينفذ فور تحقق الشروط. كل 10 ثوانٍ</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">اللازك (LAZIC Scalper)</div>
+        <div class="arch-item-meta">"فائق السرعة" — يحسب Order Book Imbalance على streaming، ينفذ في أقل من 5 مللي ثانية</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-item-name">جسر EA (MetaTrader)</div>
+        <div class="arch-item-meta">يتصل مع Expert Advisors على MT5 — الكلاود يوفر الذكاء، EA يوفر التنفيذ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Services ═════ -->
+<section class="section" id="services">
+  <div class="section-header fade-in">
+    <div class="section-label">الخدمات</div>
+    <h2 class="section-title">ست خدمات <span class="highlight">مؤسسية</span></h2>
+    <p class="section-desc">كل خدمة تحل مشكلة محددة — تُسلَّم عبر REST API أو WebSocket أو Webhook أو White Label</p>
+  </div>
+
+  <div class="services-grid">
+    <!-- Service 1 -->
+    <div class="service-card fade-in">
+      <div class="service-num">01</div>
+      <div class="service-icon">📡</div>
+      <h3 class="service-title">أنابيب الأخبار — News Pipeline API</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> تأخر المعلومة المالية يكلّف المؤسسات ملايين. الأخبار المنشورة بعد دقيقة من الحدث لا قيمة لها.<br>
+        <strong>الحل:</strong> وكيل نشر مستقل يجمع من 65 مصدراً رسمياً (بنوك مركزية، هيئات رقابية، مكاتب إحصاء) ويعيد صياغتها كأخبار أصلية بـ 5 لغات.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">5 لغات</span>
+        <span class="service-tag">65 مصدر</span>
+        <span class="service-tag">14 محول</span>
+        <span class="service-tag">كل 5 دقائق</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> REST API + WebSocket + Webhook | <strong>الجمهور:</strong> المواقع الإخبارية، التطبيقات المالية</div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card fade-in">
+      <div class="service-num">02</div>
+      <div class="service-icon teal">📊</div>
+      <h3 class="service-title">التقارير الاستراتيجية — Strategic Reports</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> صناع القرار يحتاجون تحليلاً عميقاً لكل فئة أصول، لا مجرد أخبار سريعة.<br>
+        <strong>الحل:</strong> تقارير يومية/أسبوعية/شهرية/استراتيجية تغطي 13 فئة أصول بمستويات ثقة AI، تُولَّد تلقائياً وتُترجم لـ 5 لغات.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">13 فئة أصول</span>
+        <span class="service-tag">4 أنواع تقارير</span>
+        <span class="service-tag">5 لغات</span>
+        <span class="service-tag">260 نوع</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> API + White Label PDF | <strong>الجمهور:</strong> صناديق الاستثمار، البنوك، المحللون</div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card fade-in">
+      <div class="service-num">03</div>
+      <div class="service-icon">🏛️</div>
+      <h3 class="service-title">مجلس الحكماء — Council API</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> قرار التداول الواحد يحتاج 8 وجهات نظر مختلفة — لا يوجد محلل بشري يجمعها في وقت واحد.<br>
+        <strong>الحل:</strong> 9 نماذج AI متخصصة (فني، مشاعر، مخاطر، ماكرو، أنماط، تنفيذ، تباين، سيناريوهات + محامي الشيطان) تصوت، والإجماع يصدر قراراً واحداً بنسبة ثقة.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">8+1 نماذج</span>
+        <span class="service-tag">8 مزودين</span>
+        <span class="service-tag">9 خدمات ذكاء</span>
+        <span class="service-tag">32 زوج</span>
+        <span class="service-tag">8 أطر زمنية</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> REST + WebSocket (جلسات حية) + Webhook (بريفات) | <strong>الجمهور:</strong> منصات تداول، صناديق تحوط</div>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card fade-in">
+      <div class="service-num">04</div>
+      <div class="service-icon teal">📈</div>
+      <h3 class="service-title">لوحة الشارت الذكية — Smart Chart</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> منصات الشارت الحالية (TradingView, MetaTrader) تحلل بنمط واحد — لا تجمع المدارس التحليلية.<br>
+        <strong>الحل:</strong> 64 محرك تحليل متكامل في لوحة واحدة: Wyckoff + Elliott + SMC + Harmonic + Footprint + Bayesian تكيفي. لا يوجد مثيل عالمياً.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">64 محرك</span>
+        <span class="service-tag">Unified Consensus</span>
+        <span class="service-tag">8 أوزان تحليل</span>
+        <span class="service-tag">Footprint</span>
+        <span class="service-tag">Volume Profile</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> White Label Widget + SDK | <strong>الجمهور:</strong> وسطاء، منصات تداول</div>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="service-card fade-in">
+      <div class="service-num">05</div>
+      <div class="service-icon">🤖</div>
+      <h3 class="service-title">مساعد رؤى Copilot — AI Financial Copilot</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> المستثمرون يحتاجون تحليلاً فورياً لأي سهم أو عملة — لا يملكون الوقت لقراءة 10 تقارير.<br>
+        <strong>الحل:</strong> مساعد ذكي يفهم 32 لغة، يجمع 6 سياقات (سوق، أخبار، مجلس، محفظة، تعلم، صحة النظام)، ويستدعي وظائف المنصة مباشرة.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">32 لغة</span>
+        <span class="service-tag">6 بناة سياق</span>
+        <span class="service-tag">Function Calling</span>
+        <span class="service-tag">Intent Classifier</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> White Label + SDK + API | <strong>الجمهور:</strong> وسطاء، تطبيقات مالية</div>
+    </div>
+
+    <!-- Service 6 -->
+    <div class="service-card fade-in">
+      <div class="service-num">06</div>
+      <div class="service-icon teal">⚡</div>
+      <h3 class="service-title">منصة التداول الذكي — Algo Trading Engine</h3>
+      <p class="service-problem">
+        <strong>المشكلة:</strong> التنفيذ الأوتوماتيكي يحتاج سرعة + ذكاء + أمان — نادراً ما تجتمع الثلاثة.<br>
+        <strong>الحل:</strong> 3 منفذين مستقلون (الوكيل 60s، الذكي 10s، اللازك sub-5ms) + 7 استراتيجيات + 3 بورصات + جسر MT5 + ملاذ المحفظة.
+      </p>
+      <div class="service-numbers">
+        <span class="service-tag">3 منفذين</span>
+        <span class="service-tag">7 استراتيجيات</span>
+        <span class="service-tag">3 بورصات</span>
+        <span class="service-tag">32 زوج</span>
+        <span class="service-tag">EA Bridge</span>
+      </div>
+      <div class="service-delivery"><strong>التسليم:</strong> ترخيص سنوي أو نسبة ربح | <strong>الجمهور:</strong> بنوك استثمارية، شركات إدارة أصول</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Exclusive Technology ═════ -->
+<section class="section" id="exclusive">
+  <div class="section-header fade-in">
+    <div class="section-label">تكنولوجيا حصرية</div>
+    <h2 class="section-title">لا يوجد <span class="highlight">مثيل</span> لها عالمياً</h2>
+    <p class="section-desc">ميزات تطورت عبر آلاف الساعات من التطوير — لا تجدها مجتمعة في أي منصة أخرى</p>
+  </div>
+
+  <div class="exclusive-grid">
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">مجلس 9 نماذج AI</h3>
+      <p class="exclusive-desc">8 خبراء متخصصين + محامي الشيطان يصوتون على كل قرار. 9 خدمات ذكاء: Market Regime, Dynamic Sizing, Cross-Pair Correlation, Vote Accuracy Learning, System Memory, Self-Healing, Backtesting, Trade Journal, Adaptive Schedule.</p>
+    </div>
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">64 محرك شارت موحد</h3>
+      <p class="exclusive-desc">Wyckoff (مراحل A-E) + Elliott Wave (مع Fibonacci) + SMC (BOS/CHoCH/Order Blocks) + 10 أنواع Harmonic + Footprint (bid×ask داخل الشمعة) + Bayesian تكيفي — كلها في unified consensus بأوزان مدروسة.</p>
+    </div>
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">3 منفذين بسرعات مختلفة</h3>
+      <p class="exclusive-desc">الوكيل (60s، تحليل عميق) + الذكي (10s، التزام ببريفات المجلس) + اللازك (sub-5ms، OBI على streaming). كل منفذ له دور — لا تتنافس، بل تتكامل.</p>
+    </div>
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">24 محرك جيوسياسي</h3>
+      <p class="exclusive-desc">GNN (شبكات عصبية بيانية) + Bayesian Escalation + SIR Contagion (نموذج انتشار الأزمات) + Monte Carlo (10K سيناريو) + Supply Chain Resilience + Trade Routes — يحول الأخبار الجيوسياسية لتأثير كمي.</p>
+    </div>
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">Neural Lab + Swarm</h3>
+      <p class="exclusive-desc">4 معمارات (LSTM/GRU/Transformer/Ensemble) × 4 آفاق (1h/4h/1d/7d) + Swarm Intelligence: 10 وكلاء AI يراقبون أزواجاً مختلفة ويصوتون ديمقراطياً على كل صفقة.</p>
+    </div>
+    <div class="exclusive-card fade-in">
+      <span class="exclusive-badge">حصري</span>
+      <h3 class="exclusive-title">ملاذ المحفظة + EA Bridge</h3>
+      <p class="exclusive-desc">Sanctuary: تحليل مخاطر المحفظة عبر البورصات بـ riskScore 0-100. EA Bridge: جسر مباشر مع MetaTrader 5 — EA يتلقى توصيات المجلس وينفذها، الكلاود يوفر الذكاء.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Why Rouaa ═════ -->
+<section class="section" id="why">
+  <div class="section-header fade-in">
+    <div class="section-label">الميزة التنافسية</div>
+    <h2 class="section-title">لماذا <span class="highlight">رؤى</span> دون غيرها</h2>
+    <p class="section-desc">الوحيدة الجامعة بين الأخبار + التحليل + التنفيذ في منظومة واحدة متعددة اللغات</p>
+  </div>
+
+  <table class="comparison-table fade-in">
+    <thead>
+      <tr>
+        <th>الميزة</th>
+        <th>Bloomberg</th>
+        <th>Benzinga</th>
+        <th class="rouaa">رؤى</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>اللغات المدعومة</td>
+        <td>إنجليزي</td>
+        <td>إنجليزي</td>
+        <td class="rouaa">5 + 32 لغة</td>
+      </tr>
+      <tr>
+        <td>أخبار + تحليل + تنفيذ</td>
+        <td>منفصلة</td>
+        <td>أخبار فقط</td>
+        <td class="rouaa">متكاملة</td>
+      </tr>
+      <tr>
+        <td>مجلس AI متعدد النماذج</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓ 9 نماذج</span></td>
+      </tr>
+      <tr>
+        <td>لوحة شارت بـ 64 محرك</td>
+        <td><span class="partial">~10</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓ 64 محرك</span></td>
+      </tr>
+      <tr>
+        <td>3 منفذين مستقلين</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Neural Lab + Swarm</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>خريطة جيوسياسية بـ 24 محرك</td>
+        <td><span class="partial">أساسية</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓ 24 محرك</span></td>
+      </tr>
+      <tr>
+        <td>جسر MetaTrader (EA)</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="rouaa"><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>نموذج التسعير</td>
+        <td>$32,000/سنة</td>
+        <td>~$2,400/سنة</td>
+        <td class="rouaa">تواصل للتسعير</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═════ Pricing ═════ -->
+<section class="section" id="pricing">
+  <div class="section-header fade-in">
+    <div class="section-label">التسعير</div>
+    <h2 class="section-title">باقات <span class="highlight">مؤسسية</span></h2>
+    <p class="section-desc">اختر الباقة التي تناسب حجم مؤسستك — تواصل معنا لتسعير مخصص</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card fade-in">
+      <div class="pricing-name">Starter</div>
+      <div class="pricing-desc">للمواقع والتطبيقات التي تحتاج تدفقاً إخبارياً وتقارير</div>
+      <ul class="pricing-features">
+        <li>API أخبار (5 لغات)</li>
+        <li>تقارير استراتيجية (13 فئة)</li>
+        <li>100K طلب API/شهر</li>
+        <li>5 Webhooks</li>
+        <li>دعم بريدي</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">تواصل للتسعير</a>
+    </div>
+
+    <div class="pricing-card featured fade-in">
+      <div class="pricing-name">Professional</div>
+      <div class="pricing-desc">للمنصات والوسطاء الذين يحتاجون ذكاءً كاملاً</div>
+      <ul class="pricing-features">
+        <li>كل ميزات Starter</li>
+        <li>مجلس الحكماء (9 نماذج)</li>
+        <li>لوحة الشارت الذكية (White Label)</li>
+        <li>Copilot (32 لغة)</li>
+        <li>1M طلب API/شهر</li>
+        <li>50 Webhooks + WebSocket</li>
+        <li>دعم على مدار الساعة</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">تواصل للتسعير</a>
+    </div>
+
+    <div class="pricing-card fade-in">
+      <div class="pricing-name">Enterprise</div>
+      <div class="pricing-desc">للبنوك وصناديق التحوط التي تحتاج تنفيذاً كاملاً</div>
+      <ul class="pricing-features">
+        <li>كل ميزات Professional</li>
+        <li>3 منفذين مستقلين</li>
+        <li>Neural Lab + Swarm</li>
+        <li>EA Bridge (MetaTrader)</li>
+        <li>ملاذ المحفظة (Sanctuary)</li>
+        <li>طلبات غير محدودة</li>
+        <li>White Label كامل + مدير حساب</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">تواصل للتسعير</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ Contact ═════ -->
+<section class="section" id="contact">
+  <div class="section-header fade-in">
+    <div class="section-label">تواصل معنا</div>
+    <h2 class="section-title">ابدأ <span class="highlight">التحول الرقمي</span></h2>
+    <p class="section-desc">أخبرنا عن مؤسستك وكيف يمكن لرؤى أن تخدمك</p>
+  </div>
+
+  <form class="contact-form fade-in" id="contactForm">
+    <div class="form-group">
+      <label>اسم الشركة</label>
+      <input type="text" class="form-input" name="company" required placeholder="شركة رؤى المالية">
+    </div>
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input type="email" class="form-input" name="email" required placeholder="contact@company.com">
+    </div>
+    <div class="form-group">
+      <label>القطاع</label>
+      <select class="form-select" name="sector" required>
+        <option value="">اختر القطاع</option>
+        <option>بنك استثماري</option>
+        <option>صندوق تحوط</option>
+        <option>وسيط تداول</option>
+        <option>منصة إخبارية</option>
+        <option>تطبيق مالي</option>
+        <option>أخرى</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>الخدمة المطلوبة</label>
+      <select class="form-select" name="service" required>
+        <option value="">اختر الخدمة</option>
+        <option>أنابيب الأخبار</option>
+        <option>التقارير الاستراتيجية</option>
+        <option>مجلس الحكماء</option>
+        <option>لوحة الشارت الذكية</option>
+        <option>Copilot</option>
+        <option>منصة التداول الكاملة</option>
+        <option>حزمة مخصصة</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>رسالتك</label>
+      <textarea class="form-textarea" name="message" required placeholder="أخبرنا عن احتياجاتك..."></textarea>
+    </div>
+    <button type="submit" class="form-submit">إرسال الطلب</button>
+    <div class="form-message" id="formMessage">تم استلام طلبك — سنتواصل معك خلال 24 ساعة</div>
+  </form>
+</section>
+
+<!-- ═════ Footer ═════ -->
+<footer class="footer">
+  <div class="footer-logo">رؤى</div>
+  <p class="footer-tagline">الذكاء يقرأ السوق.. أنت تتخذ القرار</p>
+  <p class="footer-copy">© 2026 شركة رؤى — الذراع التجاري لمنظومة رؤى المالية. جميع الحقوق محفوظة.</p>
+</footer>
+
+<script>
+// ═════ Scroll Progress ═════
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
+  scrollProgress.style.transform = `scaleX(${scrolled})`;
+});
+
+// ═════ Fade-in on Scroll ═════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ═════ Animated Counters ═════
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-target'));
+      let current = 0;
+      const step = target / 50;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(current);
+        }
+      }, 30);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+
+// ═════ Contact Form ═════
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  // In production: send to API endpoint
+  document.getElementById('formMessage').classList.add('success');
+  e.target.reset();
+  setTimeout(() => {
+    document.getElementById('formMessage').classList.remove('success');
+  }, 5000);
+});
+
+// ═════ Background Canvas — Subtle particles ═════
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.size = Math.random() * 2;
+    this.opacity = Math.random() * 0.3 + 0.1;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(217, 166, 83, ${this.opacity})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  // Draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(52, 216, 184, ${0.08 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ═════ Smooth scroll for nav links ═════
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+      document.getElementById('navLinks').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
