@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://roua.news/specs/event.schema.json",
+  "title": "Canonical Financial Event",
+  "description": "The universal contract for all financial events — every component must comply",
+  "type": "object",
+  "required": ["id", "type", "entity", "eventDate", "source", "confidence", "evidence", "lifecycle"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Globally unique identifier (cuid)",
+      "pattern": "^c[a-z0-9]{20,}$"
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["macro", "corporate", "markets", "regulatory", "geopolitical", "energy", "metals"]
+    },
+    "category": { "type": "string" },
+    "subcategory": { "type": ["string", "null"] },
+    "type": { "type": "string", "description": "Specific event type (hike, cut, earnings, filing)" },
+    "title": { "type": "string", "minLength": 5, "maxLength": 300 },
+    "entity": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "symbol": { "type": ["string", "null"] },
+        "type": { "type": "string", "enum": ["central_bank", "company", "regulator", "government", "exchange", "intl_org", "rating_agency"] }
+      }
+    },
+    "country": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": { "type": "string" },
+        "code": { "type": "string", "pattern": "^[A-Z]{2}$" }
+      }
+    },
+    "value": {
+      "type": ["object", "null"],
+      "properties": {
+        "amount": { "type": ["string", "number"] },
+        "unit": { "type": "string" },
+        "direction": { "type": "string", "enum": ["increase", "decrease", "neutral", "unchanged"] },
+        "previous": { "type": ["string", "number", "null"] }
+      }
+    },
+    "affectedAssets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["symbol", "direction"],
+        "properties": {
+          "symbol": { "type": "string" },
+          "direction": { "type": "string", "enum": ["up", "down", "neutral"] },
+          "reason": { "type": "string" },
+          "magnitude": { "type": ["string", "null"], "enum": ["high", "medium", "low", null] }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "authorityScore": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "url"],
+        "properties": {
+          "id": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "documentType": { "type": "string" },
+          "hash": { "type": "string" }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["documentId", "type"],
+        "properties": {
+          "documentId": { "type": "string" },
+          "type": { "type": "string", "enum": ["quote", "table", "chart", "paragraph"] },
+          "reference": { "type": "string" },
+          "text": { "type": "string" },
+          "hash": { "type": "string" }
+        }
+      }
+    },
+    "confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "impactLevel": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+    "eventDate": { "type": "string", "format": "date-time" },
+    "publishedAt": { "type": ["string", "null"], "format": "date-time" },
+    "detectedAt": { "type": "string", "format": "date-time" },
+    "locale": { "type": "string", "enum": ["ar", "en", "fr", "tr", "es"] },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["detected", "collected", "parsed", "extracted", "validated", "classified", "linked", "published", "archived", "failed"]
+    }
+  }
+}

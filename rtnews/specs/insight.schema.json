@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://roua.news/specs/insight.schema.json",
+  "title": "Insight",
+  "type": "object",
+  "required": ["id", "type", "eventId", "confidence"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^c[a-z0-9]{20,}$" },
+    "type": { "type": "string", "enum": ["analysis", "prediction", "comparison", "trend", "recommendation"] },
+    "eventId": { "type": "string" },
+    "title": { "type": "string" },
+    "body": { "type": "string" },
+    "confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "affectedAssets": { "type": "array", "items": { "type": "string" } },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "probability": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "targetPrice": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "evidenceIds": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}
