@@ -1,5 +1,5 @@
 // POST /api/sources/fetch — Trigger fetch for a specific source
-// V1220.1: FIXED — now actually stores documents (was fetching but not storing!)
+// V1220.2: Returns detailed storage errors for diagnosis
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getAdapter } from '../../../../../services/source-registry/adapters/registry';
@@ -52,17 +52,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No suitable adapter for this source' }, { status: 400 });
     }
 
-    // Step 1: Fetch documents from source
+    // Step 1: Fetch
     const result = await adapter.fetch(sourceConfig);
 
-    // Step 2: Store documents (V1220.1: THIS WAS MISSING!)
-    let storeResult = { stored: 0, newVersions: 0, duplicates: 0, errors: [] as string[] };
+    // Step 2: Store (V1220.2: with detailed error capture)
+    let storeResult = { stored: 0, newVersions: 0, duplicates: 0, errors: [] as any[] };
     if (result.success && result.documents.length > 0) {
       storeResult = await storeDocuments(source.id, result.documents);
-      console.log(`[FetchAPI] Stored: ${storeResult.stored} new, ${storeResult.newVersions} versions, ${storeResult.duplicates} duplicates, ${storeResult.errors.length} errors`);
+      console.log(`[FetchAPI] Stored: ${storeResult.stored} new, ${storeResult.newVersions} versions, ${storeResult.duplicates} dup, ${storeResult.errors.length} errors`);
+      if (storeResult.errors.length > 0) {
+        console.log('[FetchAPI] First error detail:', JSON.stringify(storeResult.errors[0]).slice(0, 300));
+      }
     }
 
-    // Step 3: Update health
+    // Step 3: Health
     await updateSourceHealth({
       sourceId: source.id,
       success: result.success,
@@ -79,6 +82,8 @@ export async function POST(request: NextRequest) {
       newVersions: storeResult.newVersions,
       duplicates: storeResult.duplicates,
       storageErrors: storeResult.errors.length,
+      // V1220.2: Return first 3 errors with full details
+      errorDetails: storeResult.errors.slice(0, 3),
       durationMs: result.durationMs,
       error: result.error,
     });

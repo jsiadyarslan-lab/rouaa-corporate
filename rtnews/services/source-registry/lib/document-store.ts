@@ -1,18 +1,22 @@
 // ═══════════════════════════════════════════════════════════════
-// Document Store — Versioned, immutable document storage (V1220)
-// ═══════════════════════════════════════════════════════════════
-// Extracted from fetch-queue.ts so both queue AND API can use it.
-// Key principle: Document without content = still a valid document.
-// (metadata first — content is optional)
+// Document Store V2 — Versioned, immutable, with detailed error capture
+// V1220.2: Now captures full error details (message, code, meta)
 // ═══════════════════════════════════════════════════════════════
 import { db } from '@/lib/db';
 import type { RawDocument } from '../adapters/types';
+
+export interface StorageError {
+  url: string;
+  message: string;
+  code?: string;
+  meta?: any;
+}
 
 export interface StoreResult {
   stored: number;
   newVersions: number;
   duplicates: number;
-  errors: string[];
+  errors: StorageError[];
 }
 
 /**
@@ -22,8 +26,6 @@ export interface StoreResult {
  * - If URL exists but hash differs: create new version, mark old as non-latest
  * 
  * IMPORTANT: A document with empty rawContent is STILL VALID.
- * The document exists (we fetched it), it has a URL, hash, and metadata.
- * Content may be empty for: PDFs (stored as binary), redirects, data-only pages.
  */
 export async function storeDocument(sourceId: string, doc: RawDocument): Promise<'created' | 'new_version' | 'duplicate' | 'error'> {
   try {
@@ -51,7 +53,7 @@ export async function storeDocument(sourceId: string, doc: RawDocument): Promise
           url: doc.url,
           documentType: doc.documentType,
           title: doc.title,
-          rawContent: doc.rawContent || '',  // Empty content is valid!
+          rawContent: doc.rawContent || '',
           hash: doc.hash,
           language: doc.language || 'en',
           version: existing.version + 1,
@@ -64,7 +66,6 @@ export async function storeDocument(sourceId: string, doc: RawDocument): Promise
         },
       });
 
-      console.log(`[DocumentStore] New version for ${doc.url}: v${existing.version + 1}`);
       return 'new_version';
     }
 
@@ -75,7 +76,7 @@ export async function storeDocument(sourceId: string, doc: RawDocument): Promise
         url: doc.url,
         documentType: doc.documentType,
         title: doc.title,
-        rawContent: doc.rawContent || '',  // Empty content is valid!
+        rawContent: doc.rawContent || '',
         hash: doc.hash,
         language: doc.language || 'en',
         version: 1,
@@ -89,27 +90,48 @@ export async function storeDocument(sourceId: string, doc: RawDocument): Promise
 
     return 'created';
   } catch (error: any) {
-    console.error(`[DocumentStore] Error storing ${doc.url}: ${error?.message?.slice(0, 100)}`);
+    // V1220.2: Log FULL error details for diagnosis
+    console.error('[DocumentStore] DETAILED ERROR:', {
+      url: doc.url,
+      message: error.message,
+      code: error.code,
+      meta: error.meta,
+      stack: error.stack?.split('\n').slice(0, 3).join(' | '),
+    });
     return 'error';
   }
 }
 
 /**
- * Store multiple documents and return summary
+ * Store multiple documents and return summary with detailed errors
  */
 export async function storeDocuments(sourceId: string, docs: RawDocument[]): Promise<StoreResult> {
   let stored = 0;
   let newVersions = 0;
   let duplicates = 0;
-  const errors: string[] = [];
+  const errors: StorageError[] = [];
 
   for (const doc of docs) {
-    const result = await storeDocument(sourceId, doc);
-    switch (result) {
-      case 'created': stored++; break;
-      case 'new_version': newVersions++; break;
-      case 'duplicate': duplicates++; break;
-      case 'error': errors.push(doc.url); break;
+    try {
+      const result = await storeDocument(sourceId, doc);
+      switch (result) {
+        case 'created': stored++; break;
+        case 'new_version': newVersions++; break;
+        case 'duplicate': duplicates++; break;
+        case 'error':
+          errors.push({
+            url: doc.url,
+            message: 'Storage failed — check server logs for details',
+          });
+          break;
+      }
+    } catch (error: any) {
+      errors.push({
+        url: doc.url,
+        message: error.message,
+        code: error.code,
+        meta: error.meta,
+      });
     }
   }
 
