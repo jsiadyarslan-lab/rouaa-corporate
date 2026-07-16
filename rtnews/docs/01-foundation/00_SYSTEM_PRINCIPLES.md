@@ -33,3 +33,19 @@
 
 ## Principle 10: التعدد اللغوي من اليوم الأول
 كل Source، Document، Event، NewsItem له locale.
+
+---
+
+## Principle 11: كل مرحلة تنتج أصلاً (Asset)، وليس ميزة (Feature)
+
+**المراحل تنتج أصولاً دائمة. الميزات تُبنى فوقها.**
+
+| أصل (Asset) | ميزة (Feature) |
+|-------------|----------------|
+| Source Infrastructure | صفحة /sources |
+| Document Archive | زر "عرض الوثيقة" |
+| Event Engine | خبر منشور |
+| Knowledge Graph | رسم بياني |
+| AI Research Engine | سؤال وجواب |
+
+**القاعدة:** إذا لم يُنتج العمل أصولاً، فهو مجرد ميزات تتراكم دون قيمة دائمة.

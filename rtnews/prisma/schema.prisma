@@ -1261,3 +1261,107 @@ model AgencyEvent {
   @@index([locale])
   @@map("agency_events")
 }
+
+// ═══════════════════════════════════════════════════════════════
+// V1220 Phase 1A: Source Infrastructure — Data Engineering Only
+// No AI, no extraction, no events. Just sources + documents + health.
+// See: docs/02-domain/11_CANONICAL_EVENT_SCHEMA.md
+// See: specs/source.schema.json, specs/document.schema.json
+// ═══════════════════════════════════════════════════════════════
+
+// ─── OfficialSource: Registry of all official financial sources ───
+// Every source is a first-class entity with full metadata.
+// SourceAdapter reads this to know HOW to fetch from each source.
+model OfficialSource {
+  id              String    @id @default(cuid())
+  name            String                           // "Federal Reserve"
+  slug            String    @unique                // "federal-reserve"
+  shortName       String?                          // "Fed"
+  country         String?                          // "USA"
+  countryCode     String?                          // "US" (ISO 3166-1 alpha-2)
+  region          String?                          // "North America" | "Europe" | "MENA" | "Asia" | "Africa" | "South America" | "Global"
+  type            String    @default("other")      // central_bank | statistics | regulator | exchange | ministry | intl_org | company | energy | metals | agriculture | transport | crypto | rating_agency | other
+  category        String?                          // Free-text subcategory
+  authorityScore  Int       @default(100)          // 0-100, 100 = highest (official government)
+  reliability     String    @default("official")   // official | verified | unverified
+  website         String?                          // "https://federalreserve.gov"
+  rss             String?                          // RSS feed URL
+  api             String?                          // API endpoint URL
+  accessMethods   String    @default("[]")         // JSON: ["rss", "html", "pdf", "json", "xml"]
+  language        String    @default("en")         // Primary language of source content
+  locale          String    @default("en")         // Content locale for display
+  updateFrequency String?                          // realtime | daily | weekly | monthly | quarterly | ad_hoc
+  timezone        String?                          // "America/New_York" (IANA)
+  relatedAssets   String    @default("[]")         // JSON: ["USD", "GOLD", "BONDS"]
+  relatedEntities String    @default("[]")         // JSON: ["Federal Reserve", "FOMC"]
+  description     String?   @db.Text               // About this source
+  logoUrl         String?                          // Source logo URL
+  isActive        Boolean   @default(true)         // Disabled sources are not fetched
+  isVerified      Boolean   @default(false)        // Admin verified
+  // Health Monitoring (1A.3)
+  lastFetchedAt   DateTime?                        // Last successful fetch
+  lastSuccessAt   DateTime?                        // Last fetch that returned content
+  lastErrorAt     DateTime?                        // Last fetch error
+  lastErrorMessage String?  @db.Text               // Error message
+  healthScore     Int       @default(100)          // 0-100, recalculated on each fetch
+  consecutiveFailures Int   @default(0)             // Resets to 0 on success
+  totalFetches    Int       @default(0)            // Total fetch attempts
+  totalSuccesses  Int       @default(0)            // Successful fetches
+  totalFailures   Int       @default(0)            // Failed fetches
+  totalDocuments  Int       @default(0)            // Documents fetched from this source
+  avgResponseTime Int?                              // Average response time in ms
+  // Priority for fetch queue (1 = highest, 10 = lowest)
+  priority        Int       @default(5)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  documents OfficialDocument[]
+
+  @@index([type, isActive])
+  @@index([country])
+  @@index([region])
+  @@index([authorityScore])
+  @@index([isActive, priority])
+  @@index([isActive, lastFetchedAt])
+  @@index([healthScore])
+  @@map("official_sources")
+}
+
+// ─── OfficialDocument: Raw documents from official sources ───
+// 1A.5: Versioned — if source changes the document, we keep both versions.
+// 1A.6: Immutable — rawContent never modified after storage.
+// 1A.7: Metadata First — all metadata stored before any extraction.
+model OfficialDocument {
+  id            String    @id @default(cuid())
+  sourceId      String                            // → OfficialSource.id
+  source        OfficialSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  url           String                            // Original URL
+  documentType  String    @default("html")        // rss | html | pdf | json | xml | csv | xbrl | docx | xlsx
+  title         String?                           // Document title (from source)
+  rawContent    String?   @db.Text                // Raw fetched content (immutable)
+  extractedText String?   @db.Text                // Plain text extracted (for future AI)
+  hash          String?                           // SHA-256 of rawContent (integrity)
+  snapshotUrl   String?                           // R2 URL for archived snapshot
+  language      String    @default("en")          // Document language
+  // 1A.5: Versioning
+  version       Int       @default(1)             // Version number (1 = first fetch)
+  isLatest      Boolean   @default(true)          // Is this the latest version?
+  previousVersionId String?                        // ID of previous version (if updated)
+  // Metadata (1A.7: stored before any extraction)
+  publishedAt   DateTime?                         // When source published it
+  fetchedAt     DateTime  @default(now())         // When we fetched it
+  fetchDurationMs Int?                             // How long the fetch took
+  contentLength Int?                               // Size of rawContent in bytes
+  httpStatus    Int?                               // HTTP status code (200, 404, etc.)
+  metadata      String    @default("{}")           // JSON: additional metadata
+  // Health
+  fetchError    String?   @db.Text                // Error message if fetch failed
+
+  @@unique([sourceId, url, version])              // Same URL + version = unique
+  @@index([sourceId, fetchedAt])
+  @@index([documentType])
+  @@index([publishedAt])
+  @@index([isLatest])
+  @@index([hash])
+  @@map("official_documents")
+}

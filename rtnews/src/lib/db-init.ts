@@ -2266,6 +2266,107 @@ export async function ensureGeopoliticalTables(): Promise<void> {
   } catch (err: any) {
     console.error('[DB Init V1052] Failed to create geopolitical_events:', err?.message?.slice(0, 150));
   }
+
+  // ═══════════════════════════════════════════════════════════════
+  // V1220 Phase 1A: Source Infrastructure tables
+  // OfficialSource + OfficialDocument — Data Engineering only, no AI
+  // ═══════════════════════════════════════════════════════════════
+  try {
+    await db.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS "official_sources" (
+        "id" TEXT NOT NULL,
+        "name" TEXT NOT NULL,
+        "slug" TEXT NOT NULL,
+        "shortName" TEXT,
+        "country" TEXT,
+        "countryCode" TEXT,
+        "region" TEXT,
+        "type" TEXT NOT NULL DEFAULT 'other',
+        "category" TEXT,
+        "authorityScore" INTEGER NOT NULL DEFAULT 100,
+        "reliability" TEXT NOT NULL DEFAULT 'official',
+        "website" TEXT,
+        "rss" TEXT,
+        "api" TEXT,
+        "accessMethods" TEXT NOT NULL DEFAULT '[]',
+        "language" TEXT NOT NULL DEFAULT 'en',
+        "locale" TEXT NOT NULL DEFAULT 'en',
+        "updateFrequency" TEXT,
+        "timezone" TEXT,
+        "relatedAssets" TEXT NOT NULL DEFAULT '[]',
+        "relatedEntities" TEXT NOT NULL DEFAULT '[]',
+        "description" TEXT,
+        "logoUrl" TEXT,
+        "isActive" BOOLEAN NOT NULL DEFAULT true,
+        "isVerified" BOOLEAN NOT NULL DEFAULT false,
+        "lastFetchedAt" TIMESTAMP(3),
+        "lastSuccessAt" TIMESTAMP(3),
+        "lastErrorAt" TIMESTAMP(3),
+        "lastErrorMessage" TEXT,
+        "healthScore" INTEGER NOT NULL DEFAULT 100,
+        "consecutiveFailures" INTEGER NOT NULL DEFAULT 0,
+        "totalFetches" INTEGER NOT NULL DEFAULT 0,
+        "totalSuccesses" INTEGER NOT NULL DEFAULT 0,
+        "totalFailures" INTEGER NOT NULL DEFAULT 0,
+        "totalDocuments" INTEGER NOT NULL DEFAULT 0,
+        "avgResponseTime" INTEGER,
+        "priority" INTEGER NOT NULL DEFAULT 5,
+        "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT "official_sources_pkey" PRIMARY KEY ("id")
+      );
+    `);
+    await db.$executeRawUnsafe(`CREATE UNIQUE INDEX IF NOT EXISTS "official_sources_slug_key" ON "official_sources"("slug")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_type_isActive_idx" ON "official_sources"("type", "isActive")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_country_idx" ON "official_sources"("country")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_region_idx" ON "official_sources"("region")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_authorityScore_idx" ON "official_sources"("authorityScore")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_isActive_priority_idx" ON "official_sources"("isActive", "priority")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_isActive_lastFetchedAt_idx" ON "official_sources"("isActive", "lastFetchedAt")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_sources_healthScore_idx" ON "official_sources"("healthScore")`);
+    console.log('[DB Init V1220] ✓ official_sources table ready');
+  } catch (err: any) {
+    console.error('[DB Init V1220] Failed to create official_sources:', err?.message?.slice(0, 150));
+  }
+
+  try {
+    await db.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS "official_documents" (
+        "id" TEXT NOT NULL,
+        "sourceId" TEXT NOT NULL,
+        "url" TEXT NOT NULL,
+        "documentType" TEXT NOT NULL DEFAULT 'html',
+        "title" TEXT,
+        "rawContent" TEXT,
+        "extractedText" TEXT,
+        "hash" TEXT,
+        "snapshotUrl" TEXT,
+        "language" TEXT NOT NULL DEFAULT 'en',
+        "version" INTEGER NOT NULL DEFAULT 1,
+        "isLatest" BOOLEAN NOT NULL DEFAULT true,
+        "previousVersionId" TEXT,
+        "publishedAt" TIMESTAMP(3),
+        "fetchedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "fetchDurationMs" INTEGER,
+        "contentLength" INTEGER,
+        "httpStatus" INTEGER,
+        "metadata" TEXT NOT NULL DEFAULT '{}',
+        "fetchError" TEXT,
+        CONSTRAINT "official_documents_pkey" PRIMARY KEY ("id")
+      );
+    `);
+    await db.$executeRawUnsafe(`CREATE UNIQUE INDEX IF NOT EXISTS "official_documents_sourceId_url_version_key" ON "official_documents"("sourceId", "url", "version")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_documents_sourceId_fetchedAt_idx" ON "official_documents"("sourceId", "fetchedAt")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_documents_documentType_idx" ON "official_documents"("documentType")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_documents_publishedAt_idx" ON "official_documents"("publishedAt")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_documents_isLatest_idx" ON "official_documents"("isLatest")`);
+    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "official_documents_hash_idx" ON "official_documents"("hash")`);
+    // Foreign key
+    await db.$executeRawUnsafe(`ALTER TABLE "official_documents" ADD CONSTRAINT IF NOT EXISTS "official_documents_sourceId_fkey" FOREIGN KEY ("sourceId") REFERENCES "official_sources"("id") ON DELETE CASCADE`);
+    console.log('[DB Init V1220] ✓ official_documents table ready');
+  } catch (err: any) {
+    console.error('[DB Init V1220] Failed to create official_documents:', err?.message?.slice(0, 150));
+  }
 }
 
 // ─── Force re-initialization of DB schema (resets all flags) ──
