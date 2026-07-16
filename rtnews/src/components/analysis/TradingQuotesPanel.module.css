@@ -1,0 +1,153 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TradingQuotesPanel — Live Trading Quotes
+   ═══════════════════════════════════════════════════════════════════ */
+
+.quotesPanel {
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.quotesHeader {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quotesHeaderIcon {
+  font-size: 12px;
+}
+
+.quotesHeaderTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-head);
+}
+
+.quotesLiveDot {
+  width: 6px;
+  height: 6px;
+  background: var(--bull);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.quotesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.quoteRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  transition: background 0.15s;
+}
+
+.quoteRow:hover {
+  background: rgba(123, 94, 167, 0.03);
+}
+
+.quoteRowBorder {
+  border-bottom: 1px solid var(--border);
+}
+
+.quoteLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quoteSymbol {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  min-width: 36px;
+  text-align: center;
+}
+
+.quoteSymbolUp {
+  background: var(--bull2);
+  color: var(--bull);
+}
+
+.quoteSymbolDown {
+  background: var(--bear2);
+  color: var(--bear);
+}
+
+.quoteName {
+  font-size: 10px;
+  color: var(--text2);
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quoteRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quotePrice {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.quoteChange {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.quoteChangeUp {
+  background: var(--bull2);
+  color: var(--bull);
+}
+
+.quoteChangeDown {
+  background: var(--bear2);
+  color: var(--bear);
+}
+
+/* Loading state */
+.quotesLoading {
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quotesLoadingSpinner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+.quotesLoadingText {
+  font-size: 10px;
+  color: var(--text3);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

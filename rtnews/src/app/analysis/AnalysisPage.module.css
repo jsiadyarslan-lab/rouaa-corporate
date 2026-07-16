@@ -1,0 +1,443 @@
+/* ═══════════════════════════════════════════════════════════════════
+   رؤى — AI Analysis Page Styles — Tab-Based Terminal Architecture
+   Bloomberg × TradingView — Arabic-first financial analysis
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page Root ── */
+.pageRoot {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.pageContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: var(--space-md);
+  padding-bottom: 60px;
+}
+
+/* ── Hero / Header Bar ── */
+.terminalHeader {
+  padding: 20px 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.terminalHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.terminalLogo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.terminalLogoSvg {
+  width: 22px;
+  height: 22px;
+}
+
+.terminalTitleGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.terminalBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--font-jetbrains-mono), monospace;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+  background: rgba(0, 229, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  margin-bottom: 2px;
+  width: fit-content;
+}
+
+.terminalBadgeDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 2s infinite;
+}
+
+.terminalTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-head);
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+  line-height: 1.2;
+}
+
+.terminalSubtitle {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+.terminalHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.advisorBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  border: none;
+  color: #000;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+}
+
+.advisorBtn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.advisorBtnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+}
+
+.advisorBtnOutline:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+/* ── Stats Bar ── */
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.statCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+
+.statCard:hover {
+  border-color: rgba(123, 94, 167, 0.3);
+}
+
+.statIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--text3);
+  font-weight: 500;
+  margin-bottom: 1px;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-jetbrains-mono), monospace;
+  color: var(--text-head);
+  line-height: 1;
+}
+
+/* ── Tab Navigation ── */
+.tabBar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabBar::-webkit-scrollbar {
+  display: none;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text3);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.tabButton:hover {
+  color: var(--text);
+  background: rgba(123, 94, 167, 0.04);
+}
+
+.tabButtonActive {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+  background: rgba(0, 229, 255, 0.03);
+}
+
+.tabIcon {
+  font-size: 14px;
+}
+
+.tabCount {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: var(--bg4);
+  color: var(--text3);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.tabButtonActive .tabCount {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--cyan);
+}
+
+/* ── Main Content Grid ── */
+.terminalGrid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 16px;
+  align-items: start;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 72px;
+}
+
+/* ── Tab Content Area ── */
+.tabContent {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Sidebar CTA ── */
+.sidebarCta {
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-inline-start: 3px solid var(--purple);
+  text-decoration: none;
+}
+
+.sidebarCta:hover {
+  border-color: rgba(123, 94, 167, 0.4);
+  transform: translateY(-1px);
+}
+
+.sidebarCtaIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebarCtaContent {
+  flex: 1;
+}
+
+.sidebarCtaTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-head);
+  margin-bottom: 3px;
+}
+
+.sidebarCtaDesc {
+  font-size: 10px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+
+.sidebarCtaArrow {
+  flex-shrink: 0;
+  color: var(--purple);
+}
+
+/* In RTL (Arabic), flip the arrow */
+[dir="rtl"] .sidebarCtaArrow {
+  transform: scaleX(-1);
+}
+
+/* In LTR (English), arrow points right naturally */
+[dir="ltr"] .sidebarCtaArrow {
+  transform: none;
+}
+
+/* ── Back to Top ── */
+.backToTop {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+.backToTop:hover {
+  background: var(--bg4);
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .terminalGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sidebar {
+    position: static !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .terminalHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .terminalHeaderRight {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tabButton {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .terminalTitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsBar {
+    grid-template-columns: 1fr;
+  }
+
+  .pageContainer {
+    padding-inline: 12px;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

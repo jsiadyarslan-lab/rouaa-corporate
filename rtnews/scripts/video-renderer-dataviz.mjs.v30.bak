@@ -1,0 +1,2053 @@
+#!/usr/bin/env node
+// ─── Al Jazeera DataViz Video Renderer V30 ────────────────────────────
+// COMPLETELY REWRITTEN — Fundamentally different from Bloomberg renderer
+//
+// "Don't give me more data — give me a story" — Mohammed Haddad, AJ Labs
+//
+// Architecture (same technical pipeline):
+//   - Playwright frame-by-frame rendering at FPS
+//   - HTML with window.setAnimationProgress(p) function (0→1)
+//   - FFmpeg stitches PNG frames + voiceover into final MP4
+//   - TTS: edge-tts → Groq fallback
+//   - Images: Pollinations → SDK → CLI → geometric fallback
+//
+// 6 SCENES (~160s total) — FUNDAMENTALLY DIFFERENT from Bloomberg:
+//   1. HOOK       (0-12s)    — Dark → Yellow square RTL → MASSIVE number inside square
+//   2. MAP        (12-40s)   — SVG Map with glowing regions + yellow square pointer
+//   3. TIMELINE   (40-75s)   — Horizontal gold timeline with event dots (2022 rebrand)
+//   4. DATAVIZ    (75-110s)  — Single horizontal bar chart, RTL, gold-to-orange gradient
+//   5. HUMANSTORY (110-140s) — AI human image + quote in yellow square frame
+//   6. CLOSING    (140-160s) — 3 takeaways in yellow squares + رؤى brand fade
+//
+// Visual Language: WARM gold/navy with PERSISTENT ELEMENTS
+//   - Moving YELLOW SQUARE — appears in EVERY scene as connecting device
+//   - Thin gold accent line at top — 2px always visible
+//   - "رؤى" brand mark — bottom right
+//   - NO ticker, NO split-screen, NO news bars
+//   - One idea per frame, generous whitespace, big numbers (60% screen)
+//   - Maps are essential, timelines are essential, HUMAN stories are essential
+//
+// Usage:
+//   node scripts/video-renderer-dataviz.mjs --input /path/to/data.json --output /path/to/output.mp4
+
+import { chromium } from 'playwright';
+import { execSync, spawnSync, execFile } from 'child_process';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync, readdirSync, rmSync } from 'fs';
+import { join, dirname, basename } from 'path';
+import { tmpdir } from 'os';
+import { randomUUID } from 'crypto';
+import { promisify } from 'util';
+
+const execFileAsync = promisify(execFile);
+
+// ═══════════════════════════════════════════════════════════════════
+// AL JAZEERA BRAND COLORS (from official brand guidelines)
+// ═══════════════════════════════════════════════════════════════════
+const AJ = {
+  gold:        '#DBA200',
+  darkBlue:    '#212E64',
+  darkBg:      '#0D1117',    // Warm dark BG — NOT cold black
+  midBg:       '#1A2332',
+  warmWhite:   '#F5F0E8',
+  gray:        '#9B9B9B',
+  orange:      '#FA6400',
+  green:       '#4CAF50',
+  red:         '#CC2936',
+  paleGold:    '#F0D68A',
+  textWhite:   '#F5F0E8',
+  textGray:    '#9B9B9B',
+  textDim:     '#6B6B6B',
+  borderGold:  'rgba(219,162,0,0.2)',
+  glowGold:    'rgba(219,162,0,0.15)',
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDERING CONSTANTS
+// ═══════════════════════════════════════════════════════════════════
+const RENDER_WIDTH = 1280;
+const RENDER_HEIGHT = 720;
+const OUTPUT_WIDTH = 1920;
+const OUTPUT_HEIGHT = 1080;
+const OUTPUT_FPS = 30;
+let RENDER_FPS = process.env.RAILWAY_ENVIRONMENT ? 16 : 24;
+if (process.env.RAILWAY_ENVIRONMENT) {
+  const totalMem = process.memoryUsage().heapTotal / 1024 / 1024;
+  if (totalMem < 400) {
+    console.warn(`[AJ30] Low memory (${totalMem.toFixed(0)}MB), reducing FPS to 12`);
+    RENDER_FPS = 12;
+  }
+}
+const FPS = RENDER_FPS;
+const WIDTH = RENDER_WIDTH;
+const HEIGHT = RENDER_HEIGHT;
+
+// 6 Scene definitions — COMPLETELY DIFFERENT from Bloomberg
+const SCENE_DEFS = [
+  ['hook',       0,   12],
+  ['map',        12,  40],
+  ['timeline',   40,  75],
+  ['dataviz',    75,  110],
+  ['humanstory', 110, 140],
+  ['closing',    140, 160],
+];
+const TOTAL_SCENES = SCENE_DEFS.length;
+
+// ═══════════════════════════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+const AR_NUMERALS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toArabicNumeral(n) {
+  return String(n).split('').map(d => AR_NUMERALS[parseInt(d)] || d).join('');
+}
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const parsed = {};
+  for (let i = 0; i < args.length; i++) {
+    if (args[i].startsWith('--')) {
+      const key = args[i].slice(2);
+      parsed[key] = args[i + 1] || true;
+      i++;
+    }
+  }
+  return parsed;
+}
+
+function escapeHTML(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function stripMarkdown(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/(\*{3}|_{3})(.+?)\1/g, '$2')
+    .replace(/(\*{2}|_{2})(.+?)\1/g, '$2')
+    .replace(/(\*|_)(.+?)\1/g, '$2')
+    .replace(/~~(.+?)~~/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^[-*_]{3,}\s*$/gm, '')
+    .replace(/^[\s]*[-*+]\s+/gm, '')
+    .replace(/^[\s]*\d+\.\s+/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[([^\]]*)]\([^)]+\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\[([^\]]+)\]\[[^\]]*\]/g, '$1')
+    .replace(/\^\((.+?)\)/g, '$1')
+    .replace(/^\s*>\s+/gm, '')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+}
+
+function truncateText(text, maxChars = 35) {
+  if (!text) return '';
+  const s = String(text).trim();
+  return s.length > maxChars ? s.slice(0, maxChars - 1) + '...' : s;
+}
+
+function getImpactColor(impact) {
+  if (['bullish', 'positive'].includes(impact)) return AJ.green;
+  if (['bearish', 'negative'].includes(impact)) return AJ.red;
+  return AJ.gold;
+}
+
+function getImpactLabel(impact, locale) {
+  if (['bullish', 'positive'].includes(impact)) return locale === 'ar' ? 'صعودي' : 'Bullish';
+  if (['bearish', 'negative'].includes(impact)) return locale === 'ar' ? 'هبوطي' : 'Bearish';
+  return locale === 'ar' ? 'محايد' : 'Neutral';
+}
+
+function getImpactArrow(impact) {
+  if (['bullish', 'positive'].includes(impact)) return '↑';
+  if (['bearish', 'negative'].includes(impact)) return '↓';
+  return '→';
+}
+
+function formatNumber(num) {
+  if (num === null || num === undefined) return '—';
+  if (typeof num === 'string') return num;
+  if (Math.abs(num) >= 1e9) return (num / 1e9).toFixed(1) + 'B';
+  if (Math.abs(num) >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+  if (Math.abs(num) >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+  return num.toFixed ? num.toFixed(1) : String(num);
+}
+
+function lerp(a, b, t) { return a + (b - a) * Math.max(0, Math.min(1, t)); }
+function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
+function segProg(p, s, e) { return clamp((p - s) / (e - s), 0, 1); }
+function easeOutCubic(t) { const p = clamp(t, 0, 1); return 1 - Math.pow(1 - p, 3); }
+function easeInOutCubic(t) { const p = clamp(t, 0, 1); return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p+2,3)/2; }
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SVG WORLD MAP — Simplified for Scene 2
+// ═══════════════════════════════════════════════════════════════════
+function generateWorldMapSVG() {
+  // Simplified world map with 5 glowable regions
+  return `
+  <svg id="aj-map" viewBox="0 0 1000 500" style="width:100%;height:100%;opacity:0.9;">
+    <defs>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glowStrong"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <!-- Ocean -->
+    <rect width="1000" height="500" fill="${AJ.darkBg}" rx="8"/>
+    <!-- Grid lines -->
+    <g opacity="0.06" stroke="${AJ.gold}" stroke-width="0.5">
+      ${Array.from({length:10}, (_,i) => `<line x1="0" y1="${i*50+25}" x2="1000" y2="${i*50+25}"/>`).join('\n      ')}
+      ${Array.from({length:20}, (_,i) => `<line x1="${i*50+25}" y1="0" x2="${i*50+25}" y2="500"/>`).join('\n      ')}
+    </g>
+    <!-- Africa -->
+    <path id="map-africa" class="map-region" d="M460,180 Q480,170 510,180 L530,220 Q540,280 520,340 L490,380 Q470,370 460,340 L440,280 Q430,230 460,180Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Middle East -->
+    <path id="map-mideast" class="map-region" d="M540,160 Q570,150 600,160 L610,180 Q620,200 600,220 L570,230 Q550,220 540,200 L530,180Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Europe -->
+    <path id="map-europe" class="map-region" d="M430,80 Q470,70 520,80 L540,120 Q530,150 510,160 L470,170 Q440,160 430,140Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Asia -->
+    <path id="map-asia" class="map-region" d="M600,80 Q700,60 800,100 L830,180 Q820,260 760,280 L680,260 Q620,230 600,180 L590,120Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Americas -->
+    <path id="map-americas" class="map-region" d="M150,80 Q200,60 240,100 L250,200 Q240,280 200,340 L160,360 Q130,340 120,280 L110,200 Q100,140 150,80Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Region labels -->
+    <text x="190" y="220" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">AMERICAS</text>
+    <text x="475" y="300" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">AFRICA</text>
+    <text x="575" y="195" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">M.EAST</text>
+    <text x="480" y="130" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">EUROPE</text>
+    <text x="710" y="180" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">ASIA</text>
+  </svg>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// IMAGE GENERATION (Pollinations → SDK → CLI → Geometric fallback)
+// ═══════════════════════════════════════════════════════════════════
+async function downloadImageFromUrl(url) {
+  try {
+    console.log(`[AJ30]  Downloading image from: ${url.slice(0, 80)}...`);
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'AJ30Renderer/1.0', 'Accept': 'image/*' },
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!response.ok) return null;
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 5000) return null;
+    console.log(`[AJ30]  Downloaded: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ30]  Download error: ${err.message}`);
+    return null;
+  }
+}
+
+async function generateImagePollinations(prompt, width, height) {
+  let cleanPrompt = prompt.replace(/[^\x00-\x7F]/g, ' ').replace(/\s+/g, ' ').trim();
+  const shortPrompt = cleanPrompt.length > 200 ? cleanPrompt.substring(0, 197) + '...' : cleanPrompt;
+  try {
+    const seed = Date.now();
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(shortPrompt)}?width=${width}&height=${height}&nologo=true&seed=${seed}`;
+    console.log(`[AJ30]  Pollinations: ${shortPrompt.length} chars...`);
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'AJ30Renderer/1.0', 'Accept': 'image/*' },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!response.ok) return null;
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 5000) return null;
+    const header = buffer.slice(0, 4).toString('hex');
+    const isJPEG = header.startsWith('ffd8');
+    const isPNG = header.startsWith('89504');
+    const isWebP = header.startsWith('5249');
+    if (!isJPEG && !isPNG && !isWebP) return null;
+    console.log(`[AJ30]  Pollinations success: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ30]  Pollinations failed: ${err.message?.slice(0, 80)}`);
+    return null;
+  }
+}
+
+async function generateImageSDK(prompt, width, height) {
+  try {
+    console.log(`[AJ30]  SDK: generating image...`);
+    const ZAI = (await import('z-ai-web-dev-sdk')).default;
+    const zai = await ZAI.create();
+    const sdkSize = '1344x768';
+    const response = await zai.images.generations.create({ prompt, size: sdkSize });
+    const base64 = response.data?.[0]?.base64;
+    if (!base64) return null;
+    const buffer = Buffer.from(base64, 'base64');
+    if (buffer.length < 5000) return null;
+    console.log(`[AJ30]  SDK success: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ30]  SDK failed: ${err.message?.slice(0, 80)}`);
+    return null;
+  }
+}
+
+function generateImageCLI(prompt, outputPath, width, height) {
+  const candidates = ['z-ai', '/usr/local/bin/z-ai'];
+  for (const cmd of candidates) {
+    try {
+      const result = spawnSync(cmd, ['image', '--prompt', prompt, '--output', outputPath, '--size', `${width}x${height}`], {
+        encoding: 'utf-8', timeout: 120000,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        const buf = readFileSync(outputPath);
+        if (buf.length > 5000) {
+          try { unlinkSync(outputPath); } catch {}
+          console.log(`[AJ30]  CLI success: ${(buf.length/1024).toFixed(0)}KB`);
+          return buf;
+        }
+      }
+    } catch {}
+  }
+  const legacyCandidates = [
+    'z-ai-generate', '/usr/local/bin/z-ai-generate',
+    '/app/node_modules/.bin/z-ai-generate',
+    join(process.cwd(), 'node_modules', '.bin', 'z-ai-generate'),
+  ];
+  for (const cmd of legacyCandidates) {
+    try {
+      const result = spawnSync(cmd, ['--prompt', prompt, '--output', outputPath, '--size', `${width}x${height}`], {
+        encoding: 'utf-8', timeout: 120000,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        const buf = readFileSync(outputPath);
+        if (buf.length > 5000) {
+          try { unlinkSync(outputPath); } catch {}
+          console.log(`[AJ30]  CLI legacy success: ${(buf.length/1024).toFixed(0)}KB`);
+          return buf;
+        }
+      }
+    } catch {}
+  }
+  return null;
+}
+
+// V30-fix: Geometric pattern fallback — VISIBLE angular shapes in gold at 8-12% opacity
+function generateGeometricFallback(width, height, marketImpact = 'neutral') {
+  const accentColor = ['bullish','positive'].includes(marketImpact) ? AJ.green
+    : ['bearish','negative'].includes(marketImpact) ? AJ.red
+    : AJ.gold;
+
+  // Build VISIBLE geometric pattern — Al Jazeera-style angular shapes at 8-12% opacity
+  const shapes = [];
+  // Large angular gold shapes (AJ peninsula motif)
+  shapes.push(`<polygon points="${width*0.65},0 ${width},0 ${width},${height*0.35}" fill="${AJ.gold}" opacity="0.10"/>`);
+  shapes.push(`<polygon points="0,${height*0.65} ${width*0.45},${height} 0,${height}" fill="${accentColor}" opacity="0.08"/>`);
+  shapes.push(`<polygon points="${width*0.75},${height*0.45} ${width},${height*0.25} ${width},${height*0.65}" fill="${AJ.paleGold}" opacity="0.06"/>`);
+  // Yellow square motif
+  const sqSize = Math.min(width, height) * 0.15;
+  shapes.push(`<rect x="${width*0.82 - sqSize/2}" y="${height*0.7 - sqSize/2}" width="${sqSize}" height="${sqSize}" fill="${AJ.gold}" opacity="0.09" transform="rotate(8,${width*0.82},${height*0.7})"/>`);
+  shapes.push(`<rect x="${width*0.12}" y="${height*0.15}" width="${sqSize*0.7}" height="${sqSize*0.7}" fill="${accentColor}" opacity="0.07" transform="rotate(-5,${width*0.12+sqSize*0.35},${height*0.15+sqSize*0.35})"/>`);
+  // Diagonal lines
+  for (let i = 0; i < 8; i++) {
+    const x = i * (width / 8);
+    shapes.push(`<line x1="${x}" y1="0" x2="${x + width*0.15}" y2="${height}" stroke="${AJ.gold}" stroke-width="0.5" opacity="0.08"/>`);
+  }
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+    <defs>
+      <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#081020"/>
+        <stop offset="50%" stop-color="${AJ.darkBg}"/>
+        <stop offset="100%" stop-color="#101828"/>
+      </linearGradient>
+      <radialGradient id="g1" cx="70%" cy="25%" r="60%">
+        <stop offset="0%" stop-color="${AJ.gold}" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="${AJ.darkBg}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg1)"/>
+    <rect width="100%" height="100%" fill="url(#g1)"/>
+    ${shapes.join('\n    ')}
+  </svg>`;
+  return Buffer.from(svg);
+}
+
+async function generateAIImage(prompt, width = 1344, height = 768, marketImpact = 'neutral') {
+  let buffer = await generateImagePollinations(prompt, width, height);
+  if (buffer) return buffer;
+  buffer = await generateImageSDK(prompt, width, height);
+  if (buffer) return buffer;
+  const tmpPath = join(tmpdir(), `aj30-bg-${randomUUID()}.png`);
+  buffer = generateImageCLI(prompt, tmpPath, width, height);
+  if (buffer) return buffer;
+  console.error(`[AJ30]  All AI image methods failed — using geometric fallback`);
+  return generateGeometricFallback(width, height, marketImpact);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TTS (edge-tts primary, Groq fallback)
+// ═══════════════════════════════════════════════════════════════════
+const ARABIC_FEMALE_VOICES = [
+  'ar-AE-FatimaNeural',
+  'ar-EG-SalmaNeural',
+  'ar-SA-ZariyahNeural',
+  'ar-JO-SanaNeural',
+  'ar-KW-NouraNeural',
+];
+const ENGLISH_FEMALE_VOICES = [
+  'en-US-JennyNeural',
+  'en-US-AriaNeural',
+];
+
+function generateVoiceover(text, outputPath, locale) {
+  const voiceList = locale === 'en' ? ENGLISH_FEMALE_VOICES : ARABIC_FEMALE_VOICES;
+  const cleanedText = stripMarkdown(text);
+  const truncated = cleanedText.length > 2000 ? cleanedText.slice(0, 1997) + '...' : cleanedText;
+  const tmpTextFile = outputPath.replace('.mp3', '_text.txt');
+  writeFileSync(tmpTextFile, truncated, 'utf-8');
+
+  for (const voice of voiceList) {
+    try {
+      const pythonCode = `
+import asyncio, edge_tts
+async def main():
+    text = open("${tmpTextFile}", "r", encoding="utf-8").read()
+    comm = edge_tts.Communicate(text, "${voice}", rate="+10%", pitch="+2Hz")
+    await comm.save("${outputPath}")
+asyncio.run(main())
+`;
+      const result = spawnSync('python3', ['-c', pythonCode], {
+        encoding: 'utf-8', timeout: 120000, maxBuffer: 10*1024*1024,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        try { unlinkSync(tmpTextFile); } catch {}
+        console.log(`[AJ30-TTS] ${voice} — SUCCESS`);
+        return true;
+      }
+    } catch (err) {
+      console.warn(`[AJ30-TTS] ${voice} error: ${err.message?.slice(0, 80)}`);
+    }
+  }
+
+  // Groq fallback
+  const groqKey = process.env.GROQ_API_KEY;
+  if (groqKey) {
+    try {
+      const groqVoice = locale === 'en' ? 'Fritz-PlayAI' : 'Hiba-MSA';
+      spawnSync('curl', [
+        '-s', '-X', 'POST', 'https://api.groq.com/openai/v1/audio/speech',
+        '-H', `Authorization: Bearer ${groqKey}`,
+        '-H', 'Content-Type: application/json',
+        '-d', JSON.stringify({ model: 'playai-tts', input: truncated, voice: groqVoice, response_format: 'mp3', speed: 1.1 }),
+        '-o', outputPath,
+      ], { encoding: 'utf-8', timeout: 60000 });
+      if (existsSync(outputPath) && readFileSync(outputPath).length > 1000) {
+        try { unlinkSync(tmpTextFile); } catch {}
+        console.log(`[AJ30-TTS] Groq ${groqVoice} — SUCCESS`);
+        return true;
+      }
+    } catch {}
+  }
+
+  try { unlinkSync(tmpTextFile); } catch {}
+  console.error(`[AJ30-TTS] ALL voices failed for locale=${locale}`);
+  return false;
+}
+
+function getAudioDuration(path) {
+  try {
+    const result = spawnSync('ffprobe', [
+      '-v', 'quiet', '-show_entries', 'format=duration',
+      '-of', 'default=noprint_wrappers=1:nokey=1', path
+    ], { encoding: 'utf-8', timeout: 10000 });
+    return parseFloat(result.stdout.trim()) || 0;
+  } catch { return 0; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BACKGROUND MUSIC — Warm Arabic maqam-inspired ambient
+// ═══════════════════════════════════════════════════════════════════
+function generateBackgroundMusic(outputPath, durationSeconds) {
+  const dur = Math.ceil(durationSeconds) + 5;
+  console.log(`[AJ30]  Generating warm ambient music (${dur}s)...`);
+  try {
+    const inputs = [];
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=73.42:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=146.83:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=174.61:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=220:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=293.66:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=440:duration=${dur}`);
+
+    const filterComplex = [
+      '[0:a]volume=0.02[sub]',
+      '[1:a]volume=0.03[root]',
+      '[2:a]volume=0.02[third]',
+      '[3:a]volume=0.015[fifth]',
+      '[4:a]volume=0.01[oct]',
+      '[5:a]volume=0.005[tex]',
+      '[sub][root][third][fifth][oct][tex]amix=6:duration=longest:dropout_transition=5[mixed]',
+      '[mixed]tremolo=f=0.2:d=0.3[trem]',
+      '[trem]lowpass=f=450:poles=4[lp]',
+      '[lp]highpass=f=35[hp]',
+      '[hp]acompressor=threshold=0.06:ratio=3:attack=5:release=120[comp]',
+      '[comp]afade=t=in:st=0:d=5[fin]',
+      `[fin]afade=t=out:st=${dur - 10}:d=10[final]`,
+    ].join(',');
+
+    const result = spawnSync('ffmpeg', [
+      '-y', ...inputs,
+      '-filter_complex', filterComplex,
+      '-map', '[final]',
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+
+    if (result.status !== 0) {
+      console.warn(`[AJ30]  Music generation failed: ${result.stderr?.slice(-200)}`);
+      return false;
+    }
+    const success = existsSync(outputPath);
+    if (success) console.log(`[AJ30]  Background music generated`);
+    return success;
+  } catch (err) {
+    console.warn(`[AJ30]  Music error: ${err.message}`);
+    return false;
+  }
+}
+
+function mixAudioWithMusic(narrationPath, musicPath, outputPath, musicVolume = 0.15) {
+  try {
+    const totalDuration = getAudioDuration(narrationPath) || 120;
+    const filterComplex = [
+      `[1:a]volume=${musicVolume},afade=t=in:st=0:d=5,afade=t=out:st=${totalDuration-8}:d=8[music]`,
+      `[0:a][music]amix=2:duration=shortest:dropout_transition=3:normalize=0[aout]`,
+    ].join(';');
+    const result = spawnSync('ffmpeg', [
+      '-y', '-i', narrationPath, '-i', musicPath,
+      '-filter_complex', filterComplex,
+      '-map', '[aout]',
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+    if (result.status !== 0) {
+      const simpleFilter = `[1:a]volume=${musicVolume}[music];[0:a][music]amix=2:duration=shortest:dropout_transition=3:normalize=0[aout]`;
+      const fallback = spawnSync('ffmpeg', [
+        '-y', '-i', narrationPath, '-i', musicPath,
+        '-filter_complex', simpleFilter,
+        '-map', '[aout]',
+        '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+        outputPath,
+      ], { encoding: 'utf-8', timeout: 60000 });
+      if (fallback.status !== 0) return false;
+    }
+    return existsSync(outputPath);
+  } catch { return false; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// PER-SCENE NARRATION — 6 Scenes, LLM-powered with template fallback
+// ═══════════════════════════════════════════════════════════════════
+async function generateNarrationLLM(data) {
+  const locale = data.locale || 'ar';
+  const isAr = locale === 'ar';
+  try {
+    const ZAI = (await import('z-ai-web-dev-sdk')).default;
+    const zai = await ZAI.create();
+
+    const impactLabel = getImpactLabel(data.market_impact, locale);
+    const impactArrow = getImpactArrow(data.market_impact);
+    const stats = (data.stats || []).map(s => `${s.label}: ${s.value}`).join('، ');
+    const keyPoints = (data.key_points || []).slice(0, 5).join('. ');
+    const rootCauses = (data.root_causes || []).map(r => `${r.title}: ${r.description}`).join('. ');
+    const scenarios = (data.scenarios || []).map(s => `${s.title} (${s.probability}): ${s.result}`).join('. ');
+    const takeaways = (data.strategic_takeaways || []).map(t => `${t.title}: ${t.detail}`).join('. ');
+    const recs = (data.recommendations || []).map(r => `${r.asset}: ${r.action}`).join('. ');
+
+    const systemPrompt = isAr
+      ? `أنت مذيعة في قناة الجزيرة بأسلوب صحافة البيانات. مهمتك كتابة نص تعليق صوتي لتقرير فيديو (أقل من 3 دقائق). القواعد: 1. عربية فصحى سلسة 2. لا كلمات إنجليزية 3. كل مشهد 2-4 جمل 4. ادخل الموضوع مباشرة 5. لا تنسيق Markdown 6. ربط طبيعي بين الأفكار`
+      : `You are an Al Jazeera data journalism narrator. Write voiceover for a short data video report (under 3 min). Rules: 1. Clear natural English 2. 2-4 sentences per scene 3. Get straight to the point 4. No Markdown formatting 5. Natural transitions`;
+
+    const userPrompt = isAr
+      ? `اكتب 6 فقرات تعليق صوتي لتقرير بعنوان: "${data.title || 'تقرير اقتصادي'}"
+تأثير السوق: ${impactArrow} ${impactLabel}
+S1 (الخطاف - 12 ثانية): الرقم الرئيسي المثير — جملتان فقط. البيانات: ${stats}
+S2 (الخريطة - 28 ثانية): المناطق المتأثرة والسياق الجغرافي — البيانات: ${stats}. النقاط: ${keyPoints}
+S3 (الخط الزمني - 35 ثانية): الأحداث والأسباب عبر الزمن — ${rootCauses || 'تطورات فنية'}
+S4 (البيانات - 35 ثانية): مقارنة الأرقام والسيناريوهات — ${scenarios || 'الاتجاه ' + impactLabel}
+S5 (قصة إنسانية - 30 ثانية): البعد الإنساني والأثر على الناس — البيانات تعكس حياة حقيقية
+S6 (الختام - 20 ثانية): الاستنتاجات والتوصيات — ${takeaways}. اختم بـ: شكراً لمتابعتكم رؤى
+أجب بهذا الشكل فقط:
+S1: ...
+S2: ...
+S3: ...
+S4: ...
+S5: ...
+S6: ...`
+      : `Write 6 voiceover paragraphs for report: "${data.title || 'Economic Report'}"
+Market impact: ${impactArrow} ${impactLabel}
+S1 (Hook - 12s): The dramatic key number — two sentences only. Data: ${stats}
+S2 (Map - 28s): Affected regions and geographic context — Data: ${stats}. Points: ${keyPoints}
+S3 (Timeline - 35s): Events and causes over time — ${rootCauses || 'Technical developments'}
+S4 (DataViz - 35s): Number comparisons and scenarios — ${scenarios || 'Direction: ' + impactLabel}
+S5 (Human Story - 30s): Human dimension and impact on real people — data reflects real lives
+S6 (Closing - 20s): Conclusions and recommendations — ${takeaways}. End with: Thank you for watching Rouaa
+Answer ONLY in this format:
+S1: ...
+S2: ...
+S3: ...
+S4: ...
+S5: ...
+S6: ...`;
+
+    console.log('[AJ30]  Calling LLM for narration...');
+    const completion = await zai.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.7, max_tokens: 2000,
+    });
+
+    const rawText = completion.choices?.[0]?.message?.content || '';
+    const parts = [];
+    for (let i = 1; i <= 6; i++) {
+      const regex = new RegExp(`S${i}\\s*:\\s*(.+?)(?=S${i+1}\\s*:|$)`, 's');
+      const match = rawText.match(regex);
+      if (match) {
+        parts.push(stripMarkdown(match[1].trim().replace(/\n+/g, ' ')));
+      } else {
+        parts.push(null);
+      }
+    }
+    const templateParts = generateNarrationTemplate(data);
+    for (let i = 0; i < 6; i++) {
+      if (!parts[i] || parts[i].length < 10) parts[i] = templateParts[i];
+    }
+    console.log('[AJ30]  LLM narration generated');
+    return parts;
+  } catch (err) {
+    console.warn(`[AJ30]  LLM narration failed: ${err.message?.slice(0, 100)}`);
+    return generateNarrationTemplate(data);
+  }
+}
+
+function generateNarrationTemplate(data) {
+  const locale = data.locale || 'ar';
+  const isAr = locale === 'ar';
+  const parts = [];
+  const impactLabel = getImpactLabel(data.market_impact, locale);
+  const impactArrow = getImpactArrow(data.market_impact);
+  const stats = data.stats || [];
+  const keyPoints = data.key_points || [];
+  const rootCauses = data.root_causes || [];
+  const scenarios = data.scenarios || [];
+  const takeaways = data.strategic_takeaways || [];
+  const recs = data.recommendations || [];
+
+  // S1: Hook
+  if (isAr) {
+    const mainStat = stats[0];
+    parts.push(mainStat
+      ? `${mainStat.label} يسجل ${mainStat.value}. تأثير السوق: ${impactArrow} ${impactLabel}`
+      : `${data.title || 'تقرير اقتصادي'}. تأثير السوق: ${impactArrow} ${impactLabel}`);
+  } else {
+    const mainStat = stats[0];
+    parts.push(mainStat
+      ? `${mainStat.label} records ${mainStat.value}. Market impact: ${impactArrow} ${impactLabel}`
+      : `${data.title || 'Economic Report'}. Market impact: ${impactArrow} ${impactLabel}`);
+  }
+
+  // S2: Map
+  if (isAr) {
+    let s2 = '';
+    if (stats.length > 0) s2 += 'المناطق المتأثرة تسجل: ' + stats.map(s => `${s.label} عند ${s.value}`).join('، ');
+    if (keyPoints.length > 0) s2 += (s2 ? '. وعلى صعيد التطورات، ' : '') + keyPoints.slice(0, 3).join('. ');
+    if (!s2) s2 = 'البيانات تشير إلى تأثيرات جغرافية مهمة';
+    parts.push(s2);
+  } else {
+    let s2 = '';
+    if (stats.length > 0) s2 += 'Affected regions record: ' + stats.map(s => `${s.label} at ${s.value}`).join(', ');
+    if (keyPoints.length > 0) s2 += (s2 ? '. On developments, ' : '') + keyPoints.slice(0, 3).join('. ');
+    if (!s2) s2 = 'Data points to significant geographic impacts';
+    parts.push(s2);
+  }
+
+  // S3: Timeline
+  if (isAr) {
+    let s3 = '';
+    if (rootCauses.length > 0) s3 += 'تطور الأحداث: ' + rootCauses.map(r => `${r.title} حيث ${r.description}`).join('. ');
+    if (!s3) s3 = 'الأحداث تتطور عبر الزمن وتستدعي المتابعة';
+    parts.push(s3);
+  } else {
+    let s3 = '';
+    if (rootCauses.length > 0) s3 += 'Events timeline: ' + rootCauses.map(r => `${r.title} — ${r.description}`).join('. ');
+    if (!s3) s3 = 'Events evolve over time and warrant monitoring';
+    parts.push(s3);
+  }
+
+  // S4: DataViz
+  if (isAr) {
+    if (scenarios.length > 0) {
+      parts.push('السيناريوهات المحتملة: ' + scenarios.map(s => `${s.title} باحتمالية ${s.probability}`).join('. '));
+    } else {
+      parts.push(`الاتجاه العام يتجه نحو المسار ${impactLabel}`);
+    }
+  } else {
+    if (scenarios.length > 0) {
+      parts.push('Likely scenarios: ' + scenarios.map(s => `${s.title} at ${s.probability}`).join('. '));
+    } else {
+      parts.push(`Overall direction is ${impactLabel}`);
+    }
+  }
+
+  // S5: Human Story
+  if (isAr) {
+    parts.push('خلف هذه الأرقام قصص حقيقية لأشخاص يتأثرون بهذه التغيرات يومياً. البيانات ليست مجرد أرقام بل تعكس حياة الناس');
+  } else {
+    parts.push('Behind these numbers are real stories of people affected by these changes daily. Data is not just numbers — it reflects real lives');
+  }
+
+  // S6: Closing
+  if (isAr) {
+    let s6 = '';
+    if (takeaways.length > 0) s6 += takeaways.slice(0, 3).map(t => `${t.title}: ${t.detail}`).join('. ');
+    s6 += (s6 ? '. ' : '') + 'شكراً لمتابعتكم رؤى';
+    parts.push(s6);
+  } else {
+    let s6 = '';
+    if (takeaways.length > 0) s6 += takeaways.slice(0, 3).map(t => `${t.title}: ${t.detail}`).join('. ');
+    s6 += (s6 ? '. ' : '') + 'Thank you for watching Rouaa';
+    parts.push(s6);
+  }
+
+  return parts;
+}
+
+async function generatePerSceneVoiceover(narrationParts, tmpDir, locale) {
+  const audioPaths = [];
+  const audioDurations = [];
+  for (let i = 0; i < narrationParts.length; i++) {
+    const text = narrationParts[i];
+    if (!text || text.trim().length === 0) {
+      audioPaths.push(null);
+      audioDurations.push(0);
+      continue;
+    }
+    const audioPath = join(tmpDir, `scene_${i}_voice.mp3`);
+    const success = generateVoiceover(text, audioPath, locale);
+    if (success && existsSync(audioPath)) {
+      const duration = getAudioDuration(audioPath);
+      audioPaths.push(audioPath);
+      audioDurations.push(duration);
+      console.log(`[AJ30]  Scene ${i+1} voiceover: ${duration.toFixed(2)}s`);
+    } else {
+      audioPaths.push(null);
+      audioDurations.push(0);
+    }
+  }
+  return { audioPaths, audioDurations };
+}
+
+function concatenateAudioSegments(audioPaths, outputPath) {
+  const validPaths = audioPaths.filter(p => p && existsSync(p));
+  if (validPaths.length === 0) return false;
+  const concatListPath = outputPath.replace('.mp3', '_concat.txt');
+  writeFileSync(concatListPath, validPaths.map(p => `file '${p}'`).join('\n'), 'utf-8');
+  try {
+    const result = spawnSync('ffmpeg', [
+      '-y', '-f', 'concat', '-safe', '0',
+      '-i', concatListPath,
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+    try { unlinkSync(concatListPath); } catch {}
+    if (result.status !== 0) return false;
+    return existsSync(outputPath);
+  } catch { return false; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DATA ENHANCEMENT
+// ═══════════════════════════════════════════════════════════════════
+function enhanceData(data) {
+  const enhanced = { ...data };
+  const locale = enhanced.locale || 'ar';
+
+  if (!enhanced._unifiedDate) {
+    if (enhanced.date && enhanced.date.trim()) {
+      enhanced._unifiedDate = enhanced.date.trim();
+    } else {
+      const now = new Date();
+      try {
+        enhanced._unifiedDate = now.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+      } catch {
+        enhanced._unifiedDate = now.toISOString().split('T')[0];
+      }
+    }
+    enhanced.date = enhanced._unifiedDate;
+  }
+
+  if (!enhanced.stats || enhanced.stats.length === 0) {
+    const impact = enhanced.market_impact || 'neutral';
+    const isPos = ['bullish','positive'].includes(impact);
+    const isNeg = ['bearish','negative'].includes(impact);
+    enhanced.stats = [
+      { label: locale === 'ar' ? 'مؤشر المشاعر' : 'Sentiment', value: isPos ? '67.5%' : isNeg ? '28.3%' : '49.2%', description: '' },
+      { label: locale === 'ar' ? 'مؤشر التذبذب' : 'Volatility', value: isNeg ? '28.4%' : isPos ? '14.2%' : '19.7%', description: '' },
+      { label: locale === 'ar' ? 'حجم التداول' : 'Volume', value: '1.2M', description: '' },
+      { label: locale === 'ar' ? 'الزخم' : 'Momentum', value: isPos ? '+3.2%' : isNeg ? '-2.8%' : '+0.1%', description: '' },
+    ];
+  }
+
+  if (!enhanced.root_causes || enhanced.root_causes.length === 0) {
+    enhanced.root_causes = [
+      { title: locale === 'ar' ? 'عوامل العرض والطلب' : 'Supply & Demand', description: locale === 'ar' ? 'تحولات في ديناميكيات السوق' : 'Shifts in market dynamics', icon: '📊' },
+      { title: locale === 'ar' ? 'تحركات رأس المال' : 'Capital Flows', description: locale === 'ar' ? 'تدفقات دولية تؤثر على الأسعار' : 'International flows impacting prices', icon: '💰' },
+      { title: locale === 'ar' ? 'سياسات البنوك المركزية' : 'Central Bank Policy', description: locale === 'ar' ? 'قرارات نقدية توجه الأسواق' : 'Monetary decisions guiding markets', icon: '🏛️' },
+    ];
+  }
+
+  if (!enhanced.scenarios || enhanced.scenarios.length === 0) {
+    enhanced.scenarios = [
+      { title: locale === 'ar' ? 'السيناريو المتفائل' : 'Optimistic', result: locale === 'ar' ? 'تعافٍ أسرع' : 'Faster recovery', probability: '35%', color: 'green' },
+      { title: locale === 'ar' ? 'السيناريو الأساسي' : 'Base Case', result: locale === 'ar' ? 'نمو معتدل' : 'Moderate growth', probability: '45%', color: 'yellow' },
+      { title: locale === 'ar' ? 'السيناريو المتشائم' : 'Pessimistic', result: locale === 'ar' ? 'تراجع حاد' : 'Sharp decline', probability: '20%', color: 'red' },
+    ];
+  }
+
+  if (!enhanced.strategic_takeaways || enhanced.strategic_takeaways.length === 0) {
+    const impact = enhanced.market_impact || 'neutral';
+    enhanced.strategic_takeaways = [
+      { title: locale === 'ar' ? 'فرص محتملة' : 'Opportunities', detail: locale === 'ar' ? 'البيانات تشير إلى مسار جديد' : 'Data indicates a new trajectory', color: ['bullish','positive'].includes(impact) ? 'green' : 'gold' },
+      { title: locale === 'ar' ? 'المؤشر الرئيسي' : 'Key Metric', detail: `${enhanced.stats[0].label}: ${enhanced.stats[0].value}`, color: 'gold' },
+      { title: locale === 'ar' ? 'إدارة المخاطر' : 'Risk Management', detail: locale === 'ar' ? 'تنويع المحفظة أمر بالغ الأهمية' : 'Diversification is crucial', color: ['bearish','negative'].includes(impact) ? 'red' : 'gold' },
+    ];
+  }
+
+  if (!enhanced.benefiting_assets || enhanced.benefiting_assets.length === 0) {
+    enhanced.benefiting_assets = [
+      { name: locale === 'ar' ? 'الذهب' : 'Gold', symbol: 'XAU', reason: locale === 'ar' ? 'ملاذ آمن' : 'Safe haven' },
+      { name: locale === 'ar' ? 'الدولار' : 'USD', symbol: 'DXY', reason: locale === 'ar' ? 'تحفظي' : 'Defensive' },
+    ];
+  }
+
+  if (!enhanced.harmed_assets || enhanced.harmed_assets.length === 0) {
+    enhanced.harmed_assets = [
+      { name: locale === 'ar' ? 'الأسهم الناشئة' : 'Emerging Equities', symbol: 'EEM', reason: locale === 'ar' ? 'مخاطرة عالية' : 'High risk' },
+    ];
+  }
+
+  if (!enhanced.recommendations || enhanced.recommendations.length === 0) {
+    enhanced.recommendations = [
+      { horizon: 'daily', asset: locale === 'ar' ? 'الذهب' : 'Gold', action: locale === 'ar' ? 'شراء عند التراجع' : 'Buy on dip', entry: '2020', target: '2080', stop: '1990', allocation: '15%' },
+      { horizon: 'medium', asset: locale === 'ar' ? 'إس آند بي 500' : 'S&P 500', action: locale === 'ar' ? 'تراكم تدريجي' : 'Accumulate gradually', entry: '5200', target: '5600', stop: '5000', allocation: '25%' },
+    ];
+  }
+
+  return enhanced;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// HTML SCENE GENERATORS — V30 Al Jazeera Data Journalism
+// COMPLETELY DIFFERENT from Bloomberg — 6 unique scenes
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Shared: Persistent Elements (yellow square, gold line, brand) ──
+function persistentElementsCSS(isRTL) {
+  return `
+    /* ═══ GOLD ACCENT LINE — 2px always visible ═══ */
+    .aj-gold-line {
+      position:absolute; top:0; ${isRTL ? 'right' : 'left'}:0;
+      height:2px; width:100%;
+      background: linear-gradient(${isRTL ? '270deg' : '90deg'}, ${AJ.gold}, ${AJ.paleGold}, transparent);
+      z-index:60;
+    }
+
+    /* ═══ YELLOW SQUARE — connecting device, appears in every scene ═══ */
+    .aj-yellow-square {
+      position:absolute;
+      background: ${AJ.gold};
+      z-index:55;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ═══ BRAND MARK — رؤى bottom right ═══ */
+    .aj-brand {
+      position:absolute; bottom:16px; ${isRTL ? 'left' : 'right'}:24px;
+      font-size:14px; font-weight:600; color:${AJ.gold};
+      opacity:0.5; z-index:55; letter-spacing:2px;
+      font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+    }
+  `;
+}
+
+// ─── Shared: Background image + overlay layer ──
+function bgImageCSS() {
+  return `
+    .aj-bg-image {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      overflow:hidden; z-index:0;
+    }
+    .aj-bg-img {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      object-fit:cover; filter: brightness(0.3) saturate(0.4) contrast(1.05);
+      will-change: transform;
+    }
+    .aj-bg-overlay {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      z-index:1;
+    }
+  `;
+}
+
+function getBgImageHTML(bgImages, sceneIndex, overlayOpacity = 0.7) {
+  const bgV2 = bgImages[sceneIndex] || bgImages[0] || null;
+  let bgImageB64 = '';
+  if (bgV2 && typeof bgV2 === 'object' && bgV2.base64) {
+    bgImageB64 = bgV2.base64 || '';
+  } else if (Array.isArray(bgImages) && typeof bgImages[0] === 'string') {
+    bgImageB64 = bgImages[sceneIndex] || bgImages[0] || '';
+  }
+  const hasBgImage = bgImageB64.length > 100;
+  const overlay = `linear-gradient(180deg, rgba(13,17,23,${overlayOpacity}) 0%, rgba(13,17,23,${overlayOpacity*0.7}) 50%, rgba(13,17,23,${overlayOpacity}) 100%)`;
+  if (hasBgImage) {
+    const mime = bgImageB64.startsWith('/9j/') ? 'image/jpeg' : bgImageB64.startsWith('iVBOR') ? 'image/png' : 'image/jpeg';
+    return `<div class="aj-bg-image"><img class="aj-bg-img" src="data:${mime};base64,${bgImageB64}"/><div class="aj-bg-overlay" style="background:${overlay}"></div></div>`;
+  }
+  return '';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 1: HOOK (0-12s) — Dark → Yellow square RTL → Massive number
+// ═══════════════════════════════════════════════════════════════════
+function generateHookHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const mainStat = data.stats?.[0] || { label: data.title || 'تقرير', value: '—' };
+  const mainNumber = isRTL ? toArabicNumeral(mainStat.value) : mainStat.value;
+  const mainLabel = truncateText(mainStat.label, 35);
+  const hookSentence = isRTL
+    ? truncateText(data.title || 'تقرير اقتصادي', 40)
+    : truncateText(data.title || 'Economic Report', 50);
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Dark curtain for first 4 seconds */
+    .hook-dark-curtain {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background:${AJ.darkBg}; z-index:10;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Yellow square — moves RTL, contains the number */
+    .hook-square {
+      position:absolute;
+      width:420px; height:320px;
+      background:${AJ.gold};
+      z-index:20;
+      top:50%; transform:translateY(-50%);
+      ${isRTL ? 'left' : 'right'}: -460px;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:24px;
+      box-shadow: 0 0 60px rgba(219,162,0,0.3);
+    }
+    .hook-number {
+      font-size:140px; font-weight:900; color:${AJ.darkBg};
+      line-height:1; letter-spacing:-4px;
+      font-family:'IBM Plex Mono','Inter',monospace;
+      overflow:hidden; text-overflow:ellipsis; max-width:380px;
+      text-align:center;
+    }
+    .hook-label {
+      font-size:28px; font-weight:600; color:${AJ.darkBg};
+      margin-top:8px; overflow:hidden; text-overflow:ellipsis;
+      max-width:380px; text-align:center; opacity:0.8;
+    }
+
+    /* Sentence under the square */
+    .hook-sentence {
+      position:absolute;
+      ${isRTL ? 'left' : 'right'}:80px;
+      top:65%; z-index:20;
+      font-size:32px; font-weight:400; color:${AJ.warmWhite};
+      max-width:500px; overflow:hidden; text-overflow:ellipsis;
+      opacity:0; line-height:1.4;
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 0, 0.7)}
+  <div class="hook-dark-curtain" id="curtain"></div>
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+
+  <!-- Moving Yellow Square -->
+  <div class="hook-square" id="square">
+    <div class="hook-number">${escapeHTML(String(mainNumber))}</div>
+    <div class="hook-label">${escapeHTML(mainLabel)}</div>
+  </div>
+  <div class="hook-sentence" id="sentence">${escapeHTML(hookSentence)}</div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var curtain = document.getElementById('curtain');
+      var square = document.getElementById('square');
+      var sentence = document.getElementById('sentence');
+
+      // Phase 1: 0-0.33 — Dark screen, no narration, just music
+      var darkEnd = 0.33;
+      if (p < darkEnd) {
+        var dp = p / darkEnd;
+        curtain.style.opacity = 1 - dp * 0.3; // Slight lightening
+        square.style.${isRTL ? 'left' : 'right'} = '-460px';
+        sentence.style.opacity = 0;
+      }
+      // Phase 2: 0.33-0.7 — Yellow square moves in from right (RTL)
+      else if (p < 0.7) {
+        var sp = (p - darkEnd) / (0.7 - darkEnd);
+        var eased = 1 - Math.pow(1 - sp, 3);
+        curtain.style.opacity = 0;
+        var pos = -460 + eased * (460 + ${isRTL ? '80' : '80'});
+        square.style.${isRTL ? 'left' : 'right'} = pos + 'px';
+        sentence.style.opacity = 0;
+      }
+      // Phase 3: 0.7-1.0 — Square in place, sentence appears
+      else {
+        var tp = (p - 0.7) / 0.3;
+        curtain.style.opacity = 0;
+        square.style.${isRTL ? 'left' : 'right'} = '80px';
+        sentence.style.opacity = Math.min(1, tp * 2);
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 2: MAP + CONTEXT (12-40s) — SVG Map with glowing regions
+// ═══════════════════════════════════════════════════════════════════
+function generateMapHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = data.stats || [];
+  const regions = [
+    { id: 'americas', label: isRTL ? 'الأمريكتان' : 'Americas', stat: stats[0] },
+    { id: 'europe', label: isRTL ? 'أوروبا' : 'Europe', stat: stats[1] },
+    { id: 'africa', label: isRTL ? 'أفريقيا' : 'Africa', stat: stats[2] || stats[0] },
+    { id: 'mideast', label: isRTL ? 'الشرق الأوسط' : 'Middle East', stat: stats[3] || stats[0] },
+    { id: 'asia', label: isRTL ? 'آسيا' : 'Asia', stat: stats[1] },
+  ];
+  const mapSVG = generateWorldMapSVG();
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Map container */
+    .map-container {
+      position:absolute; top:60px; ${isRTL ? 'left' : 'right'}:40px;
+      width:680px; height:380px; z-index:10;
+      border:1px solid ${AJ.borderGold}; border-radius:8px;
+      overflow:hidden; background:${AJ.darkBg};
+    }
+    .map-title {
+      position:absolute; top:20px; ${isRTL ? 'right' : 'left'}:40px;
+      font-size:28px; font-weight:700; color:${AJ.gold}; z-index:10;
+    }
+    .map-date {
+      position:absolute; top:52px; ${isRTL ? 'right' : 'left'}:40px;
+      font-size:16px; color:${AJ.textGray}; z-index:10;
+    }
+
+    /* Region info cards — left side */
+    .map-info {
+      position:absolute; top:80px; ${isRTL ? 'right' : 'left'}:40px;
+      width:360px; z-index:10;
+    }
+    .map-info-item {
+      margin-bottom:16px; opacity:0; transform:translateX(${isRTL ? '20px' : '-20px'});
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      display:flex; align-items:center; gap:12px;
+    }
+    .map-info-sq {
+      width:10px; height:10px; background:${AJ.gold}; flex-shrink:0;
+    }
+    .map-info-name {
+      font-size:18px; color:${AJ.textGray}; min-width:120px;
+      overflow:hidden; text-overflow:ellipsis; max-width:140px;
+    }
+    .map-info-val {
+      font-size:22px; font-weight:700; color:${AJ.warmWhite};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+
+    /* Yellow square pointer on map */
+    .map-pointer {
+      position:absolute; width:24px; height:24px;
+      background:${AJ.gold}; z-index:15;
+      box-shadow:0 0 20px rgba(219,162,0,0.5);
+      transition: left 0.6s ease, top 0.6s ease;
+    }
+
+    /* Map region glow animation */
+    .map-region { transition: fill 0.5s ease, opacity 0.5s ease, filter 0.5s ease; }
+    .map-region.glow { fill:${AJ.gold}; opacity:0.6; filter:url(#glow); }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 1, 0.75)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+  <div class="aj-yellow-square" style="width:16px;height:16px;top:70px;${isRTL ? 'left' : 'right'}:20px;opacity:0.6;"></div>
+
+  <div class="map-title">${escapeHTML(truncateText(data.title || (isRTL ? 'المناطق المتأثرة' : 'Affected Regions'), 30))}</div>
+  <div class="map-date">${escapeHTML(data.date || '')}</div>
+
+  <div class="map-info" id="mapInfo">
+    ${regions.map((r, i) => `
+    <div class="map-info-item" id="info-${i}">
+      <div class="map-info-sq"></div>
+      <div class="map-info-name">${escapeHTML(r.label)}</div>
+      <div class="map-info-val">${escapeHTML(r.stat?.value || '—')}</div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <div class="map-container">
+    ${mapSVG}
+    <div class="map-pointer" id="pointer" style="left:100px;top:200px;"></div>
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var regions = ['americas','europe','africa','mideast','asia'];
+      var regionPos = [
+        {x:190,y:200},{x:480,y:130},{x:475,y:300},{x:575,y:195},{x:710,y:180}
+      ];
+      var total = regions.length;
+      var perRegion = 1.0 / total;
+
+      for (var i = 0; i < total; i++) {
+        var start = i * perRegion;
+        var end = start + perRegion;
+        var el = document.getElementById('map-' + regions[i]);
+        var infoEl = document.getElementById('info-' + i);
+        var ptr = document.getElementById('pointer');
+
+        if (p >= start && el) {
+          el.classList.add('glow');
+          if (ptr) {
+            ptr.style.left = regionPos[i].x + 'px';
+            ptr.style.top = regionPos[i].y + 'px';
+          }
+          if (infoEl) {
+            var rp = Math.min(1, (p - start) / (perRegion * 0.3));
+            infoEl.style.opacity = rp;
+            infoEl.style.transform = 'translateX(0)';
+          }
+        } else if (el) {
+          el.classList.remove('glow');
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 3: TIMELINE (40-75s) — Gold line + event dots (2022 rebrand)
+// ═══════════════════════════════════════════════════════════════════
+function generateTimelineHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const rootCauses = data.root_causes || [];
+  const events = rootCauses.length > 0 ? rootCauses.slice(0, 5) : [
+    { title: isRTL ? 'البداية' : 'Start', description: isRTL ? 'تطورات أولى' : 'Initial developments' },
+    { title: isRTL ? 'التصاعد' : 'Escalation', description: isRTL ? 'تصاعد التوترات' : 'Rising tensions' },
+    { title: isRTL ? 'الذروة' : 'Peak', description: isRTL ? 'وصل للمستويات القصوى' : 'Reached critical levels' },
+    { title: isRTL ? 'الاستجابة' : 'Response', description: isRTL ? 'إجراءات تصحيحية' : 'Corrective measures' },
+    { title: isRTL ? 'الحالي' : 'Current', description: isRTL ? 'الوضع الراهن' : 'Current situation' },
+  ];
+
+  const yearBase = 2020;
+  const bgImages = data._bgImagesV2 || data._bgImages || [];
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Scene title */
+    .tl-title {
+      position:absolute; top:30px; ${isRTL ? 'right' : 'left'}:50px;
+      font-size:24px; font-weight:700; color:${AJ.gold}; z-index:10;
+    }
+
+    /* ═══ HORIZONTAL GOLD TIMELINE LINE ═══ */
+    .tl-line {
+      position:absolute; bottom:160px; ${isRTL ? 'right' : 'left'}:60px;
+      height:3px; width:0px; background:${AJ.gold}; z-index:10;
+      transition: width 0.2s ease;
+    }
+    .tl-line-bg {
+      position:absolute; bottom:160px; ${isRTL ? 'right' : 'left'}:60px;
+      height:1px; width:${WIDTH - 120}px; background:${AJ.borderGold}; z-index:9;
+    }
+
+    /* Event dots */
+    .tl-dot {
+      position:absolute; bottom:153px; width:18px; height:18px;
+      background:${AJ.darkBg}; border:2px solid ${AJ.gold};
+      border-radius:50%; z-index:11; opacity:0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+    }
+    .tl-dot.active {
+      background:${AJ.gold};
+      box-shadow:0 0 20px rgba(219,162,0,0.5);
+    }
+
+    /* Event info — above the line */
+    .tl-event {
+      position:absolute; bottom:190px; width:180px;
+      z-index:12; opacity:0;
+      transition: opacity 0.4s ease;
+      text-align:center;
+    }
+    .tl-event-year {
+      font-size:36px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .tl-event-desc {
+      font-size:16px; color:${AJ.warmWhite}; margin-top:4px;
+      overflow:hidden; text-overflow:ellipsis; max-width:180px;
+      line-height:1.3;
+    }
+
+    /* Current event detail — large in center */
+    .tl-current {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translate(${isRTL ? '20%' : '-20%'}, -50%);
+      z-index:15; text-align:${isRTL ? 'right' : 'left'};
+    }
+    .tl-current-year {
+      font-size:80px; font-weight:900; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      line-height:1;
+    }
+    .tl-current-desc {
+      font-size:28px; color:${AJ.warmWhite}; margin-top:8px;
+      max-width:500px; overflow:hidden; text-overflow:ellipsis;
+      line-height:1.4;
+    }
+
+    /* Yellow square */
+    .aj-yellow-square.tl-sq {
+      width:40px; height:40px; top:50%; ${isRTL ? 'right' : 'left'}:40px;
+      transform:translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(bgImages, 2, 0.7)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+  <div class="aj-yellow-square tl-sq"></div>
+
+  <div class="tl-title">${isRTL ? 'الخط الزمني' : 'Timeline'}</div>
+
+  <!-- Timeline line -->
+  <div class="tl-line-bg"></div>
+  <div class="tl-line" id="tlLine"></div>
+
+  <!-- Event dots and labels -->
+  ${events.map((evt, i) => {
+    const x = isRTL
+      ? `right: ${60 + i * ((WIDTH - 120) / events.length)}px`
+      : `left: ${60 + i * ((WIDTH - 120) / events.length)}px`;
+    return `
+  <div class="tl-dot" id="dot-${i}" style="${x}"></div>
+  <div class="tl-event" id="evt-${i}" style="${x}; margin-${isRTL ? 'right' : 'left'}:-70px;">
+    <div class="tl-event-year">${yearBase + i}</div>
+    <div class="tl-event-desc">${escapeHTML(truncateText(evt.title, 20))}</div>
+  </div>`;
+  }).join('\n  ')}
+
+  <!-- Current event large display -->
+  <div class="tl-current" id="tlCurrent">
+    <div class="tl-current-year" id="curYear"></div>
+    <div class="tl-current-desc" id="curDesc"></div>
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var line = document.getElementById('tlLine');
+      var total = ${events.length};
+      var lineWidth = ${(WIDTH - 120)};
+
+      // Line grows
+      var lineProgress = Math.min(1, p / 0.9);
+      line.style.width = (lineProgress * lineWidth) + 'px';
+
+      // Reveal dots and events sequentially
+      for (var i = 0; i < total; i++) {
+        var segStart = i / total;
+        var segEnd = (i + 1) / total;
+        var dot = document.getElementById('dot-' + i);
+        var evt = document.getElementById('evt-' + i);
+
+        if (p >= segStart) {
+          var dp = Math.min(1, (p - segStart) / (segEnd - segStart));
+          if (dot) { dot.style.opacity = 1; dot.classList.toggle('active', dp > 0.3); }
+          if (evt) { evt.style.opacity = Math.min(1, dp * 2); }
+
+          // Update current display
+          if (dp > 0.1) {
+            var curYear = document.getElementById('curYear');
+            var curDesc = document.getElementById('curDesc');
+            if (curYear) curYear.textContent = '${yearBase}' * 1 + i;
+            if (curDesc) curDesc.textContent = ${JSON.stringify(events.map(e => truncateText(e.description || e.title, 35)))}[i];
+          }
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 4: DATAVIZ (75-110s) — Horizontal bar chart, RTL, gold-orange
+// ═══════════════════════════════════════════════════════════════════
+function generateDatavizHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = (data.stats || []).slice(0, 5);
+  const maxVal = Math.max(...stats.map(s => parseFloat(String(s.value).replace(/[^0-9.-]/g, '')) || 1), 1);
+  const barColors = ['#DBA200', '#E0AD00', '#E8BA00', '#F0C800', '#FA6400'];
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    .dv-title {
+      position:absolute; top:40px; ${isRTL ? 'right' : 'left'}:60px;
+      font-size:28px; font-weight:700; color:${AJ.gold}; z-index:10;
+    }
+    .dv-subtitle {
+      position:absolute; top:76px; ${isRTL ? 'right' : 'left'}:60px;
+      font-size:16px; color:${AJ.textGray}; z-index:10;
+    }
+
+    /* Bar chart container */
+    .dv-chart {
+      position:absolute; top:130px; ${isRTL ? 'right' : 'left'}:60px;
+      width:${WIDTH - 120}px; z-index:10;
+    }
+    .dv-bar-row {
+      display:flex; align-items:center; margin-bottom:28px;
+      opacity:0; transform:translateX(${isRTL ? '30px' : '-30px'});
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .dv-bar-label {
+      width:160px; font-size:20px; color:${AJ.warmWhite}; text-align:${isRTL ? 'left' : 'right'};
+      overflow:hidden; text-overflow:ellipsis; max-width:160px;
+      flex-shrink:0; padding-${isRTL ? 'left' : 'right'}:16px;
+    }
+    .dv-bar-track {
+      flex:1; height:48px; background:${AJ.midBg}; border-radius:4px;
+      overflow:hidden; position:relative;
+    }
+    .dv-bar-fill {
+      height:100%; border-radius:4px;
+      ${isRTL ? 'margin-right:auto' : ''};
+      width:0%; transition: width 0.6s ease;
+    }
+    .dv-bar-val {
+      position:absolute; ${isRTL ? 'left' : 'right'}:12px; top:50%; transform:translateY(-50%);
+      font-size:24px; font-weight:800; color:${AJ.darkBg};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      opacity:0; transition: opacity 0.3s ease;
+    }
+
+    /* Yellow squares beside each bar */
+    .dv-sq {
+      width:18px; height:18px; background:${AJ.gold}; flex-shrink:0;
+      margin-${isRTL ? 'left' : 'right'}:12px;
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 3, 0.75)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+  <div class="aj-yellow-square" style="width:20px;height:20px;top:42px;${isRTL ? 'left' : 'right'}:30px;opacity:0.5;"></div>
+
+  <div class="dv-title">${isRTL ? 'مقارنة البيانات' : 'Data Comparison'}</div>
+  <div class="dv-subtitle">${escapeHTML(truncateText(data.title || '', 40))}</div>
+
+  <div class="dv-chart">
+    ${stats.map((s, i) => {
+      const val = parseFloat(String(s.value).replace(/[^0-9.-]/g, '')) || 0;
+      const pct = Math.round((val / maxVal) * 100);
+      return `
+    <div class="dv-bar-row" id="bar-${i}">
+      <div class="dv-sq"></div>
+      <div class="dv-bar-label">${escapeHTML(truncateText(s.label, 18))}</div>
+      <div class="dv-bar-track">
+        <div class="dv-bar-fill" id="fill-${i}" style="background:${barColors[i % barColors.length]};width:0%"></div>
+        <div class="dv-bar-val" id="val-${i}">${escapeHTML(String(s.value))}</div>
+      </div>
+    </div>`;
+    }).join('\n    ')}
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var total = ${stats.length};
+      for (var i = 0; i < total; i++) {
+        var segStart = i / total;
+        var segEnd = (i + 1) / total;
+        var row = document.getElementById('bar-' + i);
+        var fill = document.getElementById('fill-' + i);
+        var val = document.getElementById('val-' + i);
+
+        if (p >= segStart) {
+          var sp = Math.min(1, (p - segStart) / (segEnd - segStart));
+          var eased = 1 - Math.pow(1 - sp, 3);
+          if (row) { row.style.opacity = 1; row.style.transform = 'translateX(0)'; }
+          var pct = [${stats.map(s => Math.round((parseFloat(String(s.value).replace(/[^0-9.-]/g, '')) || 0) / maxVal * 100)).join(',')}];
+          if (fill) fill.style.width = (eased * pct[i]) + '%';
+          if (val) val.style.opacity = sp > 0.3 ? 1 : 0;
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 5: HUMAN STORY (110-140s) — AI image + quote in yellow frame
+// ═══════════════════════════════════════════════════════════════════
+function generateHumanStoryHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = data.stats || [];
+  const impactLabel = getImpactLabel(data.market_impact, data.locale);
+  // Generate a human quote based on data
+  const quote = isRTL
+    ? `"التغيرات أثرت على حياة الملايين... الأرقام لا تحكي القصة كاملة"`
+    : `"The changes affected millions of lives... Numbers don't tell the whole story"`;
+  const personName = isRTL ? 'أحمد، ٤٥ عاماً' : 'Ahmed, 45 years old';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* AI human image — full screen with Ken Burns zoom */
+    .hs-image {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      z-index:0; overflow:hidden;
+    }
+    .hs-img {
+      width:100%; height:100%; object-fit:cover;
+      filter: brightness(0.35) saturate(0.5);
+      transform: scale(1.0); transform-origin: 50% 40%;
+      will-change: transform;
+    }
+    .hs-overlay {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background: linear-gradient(180deg, rgba(13,17,23,0.8) 0%, rgba(13,17,23,0.3) 40%, rgba(13,17,23,0.7) 80%, rgba(13,17,23,0.9) 100%);
+      z-index:1;
+    }
+
+    /* Quote in yellow square frame */
+    .hs-quote-frame {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:80px;
+      transform:translateY(-50%);
+      z-index:20;
+    }
+    .hs-frame-border {
+      padding:48px 40px;
+      border:3px solid ${AJ.gold};
+      position:relative;
+      max-width:800px;
+      opacity:0; transition: opacity 0.6s ease;
+    }
+    /* Yellow square in corner */
+    .hs-frame-border::before {
+      content:'';
+      position:absolute; top:-12px; ${isRTL ? 'left' : 'right'}:-12px;
+      width:24px; height:24px; background:${AJ.gold};
+    }
+    .hs-quote-mark {
+      font-size:64px; color:${AJ.gold}; line-height:1; margin-bottom:-16px;
+      font-family:Georgia,serif;
+    }
+    .hs-quote-text {
+      font-size:36px; font-weight:500; color:${AJ.warmWhite};
+      line-height:1.5; max-width:700px;
+      overflow:hidden; text-overflow:ellipsis;
+      direction:${isRTL ? 'rtl' : 'ltr'};
+    }
+    .hs-person {
+      margin-top:20px; font-size:18px; color:${AJ.paleGold};
+      overflow:hidden; text-overflow:ellipsis; max-width:500px;
+    }
+
+    /* Data badge */
+    .hs-data {
+      position:absolute; bottom:60px; ${isRTL ? 'right' : 'left'}:80px;
+      z-index:20; display:flex; gap:20px;
+    }
+    .hs-data-item {
+      background:rgba(219,162,0,0.12); border:1px solid ${AJ.borderGold};
+      padding:12px 20px; border-radius:4px;
+      opacity:0; transition: opacity 0.4s ease;
+    }
+    .hs-data-num {
+      font-size:28px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .hs-data-lbl {
+      font-size:13px; color:${AJ.textGray}; margin-top:2px;
+      overflow:hidden; text-overflow:ellipsis; max-width:120px;
+    }
+  </style>
+</head>
+<body>
+  ${(() => {
+    const bgImages = data._bgImagesV2 || data._bgImages || [];
+    const bgV2 = bgImages[4] || bgImages[0] || null;
+    let bgImageB64 = '';
+    if (bgV2 && typeof bgV2 === 'object' && bgV2.base64) bgImageB64 = bgV2.base64 || '';
+    else if (Array.isArray(bgImages) && typeof bgImages[0] === 'string') bgImageB64 = bgImages[4] || bgImages[0] || '';
+    if (bgImageB64.length > 100) {
+      const mime = bgImageB64.startsWith('/9j/') ? 'image/jpeg' : 'image/png';
+      return `<div class="hs-image"><img class="hs-img" id="hsImg" src="data:${mime};base64,${bgImageB64}"/><div class="hs-overlay"></div></div>`;
+    }
+    return '';
+  })()}
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+  <div class="aj-yellow-square" style="width:30px;height:30px;top:50px;${isRTL ? 'left' : 'right'}:50px;opacity:0.4;"></div>
+
+  <div class="hs-quote-frame">
+    <div class="hs-frame-border" id="quoteFrame">
+      <div class="hs-quote-mark">"</div>
+      <div class="hs-quote-text">${escapeHTML(quote)}</div>
+      <div class="hs-person">${escapeHTML(personName)}</div>
+    </div>
+  </div>
+
+  <div class="hs-data">
+    ${stats.slice(0, 3).map((s, i) => `
+    <div class="hs-data-item" id="hsd-${i}">
+      <div class="hs-data-num">${escapeHTML(String(s.value))}</div>
+      <div class="hs-data-lbl">${escapeHTML(truncateText(s.label, 15))}</div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var frame = document.getElementById('quoteFrame');
+      var img = document.getElementById('hsImg');
+
+      // Ken Burns zoom on image
+      if (img) {
+        var scale = 1.0 + p * 0.08;
+        img.style.transform = 'scale(' + scale + ')';
+      }
+
+      // Quote frame appears
+      if (p < 0.2) {
+        if (frame) frame.style.opacity = 0;
+      } else if (p < 0.5) {
+        if (frame) frame.style.opacity = (p - 0.2) / 0.3;
+      } else {
+        if (frame) frame.style.opacity = 1;
+      }
+
+      // Data items appear
+      for (var i = 0; i < 3; i++) {
+        var el = document.getElementById('hsd-' + i);
+        if (el) {
+          var start = 0.4 + i * 0.15;
+          if (p >= start) el.style.opacity = 1;
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 6: CLOSING (140-160s) — 3 takeaways in yellow squares + brand
+// ═══════════════════════════════════════════════════════════════════
+function generateClosingHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const takeaways = (data.strategic_takeaways || []).slice(0, 3);
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    .cl-title {
+      position:absolute; top:50px; ${isRTL ? 'right' : 'left'}:60px;
+      font-size:32px; font-weight:800; color:${AJ.gold}; z-index:10;
+    }
+
+    /* Three takeaway cards — each in its own yellow square */
+    .cl-takeaways {
+      position:absolute; top:120px; ${isRTL ? 'right' : 'left'}:60px;
+      width:${WIDTH - 120}px; z-index:10;
+    }
+    .cl-takeaway {
+      display:flex; align-items:flex-start; margin-bottom:36px;
+      opacity:0; transform:translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .cl-sq {
+      width:48px; height:48px; background:${AJ.gold}; flex-shrink:0;
+      margin-${isRTL ? 'left' : 'right'}:20px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .cl-sq-num {
+      font-size:24px; font-weight:900; color:${AJ.darkBg};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .cl-content { flex:1; }
+    .cl-tk-title {
+      font-size:24px; font-weight:700; color:${AJ.warmWhite};
+      overflow:hidden; text-overflow:ellipsis; max-width:800px;
+    }
+    .cl-tk-detail {
+      font-size:18px; color:${AJ.textGray}; margin-top:4px;
+      overflow:hidden; text-overflow:ellipsis; max-width:800px;
+      line-height:1.4;
+    }
+
+    /* Brand fade-in */
+    .cl-brand {
+      position:absolute; bottom:60px; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translateX(${isRTL ? '50%' : '-50%'});
+      z-index:20; text-align:center; opacity:0;
+      transition: opacity 1s ease;
+    }
+    .cl-brand-text {
+      font-size:56px; font-weight:900; color:${AJ.gold};
+      letter-spacing:4px;
+    }
+    .cl-brand-sub {
+      font-size:16px; color:${AJ.textGray}; margin-top:4px;
+      letter-spacing:2px;
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 5, 0.8)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-brand">رؤى</div>
+
+  <div class="cl-title">${isRTL ? 'الخلاصة' : 'Key Takeaways'}</div>
+
+  <div class="cl-takeaways">
+    ${takeaways.map((tk, i) => `
+    <div class="cl-takeaway" id="tk-${i}">
+      <div class="cl-sq"><div class="cl-sq-num">${toArabicNumeral(i + 1)}</div></div>
+      <div class="cl-content">
+        <div class="cl-tk-title">${escapeHTML(truncateText(tk.title, 30))}</div>
+        <div class="cl-tk-detail">${escapeHTML(truncateText(tk.detail, 50))}</div>
+      </div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <div class="cl-brand" id="clBrand">
+    <div class="cl-brand-text">رؤى</div>
+    <div class="cl-brand-sub">ROUAA</div>
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var total = ${takeaways.length};
+      for (var i = 0; i < total; i++) {
+        var start = 0.1 + i * 0.2;
+        var el = document.getElementById('tk-' + i);
+        if (p >= start && el) {
+          var sp = Math.min(1, (p - start) / 0.2);
+          el.style.opacity = sp;
+          el.style.transform = 'translateY(0)';
+        }
+      }
+
+      // Brand fade in
+      var brand = document.getElementById('clBrand');
+      if (p > 0.7 && brand) {
+        brand.style.opacity = (p - 0.7) / 0.3;
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE HTML DISPATCHER
+// ═══════════════════════════════════════════════════════════════════
+function generateSceneHTML(sceneName, data) {
+  switch (sceneName) {
+    case 'hook':       return generateHookHTML(data);
+    case 'map':        return generateMapHTML(data);
+    case 'timeline':   return generateTimelineHTML(data);
+    case 'dataviz':    return generateDatavizHTML(data);
+    case 'humanstory': return generateHumanStoryHTML(data);
+    case 'closing':    return generateClosingHTML(data);
+    default:
+      console.warn(`[AJ30]  Unknown scene: ${sceneName}`);
+      return generateHookHTML(data);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MAIN — Playwright frame-by-frame rendering + FFmpeg assembly
+// ═══════════════════════════════════════════════════════════════════
+async function main() {
+  const args = parseArgs();
+  const inputPath = args.input;
+  const outputPath = args.output;
+
+  if (!inputPath || !outputPath) {
+    console.error('Usage: node scripts/video-renderer-dataviz.mjs --input <data.json> --output <output.mp4>');
+    process.exit(1);
+  }
+
+  console.log('══════════════════════════════════════════════════════');
+  console.log('  Al Jazeera DataViz Video Renderer V30');
+  console.log('  "Don\'t give me more data — give me a story"');
+  console.log('══════════════════════════════════════════════════════');
+
+  // Load and enhance data
+  let data;
+  try {
+    data = JSON.parse(readFileSync(inputPath, 'utf-8'));
+  } catch (err) {
+    console.error(`[AJ30]  Failed to read input: ${err.message}`);
+    process.exit(1);
+  }
+  data = enhanceData(data);
+  console.log(`[AJ30]  Data loaded: ${data.title || 'Untitled'} (${data.locale || 'ar'})`);
+
+  // Create temp directory
+  const tmpDir = join(tmpdir(), `aj30-${randomUUID()}`);
+  mkdirSync(tmpDir, { recursive: true });
+  const framesDir = join(tmpDir, 'frames');
+  mkdirSync(framesDir, { recursive: true });
+
+  // ── Step 1: Generate AI background images ──
+  console.log('[AJ30]  Step 1: Generating AI background images...');
+  const bgImages = [];
+  const topicEN = String(data.title || 'economic data visualization').replace(/[^\x00-\x7F]/g, ' ').trim();
+  const imagePrompts = [
+    `dramatic dark cinematic scene related to ${topicEN}, moody atmosphere, warm golden tones, wide shot`,
+    `satellite view of Middle East and world at night, golden lights, dark ocean, warm tones`,
+    `timeline of events, abstract chronological visualization, gold on dark navy, warm ambient`,
+    `abstract data visualization, horizontal bars, gold and warm orange on dark background, clean`,
+    `portrait of Middle Eastern person in thoughtful contemplation, warm lighting, cinematic, dignified`,
+    `abstract warm geometric shapes, gold squares on dark navy, clean minimal, elegant`,
+  ];
+
+  for (let i = 0; i < TOTAL_SCENES; i++) {
+    console.log(`[AJ30]  Generating image for scene ${i + 1}/${TOTAL_SCENES}...`);
+    const prompt = imagePrompts[i] || imagePrompts[0];
+    try {
+      const buf = await generateAIImage(prompt, 1344, 768, data.market_impact);
+      if (buf) {
+        const isSvg = buf.slice(0, 5).toString() === '<?xml' || buf.slice(0, 4).toString() === '<svg';
+        if (isSvg) {
+          const b64 = buf.toString('base64');
+          bgImages.push({ base64: b64, type: 'svg' });
+        } else {
+          const b64 = buf.toString('base64');
+          const mime = buf.slice(0, 3).toString('hex') === 'ffd8ff' ? 'image/jpeg' : 'image/png';
+          bgImages.push({ base64: b64, type: mime });
+        }
+      } else {
+        bgImages.push(null);
+      }
+    } catch (err) {
+      console.warn(`[AJ30]  Image ${i + 1} failed: ${err.message?.slice(0, 80)}`);
+      bgImages.push(null);
+    }
+  }
+  data._bgImagesV2 = bgImages;
+
+  // Download article image if available
+  if (data.image_url) {
+    console.log(`[AJ30]  Downloading article image...`);
+    const articleBuf = await downloadImageFromUrl(data.image_url);
+    if (articleBuf) {
+      const b64 = articleBuf.toString('base64');
+      const mime = articleBuf.slice(0, 3).toString('hex') === 'ffd8ff' ? 'image/jpeg' : 'image/png';
+      // Use as human story background
+      if (bgImages[4]) bgImages[4] = { base64: b64, type: mime };
+    }
+  }
+
+  // ── Step 2: Generate narration ──
+  console.log('[AJ30]  Step 2: Generating narration (6 scenes)...');
+  const narrationParts = await generateNarrationLLM(data);
+  for (let i = 0; i < narrationParts.length; i++) {
+    console.log(`[AJ30]  S${i+1}: ${narrationParts[i]?.slice(0, 60)}...`);
+  }
+
+  // ── Step 3: Generate voiceover per scene ──
+  console.log('[AJ30]  Step 3: Generating voiceover...');
+  const { audioPaths, audioDurations } = await generatePerSceneVoiceover(narrationParts, tmpDir, data.locale || 'ar');
+
+  // Concatenate audio segments
+  const fullNarrationPath = join(tmpDir, 'full_narration.mp3');
+  const concatSuccess = concatenateAudioSegments(audioPaths, fullNarrationPath);
+
+  // ── Step 4: Generate background music ──
+  console.log('[AJ30]  Step 4: Generating background music...');
+  const musicPath = join(tmpDir, 'bg_music.mp3');
+  const totalDuration = SCENE_DEFS[SCENE_DEFS.length - 1][2];
+  generateBackgroundMusic(musicPath, totalDuration);
+
+  // ── Step 5: Mix narration + music ──
+  console.log('[AJ30]  Step 5: Mixing audio...');
+  const mixedAudioPath = join(tmpDir, 'mixed_audio.mp3');
+  if (concatSuccess && existsSync(fullNarrationPath) && existsSync(musicPath)) {
+    mixAudioWithMusic(fullNarrationPath, musicPath, mixedAudioPath, 0.15);
+  } else if (concatSuccess && existsSync(fullNarrationPath)) {
+    writeFileSync(mixedAudioPath, readFileSync(fullNarrationPath));
+  } else {
+    // Create silent audio
+    spawnSync('ffmpeg', ['-y', '-f', 'lavfi', '-i', `anullsrc=r=48000:cl=stereo`, '-t', String(totalDuration), '-c:a', 'libmp3lame', '-b:a', '192k', mixedAudioPath], { encoding: 'utf-8', timeout: 30000 });
+  }
+
+  // ── Step 6: Render frames with Playwright ──
+  console.log('[AJ30]  Step 6: Rendering frames with Playwright...');
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-gpu'] });
+  } catch (err) {
+    console.error(`[AJ30]  Failed to launch browser: ${err.message}`);
+    process.exit(1);
+  }
+
+  const context = await browser.newContext({
+    viewport: { width: WIDTH, height: HEIGHT },
+    deviceScaleFactor: 1,
+  });
+  const page = await context.newPage();
+
+  let globalFrame = 0;
+  const sceneFrameDirs = [];
+
+  for (let si = 0; si < SCENE_DEFS.length; si++) {
+    const [sceneName, startSec, endSec] = SCENE_DEFS[si];
+    const sceneDuration = endSec - startSec;
+    const sceneFrames = Math.round(sceneDuration * FPS);
+    const sceneDir = join(framesDir, `scene_${si}_${sceneName}`);
+    mkdirSync(sceneDir, { recursive: true });
+    sceneFrameDirs.push(sceneDir);
+
+    console.log(`[AJ30]  Scene ${si + 1}/${TOTAL_SCENES}: ${sceneName} (${startSec}s-${endSec}s, ${sceneFrames} frames)`);
+
+    // Generate and set HTML
+    const html = generateSceneHTML(sceneName, data);
+    await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Wait for fonts to load
+    await page.waitForTimeout(500);
+
+    for (let f = 0; f < sceneFrames; f++) {
+      const progress = f / Math.max(1, sceneFrames - 1);
+      try {
+        await page.evaluate(`window.setAnimationProgress(${progress.toFixed(6)})`);
+      } catch {}
+      const framePath = join(sceneDir, `frame_${String(globalFrame).padStart(6, '0')}.png`);
+      await page.screenshot({ path: framePath, type: 'png' });
+      globalFrame++;
+    }
+
+    console.log(`[AJ30]  Scene ${si + 1} rendered: ${sceneFrames} frames`);
+  }
+
+  await browser.close();
+  console.log(`[AJ30]  Total frames rendered: ${globalFrame}`);
+
+  // ── Step 7: Assemble video with FFmpeg ──
+  console.log('[AJ30]  Step 7: Assembling video with FFmpeg...');
+
+  // Create concat file for all frames
+  const concatListPath = join(tmpDir, 'frames_concat.txt');
+  const concatLines = [];
+  for (const dir of sceneFrameDirs) {
+    const files = readdirSync(dir).filter(f => f.endsWith('.png')).sort();
+    for (const f of files) {
+      concatLines.push(`file '${join(dir, f)}'`);
+    }
+  }
+  writeFileSync(concatListPath, concatLines.join('\n'), 'utf-8');
+
+  // Assemble: frames → video, then mux with audio
+  const rawVideoPath = join(tmpDir, 'raw_video.mp4');
+  const finalOutputDir = dirname(outputPath);
+  if (!existsSync(finalOutputDir)) mkdirSync(finalOutputDir, { recursive: true });
+
+  // Step A: Frames → raw video
+  console.log('[AJ30]  Creating video from frames...');
+  const ffmpegFramesResult = spawnSync('ffmpeg', [
+    '-y',
+    '-f', 'concat', '-safe', '0',
+    '-i', concatListPath,
+    '-r', String(FPS),
+    '-vf', `scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}:flags=lanczos,format=yuv420p`,
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '20',
+    '-pix_fmt', 'yuv420p',
+    '-movflags', '+faststart',
+    rawVideoPath,
+  ], { encoding: 'utf-8', timeout: 300000 });
+
+  if (ffmpegFramesResult.status !== 0 || !existsSync(rawVideoPath)) {
+    console.error(`[AJ30]  FFmpeg frame assembly failed: ${ffmpegFramesResult.stderr?.slice(-300)}`);
+    process.exit(1);
+  }
+
+  // Step B: Mux video + audio
+  console.log('[AJ30]  Adding audio to video...');
+  const hasAudio = existsSync(mixedAudioPath) && readFileSync(mixedAudioPath).length > 1000;
+  if (hasAudio) {
+    const muxResult = spawnSync('ffmpeg', [
+      '-y',
+      '-i', rawVideoPath,
+      '-i', mixedAudioPath,
+      '-c:v', 'copy',
+      '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      '-shortest',
+      '-movflags', '+faststart',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 120000 });
+
+    if (muxResult.status !== 0) {
+      console.warn(`[AJ30]  Mux failed, copying video without audio: ${muxResult.stderr?.slice(-200)}`);
+      const { copyFileSync } = await import('fs');
+      copyFileSync(rawVideoPath, outputPath);
+    }
+  } else {
+    const { copyFileSync } = await import('fs');
+    copyFileSync(rawVideoPath, outputPath);
+  }
+
+  // Verify output
+  if (existsSync(outputPath)) {
+    const size = readFileSync(outputPath).length;
+    console.log(`\n══════════════════════════════════════════════════════`);
+    console.log(`  ✅ Video rendered successfully!`);
+    console.log(`  Output: ${outputPath}`);
+    console.log(`  Size: ${(size / 1024 / 1024).toFixed(1)} MB`);
+    console.log(`  Scenes: ${TOTAL_SCENES} (Hook → Map → Timeline → DataViz → HumanStory → Closing)`);
+    console.log(`  Frames: ${globalFrame} at ${FPS} FPS`);
+    console.log(`══════════════════════════════════════════════════════\n`);
+  } else {
+    console.error(`[AJ30]  ❌ Output file not found!`);
+    process.exit(1);
+  }
+
+  // Cleanup
+  try {
+    rmSync(tmpDir, { recursive: true, force: true });
+  } catch {}
+}
+
+main().catch(err => {
+  console.error(`[AJ30]  Fatal error: ${err.message}`);
+  console.error(err.stack);
+  process.exit(1);
+});

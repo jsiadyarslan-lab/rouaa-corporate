@@ -1,0 +1,1263 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── News Models ────────────────────────────────────────────
+
+model NewsItem {
+  id               String     @id @default(cuid())
+  title            String
+  titleAr          String? // ترجمة عربية تلقائية
+  summary          String     @default("")
+  summaryAr        String? // ترجمة عربية تلقائية
+  content          String?    @default("") // المحتوى الكامل للخبر
+  contentAr        String? // المحتوى الكامل مترجم — null until filled by prefetchArticleContent
+  source           String     @default("")
+  sourceName       String?    @default("") // اسم المصدر الظاهر للمستخدم
+  isOfficialSource Boolean    @default(false) // V1050: true = مصدر رسمي (بنك مركزي، وزارة), false = مصدر صحفي
+  url              String     @default("") // originalUrl - رابط المصدر الخارجي
+  category         String     @default("اقتصاد كلي")
+  categoryId       String? // English category ID key (e.g. 'stocks', 'crypto', 'economy') — NEW for dual-column system
+  sentiment        String     @default("neutral")
+  sentimentScore   Int        @default(55)
+  impactLevel      String     @default("low")
+  impactScore      Int        @default(0) // V101: 0-100 importance score (economic + political + geopolitical impact)
+  originalLanguage String     @default("en")
+  locale           String     @default("ar") // 'ar' | 'en' — locale of the published content. Arabic pipeline → 'ar', English pipeline → 'en'
+  newsType         String     @default("live") // live | breaking | article
+  affectedAssets   String     @default("[]") // JSON array
+  aiAnalysis       String? // JSON from AI analysis
+  isPublished      Boolean    @default(false) // V38: FALSE until article is fully complete and published
+  isReady          Boolean    @default(false) // TRUE only when content is fully processed (titleAr + contentAr + aiAnalysis) — IRREVERSIBLE once true
+  processingStage  String     @default("fetched") // fetched → content_loaded → translated → analyzed → imaged
+  retryCount       Int        @default(0) // Number of failed processing attempts — used to re-process
+  rejectCount      Int        @default(0) // V118: Number of times AI filter rejected this article — after 3, no longer auto-reset
+  lastError        String? // Last error message from failed processing step
+  imageUrl         String?
+  generatedImage   String? // Base64 encoded AI-generated illustrative image (V42: always base64, never external URL)
+  slug             String? // URL-friendly slug for SEO (uniqueness enforced by @@unique([slug, locale]) below)
+  views            Int        @default(0) // Article view count
+  publishedAt      DateTime? // V42: When article was first published — set once, never changed
+  fetchedAt        DateTime   @default(now())
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  bookmarks        Bookmark[]
+  comments         Comment[]
+
+  @@unique([slug, locale]) // V256: Composite unique — same slug allowed in different locales
+  @@index([newsType, fetchedAt])
+  @@index([category])
+  @@index([categoryId])
+  @@index([locale])
+  @@index([sentiment])
+  @@index([slug])
+  @@index([url]) // For deduplication by originalUrl
+  @@index([url, locale]) // For locale-aware deduplication
+  @@index([isReady, fetchedAt]) // For homepage queries filtering ready articles
+  @@index([isReady, locale, fetchedAt]) // For locale-filtered homepage queries
+  @@index([processingStage])
+  @@index([impactScore]) // V101: For priority sorting in article picker
+  @@map("news_items")
+}
+
+// ─── News Archive Model (V118) ─────────────────────────────────
+// Archive for old published articles — keeps the main table fast.
+// Archived articles are NEVER deleted — they remain accessible via /archive/[slug].
+// This table has the EXACT same structure as NewsItem for easy querying.
+
+model NewsItemArchive {
+  id               String    @id
+  title            String
+  titleAr          String?
+  summary          String    @default("")
+  summaryAr        String?
+  content          String?   @default("")
+  contentAr        String?
+  source           String    @default("")
+  sourceName       String?   @default("")
+  url              String    @default("")
+  category         String    @default("اقتصاد كلي")
+  categoryId       String? // English category ID key — mirrors NewsItem
+  sentiment        String    @default("neutral")
+  sentimentScore   Int       @default(55)
+  impactLevel      String    @default("low")
+  impactScore      Int       @default(0)
+  originalLanguage String    @default("en")
+  locale           String    @default("ar") // 'ar' | 'en' — mirrors NewsItem
+  newsType         String    @default("live")
+  affectedAssets   String    @default("[]")
+  aiAnalysis       String?
+  isPublished      Boolean   @default(true)
+  isReady          Boolean   @default(true)
+  processingStage  String    @default("imaged")
+  retryCount       Int       @default(0)
+  rejectCount      Int       @default(0)
+  lastError        String?
+  imageUrl         String?
+  generatedImage   String?
+  slug             String? // (uniqueness enforced by @@unique([slug, locale]) below)
+  views            Int       @default(0)
+  publishedAt      DateTime?
+  fetchedAt        DateTime  @default(now())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  archivedAt       DateTime  @default(now()) // When this article was archived
+
+  @@unique([slug, locale]) // V256: Composite unique — same slug allowed in different locales
+  @@index([newsType, fetchedAt])
+  @@index([category])
+  @@index([categoryId])
+  @@index([locale])
+  @@index([slug])
+  @@index([archivedAt])
+  @@map("news_item_archives")
+}
+
+model NewsFetchLog {
+  id           String   @id @default(cuid())
+  newsType     String // live | breaking
+  status       String // success | partial | failed
+  itemsFetched Int      @default(0)
+  itemsSaved   Int      @default(0)
+  errors       String   @default("")
+  duration     Int      @default(0) // milliseconds
+  createdAt    DateTime @default(now())
+
+  @@index([newsType, createdAt])
+  @@map("news_fetch_logs")
+}
+
+// ─── Pipeline Run Models ───────────────────────────────────
+
+model PipelineRun {
+  id                String    @id @default(cuid())
+  status            String    @default("running") // running | completed | failed | cancelled
+  trigger           String    @default("manual") // manual | cron | api
+  config            String    @default("{}") // JSON: PipelineConfig
+  articlesPublished Int       @default(0)
+  articlesSkipped   Int       @default(0)
+  articlesFailed    Int       @default(0)
+  totalDuration     Int       @default(0) // milliseconds
+  summary           String    @default("")
+  stepsJson         String    @default("[]") // JSON: PipelineStep[]
+  error             String?
+  startedAt         DateTime  @default(now())
+  completedAt       DateTime?
+
+  @@index([status, startedAt])
+  @@index([trigger])
+  @@map("pipeline_runs")
+}
+
+model AgentLog {
+  id            String   @id @default(cuid())
+  pipelineRunId String?
+  agent         String // researcher | analyst | writer | fact-checker | seo | editor | publisher | orchestrator
+  action        String
+  inputJson     String   @default("{}") // JSON
+  outputJson    String   @default("null") // JSON
+  success       Boolean  @default(true)
+  duration      Int      @default(0) // milliseconds
+  error         String?
+  createdAt     DateTime @default(now())
+
+  @@index([agent, createdAt])
+  @@index([pipelineRunId])
+  @@map("agent_logs")
+}
+
+// ─── Economic Calendar ─────────────────────────────────────
+
+model CalendarEvent {
+  id               String   @id @default(cuid())
+  eventName        String
+  eventNameAr      String?
+  country          String
+  currency         String
+  eventDate        DateTime
+  forecast         String?
+  previous         String?
+  actual           String?
+  impact           String   @default("MEDIUM") // HIGH | MEDIUM | LOW
+  source           String   @default("manual")
+  isActualReleased Boolean  @default(false)
+  createdAt        DateTime @default(now())
+
+  @@index([eventDate])
+  @@index([country])
+  @@map("calendar_events")
+}
+
+// ─── User & Auth Models ──────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String? // For email/password auth
+  image         String?
+  role          String    @default("user") // user | pro | admin
+  provider      String    @default("email") // email | google | passkey
+  plan          String    @default("free") // free | pro | elite
+  planExpiresAt DateTime?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  bookmarks         Bookmark[]
+  notifications     Notification[]
+  alerts            PriceAlert[]
+  subscriptions     Subscription[]
+  smartAlerts       SmartAlert[]
+  discussions       Discussion[]
+  discussionReplies DiscussionReply[]
+  profile           UserProfile?
+  accounts          Account[]
+  sessions          Session[]
+  passkeys          Passkey[]
+
+  @@index([email])
+  @@map("users")
+}
+
+// ─── NextAuth Models ──────────────────────────────────────────
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  type              String // oauth | credentials | passkey
+  provider          String // google | email | passkey
+  providerAccountId String
+  access_token      String?  @db.Text
+  refresh_token     String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Passkey {
+  id           String   @id @default(cuid())
+  userId       String
+  credentialId String   @unique // Base64URL encoded
+  publicKey    Bytes // COSE public key
+  counter      Int      @default(0)
+  deviceType   String   @default("singleDevice") // singleDevice | multiDevice
+  backedUp     Boolean  @default(false)
+  transports   String   @default("[]") // JSON: ["internal","hybrid","usb","ble","nfc"]
+  name         String? // User-given name e.g. "iPhone 15"
+  lastUsedAt   DateTime @default(now())
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([credentialId])
+  @@map("passkeys")
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  newsId    String
+  createdAt DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  newsItem NewsItem @relation(fields: [newsId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, newsId])
+  @@index([userId])
+  @@map("bookmarks")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("info") // info | alert | trade | system
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@index([userId, createdAt])
+  @@map("notifications")
+}
+
+model PriceAlert {
+  id          String    @id @default(cuid())
+  userId      String
+  symbol      String
+  targetPrice Float
+  direction   String    @default("above") // above | below
+  isTriggered Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  triggeredAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isTriggered])
+  @@index([symbol, isTriggered])
+  @@map("price_alerts")
+}
+
+// ─── Subscription Models ─────────────────────────────────────
+
+model Subscription {
+  id            String    @id @default(cuid())
+  userId        String
+  plan          String    @default("free") // free | pro | elite
+  status        String    @default("active") // active | cancelled | expired
+  startDate     DateTime  @default(now())
+  endDate       DateTime?
+  paymentMethod String?
+  amount        Float?
+  currency      String    @default("USD")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@map("subscriptions")
+}
+
+// ─── Newsletter & Contact Models ────────────────────────────
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  status    String   @default("active") // active | unsubscribed | bounced
+  source    String   @default("website") // website | api | import
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("newsletter_subscribers")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String   @default("")
+  message   String
+  status    String   @default("new") // new | read | replied | archived
+  reply     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("contact_messages")
+}
+
+// ─── Site Settings Model ────────────────────────────────────
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @default("")
+  type  String @default("string") // string | number | boolean | json
+  group String @default("general") // general | news | ai | cache | system
+
+  @@index([key])
+  @@index([group])
+  @@map("site_settings")
+}
+
+// ─── Smart Alert Models ────────────────────────────────────
+
+model SmartAlert {
+  id              String    @id @default(cuid())
+  userId          String?
+  alertType       String // price | sentiment | breaking | volume | custom
+  symbol          String?
+  condition       String // above | below | change_pct | keywords
+  threshold       Float?
+  keywords        String? // JSON array of keywords for news alerts
+  isActive        Boolean   @default(true)
+  isTriggered     Boolean   @default(false)
+  lastTriggeredAt DateTime?
+  createdAt       DateTime  @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isActive])
+  @@index([alertType, isActive])
+  @@index([symbol, isActive, isTriggered])
+  @@map("smart_alerts")
+}
+
+// ─── API Key Model (Public API) ────────────────────────────
+
+model ApiKey {
+  id         String    @id @default(cuid())
+  userId     String?
+  key        String    @unique
+  name       String    @default("Default")
+  plan       String    @default("free") // free | pro | enterprise
+  rateLimit  Int       @default(100) // requests per hour
+  isActive   Boolean   @default(true)
+  lastUsedAt DateTime?
+  expiresAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([key])
+  @@index([userId])
+  @@map("api_keys")
+}
+
+// ─── Community Models ──────────────────────────────────────
+
+model Discussion {
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  content    String
+  category   String   @default("general") // general | analysis | question | idea
+  tags       String   @default("[]") // JSON array
+  upvotes    Int      @default(0)
+  downvotes  Int      @default(0)
+  replyCount Int      @default(0)
+  isPinned   Boolean  @default(false)
+  isLocked   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies DiscussionReply[]
+
+  @@index([category, createdAt])
+  @@index([userId])
+  @@index([isPinned])
+  @@map("discussions")
+}
+
+model DiscussionReply {
+  id           String   @id @default(cuid())
+  discussionId String
+  userId       String
+  content      String
+  upvotes      Int      @default(0)
+  isAccepted   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  discussion Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([discussionId, createdAt])
+  @@index([userId])
+  @@map("discussion_replies")
+}
+
+// ─── Telegram Integration ────────────────────────────────────
+
+model TelegramAccount {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  telegramChatId    String   @unique
+  telegramUsername  String?
+  notificationPrefs String   @default("{}") // JSON: { breaking: true, analysis: true, price: false, calendar: false, daily: false }
+  isConnected       Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([userId])
+  @@index([telegramChatId])
+  @@map("telegram_accounts")
+}
+
+// ─── Report Model (Automated Reports) ──────────────────────
+
+model Report {
+  id          String   @id @default(cuid())
+  title       String
+  reportType  String // daily | weekly | monthly | custom
+  content     String // JSON: full report data
+  summaryAr   String? // Arabic summary
+  source      String? // V1219: content source
+  sourceName  String? // V1219: display name for source
+  period      String // e.g., "2026-04-23" or "2026-W17"
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([reportType, createdAt])
+  @@index([isPublished])
+  @@map("reports")
+}
+
+// ─── Comment Model (Article Comments) ─────────────────────
+
+model Comment {
+  id         String   @id @default(cuid())
+  newsId     String
+  content    String
+  authorName String
+  parentId   String?
+  upvotes    Int      @default(0)
+  downvotes  Int      @default(0)
+  reports    Int      @default(0)
+  isExpert   Boolean  @default(false)
+  depth      Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  news    NewsItem  @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+
+  @@index([newsId, createdAt])
+  @@index([parentId])
+  @@index([upvotes])
+  @@map("comments")
+}
+
+// ─── Monetization Models ───────────────────────────────────
+
+model Advertisement {
+  id          String    @id @default(cuid())
+  title       String
+  imageUrl    String
+  targetUrl   String
+  position    String    @default("sidebar") // top_banner | sidebar | bottom | inline
+  isActive    Boolean   @default(true)
+  impressions Int       @default(0)
+  clicks      Int       @default(0)
+  startDate   DateTime  @default(now())
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([position, isActive])
+  @@map("advertisements")
+}
+
+// ─── Economic Reports & Market Analysis (V61) ─────────────
+
+model EconomicReport {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String // (uniqueness enforced by @@unique below)
+  summary         String    @default("") // ملخص تنفيذي
+  content         String    @default("") // المحتوى الكامل - Rich Text / Markdown
+  reportType      String    @default("weekly") // weekly | monthly | quarterly | special
+  scope           String    @default("global") // arabic | global | regional
+  locale          String    @default("ar") // 'ar' | 'en' — locale of the report content
+  source          String?   // V1219: content source (e.g. 'محرر رؤى الذكي')
+  sourceName      String?   // V1219: display name for source
+  sectors         String    @default("[]") // JSON: القطاعات المعنية
+  countries       String    @default("[]") // JSON: الدول المعنية
+  keyIndicators   String    @default("{}") // JSON: مؤشرات رئيسية
+  marketImpact    String    @default("neutral") // bullish | bearish | neutral
+  confidenceScore Int       @default(50) // 0-100
+  sourceUrls      String    @default("[]") // JSON: المصادر
+  imageUrl        String?
+  isPublished     Boolean   @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([slug, locale]) // V256: Composite unique — same slug allowed in different locales
+  @@index([reportType, createdAt])
+  @@index([scope, createdAt])
+  @@index([locale])
+  @@index([isPublished, publishedAt])
+  @@index([isPublished, locale, publishedAt])
+  @@map("economic_reports")
+}
+
+model MarketAnalysis {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String // (uniqueness enforced by @@unique below)
+  assetClass      String    @default("stocks") // stocks | commodities | forex | crypto | bonds
+  analysisType    String    @default("fundamental") // technical | fundamental | sentiment
+  timeFrame       String    @default("daily") // intraday | daily | weekly | monthly
+  locale          String    @default("ar") // 'ar' | 'en' — locale of the analysis content
+  source          String?   // V1219: content source (e.g. 'محرر رؤى الذكي')
+  sourceName      String?   // V1219: display name for source
+  imageUrl        String?   // V1219e: image URL for the analysis
+  content         String    @default("") // التحليل المفصل
+  indicators      String    @default("{}") // JSON: RSI, MACD, Moving Averages
+  priceTarget     String    @default("{}") // JSON: {current, target, stopLoss}
+  riskLevel       String    @default("medium") // low | medium | high | extreme
+  sentiment       String    @default("neutral") // bullish | bearish | neutral
+  confidenceScore Int       @default(50) // 0-100
+  sourceRef       String?
+  relatedNewsIds  String    @default("[]") // JSON: IDs of related news
+  isPublished     Boolean   @default(false)
+  publishedAt     DateTime?
+  validUntil      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  sectors       String @default("[]") // JSON: القطاعات المعنية
+  countries     String @default("[]") // JSON: الدول المعنية
+  keyIndicators String @default("{}") // JSON: مؤشرات رئيسية
+  marketImpact  String @default("neutral") // bullish | bearish | neutral
+  sourceUrls    String @default("[]") // JSON: المصادر
+
+  @@unique([slug, locale]) // V256: Composite unique — same slug allowed in different locales
+  @@index([assetClass, createdAt])
+  @@index([analysisType, createdAt])
+  @@index([isPublished, publishedAt])
+  @@map("market_analyses")
+}
+
+model MarketIndicator {
+  id            String   @id @default(cuid())
+  name          String
+  nameAr        String?
+  symbol        String   @unique
+  value         Float    @default(0)
+  change        Float    @default(0)
+  changePercent Float    @default(0)
+  category      String   @default("index") // index | commodity | currency | bond_yield | crypto
+  region        String   @default("global") // arabic | global
+  history       String   @default("[]") // JSON: آخر 30 يوم [{date, value}]
+  lastUpdated   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([category, region])
+  @@index([symbol])
+  @@map("market_indicators")
+}
+
+// ─── Report Subscriptions (V62) ──────────────────────────────
+
+model ReportSubscription {
+  id           String   @id @default(cuid())
+  email        String
+  name         String?
+  frequency    String   @default("daily") // daily | weekly | monthly | breaking
+  categories   String   @default("[]") // JSON: selected categories
+  regions      String   @default("[]") // JSON: selected regions
+  isActive     Boolean  @default(true)
+  confirmToken String?
+  isConfirmed  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([frequency, isActive])
+  @@index([confirmToken])
+  @@map("report_subscriptions")
+}
+
+// ─── Economic Events (V62) ──────────────────────────────────
+
+model EconomicEvent {
+  id               String   @id @default(cuid())
+  eventName        String
+  eventNameAr      String?
+  country          String
+  currency         String
+  eventDate        DateTime
+  importance       String   @default("medium") // low | medium | high | critical
+  eventType        String   @default("indicator") // indicator | speech | meeting | earnings | other
+  forecast         String?
+  previous         String?
+  actual           String?
+  source           String   @default("manual")
+  isActualReleased Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([eventDate])
+  @@index([country, eventDate])
+  @@index([importance, eventDate])
+  @@map("economic_events")
+}
+
+// ─── Infographic Model ──────────────────────────────────────
+
+model Infographic {
+  id           String    @id @default(cuid())
+  slug         String // (uniqueness enforced by @@unique below)
+  title        String
+  subtitle     String?
+  sourceType   String // "news" | "economic_report" | "market_analysis"
+  sourceId     String?
+  sourceTitle  String?
+  category     String?
+  locale       String    @default("ar") // 'ar' | 'en' — locale of the infographic content
+  slides       Json // مصفوفة الشرائح (البيانات الهيكلية)
+  thumbnailUrl String?
+  impactScore  Int?
+  viewCount    Int       @default(0)
+  isPublished  Boolean   @default(false)
+  publishedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([slug, locale]) // V256: Composite unique — same slug allowed in different locales
+  @@index([sourceType, sourceId])
+  @@index([category])
+  @@index([locale])
+  @@index([isPublished, publishedAt])
+  @@index([isPublished, locale, publishedAt])
+  @@map("infographics")
+}
+
+// ─── Video Reports (V317) ─────────────────────────────────────
+// تقارير فيديو تحليلية مولّدة بالذكاء الاصطناعي
+
+model VideoReport {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String
+  symbol         String // e.g. "AAPL", "BTC-USD", "EURUSD=X"
+  assetName      String // e.g. "Apple Inc.", "Bitcoin"
+  locale         String    @default("ar") // 'ar' | 'en'
+  reportType     String    @default("analysis") // analysis | daily | weekly | strategic
+  assetClass     String    @default("stocks") // stocks | crypto | forex | commodities | bonds | energy
+  videoUrl       String? // R2/S3 URL for the video file
+  thumbnailUrl   String? // R2/S3 URL for the thumbnail
+  duration       Float? // Duration in seconds
+  sourceReportId String? // Linked EconomicReport or MarketAnalysis ID
+  sourceType     String? // "economic_report" | "market_analysis"
+  analysisText   String?   @default("") // The analysis text used for TTS
+  chartMode      String    @default("bg") // "bg" (global) | "windows" (sliding)
+  style          String    @default("pulse") // "pulse" (Bloomberg) | "dataviz" (Al Jazeera)
+  marketImpact   String    @default("neutral") // bullish | bearish | neutral
+  status         String    @default("pending") // pending | processing | completed | failed
+  error          String? // Error message if failed
+  viewCount      Int       @default(0)
+  isPublished    Boolean   @default(false)
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([slug, locale])
+  @@index([symbol])
+  @@index([locale])
+  @@index([assetClass])
+  @@index([status])
+  @@index([isPublished, locale, publishedAt])
+  @@map("video_reports")
+}
+
+// ─── Report Views (V62) ─────────────────────────────────────
+
+model ReportView {
+  id         String   @id @default(cuid())
+  reportId   String
+  reportType String // economic_report | market_analysis
+  userId     String?
+  ipAddress  String?
+  userAgent  String?
+  referrer   String?
+  createdAt  DateTime @default(now())
+
+  @@index([reportId, createdAt])
+  @@index([reportType])
+  @@map("report_views")
+}
+
+// ─── Trading Signal Models (News Site) ──────────────────────
+// الموقع الإخباري يحفظ الإشارات وبيانات المجلس الذكي للعرض والتتبع.
+// ربط الحسابات والمحفظة الحقيقية في منصة التداول المنفصلة.
+
+model TradingSignal {
+  id             String    @id @default(cuid())
+  pair           String // e.g. BTC/USDT, XAU/USD, EUR/USD
+  action         String // BUY | SELL | WAIT
+  confidence     Int       @default(50) // 0-100
+  reason         String    @default("") // تحليل الإشارة بالعربية
+  entryPrice     Float? // سعر الدخول
+  stopLoss       Float? // وقف الخسارة
+  takeProfit     Float? // جني الأرباح
+  riskReward     Float? // نسبة المخاطرة/المكافأة
+  status         String    @default("ACTIVE") // ACTIVE | EXECUTED | EXPIRED | CANCELLED | HIT_TP | HIT_SL
+  source         String    @default("local-fallback") // local-fallback | trading-platform | council
+  category       String    @default("forex") // forex | crypto | commodities | stocks
+  timeframe      String    @default("H4") // H1 | H4 | D1 | W1
+  resultPips     Float? // النتيجة بالنقاط (بعد الإغلاق)
+  resultPercent  Float? // النتيجة بالنسبة المئوية
+  closePrice     Float? // سعر الإغلاق
+  profitPips     Float? // الربح بالنقاط
+  profitPercent  Float? // الربح بالنسبة المئوية
+  isWin          Boolean? // هل حققت الربح؟
+  rsiAtSignal    Float? // قيمة RSI عند الإشارة
+  sma20AtSignal  Float? // قيمة SMA20 عند الإشارة
+  sma50AtSignal  Float? // قيمة SMA50 عند الإشارة
+  councilVotes   String    @default("{}") // JSON: أصوات المجلس
+  councilModels  String    @default("[]") // JSON: نماذج المجلس
+  relatedNewsIds String    @default("[]") // JSON: أخبار مرتبطة
+  notes          String? // ملاحظات
+  closedAt       DateTime? // تاريخ إغلاق الإشارة
+  expiresAt      DateTime? // تاريخ انتهاء الصلاحية
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // ربط بإحاطة المجلس الذكي (اختياري)
+  councilBrief   CouncilBrief? @relation(fields: [councilBriefId], references: [id], onDelete: SetNull)
+  councilBriefId String?       @unique
+
+  @@index([status, createdAt])
+  @@index([pair, status])
+  @@index([action, status])
+  @@index([source, createdAt])
+  @@index([category])
+  @@map("trading_signals")
+}
+
+model CouncilBrief {
+  id              String    @id @default(cuid())
+  pair            String // e.g. BTC/USDT
+  direction       String // BUY | SELL
+  entryPrice      Float
+  stopLoss        Float
+  takeProfit      Float
+  confidence      Int       @default(50) // 0-100
+  timeframe       String    @default("H4") // H1 | H4 | D1 | W1
+  isActive        Boolean   @default(true)
+  reviewStatus    String    @default("PENDING") // PENDING | APPROVED | REJECTED | EXPIRED
+  analysisSummary String    @default("") // ملخص التحليل
+  consensusJson   String    @default("{}") // JSON: {totalModels, buyVotes, sellVotes, neutralVotes}
+  source          String    @default("local-fallback") // local-fallback | trading-platform
+  sessionAt       DateTime? // وقت جلسة المجلس
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // الإشارة المرتبطة
+  signal TradingSignal?
+
+  @@index([isActive, createdAt])
+  @@index([pair, isActive])
+  @@index([reviewStatus])
+  @@map("council_briefs")
+}
+
+// ─── مساعد رؤى — AI Personal Advisor Models ──────────────
+// نظام التوصيات الشخصية المدعوم بالذكاء الاصطناعي
+
+model UserProfile {
+  id                 String    @id @default(cuid())
+  userId             String    @unique
+  experienceLevel    String    @default("beginner") // beginner | intermediate | advanced | professional
+  riskTolerance      String    @default("moderate") // conservative | moderate | aggressive
+  investmentHorizon  String    @default("medium") // short | medium | long
+  preferredAssets    String    @default("[]") // JSON: ["forex", "commodities", "crypto", "stocks", "bonds"]
+  preferredMarkets   String    @default("[]") // JSON: ["arabic", "global", "emerging"]
+  capitalRange       String    @default("unknown") // under10k | 10k-50k | 50k-200k | 200k-1m | over1m | unknown
+  tradingFrequency   String    @default("weekly") // daily | weekly | monthly | occasional
+  interests          String    @default("[]") // JSON: topics of interest
+  onboardingComplete Boolean   @default(false)
+  onboardingStep     Int       @default(0) // Current step in onboarding flow
+  lastAdvisorRun     DateTime? // Last time advisor generated recommendations
+  advisorEnabled     Boolean   @default(true) // User can disable advisor
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  // ─── حقول التوصية المتقدمة (PR#23) ────────────────────────
+  excludedAssets              String  @default("[]") // JSON: أصول مستبعدة من التوصيات
+  minConfidenceScore          Int     @default(40) // الحد الأدنى لعرض التوصية (0-100)
+  successRate                 Float   @default(0) // معدل نجاح التوصيات المنفذة (0-100)
+  allowGeneralRecommendations Boolean @default(false) // السماح بالتوصيات العامة
+
+  user            User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recommendations PersonalizedRecommendation[]
+
+  @@index([userId])
+  @@index([experienceLevel])
+  @@index([riskTolerance])
+  @@map("user_profiles")
+}
+
+model PersonalizedRecommendation {
+  id                  String    @id @default(cuid())
+  userId              String
+  profileId           String
+  recommendationType  String // asset_focus | market_opportunity | risk_alert | portfolio_rebalance | educational
+  title               String // عنوان التوصية بالعربية
+  titleEn             String? // English title
+  summary             String    @default("") // ملخص التوصية
+  reasoning           String    @default("") // مبرر التوصية بالعربية
+  actionItems         String    @default("[]") // JSON: خطوات عملية
+  relatedAssetClasses String    @default("[]") // JSON: فئات الأصول المرتبطة
+  relatedSymbols      String    @default("[]") // JSON: الرموز المرتبطة
+  relatedReportIds    String    @default("[]") // JSON: معرفات التقارير المرتبطة
+  relatedNewsIds      String    @default("[]") // JSON: معرفات الأخبار المرتبطة
+  confidenceScore     Int       @default(50) // 0-100
+  urgencyLevel        String    @default("normal") // low | normal | high | critical
+  validFrom           DateTime  @default(now())
+  validUntil          DateTime?
+  isRead              Boolean   @default(false)
+  isDismissed         Boolean   @default(false)
+  isActioned          Boolean   @default(false) // User took action on this recommendation
+  userFeedback        String? // positive | negative | neutral
+  sourceData          String    @default("{}") // JSON: البيانات المصدرية المستخدمة
+  generatedBy         String    @default("advisor") // advisor | manual | scheduled
+
+  // ─── حقول التوصية المتقدمة (PR#23) ────────────────────────
+  reportId          String? // معرف التقرير المصدر (EconomicReport أو MarketAnalysis)
+  reportSlug        String? // slug التقرير للرابط المباشر
+  reportTitle       String? // عنوان التقرير للعرض السريع
+  asset             String? // الأصل الموصى به (مثال: BTC/USD)
+  action            String? // شراء | بيع | تجميع | مراقبة
+  entryPrice        String? // سعر/مستوى الدخول
+  targetPrice       String? // سعر الهدف
+  stopLoss          String? // وقف الخسارة
+  timeHorizon       String? // أفق زمني (مثال: أسبوعين)
+  allocationPercent String? // نسبة التخصيص المقترحة (مثال: 5%)
+
+  // ─── حقول التعلم من التفاعل (PR#23) ──────────────────────
+  feedbackType     String? // executed | ignored | dismissed | useful | not_useful
+  executedAt       DateTime? // وقت الضغط على "تم التنفيذ"
+  executionPrice   String? // سعر التنفيذ الفعلي (اختياري)
+  actualProfitLoss Float? // الربح/الخسارة الفعلي
+  isSuccessful     Boolean? // هل حققت التوصية هدفها
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile UserProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@index([userId, isDismissed])
+  @@index([userId, createdAt])
+  @@index([recommendationType, urgencyLevel])
+  @@index([validFrom, validUntil])
+  @@index([asset])
+  @@index([feedbackType])
+  @@index([isSuccessful])
+  @@map("personalized_recommendations")
+}
+
+// ─── Stock Analysis Models ──────────────────────────────────
+
+model CompanyProfile {
+  id            String   @id @default(cuid())
+  symbol        String   @unique
+  name          String
+  nameAr        String?
+  nameFr        String?
+  exchange      String?
+  sector        String?
+  industry      String?
+  description   String?  @db.Text
+  descriptionAr String?  @db.Text
+  descriptionFr String?  @db.Text
+  marketCap     Float    @default(0)
+  peRatio       Float    @default(0)
+  eps           Float    @default(0)
+  dividendYield Float    @default(0)
+  beta          Float    @default(0)
+  ceo           String?
+  country       String?
+  logoUrl       String?
+  website       String?
+  employees     Int?
+  lastUpdated   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  analyses StockAnalysis[]
+
+  @@index([sector])
+  @@index([exchange])
+  @@index([marketCap])
+  @@map("company_profiles")
+}
+
+model StockAnalysis {
+  id               String    @id @default(cuid())
+  symbol           String
+  slug             String    @default("")
+  locale           String    @default("en")
+  title            String    @default("")
+  summary          String    @default("") @db.Text
+  content          String    @default("") @db.Text
+  source           String?   // V1219: content source (e.g. 'محرر رؤى الذكي')
+  sourceName       String?   // V1219: display name for source
+  analysisType     String    @default("daily")
+  priceAtAnalysis  Float     @default(0)
+  price            Float     @default(0)
+  change           Float     @default(0)
+  changePercent    Float     @default(0)
+  high             Float     @default(0)
+  low              Float     @default(0)
+  open             Float     @default(0)
+  volume           Int       @default(0)
+  previousClose    Float     @default(0)
+  priceTarget      Float?
+  stopLoss         Float?
+  riskLevel        String    @default("medium")
+  sentiment        String    @default("neutral")
+  overallSignal    String    @default("neutral")
+  overallScore     Int       @default(0)
+  confidenceScore  Int       @default(50)
+  technicalScore   Int       @default(0)
+  fundamentalScore Int       @default(0)
+  sector           String?
+  marketCap        Float     @default(0)
+  peRatio          Float     @default(0)
+  eps              Float     @default(0)
+  marketType       String    @default("sp500")
+  assetClass       String    @default("stocks")
+  keyMetrics       String    @default("{}") @db.Text
+  indicators       String    @default("{}") @db.Text
+  technicalData    String    @default("{}") @db.Text
+  tradeSetup       String    @default("{}") @db.Text
+  sourceUrls       String    @default("[]") @db.Text
+  relatedNewsIds   String    @default("[]") @db.Text
+  relatedReportIds String    @default("[]") @db.Text
+  newsItemId       String?
+  imageUrl         String?
+  isPublished      Boolean   @default(false)
+  publishedAt      DateTime?
+  validUntil       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  company CompanyProfile? @relation(fields: [symbol], references: [symbol], onDelete: Cascade)
+
+  @@unique([slug, locale])
+  @@index([symbol, locale])
+  @@index([analysisType, createdAt])
+  @@index([isPublished, locale, publishedAt])
+  @@index([sector])
+  @@index([confidenceScore])
+  @@index([sentiment])
+  @@index([overallSignal])
+  @@index([marketType])
+  @@map("stock_analyses")
+}
+
+// ─── Chat Session & Messages (Assistant) ───────────────────────
+
+model ChatSession {
+  id        String        @id @default(cuid())
+  userId    String?
+  locale    String        @default("ar")
+  title     String?
+  pageUrl   String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+
+  @@index([userId])
+  @@index([locale])
+  @@index([createdAt])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id          String      @id @default(cuid())
+  sessionId   String
+  role        String // user | assistant | system
+  content     String      @db.Text
+  toolCalls   String?     @db.Text // JSON: tools used
+  toolResults String?     @db.Text // JSON: tool execution results
+  sources     String?     @db.Text // JSON: reference sources
+  createdAt   DateTime    @default(now())
+  session     ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([createdAt])
+  @@map("chat_messages")
+}
+
+// ─── Geopolitical Risk Models ────────────────────────────────
+
+model GeopoliticalRisk {
+  id                 String    @id @default(cuid())
+  title              String
+  slug               String
+  summary            String    @default("")
+  content            String    @default("")
+  locale             String    @default("ar") // ar | en | fr | tr | es
+  riskCategory       String    @default("conflict") // conflict | trade | energy | political | cyber | sanctions | climate
+  riskLevel          String    @default("moderate") // low | moderate | elevated | high | severe
+  riskScore          Int       @default(50) // 0-100 composite index
+  aiGprScore         Float? // AI-GPR Index (Federal Reserve)
+  acledEventCount    Int       @default(0)
+  acledFatalityCount Int       @default(0)
+  worldBankStability Float?
+  gdeltTone          Float? // -10 to +10
+  affectedRegions    Json      @default("[]") // JSON array
+  affectedCountries  Json      @default("[]") // JSON: [{code:"SA",name:"السعودية",score:72}]
+  affectedAssets     Json      @default("[]") // JSON: [{symbol:"OIL",impact:"+3%",direction:"bullish"}]
+  scenarios          Json? // JSON: {base:{...},adverse:{...},severe:{...}}
+  tradeRoutes        Json? // JSON: [{name:"هرمز",status:"disrupted"}]
+  latitude           Float?
+  longitude          Float?
+  imageUrl           String?
+  sourceUrls         Json      @default("[]") // JSON array
+  isPublished        Boolean   @default(false)
+  publishedAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@unique([slug, locale])
+  @@index([riskCategory, locale])
+  @@index([riskLevel])
+  @@index([publishedAt])
+  @@index([locale, isPublished, publishedAt]) // Main dashboard query
+  @@map("geopolitical_risks")
+}
+
+model GeopoliticalEvent {
+  id          String   @id @default(cuid())
+  eventId     String   @unique // ACLED/GDELT event ID
+  source      String   @default("acled") // acled | gdelt | manual
+  eventType   String // battle | protest | riot | violence-civilians | ...
+  actor1      String?
+  actor2      String?
+  country     String
+  countryCode String // ISO 3166-1 alpha-2
+  region      String? // subnational region
+  latitude    Float
+  longitude   Float
+  fatalities  Int      @default(0)
+  notes       String?
+  sourceUrl   String?
+  eventDate   DateTime
+  gdeltTone   Float? // GDELT sentiment tone
+  importedAt  DateTime @default(now())
+
+  @@index([countryCode, eventDate])
+  @@index([eventType])
+  @@index([eventDate])
+  @@index([latitude, longitude])
+  @@map("geopolitical_events")
+}
+
+model CountryRiskScore {
+  id              String   @id @default(cuid())
+  countryCode     String // ISO 3166-1 alpha-2
+  countryNameAr   String
+  countryNameEn   String
+  compositeScore  Int // 0-100 composite risk score
+  gprScore        Float? // GPR historical
+  aiGprScore      Float? // AI-GPR (Fed)
+  acledScore      Float? // ACLED-based
+  worldBankScore  Float? // WGI Political Stability
+  gdeltScore      Float? // GDELT tone average
+  peaceIndexScore Float? // Global Peace Index
+  riskLevel       String   @default("moderate") // low | moderate | elevated | high | severe
+  riskCategory    String   @default("conflict") // primary risk category
+  region          String // middle-east | east-asia | europe | africa | americas
+  subRegion       String? // gulf | levant | maghreb | etc.
+  latitude        Float?
+  longitude       Float?
+  updatedAt       DateTime @updatedAt
+
+  @@unique([countryCode])
+  @@index([compositeScore])
+  @@index([region])
+  @@index([riskLevel])
+  @@map("country_risk_scores")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// AgencyEvent — News Agency Service (V1084)
+// ═══════════════════════════════════════════════════════════════
+// Independent news-writer agent. Fetches from official sources
+// (SEC EDGAR, Fed RSS, World Bank), uses LLM to write original
+// Arabic articles, publishes directly to NewsItem.
+//
+// This model is SEPARATE from the news pipeline. The agency service
+// does NOT touch orchestrator/analyzer/imager/publisher. It reads
+// from this table + writes directly to NewsItem.
+// ═══════════════════════════════════════════════════════════════
+
+model AgencyEvent {
+  id String @id @default(cuid())
+
+  // Source identification
+  sourceId   String // 'SEC' | 'FRED' | 'FedRSS' | 'WorldBank'
+  externalId String // ID from the source (e.g., SEC accession number, Fed press release ID)
+  sourceName String? // Display name: "SEC EDGAR", "Federal Reserve"
+  url        String  @default("") // Original URL of the event
+
+  // Event data (raw)
+  eventType  String // 'filing' | 'press_release' | 'data_release' | 'speech'
+  title      String // Original title from source
+  rawContent String  @db.Text // Raw content extracted from source
+  category   String? // For placeholder image: 'economy' | 'stocks' | 'crypto' | 'commodities' | 'forex' | 'central_banks'
+
+  // Draft (filled after LLM generation)
+  draftTitle   String? @db.Text // Arabic title written by LLM
+  draftBody    String? @db.Text // Arabic body written by LLM
+  draftSummary String? // Arabic summary (2-3 sentences)
+  llmProvider  String? // 'groq' | 'mistral' | 'bedrock' — which LLM wrote the draft
+
+  // Context from internal DB (filled at draft time)
+  internalContext String? @db.Text // JSON: related economic_events, stock_analyses, geopolitical_risks
+
+  // Status tracking
+  status     String  @default("fetched") // fetched → drafted → published | failed
+  retryCount Int     @default(0)
+  lastError  String? @db.Text
+
+  // Locale (for multi-locale support in V2)
+  locale String @default("ar")
+
+  // Relations
+  newsItemId  String? // FK to NewsItem after publish (manual, not Prisma relation to avoid coupling)
+  publishedAt DateTime? // When actually published to NewsItem
+
+  // Timestamps
+  fetchedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sourceId, externalId]) // Dedup: same event from same source = skip
+  @@index([status, createdAt])
+  @@index([newsItemId])
+  @@index([category])
+  @@index([publishedAt])
+  @@index([locale])
+  @@map("agency_events")
+}

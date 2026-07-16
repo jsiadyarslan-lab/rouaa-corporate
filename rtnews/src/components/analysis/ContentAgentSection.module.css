@@ -1,0 +1,226 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ContentAgentSection — Content Agent Analysis Cards
+   ═══════════════════════════════════════════════════════════════════ */
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.sectionTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  font-size: 16px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-head);
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+}
+
+.sectionCount {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--font-jetbrains-mono), monospace;
+  background: var(--bg4);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.rouaBadge {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--purple2);
+  color: var(--purple);
+  border: 1px solid color-mix(in srgb, var(--purple) 15%, transparent);
+  letter-spacing: 0.5px;
+  margin-right: 8px;
+}
+
+.agentCardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.agentCard {
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.agentCard:hover {
+  border-color: rgba(123, 94, 167, 0.3);
+}
+
+.agentCardHeader {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.agentCardHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agentCardIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--purple2);
+  border: 1px solid color-mix(in srgb, var(--purple) 15%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple);
+}
+
+.agentCardTitleGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.agentCardTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-head);
+}
+
+.agentCardSymbolsRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.symbolChip {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--cyan2);
+  color: var(--cyan);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.categoryText {
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--text4);
+}
+
+.agentCardHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sentimentChip {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.impactLabel {
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.agentCardContent {
+  padding: 10px 14px;
+}
+
+.summaryText {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.contentText {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.8;
+}
+
+.readMoreBtn {
+  background: none;
+  border: none;
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0;
+  margin-right: 4px;
+}
+
+.tagsRow {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.tagChip {
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--bg4);
+  color: var(--text4);
+  border: 1px solid var(--border);
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 8px;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.spinnerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 1s infinite;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+.emptyStateIcon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

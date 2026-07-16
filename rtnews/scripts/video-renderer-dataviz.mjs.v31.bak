@@ -1,0 +1,2307 @@
+#!/usr/bin/env node
+// ─── Al Jazeera AJ Labs Video Renderer V31 ────────────────────────────
+// AUTHENTICALLY Al Jazeera — Counter animations, category labels, human stories
+//
+// "Don't give me more data — give me a story" — Mohammed Haddad, AJ Labs
+//
+// Architecture (same technical pipeline):
+//   - Playwright frame-by-frame rendering at FPS
+//   - HTML with window.setAnimationProgress(p) function (0→1)
+//   - FFmpeg stitches PNG frames + voiceover into final MP4
+//   - TTS: edge-tts → Groq fallback
+//   - Images: Pollinations → SDK → CLI → geometric fallback
+//
+// 6 SCENES (~170s total) — AUTHENTICALLY AL JAZEERA AJ LABS:
+//   1. HOOK       (0-15s)    — Counter animation (0→value), category label, gold underline
+//   2. MAP        (15-45s)   — Full-width map with region counters, progress timeline bar
+//   3. TIMELINE   (45-80s)   — VERTICAL timeline, sequential events, gold dots
+//   4. DATAVIZ    (80-115s)  — Counter-first then bar build, small square bullets
+//   5. HUMANSTORY (115-145s) — Emotional portrait + gold quote + floating counter badges
+//   6. CLOSING    (145-170s) — Clean takeaways (01/02/03), source credits, رؤى brand
+//
+// Visual Language: AUTHENTIC AJ Labs (2022 rebrand)
+//   - COUNTER ANIMATIONS — numbers counting up from 0 (AJ's signature visual)
+//   - Category labels — ALL-CAPS small text at top of every frame
+//   - Source lines — always present at bottom of data frames
+//   - AJ Labs bug — "AJ Labs | رؤى" in corner of every frame
+//   - Progress timeline bar — thin gold line at bottom (2022 rebrand motif)
+//   - Gold accent line — 2px at top of every frame
+//   - Small gold square BULLETS (8-10px) — NOT floating squares
+//   - NO ticker, NO split-screen, NO news bars, NO floating yellow squares
+//
+// Usage:
+//   node scripts/video-renderer-dataviz.mjs --input /path/to/data.json --output /path/to/output.mp4
+
+import { chromium } from 'playwright';
+import { execSync, spawnSync, execFile } from 'child_process';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync, readdirSync, rmSync } from 'fs';
+import { join, dirname, basename } from 'path';
+import { tmpdir } from 'os';
+import { randomUUID } from 'crypto';
+import { promisify } from 'util';
+
+const execFileAsync = promisify(execFile);
+
+// ═══════════════════════════════════════════════════════════════════
+// AL JAZEERA BRAND COLORS (from official brand guidelines)
+// ═══════════════════════════════════════════════════════════════════
+const AJ = {
+  gold:        '#DBA200',
+  darkBlue:    '#212E64',
+  darkBg:      '#0D1117',    // Warm dark BG — NOT cold black
+  midBg:       '#1A2332',
+  warmWhite:   '#F5F0E8',
+  gray:        '#9B9B9B',
+  orange:      '#FA6400',
+  green:       '#4CAF50',
+  red:         '#CC2936',
+  paleGold:    '#F0D68A',
+  textWhite:   '#F5F0E8',
+  textGray:    '#9B9B9B',
+  textDim:     '#6B6B6B',
+  borderGold:  'rgba(219,162,0,0.2)',
+  glowGold:    'rgba(219,162,0,0.15)',
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDERING CONSTANTS
+// ═══════════════════════════════════════════════════════════════════
+const RENDER_WIDTH = 1280;
+const RENDER_HEIGHT = 720;
+const OUTPUT_WIDTH = 1920;
+const OUTPUT_HEIGHT = 1080;
+const OUTPUT_FPS = 30;
+let RENDER_FPS = process.env.RAILWAY_ENVIRONMENT ? 16 : 24;
+if (process.env.RAILWAY_ENVIRONMENT) {
+  const totalMem = process.memoryUsage().heapTotal / 1024 / 1024;
+  if (totalMem < 400) {
+    console.warn(`[AJ31] Low memory (${totalMem.toFixed(0)}MB), reducing FPS to 12`);
+    RENDER_FPS = 12;
+  }
+}
+const FPS = RENDER_FPS;
+const WIDTH = RENDER_WIDTH;
+const HEIGHT = RENDER_HEIGHT;
+
+// 6 Scene definitions — Authentic AJ Labs pacing
+const SCENE_DEFS = [
+  ['hook',       0,   15],
+  ['map',        15,  45],
+  ['timeline',   45,  80],
+  ['dataviz',    80,  115],
+  ['humanstory', 115, 145],
+  ['closing',    145, 170],
+];
+const TOTAL_SCENES = SCENE_DEFS.length;
+
+// ═══════════════════════════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+const AR_NUMERALS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toArabicNumeral(n) {
+  return String(n).split('').map(d => AR_NUMERALS[parseInt(d)] || d).join('');
+}
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const parsed = {};
+  for (let i = 0; i < args.length; i++) {
+    if (args[i].startsWith('--')) {
+      const key = args[i].slice(2);
+      parsed[key] = args[i + 1] || true;
+      i++;
+    }
+  }
+  return parsed;
+}
+
+function escapeHTML(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function stripMarkdown(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/(\*{3}|_{3})(.+?)\1/g, '$2')
+    .replace(/(\*{2}|_{2})(.+?)\1/g, '$2')
+    .replace(/(\*|_)(.+?)\1/g, '$2')
+    .replace(/~~(.+?)~~/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^[-*_]{3,}\s*$/gm, '')
+    .replace(/^[\s]*[-*+]\s+/gm, '')
+    .replace(/^[\s]*\d+\.\s+/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[([^\]]*)]\([^)]+\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\[([^\]]+)\]\[[^\]]*\]/g, '$1')
+    .replace(/\^\((.+?)\)/g, '$1')
+    .replace(/^\s*>\s+/gm, '')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+}
+
+function truncateText(text, maxChars = 35) {
+  if (!text) return '';
+  const s = String(text).trim();
+  return s.length > maxChars ? s.slice(0, maxChars - 1) + '...' : s;
+}
+
+function getImpactColor(impact) {
+  if (['bullish', 'positive'].includes(impact)) return AJ.green;
+  if (['bearish', 'negative'].includes(impact)) return AJ.red;
+  return AJ.gold;
+}
+
+function getImpactLabel(impact, locale) {
+  if (['bullish', 'positive'].includes(impact)) return locale === 'ar' ? 'صعودي' : 'Bullish';
+  if (['bearish', 'negative'].includes(impact)) return locale === 'ar' ? 'هبوطي' : 'Bearish';
+  return locale === 'ar' ? 'محايد' : 'Neutral';
+}
+
+function getImpactArrow(impact) {
+  if (['bullish', 'positive'].includes(impact)) return '↑';
+  if (['bearish', 'negative'].includes(impact)) return '↓';
+  return '→';
+}
+
+function formatNumber(num) {
+  if (num === null || num === undefined) return '—';
+  if (typeof num === 'string') return num;
+  if (Math.abs(num) >= 1e9) return (num / 1e9).toFixed(1) + 'B';
+  if (Math.abs(num) >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+  if (Math.abs(num) >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+  return num.toFixed ? num.toFixed(1) : String(num);
+}
+
+function lerp(a, b, t) { return a + (b - a) * Math.max(0, Math.min(1, t)); }
+function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
+function segProg(p, s, e) { return clamp((p - s) / (e - s), 0, 1); }
+function easeOutCubic(t) { const p = clamp(t, 0, 1); return 1 - Math.pow(1 - p, 3); }
+function easeInOutCubic(t) { const p = clamp(t, 0, 1); return p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p+2,3)/2; }
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SVG WORLD MAP — Simplified for Scene 2
+// ═══════════════════════════════════════════════════════════════════
+function generateWorldMapSVG() {
+  // Simplified world map with 5 glowable regions
+  return `
+  <svg id="aj-map" viewBox="0 0 1000 500" style="width:100%;height:100%;opacity:0.9;">
+    <defs>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glowStrong"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <!-- Ocean -->
+    <rect width="1000" height="500" fill="${AJ.darkBg}" rx="8"/>
+    <!-- Grid lines -->
+    <g opacity="0.06" stroke="${AJ.gold}" stroke-width="0.5">
+      ${Array.from({length:10}, (_,i) => `<line x1="0" y1="${i*50+25}" x2="1000" y2="${i*50+25}"/>`).join('\n      ')}
+      ${Array.from({length:20}, (_,i) => `<line x1="${i*50+25}" y1="0" x2="${i*50+25}" y2="500"/>`).join('\n      ')}
+    </g>
+    <!-- Africa -->
+    <path id="map-africa" class="map-region" d="M460,180 Q480,170 510,180 L530,220 Q540,280 520,340 L490,380 Q470,370 460,340 L440,280 Q430,230 460,180Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Middle East -->
+    <path id="map-mideast" class="map-region" d="M540,160 Q570,150 600,160 L610,180 Q620,200 600,220 L570,230 Q550,220 540,200 L530,180Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Europe -->
+    <path id="map-europe" class="map-region" d="M430,80 Q470,70 520,80 L540,120 Q530,150 510,160 L470,170 Q440,160 430,140Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Asia -->
+    <path id="map-asia" class="map-region" d="M600,80 Q700,60 800,100 L830,180 Q820,260 760,280 L680,260 Q620,230 600,180 L590,120Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Americas -->
+    <path id="map-americas" class="map-region" d="M150,80 Q200,60 240,100 L250,200 Q240,280 200,340 L160,360 Q130,340 120,280 L110,200 Q100,140 150,80Z" fill="${AJ.midBg}" stroke="${AJ.borderGold}" stroke-width="1" opacity="0.8"/>
+    <!-- Region labels -->
+    <text x="190" y="220" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">AMERICAS</text>
+    <text x="475" y="300" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">AFRICA</text>
+    <text x="575" y="195" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">M.EAST</text>
+    <text x="480" y="130" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">EUROPE</text>
+    <text x="710" y="180" fill="${AJ.textGray}" font-size="10" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.5">ASIA</text>
+  </svg>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// IMAGE GENERATION (Pollinations → SDK → CLI → Geometric fallback)
+// ═══════════════════════════════════════════════════════════════════
+async function downloadImageFromUrl(url) {
+  try {
+    console.log(`[AJ31]  Downloading image from: ${url.slice(0, 80)}...`);
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'AJ31Renderer/1.0', 'Accept': 'image/*' },
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!response.ok) return null;
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 5000) return null;
+    console.log(`[AJ31]  Downloaded: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ31]  Download error: ${err.message}`);
+    return null;
+  }
+}
+
+async function generateImagePollinations(prompt, width, height) {
+  let cleanPrompt = prompt.replace(/[^\x00-\x7F]/g, ' ').replace(/\s+/g, ' ').trim();
+  const shortPrompt = cleanPrompt.length > 200 ? cleanPrompt.substring(0, 197) + '...' : cleanPrompt;
+  try {
+    const seed = Date.now();
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(shortPrompt)}?width=${width}&height=${height}&nologo=true&seed=${seed}`;
+    console.log(`[AJ31]  Pollinations: ${shortPrompt.length} chars...`);
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'AJ31Renderer/1.0', 'Accept': 'image/*' },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!response.ok) return null;
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 5000) return null;
+    const header = buffer.slice(0, 4).toString('hex');
+    const isJPEG = header.startsWith('ffd8');
+    const isPNG = header.startsWith('89504');
+    const isWebP = header.startsWith('5249');
+    if (!isJPEG && !isPNG && !isWebP) return null;
+    console.log(`[AJ31]  Pollinations success: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ31]  Pollinations failed: ${err.message?.slice(0, 80)}`);
+    return null;
+  }
+}
+
+async function generateImageSDK(prompt, width, height) {
+  try {
+    console.log(`[AJ31]  SDK: generating image...`);
+    const ZAI = (await import('z-ai-web-dev-sdk')).default;
+    const zai = await ZAI.create();
+    const sdkSize = '1344x768';
+    const response = await zai.images.generations.create({ prompt, size: sdkSize });
+    const base64 = response.data?.[0]?.base64;
+    if (!base64) return null;
+    const buffer = Buffer.from(base64, 'base64');
+    if (buffer.length < 5000) return null;
+    console.log(`[AJ31]  SDK success: ${(buffer.length/1024).toFixed(0)}KB`);
+    return buffer;
+  } catch (err) {
+    console.warn(`[AJ31]  SDK failed: ${err.message?.slice(0, 80)}`);
+    return null;
+  }
+}
+
+function generateImageCLI(prompt, outputPath, width, height) {
+  const candidates = ['z-ai', '/usr/local/bin/z-ai'];
+  for (const cmd of candidates) {
+    try {
+      const result = spawnSync(cmd, ['image', '--prompt', prompt, '--output', outputPath, '--size', `${width}x${height}`], {
+        encoding: 'utf-8', timeout: 120000,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        const buf = readFileSync(outputPath);
+        if (buf.length > 5000) {
+          try { unlinkSync(outputPath); } catch {}
+          console.log(`[AJ31]  CLI success: ${(buf.length/1024).toFixed(0)}KB`);
+          return buf;
+        }
+      }
+    } catch {}
+  }
+  const legacyCandidates = [
+    'z-ai-generate', '/usr/local/bin/z-ai-generate',
+    '/app/node_modules/.bin/z-ai-generate',
+    join(process.cwd(), 'node_modules', '.bin', 'z-ai-generate'),
+  ];
+  for (const cmd of legacyCandidates) {
+    try {
+      const result = spawnSync(cmd, ['--prompt', prompt, '--output', outputPath, '--size', `${width}x${height}`], {
+        encoding: 'utf-8', timeout: 120000,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        const buf = readFileSync(outputPath);
+        if (buf.length > 5000) {
+          try { unlinkSync(outputPath); } catch {}
+          console.log(`[AJ31]  CLI legacy success: ${(buf.length/1024).toFixed(0)}KB`);
+          return buf;
+        }
+      }
+    } catch {}
+  }
+  return null;
+}
+
+// V31-fix: Geometric pattern fallback — VISIBLE angular shapes in gold at 8-12% opacity
+function generateGeometricFallback(width, height, marketImpact = 'neutral') {
+  const accentColor = ['bullish','positive'].includes(marketImpact) ? AJ.green
+    : ['bearish','negative'].includes(marketImpact) ? AJ.red
+    : AJ.gold;
+
+  // Build VISIBLE geometric pattern — Al Jazeera-style angular shapes at 8-12% opacity
+  const shapes = [];
+  // Large angular gold shapes (AJ peninsula motif)
+  shapes.push(`<polygon points="${width*0.65},0 ${width},0 ${width},${height*0.35}" fill="${AJ.gold}" opacity="0.10"/>`);
+  shapes.push(`<polygon points="0,${height*0.65} ${width*0.45},${height} 0,${height}" fill="${accentColor}" opacity="0.08"/>`);
+  shapes.push(`<polygon points="${width*0.75},${height*0.45} ${width},${height*0.25} ${width},${height*0.65}" fill="${AJ.paleGold}" opacity="0.06"/>`);
+  // Yellow square motif
+  const sqSize = Math.min(width, height) * 0.15;
+  shapes.push(`<rect x="${width*0.82 - sqSize/2}" y="${height*0.7 - sqSize/2}" width="${sqSize}" height="${sqSize}" fill="${AJ.gold}" opacity="0.09" transform="rotate(8,${width*0.82},${height*0.7})"/>`);
+  shapes.push(`<rect x="${width*0.12}" y="${height*0.15}" width="${sqSize*0.7}" height="${sqSize*0.7}" fill="${accentColor}" opacity="0.07" transform="rotate(-5,${width*0.12+sqSize*0.35},${height*0.15+sqSize*0.35})"/>`);
+  // Diagonal lines
+  for (let i = 0; i < 8; i++) {
+    const x = i * (width / 8);
+    shapes.push(`<line x1="${x}" y1="0" x2="${x + width*0.15}" y2="${height}" stroke="${AJ.gold}" stroke-width="0.5" opacity="0.08"/>`);
+  }
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+    <defs>
+      <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#081020"/>
+        <stop offset="50%" stop-color="${AJ.darkBg}"/>
+        <stop offset="100%" stop-color="#101828"/>
+      </linearGradient>
+      <radialGradient id="g1" cx="70%" cy="25%" r="60%">
+        <stop offset="0%" stop-color="${AJ.gold}" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="${AJ.darkBg}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg1)"/>
+    <rect width="100%" height="100%" fill="url(#g1)"/>
+    ${shapes.join('\n    ')}
+  </svg>`;
+  return Buffer.from(svg);
+}
+
+async function generateAIImage(prompt, width = 1344, height = 768, marketImpact = 'neutral') {
+  let buffer = await generateImagePollinations(prompt, width, height);
+  if (buffer) return buffer;
+  buffer = await generateImageSDK(prompt, width, height);
+  if (buffer) return buffer;
+  const tmpPath = join(tmpdir(), `aj31-bg-${randomUUID()}.png`);
+  buffer = generateImageCLI(prompt, tmpPath, width, height);
+  if (buffer) return buffer;
+  console.error(`[AJ31]  All AI image methods failed — using geometric fallback`);
+  return generateGeometricFallback(width, height, marketImpact);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TTS (edge-tts primary, Groq fallback)
+// ═══════════════════════════════════════════════════════════════════
+const ARABIC_FEMALE_VOICES = [
+  'ar-AE-FatimaNeural',
+  'ar-EG-SalmaNeural',
+  'ar-SA-ZariyahNeural',
+  'ar-JO-SanaNeural',
+  'ar-KW-NouraNeural',
+];
+const ENGLISH_FEMALE_VOICES = [
+  'en-US-JennyNeural',
+  'en-US-AriaNeural',
+];
+
+function generateVoiceover(text, outputPath, locale) {
+  const voiceList = locale === 'en' ? ENGLISH_FEMALE_VOICES : ARABIC_FEMALE_VOICES;
+  const cleanedText = stripMarkdown(text);
+  const truncated = cleanedText.length > 2000 ? cleanedText.slice(0, 1997) + '...' : cleanedText;
+  const tmpTextFile = outputPath.replace('.mp3', '_text.txt');
+  writeFileSync(tmpTextFile, truncated, 'utf-8');
+
+  for (const voice of voiceList) {
+    try {
+      const pythonCode = `
+import asyncio, edge_tts
+async def main():
+    text = open("${tmpTextFile}", "r", encoding="utf-8").read()
+    comm = edge_tts.Communicate(text, "${voice}", rate="+10%", pitch="+2Hz")
+    await comm.save("${outputPath}")
+asyncio.run(main())
+`;
+      const result = spawnSync('python3', ['-c', pythonCode], {
+        encoding: 'utf-8', timeout: 120000, maxBuffer: 10*1024*1024,
+      });
+      if (result.status === 0 && existsSync(outputPath)) {
+        try { unlinkSync(tmpTextFile); } catch {}
+        console.log(`[AJ31-TTS] ${voice} — SUCCESS`);
+        return true;
+      }
+    } catch (err) {
+      console.warn(`[AJ31-TTS] ${voice} error: ${err.message?.slice(0, 80)}`);
+    }
+  }
+
+  // Groq fallback
+  const groqKey = process.env.GROQ_API_KEY;
+  if (groqKey) {
+    try {
+      const groqVoice = locale === 'en' ? 'Fritz-PlayAI' : 'Hiba-MSA';
+      spawnSync('curl', [
+        '-s', '-X', 'POST', 'https://api.groq.com/openai/v1/audio/speech',
+        '-H', `Authorization: Bearer ${groqKey}`,
+        '-H', 'Content-Type: application/json',
+        '-d', JSON.stringify({ model: 'playai-tts', input: truncated, voice: groqVoice, response_format: 'mp3', speed: 1.1 }),
+        '-o', outputPath,
+      ], { encoding: 'utf-8', timeout: 60000 });
+      if (existsSync(outputPath) && readFileSync(outputPath).length > 1000) {
+        try { unlinkSync(tmpTextFile); } catch {}
+        console.log(`[AJ31-TTS] Groq ${groqVoice} — SUCCESS`);
+        return true;
+      }
+    } catch {}
+  }
+
+  try { unlinkSync(tmpTextFile); } catch {}
+  console.error(`[AJ31-TTS] ALL voices failed for locale=${locale}`);
+  return false;
+}
+
+function getAudioDuration(path) {
+  try {
+    const result = spawnSync('ffprobe', [
+      '-v', 'quiet', '-show_entries', 'format=duration',
+      '-of', 'default=noprint_wrappers=1:nokey=1', path
+    ], { encoding: 'utf-8', timeout: 10000 });
+    return parseFloat(result.stdout.trim()) || 0;
+  } catch { return 0; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BACKGROUND MUSIC — Warm Arabic maqam-inspired ambient
+// ═══════════════════════════════════════════════════════════════════
+function generateBackgroundMusic(outputPath, durationSeconds) {
+  const dur = Math.ceil(durationSeconds) + 5;
+  console.log(`[AJ31]  Generating warm ambient music (${dur}s)...`);
+  try {
+    const inputs = [];
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=73.42:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=146.83:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=174.61:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=220:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=293.66:duration=${dur}`);
+    inputs.push('-f', 'lavfi', '-i', `sine=frequency=440:duration=${dur}`);
+
+    const filterComplex = [
+      '[0:a]volume=0.02[sub]',
+      '[1:a]volume=0.03[root]',
+      '[2:a]volume=0.02[third]',
+      '[3:a]volume=0.015[fifth]',
+      '[4:a]volume=0.01[oct]',
+      '[5:a]volume=0.005[tex]',
+      '[sub][root][third][fifth][oct][tex]amix=6:duration=longest:dropout_transition=5[mixed]',
+      '[mixed]tremolo=f=0.2:d=0.3[trem]',
+      '[trem]lowpass=f=450:poles=4[lp]',
+      '[lp]highpass=f=35[hp]',
+      '[hp]acompressor=threshold=0.06:ratio=3:attack=5:release=120[comp]',
+      '[comp]afade=t=in:st=0:d=5[fin]',
+      `[fin]afade=t=out:st=${dur - 10}:d=10[final]`,
+    ].join(',');
+
+    const result = spawnSync('ffmpeg', [
+      '-y', ...inputs,
+      '-filter_complex', filterComplex,
+      '-map', '[final]',
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+
+    if (result.status !== 0) {
+      console.warn(`[AJ31]  Music generation failed: ${result.stderr?.slice(-200)}`);
+      return false;
+    }
+    const success = existsSync(outputPath);
+    if (success) console.log(`[AJ31]  Background music generated`);
+    return success;
+  } catch (err) {
+    console.warn(`[AJ31]  Music error: ${err.message}`);
+    return false;
+  }
+}
+
+function mixAudioWithMusic(narrationPath, musicPath, outputPath, musicVolume = 0.15) {
+  try {
+    const totalDuration = getAudioDuration(narrationPath) || 120;
+    const filterComplex = [
+      `[1:a]volume=${musicVolume},afade=t=in:st=0:d=5,afade=t=out:st=${totalDuration-8}:d=8[music]`,
+      `[0:a][music]amix=2:duration=shortest:dropout_transition=3:normalize=0[aout]`,
+    ].join(';');
+    const result = spawnSync('ffmpeg', [
+      '-y', '-i', narrationPath, '-i', musicPath,
+      '-filter_complex', filterComplex,
+      '-map', '[aout]',
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+    if (result.status !== 0) {
+      const simpleFilter = `[1:a]volume=${musicVolume}[music];[0:a][music]amix=2:duration=shortest:dropout_transition=3:normalize=0[aout]`;
+      const fallback = spawnSync('ffmpeg', [
+        '-y', '-i', narrationPath, '-i', musicPath,
+        '-filter_complex', simpleFilter,
+        '-map', '[aout]',
+        '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+        outputPath,
+      ], { encoding: 'utf-8', timeout: 60000 });
+      if (fallback.status !== 0) return false;
+    }
+    return existsSync(outputPath);
+  } catch { return false; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// PER-SCENE NARRATION — 6 Scenes, LLM-powered with template fallback
+// ═══════════════════════════════════════════════════════════════════
+async function generateNarrationLLM(data) {
+  const locale = data.locale || 'ar';
+  const isAr = locale === 'ar';
+  try {
+    const ZAI = (await import('z-ai-web-dev-sdk')).default;
+    const zai = await ZAI.create();
+
+    const impactLabel = getImpactLabel(data.market_impact, locale);
+    const impactArrow = getImpactArrow(data.market_impact);
+    const stats = (data.stats || []).map(s => `${s.label}: ${s.value}`).join('، ');
+    const keyPoints = (data.key_points || []).slice(0, 5).join('. ');
+    const rootCauses = (data.root_causes || []).map(r => `${r.title}: ${r.description}`).join('. ');
+    const scenarios = (data.scenarios || []).map(s => `${s.title} (${s.probability}): ${s.result}`).join('. ');
+    const takeaways = (data.strategic_takeaways || []).map(t => `${t.title}: ${t.detail}`).join('. ');
+    const recs = (data.recommendations || []).map(r => `${r.asset}: ${r.action}`).join('. ');
+
+    const systemPrompt = isAr
+      ? `أنت مذيعة في قناة الجزيرة بأسلوب صحافة البيانات. مهمتك كتابة نص تعليق صوتي لتقرير فيديو (أقل من 3 دقائق). القواعد: 1. عربية فصحى سلسة 2. لا كلمات إنجليزية 3. كل مشهد 2-4 جمل 4. ادخل الموضوع مباشرة 5. لا تنسيق Markdown 6. ربط طبيعي بين الأفكار`
+      : `You are an Al Jazeera data journalism narrator. Write voiceover for a short data video report (under 3 min). Rules: 1. Clear natural English 2. 2-4 sentences per scene 3. Get straight to the point 4. No Markdown formatting 5. Natural transitions`;
+
+    const userPrompt = isAr
+      ? `اكتب 6 فقرات تعليق صوتي لتقرير بعنوان: "${data.title || 'تقرير اقتصادي'}"
+تأثير السوق: ${impactArrow} ${impactLabel}
+S1 (الخطاف - 15 ثانية): الرقم الرئيسي المثير مع عد تصاعدي — جملتان فقط. البيانات: ${stats}
+S2 (الخريطة - 30 ثانية): المناطق المتأثرة والسياق الجغرافي مع أرقام عد تصاعدي — البيانات: ${stats}. النقاط: ${keyPoints}
+S3 (الخط الزمني - 35 ثانية): الأحداث والأسباب عبر الزمن بشكل خط زمني عمودي — ${rootCauses || 'تطورات فنية'}
+S4 (البيانات - 35 ثانية): مقارنة الأرقام بعد تصاعدي ثم أعمدة — ${scenarios || 'الاتجاه ' + impactLabel}
+S5 (قصة إنسانية - 30 ثانية): البعد الإنساني والعاطفي والأثر على الناس — البيانات تعكس حياة حقيقية
+S6 (الختام - 25 ثانية): الاستنتاجات والتوصيات والمصادر — ${takeaways}. اختم بـ: شكراً لمتابعتكم رؤى
+أجب بهذا الشكل فقط:
+S1: ...
+S2: ...
+S3: ...
+S4: ...
+S5: ...
+S6: ...`
+      : `Write 6 voiceover paragraphs for report: "${data.title || 'Economic Report'}"
+Market impact: ${impactArrow} ${impactLabel}
+S1 (Hook - 15s): The dramatic key number with counter animation — two sentences only. Data: ${stats}
+S2 (Map - 30s): Affected regions with counter animations and geographic context — Data: ${stats}. Points: ${keyPoints}
+S3 (Timeline - 35s): Events and causes over time in vertical timeline — ${rootCauses || 'Technical developments'}
+S4 (DataViz - 35s): Counter-first number comparisons then bar chart — ${scenarios || 'Direction: ' + impactLabel}
+S5 (Human Story - 30s): Emotional human dimension and impact on real people — data reflects real lives
+S6 (Closing - 25s): Conclusions, source credits and recommendations — ${takeaways}. End with: Thank you for watching Rouaa
+Answer ONLY in this format:
+S1: ...
+S2: ...
+S3: ...
+S4: ...
+S5: ...
+S6: ...`;
+
+    console.log('[AJ31]  Calling LLM for narration...');
+    const completion = await zai.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.7, max_tokens: 2000,
+    });
+
+    const rawText = completion.choices?.[0]?.message?.content || '';
+    const parts = [];
+    for (let i = 1; i <= 6; i++) {
+      const regex = new RegExp(`S${i}\\s*:\\s*(.+?)(?=S${i+1}\\s*:|$)`, 's');
+      const match = rawText.match(regex);
+      if (match) {
+        parts.push(stripMarkdown(match[1].trim().replace(/\n+/g, ' ')));
+      } else {
+        parts.push(null);
+      }
+    }
+    const templateParts = generateNarrationTemplate(data);
+    for (let i = 0; i < 6; i++) {
+      if (!parts[i] || parts[i].length < 10) parts[i] = templateParts[i];
+    }
+    console.log('[AJ31]  LLM narration generated');
+    return parts;
+  } catch (err) {
+    console.warn(`[AJ31]  LLM narration failed: ${err.message?.slice(0, 100)}`);
+    return generateNarrationTemplate(data);
+  }
+}
+
+function generateNarrationTemplate(data) {
+  const locale = data.locale || 'ar';
+  const isAr = locale === 'ar';
+  const parts = [];
+  const impactLabel = getImpactLabel(data.market_impact, locale);
+  const impactArrow = getImpactArrow(data.market_impact);
+  const stats = data.stats || [];
+  const keyPoints = data.key_points || [];
+  const rootCauses = data.root_causes || [];
+  const scenarios = data.scenarios || [];
+  const takeaways = data.strategic_takeaways || [];
+  const recs = data.recommendations || [];
+
+  // S1: Hook
+  if (isAr) {
+    const mainStat = stats[0];
+    parts.push(mainStat
+      ? `${mainStat.label} يسجل ${mainStat.value}. تأثير السوق: ${impactArrow} ${impactLabel}`
+      : `${data.title || 'تقرير اقتصادي'}. تأثير السوق: ${impactArrow} ${impactLabel}`);
+  } else {
+    const mainStat = stats[0];
+    parts.push(mainStat
+      ? `${mainStat.label} records ${mainStat.value}. Market impact: ${impactArrow} ${impactLabel}`
+      : `${data.title || 'Economic Report'}. Market impact: ${impactArrow} ${impactLabel}`);
+  }
+
+  // S2: Map
+  if (isAr) {
+    let s2 = '';
+    if (stats.length > 0) s2 += 'المناطق المتأثرة تسجل: ' + stats.map(s => `${s.label} عند ${s.value}`).join('، ');
+    if (keyPoints.length > 0) s2 += (s2 ? '. وعلى صعيد التطورات، ' : '') + keyPoints.slice(0, 3).join('. ');
+    if (!s2) s2 = 'البيانات تشير إلى تأثيرات جغرافية مهمة';
+    parts.push(s2);
+  } else {
+    let s2 = '';
+    if (stats.length > 0) s2 += 'Affected regions record: ' + stats.map(s => `${s.label} at ${s.value}`).join(', ');
+    if (keyPoints.length > 0) s2 += (s2 ? '. On developments, ' : '') + keyPoints.slice(0, 3).join('. ');
+    if (!s2) s2 = 'Data points to significant geographic impacts';
+    parts.push(s2);
+  }
+
+  // S3: Timeline
+  if (isAr) {
+    let s3 = '';
+    if (rootCauses.length > 0) s3 += 'تطور الأحداث: ' + rootCauses.map(r => `${r.title} حيث ${r.description}`).join('. ');
+    if (!s3) s3 = 'الأحداث تتطور عبر الزمن وتستدعي المتابعة';
+    parts.push(s3);
+  } else {
+    let s3 = '';
+    if (rootCauses.length > 0) s3 += 'Events timeline: ' + rootCauses.map(r => `${r.title} — ${r.description}`).join('. ');
+    if (!s3) s3 = 'Events evolve over time and warrant monitoring';
+    parts.push(s3);
+  }
+
+  // S4: DataViz
+  if (isAr) {
+    if (scenarios.length > 0) {
+      parts.push('السيناريوهات المحتملة: ' + scenarios.map(s => `${s.title} باحتمالية ${s.probability}`).join('. '));
+    } else {
+      parts.push(`الاتجاه العام يتجه نحو المسار ${impactLabel}`);
+    }
+  } else {
+    if (scenarios.length > 0) {
+      parts.push('Likely scenarios: ' + scenarios.map(s => `${s.title} at ${s.probability}`).join('. '));
+    } else {
+      parts.push(`Overall direction is ${impactLabel}`);
+    }
+  }
+
+  // S5: Human Story
+  if (isAr) {
+    parts.push('خلف هذه الأرقام قصص حقيقية لأشخاص يتأثرون بهذه التغيرات يومياً. البيانات ليست مجرد أرقام بل تعكس حياة الناس');
+  } else {
+    parts.push('Behind these numbers are real stories of people affected by these changes daily. Data is not just numbers — it reflects real lives');
+  }
+
+  // S6: Closing
+  if (isAr) {
+    let s6 = '';
+    if (takeaways.length > 0) s6 += takeaways.slice(0, 3).map(t => `${t.title}: ${t.detail}`).join('. ');
+    s6 += (s6 ? '. ' : '') + 'شكراً لمتابعتكم رؤى';
+    parts.push(s6);
+  } else {
+    let s6 = '';
+    if (takeaways.length > 0) s6 += takeaways.slice(0, 3).map(t => `${t.title}: ${t.detail}`).join('. ');
+    s6 += (s6 ? '. ' : '') + 'Thank you for watching Rouaa';
+    parts.push(s6);
+  }
+
+  return parts;
+}
+
+async function generatePerSceneVoiceover(narrationParts, tmpDir, locale) {
+  const audioPaths = [];
+  const audioDurations = [];
+  for (let i = 0; i < narrationParts.length; i++) {
+    const text = narrationParts[i];
+    if (!text || text.trim().length === 0) {
+      audioPaths.push(null);
+      audioDurations.push(0);
+      continue;
+    }
+    const audioPath = join(tmpDir, `scene_${i}_voice.mp3`);
+    const success = generateVoiceover(text, audioPath, locale);
+    if (success && existsSync(audioPath)) {
+      const duration = getAudioDuration(audioPath);
+      audioPaths.push(audioPath);
+      audioDurations.push(duration);
+      console.log(`[AJ31]  Scene ${i+1} voiceover: ${duration.toFixed(2)}s`);
+    } else {
+      audioPaths.push(null);
+      audioDurations.push(0);
+    }
+  }
+  return { audioPaths, audioDurations };
+}
+
+function concatenateAudioSegments(audioPaths, outputPath) {
+  const validPaths = audioPaths.filter(p => p && existsSync(p));
+  if (validPaths.length === 0) return false;
+  const concatListPath = outputPath.replace('.mp3', '_concat.txt');
+  writeFileSync(concatListPath, validPaths.map(p => `file '${p}'`).join('\n'), 'utf-8');
+  try {
+    const result = spawnSync('ffmpeg', [
+      '-y', '-f', 'concat', '-safe', '0',
+      '-i', concatListPath,
+      '-c:a', 'libmp3lame', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 60000 });
+    try { unlinkSync(concatListPath); } catch {}
+    if (result.status !== 0) return false;
+    return existsSync(outputPath);
+  } catch { return false; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DATA ENHANCEMENT
+// ═══════════════════════════════════════════════════════════════════
+function enhanceData(data) {
+  const enhanced = { ...data };
+  const locale = enhanced.locale || 'ar';
+
+  if (!enhanced._unifiedDate) {
+    if (enhanced.date && enhanced.date.trim()) {
+      enhanced._unifiedDate = enhanced.date.trim();
+    } else {
+      const now = new Date();
+      try {
+        enhanced._unifiedDate = now.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+      } catch {
+        enhanced._unifiedDate = now.toISOString().split('T')[0];
+      }
+    }
+    enhanced.date = enhanced._unifiedDate;
+  }
+
+  if (!enhanced.stats || enhanced.stats.length === 0) {
+    const impact = enhanced.market_impact || 'neutral';
+    const isPos = ['bullish','positive'].includes(impact);
+    const isNeg = ['bearish','negative'].includes(impact);
+    enhanced.stats = [
+      { label: locale === 'ar' ? 'مؤشر المشاعر' : 'Sentiment', value: isPos ? '67.5%' : isNeg ? '28.3%' : '49.2%', description: '' },
+      { label: locale === 'ar' ? 'مؤشر التذبذب' : 'Volatility', value: isNeg ? '28.4%' : isPos ? '14.2%' : '19.7%', description: '' },
+      { label: locale === 'ar' ? 'حجم التداول' : 'Volume', value: '1.2M', description: '' },
+      { label: locale === 'ar' ? 'الزخم' : 'Momentum', value: isPos ? '+3.2%' : isNeg ? '-2.8%' : '+0.1%', description: '' },
+    ];
+  }
+
+  if (!enhanced.root_causes || enhanced.root_causes.length === 0) {
+    enhanced.root_causes = [
+      { title: locale === 'ar' ? 'عوامل العرض والطلب' : 'Supply & Demand', description: locale === 'ar' ? 'تحولات في ديناميكيات السوق' : 'Shifts in market dynamics', icon: '📊' },
+      { title: locale === 'ar' ? 'تحركات رأس المال' : 'Capital Flows', description: locale === 'ar' ? 'تدفقات دولية تؤثر على الأسعار' : 'International flows impacting prices', icon: '💰' },
+      { title: locale === 'ar' ? 'سياسات البنوك المركزية' : 'Central Bank Policy', description: locale === 'ar' ? 'قرارات نقدية توجه الأسواق' : 'Monetary decisions guiding markets', icon: '🏛️' },
+    ];
+  }
+
+  if (!enhanced.scenarios || enhanced.scenarios.length === 0) {
+    enhanced.scenarios = [
+      { title: locale === 'ar' ? 'السيناريو المتفائل' : 'Optimistic', result: locale === 'ar' ? 'تعافٍ أسرع' : 'Faster recovery', probability: '35%', color: 'green' },
+      { title: locale === 'ar' ? 'السيناريو الأساسي' : 'Base Case', result: locale === 'ar' ? 'نمو معتدل' : 'Moderate growth', probability: '45%', color: 'yellow' },
+      { title: locale === 'ar' ? 'السيناريو المتشائم' : 'Pessimistic', result: locale === 'ar' ? 'تراجع حاد' : 'Sharp decline', probability: '20%', color: 'red' },
+    ];
+  }
+
+  if (!enhanced.strategic_takeaways || enhanced.strategic_takeaways.length === 0) {
+    const impact = enhanced.market_impact || 'neutral';
+    enhanced.strategic_takeaways = [
+      { title: locale === 'ar' ? 'فرص محتملة' : 'Opportunities', detail: locale === 'ar' ? 'البيانات تشير إلى مسار جديد' : 'Data indicates a new trajectory', color: ['bullish','positive'].includes(impact) ? 'green' : 'gold' },
+      { title: locale === 'ar' ? 'المؤشر الرئيسي' : 'Key Metric', detail: `${enhanced.stats[0].label}: ${enhanced.stats[0].value}`, color: 'gold' },
+      { title: locale === 'ar' ? 'إدارة المخاطر' : 'Risk Management', detail: locale === 'ar' ? 'تنويع المحفظة أمر بالغ الأهمية' : 'Diversification is crucial', color: ['bearish','negative'].includes(impact) ? 'red' : 'gold' },
+    ];
+  }
+
+  if (!enhanced.benefiting_assets || enhanced.benefiting_assets.length === 0) {
+    enhanced.benefiting_assets = [
+      { name: locale === 'ar' ? 'الذهب' : 'Gold', symbol: 'XAU', reason: locale === 'ar' ? 'ملاذ آمن' : 'Safe haven' },
+      { name: locale === 'ar' ? 'الدولار' : 'USD', symbol: 'DXY', reason: locale === 'ar' ? 'تحفظي' : 'Defensive' },
+    ];
+  }
+
+  if (!enhanced.harmed_assets || enhanced.harmed_assets.length === 0) {
+    enhanced.harmed_assets = [
+      { name: locale === 'ar' ? 'الأسهم الناشئة' : 'Emerging Equities', symbol: 'EEM', reason: locale === 'ar' ? 'مخاطرة عالية' : 'High risk' },
+    ];
+  }
+
+  if (!enhanced.recommendations || enhanced.recommendations.length === 0) {
+    enhanced.recommendations = [
+      { horizon: 'daily', asset: locale === 'ar' ? 'الذهب' : 'Gold', action: locale === 'ar' ? 'شراء عند التراجع' : 'Buy on dip', entry: '2020', target: '2080', stop: '1990', allocation: '15%' },
+      { horizon: 'medium', asset: locale === 'ar' ? 'إس آند بي 500' : 'S&P 500', action: locale === 'ar' ? 'تراكم تدريجي' : 'Accumulate gradually', entry: '5200', target: '5600', stop: '5000', allocation: '25%' },
+    ];
+  }
+
+  return enhanced;
+}
+// ═══════════════════════════════════════════════════════════════════
+// HTML SCENE GENERATORS — V31 Al Jazeera AJ Labs Data Journalism
+// Counter animations, category labels, source lines, progress bar
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Shared CSS: AJ Labs persistent elements ──
+function persistentElementsCSS(isRTL) {
+  return `
+    /* ═══ GOLD ACCENT LINE — 2px always visible ═══ */
+    .aj-gold-line {
+      position:absolute; top:0; ${isRTL ? 'right' : 'left'}:0;
+      height:2px; width:100%;
+      background: linear-gradient(${isRTL ? '270deg' : '90deg'}, ${AJ.gold}, ${AJ.paleGold}, transparent);
+      z-index:60;
+    }
+
+    /* ═══ CATEGORY LABEL — ALL-CAPS small text top-left ═══ */
+    .aj-category {
+      position:absolute; top:24px; ${isRTL ? 'right' : 'left'}:40px;
+      font-size:14px; font-weight:600; color:${AJ.paleGold};
+      letter-spacing:3px; text-transform:uppercase; z-index:55;
+      font-family:'IBM Plex Mono','Inter',monospace;
+      opacity:0; transition: opacity 0.5s ease;
+    }
+
+    /* ═══ SOURCE LINE — small gray text at very bottom ═══ */
+    .aj-source {
+      position:absolute; bottom:32px; ${isRTL ? 'right' : 'left'}:40px;
+      font-size:11px; color:${AJ.textDim}; z-index:55;
+      font-family:'IBM Plex Mono','Inter',monospace;
+      letter-spacing:0.5px;
+    }
+
+    /* ═══ AJ LABS BUG — bottom corner ═══ */
+    .aj-labs-bug {
+      position:absolute; bottom:16px; ${isRTL ? 'left' : 'right'}:24px;
+      font-size:12px; font-weight:600; color:${AJ.gold};
+      opacity:0.5; z-index:55; letter-spacing:1.5px;
+      font-family: 'Noto Sans Arabic', 'IBM Plex Mono', sans-serif;
+    }
+
+    /* ═══ PROGRESS TIMELINE BAR — 2022 rebrand motif ═══ */
+    .aj-progress-track {
+      position:absolute; bottom:0; ${isRTL ? 'right' : 'left'}:0;
+      height:3px; width:100%; background:rgba(219,162,0,0.08); z-index:55;
+    }
+    .aj-progress-fill {
+      height:100%; width:0%; background:${AJ.gold}; z-index:56;
+      transition: width 0.1s linear;
+    }
+
+    /* ═══ SMALL GOLD SQUARE BULLET — 8-10px ═══ */
+    .aj-sq-bullet {
+      width:9px; height:9px; background:${AJ.gold}; flex-shrink:0;
+      margin-${isRTL ? 'left' : 'right'}:12px;
+    }
+  `;
+}
+
+// ─── Shared: Background image + overlay layer ──
+function bgImageCSS() {
+  return `
+    .aj-bg-image {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      overflow:hidden; z-index:0;
+    }
+    .aj-bg-img {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      object-fit:cover; filter: brightness(0.3) saturate(0.4) contrast(1.05);
+      will-change: transform;
+    }
+    .aj-bg-overlay {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      z-index:1;
+    }
+  `;
+}
+
+function getBgImageHTML(bgImages, sceneIndex, overlayOpacity = 0.7) {
+  const bgV2 = bgImages[sceneIndex] || bgImages[0] || null;
+  let bgImageB64 = '';
+  if (bgV2 && typeof bgV2 === 'object' && bgV2.base64) {
+    bgImageB64 = bgV2.base64 || '';
+  } else if (Array.isArray(bgImages) && typeof bgImages[0] === 'string') {
+    bgImageB64 = bgImages[sceneIndex] || bgImages[0] || '';
+  }
+  const hasBgImage = bgImageB64.length > 100;
+  const overlay = `linear-gradient(180deg, rgba(13,17,23,${overlayOpacity}) 0%, rgba(13,17,23,${overlayOpacity*0.7}) 50%, rgba(13,17,23,${overlayOpacity}) 100%)`;
+  if (hasBgImage) {
+    const mime = bgImageB64.startsWith('/9j/') ? 'image/jpeg' : bgImageB64.startsWith('iVBOR') ? 'image/png' : 'image/jpeg';
+    return `<div class="aj-bg-image"><img class="aj-bg-img" src="data:${mime};base64,${bgImageB64}"/><div class="aj-bg-overlay" style="background:${overlay}"></div></div>`;
+  }
+  return '';
+}
+
+// ─── Shared: Counter animation JavaScript helper ──
+function counterAnimationJS() {
+  return `
+    function formatCounterValue(val, suffix) {
+      var abs = Math.abs(val);
+      if (abs >= 1e9) return (val / 1e9).toFixed(1) + 'B';
+      if (abs >= 1e6) return (val / 1e6).toFixed(1) + 'M';
+      if (abs >= 1e3) return (val / 1e3).toFixed(1) + 'K';
+      if (val % 1 !== 0) return val.toFixed(1) + (suffix || '');
+      return Math.round(val) + (suffix || '');
+    }
+    function animateCounter(el, startVal, endVal, progress, suffix) {
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = startVal + (endVal - startVal) * eased;
+      el.textContent = formatCounterValue(current, suffix);
+    }
+    function parseNumericValue(str) {
+      if (typeof str === 'number') return str;
+      var s = String(str).replace(/[^0-9.-]/g, '');
+      var n = parseFloat(s);
+      if (isNaN(n)) return 0;
+      var lc = String(str).toLowerCase();
+      if (lc.includes('b')) n *= 1e9;
+      else if (lc.includes('m')) n *= 1e6;
+      else if (lc.includes('k')) n *= 1e3;
+      return n;
+    }
+    function getSuffix(str) {
+      var lc = String(str).toLowerCase();
+      if (lc.includes('%')) return '%';
+      return '';
+    }
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 1: HOOK (0-15s) — Counter animation + category label
+// ═══════════════════════════════════════════════════════════════════
+function generateHookHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const mainStat = data.stats?.[0] || { label: data.title || 'تقرير', value: '—' };
+  const mainNumber = String(mainStat.value);
+  const mainLabel = truncateText(mainStat.label, 35);
+  const numericVal = parseNumericValueStr(mainStat.value);
+  const suffix = mainNumber.includes('%') ? '%' : '';
+  const categoryLabel = isRTL ? 'بالأرقام' : 'BY THE NUMBERS';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Warm gradient background */
+    .hook-gradient {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(33,46,100,0.15) 0%, transparent 60%),
+                  linear-gradient(180deg, #0D1117 0%, #101820 50%, #0D1117 100%);
+      z-index:0;
+    }
+
+    /* Counter number — MASSIVE, center of screen */
+    .hook-counter {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translate(${isRTL ? '50%' : '-50%'}, -50%);
+      font-size:170px; font-weight:900; color:${AJ.warmWhite};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      line-height:1; letter-spacing:-4px;
+      z-index:20; text-align:center;
+      opacity:0;
+    }
+
+    /* Gold underline — draws itself */
+    .hook-underline {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translate(${isRTL ? '50%' : '-50%'}, 40px);
+      width:0px; height:2px;
+      background: linear-gradient(${isRTL ? '270deg' : '90deg'}, ${AJ.gold}, ${AJ.paleGold});
+      z-index:20;
+      transition: width 0.3s ease;
+    }
+
+    /* Label below underline */
+    .hook-label {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translate(${isRTL ? '50%' : '-50%'}, 68px);
+      font-size:28px; font-weight:500; color:${AJ.paleGold};
+      z-index:20; text-align:center;
+      opacity:0; white-space:nowrap;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+    }
+
+    /* Sub-sentence */
+    .hook-sentence {
+      position:absolute; top:50%; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translate(${isRTL ? '50%' : '-50%'}, 120px);
+      font-size:20px; font-weight:400; color:${AJ.textGray};
+      z-index:20; text-align:center;
+      opacity:0; max-width:600px;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="hook-gradient"></div>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 0, 0.8)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-source">${isRTL ? 'المصدر: بيانات السوق' : 'Source: Market Data'}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <div class="hook-counter" id="counter">0</div>
+  <div class="hook-underline" id="underline"></div>
+  <div class="hook-label" id="hookLabel">${escapeHTML(mainLabel)}</div>
+  <div class="hook-sentence" id="hookSentence">${escapeHTML(truncateText(data.title || '', 50))}</div>
+
+  <script>
+    ${counterAnimationJS()}
+    var endVal = ${numericVal};
+    var suffix = '${suffix}';
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var counter = document.getElementById('counter');
+      var underline = document.getElementById('underline');
+      var label = document.getElementById('hookLabel');
+      var sentence = document.getElementById('hookSentence');
+      var prog = document.getElementById('progressBar');
+
+      // Phase 1: 0-0.15 — Category label fades in
+      if (p < 0.15) {
+        var dp = p / 0.15;
+        if (cat) cat.style.opacity = dp;
+        if (counter) { counter.style.opacity = 0; }
+      }
+      // Phase 2: 0.15-0.7 — Counter counts up from 0
+      else if (p < 0.7) {
+        if (cat) cat.style.opacity = 1;
+        var cp = (p - 0.15) / (0.7 - 0.15);
+        if (counter) {
+          counter.style.opacity = 1;
+          animateCounter(counter, 0, endVal, cp, suffix);
+        }
+        // Underline draws as counter progresses
+        if (underline) {
+          var lineW = cp * 300;
+          underline.style.width = lineW + 'px';
+        }
+      }
+      // Phase 3: 0.7-1.0 — Label + sentence appear
+      else {
+        if (cat) cat.style.opacity = 1;
+        if (counter) {
+          counter.style.opacity = 1;
+          animateCounter(counter, 0, endVal, 1, suffix);
+        }
+        if (underline) underline.style.width = '300px';
+        var tp = (p - 0.7) / 0.3;
+        if (label) label.style.opacity = Math.min(1, tp * 2);
+        if (sentence) sentence.style.opacity = Math.max(0, Math.min(1, (tp - 0.3) * 2));
+      }
+
+      // Progress bar
+      if (prog) prog.style.width = (p * 100) + '%';
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// Helper: parse numeric value from stat string (Node.js side)
+function parseNumericValueStr(str) {
+  if (typeof str === 'number') return str;
+  var s = String(str).replace(/[^0-9.-]/g, '');
+  var n = parseFloat(s);
+  if (isNaN(n)) return 100;
+  var lc = String(str).toLowerCase();
+  if (lc.includes('b')) n *= 1e9;
+  else if (lc.includes('m')) n *= 1e6;
+  else if (lc.includes('k')) n *= 1e3;
+  return n;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 2: MAP + CONTEXT (15-45s) — Full-width map + region counters
+// ═══════════════════════════════════════════════════════════════════
+function generateMapHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = data.stats || [];
+  const regions = [
+    { id: 'americas', label: isRTL ? 'الأمريكتان' : 'Americas', stat: stats[0], cx: 190, cy: 200 },
+    { id: 'europe', label: isRTL ? 'أوروبا' : 'Europe', stat: stats[1], cx: 480, cy: 130 },
+    { id: 'africa', label: isRTL ? 'أفريقيا' : 'Africa', stat: stats[2] || stats[0], cx: 475, cy: 300 },
+    { id: 'mideast', label: isRTL ? 'الشرق الأوسط' : 'Middle East', stat: stats[3] || stats[0], cx: 575, cy: 195 },
+    { id: 'asia', label: isRTL ? 'آسيا' : 'Asia', stat: stats[1] || stats[0], cx: 710, cy: 180 },
+  ];
+  const mapSVG = generateWorldMapSVG();
+  const categoryLabel = isRTL ? 'ما المهدد' : "WHAT'S AT STAKE";
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Map container — centered, ~60% of frame */
+    .map-container {
+      position:absolute; top:70px; ${isRTL ? 'left' : 'right'}:40px;
+      width:740px; height:400px; z-index:10;
+      border:1px solid ${AJ.borderGold}; border-radius:8px;
+      overflow:hidden; background:${AJ.darkBg};
+    }
+    .map-title {
+      position:absolute; top:20px; ${isRTL ? 'right' : 'left'}:40px;
+      font-size:22px; font-weight:700; color:${AJ.warmWhite}; z-index:10;
+      opacity:0;
+    }
+
+    /* Region overlay labels — positioned on the map */
+    .map-region-stat {
+      position:absolute; z-index:15;
+      text-align:center; opacity:0;
+      transition: opacity 0.4s ease;
+    }
+    .map-region-num {
+      font-size:28px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      text-shadow: 0 0 20px rgba(219,162,0,0.4);
+    }
+    .map-region-name {
+      font-size:13px; color:${AJ.paleGold}; margin-top:2px;
+      letter-spacing:1px;
+    }
+
+    /* Left side info — region list */
+    .map-info {
+      position:absolute; top:80px; ${isRTL ? 'right' : 'left'}:40px;
+      width:380px; z-index:10;
+    }
+    .map-info-item {
+      display:flex; align-items:center; margin-bottom:20px;
+      opacity:0; transform:translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .map-info-name {
+      font-size:16px; color:${AJ.textGray}; min-width:110px;
+    }
+    .map-info-val {
+      font-size:22px; font-weight:700; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+
+    /* Map region glow animation */
+    .map-region { transition: fill 0.5s ease, opacity 0.5s ease, filter 0.5s ease; }
+    .map-region.glow { fill:${AJ.gold}; opacity:0.5; filter:url(#glow); }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 1, 0.75)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-source">${isRTL ? 'المصدر: البيانات الجغرافية' : 'Source: Geographic Data'}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <div class="map-title" id="mapTitle">${escapeHTML(truncateText(data.title || (isRTL ? 'المناطق المتأثرة' : 'Affected Regions'), 35))}</div>
+
+  <div class="map-info" id="mapInfo">
+    ${regions.map((r, i) => `
+    <div class="map-info-item" id="info-${i}">
+      <div class="aj-sq-bullet"></div>
+      <div class="map-info-name">${escapeHTML(r.label)}</div>
+      <div class="map-info-val" id="infoval-${i}">0</div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <div class="map-container">
+    ${mapSVG}
+    ${regions.map((r, i) => `
+    <div class="map-region-stat" id="rstat-${i}" style="left:${(r.cx / 1000) * 100}%;top:${(r.cy / 500) * 100}%;">
+      <div class="map-region-num" id="rnum-${i}">0</div>
+      <div class="map-region-name">${escapeHTML(r.label)}</div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <script>
+    ${counterAnimationJS()}
+    var regionData = ${JSON.stringify(regions.map(r => ({
+      numericVal: parseNumericValueStr(r.stat?.value || '0'),
+      suffix: String(r.stat?.value || '').includes('%') ? '%' : '',
+      display: String(r.stat?.value || '—')
+    })))};
+    var regionIds = ['americas','europe','africa','mideast','asia'];
+
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var title = document.getElementById('mapTitle');
+      var prog = document.getElementById('progressBar');
+      var total = ${regions.length};
+      var perRegion = 1.0 / total;
+
+      // Category label
+      if (cat) cat.style.opacity = Math.min(1, p * 4);
+      if (title) title.style.opacity = Math.min(1, p * 3);
+
+      // Progress bar
+      if (prog) prog.style.width = (p * 100) + '%';
+
+      for (var i = 0; i < total; i++) {
+        var start = i * perRegion;
+        var end = start + perRegion;
+        var el = document.getElementById('map-' + regionIds[i]);
+        var infoEl = document.getElementById('info-' + i);
+        var rstat = document.getElementById('rstat-' + i);
+        var rnum = document.getElementById('rnum-' + i);
+        var infoval = document.getElementById('infoval-' + i);
+
+        if (p >= start) {
+          var sp = Math.min(1, (p - start) / perRegion);
+
+          // Glow region
+          if (el && sp > 0.05) el.classList.add('glow');
+
+          // Show info item
+          if (infoEl) {
+            infoEl.style.opacity = Math.min(1, sp * 3);
+            infoEl.style.transform = 'translateY(0)';
+          }
+
+          // Show map overlay stat
+          if (rstat) rstat.style.opacity = Math.min(1, sp * 2);
+
+          // Counter animation for this region
+          var counterProg = Math.min(1, sp * 1.5);
+          if (rnum) animateCounter(rnum, 0, regionData[i].numericVal, counterProg, regionData[i].suffix);
+          if (infoval) animateCounter(infoval, 0, regionData[i].numericVal, counterProg, regionData[i].suffix);
+
+        } else {
+          if (el) el.classList.remove('glow');
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 3: TIMELINE (45-80s) — VERTICAL timeline with gold dots
+// ═══════════════════════════════════════════════════════════════════
+function generateTimelineHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const rootCauses = data.root_causes || [];
+  const events = rootCauses.length > 0 ? rootCauses.slice(0, 5) : [
+    { title: isRTL ? 'البداية' : 'Start', description: isRTL ? 'تطورات أولى' : 'Initial developments' },
+    { title: isRTL ? 'التصاعد' : 'Escalation', description: isRTL ? 'تصاعد التوترات' : 'Rising tensions' },
+    { title: isRTL ? 'الذروة' : 'Peak', description: isRTL ? 'وصل للمستويات القصوى' : 'Reached critical levels' },
+    { title: isRTL ? 'الاستجابة' : 'Response', description: isRTL ? 'إجراءات تصحيحية' : 'Corrective measures' },
+    { title: isRTL ? 'الحالي' : 'Current', description: isRTL ? 'الوضع الراهن' : 'Current situation' },
+  ];
+  const yearBase = 2020;
+  const categoryLabel = isRTL ? 'كيف وصلنا هنا' : 'HOW WE GOT HERE';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Vertical timeline line */
+    .tl-vline-bg {
+      position:absolute; top:80px; ${isRTL ? 'right' : 'left'}:120px;
+      width:2px; height:${HEIGHT - 140}px;
+      background:${AJ.borderGold}; z-index:9;
+    }
+    .tl-vline-fill {
+      position:absolute; top:80px; ${isRTL ? 'right' : 'left'}:120px;
+      width:2px; height:0px;
+      background:${AJ.gold}; z-index:10;
+      transition: height 0.2s ease;
+    }
+
+    /* Timeline events — left of the line */
+    .tl-events {
+      position:absolute; top:70px; ${isRTL ? 'right' : 'left'}:150px;
+      width:400px; z-index:12;
+    }
+    .tl-event {
+      display:flex; align-items:flex-start; margin-bottom:${Math.floor((HEIGHT - 180) / events.length - 10)}px;
+      opacity:0; transform:translateY(15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position:relative;
+    }
+    .tl-event-dot {
+      position:absolute; ${isRTL ? 'right' : 'left'}:-42px; top:6px;
+      width:14px; height:14px; border-radius:50%;
+      background:${AJ.darkBg}; border:2px solid ${AJ.gold};
+      z-index:13; transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tl-event-dot.active {
+      background:${AJ.gold};
+      box-shadow:0 0 15px rgba(219,162,0,0.5);
+    }
+    .tl-event-year {
+      font-size:24px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      min-width:60px; margin-${isRTL ? 'left' : 'right'}:12px;
+    }
+    .tl-event-title {
+      font-size:16px; font-weight:600; color:${AJ.warmWhite};
+      overflow:hidden; text-overflow:ellipsis; max-width:300px;
+    }
+    .tl-event-desc {
+      font-size:13px; color:${AJ.textGray}; margin-top:2px;
+      overflow:hidden; text-overflow:ellipsis; max-width:300px;
+      line-height:1.3;
+    }
+
+    /* Current event detail — LARGE on right side */
+    .tl-current {
+      position:absolute; top:50%; ${isRTL ? 'left' : 'right'}:60px;
+      transform:translateY(-50%);
+      z-index:15; text-align:${isRTL ? 'right' : 'left'};
+      max-width:500px;
+    }
+    .tl-current-year {
+      font-size:72px; font-weight:900; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      line-height:1; opacity:0.9;
+    }
+    .tl-current-desc {
+      font-size:26px; color:${AJ.warmWhite}; margin-top:12px;
+      line-height:1.4;
+    }
+    .tl-current-box {
+      margin-top:16px; padding:12px 20px;
+      border-${isRTL ? 'right' : 'left'}:3px solid ${AJ.gold};
+      background:${AJ.glowGold};
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 2, 0.7)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-source">${isRTL ? 'المصدر: التحليل الزمني' : 'Source: Timeline Analysis'}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <!-- Vertical timeline line -->
+  <div class="tl-vline-bg"></div>
+  <div class="tl-vline-fill" id="tlVLine"></div>
+
+  <!-- Timeline events -->
+  <div class="tl-events">
+    ${events.map((evt, i) => `
+    <div class="tl-event" id="evt-${i}">
+      <div class="tl-event-dot" id="dot-${i}"></div>
+      <div class="tl-event-year">${yearBase + i}</div>
+      <div>
+        <div class="tl-event-title">${escapeHTML(truncateText(evt.title, 25))}</div>
+        <div class="tl-event-desc">${escapeHTML(truncateText(evt.description || '', 40))}</div>
+      </div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <!-- Current event large display -->
+  <div class="tl-current" id="tlCurrent">
+    <div class="tl-current-year" id="curYear"></div>
+    <div class="tl-current-desc" id="curDesc"></div>
+    <div class="tl-current-box" id="curBox" style="opacity:0">
+      <div style="font-size:14px;color:${AJ.paleGold}" id="curTitle"></div>
+    </div>
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var line = document.getElementById('tlVLine');
+      var prog = document.getElementById('progressBar');
+      var total = ${events.length};
+      var lineHeight = ${HEIGHT - 140};
+
+      if (cat) cat.style.opacity = Math.min(1, p * 4);
+      if (prog) prog.style.width = (p * 100) + '%';
+
+      // Vertical line grows
+      var lineProg = Math.min(1, p / 0.9);
+      if (line) line.style.height = (lineProg * lineHeight) + 'px';
+
+      // Reveal events sequentially
+      var curYear = document.getElementById('curYear');
+      var curDesc = document.getElementById('curDesc');
+      var curBox = document.getElementById('curBox');
+      var curTitle = document.getElementById('curTitle');
+      var eventDescs = ${JSON.stringify(events.map(e => truncateText(e.description || e.title, 50)))};
+      var eventTitles = ${JSON.stringify(events.map(e => truncateText(e.title, 30)))};
+
+      for (var i = 0; i < total; i++) {
+        var segStart = i / total;
+        var segEnd = (i + 1) / total;
+        var evt = document.getElementById('evt-' + i);
+        var dot = document.getElementById('dot-' + i);
+
+        if (p >= segStart) {
+          var dp = Math.min(1, (p - segStart) / (segEnd - segStart));
+          if (evt) {
+            evt.style.opacity = Math.min(1, dp * 3);
+            evt.style.transform = 'translateY(0)';
+          }
+          if (dot) {
+            dot.classList.toggle('active', dp > 0.2);
+          }
+          // Update current display to latest active event
+          if (dp > 0.1) {
+            if (curYear) curYear.textContent = '${yearBase}' * 1 + i;
+            if (curDesc) curDesc.textContent = eventDescs[i];
+            if (curTitle) curTitle.textContent = eventTitles[i];
+            if (curBox) curBox.style.opacity = dp > 0.3 ? 1 : 0;
+          }
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 4: DATAVIZ (80-115s) — Counter-first then bar build
+// ═══════════════════════════════════════════════════════════════════
+function generateDatavizHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = (data.stats || []).slice(0, 5);
+  const maxVal = Math.max(...stats.map(s => parseNumericValueStr(s.value)), 1);
+  const barColors = ['#DBA200', '#E0AD00', '#E8BA00', '#F0C800', '#FA6400'];
+  const categoryLabel = isRTL ? 'بالمقارنة' : 'BY COMPARISON';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    .dv-title {
+      position:absolute; top:50px; ${isRTL ? 'right' : 'left'}:60px;
+      font-size:24px; font-weight:700; color:${AJ.warmWhite}; z-index:10;
+      opacity:0;
+    }
+
+    /* Bar chart container */
+    .dv-chart {
+      position:absolute; top:120px; ${isRTL ? 'right' : 'left'}:60px;
+      width:${WIDTH - 120}px; z-index:10;
+    }
+    .dv-bar-row {
+      display:flex; align-items:center; margin-bottom:32px;
+      opacity:0; transform:translateX(${isRTL ? '20px' : '-20px'});
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .dv-bar-bullet {
+      width:9px; height:9px; background:${AJ.gold}; flex-shrink:0;
+      margin-${isRTL ? 'left' : 'right'}:12px;
+    }
+    .dv-bar-label {
+      width:150px; font-size:18px; color:${AJ.warmWhite}; text-align:${isRTL ? 'left' : 'right'};
+      overflow:hidden; text-overflow:ellipsis; max-width:150px;
+      flex-shrink:0; padding-${isRTL ? 'left' : 'right'}:12px;
+    }
+    .dv-bar-counter {
+      width:100px; font-size:24px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      flex-shrink:0; padding-${isRTL ? 'left' : 'right'}:8px;
+      opacity:0; transition: opacity 0.3s ease;
+    }
+    .dv-bar-track {
+      flex:1; height:40px; background:${AJ.midBg}; border-radius:4px;
+      overflow:hidden; position:relative;
+    }
+    .dv-bar-fill {
+      height:100%; border-radius:4px;
+      width:0%; transition: width 0.6s ease;
+      background: linear-gradient(${isRTL ? '270deg' : '90deg'}, ${AJ.gold}, ${AJ.orange});
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 3, 0.75)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-source">${isRTL ? 'المصدر: تحليل البيانات' : 'Source: Data Analysis'}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <div class="dv-title" id="dvTitle">${escapeHTML(truncateText(data.title || '', 40))}</div>
+
+  <div class="dv-chart">
+    ${stats.map((s, i) => {
+      const val = parseNumericValueStr(s.value);
+      const pct = Math.round((val / maxVal) * 100);
+      return `
+    <div class="dv-bar-row" id="bar-${i}">
+      <div class="dv-bar-bullet"></div>
+      <div class="dv-bar-label">${escapeHTML(truncateText(s.label, 18))}</div>
+      <div class="dv-bar-counter" id="bcounter-${i}">0</div>
+      <div class="dv-bar-track">
+        <div class="dv-bar-fill" id="fill-${i}" style="width:0%"></div>
+      </div>
+    </div>`;
+    }).join('\n    ')}
+  </div>
+
+  <script>
+    ${counterAnimationJS()}
+    var barData = ${JSON.stringify(stats.map(s => ({
+      numericVal: parseNumericValueStr(s.value),
+      suffix: String(s.value).includes('%') ? '%' : '',
+      pct: Math.round((parseNumericValueStr(s.value) / maxVal) * 100)
+    })))};
+
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var title = document.getElementById('dvTitle');
+      var prog = document.getElementById('progressBar');
+      var total = ${stats.length};
+
+      if (cat) cat.style.opacity = Math.min(1, p * 4);
+      if (title) title.style.opacity = Math.min(1, p * 3);
+      if (prog) prog.style.width = (p * 100) + '%';
+
+      for (var i = 0; i < total; i++) {
+        var segStart = i / total;
+        var segEnd = (i + 1) / total;
+        var row = document.getElementById('bar-' + i);
+        var fill = document.getElementById('fill-' + i);
+        var counter = document.getElementById('bcounter-' + i);
+
+        if (p >= segStart) {
+          var sp = Math.min(1, (p - segStart) / (segEnd - segStart));
+
+          // Phase 1: Show row, counter counts up (0-0.5 of segment)
+          if (row) {
+            row.style.opacity = 1;
+            row.style.transform = 'translateX(0)';
+          }
+          if (counter) {
+            counter.style.opacity = 1;
+            var counterProg = Math.min(1, sp * 2);
+            animateCounter(counter, 0, barData[i].numericVal, counterProg, barData[i].suffix);
+          }
+
+          // Phase 2: Bar grows (0.3-1.0 of segment)
+          var barProg = Math.max(0, (sp - 0.3) / 0.7);
+          var eased = 1 - Math.pow(1 - barProg, 3);
+          if (fill) fill.style.width = (eased * barData[i].pct) + '%';
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 5: HUMAN STORY (115-145s) — Emotional portrait + quote
+// ═══════════════════════════════════════════════════════════════════
+function generateHumanStoryHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const stats = data.stats || [];
+  const quote = isRTL
+    ? `"التغيرات أثرت على حياة الملايين... الأرقام لا تحكي القصة كاملة"`
+    : `"The changes affected millions of lives... Numbers don't tell the whole story"`;
+  const personName = isRTL ? 'أحمد، ٤٥ عاماً' : 'Ahmed, 45 years old';
+  const categoryLabel = isRTL ? 'وراء الأرقام' : 'BEHIND THE NUMBERS';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* AI human image — 70% of frame */
+    .hs-image {
+      position:absolute; top:0; ${isRTL ? 'right' : 'left'}:0;
+      width:70%; height:100%;
+      z-index:0; overflow:hidden;
+    }
+    .hs-img {
+      width:100%; height:100%; object-fit:cover;
+      filter: brightness(0.35) saturate(0.5) sepia(0.2);
+      transform: scale(1.0); transform-origin: 50% 40%;
+      will-change: transform;
+    }
+    .hs-overlay {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background: linear-gradient(${isRTL ? '90deg' : '270deg'}, rgba(13,17,23,0.95) 0%, rgba(13,17,23,0.5) 60%, rgba(13,17,23,0.3) 100%);
+      z-index:1;
+    }
+
+    /* Quote section — right side */
+    .hs-quote {
+      position:absolute; top:50%; ${isRTL ? 'left' : 'right'}:50px;
+      transform:translateY(-50%);
+      z-index:20; max-width:480px;
+      ${isRTL ? 'text-align:right' : 'text-align:left'};
+    }
+    .hs-quote-mark {
+      font-size:80px; color:${AJ.gold}; line-height:0.8;
+      font-family:Georgia,serif; opacity:0;
+      transition: opacity 0.6s ease;
+    }
+    .hs-quote-text {
+      font-size:28px; font-weight:500; color:${AJ.warmWhite};
+      line-height:1.5; margin-top:8px;
+      opacity:0; transition: opacity 0.6s ease 0.2s;
+      direction:${isRTL ? 'rtl' : 'ltr'};
+    }
+    .hs-person {
+      margin-top:16px; font-size:16px; color:${AJ.paleGold};
+      opacity:0; transition: opacity 0.6s ease 0.4s;
+      letter-spacing:1px;
+    }
+
+    /* Floating stat badges with counter animations */
+    .hs-badges {
+      position:absolute; bottom:70px; ${isRTL ? 'left' : 'right'}:50px;
+      z-index:20; display:flex; gap:16px;
+    }
+    .hs-badge {
+      background:rgba(13,17,23,0.8); border:1px solid ${AJ.borderGold};
+      padding:12px 20px; border-radius:4px;
+      opacity:0; transform:translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .hs-badge-num {
+      font-size:26px; font-weight:800; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .hs-badge-lbl {
+      font-size:12px; color:${AJ.textGray}; margin-top:2px;
+      letter-spacing:0.5px;
+    }
+  </style>
+</head>
+<body>
+  ${(() => {
+    const bgImages = data._bgImagesV2 || data._bgImages || [];
+    const bgV2 = bgImages[4] || bgImages[0] || null;
+    let bgImageB64 = '';
+    if (bgV2 && typeof bgV2 === 'object' && bgV2.base64) bgImageB64 = bgV2.base64 || '';
+    else if (Array.isArray(bgImages) && typeof bgImages[0] === 'string') bgImageB64 = bgImages[4] || bgImages[0] || '';
+    if (bgImageB64.length > 100) {
+      const mime = bgImageB64.startsWith('/9j/') ? 'image/jpeg' : 'image/png';
+      return `<div class="hs-image"><img class="hs-img" id="hsImg" src="data:${mime};base64,${bgImageB64}"/><div class="hs-overlay"></div></div>`;
+    }
+    return '';
+  })()}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-source">${isRTL ? 'المصدر: تقارير ميدانية' : 'Source: Field Reports'}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <div class="hs-quote">
+    <div class="hs-quote-mark" id="quoteMark">"</div>
+    <div class="hs-quote-text" id="quoteText">${escapeHTML(quote)}</div>
+    <div class="hs-person" id="quotePerson">— ${escapeHTML(personName)}</div>
+  </div>
+
+  <div class="hs-badges">
+    ${stats.slice(0, 3).map((s, i) => `
+    <div class="hs-badge" id="hsb-${i}">
+      <div class="hs-badge-num" id="hsbnum-${i}">0</div>
+      <div class="hs-badge-lbl">${escapeHTML(truncateText(s.label, 14))}</div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <script>
+    ${counterAnimationJS()}
+    var badgeData = ${JSON.stringify(stats.slice(0, 3).map(s => ({
+      numericVal: parseNumericValueStr(s.value),
+      suffix: String(s.value).includes('%') ? '%' : '',
+    })))};
+
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var img = document.getElementById('hsImg');
+      var qmark = document.getElementById('quoteMark');
+      var qtext = document.getElementById('quoteText');
+      var qperson = document.getElementById('quotePerson');
+      var prog = document.getElementById('progressBar');
+
+      if (cat) cat.style.opacity = Math.min(1, p * 4);
+      if (prog) prog.style.width = (p * 100) + '%';
+
+      // Ken Burns zoom on image
+      if (img) {
+        var scale = 1.0 + p * 0.06;
+        img.style.transform = 'scale(' + scale + ')';
+      }
+
+      // Quote appears gradually
+      if (p < 0.15) {
+        if (qmark) qmark.style.opacity = 0;
+        if (qtext) qtext.style.opacity = 0;
+        if (qperson) qperson.style.opacity = 0;
+      } else if (p < 0.5) {
+        var qp = (p - 0.15) / 0.35;
+        if (qmark) qmark.style.opacity = Math.min(1, qp * 2);
+        if (qtext) qtext.style.opacity = Math.min(1, qp * 1.5);
+        if (qperson) qperson.style.opacity = Math.max(0, (qp - 0.5) * 2);
+      } else {
+        if (qmark) qmark.style.opacity = 1;
+        if (qtext) qtext.style.opacity = 1;
+        if (qperson) qperson.style.opacity = 1;
+      }
+
+      // Stat badges appear with counter animations
+      for (var i = 0; i < 3; i++) {
+        var el = document.getElementById('hsb-' + i);
+        var num = document.getElementById('hsbnum-' + i);
+        if (el && num && badgeData[i]) {
+          var start = 0.3 + i * 0.15;
+          if (p >= start) {
+            var bp = Math.min(1, (p - start) / 0.2);
+            el.style.opacity = bp;
+            el.style.transform = 'translateY(0)';
+            var counterProg = Math.min(1, (p - start) / 0.3);
+            animateCounter(num, 0, badgeData[i].numericVal, counterProg, badgeData[i].suffix);
+          }
+        }
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCENE 6: CLOSING (145-170s) — Clean takeaways + source credits
+// ═══════════════════════════════════════════════════════════════════
+function generateClosingHTML(data) {
+  const isRTL = data.locale === 'ar';
+  const takeaways = (data.strategic_takeaways || []).slice(0, 3);
+  const categoryLabel = isRTL ? 'ما يعنيه هذا' : 'WHAT THIS MEANS';
+
+  return `<!DOCTYPE html>
+<html lang="${data.locale || 'ar'}" dir="${isRTL ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      width:${WIDTH}px; height:${HEIGHT}px; overflow:hidden;
+      font-family:'Noto Sans Arabic','Inter',sans-serif;
+      background:${AJ.darkBg}; color:${AJ.textWhite};
+      direction:${isRTL ? 'rtl' : 'ltr'}; position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+    ${bgImageCSS()}
+    ${persistentElementsCSS(isRTL)}
+
+    /* Takeaways — clean text, no card backgrounds */
+    .cl-takeaways {
+      position:absolute; top:80px; ${isRTL ? 'right' : 'left'}:60px;
+      width:${WIDTH - 120}px; z-index:10;
+    }
+    .cl-takeaway {
+      display:flex; align-items:flex-start; margin-bottom:32px;
+      opacity:0; transform:translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .cl-num {
+      font-size:36px; font-weight:900; color:${AJ.gold};
+      font-family:'IBM Plex Mono','Inter',monospace;
+      min-width:60px; margin-${isRTL ? 'left' : 'right'}:16px;
+      line-height:1;
+    }
+    .cl-content { flex:1; }
+    .cl-tk-title {
+      font-size:22px; font-weight:700; color:${AJ.warmWhite};
+      overflow:hidden; text-overflow:ellipsis; max-width:800px;
+      margin-bottom:4px;
+    }
+    .cl-tk-detail {
+      font-size:16px; color:${AJ.textGray};
+      overflow:hidden; text-overflow:ellipsis; max-width:800px;
+      line-height:1.4;
+    }
+
+    /* Source credits */
+    .cl-source-credits {
+      position:absolute; bottom:80px; ${isRTL ? 'right' : 'left'}:60px;
+      z-index:20; opacity:0;
+      transition: opacity 0.8s ease;
+    }
+    .cl-source-text {
+      font-size:14px; color:${AJ.textDim}; letter-spacing:0.5px;
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+
+    /* Brand fade-in */
+    .cl-brand {
+      position:absolute; bottom:90px; ${isRTL ? 'right' : 'left'}:50%;
+      transform:translateX(${isRTL ? '50%' : '-50%'});
+      z-index:20; text-align:center; opacity:0;
+      transition: opacity 1s ease;
+    }
+    .cl-brand-ar {
+      font-size:48px; font-weight:900; color:${AJ.gold};
+      letter-spacing:4px;
+      font-family:'Noto Sans Arabic',sans-serif;
+    }
+    .cl-brand-en {
+      font-size:16px; color:${AJ.textGray}; margin-top:4px;
+      letter-spacing:3px;
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .cl-brand-line {
+      width:60px; height:2px; background:${AJ.gold};
+      margin:12px auto 0;
+    }
+
+    /* Final brand mark on dark */
+    .cl-final {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background:${AJ.darkBg}; z-index:30;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      opacity:0; transition: opacity 1s ease;
+    }
+    .cl-final-mark {
+      font-size:64px; font-weight:900; color:${AJ.gold};
+      letter-spacing:6px;
+      font-family:'Noto Sans Arabic',sans-serif;
+    }
+    .cl-final-sub {
+      font-size:18px; color:${AJ.textDim}; margin-top:8px;
+      letter-spacing:4px;
+      font-family:'IBM Plex Mono','Inter',monospace;
+    }
+    .cl-final-accent {
+      width:80px; height:3px; background:${AJ.gold};
+      margin-top:16px;
+    }
+  </style>
+</head>
+<body>
+  ${getBgImageHTML(data._bgImagesV2 || data._bgImages || [], 5, 0.85)}
+  <div class="aj-gold-line"></div>
+  <div class="aj-category" id="catLabel">${escapeHTML(categoryLabel)}</div>
+  <div class="aj-labs-bug">AJ Labs | رؤى</div>
+  <div class="aj-progress-track"><div class="aj-progress-fill" id="progressBar"></div></div>
+
+  <div class="cl-takeaways">
+    ${takeaways.map((tk, i) => `
+    <div class="cl-takeaway" id="tk-${i}">
+      <div class="cl-num">${isRTL ? toArabicNumeral('0' + (i + 1)) : '0' + (i + 1)}</div>
+      <div class="cl-content">
+        <div class="cl-tk-title">${escapeHTML(truncateText(tk.title, 30))}</div>
+        <div class="cl-tk-detail">${escapeHTML(truncateText(tk.detail, 60))}</div>
+      </div>
+    </div>`).join('\n    ')}
+  </div>
+
+  <div class="cl-source-credits" id="srcCredits">
+    <div class="cl-source-text">${isRTL ? 'المصدر: بيانات السوق | البيانات: رؤى' : 'Source: Market Data | Data: AJ Labs'}</div>
+  </div>
+
+  <div class="cl-brand" id="clBrand">
+    <div class="cl-brand-ar">رؤى</div>
+    <div class="cl-brand-en">ROUAA</div>
+    <div class="cl-brand-line"></div>
+  </div>
+
+  <div class="cl-final" id="clFinal">
+    <div class="cl-final-mark">رؤى</div>
+    <div class="cl-final-sub">ROUAA | AJ LABS</div>
+    <div class="cl-final-accent"></div>
+  </div>
+
+  <script>
+    window.setAnimationProgress = function(p) {
+      var cat = document.getElementById('catLabel');
+      var prog = document.getElementById('progressBar');
+      var total = ${takeaways.length};
+      var srcCredits = document.getElementById('srcCredits');
+      var brand = document.getElementById('clBrand');
+      var final_ = document.getElementById('clFinal');
+
+      if (cat) cat.style.opacity = Math.min(1, p * 4);
+      if (prog) prog.style.width = (p * 100) + '%';
+
+      // Takeaways appear one by one
+      for (var i = 0; i < total; i++) {
+        var start = 0.05 + i * 0.15;
+        var el = document.getElementById('tk-' + i);
+        if (p >= start && el) {
+          var sp = Math.min(1, (p - start) / 0.15);
+          el.style.opacity = sp;
+          el.style.transform = 'translateY(0)';
+        }
+      }
+
+      // Source credits
+      if (p > 0.5 && srcCredits) {
+        srcCredits.style.opacity = Math.min(1, (p - 0.5) / 0.15);
+      }
+
+      // Brand fade in
+      if (p > 0.65 && brand) {
+        brand.style.opacity = (p - 0.65) / 0.15;
+      }
+
+      // Final brand mark
+      if (p > 0.85 && final_) {
+        final_.style.opacity = (p - 0.85) / 0.15;
+      }
+    };
+  </script>
+</body>
+</html>`;
+}
+// ═══════════════════════════════════════════════════════════════════
+// SCENE HTML DISPATCHER
+// ═══════════════════════════════════════════════════════════════════
+function generateSceneHTML(sceneName, data) {
+  switch (sceneName) {
+    case 'hook':       return generateHookHTML(data);
+    case 'map':        return generateMapHTML(data);
+    case 'timeline':   return generateTimelineHTML(data);
+    case 'dataviz':    return generateDatavizHTML(data);
+    case 'humanstory': return generateHumanStoryHTML(data);
+    case 'closing':    return generateClosingHTML(data);
+    default:
+      console.warn(`[AJ31]  Unknown scene: ${sceneName}`);
+      return generateHookHTML(data);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MAIN — Playwright frame-by-frame rendering + FFmpeg assembly
+// ═══════════════════════════════════════════════════════════════════
+async function main() {
+  const args = parseArgs();
+  const inputPath = args.input;
+  const outputPath = args.output;
+
+  if (!inputPath || !outputPath) {
+    console.error('Usage: node scripts/video-renderer-dataviz.mjs --input <data.json> --output <output.mp4>');
+    process.exit(1);
+  }
+
+  console.log('══════════════════════════════════════════════════════');
+  console.log('  Al Jazeera DataViz Video Renderer V31');
+  console.log('  "Don\'t give me more data — give me a story"');
+  console.log('══════════════════════════════════════════════════════');
+
+  // Load and enhance data
+  let data;
+  try {
+    data = JSON.parse(readFileSync(inputPath, 'utf-8'));
+  } catch (err) {
+    console.error(`[AJ31]  Failed to read input: ${err.message}`);
+    process.exit(1);
+  }
+  data = enhanceData(data);
+  console.log(`[AJ31]  Data loaded: ${data.title || 'Untitled'} (${data.locale || 'ar'})`);
+
+  // Create temp directory
+  const tmpDir = join(tmpdir(), `aj31-${randomUUID()}`);
+  mkdirSync(tmpDir, { recursive: true });
+  const framesDir = join(tmpDir, 'frames');
+  mkdirSync(framesDir, { recursive: true });
+
+  // ── Step 1: Generate AI background images ──
+  console.log('[AJ31]  Step 1: Generating AI background images...');
+  const bgImages = [];
+  const topicEN = String(data.title || 'economic data visualization').replace(/[^\x00-\x7F]/g, ' ').trim();
+  const imagePrompts = [
+    `dramatic dark cinematic scene related to ${topicEN}, moody atmosphere, warm golden tones, wide shot`,
+    `satellite view of Middle East and world at night, golden lights, dark ocean, warm tones`,
+    `timeline of events, abstract chronological visualization, gold on dark navy, warm ambient`,
+    `abstract data visualization, horizontal bars, gold and warm orange on dark background, clean`,
+    `portrait of Middle Eastern person in thoughtful contemplation, warm lighting, cinematic, dignified`,
+    `abstract warm geometric shapes, gold squares on dark navy, clean minimal, elegant`,
+  ];
+
+  for (let i = 0; i < TOTAL_SCENES; i++) {
+    console.log(`[AJ31]  Generating image for scene ${i + 1}/${TOTAL_SCENES}...`);
+    const prompt = imagePrompts[i] || imagePrompts[0];
+    try {
+      const buf = await generateAIImage(prompt, 1344, 768, data.market_impact);
+      if (buf) {
+        const isSvg = buf.slice(0, 5).toString() === '<?xml' || buf.slice(0, 4).toString() === '<svg';
+        if (isSvg) {
+          const b64 = buf.toString('base64');
+          bgImages.push({ base64: b64, type: 'svg' });
+        } else {
+          const b64 = buf.toString('base64');
+          const mime = buf.slice(0, 3).toString('hex') === 'ffd8ff' ? 'image/jpeg' : 'image/png';
+          bgImages.push({ base64: b64, type: mime });
+        }
+      } else {
+        bgImages.push(null);
+      }
+    } catch (err) {
+      console.warn(`[AJ31]  Image ${i + 1} failed: ${err.message?.slice(0, 80)}`);
+      bgImages.push(null);
+    }
+  }
+  data._bgImagesV2 = bgImages;
+
+  // Download article image if available
+  if (data.image_url) {
+    console.log(`[AJ31]  Downloading article image...`);
+    const articleBuf = await downloadImageFromUrl(data.image_url);
+    if (articleBuf) {
+      const b64 = articleBuf.toString('base64');
+      const mime = articleBuf.slice(0, 3).toString('hex') === 'ffd8ff' ? 'image/jpeg' : 'image/png';
+      // Use as human story background
+      if (bgImages[4]) bgImages[4] = { base64: b64, type: mime };
+    }
+  }
+
+  // ── Step 2: Generate narration ──
+  console.log('[AJ31]  Step 2: Generating narration (6 scenes)...');
+  const narrationParts = await generateNarrationLLM(data);
+  for (let i = 0; i < narrationParts.length; i++) {
+    console.log(`[AJ31]  S${i+1}: ${narrationParts[i]?.slice(0, 60)}...`);
+  }
+
+  // ── Step 3: Generate voiceover per scene ──
+  console.log('[AJ31]  Step 3: Generating voiceover...');
+  const { audioPaths, audioDurations } = await generatePerSceneVoiceover(narrationParts, tmpDir, data.locale || 'ar');
+
+  // Concatenate audio segments
+  const fullNarrationPath = join(tmpDir, 'full_narration.mp3');
+  const concatSuccess = concatenateAudioSegments(audioPaths, fullNarrationPath);
+
+  // ── Step 4: Generate background music ──
+  console.log('[AJ31]  Step 4: Generating background music...');
+  const musicPath = join(tmpDir, 'bg_music.mp3');
+  const totalDuration = SCENE_DEFS[SCENE_DEFS.length - 1][2];
+  generateBackgroundMusic(musicPath, totalDuration);
+
+  // ── Step 5: Mix narration + music ──
+  console.log('[AJ31]  Step 5: Mixing audio...');
+  const mixedAudioPath = join(tmpDir, 'mixed_audio.mp3');
+  if (concatSuccess && existsSync(fullNarrationPath) && existsSync(musicPath)) {
+    mixAudioWithMusic(fullNarrationPath, musicPath, mixedAudioPath, 0.15);
+  } else if (concatSuccess && existsSync(fullNarrationPath)) {
+    writeFileSync(mixedAudioPath, readFileSync(fullNarrationPath));
+  } else {
+    // Create silent audio
+    spawnSync('ffmpeg', ['-y', '-f', 'lavfi', '-i', `anullsrc=r=48000:cl=stereo`, '-t', String(totalDuration), '-c:a', 'libmp3lame', '-b:a', '192k', mixedAudioPath], { encoding: 'utf-8', timeout: 30000 });
+  }
+
+  // ── Step 6: Render frames with Playwright ──
+  console.log('[AJ31]  Step 6: Rendering frames with Playwright...');
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-gpu'] });
+  } catch (err) {
+    console.error(`[AJ31]  Failed to launch browser: ${err.message}`);
+    process.exit(1);
+  }
+
+  const context = await browser.newContext({
+    viewport: { width: WIDTH, height: HEIGHT },
+    deviceScaleFactor: 1,
+  });
+  const page = await context.newPage();
+
+  let globalFrame = 0;
+  const sceneFrameDirs = [];
+
+  for (let si = 0; si < SCENE_DEFS.length; si++) {
+    const [sceneName, startSec, endSec] = SCENE_DEFS[si];
+    const sceneDuration = endSec - startSec;
+    const sceneFrames = Math.round(sceneDuration * FPS);
+    const sceneDir = join(framesDir, `scene_${si}_${sceneName}`);
+    mkdirSync(sceneDir, { recursive: true });
+    sceneFrameDirs.push(sceneDir);
+
+    console.log(`[AJ31]  Scene ${si + 1}/${TOTAL_SCENES}: ${sceneName} (${startSec}s-${endSec}s, ${sceneFrames} frames)`);
+
+    // Generate and set HTML
+    const html = generateSceneHTML(sceneName, data);
+    await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Wait for fonts to load
+    await page.waitForTimeout(500);
+
+    for (let f = 0; f < sceneFrames; f++) {
+      const progress = f / Math.max(1, sceneFrames - 1);
+      try {
+        await page.evaluate(`window.setAnimationProgress(${progress.toFixed(6)})`);
+      } catch {}
+      const framePath = join(sceneDir, `frame_${String(globalFrame).padStart(6, '0')}.png`);
+      await page.screenshot({ path: framePath, type: 'png' });
+      globalFrame++;
+    }
+
+    console.log(`[AJ31]  Scene ${si + 1} rendered: ${sceneFrames} frames`);
+  }
+
+  await browser.close();
+  console.log(`[AJ31]  Total frames rendered: ${globalFrame}`);
+
+  // ── Step 7: Assemble video with FFmpeg ──
+  console.log('[AJ31]  Step 7: Assembling video with FFmpeg...');
+
+  // Create concat file for all frames
+  const concatListPath = join(tmpDir, 'frames_concat.txt');
+  const concatLines = [];
+  for (const dir of sceneFrameDirs) {
+    const files = readdirSync(dir).filter(f => f.endsWith('.png')).sort();
+    for (const f of files) {
+      concatLines.push(`file '${join(dir, f)}'`);
+    }
+  }
+  writeFileSync(concatListPath, concatLines.join('\n'), 'utf-8');
+
+  // Assemble: frames → video, then mux with audio
+  const rawVideoPath = join(tmpDir, 'raw_video.mp4');
+  const finalOutputDir = dirname(outputPath);
+  if (!existsSync(finalOutputDir)) mkdirSync(finalOutputDir, { recursive: true });
+
+  // Step A: Frames → raw video
+  console.log('[AJ31]  Creating video from frames...');
+  const ffmpegFramesResult = spawnSync('ffmpeg', [
+    '-y',
+    '-f', 'concat', '-safe', '0',
+    '-i', concatListPath,
+    '-r', String(FPS),
+    '-vf', `scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}:flags=lanczos,format=yuv420p`,
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '20',
+    '-pix_fmt', 'yuv420p',
+    '-movflags', '+faststart',
+    rawVideoPath,
+  ], { encoding: 'utf-8', timeout: 300000 });
+
+  if (ffmpegFramesResult.status !== 0 || !existsSync(rawVideoPath)) {
+    console.error(`[AJ31]  FFmpeg frame assembly failed: ${ffmpegFramesResult.stderr?.slice(-300)}`);
+    process.exit(1);
+  }
+
+  // Step B: Mux video + audio
+  console.log('[AJ31]  Adding audio to video...');
+  const hasAudio = existsSync(mixedAudioPath) && readFileSync(mixedAudioPath).length > 1000;
+  if (hasAudio) {
+    const muxResult = spawnSync('ffmpeg', [
+      '-y',
+      '-i', rawVideoPath,
+      '-i', mixedAudioPath,
+      '-c:v', 'copy',
+      '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+      '-shortest',
+      '-movflags', '+faststart',
+      outputPath,
+    ], { encoding: 'utf-8', timeout: 120000 });
+
+    if (muxResult.status !== 0) {
+      console.warn(`[AJ31]  Mux failed, copying video without audio: ${muxResult.stderr?.slice(-200)}`);
+      const { copyFileSync } = await import('fs');
+      copyFileSync(rawVideoPath, outputPath);
+    }
+  } else {
+    const { copyFileSync } = await import('fs');
+    copyFileSync(rawVideoPath, outputPath);
+  }
+
+  // Verify output
+  if (existsSync(outputPath)) {
+    const size = readFileSync(outputPath).length;
+    console.log(`\n══════════════════════════════════════════════════════`);
+    console.log(`  ✅ Video rendered successfully!`);
+    console.log(`  Output: ${outputPath}`);
+    console.log(`  Size: ${(size / 1024 / 1024).toFixed(1)} MB`);
+    console.log(`  Scenes: ${TOTAL_SCENES} (Hook → Map → Timeline → DataViz → HumanStory → Closing)`);
+    console.log(`  Frames: ${globalFrame} at ${FPS} FPS`);
+    console.log(`══════════════════════════════════════════════════════\n`);
+  } else {
+    console.error(`[AJ31]  ❌ Output file not found!`);
+    process.exit(1);
+  }
+
+  // Cleanup
+  try {
+    rmSync(tmpDir, { recursive: true, force: true });
+  } catch {}
+}
+
+main().catch(err => {
+  console.error(`[AJ31]  Fatal error: ${err.message}`);
+  console.error(err.stack);
+  process.exit(1);
+});

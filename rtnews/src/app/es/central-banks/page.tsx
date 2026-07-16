@@ -1,0 +1,21 @@
+'use client';
+
+import { useEffect } from 'react';
+import EsArabCentralBanks from '@/components/es/EsArabCentralBanks';
+
+export default function EsCentralBanksPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  return (
+    <main className="min-h-screen pb-mobile-safe" dir="ltr" style={{ background: 'var(--ink)' }}>
+      <div className="pt-4">
+        <EsArabCentralBanks />
+      </div>
+    </main>
+  );
+}

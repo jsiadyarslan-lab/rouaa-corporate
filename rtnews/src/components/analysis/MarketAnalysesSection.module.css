@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MarketAnalysesSection — Market Analysis Cards
+   ═══════════════════════════════════════════════════════════════════ */
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.sectionTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  font-size: 16px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-head);
+  font-family: var(--font-readex-pro), 'Readex Pro', var(--font-cairo), sans-serif;
+}
+
+.sectionCount {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--font-jetbrains-mono), monospace;
+  background: var(--bg4);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.sectionLink {
+  font-size: 11px;
+  color: var(--cyan);
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.sectionLink:hover {
+  opacity: 0.8;
+}
+
+.analysisCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.marketAnalysisCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.marketAnalysisCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  transition: width 0.2s;
+}
+
+.marketAnalysisCard:hover {
+  border-color: rgba(123, 94, 167, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bullish::before { background: var(--bull); }
+.bearish::before { background: var(--bear); }
+.neutralSentiment::before { background: var(--text3); }
+
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cardAssetBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardAssetDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.cardAssetDot.bullish { background: var(--bull); }
+.cardAssetDot.bearish { background: var(--bear); }
+.cardAssetDot.neutralDot { background: var(--text3); }
+
+.cardAssetName {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.cardSentimentBadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.cardSentimentBadge.bullish {
+  color: var(--bull);
+  background: rgba(0, 153, 107, 0.1);
+}
+
+.cardSentimentBadge.bearish {
+  color: var(--bear);
+  background: rgba(212, 54, 92, 0.1);
+}
+
+.cardSentimentBadge.neutralBadge {
+  color: var(--text3);
+  background: rgba(138, 149, 168, 0.1);
+}
+
+.cardTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-head);
+  margin-bottom: 8px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text3);
+}
+
+.cardConfidence {
+  font-weight: 700;
+  color: var(--cyan);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.cardRiskBadge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.riskHigh {
+  color: var(--bear);
+  background: rgba(212, 54, 92, 0.1);
+}
+
+.riskMedium {
+  color: var(--gold);
+  background: rgba(212, 147, 13, 0.1);
+}
+
+.riskLow {
+  color: var(--bull);
+  background: rgba(0, 153, 107, 0.1);
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 8px;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.spinnerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 1s infinite;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+.emptyStateIcon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .analysisCardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
