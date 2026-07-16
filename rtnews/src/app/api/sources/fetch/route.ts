@@ -2,10 +2,10 @@
 // V1220.2: Returns detailed storage errors for diagnosis
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { getAdapter } from '../../../../../services/source-registry/adapters/registry';
-import { updateSourceHealth } from '../../../../../services/source-registry/lib/health-monitor';
-import { storeDocuments } from '../../../../../services/source-registry/lib/document-store';
-import type { SourceConfig } from '../../../../../services/source-registry/adapters/types';
+import { getAdapter } from '@/../services/source-registry/adapters/registry';
+import { updateSourceHealth } from '@/../services/source-registry/lib/health-monitor';
+import { storeDocuments } from '@/../services/source-registry/lib/document-store';
+import type { SourceConfig } from '@/../services/source-registry/adapters/types';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
