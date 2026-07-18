@@ -1,1174 +1,494 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>رواء | Roua — منظومة مالية موحّدة للأخبار والتداول</title>
-<meta name="description" content="رواء: منظومة مالية تجمع بين منصة الأخبار متعددة اللغات ومنصة التداول المدعومة بمجلس ذكاء اصطناعي من 9 نماذج." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ============ TOKENS ============ */
-:root{
-  --bg:#04050b;
-  --bg-2:#070912;
-  --panel:rgba(255,255,255,0.035);
-  --panel-strong:rgba(255,255,255,0.06);
-  --line:rgba(255,255,255,0.08);
-  --line-strong:rgba(255,255,255,0.14);
-  --ink:#eef2fb;
-  --ink-2:#aab3c5;
-  --ink-3:#6b7588;
-  --teal:#22d3ee;
-  --teal-2:#06b6d4;
-  --teal-deep:#0e7490;
-  --gold:#f5c451;
-  --gold-2:#e0a92e;
-  --gold-deep:#9a6f12;
-  --up:#22c55e;
-  --down:#ef4444;
-  --radius:18px;
-  --radius-sm:12px;
-  --maxw:1240px;
-  --shadow-soft:0 30px 80px -30px rgba(0,0,0,.8);
-  --font:'IBM Plex Sans Arabic','Readex Pro',system-ui,sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.65;
-  overflow-x:hidden;
-  font-weight:300;
-  letter-spacing:.005em;
-  -webkit-font-smoothing:antialiased;
-}
-body::before{
-  /* radial cosmic glow base */
-  content:"";
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(900px 600px at 80% -10%, rgba(34,211,238,.10), transparent 60%),
-    radial-gradient(700px 500px at 10% 10%, rgba(245,196,81,.06), transparent 60%),
-    radial-gradient(1000px 700px at 50% 110%, rgba(6,182,212,.08), transparent 60%);
-}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-ul{list-style:none}
-::selection{background:rgba(34,211,238,.3);color:#fff}
-
-/* ============ LAYOUT HELPERS ============ */
-.wrap{width:min(var(--maxw),92vw);margin-inline:auto;position:relative;z-index:2}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:12.5px;font-weight:500;letter-spacing:.12em;
-  color:var(--ink-2);text-transform:uppercase;
-  padding:7px 14px;border:1px solid var(--line-strong);
-  border-radius:100px;background:var(--panel);
-  backdrop-filter:blur(10px);
-}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
-.eyebrow.gold .dot{background:var(--gold);box-shadow:0 0 12px var(--gold)}
-.section{padding:120px 0;position:relative;z-index:2}
-.section-head{max-width:760px;margin:0 auto 72px;text-align:center}
-.section-head h2{
-  font-size:clamp(30px,4.4vw,52px);
-  font-weight:600;line-height:1.18;letter-spacing:-.01em;
-  margin:22px 0 18px;
-  background:linear-gradient(180deg,#fff 0%,#cdd6e8 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-.section-head p{color:var(--ink-2);font-size:17px;font-weight:300}
-
-/* ============ NAV ============ */
-.nav{
-  position:fixed;top:0;inset-inline:0;z-index:100;height:56px;
-  display:flex;align-items:center;
-  background:rgba(6,8,16,.55);
-  backdrop-filter:blur(18px) saturate(140%);
-  border-bottom:1px solid var(--line);
-  transition:background .3s;
-}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:19px;letter-spacing:.01em}
-.brand .mark{
-  width:30px;height:30px;border-radius:9px;
-  background:radial-gradient(circle at 30% 30%, #67e8f9, #0e7490 70%);
-  box-shadow:0 0 22px rgba(34,211,238,.55), inset 0 0 8px rgba(255,255,255,.25);
-  position:relative;
-}
-.brand .mark::after{
-  content:"";position:absolute;inset:6px;border-radius:5px;
-  background:radial-gradient(circle, rgba(255,255,255,.9), transparent 60%);
-}
-.brand span{background:linear-gradient(180deg,#fff,#9fb0cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{font-size:14px;color:var(--ink-2);font-weight:400;transition:color .2s;position:relative}
-.nav-links a:hover{color:var(--ink)}
-.nav-links a::after{content:"";position:absolute;bottom:-6px;inset-inline:0;height:1px;background:var(--teal);transform:scaleX(0);transition:transform .25s;transform-origin:center}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-cta{
-  font-size:13.5px;font-weight:500;padding:9px 18px;border-radius:100px;
-  background:linear-gradient(180deg,rgba(34,211,238,.18),rgba(34,211,238,.08));
-  border:1px solid rgba(34,211,238,.4);color:#bff3ff;
-  transition:all .25s;
-}
-.nav-cta:hover{background:linear-gradient(180deg,rgba(34,211,238,.3),rgba(34,211,238,.15));box-shadow:0 0 24px rgba(34,211,238,.35)}
-.burger{display:none;flex-direction:column;gap:5px;padding:8px}
-.burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
-
-/* ============ TICKER ============ */
-.ticker{
-  position:fixed;top:56px;inset-inline:0;z-index:99;height:38px;
-  background:linear-gradient(180deg,#0a0d18,#060810);
-  border-bottom:1px solid var(--line);
-  overflow:hidden;display:flex;align-items:center;
-}
-.ticker-mask{flex:1;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ticker-track{display:flex;gap:0;animation:tick 60s linear infinite;width:max-content}
-.ticker-item{
-  display:flex;align-items:center;gap:9px;padding:0 26px;
-  font-size:12.5px;font-weight:400;white-space:nowrap;
-  border-inline-end:1px solid var(--line);
-}
-.ticker-item .sym{color:var(--ink);font-weight:500;letter-spacing:.02em}
-.ticker-item .px{color:var(--ink-2);font-variant-numeric:tabular-nums}
-.ticker-item .chg{font-variant-numeric:tabular-nums;font-weight:500;font-size:12px;padding:2px 7px;border-radius:5px}
-.chg.up{color:var(--up);background:rgba(34,197,94,.1)}
-.chg.down{color:var(--down);background:rgba(239,68,68,.1)}
-.ticker-badge{
-  display:flex;align-items:center;gap:7px;padding:0 16px;height:100%;
-  background:linear-gradient(180deg,rgba(239,68,68,.18),rgba(239,68,68,.08));
-  border-inline-end:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.1em;color:#ffb4b4;
-}
-.ticker-badge .pulse{width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,.7);animation:pulse 1.8s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}70%{box-shadow:0 0 0 10px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-[dir=rtl] .ticker-track{animation-direction:reverse}
-body{padding-top:94px} /* nav+ticker */
-
-/* ============ HERO ============ */
-.hero{
-  position:relative;min-height:calc(100vh - 94px);
-  display:flex;align-items:center;
-  padding:80px 0 100px;overflow:hidden;
-}
-#starfield,#network{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-#network{z-index:1}
-.hero .wrap{position:relative;z-index:3;text-align:center}
-.hero-eyebrow{margin-bottom:30px}
-.hero h1{
-  font-size:clamp(54px,11vw,148px);
-  font-weight:600;line-height:.95;letter-spacing:-.02em;
-  margin-bottom:8px;
-  background:linear-gradient(180deg,#ffffff 0%,#a8c6ff 55%,#22d3ee 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:0 0 60px rgba(34,211,238,.15);
-}
-.hero .h1-sub{
-  font-size:clamp(15px,1.6vw,18px);font-weight:500;letter-spacing:.4em;
-  color:var(--teal);text-transform:uppercase;margin-bottom:30px;opacity:.85;
-}
-.hero .lede{
-  max-width:680px;margin:0 auto 42px;font-size:clamp(16px,1.6vw,20px);
-  color:var(--ink-2);font-weight:300;line-height:1.75;
-}
-.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:15px;font-weight:500;padding:15px 30px;border-radius:100px;
-  transition:all .28s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden;
-}
-.btn-primary{
-  background:linear-gradient(180deg,#22d3ee,#06b6d4);color:#02121a;
-  box-shadow:0 12px 40px -8px rgba(34,211,238,.6), inset 0 1px 0 rgba(255,255,255,.4);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(34,211,238,.75), inset 0 1px 0 rgba(255,255,255,.5)}
-.btn-ghost{background:var(--panel);border:1px solid var(--line-strong);color:var(--ink);backdrop-filter:blur(10px)}
-.btn-ghost:hover{background:var(--panel-strong);border-color:rgba(255,255,255,.25)}
-.btn svg{width:16px;height:16px}
-
-/* floating preview thumbnails */
-.hero-previews{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;perspective:1200px}
-.thumb{
-  width:min(340px,80vw);border-radius:14px;overflow:hidden;
-  border:1px solid var(--line-strong);background:#0a0d18;
-  box-shadow:0 30px 70px -25px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.02);
-  transition:transform .5s cubic-bezier(.2,.7,.3,1);position:relative;
-}
-.thumb.gold{box-shadow:0 30px 70px -25px rgba(0,0,0,.9), 0 0 30px -10px rgba(245,196,81,.25)}
-.thumb.teal{box-shadow:0 30px 70px -25px rgba(0,0,0,.9), 0 0 30px -10px rgba(34,211,238,.3)}
-.thumb img{display:block;width:100%;height:200px;object-fit:cover;object-position:top}
-.thumb .cap{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;font-size:13px}
-.thumb .cap .name{font-weight:500}
-.thumb .cap .tag{font-size:10.5px;letter-spacing:.12em;padding:3px 9px;border-radius:100px;text-transform:uppercase}
-.thumb.gold .tag{color:var(--gold);background:rgba(245,196,81,.12);border:1px solid rgba(245,196,81,.25)}
-.thumb.teal .tag{color:var(--teal);background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)}
-.thumb:hover{transform:translateY(-6px) rotateX(2deg)}
-
-/* ============ STATS ============ */
-.stats{padding:60px 0;position:relative;z-index:2}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.stat{background:var(--bg);padding:38px 24px;text-align:center;position:relative}
-.stat .num{
-  font-size:clamp(34px,4.5vw,54px);font-weight:600;line-height:1;letter-spacing:-.02em;
-  background:linear-gradient(180deg,#fff,#9fb0cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  font-variant-numeric:tabular-nums;
-}
-.stat .num.gold{background:linear-gradient(180deg,#fde9b6,#e0a92e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.stat .num.teal{background:linear-gradient(180deg,#bff3ff,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.stat .lab{margin-top:12px;color:var(--ink-2);font-size:14px;font-weight:400}
-.stat::before{content:"";position:absolute;top:0;inset-inline:30%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:.4}
-
-/* ============ PRODUCT SECTION (shared) ============ */
-.product{position:relative}
-.product-head{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;margin-bottom:60px}
-.product-head .left h2{
-  font-size:clamp(32px,4.4vw,56px);font-weight:600;line-height:1.1;letter-spacing:-.01em;margin:20px 0 18px;
-}
-.product-head .left h2 .accent{display:inline-block}
-.product-head.gold h2 .accent{background:linear-gradient(180deg,#fde9b6,#e0a92e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.product-head.teal h2 .accent{background:linear-gradient(180deg,#bff3ff,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.product-head .left p{color:var(--ink-2);font-size:16.5px;font-weight:300;max-width:520px}
-.product-head .right{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.product-head .right .meta{display:flex;gap:10px;flex-wrap:wrap}
-.chip{
-  font-size:12px;font-weight:500;padding:6px 12px;border-radius:100px;
-  background:var(--panel);border:1px solid var(--line);color:var(--ink-2);
-}
-.chip.gold{color:#fde9b6;border-color:rgba(245,196,81,.3);background:rgba(245,196,81,.06)}
-.chip.teal{color:#bff3ff;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.06)}
-
-/* screenshot showcase frame */
-.showcase{
-  position:relative;margin:0 auto 80px;max-width:1080px;perspective:1600px;
-}
-.showcase-frame{
-  position:relative;border-radius:16px;overflow:hidden;
-  background:#0a0d18;border:1px solid var(--line-strong);
-  box-shadow:0 50px 120px -30px rgba(0,0,0,.9);
-  transform:rotateX(3deg) rotateY(-1deg);
-  transition:transform .6s cubic-bezier(.2,.7,.3,1);
-}
-.showcase:hover .showcase-frame{transform:rotateX(1deg) rotateY(0deg)}
-.showcase.gold .showcase-frame{box-shadow:0 50px 120px -30px rgba(0,0,0,.9), 0 0 80px -20px rgba(245,196,81,.25)}
-.showcase.teal .showcase-frame{box-shadow:0 50px 120px -30px rgba(0,0,0,.9), 0 0 80px -20px rgba(34,211,238,.3)}
-.browser-bar{
-  display:flex;align-items:center;gap:7px;padding:12px 16px;
-  background:linear-gradient(180deg,#10131f,#0a0d18);border-bottom:1px solid var(--line);
-}
-.browser-bar .dots{display:flex;gap:6px}
-.browser-bar .dots span{width:11px;height:11px;border-radius:50%}
-.browser-bar .dots span:nth-child(1){background:#ff5f57}
-.browser-bar .dots span:nth-child(2){background:#febc2e}
-.browser-bar .dots span:nth-child(3){background:#28c840}
-.browser-bar .url{
-  flex:1;margin-inline:14px;font-size:12px;color:var(--ink-3);
-  background:rgba(255,255,255,.04);padding:5px 14px;border-radius:8px;
-  border:1px solid var(--line);text-align:center;font-family:monospace;direction:ltr;
-}
-.browser-bar .url.live::before{content:"●";color:#ef4444;margin-inline-end:7px;animation:pulse 2s infinite}
-.showcase-img{display:block;width:100%;height:auto}
-.showcase-glow{position:absolute;inset:-1px;border-radius:16px;pointer-events:none;z-index:-1;opacity:.5;filter:blur(40px)}
-.showcase.gold .showcase-glow{background:radial-gradient(circle at 50% 0%, rgba(245,196,81,.4), transparent 60%)}
-.showcase.teal .showcase-glow{background:radial-gradient(circle at 50% 0%, rgba(34,211,238,.4), transparent 60%)}
-
-/* service cards */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px}
-.svc-card{
-  position:relative;padding:30px 26px;border-radius:var(--radius);
-  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
-  border:1px solid var(--line);overflow:hidden;
-  transition:transform .35s cubic-bezier(.2,.7,.3,1), border-color .35s;
-}
-.svc-card::before{content:"";position:absolute;top:0;inset-inline:0;height:2px;opacity:.7}
-.svc-card.gold::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.svc-card.teal::before{background:linear-gradient(90deg,transparent,var(--teal),transparent)}
-.svc-card:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-.svc-card.gold:hover{box-shadow:0 24px 60px -25px rgba(245,196,81,.3)}
-.svc-card.teal:hover{box-shadow:0 24px 60px -25px rgba(34,211,238,.3)}
-.svc-card .cat{
-  display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;
-}
-.svc-card.gold .cat{color:var(--gold)}
-.svc-card.teal .cat{color:var(--teal)}
-.svc-card .cat .ln{width:18px;height:1px;background:currentColor;opacity:.6}
-.svc-card ul{display:flex;flex-direction:column;gap:14px}
-.svc-card li{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink-2);font-weight:300;line-height:1.55}
-.svc-card li .ic{
-  flex-shrink:0;width:18px;height:18px;border-radius:6px;margin-top:1px;
-  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;
-}
-.svc-card.gold .ic{background:rgba(245,196,81,.14);color:var(--gold)}
-.svc-card.teal .ic{background:rgba(34,211,238,.14);color:var(--teal)}
-.svc-card li b{color:var(--ink);font-weight:500;display:block;margin-bottom:1px}
-.svc-card li span{font-size:12.5px;color:var(--ink-3)}
-
-.product-cta{display:flex;justify-content:center}
-.btn-gold{background:linear-gradient(180deg,#f5c451,#e0a92e);color:#1a1303;box-shadow:0 12px 40px -8px rgba(245,196,81,.5),inset 0 1px 0 rgba(255,255,255,.4)}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(245,196,81,.65)}
-.btn-teal{background:linear-gradient(180deg,#22d3ee,#06b6d4);color:#02121a;box-shadow:0 12px 40px -8px rgba(34,211,238,.6),inset 0 1px 0 rgba(255,255,255,.4)}
-.btn-teal:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(34,211,238,.75)}
-
-/* ============ HOW IT WORKS ============ */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
-.steps::before{content:"";position:absolute;top:38px;inset-inline:8%;height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),var(--line-strong),transparent);z-index:0}
-.step{position:relative;z-index:1;text-align:center;padding:0 8px}
-.step .num{
-  width:76px;height:76px;margin:0 auto 24px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;
-  background:var(--bg-2);border:1px solid var(--line-strong);
-  position:relative;
-}
-.step .num::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:linear-gradient(135deg,var(--teal),transparent);opacity:.4;z-index:-1}
-.step:nth-child(2) .num::before{background:linear-gradient(135deg,var(--gold),transparent)}
-.step:nth-child(3) .num::before{background:linear-gradient(135deg,var(--teal),transparent)}
-.step:nth-child(4) .num::before{background:linear-gradient(135deg,var(--gold),transparent)}
-.step h3{font-size:17px;font-weight:600;margin-bottom:10px}
-.step p{font-size:13.5px;color:var(--ink-2);font-weight:300;line-height:1.6}
-
-/* ============ UNIQUE FEATURES ============ */
-.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.feat{
-  padding:32px 26px;border-radius:var(--radius);
-  background:var(--panel);border:1px solid var(--line);
-  transition:all .35s;position:relative;overflow:hidden;
-}
-.feat:hover{transform:translateY(-4px);background:var(--panel-strong);border-color:var(--line-strong)}
-.feat .ico{
-  width:48px;height:48px;border-radius:12px;margin-bottom:20px;
-  display:flex;align-items:center;justify-content:center;font-size:22px;
-  background:radial-gradient(circle at 30% 30%, rgba(34,211,238,.25), rgba(34,211,238,.05));
-  border:1px solid rgba(34,211,238,.25);
-}
-.feat h3{font-size:16.5px;font-weight:600;margin-bottom:10px}
-.feat p{font-size:13.5px;color:var(--ink-2);font-weight:300;line-height:1.65}
-
-/* ============ PRICING ============ */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-.price{
-  padding:38px 30px;border-radius:var(--radius);
-  background:var(--panel);border:1px solid var(--line);
-  display:flex;flex-direction:column;position:relative;transition:all .35s;
-}
-.price:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-.price.featured{
-  background:linear-gradient(180deg,rgba(34,211,238,.08),rgba(34,211,238,.02));
-  border-color:rgba(34,211,238,.4);
-  box-shadow:0 30px 80px -30px rgba(34,211,238,.4);
-}
-.price.featured::before{content:"الأكثر شيوعاً";position:absolute;top:-12px;inset-inline:50%;transform:translateX(50%);font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px;background:linear-gradient(180deg,#22d3ee,#06b6d4);color:#02121a;letter-spacing:.05em}
-.price .tier{font-size:14px;color:var(--ink-2);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-.price .fee{font-size:42px;font-weight:600;margin:14px 0 4px;letter-spacing:-.02em}
-.price .fee small{font-size:14px;color:var(--ink-3);font-weight:400}
-.price .fee .cur{font-size:18px;color:var(--ink-2);font-weight:400;margin-inline-end:3px}
-.price .desc{font-size:13.5px;color:var(--ink-2);margin-bottom:24px;font-weight:300}
-.price ul{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;flex:1}
-.price li{display:flex;gap:10px;font-size:13.5px;color:var(--ink-2);font-weight:300;align-items:flex-start}
-.price li::before{content:"✓";color:var(--teal);font-weight:700;flex-shrink:0}
-.price .btn{justify-content:center;width:100%}
-.price .btn-outline{background:var(--panel);border:1px solid var(--line-strong);color:var(--ink)}
-.price .btn-outline:hover{background:var(--panel-strong)}
-
-/* ============ CONTACT ============ */
-.contact-card{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;
-  border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--line);background:var(--panel);
-}
-.contact-info{padding:48px 44px;background:linear-gradient(180deg,rgba(34,211,238,.06),transparent);border-inline-end:1px solid var(--line)}
-.contact-info h3{font-size:26px;font-weight:600;margin-bottom:16px}
-.contact-info p{color:var(--ink-2);font-size:15px;font-weight:300;margin-bottom:32px;line-height:1.7}
-.contact-info .item{display:flex;gap:14px;align-items:center;margin-bottom:18px;font-size:14px;color:var(--ink-2)}
-.contact-info .item .ic{width:38px;height:38px;border-radius:10px;background:var(--panel-strong);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.contact-form{padding:48px 44px}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:12.5px;color:var(--ink-2);margin-bottom:8px;font-weight:500;letter-spacing:.02em}
-.field input,.field textarea,.field select{
-  width:100%;padding:13px 16px;border-radius:11px;
-  background:rgba(255,255,255,.03);border:1px solid var(--line);
-  color:var(--ink);font-family:inherit;font-size:14.5px;font-weight:300;
-  transition:all .2s;
-}
-.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--teal);background:rgba(34,211,238,.04);box-shadow:0 0 0 4px rgba(34,211,238,.1)}
-.field textarea{resize:vertical;min-height:110px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* ============ FOOTER ============ */
-footer{padding:80px 0 40px;border-top:1px solid var(--line);position:relative;z-index:2;background:linear-gradient(180deg,transparent,rgba(6,182,212,.03))}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px}
-.foot-brand .brand{margin-bottom:18px}
-.foot-brand p{color:var(--ink-2);font-size:13.5px;font-weight:300;max-width:340px;line-height:1.7}
-.foot-col h4{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;color:var(--ink)}
-.foot-col ul{display:flex;flex-direction:column;gap:11px}
-.foot-col a{font-size:13.5px;color:var(--ink-2);font-weight:300;transition:color .2s}
-.foot-col a:hover{color:var(--teal)}
-.foot-bottom{padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-.foot-bottom p{font-size:12.5px;color:var(--ink-3)}
-.foot-social{display:flex;gap:10px}
-.foot-social a{width:34px;height:34px;border-radius:9px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s}
-.foot-social a:hover{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.3);color:var(--teal)}
-
-/* ============ SCROLL ANIMATIONS ============ */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
-
-/* ============ RESPONSIVE ============ */
-@media(max-width:1024px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .svc-grid{grid-template-columns:1fr 1fr}
-  .feat-grid{grid-template-columns:1fr 1fr}
-  .price-grid{grid-template-columns:1fr;max-width:480px;margin-inline:auto}
-  .steps{grid-template-columns:repeat(2,1fr);gap:40px 20px}
-  .steps::before{display:none}
-  .product-head{grid-template-columns:1fr;gap:24px}
-  .contact-card{grid-template-columns:1fr}
-  .contact-info{border-inline-end:none;border-bottom:1px solid var(--line)}
-  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
-}
-@media(max-width:680px){
-  .section{padding:80px 0}
-  .nav-links{display:none}
-  .burger{display:flex}
-  .nav-links.open{display:flex;position:absolute;top:56px;inset-inline:0;flex-direction:column;background:rgba(6,8,16,.96);backdrop-filter:blur(20px);padding:24px;gap:18px;border-bottom:1px solid var(--line)}
-  .svc-grid{grid-template-columns:1fr}
-  .feat-grid{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .foot-grid{grid-template-columns:1fr;gap:30px}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .product-head .right{align-items:flex-start}
-  .contact-info,.contact-form{padding:32px 24px}
-  .hero{padding:40px 0 70px}
-  .showcase-frame{transform:none}
-}
-@media(max-width:400px){
-  .stat .num{font-size:32px}
-  .hero h1{font-size:54px}
-}
-
-/* reduced motion */
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-  .ticker-track{animation:none}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رؤى — من الخبر إلى الفرصة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Canvas 3D Background -->
+    <canvas id="neural-canvas"></canvas>
 
-<!-- ============ NAV ============ -->
-<nav class="nav" id="nav">
-  <div class="wrap">
-    <a href="#" class="brand">
-      <span class="mark"></span>
-      <span>رواء <span style="opacity:.5;font-weight:300">| Roua</span></span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#news">رواء نيوز</a></li>
-      <li><a href="#trading">رواء تريدنج</a></li>
-      <li><a href="#how">كيف يعمل</a></li>
-      <li><a href="#features">المزايا</a></li>
-      <li><a href="#pricing">الأسعار</a></li>
-      <li><a href="#contact">تواصل</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">ابدأ الآن</a>
-    <button class="burger" id="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<!-- ============ TICKER ============ -->
-<div class="ticker" role="region" aria-label="مؤشرات السوق المباشرة">
-  <div class="ticker-badge"><span class="pulse"></span> مباشر</div>
-  <div class="ticker-mask">
-    <div class="ticker-track" id="tickerTrack">
-      <!-- filled by JS for seamless loop -->
-    </div>
-  </div>
-</div>
-
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <canvas id="starfield"></canvas>
-  <canvas id="network"></canvas>
-  <div class="wrap">
-    <div class="hero-eyebrow reveal">
-      <span class="eyebrow"><span class="dot"></span> منظومة مالية موحّدة · 16 خدمة ذكية</span>
-    </div>
-    <div class="h1-sub reveal d1">R O U A</div>
-    <h1 class="reveal d1">رواء</h1>
-    <p class="lede reveal d2">
-      منظومة واحدة تجمع بين <b style="color:#fde9b6;font-weight:500">منصة الأخبار المالية متعددة اللغات</b>
-      و<b style="color:#bff3ff;font-weight:500">منصة التداول المدعومة بمجلس ذكاء اصطناعي من 9 نماذج</b> —
-      من الخبر الأول إلى أمر التنفيذ في أقل من 5 ملّي ثانية.
-    </p>
-    <div class="hero-cta reveal d3">
-      <a href="#contact" class="btn btn-primary">
-        ابدأ رحلتك
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" transform="scale(-1,1) translate(-24,0)"/></svg>
-      </a>
-      <a href="#news" class="btn btn-ghost">استكشف المنصتين</a>
-    </div>
-    <div class="hero-previews reveal d4">
-      <div class="thumb gold">
-        <img src="images/news-hero.jpg" alt="رواء نيوز — الصفحة الرئيسية" loading="lazy">
-        <div class="cap"><span class="name">رواء نيوز</span><span class="tag">منصة الأخبار</span></div>
-      </div>
-      <div class="thumb teal">
-        <img src="images/trading-home.jpg" alt="رواء تريدنج — الصفحة الرئيسية" loading="lazy">
-        <div class="cap"><span class="name">رواء تريدنج</span><span class="tag">منصة التداول</span></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ============ STATS ============ -->
-<section class="stats">
-  <div class="wrap">
-    <div class="stats-grid reveal">
-      <div class="stat"><div class="num" data-count="16">0</div><div class="lab">خدمة متكاملة</div></div>
-      <div class="stat"><div class="num gold" data-count="5000" data-suffix="+">0</div><div class="lab">خبر يومياً · 5 لغات</div></div>
-      <div class="stat"><div class="num teal" data-count="9">0</div><div class="lab">نماذج ذكاء اصطناعي</div></div>
-      <div class="stat"><div class="num" data-count="32">0</div><div class="lab">لغة مدعومة</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ NEWS PLATFORM ============ -->
-<section class="section product" id="news">
-  <div class="wrap">
-    <div class="product-head gold reveal">
-      <div class="left">
-        <span class="eyebrow gold"><span class="dot"></span> المنصة الأولى · News</span>
-        <h2>رواء <span class="accent">نيوز</span></h2>
-        <p>منصة إخبارية مالية تنتج أكثر من 5000 خبر يومياً عبر 5 خطوط معالجة لغوية، مع 24 محرك جغرافي ووكالة نشر متكاملة — كل ما يحتاجه المتداول قبل اتخاذ القرار.</p>
-      </div>
-      <div class="right">
-        <div class="meta">
-          <span class="chip gold">RTL · عربي</span>
-          <span class="chip gold">5 لغات</span>
-          <span class="chip gold">24/7</span>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" stroke="#00d4aa" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="8" fill="#00d4aa" opacity="0.3"/>
+                        <circle cx="20" cy="20" r="3" fill="#00d4aa"/>
+                    </svg>
+                </span>
+                <span class="logo-text">رؤى</span>
+            </a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link magnetic">الرئيسية</a>
+                <a href="#news" class="nav-link magnetic">الأدوات</a>
+                <a href="#trading" class="nav-link magnetic">الطريقة</a>
+                <a href="#features" class="nav-link magnetic">التجارب</a>
+            </div>
+            <div class="nav-actions">
+                <div class="lang-switch">
+                    <span>🌐</span>
+                    <span>عربي</span>
+                </div>
+                <a href="#" class="btn-login">تسجيل الدخول</a>
+                <a href="#" class="btn-primary magnetic">ابدأ الآن</a>
+            </div>
         </div>
-        <a href="https://rouatradingnews-production.up.railway.app/ar" target="_blank" rel="noopener" class="btn btn-gold" style="align-self:flex-start">
-          زيارة منصة الأخبار
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M7 17L17 7M17 7H8M17 7V16" transform="scale(-1,1) translate(-24,0)"/></svg>
-        </a>
-      </div>
-    </div>
+    </nav>
 
-    <!-- Real screenshot showcase -->
-    <div class="showcase gold reveal d1">
-      <div class="showcase-glow"></div>
-      <div class="showcase-frame">
-        <div class="browser-bar">
-          <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url live">rouatradingnews-production.up.railway.app/ar</div>
-          <div style="font-size:11px;color:var(--ink-3)">● مباشر</div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>سنة نماذج ذكاء اصطناعي متناغمة</span>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="title-line">
+                    <span class="char-reveal">رُ</span>
+                    <span class="char-reveal">ؤ</span>
+                    <span class="char-reveal">ى</span>
+                </span>
+            </h1>
+
+            <p class="hero-subtitle">
+                منظومة ربط الحسابات المدعومة بالذكاء الاصطناعي الأكثر تقدماً في المنطقة.
+                <br>
+                حيث تلتقي شبكة الكون المالي بعقل آلة يتنبأ قبل أن يحدث.
+            </p>
+
+            <div class="hero-ctas">
+                <a href="#" class="btn-glow magnetic">
+                    <span>ابدأ ربط حساباتك</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="btn-glass magnetic">
+                    <span>استكشف المنصة</span>
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card glass">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">ساعة مراقبة يومية</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-label">ثانية للإعداد</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">فئات أصول مدعومة</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-number" data-target="8">0</div>
+                    <div class="stat-label">نماذج ذكاء اصطناعي</div>
+                </div>
+            </div>
         </div>
-        <img class="showcase-img" src="images/news-hero.jpg" alt="لقطة حية من منصة رواء نيوز — الصفحة الرئيسية مع شريط المؤشرات وبطاقات الأخبار">
-      </div>
-    </div>
 
-    <!-- secondary screenshots row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:64px" class="reveal d2">
-      <div class="showcase gold" style="margin:0;max-width:none">
-        <div class="showcase-frame" style="transform:rotateX(2deg)">
-          <div class="browser-bar">
-            <div class="dots"><span></span><span></span><span></span></div>
-            <div class="url">rouatradingnews /ar/markets</div>
-          </div>
-          <img class="showcase-img" src="images/stock-analysis.jpg" alt="قسم الأسواق في منصة رواء نيوز" loading="lazy">
+        <!-- Floating Ticker -->
+        <div class="ticker-bar glass">
+            <div class="ticker-track">
+                <div class="ticker-item up">
+                    <span class="ticker-pair">GOLD</span>
+                    <span class="ticker-signal">BUY</span>
+                    <span class="ticker-value">2.1%</span>
+                </div>
+                <div class="ticker-item down">
+                    <span class="ticker-pair">GBP/JPY</span>
+                    <span class="ticker-signal">SELL</span>
+                    <span class="ticker-value">0.8%</span>
+                </div>
+                <div class="ticker-item up">
+                    <span class="ticker-pair">BTC/USD</span>
+                    <span class="ticker-signal">BUY</span>
+                    <span class="ticker-value">3.4%</span>
+                </div>
+                <div class="ticker-item up">
+                    <span class="ticker-pair">EUR/USD</span>
+                    <span class="ticker-signal">BUY</span>
+                    <span class="ticker-value">1.2%</span>
+                </div>
+                <div class="ticker-item down">
+                    <span class="ticker-pair">USD/JPY</span>
+                    <span class="ticker-signal">SELL</span>
+                    <span class="ticker-value">0.5%</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="ticker-item up">
+                    <span class="ticker-pair">GOLD</span>
+                    <span class="ticker-signal">BUY</span>
+                    <span class="ticker-value">2.1%</span>
+                </div>
+                <div class="ticker-item down">
+                    <span class="ticker-pair">GBP/JPY</span>
+                    <span class="ticker-signal">SELL</span>
+                    <span class="ticker-value">0.8%</span>
+                </div>
+                <div class="ticker-item up">
+                    <span class="ticker-pair">BTC/USD</span>
+                    <span class="ticker-signal">BUY</span>
+                    <span class="ticker-value">3.4%</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="showcase gold" style="margin:0;max-width:none">
-        <div class="showcase-frame" style="transform:rotateX(2deg)">
-          <div class="browser-bar">
-            <div class="dots"><span></span><span></span><span></span></div>
-            <div class="url">rouatradingnews /ar/stocks</div>
-          </div>
-          <img class="showcase-img" src="images/trading-home-2.jpg" alt="صفحة تحليل الأسهم في منصة رواء نيوز" loading="lazy">
+    </section>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
         </div>
-      </div>
+        <span>اسحب للأسفل</span>
     </div>
 
-    <!-- 8 services in 3 cards -->
-    <div class="svc-grid">
-      <div class="svc-card gold reveal">
-        <span class="cat"><span class="ln"></span> محتوى وأخبار</span>
-        <ul>
-          <li><span class="ic">01</span><div><b>خطوط معالجة بـ 5 لغات</b><span>5000+ خبر يومياً عبر العربية والإنجليزية والفرنسية والإسبانية والصينية</span></div></li>
-          <li><span class="ic">02</span><div><b>وكالة نشر متكاملة</b><span>تحرير ومراجعة ونشر احترافي بمعايير الوكالات العالمية</span></div></li>
-          <li><span class="ic">03</span><div><b>خطوط إنتاج الفيديو</b><span>تحويل الأخبار إلى محتوى مرئي مؤتمت بالكامل</span></div></li>
-        </ul>
-      </div>
-      <div class="svc-card gold reveal d1">
-        <span class="cat"><span class="ln"></span> تحليلات وتقارير</span>
-        <ul>
-          <li><span class="ic">04</span><div><b>تحليل الأسهم</b><span>صفحات تحليل عميقة لكل سهم مع مؤشرات فنية وأساسية</span></div></li>
-          <li><span class="ic">05</span><div><b>260 نوع تقرير</b><span>تقارير لحظية ويومية وأسبوعية لكل قطاع وأداة مالية</span></div></li>
-          <li><span class="ic">06</span><div><b>24 محرك جغرافي</b><span>تغطية مخصصة لـ 24 سوقاً إقليمياً ودولياً</span></div></li>
-        </ul>
-      </div>
-      <div class="svc-card gold reveal d2">
-        <span class="cat"><span class="ln"></span> تصميم وذكاء</span>
-        <ul>
-          <li><span class="ic">07</span><div><b>الإنفوجرافيك الآلي</b><span>توليد رسوم بيانية ومعلوماتية لحظية من البيانات</span></div></li>
-          <li><span class="ic">08</span><div><b>المساعد الذكي Copilot</b><span>دعم 32 لغة · أسئلة وأجوبة وملخصات فورية</span></div></li>
-        </ul>
-      </div>
-    </div>
+    <script src="main.js"></script>
 
-    <div class="product-cta reveal d3">
-      <a href="https://rouatradingnews-production.up.railway.app/ar" target="_blank" rel="noopener" class="btn btn-gold">
-        ادخل منصة الأخبار مباشرة
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M7 17L17 7M17 7H8M17 7V16" transform="scale(-1,1) translate(-24,0)"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- ═══════════════════════════════════════
+         ROUAA NEWS SECTION — Intelligence Grid
+         ═══════════════════════════════════════ -->
+    <section id="news" class="news-section">
+        <div class="section-container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <span class="section-tag">الطريق الأول</span>
+                <h2 class="section-title">
+                    <span class="title-gradient">السوق يفيض بالأخبار.</span>
+                    <br>
+                    <span class="title-dim">والفرصة تضيع.</span>
+                </h2>
+                <p class="section-subtitle">
+                    رؤى نيوز — استخبار إخباري لحظي بلغة السوق، يولّد تلقائياً وبدقة محرّر بشري.
+                </p>
+            </div>
 
-<!-- ============ TRADING PLATFORM ============ -->
-<section class="section product" id="trading">
-  <div class="wrap">
-    <div class="product-head teal reveal">
-      <div class="left">
-        <span class="eyebrow"><span class="dot"></span> المنصة الثانية · Trading</span>
-        <h2>رواء <span class="accent">تريدنج</span></h2>
-        <p>منصة تداول يحكمها مجلس ذكاء اصطناعي من 9 نماذج مع «المحامي الشيطاني»، تنفّذ عبر 3 طبقات بزمن استجابة يصل إلى أقل من 5 ملّي ثانية — حيث يلتقي الكون المالي بالذكاء الاصطناعي.</p>
-      </div>
-      <div class="right">
-        <div class="meta">
-          <span class="chip teal">9 نماذج AI</span>
-          <span class="chip teal">&lt; 5ms</span>
-          <span class="chip teal">64 محرك رسوم</span>
+            <!-- News Dashboard Preview -->
+            <div class="news-dashboard glass-3d">
+                <div class="dashboard-glow"></div>
+                <div class="dashboard-header">
+                    <div class="dashboard-tabs">
+                        <button class="tab active">الرئيسية</button>
+                        <button class="tab">الأخبار</button>
+                        <button class="tab">تحليل الأسهم</button>
+                        <button class="tab">القطاعات</button>
+                    </div>
+                    <div class="dashboard-search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <span>بحث دلالي...</span>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="news-card featured">
+                        <div class="news-card-glow"></div>
+                        <div class="news-card-image">
+                            <div class="news-image-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                            </div>
+                        </div>
+                        <div class="news-card-content">
+                            <div class="news-meta">
+                                <span class="news-source">Bloomberg</span>
+                                <span class="news-time">منذ 2 دقيقة</span>
+                            </div>
+                            <h4 class="news-title">النفط يتجاوز 85$ مع تصاعد التوترات الجيوسياسية</h4>
+                            <div class="news-impact">
+                                <span class="impact-badge positive">إيجابي</span>
+                                <span class="impact-score">ثقة 92%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-card-glow"></div>
+                        <div class="news-card-content">
+                            <div class="news-meta">
+                                <span class="news-source">Reuters</span>
+                                <span class="news-time">منذ 5 دقائق</span>
+                            </div>
+                            <h4 class="news-title">الفيدرالي يشير إلى تباطؤ في وتيرة رفع الفائدة</h4>
+                            <div class="news-impact">
+                                <span class="impact-badge neutral">محايد</span>
+                                <span class="impact-score">ثقة 78%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-card-glow"></div>
+                        <div class="news-card-content">
+                            <div class="news-meta">
+                                <span class="news-source">CNBC</span>
+                                <span class="news-time">منذ 12 دقيقة</span>
+                            </div>
+                            <h4 class="news-title">تسلا تعلن عن نتائج فصلية تفوق التوقعات</h4>
+                            <div class="news-impact">
+                                <span class="impact-badge positive">إيجابي</span>
+                                <span class="impact-score">ثقة 88%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-card-glow"></div>
+                        <div class="news-card-content">
+                            <div class="news-meta">
+                                <span class="news-source">WSJ</span>
+                                <span class="news-time">منذ 18 دقيقة</span>
+                            </div>
+                            <h4 class="news-title">الذهب يسجل أعلى مستوى في 6 أشهر</h4>
+                            <div class="news-impact">
+                                <span class="impact-badge positive">إيجابي</span>
+                                <span class="impact-score">ثقة 85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-item" data-index="01">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h4 class="feature-title">تقاطع متعدد المصادر</h4>
+                    <p class="feature-desc">14 مزوداً، 65 خلاصة RSS، 5 لغات — بزمن حضور أقل من دقيقة</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat">14 مصدر</span>
+                        <span class="feature-stat">65 RSS</span>
+                    </div>
+                </div>
+                <div class="feature-item" data-index="02">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h4 class="feature-title">تنقية ذكية للضوضاء</h4>
+                    <p class="feature-desc">فلترة تلقائية للمكرر، وتصنيف للإشارات ذات الأثر السوقي</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight">AI filter</span>
+                    </div>
+                </div>
+                <div class="feature-item" data-index="03">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                    </div>
+                    <h4 class="feature-title">توليد بالذكاء الاصطناعي</h4>
+                    <p class="feature-desc">9 نماذج لغوية تتنافس على صياغة الخبر الأدق</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight">9 نماذج</span>
+                    </div>
+                </div>
+                <div class="feature-item" data-index="04">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <h4 class="feature-title">تحليل أثر سوقي فوري</h4>
+                    <p class="feature-desc">كل خبر يحمل وسم أثر: إيجابي / سلبي / محايد — مع درجة ثقة</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight">real-time</span>
+                    </div>
+                </div>
+                <div class="feature-item" data-index="05">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                    </div>
+                    <h4 class="feature-title">رسوم بيانية حية</h4>
+                    <p class="feature-desc">64 محركاً لتحويل الأرقام في النص إلى مخططات تفاعلية</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight">64 engine</span>
+                    </div>
+                </div>
+                <div class="feature-item" data-index="06">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    </div>
+                    <h4 class="feature-title">بحث دلالي</h4>
+                    <p class="feature-desc">لا تبحث بالكلمات بل بالمعنى. اسأل: «ما الأخبار التي أثّرت في البنوك؟»</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight">semantic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="section-cta">
+                <a href="#" class="btn-glow-large magnetic">
+                    <span>ادخل رؤى نيوز</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
         </div>
-        <a href="#contact" class="btn btn-teal" style="align-self:flex-start">
-          طلب عرض توضيحي
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
-        </a>
-      </div>
-    </div>
+    </section>
 
-    <div class="showcase teal reveal d1">
-      <div class="showcase-glow"></div>
-      <div class="showcase-frame">
-        <div class="browser-bar">
-          <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">roua-trading.app — Six Harmonious AI Models</div>
-          <div style="font-size:11px;color:var(--teal)">● AI Council</div>
+
+    <!-- ═══════════════════════════════════════
+         ROUAA TRADING SECTION — Command Center
+         ═══════════════════════════════════════ -->
+    <section id="trading" class="trading-section">
+        <div class="section-container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">الطريق الثاني</span>
+                <h2 class="section-title">
+                    <span class="title-gradient" style="background: linear-gradient(135deg, var(--quantum-blue), #00d4aa);">تنفيذ أتمت.</span>
+                    <br>
+                    <span class="title-dim">شفافية كاملة في كل خطوة.</span>
+                </h2>
+                <p class="section-subtitle">
+                    رؤى تريد — تنفيذ أتمت، إدارة مخاطر مدمجة، شفافية كاملة في كل خطوة.
+                </p>
+            </div>
+
+            <!-- Trading Dashboard Preview -->
+            <div class="trading-dashboard glass-3d">
+                <div class="trading-dashboard-glow"></div>
+
+                <!-- Dashboard Top Bar -->
+                <div class="trading-topbar">
+                    <div class="trading-pairs">
+                        <span class="pair-item active">BNB/USDT</span>
+                        <span class="pair-item">BTC/USD</span>
+                        <span class="pair-item">ETH/USD</span>
+                        <span class="pair-item">XAU/USD</span>
+                    </div>
+                    <div class="trading-price">
+                        <span class="price-value">572.25</span>
+                        <span class="price-change up">+2.1%</span>
+                    </div>
+                </div>
+
+                <!-- Chart Area -->
+                <div class="chart-container">
+                    <canvas id="trading-chart"></canvas>
+                    <div class="chart-overlay">
+                        <div class="chart-signal">
+                            <div class="signal-badge sell">
+                                <span class="signal-arrow">▼</span>
+                                <span>SELL</span>
+                            </div>
+                            <div class="signal-confidence">20%</div>
+                        </div>
+                        <div class="chart-levels">
+                            <div class="level tp">
+                                <span>TP</span>
+                                <span>+$5.06</span>
+                            </div>
+                            <div class="level entry">
+                                <span>Entry</span>
+                                <span>$1.14</span>
+                            </div>
+                            <div class="level sl">
+                                <span>SL</span>
+                                <span>$1.33</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trading Stats Bar -->
+                <div class="trading-stats-bar">
+                    <div class="tstat-item">
+                        <span class="tstat-label">الرصيد</span>
+                        <span class="tstat-value">$3,917.51</span>
+                    </div>
+                    <div class="tstat-item">
+                        <span class="tstat-label">الربح اليومي</span>
+                        <span class="tstat-value up">+$8.46</span>
+                    </div>
+                    <div class="tstat-item">
+                        <span class="tstat-label">الصفقات</span>
+                        <span class="tstat-value">210.5%</span>
+                    </div>
+                    <div class="tstat-item">
+                        <span class="tstat-label">المخاطرة</span>
+                        <span class="tstat-value">$4,330.13</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trading Features -->
+            <div class="features-grid trading-features">
+                <div class="feature-item trading-feature" data-index="01">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h4 class="feature-title">تنفيذ متعدد الوسطاء</h4>
+                    <p class="feature-desc">ثلاثة منفّذين تقنيين يتنافسون على أفضل سعر تنفيذ لحظية</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">3 منفّذين</span>
+                    </div>
+                </div>
+                <div class="feature-item trading-feature" data-index="02">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
+                    </div>
+                    <h4 class="feature-title">أتمتة قابلة للبرمجة</h4>
+                    <p class="feature-desc">عرّف قاعدتك مرة: «اشترِ إذا X، بِع إذا Y» — والنظام ينفّذ</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">auto</span>
+                    </div>
+                </div>
+                <div class="feature-item trading-feature" data-index="03">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h4 class="feature-title">إدارة مخاطر مدمجة</h4>
+                    <p class="feature-desc">حد خسارة يومي، حد حجم مركز، إيقاف تلقائي عند الانحراف</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">risk engine</span>
+                    </div>
+                </div>
+                <div class="feature-item trading-feature" data-index="04">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                    </div>
+                    <h4 class="feature-title">سجل تنفيذ شفّاف</h4>
+                    <p class="feature-desc">كل صفقة موثقة: السبب، التوقيت، الانزلاق، التكلفة — قابل للتدقيق</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">audit</span>
+                    </div>
+                </div>
+                <div class="feature-item trading-feature" data-index="05">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h4 class="feature-title">ربط مباشر مع رؤى نيوز</h4>
+                    <p class="feature-desc">الإشارة الإخبارية تتحول إلى أمر تنفيذي خلال ثوانٍ معدودة</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">~3s</span>
+                    </div>
+                </div>
+                <div class="feature-item trading-feature" data-index="06">
+                    <div class="feature-icon" style="background: rgba(0,102,255,0.08); border-color: rgba(0,102,255,0.15);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                    </div>
+                    <h4 class="feature-title">وضع محاكاة</h4>
+                    <p class="feature-desc">اختبر استراتيجيتك على بيانات حقيقية تاريخية قبل المخاطرة</p>
+                    <div class="feature-stats">
+                        <span class="feature-stat highlight" style="background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); color: var(--quantum-blue);">backtest</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="section-cta">
+                <a href="#" class="btn-glow-large magnetic" style="background: linear-gradient(135deg, var(--quantum-blue), var(--neural-teal));">
+                    <span>ادخل رؤى تريد</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
         </div>
-        <img class="showcase-img" src="images/trading-home.jpg" alt="لقطة حية من منصة رواء تريدنج — الواجهة الكونية مع شبكة النماذج الذكية">
-      </div>
-    </div>
+    </section>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:64px" class="reveal d2">
-      <div class="showcase teal" style="margin:0;max-width:none">
-        <div class="showcase-frame" style="transform:rotateX(2deg)">
-          <div class="browser-bar">
-            <div class="dots"><span></span><span></span><span></span></div>
-            <div class="url">roua-trading /features</div>
-          </div>
-          <img class="showcase-img" src="images/news-hero.jpg" alt="قسم المزايا في منصة رواء تريدنج" loading="lazy">
-        </div>
-      </div>
-      <div class="showcase teal" style="margin:0;max-width:none">
-        <div class="showcase-frame" style="transform:rotateX(2deg)">
-          <div class="browser-bar">
-            <div class="dots"><span></span><span></span><span></span></div>
-            <div class="url">roua-trading /neural-lab</div>
-          </div>
-          <img class="showcase-img" src="images/trading-home.jpg" alt="المزيد من مزايا منصة رواء تريدنج" loading="lazy">
-        </div>
-      </div>
-    </div>
-
-    <div class="svc-grid">
-      <div class="svc-card teal reveal">
-        <span class="cat"><span class="ln"></span> مجلس الذكاء</span>
-        <ul>
-          <li><span class="ic">01</span><div><b>مجلس 9 نماذج + المحامي الشيطاني</b><span>تسعة نماذج تتصارع وتتوافق، مع نموذج معاكس يكشف الثغرات</span></div></li>
-          <li><span class="ic">02</span><div><b>البريفات الذكية</b><span>ملخصات قرار مدعومة بالأدلة والسيناريوهات قبل التنفيذ</span></div></li>
-        </ul>
-      </div>
-      <div class="svc-card teal reveal d1">
-        <span class="cat"><span class="ln"></span> الرسوم والتنفيذ</span>
-        <ul>
-          <li><span class="ic">03</span><div><b>64 محرك رسوم بيانية</b><span>تحليل فني متقدم بأنماط ومؤشرات لحظية لا محدودة</span></div></li>
-          <li><span class="ic">04</span><div><b>3 منفّذات (60ث / 10ث / &lt;5ملّي)</b><span>طبقات تنفيذ من الاستراتيجي إلى فائق السرعة</span></div></li>
-          <li><span class="ic">05</span><div><b>جسر EA Bridge</b><span>ربط مباشر مع خبراء MetaTrader والمستشارين الآليين</span></div></li>
-        </ul>
-      </div>
-      <div class="svc-card teal reveal d2">
-        <span class="cat"><span class="ln"></span> ابتكار وملاذ</span>
-        <ul>
-          <li><span class="ic">06</span><div><b>المختبر العصبي Neural Lab</b><span>تدريب واختبار نماذج مخصصة على بيانات حقيقية</span></div></li>
-          <li><span class="ic">07</span><div><b>الملاذ Sanctuary</b><span>طبقة أمان وحماية متقدمة للأصول والقرارات</span></div></li>
-          <li><span class="ic">08</span><div><b>سوق التنبؤ Prediction Market</b><span>تقييم جماعي للسيناريوهات واحتمالات السوق</span></div></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="product-cta reveal d3">
-      <a href="#contact" class="btn btn-teal">احجز عرضاً توضيحياً خاصاً</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HOW IT WORKS ============ -->
-<section class="section" id="how">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow"><span class="dot"></span> كيف يعمل</span>
-      <h2>من الانضمام إلى التنفيذ في 4 خطوات</h2>
-      <p>رحلة مصمّمة لتكون سلسة — من تفعيل الحساب حتى أول أمر تنفيذ بزمن استجابة أقل من 5 ملّي ثانية.</p>
-    </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="num">01</div>
-        <h3>تفعيل الحساب</h3>
-        <p>اشتراك سريع يفتح لك بوابة المنظومة كاملةً مع ضبط الصلاحيات وأمن الحساب.</p>
-      </div>
-      <div class="step reveal d1">
-        <div class="num">02</div>
-        <h3>اختيار المنصة</h3>
-        <p>ادخل رواء نيوز لمتابعة الأسواق، أو رواء تريدنج للتنفيذ — أو كليهما في وقت واحد.</p>
-      </div>
-      <div class="step reveal d2">
-        <div class="num">03</div>
-        <h3>تكوين الذكاء</h3>
-        <p>فعّل نماذج المجلس، اضبط خطوط المعالجة اللغوية، واربط منفّذاتك المفضّلة.</p>
-      </div>
-      <div class="step reveal d3">
-        <div class="num">04</div>
-        <h3>البدء بالتداول</h3>
-        <p>من الخبر الأول إلى أمر التنفيذ عبر 3 طبقات سرعة، مع مراقبة لحظية كاملة.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ UNIQUE FEATURES ============ -->
-<section class="section" id="features">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow"><span class="dot"></span> ما يميّزنا</span>
-      <h2>مزايا لا تجدها في أي مكان آخر</h2>
-      <p>تكامل نادر بين الذكاء اللغوي والذكاء التنفيذي، في منظومة واحدة ذات طابع كوني.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat reveal">
-        <div class="ico">🌌</div>
-        <h3>شبكة كونية موحّدة</h3>
-        <p>المنصتان تعملان على بنية واحدة، فالخبر يغذّي القرار والقرار يغذّي الخبر في حلقة مستمرة.</p>
-      </div>
-      <div class="feat reveal d1">
-        <div class="ico">🧠</div>
-        <h3>ذكاء متعدد النماذج</h3>
-        <p>تسعة نماذج تتشاور وتتصارع، مع محامٍ شيطاني يكشف المغالطات قبل أي قرار.</p>
-      </div>
-      <div class="feat reveal d2">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3>تنفيذ فائق السرعة</h3>
-        <p>طبقة تنفيذ أقل من 5 ملّي ثانية بجانب طبقات 10 ثوانٍ و60 ثانية لكل أسلوب تداول.</p>
-      </div>
-      <div class="feat reveal d3">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>أمان مطلق</h3>
-        <p>طبقة الملاذ Sanctuary تحمي الأصول والقرارات، مع جسر آمن للمستشارين الآليين.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PRICING ============ -->
-<section class="section" id="pricing">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow"><span class="dot"></span> الباقات</span>
-      <h2>باقات تناسب كل رحلة</h2>
-      <p>من المتداول المستقل إلى المؤسسة — اختر الباقة التي تناسب طموحك، وارفعها متى شئت.</p>
-    </div>
-    <div class="price-grid">
-      <div class="price reveal">
-        <div class="tier">Explorer</div>
-        <div class="fee"><span class="cur">$</span>29<small>/شهرياً</small></div>
-        <div class="desc">للمتداول المستكشف الذي يبدأ رحلته في منظومة رواء.</div>
-        <ul>
-          <li>وصول كامل لرواء نيوز</li>
-          <li>خط معالجة لغوية واحد</li>
-          <li>3 نماذج ذكاء اصطناعي</li>
-          <li>16 محرك رسوم بيانية</li>
-          <li>منفّذ 60 ثانية</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">اختيار الباقة</a>
-      </div>
-      <div class="price featured reveal d1">
-        <div class="tier">Professional</div>
-        <div class="fee"><span class="cur">$</span>89<small>/شهرياً</small></div>
-        <div class="desc">للمتداول المحترف الذي يحتاج القوة الكاملة للمنظومة.</div>
-        <ul>
-          <li>كل مزايا Explorer</li>
-          <li>5 خطوط معالجة لغوية</li>
-          <li>9 نماذج + المحامي الشيطاني</li>
-          <li>64 محرك رسوم بيانية</li>
-          <li>3 منفّذات (60ث/10ث/&lt;5ملّي)</li>
-          <li>المساعد Copilot · 32 لغة</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary">ابدأ الآن</a>
-      </div>
-      <div class="price reveal d2">
-        <div class="tier">Enterprise</div>
-        <div class="fee" style="font-size:28px">حسب الطلب</div>
-        <div class="desc">للمؤسسات والصناديق التي تحتاج حلولاً مخصصة بالكامل.</div>
-        <ul>
-          <li>كل مزايا Professional</li>
-          <li>المختبر العصبي Neural Lab</li>
-          <li>طبقة الملاذ Sanctuary</li>
-          <li>جسر EA Bridge مخصّص</li>
-          <li>سوق التنبؤ Prediction Market</li>
-          <li>دعم مخصّص وSLA مضمون</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">تواصل مع المبيعات</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACT ============ -->
-<section class="section" id="contact">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow"><span class="dot"></span> ابدأ الآن</span>
-      <h2>جاهز لدخول منظومة رواء؟</h2>
-      <p>أخبرنا عن احتياجك وسيتواصل معك فريقنا خلال 24 ساعة لإعداد عرضك التوضيحي.</p>
-    </div>
-    <div class="contact-card reveal d1">
-      <div class="contact-info">
-        <h3>لنتحدث عن رحلتك</h3>
-        <p>سواء كنت متداولاً مستقلاً يبحث عن سرعة التنفيذ، أو مؤسسة تحتاج منظومة كاملة — فريق رواء جاهز لمساعدتك.</p>
-        <div class="item"><div class="ic">✉</div><div>hello@roua.finance</div></div>
-        <div class="item"><div class="ic">🖹</div><div>دعم 24/7 · 5 لغات</div></div>
-        <div class="item"><div class="ic">🌐</div><div>تغطية 24 سوقاً جغرافياً</div></div>
-        <div class="item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div>زمن استجابة &lt; 5 ملّي ثانية</div></div>
-      </div>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-grid">
-          <div class="field">
-            <label>الاسم الكامل</label>
-            <input type="text" placeholder="مثال: أحمد العلي" required>
-          </div>
-          <div class="field">
-            <label>البريد الإلكتروني</label>
-            <input type="email" placeholder="you@example.com" required>
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="field">
-            <label>المنصة المهتمة</label>
-            <select>
-              <option>المنصتان معاً</option>
-              <option>رواء نيوز</option>
-              <option>رواء تريدنج</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>الباقة</label>
-            <select>
-              <option>Explorer — $29/شهر</option>
-              <option>Professional — $89/شهر</option>
-              <option>Enterprise — حسب الطلب</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label>رسالتك</label>
-          <textarea placeholder="أخبرنا عن احتياجك أو سؤالك..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
-          إرسال الطلب
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <a href="#" class="brand">
-          <span class="mark"></span>
-          <span>رواء | Roua</span>
-        </a>
-        <p>منظومة مالية موحّدة تجمع بين أخبار الأسواق متعددة اللغات وذكاء التداول متعدد النماذج — من الخبر الأول إلى أمر التنفيذ.</p>
-      </div>
-      <div class="foot-col">
-        <h4>المنصات</h4>
-        <ul>
-          <li><a href="#news">رواء نيوز</a></li>
-          <li><a href="#trading">رواء تريدنج</a></li>
-          <li><a href="https://rouatradingnews-production.up.railway.app/ar" target="_blank" rel="noopener">منصة الأخبار المباشرة</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>المنظومة</h4>
-        <ul>
-          <li><a href="#how">كيف يعمل</a></li>
-          <li><a href="#features">المزايا</a></li>
-          <li><a href="#pricing">الأسعار</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>تواصل</h4>
-        <ul>
-          <li><a href="#contact">طلب عرض توضيحي</a></li>
-          <li><a href="mailto:hello@roua.finance">hello@roua.finance</a></li>
-          <li><a href="#">الدعم الفني</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <p>© 2025 رواء · Roua. جميع الحقوق محفوظة.</p>
-      <div class="foot-social">
-        <a href="#" aria-label="X">𝕏</a>
-        <a href="#" aria-label="LinkedIn">in</a>
-        <a href="#" aria-label="Telegram">✈</a>
-        <a href="#" aria-label="YouTube">▶</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* ============ STARFIELD + NETWORK ============ */
-(function(){
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const star = document.getElementById('starfield');
-  const net = document.getElementById('network');
-  const hero = document.querySelector('.hero');
-  let sw, sh, dpr;
-  const stars = [];
-  const STAR_COUNT = 220;
-
-  function size(){
-    dpr = Math.min(window.devicePixelRatio||1, 2);
-    const r = hero.getBoundingClientRect();
-    sw = r.width; sh = r.height;
-    [star, net].forEach(c=>{
-      c.width = sw*dpr; c.height = sh*dpr;
-      c.style.width = sw+'px'; c.style.height = sh+'px';
-    });
-  }
-  function initStars(){
-    stars.length = 0;
-    for(let i=0;i<STAR_COUNT;i++){
-      stars.push({
-        x: Math.random()*sw,
-        y: Math.random()*sh,
-        r: Math.random()*1.4 + 0.3,
-        a: Math.random()*0.6 + 0.2,
-        tw: Math.random()*0.02 + 0.005,
-        dir: Math.random()<0.5?1:-1,
-        vx: (Math.random()-0.5)*0.04,
-        vy: (Math.random()-0.5)*0.04
-      });
-    }
-  }
-  const sctx = star.getContext('2d');
-  const nctx = net.getContext('2d');
-
-  // network nodes
-  const nodes = [];
-  function initNodes(){
-    nodes.length = 0;
-    const N = 7;
-    for(let i=0;i<N;i++){
-      nodes.push({
-        x: Math.random()*sw,
-        y: Math.random()*sh,
-        r: Math.random()*2 + 2.5,
-        phase: Math.random()*Math.PI*2,
-        speed: Math.random()*0.5+0.4,
-        amp: Math.random()*40+25,
-        bx: 0, by: 0
-      });
-      nodes[i].bx = nodes[i].x; nodes[i].by = nodes[i].y;
-    }
-  }
-
-  let t = 0;
-  function drawStars(){
-    sctx.clearRect(0,0,sw*dpr,sh*dpr);
-    sctx.save();
-    sctx.scale(dpr,dpr);
-    for(const s of stars){
-      s.a += s.tw * s.dir;
-      if(s.a > 0.9 || s.a < 0.15) s.dir *= -1;
-      s.x += s.vx; s.y += s.vy;
-      if(s.x<0) s.x=sw; if(s.x>sw) s.x=0;
-      if(s.y<0) s.y=sh; if(s.y>sh) s.y=0;
-      sctx.beginPath();
-      sctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      sctx.fillStyle = 'rgba(255,255,255,'+s.a+')';
-      sctx.fill();
-      // occasional larger glow stars
-      if(s.r > 1.2){
-        sctx.beginPath();
-        sctx.arc(s.x, s.y, s.r*3, 0, Math.PI*2);
-        sctx.fillStyle = 'rgba(180,220,255,'+(s.a*0.08)+')';
-        sctx.fill();
-      }
-    }
-    sctx.restore();
-  }
-
-  function drawNet(){
-    nctx.clearRect(0,0,sw*dpr,sh*dpr);
-    nctx.save();
-    nctx.scale(dpr,dpr);
-    // update node positions (drift around base)
-    for(const n of nodes){
-      n.x = n.bx + Math.cos(t*n.speed + n.phase) * n.amp;
-      n.y = n.by + Math.sin(t*n.speed*0.8 + n.phase) * n.amp;
-    }
-    // connecting lines
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x-b.x, dy = a.y-b.y;
-        const d = Math.sqrt(dx*dx+dy*dy);
-        const max = 320;
-        if(d < max){
-          const op = (1 - d/max) * 0.35;
-          const grad = nctx.createLinearGradient(a.x,a.y,b.x,b.y);
-          grad.addColorStop(0, 'rgba(34,211,238,'+op+')');
-          grad.addColorStop(1, 'rgba(103,232,249,'+op*0.6+')');
-          nctx.strokeStyle = grad;
-          nctx.lineWidth = 0.8;
-          nctx.beginPath();
-          nctx.moveTo(a.x,a.y); nctx.lineTo(b.x,b.y);
-          nctx.stroke();
-        }
-      }
-    }
-    // nodes with glow
-    for(const n of nodes){
-      const pulse = (Math.sin(t*2 + n.phase)+1)/2;
-      const glowR = n.r * (6 + pulse*4);
-      const g = nctx.createRadialGradient(n.x,n.y,0,n.x,n.y,glowR);
-      g.addColorStop(0, 'rgba(34,211,238,'+(0.55+pulse*0.25)+')');
-      g.addColorStop(0.4,'rgba(34,211,238,0.15)');
-      g.addColorStop(1, 'rgba(34,211,238,0)');
-      nctx.fillStyle = g;
-      nctx.beginPath(); nctx.arc(n.x,n.y,glowR,0,Math.PI*2); nctx.fill();
-      // core
-      nctx.beginPath(); nctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      nctx.fillStyle = 'rgba(220,250,255,0.95)'; nctx.fill();
-    }
-    nctx.restore();
-  }
-
-  function loop(){
-    t += 0.01;
-    if(!reduce){ drawStars(); drawNet(); }
-    requestAnimationFrame(loop);
-  }
-
-  size(); initStars(); initNodes();
-  if(reduce){ drawStars(); drawNet(); }
-  else loop();
-
-  let rt;
-  window.addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(()=>{ size(); initStars(); initNodes(); }, 200); });
-})();
-
-/* ============ TICKER ============ */
-(function(){
-  const items = [
-    {s:'XAU/USD', p:'2,418.50', c:'+0.42%', up:true},
-    {s:'BTC/USD', p:'67,234.10', c:'+2.18%', up:true},
-    {s:'ETH/USD', p:'3,512.80', c:'-0.94%', up:false},
-    {s:'EUR/USD', p:'1.0892', c:'-0.18%', up:false},
-    {s:'GBP/USD', p:'1.2745', c:'+0.11%', up:true},
-    {s:'USD/JPY', p:'157.32', c:'+0.27%', up:true},
-    {s:'S&P 500', p:'5,521.43', c:'+0.31%', up:true},
-    {s:'NASDAQ', p:'18,342.94', c:'+0.58%', up:true},
-    {s:'DOW', p:'39,118.86', c:'-0.12%', up:false},
-    {s:'DXY', p:'104.82', c:'+0.09%', up:true},
-    {s:'WTI', p:'78.45', c:'+1.23%', up:true},
-    {s:'BRENT', p:'82.91', c:'+0.88%', up:true},
-    {s:'TADAWUL', p:'11,842.70', c:'+0.67%', up:true},
-    {s:'DFM', p:'4,213.55', c:'-0.34%', up:false},
-    {s:'ADI', p:'9,128.40', c:'+0.22%', up:true},
-    {s:'GOLD', p:'2,418.50', c:'+0.42%', up:true},
-  ];
-  const track = document.getElementById('tickerTrack');
-  const build = ()=> items.map(i=>`<div class="ticker-item"><span class="sym">${i.s}</span><span class="px">${i.p}</span><span class="chg ${i.up?'up':'down'}">${i.c}</span></div>`).join('');
-  track.innerHTML = build() + build(); // duplicate for seamless loop
-})();
-
-/* ============ REVEAL ON SCROLL ============ */
-(function(){
-  const els = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  els.forEach(el=> io.observe(el));
-})();
-
-/* ============ COUNT-UP ============ */
-(function(){
-  const nums = document.querySelectorAll('[data-count]');
-  const animate = (el)=>{
-    const target = parseFloat(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    const dur = 1800; const start = performance.now();
-    const step = (now)=>{
-      const p = Math.min((now-start)/dur, 1);
-      const eased = 1 - Math.pow(1-p, 3);
-      const val = Math.floor(target * eased);
-      el.textContent = val.toLocaleString('en-US') + suffix;
-      if(p < 1) requestAnimationFrame(step);
-      else el.textContent = target.toLocaleString('en-US') + suffix;
-    };
-    requestAnimationFrame(step);
-  };
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } });
-  }, { threshold: 0.5 });
-  nums.forEach(n=> io.observe(n));
-})();
-
-/* ============ NAV SHRINK + BURGER ============ */
-(function(){
-  const nav = document.getElementById('nav');
-  const onScroll = ()=>{
-    if(window.scrollY > 30) nav.style.background = 'rgba(6,8,16,.82)';
-    else nav.style.background = 'rgba(6,8,16,.55)';
-  };
-  window.addEventListener('scroll', onScroll, {passive:true});
-  const burger = document.getElementById('burger');
-  const links = document.getElementById('navLinks');
-  burger.addEventListener('click', ()=> links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> links.classList.remove('open')));
-})();
-
-/* ============ FORM ============ */
-function handleSubmit(e){
-  e.preventDefault();
-  const btn = e.target.querySelector('button[type=submit]');
-  const orig = btn.innerHTML;
-  btn.innerHTML = 'تم الإرسال ✓';
-  btn.style.background = 'linear-gradient(180deg,#22c55e,#16a34a)';
-  setTimeout(()=>{ btn.innerHTML = orig; btn.style.background=''; e.target.reset(); }, 2600);
-}
-</script>
 </body>
 </html>
