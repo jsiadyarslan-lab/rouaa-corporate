@@ -495,6 +495,302 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   .nf-card-inner{padding:1.5rem 1.3rem 1.3rem}
 }
 
+
+/* ─── كيف تعمل رؤى؟ — Mental Map Section ─── */
+.how-rouaa{
+  padding:var(--space-2xl) var(--space-lg);
+  max-width:1300px;
+  margin:0 auto;
+  position:relative;
+  scroll-margin-top:80px;
+}
+.how-header{
+  text-align:center;
+  margin-bottom:var(--space-xl);
+}
+.how-title{
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:900;
+  line-height:1.25;
+  margin-bottom:0.8rem;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.how-sub{
+  color:var(--text-dim);
+  font-size:1.05rem;
+  font-weight:500;
+  line-height:1.85;
+  max-width:680px;
+  margin:0 auto;
+}
+.how-sub strong{
+  color:var(--blue-glow);
+  font-weight:700;
+}
+
+/* ── 3-stage flow ── */
+.how-flow{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:1rem;
+  align-items:center;
+  margin:var(--space-xl) 0;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media (max-width:880px){
+  .how-flow{
+    grid-template-columns:1fr;
+    gap:0.8rem;
+  }
+  .how-arrow{transform:rotate(90deg);margin:0.3rem auto}
+}
+.how-stage{
+  padding:1.6rem 1.3rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(160deg, rgba(59,130,246,0.06) 0%, rgba(34,211,238,0.03) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  text-align:center;
+  position:relative;
+  transition:all 0.4s;
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.how-stage::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:60%;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+  opacity:0.6;
+  transition:opacity 0.4s, width 0.4s;
+}
+.how-stage:hover{
+  transform:translateY(-4px);
+  border-color:var(--blue-bright);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.12);
+}
+.how-stage:hover::before{
+  opacity:1;
+  width:80%;
+}
+.how-stage-num{
+  font-family:'Orbitron',sans-serif;
+  font-size:0.85rem;
+  font-weight:900;
+  color:var(--blue-bright);
+  letter-spacing:0.15em;
+  margin-bottom:0.8rem;
+  opacity:0.7;
+}
+.how-stage-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(34,211,238,0.08) 100%);
+  border:1px solid rgba(96,165,250,0.3);
+  display:grid;place-items:center;
+  margin:0 auto 0.8rem;
+}
+.how-stage-icon svg{width:24px;height:24px;color:var(--blue-bright)}
+.how-stage-title{
+  font-size:1.05rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.4rem;
+  line-height:1.4;
+}
+.how-stage-desc{
+  color:var(--text-dim);
+  font-size:0.85rem;
+  line-height:1.6;
+  font-weight:500;
+}
+.how-arrow{
+  display:grid;
+  place-items:center;
+  color:var(--blue-bright);
+  opacity:0.6;
+}
+.how-arrow svg{width:32px;height:32px}
+
+/* ── Two-products relationship ── */
+.how-relation{
+  margin-top:var(--space-2xl);
+  padding:var(--space-xl);
+  border-radius:var(--radius-xl);
+  background:linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(34,211,238,0.02) 100%);
+  border:1px solid var(--glass-border-strong);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.how-relation::before{
+  content:'';
+  position:absolute;
+  top:-50%;right:-30%;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(96,165,250,0.1), transparent 70%);
+  filter:blur(40px);
+  pointer-events:none;
+}
+.how-relation-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:var(--space-lg);
+  align-items:stretch;
+  position:relative;
+}
+@media (max-width:880px){
+  .how-relation-grid{
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+  .how-link{transform:rotate(90deg);margin:0.5rem auto}
+}
+.how-product{
+  padding:var(--space-lg);
+  border-radius:var(--radius-lg);
+  background:rgba(2,6,23,0.5);
+  border:1px solid var(--glass-border);
+  text-align:center;
+  transition:all 0.4s;
+  position:relative;
+}
+.how-product.news{border-color:rgba(34,211,238,0.3)}
+.how-product.trading{border-color:rgba(96,165,250,0.4)}
+.how-product:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+.how-product.news:hover{border-color:var(--cyan)}
+.how-product.trading:hover{border-color:var(--blue-bright)}
+
+.how-product-role{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.7rem;
+  padding:0.3rem 0.8rem;
+  border-radius:4px;
+  display:inline-block;
+}
+.how-product.news .how-product-role{
+  color:var(--cyan);
+  background:rgba(34,211,238,0.1);
+  border:1px solid rgba(34,211,238,0.3);
+}
+.how-product.trading .how-product-role{
+  color:var(--blue-bright);
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(96,165,250,0.3);
+}
+.how-product-name{
+  font-size:1.5rem;
+  font-weight:900;
+  margin-bottom:0.5rem;
+  line-height:1.2;
+}
+.how-product.news .how-product-name{color:var(--cyan)}
+.how-product.trading .how-product-name{color:var(--blue-bright)}
+.how-product-tagline{
+  color:var(--white);
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:0.5rem;
+  line-height:1.5;
+}
+.how-product-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;
+  line-height:1.7;
+}
+
+.how-link{
+  display:grid;
+  place-items:center;
+  align-self:center;
+  color:var(--blue-bright);
+  position:relative;
+}
+.how-link-arrow{
+  width:60px;height:2px;
+  background:linear-gradient(90deg, var(--cyan), var(--blue-bright));
+  position:relative;
+  border-radius:2px;
+  box-shadow:0 0 10px rgba(96,165,250,0.6);
+}
+.how-link-arrow::before{
+  content:'';
+  position:absolute;
+  top:50%;left:0;
+  width:14px;height:14px;
+  background:radial-gradient(circle, var(--blue-bright), transparent);
+  border-radius:50%;
+  transform:translateY(-50%);
+  animation:linkPulse 2s linear infinite;
+}
+@keyframes linkPulse{
+  0%{left:0;opacity:1}
+  100%{left:calc(100% - 14px);opacity:0}
+}
+.how-link-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.15em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  margin-top:0.5rem;
+  white-space:nowrap;
+}
+
+/* ── Unification footer ── */
+.how-unification{
+  margin-top:var(--space-lg);
+  text-align:center;
+  padding:1.5rem 2rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(135deg, rgba(96,165,250,0.08) 0%, rgba(34,211,238,0.05) 100%);
+  border:1px solid rgba(96,165,250,0.3);
+  position:relative;
+}
+.how-unification-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.2em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.6rem;
+  opacity:0.8;
+}
+.how-unification-text{
+  font-size:1.25rem;
+  font-weight:800;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1.4;
+}
+.how-unification-sub{
+  color:var(--text-dim);
+  font-size:0.9rem;
+  margin-top:0.5rem;
+  font-weight:500;
+}
+
 </style>
 </head>
 <body>
@@ -510,6 +806,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   </div>
   <ul class="nav-links">
     <li><a href="#hero">الرئيسية</a></li>
+    <li><a href="#how-rouaa-works">كيف تعمل رؤى؟</a></li>
     <li><a href="#advantage">الميزة التنافسية</a></li>
     <li><a href="#audiences">لمن صُممت رؤى</a></li>
     <li><a href="#rouaa-news">رؤى الأخبار</a></li>
@@ -581,6 +878,94 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
     </div>
   </div>
 </section>
+
+
+<!-- ═══ كيف تعمل رؤى؟ — Mental Map ═══ -->
+<section id="how-rouaa-works" class="how-rouaa reveal">
+  <div class="how-header">
+    <span class="section-tag">كيف تعمل رؤى؟</span>
+    <h2 class="how-title">من الخبر إلى القرار — في ثوانٍ</h2>
+    <p class="how-sub">
+      رؤى ليست موقع أخبار، ولا منصة تداول، ولا وسيط. هي <strong>بنية تحتية للاستخبار المالي</strong> —
+      تجمع، تُحلّل، وتُنفّذ في مسار واحد متكامل.
+    </p>
+  </div>
+
+  <!-- 3-stage flow -->
+  <div class="how-flow">
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠١</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h4 class="how-stage-title">المصادر المالية العالمية</h4>
+      <p class="how-stage-desc">729+ مصدر رسمي · 5 لغات · بنوك مركزية وهيئات ووزارات</p>
+    </div>
+
+    <div class="how-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠٢</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+      </div>
+      <h4 class="how-stage-title">الاستخبارات بالذكاء الاصطناعي</h4>
+      <p class="how-stage-desc">10 أدوار ذكاء اصطناعي تُحلّل وتصوت وتُحدّد الأثر السوقي لحظياً</p>
+    </div>
+
+    <div class="how-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠٣</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h4 class="how-stage-title">القرار والتنفيذ الذكي</h4>
+      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · 6 منصات تنفيذ</p>
+    </div>
+
+  </div>
+
+  <!-- Two-products relationship -->
+  <div class="how-relation">
+    <div class="how-relation-grid">
+
+      <div class="how-product news">
+        <div class="how-product-role">العقل</div>
+        <h3 class="how-product-name">رؤى الأخبار</h3>
+        <p class="how-product-tagline">يجمع ويفهم المعلومات</p>
+        <p class="how-product-desc">يُغذّي المنظومة بذكاء مالي لحظي من 729+ مصدراً، يُحلّله بـ 10 أدوار ذكاء اصطناعي، ويُخرجه كإشارات قابلة للتنفيذ.</p>
+      </div>
+
+      <div class="how-link">
+        <div class="how-link-arrow"></div>
+        <div class="how-link-label">يُغذّي بالذكاء</div>
+      </div>
+
+      <div class="how-product trading">
+        <div class="how-product-role">الذراع</div>
+        <h3 class="how-product-name">رؤى التداول</h3>
+        <p class="how-product-tagline">يُحوّل الفهم إلى قرار وتنفيذ</p>
+        <p class="how-product-desc">يستهلك إشارات العقل، يُطبّق 15 فحص أمان، ويُنفّذ تلقائياً عبر 6 منصات بـ 3 وكلاء مستقلين.</p>
+      </div>
+
+    </div>
+
+    <!-- Unification footer -->
+    <div class="how-unification">
+      <div class="how-unification-label">المعادلة الكاملة</div>
+      <div class="how-unification-text">رؤى الأخبار + رؤى التداول = بنية تحتية للاستخبار المالي</div>
+      <div class="how-unification-sub">ليست منصة واحدة، بل منظومتان متكاملتان تعملان ب独立ية تامة، وتتكاملان عند الحاجة</div>
+    </div>
+  </div>
+
+</section>
+
 
 <!-- الميزة التنافسية -->
 <section id="advantage" class="reveal">
