@@ -1241,7 +1241,7 @@ nav{
   background:rgba(2,6,23,0.55);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--glass-border);
+  border-bottom:none;
   transform:translateY(-100%);
   animation:navDown 0.8s ease 0.3s forwards;
   overflow:visible;
@@ -1298,6 +1298,27 @@ nav{
 }
 .logo-svg svg rect{display:none}
 
+
+/* ─── Nav bottom border with semicircular notch ─── */
+.nav-border{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:2px;
+  z-index:98;
+  pointer-events:none;
+  overflow:visible;
+}
+.nav-border svg{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:60px;
+  overflow:visible;
+}
+
 </style>
 </head>
 <body>
@@ -1307,6 +1328,8 @@ nav{
 <div class="orb orb-3"></div>
 
 <nav>
+  <div class="nav-border"><svg viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="M0,1 L850,1 A50,50 0 0,1 950,1 L1000,1" fill="none" stroke="rgba(96,165,250,0.35)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+  
   <div class="logo" role="img" aria-label="رؤى - ببصيرة نحو الأسواق">
     <div class="logo-svg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="88" height="88">
       <defs>
