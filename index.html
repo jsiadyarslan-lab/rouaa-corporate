@@ -1204,6 +1204,43 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   to{transform:scale(1.8);opacity:0}
 }
 
+
+/* ─── SVG Logo ─── */
+.logo-svg{display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-svg svg{width:44px;height:44px;filter:drop-shadow(0 0 12px rgba(99,102,241,0.4))}
+.logo-svg svg rect{display:none}
+/* Hide the background rect */
+
+/* ─── Hero Logo ─── */
+.hero-logo{display:flex;justify-content:center;margin-bottom:1rem}
+.hero-logo svg{width:140px;height:140px;filter:drop-shadow(0 0 40px rgba(99,102,241,0.25))}
+.hero-logo svg rect{display:none}
+
+
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      
 </style>
 </head>
 <body>
@@ -1237,7 +1274,197 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <span class="badge-dot"></span>
       <span>منظومة استخبارات مالية ذكية</span>
     </div>
-    <h1 class="hero-title">رُؤى</h1>
+    <div class="hero-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="140" height="140">
+      <defs>
+        <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#B388FF"/>
+          <stop offset="50%" stop-color="#6366F1"/>
+          <stop offset="100%" stop-color="#06B6D4"/>
+        </linearGradient>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#B388FF" stop-opacity="0.8"/>
+          <stop offset="40%" stop-color="#6366F1" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/>
+          <stop offset="50%" stop-color="#B388FF" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#000000" stop-opacity="0.7"/>
+          <stop offset="70%" stop-color="#0a0a1a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#1a1a2e" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#B388FF" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#6366F1" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.5"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <style>
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      </style>
+      <rect width="200" height="200" rx="20" fill="#0a0a12"/>
+      <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
+      <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
+      <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(179,136,255,0.12)" stroke-width="0.5" class="range-ring" style="animation-delay:1s"/>
+      <g class="network">
+        <line class="network-line" x1="100" y1="20" x2="147.02" y2="35.28"/>
+        <line class="network-line" x1="100" y1="20" x2="176.08" y2="75.28"/>
+        <line class="network-line" x1="100" y1="20" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="100" y1="20" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="100" y1="20" x2="100" y2="180"/>
+        <line class="network-line" x1="100" y1="20" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="100" y1="20" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="100" y1="20" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="100" y1="20" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="100" y2="180"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="100" y2="180"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="100" y2="180"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="100" y2="180"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="100" y1="180" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="100" y1="180" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="100" y1="180" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="100" y1="180" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="23.92" y1="124.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="23.92" y1="124.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="23.92" y1="75.28" x2="52.98" y2="35.28"/>
+      </g>
+      <g class="radar-group">
+        <path fill="url(#radarGrad)" d="M 100,100 L 100,5 A 95,95 0 0,1 195,100 Z"/>
+        <line x1="100" y1="100" x2="100" y2="5" stroke="#B388FF" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
+        <circle cx="100" cy="5" r="2" fill="#06B6D4" opacity="0.8"/>
+      </g>
+      <circle class="center-glow" cx="100" cy="100" r="25"/>
+      <circle class="center-dot" cx="100" cy="100" r="8"/>
+      <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+      <g class="inner-nodes">
+        <circle class="inner-halo in0" cx="158.12" cy="100.0" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in0" cx="158.12" cy="100.0" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in1" cx="152.57" cy="107.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in1" cx="152.57" cy="107.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in2" cx="160.02" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in2" cx="160.02" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in3" cx="155.05" cy="140.0" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in3" cx="155.05" cy="140.0" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in4" cx="117.96" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in4" cx="117.96" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in5" cx="123.51" cy="147.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in5" cx="123.51" cy="147.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in6" cx="111.1" cy="145.83" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in6" cx="111.1" cy="145.83" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in7" cx="100.0" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in7" cx="100.0" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in8" cx="91.97" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in8" cx="91.97" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in9" cx="70.94" cy="158.88" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in9" cx="70.94" cy="158.88" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in10" cx="57.94" cy="149.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in10" cx="57.94" cy="149.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in11" cx="78.97" cy="115.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in11" cx="78.97" cy="115.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in12" cx="52.98" cy="115.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in12" cx="52.98" cy="115.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in13" cx="35.02" cy="109.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in13" cx="35.02" cy="109.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in14" cx="52.98" cy="96.39" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in14" cx="52.98" cy="96.39" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in15" cx="76.49" cy="92.36" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in15" cx="76.49" cy="92.36" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in16" cx="52.98" cy="65.84" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in16" cx="52.98" cy="65.84" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in17" cx="52.98" cy="54.16" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in17" cx="52.98" cy="54.16" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in18" cx="65.98" cy="44.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in18" cx="65.98" cy="44.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in19" cx="82.04" cy="44.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in19" cx="82.04" cy="44.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in20" cx="100.0" cy="69.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in20" cx="100.0" cy="69.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in21" cx="111.1" cy="35.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in21" cx="111.1" cy="35.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in22" cx="117.96" cy="56.39" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in22" cx="117.96" cy="56.39" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in23" cx="138.04" cy="47.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in23" cx="138.04" cy="47.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+      </g>
+      <g class="outer-nodes">
+        <circle class="node-halo n0" cx="100" cy="20" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n0" cx="100" cy="20" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n1" cx="147.02" cy="35.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n1" cx="147.02" cy="35.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n2" cx="176.08" cy="75.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n2" cx="176.08" cy="75.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n3" cx="176.08" cy="124.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n3" cx="176.08" cy="124.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n4" cx="147.02" cy="164.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n4" cx="147.02" cy="164.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n5" cx="100" cy="180" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n5" cx="100" cy="180" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n6" cx="52.98" cy="164.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n6" cx="52.98" cy="164.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n7" cx="23.92" cy="124.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n7" cx="23.92" cy="124.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n8" cx="23.92" cy="75.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n8" cx="23.92" cy="75.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n9" cx="52.98" cy="35.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n9" cx="52.98" cy="35.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+      </g>
+      <text x="100" y="100" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="#fff" opacity="0.95" letter-spacing="2" style="text-shadow:0 0 10px rgba(179,136,255,0.6);">R</text>
+    </svg></div>
+      <h1 class="hero-title">رُؤى</h1>
     <div class="hero-title-en">رؤى · ببصيرة نحو الأسواق</div>
     <p class="hero-tagline">بنية تحتية مالية <span>للمؤسسات</span> — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
     <p class="hero-sub">
