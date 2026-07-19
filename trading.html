@@ -149,24 +149,35 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
         .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
       
 
-/* ─── Navbar with floating circular logo ─── */
+.nav-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:40px;
+  overflow:visible;
+  z-index:98;
+  pointer-events:none;
+}
+/* ─── Navbar ─── */
 nav{
   position:fixed;top:0;left:0;right:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:1.2rem 3rem;
   z-index:100;
-  background:rgba(2,6,23,0.55);
+  background:rgba(2,6,23,0.65);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--glass-border);
+  border-bottom:none;
   transform:translateY(-100%);
   animation:navDown 0.8s ease 0.3s forwards;
   overflow:visible;
 }
 @keyframes navDown{to{transform:translateY(0)}}
+/* Logo — absolute position, hangs below nav */
 .logo{
   position:absolute;
-  bottom:-48px;
+  bottom:-44px;
   right:3rem;
   display:flex;
   align-items:center;
@@ -180,7 +191,7 @@ nav{
   text-decoration:none;
   z-index:101;
 }
-/* SVG Logo container — circular, floating above navbar border */
+/* Circular logo container */
 .logo-svg{
   display:flex;
   align-items:center;
@@ -192,62 +203,19 @@ nav{
   border-radius:50%;
   background:#0a0a12;
   border:2px solid rgba(99,102,241,0.4);
-  box-shadow:
-    0 0 20px rgba(99,102,241,0.3),
-    0 4px 15px rgba(0,0,0,0.5),
-    inset 0 0 20px rgba(99,102,241,0.1);
+  box-shadow:0 0 20px rgba(99,102,241,0.3),0 4px 15px rgba(0,0,0,0.5),inset 0 0 20px rgba(99,102,241,0.1);
   overflow:visible;
-  transition:border-color 0.3s, box-shadow 0.3s;
-  margin-top:0;
-}
-.logo-svg::after{
-  content:'';
-  position:absolute;
-  bottom:-10px;
-  left:50%;
-  transform:translateX(-50%);
-  width:116px;
-  height:58px;
-  border-radius:0 0 58px 58px;
-  border:2px solid rgba(99,102,241,0.5);
-  border-top:none;
-  background:transparent;
-  pointer-events:none;
+  transition:border-color 0.3s,box-shadow 0.3s;
 }
 .logo:hover .logo-svg{
   border-color:rgba(99,102,241,0.8);
-  box-shadow:
-    0 0 30px rgba(99,102,241,0.5),
-    0 4px 20px rgba(0,0,0,0.6),
-    inset 0 0 25px rgba(99,102,241,0.15);
+  box-shadow:0 0 30px rgba(99,102,241,0.5),0 4px 20px rgba(0,0,0,0.6),inset 0 0 25px rgba(99,102,241,0.15);
 }
-.logo-svg svg{
-  width:80px;
-  height:80px;
-  filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));
-}
+.logo-svg svg{width:80px;height:80px;filter:drop-shadow(0 0 8px rgba(99,102,241,0.4))}
 .logo-svg svg rect{display:none}
 
 
-/* ─── Nav bottom border with semicircular notch ─── */
-.nav-border{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:52px;
-  z-index:98;
-  pointer-events:none;
-  overflow:visible;
-}
-.nav-border svg{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:60px;
-  overflow:visible;
-}
+
 
 </style>
 </head>
@@ -258,7 +226,8 @@ nav{
 <div class="orb orb-3"></div>
 
 <nav>
-  <div class="nav-border"><svg viewBox="0 0 1000 60" preserveAspectRatio="xMidYMax meet"><path d="M0,1 L850,1 A50,50 0 0,1 950,1 L1000,1" fill="none" stroke="rgba(96,165,250,0.5)" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <!-- Nav bottom border with arc around logo -->
+  <svg class="nav-line" viewBox="0 0 100 4" preserveAspectRatio="none"><path d="M0,2 L88,2 A6,6 0 0,1 94,2 L100,2" fill="none" stroke="rgba(96,165,250,0.3)" stroke-width="0.3"/></svg>
   
   <a href="index.html" class="logo"><div class="logo-svg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="40" height="40">
       <defs>
