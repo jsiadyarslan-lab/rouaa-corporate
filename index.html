@@ -1246,23 +1246,24 @@ nav{
   animation:navDown 0.8s ease 0.3s forwards;
 }
 @keyframes navDown{to{transform:translateY(0)}}
-
-/* Notch cutout in navbar border — semicircle around logo */
+/* Semicircular notch in nav bottom border around logo */
 nav::after{
   content:'';
   position:absolute;
   bottom:-1px;
-  left:3rem;  /* aligns with .logo position */
-  width:100px;  /* diameter of the notch */
-  height:50px;  /* half circle */
-  border-radius:0 0 50px 50px;  /* bottom semicircle */
-  background:rgba(2,6,23,0.95);  /* match nav bg */
+  left:3rem;
+  width:100px;
+  height:50px;
+  border-radius:0 0 50px 50px;
+  background:rgba(2,6,23,0.95);
   border:1px solid var(--glass-border);
-  border-top:none;  /* open at top */
+  border-top:none;
   z-index:99;
   pointer-events:none;
-  /* Center the notch under the logo */
   transform:translateX(-2px);
+  /* Mask out the straight border behind the notch */
+  -webkit-mask:radial-gradient(circle 50px at 50% 0%, transparent 99%, black 100%);
+  mask:radial-gradient(circle 50px at 50% 0%, transparent 99%, black 100%);
 }
 .logo{
   position:relative;
