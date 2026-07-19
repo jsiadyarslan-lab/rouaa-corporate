@@ -1279,10 +1279,23 @@ nav{
     0 0 20px rgba(99,102,241,0.3),
     0 4px 15px rgba(0,0,0,0.5),
     inset 0 0 20px rgba(99,102,241,0.1);
-  overflow:hidden;
+  overflow:visible;
   transition:border-color 0.3s, box-shadow 0.3s;
-  /* Position logo to overlap nav bottom border */
   margin-top:0;
+}
+.logo-svg::after{
+  content:'';
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:116px;
+  height:58px;
+  border-radius:0 0 58px 58px;
+  border:2px solid rgba(99,102,241,0.5);
+  border-top:none;
+  background:transparent;
+  pointer-events:none;
 }
 .logo:hover .logo-svg{
   border-color:rgba(99,102,241,0.8);
