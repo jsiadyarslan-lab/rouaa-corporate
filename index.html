@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#020617">
-<title>ROUAA — منصة الاستخبار المالي</title>
+<title>ROUAA — AI Council Trading Platform | فئة جديدة في عالم التداول</title>
+<meta name="description" content="ROUAA — أول AI Council Trading Platform في العالم. 8 أدوار ذكاء اصطناعي + Polymarket + Adaptive Learning + 32 لغة. ليست منصة تداول، بل فئة جديدة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 /* ============================================================================
-   ROUAA — 3D / Glass / Blue Radar redesign
+   ROUAA — 3D / Glass / Blue Radar — Comprehensive redesign
    ============================================================================ */
 :root{
   --bg-0:#020617;
@@ -21,6 +22,10 @@
   --blue-glow:#93c5fd;
   --blue-deep:#1e3a8a;
   --cyan:#22d3ee;
+  --gold:#fbbf24;
+  --gold-bright:#fde047;
+  --profit:#10b981;
+  --loss:#ef4444;
   --white:#f8fafc;
   --text-dim:rgba(248,250,252,0.65);
   --text-mute:rgba(248,250,252,0.40);
@@ -28,6 +33,9 @@
   --glass-strong:rgba(255,255,255,0.07);
   --glass-border:rgba(96,165,250,0.25);
   --glass-border-strong:rgba(96,165,250,0.5);
+  --tier-1:rgba(96,165,250,0.6);
+  --tier-2:rgba(34,211,238,0.6);
+  --tier-3:rgba(148,163,184,0.5);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -37,6 +45,7 @@ html,body{
   font-family:'Cairo',-apple-system,sans-serif;
   overflow-x:hidden;
   scroll-behavior:smooth;
+  line-height:1.7;
 }
 
 /* ===== 3D Animated background ===== */
@@ -64,14 +73,8 @@ html,body{
     radial-gradient(circle at 70% 60%, rgba(34,211,238,0.10), transparent 30%);
   animation:blobPulse 8s ease-in-out infinite alternate;
 }
-@keyframes gridScroll{
-  from{transform:rotateX(60deg) translateY(0)}
-  to{transform:rotateX(60deg) translateY(80px)}
-}
-@keyframes blobPulse{
-  from{opacity:0.6;transform:scale(1)}
-  to{opacity:1;transform:scale(1.15)}
-}
+@keyframes gridScroll{from{transform:rotateX(60deg) translateY(0)}to{transform:rotateX(60deg) translateY(80px)}}
+@keyframes blobPulse{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
 
 /* Floating glass orbs */
 .orb{
@@ -85,11 +88,7 @@ html,body{
 .orb-1{width:400px;height:400px;top:-100px;right:-100px;animation-delay:0s}
 .orb-2{width:300px;height:300px;bottom:-50px;left:-50px;animation-delay:-7s;background:radial-gradient(circle at 30% 30%, rgba(34,211,238,0.35), rgba(34,211,238,0.08) 60%, transparent)}
 .orb-3{width:250px;height:250px;top:40%;left:30%;animation-delay:-14s;opacity:0.5}
-@keyframes orbFloat{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(40px,-30px) scale(1.1)}
-  66%{transform:translate(-30px,40px) scale(0.95)}
-}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(0.95)}}
 
 /* ===== NAV ===== */
 nav{
@@ -121,14 +120,8 @@ nav{
   transform:rotate(45deg);
   animation:logoSpin 6s ease-in-out infinite;
 }
-.logo-mark::before{
-  content:'';width:14px;height:14px;
-  background:var(--bg-0);border-radius:3px;
-}
-@keyframes logoSpin{
-  0%,100%{transform:rotate(45deg)}
-  50%{transform:rotate(225deg)}
-}
+.logo-mark::before{content:'';width:14px;height:14px;background:var(--bg-0);border-radius:3px}
+@keyframes logoSpin{0%,100%{transform:rotate(45deg)}50%{transform:rotate(225deg)}}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{
   color:var(--text-dim);text-decoration:none;
@@ -143,9 +136,7 @@ nav{
 }
 .nav-links a:hover{color:var(--white)}
 .nav-links a:hover::after{transform:scaleX(1)}
-.nav-cta{
-  display:flex;gap:0.75rem;align-items:center;
-}
+.nav-cta{display:flex;gap:0.75rem;align-items:center}
 .btn-ghost,.btn-primary{
   font-family:'Cairo',sans-serif;
   padding:0.55rem 1.2rem;border-radius:8px;
@@ -153,23 +144,16 @@ nav{
   text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;
   transition:all 0.3s;border:none;
 }
-.btn-ghost{
-  background:var(--glass);color:var(--white);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(10px);
-}
+.btn-ghost{background:var(--glass);color:var(--white);border:1px solid var(--glass-border);backdrop-filter:blur(10px)}
 .btn-ghost:hover{background:var(--glass-strong);border-color:var(--glass-border-strong)}
 .btn-primary{
   background:linear-gradient(135deg, var(--blue), var(--cyan));
   color:var(--bg-0);
   box-shadow:0 4px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
 }
-.btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 30px rgba(59,130,246,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
-}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.6), inset 0 1px 0 rgba(255,255,255,0.4)}
 
-/* ===== HERO with BLUE RADAR ===== */
+/* ===== HERO ===== */
 .hero{
   position:relative;
   min-height:100vh;
@@ -184,32 +168,21 @@ nav{
 @media (max-width:980px){
   .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:2rem;text-align:center}
 }
-
-/* Hero text side */
 .hero-text{display:flex;flex-direction:column;gap:1.5rem;animation:textReveal 1s ease 0.4s both}
 @media (max-width:980px){.hero-text{align-items:center}}
-@keyframes textReveal{
-  from{opacity:0;transform:translateY(30px) translateX(20px)}
-  to{opacity:1;transform:translateY(0) translateX(0)}
-}
+@keyframes textReveal{from{opacity:0;transform:translateY(30px) translateX(20px)}to{opacity:1;transform:translateY(0) translateX(0)}}
 .hero-badge{
   display:inline-flex;align-items:center;gap:0.5rem;
   padding:0.4rem 1rem;border-radius:50px;
   background:rgba(59,130,246,0.1);
   border:1px solid rgba(96,165,250,0.4);
   font-family:'Share Tech Mono',monospace;
-  font-size:0.75rem;letter-spacing:0.2em;
+  font-size:0.72rem;letter-spacing:0.2em;
   color:var(--blue-glow);text-transform:uppercase;
   width:fit-content;
 }
-.badge-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--blue-bright);
-  box-shadow:0 0 10px var(--blue-bright);
-  animation:dotPulse 1.5s ease-in-out infinite;
-}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 10px var(--blue-bright);animation:dotPulse 1.5s ease-in-out infinite}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
-
 .hero-title{
   font-family:'Cairo',sans-serif;
   font-size:clamp(2.5rem, 6vw, 4.5rem);
@@ -221,16 +194,25 @@ nav{
 }
 .hero-title-en{
   font-family:'Orbitron',sans-serif;
-  font-size:clamp(0.9rem,1.5vw,1.1rem);
-  font-weight:400;letter-spacing:0.4em;
+  font-size:clamp(0.85rem,1.3vw,1rem);
+  font-weight:400;letter-spacing:0.3em;
   color:var(--blue-bright);
   text-transform:uppercase;
   margin-top:-0.5rem;
 }
+.hero-tagline{
+  font-family:'Share Tech Mono',monospace;
+  font-size:clamp(0.95rem,1.4vw,1.1rem);
+  color:var(--gold);
+  margin-top:0.5rem;
+  direction:ltr;
+  text-align:right;
+}
+@media (max-width:980px){.hero-tagline{text-align:center;direction:rtl}}
 .hero-sub{
   font-size:clamp(0.95rem,1.5vw,1.1rem);
   color:var(--text-dim);
-  line-height:1.8;max-width:520px;
+  line-height:1.8;max-width:560px;
 }
 @media (max-width:980px){.hero-sub{margin:0 auto}}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
@@ -245,16 +227,9 @@ nav{
   box-shadow:0 0 25px rgba(59,130,246,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
   transition:transform 0.3s, box-shadow 0.3s;
 }
-.btn-glow::before{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
-  transition:left 0.6s;
-}
+.btn-glow::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
 .btn-glow:hover::before{left:100%}
-.btn-glow:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 40px rgba(59,130,246,0.7), inset 0 1px 0 rgba(255,255,255,0.5);
-}
+.btn-glow:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(59,130,246,0.7), inset 0 1px 0 rgba(255,255,255,0.5)}
 .btn-outline{
   display:inline-flex;align-items:center;gap:0.6rem;
   padding:0.9rem 1.8rem;border-radius:10px;
@@ -265,33 +240,20 @@ nav{
   backdrop-filter:blur(10px);
   transition:all 0.3s;
 }
-.btn-outline:hover{
-  background:var(--glass-strong);border-color:var(--blue-bright);
-  box-shadow:0 0 25px rgba(96,165,250,0.3);
-}
-
-/* Hero stats strip */
-.hero-strip{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
-  margin-top:1rem;
-}
+.btn-outline:hover{background:var(--glass-strong);border-color:var(--blue-bright);box-shadow:0 0 25px rgba(96,165,250,0.3)}
+.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-top:1rem}
+@media (max-width:680px){.hero-strip{grid-template-columns:repeat(2,1fr)}}
 .strip-item{
-  padding:1rem;border-radius:10px;
+  padding:1rem 0.8rem;border-radius:10px;
   background:var(--glass);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(10px);
-  text-align:right;
+  text-align:center;
+  transition:transform 0.3s, border-color 0.3s;
 }
-@media (max-width:980px){.strip-item{text-align:center}}
-.strip-num{
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:1.5rem;color:var(--blue-bright);
-  text-shadow:0 0 15px rgba(96,165,250,0.6);
-}
-.strip-lbl{
-  font-size:0.75rem;color:var(--text-mute);
-  margin-top:0.2rem;letter-spacing:0.05em;
-}
+.strip-item:hover{transform:translateY(-3px);border-color:var(--blue-bright)}
+.strip-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.4rem;color:var(--blue-bright);text-shadow:0 0 15px rgba(96,165,250,0.6)}
+.strip-lbl{font-size:0.7rem;color:var(--text-mute);margin-top:0.2rem;letter-spacing:0.05em}
 
 /* ===== BLUE RADAR ===== */
 .radar-wrap{
@@ -302,20 +264,8 @@ nav{
   perspective:1000px;
   animation:radarEnter 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s both;
 }
-@keyframes radarEnter{
-  from{opacity:0;transform:translateZ(-200px) rotateY(-30deg) scale(0.8)}
-  to{opacity:1;transform:translateZ(0) rotateY(0) scale(1)}
-}
-
-/* Glass pedestal under radar */
-.radar-pedestal{
-  position:absolute;
-  bottom:-30px;left:10%;right:10%;height:60px;
-  background:radial-gradient(ellipse at center, rgba(96,165,250,0.3), transparent 70%);
-  filter:blur(15px);
-  transform:rotateX(60deg);
-}
-
+@keyframes radarEnter{from{opacity:0;transform:translateZ(-200px) rotateY(-30deg) scale(0.8)}to{opacity:1;transform:translateZ(0) rotateY(0) scale(1)}}
+.radar-pedestal{position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse at center, rgba(96,165,250,0.3), transparent 70%);filter:blur(15px);transform:rotateX(60deg)}
 .radar-frame{
   position:absolute;inset:0;
   border-radius:50%;
@@ -323,95 +273,45 @@ nav{
     radial-gradient(circle at 30% 30%, rgba(96,165,250,0.15), transparent 50%),
     linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.03));
   border:1px solid var(--glass-border-strong);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.5),
-    0 0 100px rgba(59,130,246,0.3),
-    inset 0 2px 0 rgba(255,255,255,0.1),
-    inset 0 -2px 0 rgba(0,0,0,0.3);
+  box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.3), inset 0 2px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);
   backdrop-filter:blur(20px);
   transform-style:preserve-3d;
   animation:radarTilt 6s ease-in-out infinite;
 }
-@keyframes radarTilt{
-  0%,100%{transform:rotateX(8deg) rotateY(-3deg)}
-  50%{transform:rotateX(8deg) rotateY(3deg)}
-}
-
-/* Inner radar screen */
+@keyframes radarTilt{0%,100%{transform:rotateX(8deg) rotateY(-3deg)}50%{transform:rotateX(8deg) rotateY(3deg)}}
 .radar-screen{
-  position:absolute;
-  inset:5%;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at center,
-      rgba(30,58,138,0.6) 0%,
-      rgba(10,21,48,0.9) 50%,
-      rgba(2,6,23,1) 100%);
+  position:absolute;inset:5%;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(30,58,138,0.6) 0%, rgba(10,21,48,0.9) 50%, rgba(2,6,23,1) 100%);
   overflow:hidden;
-  box-shadow:
-    inset 0 0 60px rgba(59,130,246,0.3),
-    inset 0 0 20px rgba(0,0,0,0.8);
+  box-shadow:inset 0 0 60px rgba(59,130,246,0.3), inset 0 0 20px rgba(0,0,0,0.8);
 }
-
-/* Radar grid */
 .radar-grid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .radar-grid .ring{fill:none;stroke:rgba(96,165,250,0.25);stroke-width:0.4}
 .radar-grid .ring.bright{stroke:rgba(96,165,250,0.5);stroke-width:0.6}
 .radar-grid .az{stroke:rgba(96,165,250,0.15);stroke-width:0.3}
 .radar-grid .az.cardinal{stroke:rgba(96,165,250,0.3);stroke-width:0.5}
-.radar-grid .compass{
-  fill:var(--blue-glow);font-family:'Share Tech Mono',monospace;
-  font-size:5px;font-weight:700;text-anchor:middle;dominant-baseline:middle;
-}
-.radar-grid .range{
-  fill:rgba(96,165,250,0.5);font-family:'Share Tech Mono',monospace;
-  font-size:3px;text-anchor:middle;dominant-baseline:middle;
-}
-.radar-grid .center-dot{
-  fill:var(--blue-bright);filter:drop-shadow(0 0 4px var(--blue-bright));
-}
+.radar-grid .compass{fill:var(--blue-glow);font-family:'Share Tech Mono',monospace;font-size:5px;font-weight:700;text-anchor:middle;dominant-baseline:middle}
+.radar-grid .range{fill:rgba(96,165,250,0.5);font-family:'Share Tech Mono',monospace;font-size:3px;text-anchor:middle;dominant-baseline:middle}
+.radar-grid .center-dot{fill:var(--blue-bright);filter:drop-shadow(0 0 4px var(--blue-bright))}
 .radar-grid .center-cross{stroke:var(--blue-bright);stroke-width:0.7}
-
-/* Sweep — bright blue cone */
 .radar-sweep{
   position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(
-    from 0deg,
-    rgba(96,165,250,0.7) 0deg,
-    rgba(96,165,250,0.35) 18deg,
-    rgba(96,165,250,0.1) 45deg,
-    rgba(96,165,250,0.02) 80deg,
-    transparent 100deg,
-    transparent 360deg
-  );
+  background:conic-gradient(from 0deg, rgba(96,165,250,0.7) 0deg, rgba(96,165,250,0.35) 18deg, rgba(96,165,250,0.1) 45deg, rgba(96,165,250,0.02) 80deg, transparent 100deg, transparent 360deg);
   mix-blend-mode:screen;
-  animation:sweep 4s linear infinite;
+  animation:sweepBg 4s linear infinite;
   pointer-events:none;
 }
 .radar-sweep-line{
   position:absolute;top:50%;left:50%;
   width:50%;height:2px;
   transform-origin:left center;
-  background:linear-gradient(90deg,
-    rgba(147,197,253,1) 0%,
-    rgba(96,165,250,0.7) 40%,
-    rgba(59,130,246,0.2) 80%,
-    transparent 100%);
+  background:linear-gradient(90deg, rgba(147,197,253,1) 0%, rgba(96,165,250,0.7) 40%, rgba(59,130,246,0.2) 80%, transparent 100%);
   box-shadow:0 0 10px var(--blue-bright), 0 0 25px rgba(96,165,250,0.7);
   animation:sweep 4s linear infinite;
   pointer-events:none;
 }
-@keyframes sweep{
-  from{transform:translate(0,-50%) rotate(0deg)}
-  to{transform:translate(0,-50%) rotate(360deg)}
-}
-.radar-sweep{animation-name:sweepBg}
-@keyframes sweepBg{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-
-/* Targets */
+@keyframes sweep{from{transform:translate(0,-50%) rotate(0deg)}to{transform:translate(0,-50%) rotate(360deg)}}
+@keyframes sweepBg{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .radar-targets{position:absolute;inset:0;pointer-events:none}
 .target{
   position:absolute;width:8px;height:8px;
@@ -421,76 +321,32 @@ nav{
   opacity:0;
   animation:targetLife 4s ease-out forwards;
 }
-.target.hostile{
-  background:#ef4444;
-  box-shadow:0 0 10px #ef4444, 0 0 20px rgba(239,68,68,0.7);
-}
-.target.neutral{
-  background:#fbbf24;
-  box-shadow:0 0 10px #fbbf24, 0 0 20px rgba(251,191,36,0.7);
-}
-.target::after{
-  content:'';position:absolute;inset:-6px;
-  border:1px solid currentColor;border-radius:50%;
-  opacity:0.5;
-  animation:targetRing 1.5s ease-out infinite;
-}
-@keyframes targetLife{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(0.3)}
-  10%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}
-  25%{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  100%{opacity:0.1;transform:translate(-50%,-50%) scale(1)}
-}
-@keyframes targetRing{
-  from{transform:scale(1);opacity:0.6}
-  to{transform:scale(2.5);opacity:0}
-}
-
-/* HUD corners */
-.hud-bracket{
-  position:absolute;width:32px;height:32px;
-  border:2px solid var(--blue-bright);
-  filter:drop-shadow(0 0 6px rgba(96,165,250,0.6));
-}
+.target.hostile{background:#ef4444;box-shadow:0 0 10px #ef4444, 0 0 20px rgba(239,68,68,0.7)}
+.target.neutral{background:#fbbf24;box-shadow:0 0 10px #fbbf24, 0 0 20px rgba(251,191,36,0.7)}
+.target::after{content:'';position:absolute;inset:-6px;border:1px solid currentColor;border-radius:50%;opacity:0.5;animation:targetRing 1.5s ease-out infinite}
+@keyframes targetLife{0%{opacity:0;transform:translate(-50%,-50%) scale(0.3)}10%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}25%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0.1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes targetRing{from{transform:scale(1);opacity:0.6}to{transform:scale(2.5);opacity:0}}
+.hud-bracket{position:absolute;width:32px;height:32px;border:2px solid var(--blue-bright);filter:drop-shadow(0 0 6px rgba(96,165,250,0.6))}
 .hud-bracket.tl{top:-8px;left:-8px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
 .hud-bracket.tr{top:-8px;right:-8px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
 .hud-bracket.bl{bottom:-8px;left:-8px;border-right:none;border-top:none;border-radius:0 0 0 6px}
 .hud-bracket.br{bottom:-8px;right:-8px;border-left:none;border-top:none;border-radius:0 0 6px 0}
-
-.hud-label{
-  position:absolute;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.65rem;letter-spacing:0.2em;
-  color:var(--blue-glow);text-transform:uppercase;
-  white-space:nowrap;text-shadow:0 0 8px rgba(96,165,250,0.5);
-}
+.hud-label{position:absolute;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--blue-glow);text-transform:uppercase;white-space:nowrap;text-shadow:0 0 8px rgba(96,165,250,0.5)}
 .hud-label.top{top:-26px;left:50%;transform:translateX(-50%)}
 .hud-label.bottom{bottom:-26px;left:50%;transform:translateX(-50%)}
 .hud-label.left{top:50%;left:-12px;transform:translate(-100%,-50%)}
 .hud-label.right{top:50%;right:-12px;transform:translate(100%,-50%)}
-
-/* Status bar */
-.radar-status{
-  position:absolute;
-  bottom:-70px;left:0;right:0;
-  display:flex;justify-content:space-around;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.7rem;letter-spacing:0.15em;
-  color:var(--blue-glow);text-transform:uppercase;
-}
+.radar-status{position:absolute;bottom:-70px;left:0;right:0;display:flex;justify-content:space-around;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--blue-glow);text-transform:uppercase}
 .radar-status .item{display:flex;flex-direction:column;align-items:center;gap:0.2rem}
-.radar-status .val{
-  color:var(--blue-bright);font-weight:700;font-size:0.95rem;
-  text-shadow:0 0 10px var(--blue-bright);
-}
+.radar-status .val{color:var(--blue-bright);font-weight:700;font-size:0.95rem;text-shadow:0 0 10px var(--blue-bright)}
 
-/* ===== SECTIONS ===== */
+/* ===== SECTION COMMON ===== */
 section{padding:6rem 3rem;max-width:1400px;margin:0 auto;position:relative}
 @media (max-width:768px){section{padding:4rem 1.5rem}}
 .section-tag{
   display:inline-block;
   font-family:'Share Tech Mono',monospace;
-  font-size:0.75rem;letter-spacing:0.3em;
+  font-size:0.72rem;letter-spacing:0.3em;
   color:var(--blue-bright);text-transform:uppercase;
   padding:0.3rem 0.8rem;border-radius:4px;
   background:rgba(59,130,246,0.1);
@@ -506,66 +362,482 @@ section{padding:6rem 3rem;max-width:1400px;margin:0 auto;position:relative}
 }
 .section-sub{
   color:var(--text-dim);font-size:1rem;line-height:1.8;
-  max-width:600px;margin-bottom:3rem;
+  max-width:680px;margin-bottom:3rem;
+}
+<style>
+/* ============================================================================
+   PREMIUM FEATURE CARDS — redesigned
+   ============================================================================ */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:1.5rem;
+  margin-top:2rem;
 }
 
-/* Features grid */
-.features-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1.5rem;
+/* Premium card with gradient border */
+.premium-card{
+  position:relative;
+  padding:2rem;
+  border-radius:20px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  overflow:hidden;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+  isolation:isolate;
 }
-.feature-card{
-  position:relative;padding:2rem;border-radius:16px;
+
+/* Animated gradient border */
+.premium-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  padding:1px;
+  border-radius:20px;
+  background:linear-gradient(135deg,
+    rgba(96,165,250,0.5) 0%,
+    rgba(34,211,238,0.3) 50%,
+    rgba(96,165,250,0.1) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  transition:background 0.5s;
+}
+
+/* Spotlight following cursor */
+.premium-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle 250px at var(--mx,50%) var(--my,50%),
+    rgba(96,165,250,0.15), transparent 70%);
+  opacity:0;
+  transition:opacity 0.4s;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.premium-card:hover{
+  transform:translateY(-8px) rotateX(4deg) rotateY(-4deg);
+}
+.premium-card:hover::before{
+  background:linear-gradient(135deg,
+    rgba(96,165,250,1) 0%,
+    rgba(34,211,238,0.8) 50%,
+    rgba(96,165,250,0.4) 100%);
+}
+.premium-card:hover::after{opacity:1}
+
+.card-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:1.2rem;gap:1rem;
+}
+
+.card-icon{
+  width:54px;height:54px;
+  border-radius:14px;
+  background:linear-gradient(135deg, var(--blue), var(--cyan));
+  display:grid;place-items:center;
+  box-shadow:0 8px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  position:relative;
+  flex-shrink:0;
+}
+.card-icon svg{width:26px;height:26px;color:var(--bg-0)}
+.card-icon::after{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:16px;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  filter:blur(10px);
+  opacity:0.5;
+  z-index:-1;
+}
+
+.card-tier{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  padding:0.25rem 0.7rem;
+  border-radius:50px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.15em;
+  text-transform:uppercase;font-weight:700;
+  white-space:nowrap;
+}
+.card-tier.tier-1{background:rgba(96,165,250,0.15);color:var(--blue-bright);border:1px solid rgba(96,165,250,0.4)}
+.card-tier.tier-2{background:rgba(34,211,238,0.12);color:var(--cyan);border:1px solid rgba(34,211,238,0.4)}
+.card-tier.tier-3{background:rgba(148,163,184,0.1);color:rgba(203,213,225,0.8);border:1px solid rgba(148,163,184,0.3)}
+
+.card-stars{color:var(--gold);font-size:0.85rem;letter-spacing:0.05em;margin-bottom:0.4rem}
+
+.card-title{
+  font-size:1.25rem;font-weight:700;
+  color:var(--white);
+  margin-bottom:0.5rem;
+  line-height:1.3;
+}
+
+.card-desc{
+  color:var(--text-dim);
+  font-size:0.9rem;line-height:1.7;
+  margin-bottom:1rem;
+}
+
+.card-features{
+  list-style:none;
+  display:flex;flex-direction:column;gap:0.5rem;
+  margin-bottom:1.2rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(96,165,250,0.15);
+}
+.card-features li{
+  font-size:0.85rem;
+  color:var(--text-dim);
+  padding-right:1.3rem;
+  position:relative;
+  line-height:1.6;
+}
+.card-features li::before{
+  content:'';
+  position:absolute;
+  right:0;top:0.55em;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  box-shadow:0 0 8px rgba(96,165,250,0.6);
+}
+.card-features li strong{color:var(--blue-glow);font-weight:700}
+
+.card-uniqueness{
+  background:rgba(251,191,36,0.06);
+  border:1px solid rgba(251,191,36,0.25);
+  border-radius:10px;
+  padding:0.7rem 1rem;
+  font-size:0.8rem;
+  color:rgba(253,224,71,0.85);
+  margin-bottom:1rem;
+  line-height:1.6;
+}
+.card-uniqueness strong{color:var(--gold-bright)}
+
+.card-pricing{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:1rem;
+  border-top:1px solid rgba(96,165,250,0.15);
+}
+.price-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.15em;
+  color:var(--text-mute);text-transform:uppercase;
+}
+.price-value{
+  font-family:'Orbitron',sans-serif;font-weight:700;
+  font-size:0.95rem;
+  background:linear-gradient(135deg, var(--gold), var(--gold-bright));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-align:left;
+  direction:ltr;
+}
+
+/* ============================================================================
+   COMPARISON TABLES
+   ============================================================================ */
+.comparison-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  margin:2rem 0;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  overflow:hidden;
+  backdrop-filter:blur(20px);
+}
+.comparison-table th,.comparison-table td{
+  padding:1rem 1.2rem;
+  text-align:right;
+  border-bottom:1px solid rgba(96,165,250,0.1);
+}
+.comparison-table thead th{
+  background:rgba(59,130,246,0.1);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;letter-spacing:0.15em;
+  color:var(--blue-bright);
+  text-transform:uppercase;
+  font-weight:700;
+}
+.comparison-table tbody tr:last-child td{border-bottom:none}
+.comparison-table td:first-child{color:var(--text-dim);font-size:0.9rem}
+.comparison-table td:last-child{color:var(--white);font-weight:600}
+.comparison-table td strong{color:var(--blue-glow)}
+.comparison-table tbody tr:hover{background:rgba(59,130,246,0.04)}
+
+/* Highlight box */
+.highlight-box{
+  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
+  border:1px solid var(--glass-border-strong);
+  border-right:3px solid var(--blue-bright);
+  border-radius:12px;
+  padding:1.5rem 2rem;
+  margin:1.5rem 0;
+  font-size:1rem;line-height:1.8;
+  color:var(--text-dim);
+  backdrop-filter:blur(10px);
+}
+.highlight-box.gold{
+  background:linear-gradient(135deg, rgba(251,191,36,0.08), rgba(251,191,36,0.02));
+  border-color:rgba(251,191,36,0.4);
+  border-right-color:var(--gold);
+}
+.highlight-box.gold strong{color:var(--gold-bright)}
+.highlight-box strong{color:var(--blue-glow)}
+.highlight-box p{margin:0}
+
+/* ============================================================================
+   POSITIONING SECTION
+   ============================================================================ */
+.positioning-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  margin:2rem 0;
+}
+@media (max-width:768px){.positioning-grid{grid-template-columns:1fr}}
+.pos-card{
+  padding:2rem;border-radius:16px;
   background:var(--glass);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(20px);
-  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-  overflow:hidden;
-  transform-style:preserve-3d;
+  position:relative;
+  transition:transform 0.4s;
 }
-.feature-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);
-  opacity:0;transition:opacity 0.4s;
+.pos-card.old{
+  border-color:rgba(239,68,68,0.3);
+  background:linear-gradient(135deg, rgba(239,68,68,0.04), transparent);
 }
-.feature-card::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.15), transparent 40%);
-  opacity:0;transition:opacity 0.4s;pointer-events:none;
+.pos-card.new{
+  border-color:rgba(96,165,250,0.5);
+  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
+  box-shadow:0 0 40px rgba(59,130,246,0.15);
 }
-.feature-card:hover{
-  transform:translateY(-8px) rotateX(5deg);
-  border-color:var(--glass-border-strong);
-  background:var(--glass-strong);
-  box-shadow:0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.2);
+.pos-card:hover{transform:translateY(-3px)}
+.pos-card-label{
+  display:inline-block;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.2em;
+  text-transform:uppercase;font-weight:700;
+  padding:0.3rem 0.8rem;border-radius:4px;
+  margin-bottom:1rem;
 }
-.feature-card:hover::before{opacity:1}
-.feature-card:hover::after{opacity:1}
-.feature-icon{
-  width:56px;height:56px;border-radius:12px;
+.pos-card.old .pos-card-label{background:rgba(239,68,68,0.15);color:#f87171}
+.pos-card.new .pos-card-label{background:rgba(96,165,250,0.15);color:var(--blue-bright)}
+.pos-card h4{font-size:1.15rem;color:var(--white);margin-bottom:0.8rem;font-weight:700}
+.pos-card ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.pos-card ul li{
+  font-size:0.9rem;color:var(--text-dim);
+  padding-right:1.5rem;position:relative;line-height:1.7;
+}
+.pos-card.old ul li::before{content:'✕';position:absolute;right:0;color:#f87171;font-weight:700}
+.pos-card.new ul li::before{content:'✓';position:absolute;right:0;color:var(--blue-bright);font-weight:700}
+
+/* ============================================================================
+   CATEGORY CREATION — Tesla/Bloomberg style cards
+   ============================================================================ */
+.cat-examples{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin:2rem 0;
+}
+.cat-example{
+  padding:1.5rem;border-radius:14px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(15px);
+  text-align:center;
+  transition:all 0.3s;
+}
+.cat-example:hover{
+  transform:translateY(-4px) scale(1.02);
+  border-color:var(--blue-bright);
+  box-shadow:0 10px 30px rgba(59,130,246,0.2);
+}
+.cat-example-icon{
+  width:50px;height:50px;
+  border-radius:50%;
   background:linear-gradient(135deg, var(--blue), var(--cyan));
   display:grid;place-items:center;
-  margin-bottom:1.2rem;
-  box-shadow:0 8px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  margin:0 auto 1rem;
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;font-size:1.1rem;
+  color:var(--bg-0);
+  box-shadow:0 0 25px rgba(96,165,250,0.4);
 }
-.feature-icon svg{width:28px;height:28px;color:var(--bg-0)}
-.feature-title{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem;color:var(--white)}
-.feature-desc{color:var(--text-dim);font-size:0.9rem;line-height:1.7}
+.cat-example-brand{font-family:'Orbitron',sans-serif;font-weight:700;color:var(--white);margin-bottom:0.3rem;font-size:1rem}
+.cat-example-cat{color:var(--blue-glow);font-size:0.85rem;font-style:italic;line-height:1.5}
 
-/* Stats section */
+/* ============================================================================
+   PRICING TIERS
+   ============================================================================ */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin:2rem 0;
+}
+.pricing-card{
+  padding:1.8rem;border-radius:16px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  text-align:center;
+  position:relative;
+  transition:all 0.3s;
+}
+.pricing-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 15px 40px rgba(251,191,36,0.15)}
+.pricing-card.featured{
+  background:linear-gradient(135deg, rgba(251,191,36,0.08), rgba(59,130,246,0.04));
+  border-color:rgba(251,191,36,0.5);
+}
+.pricing-tier{
+  display:inline-block;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.2em;
+  color:var(--gold);text-transform:uppercase;
+  padding:0.3rem 0.8rem;
+  background:rgba(251,191,36,0.1);
+  border:1px solid rgba(251,191,36,0.3);
+  border-radius:4px;
+  margin-bottom:1rem;
+}
+.pricing-product{
+  font-size:0.95rem;color:var(--white);font-weight:700;
+  margin-bottom:0.8rem;line-height:1.4;min-height:2.6em;
+}
+.pricing-price{
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:1.3rem;
+  background:linear-gradient(135deg, var(--gold), var(--gold-bright));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+  direction:ltr;
+}
+.pricing-target{
+  font-size:0.78rem;color:var(--text-mute);
+  line-height:1.5;
+}
+
+/* ============================================================================
+   FIXES / P0 P1
+   ============================================================================ */
+.fixes-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin:2rem 0;
+}
+@media (max-width:768px){.fixes-grid{grid-template-columns:1fr}}
+.fix-card{
+  padding:1.8rem;border-radius:16px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+}
+.fix-card.p0{border-color:rgba(239,68,68,0.4);background:linear-gradient(135deg, rgba(239,68,68,0.04), transparent)}
+.fix-card.p1{border-color:rgba(251,191,36,0.4);background:linear-gradient(135deg, rgba(251,191,36,0.04), transparent)}
+.fix-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1rem;gap:1rem;
+}
+.fix-header h3{font-size:1.1rem;color:var(--white);font-weight:700}
+.fix-badge{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.15em;
+  padding:0.3rem 0.7rem;border-radius:4px;
+  text-transform:uppercase;font-weight:700;
+  white-space:nowrap;
+}
+.fix-badge.red{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.4)}
+.fix-badge.yellow{background:rgba(251,191,36,0.15);color:var(--gold);border:1px solid rgba(251,191,36,0.4)}
+.fix-card ol{padding-right:1.2rem;color:var(--text-dim);font-size:0.88rem;line-height:1.9}
+.fix-card ol li{margin-bottom:0.4rem}
+.fix-card ol li strong{color:var(--white)}
+
+/* ============================================================================
+   LANGUAGES SECTION
+   ============================================================================ */
+.lang-comparison{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  margin:2rem 0;
+}
+@media (max-width:768px){.lang-comparison{grid-template-columns:1fr}}
+.lang-stat{
+  text-align:center;
+  padding:2rem;border-radius:16px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+}
+.lang-stat .big-num{
+  font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:4rem;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 25px rgba(96,165,250,0.4));
+  line-height:1;
+}
+.lang-stat .stat-detail{color:var(--text-dim);font-size:0.9rem;margin-top:0.8rem;line-height:1.7}
+.lang-stat.ui{border-color:rgba(96,165,250,0.4)}
+.lang-stat.ai{border-color:rgba(251,191,36,0.4);background:linear-gradient(135deg, rgba(251,191,36,0.04), transparent)}
+.lang-stat.ai .big-num{background:linear-gradient(135deg, var(--gold), var(--gold-bright));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(251,191,36,0.4))}
+
+.lang-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:1.5rem;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  overflow:hidden;
+}
+.lang-table th,.lang-table td{
+  padding:0.7rem 1rem;
+  text-align:right;
+  border-bottom:1px solid rgba(96,165,250,0.1);
+  font-size:0.85rem;
+}
+.lang-table thead th{
+  background:rgba(59,130,246,0.1);
+  color:var(--blue-bright);
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:0.1em;font-size:0.75rem;
+}
+.lang-table tr:last-child td{border-bottom:none}
+.lang-table tr.highlight td{background:rgba(96,165,250,0.08);color:var(--white);font-weight:700}
+
+/* ============================================================================
+   STATS + CTA
+   ============================================================================ */
 .stats-section{padding:5rem 3rem;text-align:center}
 .stats-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:2rem;max-width:1000px;margin:0 auto;
+  gap:1rem;max-width:1100px;margin:0 auto;
 }
 .stat-block{
-  padding:2rem 1rem;border-radius:16px;
+  padding:1.8rem 1rem;border-radius:16px;
   background:var(--glass);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(20px);
   transition:transform 0.4s;
 }
-.stat-block:hover{transform:translateY(-5px) scale(1.02)}
+.stat-block:hover{transform:translateY(-5px) scale(1.02);border-color:var(--blue-bright)}
 .stat-num{
   font-family:'Orbitron',sans-serif;font-weight:900;
   font-size:clamp(2rem,4vw,3rem);
@@ -573,16 +845,13 @@ section{padding:6rem 3rem;max-width:1400px;margin:0 auto;position:relative}
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 20px rgba(96,165,250,0.5));
+  direction:ltr;
 }
-.stat-lbl{color:var(--text-mute);font-size:0.85rem;margin-top:0.5rem;letter-spacing:0.05em}
+.stat-lbl{color:var(--text-mute);font-size:0.8rem;margin-top:0.5rem;letter-spacing:0.05em}
 
-/* CTA section */
-.cta-section{
-  text-align:center;
-  padding:6rem 2rem;
-}
+.cta-section{text-align:center;padding:6rem 2rem}
 .cta-card{
-  max-width:800px;margin:0 auto;
+  max-width:900px;margin:0 auto;
   padding:4rem 2rem;border-radius:24px;
   background:
     radial-gradient(circle at 50% 0%, rgba(59,130,246,0.2), transparent 70%),
@@ -590,15 +859,23 @@ section{padding:6rem 3rem;max-width:1400px;margin:0 auto;position:relative}
   border:1px solid var(--glass-border-strong);
   backdrop-filter:blur(20px);
   box-shadow:0 30px 80px rgba(0,0,0,0.4);
+  position:relative;
+  overflow:hidden;
 }
+.cta-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, transparent 40%, rgba(96,165,250,0.08) 50%, transparent 60%);
+  animation:shimmer 4s linear infinite;
+}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .cta-title{
   font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;
-  margin-bottom:1rem;
+  margin-bottom:1rem;position:relative;
   background:linear-gradient(135deg, var(--white), var(--blue-glow));
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7}
+.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative}
 
 /* Footer */
 footer{
@@ -606,6 +883,12 @@ footer{
   text-align:center;color:var(--text-mute);font-size:0.85rem;
   background:rgba(2,6,23,0.5);
   backdrop-filter:blur(10px);
+}
+footer p{margin-bottom:0.3rem}
+footer .tagline{
+  font-family:'Orbitron',sans-serif;letter-spacing:0.2em;
+  color:var(--blue-bright);font-size:0.8rem;
+  margin-top:0.5rem;
 }
 
 /* Scroll reveal */
@@ -630,21 +913,37 @@ footer{
   font-family:'Share Tech Mono',monospace;
   font-size:0.8rem;
 }
-.ticker-track{
-  display:flex;gap:3rem;
-  animation:tickerScroll 40s linear infinite;
-  white-space:nowrap;
-}
-@keyframes tickerScroll{
-  from{transform:translateX(100%)}
-  to{transform:translateX(-100%)}
-}
+.ticker-track{display:flex;gap:3rem;animation:tickerScroll 40s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
 .ticker-item{display:flex;align-items:center;gap:0.5rem}
 .ticker-pair{color:var(--white);font-weight:700}
 .ticker-signal{padding:0.1rem 0.5rem;border-radius:3px;font-size:0.7rem}
 .ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
 .ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
 .ticker-val{color:var(--blue-bright)}
+
+/* Tier section header */
+.tier-section{margin-top:4rem}
+.tier-section:first-of-type{margin-top:0}
+.tier-header{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.5rem;
+}
+.tier-badge{
+  width:50px;height:50px;
+  border-radius:12px;
+  display:grid;place-items:center;
+  font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2rem;
+  color:var(--bg-0);
+  flex-shrink:0;
+}
+.tier-badge.t1{background:linear-gradient(135deg, var(--blue-bright), var(--cyan));box-shadow:0 0 20px rgba(96,165,250,0.4)}
+.tier-badge.t2{background:linear-gradient(135deg, var(--cyan), #5eead4);box-shadow:0 0 20px rgba(34,211,238,0.4)}
+.tier-badge.t3{background:linear-gradient(135deg, #94a3b8, #cbd5e1);box-shadow:0 0 15px rgba(148,163,184,0.3)}
+.tier-header h3{
+  font-size:1.5rem;font-weight:700;color:var(--white);
+}
+.tier-header .tier-sub{color:var(--text-dim);font-size:0.9rem;margin-top:0.2rem}
 
 @media (max-width:768px){
   nav{padding:1rem 1.2rem}
@@ -669,8 +968,10 @@ footer{
   </div>
   <ul class="nav-links">
     <li><a href="#hero">الرئيسية</a></li>
+    <li><a href="#positioning">الفئة الجديدة</a></li>
     <li><a href="#features">الميزات</a></li>
-    <li><a href="#stats">الأرقام</a></li>
+    <li><a href="#languages">اللغات</a></li>
+    <li><a href="#pricing">التسعير</a></li>
     <li><a href="#contact">تواصل</a></li>
   </ul>
   <div class="nav-cta">
@@ -684,35 +985,41 @@ footer{
   <div class="hero-text">
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span>SYSTEM ONLINE · منصة الاستخبار المالي</span>
+      <span>SYSTEM ONLINE · AI COUNCIL TRADING PLATFORM</span>
     </div>
     <h1 class="hero-title">رُؤى</h1>
-    <div class="hero-title-en">ROUAA · INTELLIGENCE PLATFORM</div>
+    <div class="hero-title-en">ROUAA · THE FIRST AI COUNCIL TRADING PLATFORM</div>
+    <div class="hero-tagline">"8 AI Roles + Polymarket + Adaptive Learning"</div>
     <p class="hero-sub">
-      منظومة استخبار مالي ترصد الفرص في الزمن الحقيقي.
-      مسحٌ دائم للأسواق، اكتشافٌ فوري للفرص، وتنفيذٌ قبل لحظات من السوق.
+      ليست منصة تداول عادية — بل <strong style="color:var(--blue-glow)">فئة جديدة كلياً</strong> في عالم التداول.
+      ثمانية أدوار ذكاء اصطناعي تتخذ القرارات، Polymarket كعضو تاسع، و Adaptive Learning يُحسّن الأداء ذاتياً.
+      التنفيذ تلقائي عبر Binance/MT5/Alpaca، بواجهة 32 لغة.
     </p>
     <div class="hero-cta">
-      <a href="#" class="btn-glow">
-        <span>ابدأ المسح</span>
+      <a href="#features" class="btn-glow">
+        <span>استكشف الميزات</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <a href="#features" class="btn-outline">استكشف الميزات</a>
+      <a href="#pricing" class="btn-outline">عرض التسعير</a>
     </div>
     <div class="hero-strip">
       <div class="strip-item">
-        <div class="strip-num">24/7</div>
-        <div class="strip-lbl">مراقبة يومية</div>
+        <div class="strip-num">8+2</div>
+        <div class="strip-lbl">أدوار AI</div>
       </div>
       <div class="strip-item">
-        <div class="strip-num">8</div>
-        <div class="strip-lbl">نماذج ذكاء</div>
+        <div class="strip-num">32</div>
+        <div class="strip-lbl">لغة عالمية</div>
       </div>
       <div class="strip-item">
-        <div class="strip-num">6</div>
-        <div class="strip-lbl">فئات أصول</div>
+        <div class="strip-num">11</div>
+        <div class="strip-lbl">نماذج LLM</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num">60+</div>
+        <div class="strip-lbl">محركات ذكية</div>
       </div>
     </div>
   </div>
@@ -720,17 +1027,14 @@ footer{
   <!-- BLUE RADAR -->
   <div class="radar-wrap">
     <div class="radar-pedestal"></div>
-
     <div class="hud-bracket tl"></div>
     <div class="hud-bracket tr"></div>
     <div class="hud-bracket bl"></div>
     <div class="hud-bracket br"></div>
-
     <span class="hud-label top">SECTOR · ALPHA-7</span>
     <span class="hud-label bottom">RANGE · 500KM</span>
     <span class="hud-label left">SCAN · 360°</span>
     <span class="hud-label right">FREQ · 2.4GHZ</span>
-
     <div class="radar-frame">
       <div class="radar-screen">
         <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
@@ -758,13 +1062,11 @@ footer{
           <line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
           <circle cx="0" cy="0" r="1.8" class="center-dot"/>
         </svg>
-
         <div class="radar-sweep"></div>
         <div class="radar-sweep-line"></div>
         <div class="radar-targets" id="radarTargets"></div>
       </div>
     </div>
-
     <div class="radar-status">
       <div class="item"><span>STATUS</span><span class="val" id="rStatus">ACTIVE</span></div>
       <div class="item"><span>TARGETS</span><span class="val" id="rCount">00</span></div>
@@ -774,62 +1076,573 @@ footer{
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features" class="reveal">
-  <span class="section-tag">CAPABILITIES</span>
-  <h2 class="section-title">منظومة متكاملة من الاستخبار المالي</h2>
+<!-- POSITIONING — Category Creation -->
+<section id="positioning" class="reveal">
+  <span class="section-tag">CATEGORY CREATION</span>
+  <h2 class="section-title">لست منصة تداول — أنت فئة جديدة</h2>
   <p class="section-sub">
-    ست قدرات أساسية تعمل معاً في الزمن الحقيقي لرصد الفرص قبل أن يراها الآخرون.
+    كل منافسيك في نفس الفئة: TradingView, MetaTrader, eToro, Binance, Plus500, IG, XTB...
+    ينافسون على: عدد اللغات، المؤشرات، المستخدمين، العمولات.
+    لكن Roua شيء آخر تماماً — <strong style="color:var(--blue-glow)">AI Council Trading Platform</strong>، فئة بلا منافس مباشر.
   </p>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.7 1 6.3 2.7"/><path d="M21 3v6h-6"/></svg>
+  <table class="comparison-table">
+    <thead><tr><th>Trading Platform</th><th>AI Council Trading Platform</th></tr></thead>
+    <tbody>
+      <tr><td>يقدم أدوات</td><td><strong>يقدم قرارات</strong></td></tr>
+      <tr><td>المستخدم يحلل</td><td><strong>المجلس يحلل + يقرر + ينفذ</strong></td></tr>
+      <tr><td>مؤشرات + chart</td><td><strong>8 أدوار AI + Polymarket + Adaptive Learning</strong></td></tr>
+      <tr><td>يتطلب خبرة</td><td><strong>يقدم الذكاء نفسه</strong></td></tr>
+      <tr><td>منافسة على السعر</td><td><strong>لا توجد منافسة (فئة وحيدة)</strong></td></tr>
+      <tr><td>UI + execution</td><td><strong>AI brain + execution layer</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="positioning-grid">
+    <div class="pos-card old">
+      <span class="pos-card-label">الـ Positioning القديم</span>
+      <h4>"منصة تداول متعددة اللغات"</h4>
+      <ul>
+        <li>منافس لـ TradingView</li>
+        <li>أداة تساعد المتداول</li>
+        <li>يُقارن بالـ competitors</li>
+        <li>تسعير تنافسي $99-499/شهر</li>
+        <li>نقاسَم السوق مع 20 منافساً</li>
+      </ul>
+    </div>
+    <div class="pos-card new">
+      <span class="pos-card-label">الـ Positioning الصحيح</span>
+      <h4>"AI Council Trading Platform متعددة اللغات"</h4>
+      <ul>
+        <li>فئة جديدة كلياً</li>
+        <li>ذكاء يحل محل الحاجة للخبرة</li>
+        <li>لا يوجد من ما يُقارن به</li>
+        <li>تسعير value-based $2K-50K/شهر</li>
+        <li>نأخذ 100% من فئتنا</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.4rem;color:var(--white);margin:2.5rem 0 1rem;font-weight:700;">
+    <span style="color:var(--blue-bright);">🧬</span> قاعدة الـ Category Creation الكلاسيكية
+  </h3>
+  <p style="color:var(--text-dim);margin-bottom:1rem;">
+    كل عظيم لم يتنافس — بل خلق فئة جديدة كلياً:
+  </p>
+
+  <div class="cat-examples">
+    <div class="cat-example">
+      <div class="cat-example-icon">T</div>
+      <div class="cat-example-brand">Tesla</div>
+      <div class="cat-example-cat">لم تتنافس مع Toyota — خلق فئة "Smart EVs"</div>
+    </div>
+    <div class="cat-example">
+      <div class="cat-example-icon">B</div>
+      <div class="cat-example-brand">Bloomberg</div>
+      <div class="cat-example-cat">خلق "Terminal" — فئة وحيدة لـ 40 سنة</div>
+    </div>
+    <div class="cat-example">
+      <div class="cat-example-icon">N</div>
+      <div class="cat-example-brand">Notion</div>
+      <div class="cat-example-cat">لم يتنافس مع Word — خلق "All-in-one Workspace"</div>
+    </div>
+    <div class="cat-example">
+      <div class="cat-example-icon">R</div>
+      <div class="cat-example-brand">Robinhood</div>
+      <div class="cat-example-cat">خلق "Commission-free broker" — فئة جديدة</div>
+    </div>
+    <div class="cat-example" style="background:linear-gradient(135deg, rgba(59,130,246,0.12), rgba(34,211,238,0.06));border-color:var(--blue-bright);">
+      <div class="cat-example-icon">R</div>
+      <div class="cat-example-brand" style="color:var(--blue-bright);">Roua</div>
+      <div class="cat-example-cat" style="color:var(--white);font-weight:700;">يخلق فئة "AI Council Trading Platform"</div>
+    </div>
+  </div>
+
+  <div class="highlight-box gold">
+    <strong>الخلاصة الاستراتيجية:</strong><br>
+    أنت لا تبني منصة — أنت تبني فئة. كل ما فعلته (8 roles + Polymarket + 60+ engines + 32 لغة + EA Bridge + Self-learning)
+    <strong>ليس تجميع ميزات — بل بناء مكونات فئة جديدة</strong>. الـ competitors يضيفون ميزات لمنصاتهم، أنت تضيف مكونات لفئتك.
+  </div>
+</section>
+
+<!-- FEATURES — Tier 1 -->
+<section id="features" class="reveal">
+  <span class="section-tag">CAPABILITIES · IP فريد عالمياً</span>
+  <h2 class="section-title">منظومة الميزات — 6 طبقات من الذكاء</h2>
+  <p class="section-sub">
+    كل ميزة في Roua مبنية لتعمّق الفئة، لا لتتنافس مع منصات أخرى. هذا الـ IP الفريد لا يملكه أحد في العالم —
+    موثق بقراءة كاملة لـ 50,000+ سطر من الكود الفعلي عبر 8 فحوصات متوازية.
+  </p>
+
+  <!-- TIER 1 -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div class="tier-badge t1">T1</div>
+      <div>
+        <h3>Tier 1 — IP فريد عالمياً</h3>
+        <div class="tier-sub">لا يملكها أحد غير Roua · ⭐⭐⭐⭐⭐</div>
       </div>
-      <h3 class="feature-title">مسح دائم 24/7</h3>
-      <p class="feature-desc">رصد مستمر لجميع الأسواق المالية دون توقف، مع تنبيهات فورية عند ظهور فرص غير عادية.</p>
     </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+    <div class="features-grid">
+
+      <!-- Feature 1: AI Strategic Council -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="5" cy="10" r="2"/><circle cx="19" cy="10" r="2"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">AI Strategic Council</h3>
+        <p class="card-desc">مجلس استراتيجي بـ 8 أدوار AI متخصصة + عضوين إضافيين يصوتان على كل قرار تداول.</p>
+        <ul class="card-features">
+          <li><strong>8 أدوار متخصصة:</strong> Technical, Sentiment, Risk, Macro, Pattern, Execution, Divergence, Scenario — كل دور له prompt + model + fallback chain</li>
+          <li><strong>العضو التاسع: Polymarket</strong> — يحسب signalBoost +0.05 للاتفاق، -0.08 للتعارض</li>
+          <li><strong>العضو العاشر: SmartScore Scanner</strong> — يُحقن تقنياً</li>
+          <li><strong>11 نموذج AI:</strong> Gemini, Groq, GLM, Cerebras, DeepSeek, Mistral, NVIDIA, Ollama, Bedrock, HuggingFace, OpenRouter</li>
+          <li><strong>Consensus algorithm</strong> مع HOLD_WEIGHT_MULTIPLIER = 0.3</li>
+          <li><strong>Dynamic weighting</strong> عبر CouncilVoteAccuracy — يتعلّم من أخطائه</li>
+        </ul>
+        <div class="card-uniqueness">
+          <strong>ما لا يملكه أحد:</strong> لا BattleFin ولا Eagle Alpha يقدمان multi-LLM consensus. لا TradingView يدمج Polymarket signals. لا eToro عنده self-learning weights.
+        </div>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$1,999-9,999/mo</span>
+        </div>
       </div>
-      <h3 class="feature-title">تحليل تنبؤي</h3>
-      <p class="feature-desc">ثمانية نماذج ذكاء اصطناعي تتنبأ بالاتجاهات قبل حدوثها بدقائق ثمينة كافية للتنفيذ.</p>
+
+      <!-- Feature 2: EA Bridge -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/><path d="M8 14l4 4 4-4"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">EA Bridge — MetaTrader Bridge</h3>
+        <p class="card-desc">يحوّل MT5 terminal إلى remote execution node للـ AI Council — تنفيذ سحابي مباشر.</p>
+        <ul class="card-features">
+          <li><strong>البروتوكول:</strong> REST polling كل 30 ثانية + Redis Pub/Sub للتوزيع</li>
+          <li><strong>Per-user tokens:</strong> ea_live_&lt;24-hex&gt; مع Redis cache + DB fallback</li>
+          <li><strong>Heartbeat monitoring:</strong> يفحص ea:heartbeat:* كل 5 دقائق</li>
+          <li><strong>Bidirectional execution reports:</strong> EA يُنفّذ محلياً ثم يُ report النتيجة</li>
+          <li><strong>Symbol translation:</strong> EUR/USD → EURUSD، BTC/USDT → BTCUSD</li>
+          <li><strong>9 endpoints كاملة:</strong> generate-token, briefs, heartbeat, execution, positions, config, list-tokens, revoke-token, status</li>
+        </ul>
+        <div class="card-uniqueness">
+          <strong>ما لا يملكه أحد:</strong> MetaTrader Signals = copy-trading فقط بدون AI. MetaAPI = REST API فقط. 3Commas = one-way signal بدون execution report.
+        </div>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$5K-25K setup + $1K-5K/mo</span>
+        </div>
+      </div>
+
+      <!-- Feature 3: Smart Chart Analysis Suite -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><path d="M3 12h2M3 8h2M3 16h2"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Smart Chart Analysis Suite</h3>
+        <p class="card-desc">15 مؤشر + 83+ drawing tool + 15 محرك فريد — 32,405 سطر من التحليل التقني المتقدم.</p>
+        <ul class="card-features">
+          <li><strong>15 مؤشر فني:</strong> SMA, EMA, BB, VWAP, PSAR, Ichimoku, SuperTrend, Pivot, Donchian, RSI, MACD, Stochastic, ATR, ADX, CCI</li>
+          <li><strong>83+ drawing tool</strong> في 11 فئة — يشمل Gann و Harmonic Patterns و Elliott Wave</li>
+          <li><strong>AdaptiveBayesianEngine:</strong> 760 سطر، self-learning per-source/regime/timeframe</li>
+          <li><strong>PredictivePatternCompletion:</strong> يرسم ghost للأنماط غير المكتملة</li>
+          <li><strong>WyckoffEngine:</strong> 873 سطر، A-E phases + money flow</li>
+          <li><strong>ProfessionalHarmonicPatterns:</strong> 9 harmonic patterns بـ Fibonacci ratios</li>
+          <li><strong>VisualRuleBuilder:</strong> drag-and-drop AND/OR/NOT/XOR/NAND</li>
+        </ul>
+        <div class="card-uniqueness">
+          <strong>ما لا يملكه أحد:</strong> Predictive Pattern Completion (ghost patterns) + AI Explanation Engine + 9 harmonic patterns + Adaptive Bayesian self-learning — كلها غير موجودة في TradingView.
+        </div>
+        <div class="card-pricing">
+          <span class="price-label">للمستخدم / White-label</span>
+          <span class="price-value">$99-499 / $2K-10K mo</span>
+        </div>
+      </div>
+
+      <!-- Feature 4: Multi-Exchange Trading Engine -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Multi-Exchange + Smart Executor + Autonomous Agent</h3>
+        <p class="card-desc">~19,500 سطر من بنية التنفيذ الذكي عبر Binance و MT5 و Alpaca مع 8 استراتيجيات مدمجة.</p>
+        <ul class="card-features">
+          <li><strong>Smart Executor:</strong> Tick كل 10 ثوانٍ + 15+ gating checks قبل التنفيذ</li>
+          <li><strong>5-level position sizing:</strong> risk × confidence × drawdown × dynamic × correlation × MTF، capped 1% محفظة</li>
+          <li><strong>Timeframe-aware TTL</strong> لكل brief (M1→1min, W1→7d)</li>
+          <li><strong>Autonomous Agent:</strong> 6 حالات session (RUNNING/STOPPED/PAUSED/EMERGENCY_STOP/DAILY_LIMIT_REACHED/IDLE)</li>
+          <li><strong>3-layer حماية 48h</strong> للـ Agent positions</li>
+          <li><strong>8 استراتيجيات:</strong> DCA ذكي، Grid، Mean Reversion، Momentum Breakout، Swing، VWAP-RSI، Scalping، AUTO</li>
+          <li><strong>AdaptiveStrategySelector</strong> + RL Trade Manager (Q-learning) + StrategyABTesting</li>
+        </ul>
+        <div class="card-uniqueness">
+          <strong>ما لا يملكه أحد:</strong> 3-layer cooldown system + per-tick 15+ gates + 8 strategies مع strategy-specific min R:R.
+        </div>
+        <div class="card-pricing">
+          <span class="price-label">لكل prop firm</span>
+          <span class="price-value">$2,000-15,000/mo</span>
+        </div>
+      </div>
+
+      <!-- Feature 5: Advanced Scanner -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Advanced Scanner + 4D SmartScore</h3>
+        <p class="card-desc">ماسح متقدم بـ 4 أبعاد لكل أصل — Trend, Momentum, Volume, Volatility في Zeit الحقيقي.</p>
+        <ul class="card-features">
+          <li><strong>4D SmartScore:</strong> Trend 40% + Momentum 30% + Volume 20% + Volatility 10%</li>
+          <li><strong>25 candlestick pattern</strong> بأسماء عربية</li>
+          <li><strong>Multi-timeframe M15/H1/H4/D1</strong> بـ weighted alignment (D1=2.0x, H4=1.5x, H1=1.0x, M15=0.5x)</li>
+          <li><strong>Volume Profile</strong> مع POC/VAH/VAL</li>
+          <li><strong>Ichimoku</strong> بـ proper 26-period displacement</li>
+          <li><strong>Parabolic SAR</strong> بـ Wilder's acceleration</li>
+          <li><strong>ADX</strong> بـ full Wilder's smoothing</li>
+          <li><strong>Divergence detection</strong> (regular + hidden)</li>
+        </ul>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$199-999/mo</span>
+        </div>
+      </div>
+
+      <!-- Feature 6: Council Intelligence -->
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <span class="card-tier tier-1">TIER 1 · ⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Council Intelligence — Self-Learning Loop</h3>
+        <p class="card-desc">حلقة تعلّم ذاتي مغلقة — المجلس يتعلّم من أخطائه ويُحسّن أوزانه ديناميكياً. 2,824 سطر، 11 ملف.</p>
+        <ul class="card-features">
+          <li><strong>TradeJournal:</strong> يحفظ councilVotes + regimeAtEntry + newsContext + wasRight لكل عضو</li>
+          <li><strong>CouncilVoteAccuracy:</strong> dynamic weights: 70% recent + 30% overall + streak bonus</li>
+          <li><strong>MarketRegimeService:</strong> BULL/BEAR/RANGE/VOLATILE + rrAdjustment</li>
+          <li><strong>CrossPairCorrelation:</strong> 24h/7d/30d correlations + riskLevel</li>
+          <li><strong>SystemMemory:</strong> INSIGHT/PATTERN/FAILED_SETUP/REGIME_HISTORY/LESSON</li>
+          <li><strong>SelfHealingService:</strong> 3-tier circuit breaker لـ 6 components</li>
+          <li><strong>DynamicPositionSizing:</strong> 9 multiplicative factors</li>
+          <li><strong>BacktestingEngine:</strong> replay historical TradeJournals</li>
+        </ul>
+        <div class="card-uniqueness">
+          <strong>ما لا يملكه أحد:</strong> closed-loop self-improving trading council — المجلس يصبح أذكى مع كل صفقة.
+        </div>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$1,000-5,000/mo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER 2 -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div class="tier-badge t2">T2</div>
+      <div>
+        <h3>Tier 2 — ميزات قوية جداً</h3>
+        <div class="tier-sub">لها منافسون لكن Roua يتفوق · ⭐⭐⭐⭐</div>
+      </div>
     </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+    <div class="features-grid">
+
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <span class="card-tier tier-2">TIER 2 · ⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Content Agents — Bilingual AI Content</h3>
+        <p class="card-desc">منصة تسويق محتوى AI ثنائية اللغة — 10 أنواع محتوى، 11 فئة، 5-axis quality scoring.</p>
+        <ul class="card-features">
+          <li><strong>4 services:</strong> Curator → Generator → Optimizer → Publisher</li>
+          <li><strong>10 content types:</strong> Article, Analysis, News Digest, Market Report, Educational, Opinion, Breaking, Hourly Update, Weekly Review, Pair Analysis</li>
+          <li><strong>Bilingual by default</strong> (AR + EN، نُسختان مستقلتان)</li>
+          <li><strong>5-axis quality scoring:</strong> SEO 25% + Readability 20% + Engagement 20% + Deduplication 15% + Compliance 20%</li>
+          <li><strong>Levenshtein deduplication</strong> ضد آخر 7 أيام</li>
+          <li><strong>Auto-compliance fixing</strong> — يضيف risk warnings تلقائياً</li>
+          <li><strong>5 cron jobs</strong> + JSON-LD structured data + Telegram auto-publishing</li>
+        </ul>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$499-2,999/mo</span>
+        </div>
       </div>
-      <h3 class="feature-title">تغطية عالمية</h3>
-      <p class="feature-desc">ست فئات أصول تشمل العملات والمعادن والطاقة والعملات الرقمية والمؤشرات والأسهم.</p>
+
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+          </div>
+          <span class="card-tier tier-2">TIER 2 · ⭐⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">News Module — Arab Sentiment Index</h3>
+        <p class="card-desc">4 مصادر أخبار + تحليل مشاعر عربي فريد عالمياً + Fear & Greed + Geopolitical Risk Index.</p>
+        <ul class="card-features">
+          <li><strong>4 sources:</strong> CoinTelegraph RSS + CryptoPanic API + CoinDesk RSS + Roua News</li>
+          <li><strong>Combined translation + sentiment</strong> في استدعاء AI واحد (87.5% توفير في التكلفة)</li>
+          <li><strong>Sentiment score (-1 to +1)</strong>، impactLevel، affectedAssets</li>
+          <li><strong>Arab Sentiment Index</strong> (فريد عالمياً)</li>
+          <li><strong>Fear & Greed Index</strong></li>
+          <li><strong>Geopolitical Risk Index</strong></li>
+        </ul>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$299-1,499/mo</span>
+        </div>
+      </div>
+
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42a12 12 0 01.84 4.42c0 2.5-2 4-9 6-7-2-9-3.5-9-6a12 12 0 01.84-4.42L12 14z"/></svg>
+          </div>
+          <span class="card-tier tier-2">TIER 2 · ⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">AI Coach — 3-Source PnL Fusion</h3>
+        <p class="card-desc">مدرّب ذكي يحلّل أداءك من 3 مصادر بيانات ويقدم نصائح هيكلية مع 18 مقياس إحصائي.</p>
+        <ul class="card-features">
+          <li><strong>3 مصادر بيانات:</strong> Trade + Position(CLOSED) + PaperOrder (FIFO reconstruction)</li>
+          <li><strong>18 statistical metrics:</strong> winRate, profitFactor, maxDrawdown, Sharpe, consecutive losses</li>
+          <li><strong>Rating system:</strong> excellent / good / needs_improvement / insufficient_data</li>
+          <li><strong>Structured advice:</strong> [تحذير/فرصة/تعليم] مع icons</li>
+        </ul>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$99-499/mo</span>
+        </div>
+      </div>
+
+      <div class="premium-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          </div>
+          <span class="card-tier tier-2">TIER 2 · ⭐⭐⭐</span>
+        </div>
+        <h3 class="card-title">Notification Engine — 5 Channels</h3>
+        <p class="card-desc">محرك إشعارات بـ 5 قنوات fan-out متعدد الأجهزة مع 10 أنواع إشعارات × 4 أولويات.</p>
+        <ul class="card-features">
+          <li><strong>5 channels:</strong> WebSocket + Telegram + Discord + Browser push + Sound</li>
+          <li><strong>Multi-device fanout</strong> (نفس المستخدم يمكنه عدة sockets)</li>
+          <li><strong>V156 SECURITY broadcast whitelist</strong></li>
+          <li><strong>10 notification types</strong> × 4 priorities</li>
+        </ul>
+        <div class="card-pricing">
+          <span class="price-label">التسعير المقترح</span>
+          <span class="price-value">$199-999/mo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div class="tier-badge t3">T3</div>
+      <div>
+        <h3>Tier 3 — ميزات جاهزة لكن شائعة</h3>
+        <div class="tier-sub">ميزات أساسية متوفرة في معظم المنصات · ⭐⭐⭐</div>
+      </div>
     </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div class="premium-card">
+        <h3 class="card-title" style="font-size:1.05rem">11 · Paper Trading Sandbox</h3>
+        <p class="card-desc" style="margin:0">بيئة تجريبية بـ Virtual $10k + Sharpe/MaxDD</p>
+        <div class="card-pricing" style="border:none;padding:0;margin-top:1rem">
+          <span class="price-label">السعر</span>
+          <span class="price-value">$49-199/mo</span>
+        </div>
       </div>
-      <h3 class="feature-title">لوحة تحكم ثلاثية الأبعاد</h3>
-      <p class="feature-desc">واجهة بصرية تفاعلية تعرض كل البيانات في شاشة واحدة مع رسوم متحركة سلسة.</p>
+      <div class="premium-card">
+        <h3 class="card-title" style="font-size:1.05rem">12 · Multi-Exchange Adapters</h3>
+        <p class="card-desc" style="margin:0">Binance + MT5 + Alpaca — تنفيذ موحد</p>
+        <div class="card-pricing" style="border:none;padding:0;margin-top:1rem">
+          <span class="price-label">السعر</span>
+          <span class="price-value">$299-1,499/mo</span>
+        </div>
+      </div>
+      <div class="premium-card">
+        <h3 class="card-title" style="font-size:1.05rem">13 · Real-time WebSocket</h3>
+        <p class="card-desc" style="margin:0">V266 — بث لحظي لكل البيانات</p>
+        <div class="card-pricing" style="border:none;padding:0;margin-top:1rem">
+          <span class="price-label">ضمن الباقة</span>
+          <span class="price-value" style="color:var(--blue-bright);background:none;-webkit-text-fill-color:var(--blue-bright);">INCLUDED</span>
+        </div>
+      </div>
+      <div class="premium-card">
+        <h3 class="card-title" style="font-size:1.05rem">14 · Audit Trail + RiskEvent</h3>
+        <p class="card-desc" style="margin:0">تسجيل كامل لكل قرار وحدث مخاطرة</p>
+        <div class="card-pricing" style="border:none;padding:0;margin-top:1rem">
+          <span class="price-label">السعر</span>
+          <span class="price-value">$99-499/mo</span>
+        </div>
+      </div>
+      <div class="premium-card">
+        <h3 class="card-title" style="font-size:1.05rem">15 · User Tiers</h3>
+        <p class="card-desc" style="margin:0">FREE / PRO / PLUS / PREMIUM / INSTITUTIONAL</p>
+        <div class="card-pricing" style="border:none;padding:0;margin-top:1rem">
+          <span class="price-label">ضمن الباقة</span>
+          <span class="price-value" style="color:var(--blue-bright);background:none;-webkit-text-fill-color:var(--blue-bright);">INCLUDED</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
-      <h3 class="feature-title">طبقات أمان متعددة</h3>
-      <p class="feature-desc">تشفير من الطرف إلى الطرف مع مصادقة ثنائية وحماية كاملة لبيانات الحسابات.</p>
-    </div>
+<!-- LANGUAGES SECTION -->
+<section id="languages" class="reveal">
+  <span class="section-tag">GLOBAL REACH · 32 LANGUAGES</span>
+  <h2 class="section-title">32 لغة = 32 سوقاً بلا منافس</h2>
+  <p class="section-sub">
+    Roua = <strong style="color:var(--blue-glow)">رقم 1 عالمياً</strong> في تغطية اللغات، متفوقة على Binance (31) و MetaTrader 5 (27) و TradingView (21).
+    لكن الفجوة الحقيقية بين الادعاء والحقيقة تحتاج إصلاحاً — UI يدعم 32 لغة، لكن AI layer عربي فقط.
+  </p>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+  <div class="lang-comparison">
+    <div class="lang-stat ui">
+      <div class="big-num">32</div>
+      <div class="stat-detail">
+        <strong style="color:var(--blue-bright)">UI Layer</strong><br>
+        32 لغة فعلية في apps/web/messages/<br>
+        كل ملف 4,752 سطر = 152,064 نص مترجم<br>
+        RTL يعمل للـ 4 لغات (ar, he, fa, ur)<br>
+        defaultLocale = 'ar' مع localePrefix: 'as-needed'
       </div>
-      <h3 class="feature-title">تنفيذ لحظي</h3>
-      <p class="feature-desc">اتصال مباشر بالوسطاء مع زمن تنفيذ أقل من 30 مللي ثانية لاقتناص الفرص.</p>
     </div>
+    <div class="lang-stat ai">
+      <div class="big-num">1</div>
+      <div class="stat-detail">
+        <strong style="color:var(--gold-bright)">AI Layer</strong><br>
+        AI brain عربي فقط حالياً<br>
+        Council, News, Coach, Signals, Sanctuary<br>
+        <span style="color:#f87171;">إصلاح مطلوب: 3-6 أسابيع لجعل AI locale-aware</span>
+      </div>
+    </div>
+  </div>
+
+  <table class="lang-table">
+    <thead><tr><th>المنصة</th><th>عدد اللغات</th><th>التقييم</th></tr></thead>
+    <tbody>
+      <tr class="highlight"><td>Roua</td><td>32</td><td>⭐⭐⭐⭐⭐ #1 عالمياً</td></tr>
+      <tr><td>Plus500</td><td>32</td><td>بدون AI</td></tr>
+      <tr><td>Binance</td><td>31</td><td>—</td></tr>
+      <tr><td>MetaTrader 5</td><td>27</td><td>—</td></tr>
+      <tr><td>eToro</td><td>23</td><td>—</td></tr>
+      <tr><td>TradingView</td><td>21</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box gold">
+    <strong>الميزة الاستراتيجية الكبرى:</strong> 32 لغة = 32 سوقاً بلا منافس في كل واحد منها — لأن الفئة كلها لك.
+    في كل لغة، أنت الأول والأخير. لا يوجد "Binance of AI Council" — لأنك أنت Binance والـ AI Council معاً.
+  </div>
+</section>
+
+<!-- CRITICAL FIXES -->
+<section id="fixes" class="reveal">
+  <span class="section-tag">PRE-LAUNCH · CRITICAL FIXES</span>
+  <h2 class="section-title">الإصلاحات الحرجة قبل إطلاق B2B</h2>
+  <p class="section-sub">
+    قبل أي إطلاق B2B، هناك إصلاحات P0 (blockers) و P1 (strategic) يجب إنجازها لضمان جودة المنتج عالمياً.
+  </p>
+
+  <div class="fixes-grid">
+    <div class="fix-card p0">
+      <div class="fix-header">
+        <h3>P0 — Blockers</h3>
+        <span class="fix-badge red">1-2 أسبوع</span>
+      </div>
+      <ol>
+        <li><strong>إعادة ترجمة ja.json</strong> (95 خطأ) — السوق الياباني مغلق</li>
+        <li><strong>إعادة ترجمة fil.json</strong> (49 خطأ) — السوق الفلبيني مغلق</li>
+        <li><strong>إعادة ترجمة hi.json</strong> (47 خطأ) — السوق الهندي مغلق</li>
+        <li><strong>إعادة ترجمة it.json</strong> (24 خطأ) — السوق الإيطالي مغلق</li>
+      </ol>
+    </div>
+    <div class="fix-card p1">
+      <div class="fix-header">
+        <h3>P1 — Strategic</h3>
+        <span class="fix-badge yellow">3-6 أسابيع</span>
+      </div>
+      <ol start="5">
+        <li><strong>جعل AI layer locale-aware</strong> — إضافة language: Locale parameter</li>
+        <li><strong>تحديث Strategic Council prompts</strong> لـ 32 لغة</li>
+        <li><strong>توسيع hreflang</strong> من 11 إلى 32 لغة</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="reveal">
+  <span class="section-tag">PRICING · TIERED SaaS</span>
+  <h2 class="section-title">خطة التسعير المُقترحة</h2>
+  <p class="section-sub">
+    تسعير value-based — العميل يدفع قيمة ما يحصل عليه، لا سعر المنافس. كل tier يستهدف شريحة سوق مختلفة.
+  </p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <span class="pricing-tier">TIER 1</span>
+      <div class="pricing-product">Council Signals API</div>
+      <div class="pricing-price">$1,999-9,999/mo</div>
+      <div class="pricing-target">hedge funds صغيرة، quants، prop firms</div>
+    </div>
+    <div class="pricing-card featured">
+      <span class="pricing-tier">TIER 2</span>
+      <div class="pricing-product">Council + Risk Engine</div>
+      <div class="pricing-price">$5,000-25,000/mo</div>
+      <div class="pricing-target">prop firms، fintech startups</div>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-tier">TIER 3</span>
+      <div class="pricing-product">Full White-Label Platform</div>
+      <div class="pricing-price">$50K + $15K/mo</div>
+      <div class="pricing-target">brokers صغار</div>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-tier">TIER 4</span>
+      <div class="pricing-product">EA Bridge License</div>
+      <div class="pricing-price">$25K + $5K/mo</div>
+      <div class="pricing-target">أي MT5 broker</div>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-tier">TIER 5</span>
+      <div class="pricing-product">Smart Chart Suite (White-label)</div>
+      <div class="pricing-price">$10K + $2K/mo</div>
+      <div class="pricing-target">brokers يريدون ترقية charts</div>
+    </div>
+  </div>
+
+  <div class="highlight-box gold">
+    <strong>التقدير المالي المحتمل:</strong><br>
+    السنة 1: <strong>$500K-1.5M ARR</strong> ·
+    السنة 2: <strong>$2M-5M ARR</strong> ·
+    السنة 3: <strong>$5M-15M ARR</strong>
   </div>
 </section>
 
@@ -839,20 +1652,28 @@ footer{
   <h2 class="section-title">أرقام تتحدث عن نفسها</h2>
   <div class="stats-grid">
     <div class="stat-block">
-      <div class="stat-num" data-target="24">0</div>
-      <div class="stat-lbl">ساعة مراقبة</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" data-target="30">0</div>
-      <div class="stat-lbl">ثانية للإعداد</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" data-target="6">0</div>
-      <div class="stat-lbl">فئات أصول</div>
-    </div>
-    <div class="stat-block">
       <div class="stat-num" data-target="8">0</div>
-      <div class="stat-lbl">نماذج ذكاء</div>
+      <div class="stat-lbl">أدوار AI</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" data-target="32">0</div>
+      <div class="stat-lbl">لغة عالمية</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" data-target="60">0</div>
+      <div class="stat-lbl">محرك ذكي</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" data-target="11">0</div>
+      <div class="stat-lbl">نماذج LLM</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" data-target="50000">0</div>
+      <div class="stat-lbl">سطر كود فحصنا</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" data-target="152064">0</div>
+      <div class="stat-lbl">نص مترجم</div>
     </div>
   </div>
 </section>
@@ -860,10 +1681,10 @@ footer{
 <!-- CTA -->
 <section id="contact" class="cta-section reveal">
   <div class="cta-card">
-    <h2 class="cta-title">جاهز لبدء المسح؟</h2>
+    <h2 class="cta-title">جاهز لاخلق فئتك؟</h2>
     <p class="cta-sub">
-      انضم اليوم واحصل على وصول كامل لمنصة الاستخبار المالي الأكثر تقدماً في المنطقة.
-      تجربة مجانية لمدة 14 يوماً بدون بطاقة ائتمان.
+      Roua ليست منصة تداول — هي <strong style="color:var(--blue-glow)">AI Trading Intelligence Suite</strong>.
+      انضم اليوم واحصل على وصول كامل لأول AI Council Trading Platform في العالم.
     </p>
     <a href="#" class="btn-glow">
       <span>ابدأ التجربة المجانية</span>
@@ -875,7 +1696,8 @@ footer{
 </section>
 
 <footer>
-  <p>&copy; 2026 ROUAA — منصة الاستخبار المالي. جميع الحقوق محفوظة.</p>
+  <p>&copy; 2026 Roua Trading — AI Council Trading Platform | فئة جديدة في عالم التداول</p>
+  <p class="tagline">VISION INTO MARKETS · ببصيرة نحو الأسواق</p>
 </footer>
 
 <!-- Ticker -->
@@ -889,7 +1711,6 @@ footer{
     <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.5%</span></div>
     <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.8%</span></div>
     <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+0.9%</span></div>
-    <!-- duplicate for seamless loop -->
     <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.1%</span></div>
     <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+3.4%</span></div>
     <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.2%</span></div>
@@ -902,7 +1723,7 @@ footer{
 </div>
 
 <script>
-// ===== RADAR targets + status =====
+// ===== RADAR =====
 (function(){
   const targetsEl = document.getElementById('radarTargets');
   const countEl   = document.getElementById('rCount');
@@ -910,13 +1731,10 @@ footer{
   const clockEl   = document.getElementById('rClock');
   const statusEl  = document.getElementById('rStatus');
   if(!targetsEl) return;
-
   const SWEEP_DUR = 4000;
   let active = [];
   const MAX = 8;
-
   const rand = (a,b) => a + Math.random()*(b-a);
-
   function spawn(){
     if(active.length >= MAX) return;
     const r = rand(15, 92);
@@ -938,7 +1756,6 @@ footer{
   }
   setInterval(spawn, 600);
   for(let i=0;i<4;i++) setTimeout(spawn, i*150);
-
   const pad = n => n.toString().padStart(2,'0');
   function loop(){
     if(countEl) countEl.textContent = pad(active.length);
@@ -953,7 +1770,6 @@ footer{
     requestAnimationFrame(loop);
   }
   loop();
-
   const statuses = ['ACTIVE','SCANNING','TRACKING','LOCKED'];
   setInterval(()=>{
     if(statusEl) statusEl.textContent = statuses[Math.floor(Math.random()*statuses.length)];
@@ -963,23 +1779,20 @@ footer{
 // ===== Scroll reveal =====
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
   });
-}, {threshold:0.15});
+}, {threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ===== Animated stat counters =====
+// ===== Animated counters =====
 document.querySelectorAll('.stat-num').forEach(el => {
   const target = parseInt(el.dataset.target);
   let cur = 0;
-  const step = Math.max(1, Math.floor(target / 40));
+  const step = Math.max(1, Math.floor(target / 50));
   const update = () => {
     cur += step;
     if(cur >= target){ cur = target; }
-    el.textContent = cur;
+    el.textContent = cur.toLocaleString('en-US');
     if(cur < target) requestAnimationFrame(update);
   };
   const obs = new IntersectionObserver((entries)=>{
@@ -990,16 +1803,16 @@ document.querySelectorAll('.stat-num').forEach(el => {
   obs.observe(el);
 });
 
-// ===== 3D tilt on feature cards =====
-document.querySelectorAll('.feature-card').forEach(card => {
+// ===== 3D tilt on premium cards =====
+document.querySelectorAll('.premium-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
     const y = (e.clientY - r.top) / r.height;
     card.style.setProperty('--mx', (x*100)+'%');
     card.style.setProperty('--my', (y*100)+'%');
-    const rx = (y - 0.5) * -10;
-    const ry = (x - 0.5) * 10;
+    const rx = (y - 0.5) * -8;
+    const ry = (x - 0.5) * 8;
     card.style.transform = `translateY(-8px) perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
   card.addEventListener('mouseleave', () => {
