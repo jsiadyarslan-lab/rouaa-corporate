@@ -163,6 +163,24 @@ nav{
   animation:navDown 0.8s ease 0.3s forwards;
 }
 @keyframes navDown{to{transform:translateY(0)}}
+
+/* Notch cutout in navbar border — semicircle around logo */
+nav::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;
+  left:3rem;  /* aligns with .logo position */
+  width:100px;  /* diameter of the notch */
+  height:50px;  /* half circle */
+  border-radius:0 0 50px 50px;  /* bottom semicircle */
+  background:rgba(2,6,23,0.95);  /* match nav bg */
+  border:1px solid var(--glass-border);
+  border-top:none;  /* open at top */
+  z-index:99;
+  pointer-events:none;
+  /* Center the notch under the logo */
+  transform:translateX(-2px);
+}
 .logo{
   position:relative;
   display:flex;
@@ -195,6 +213,8 @@ nav{
     inset 0 0 20px rgba(99,102,241,0.1);
   overflow:hidden;
   transition:border-color 0.3s, box-shadow 0.3s;
+  /* Position logo to overlap nav bottom border */
+  margin-top:0;
 }
 .logo:hover .logo-svg{
   border-color:rgba(99,102,241,0.8);
@@ -208,7 +228,6 @@ nav{
   height:80px;
   filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));
 }
-/* Keep the SVG background rect hidden */
 .logo-svg svg rect{display:none}
 
 </style>
