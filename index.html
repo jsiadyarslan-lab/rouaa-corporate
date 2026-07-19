@@ -339,6 +339,155 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 @media (max-width:768px){nav{padding:1rem 1.2rem}.nav-links{display:none}.hero{padding-top:6rem;padding-bottom:5rem}.hud-label.left,.hud-label.right{display:none}.hud-label.top{top:-22px;font-size:0.58rem}.hud-label.bottom{bottom:-22px;font-size:0.58rem}.radar-status{bottom:-60px;font-size:0.6rem;gap:0.3rem}.radar-status .val{font-size:0.8rem}}
 @media (max-width:480px){.hud-label.top,.hud-label.bottom{display:none}.radar-status{bottom:-55px;flex-wrap:wrap;gap:0.4rem}}
 @media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
+
+/* ─── Premium News Feature Cards (redesigned) ─── */
+.news-features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:var(--space-md);
+  margin-top:var(--space-md);
+}
+.nf-card{
+  position:relative;
+  padding:1.8rem 1.6rem 1.5rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(160deg, rgba(59,130,246,0.05) 0%, rgba(34,211,238,0.02) 50%, rgba(2,6,23,0.4) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;
+  isolation:isolate;
+  min-height:200px;
+  display:flex;
+  flex-direction:column;
+}
+/* Gradient border on hover */
+.nf-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  padding:1.5px;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(135deg, rgba(96,165,250,0.5) 0%, rgba(34,211,238,0.3) 50%, transparent 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  transition:background 0.4s, opacity 0.4s;
+  opacity:0.6;
+}
+/* Spotlight following cursor */
+.nf-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle 250px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.12), transparent 70%);
+  opacity:0;
+  transition:opacity 0.4s;
+  pointer-events:none;
+  z-index:-1;
+}
+.nf-card:hover{
+  transform:translateY(-6px);
+  background:linear-gradient(160deg, rgba(59,130,246,0.1) 0%, rgba(34,211,238,0.05) 50%, rgba(2,6,23,0.5) 100%);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.15);
+}
+.nf-card:hover::before{
+  background:linear-gradient(135deg, var(--blue-bright) 0%, var(--cyan) 50%, rgba(96,165,250,0.4) 100%);
+  opacity:1;
+}
+.nf-card:hover::after{opacity:1}
+
+/* Card header: icon + number badge */
+.nf-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  margin-bottom:1rem;
+  gap:0.8rem;
+}
+.nf-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  background:linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+  display:grid;place-items:center;
+  box-shadow:0 6px 18px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  position:relative;
+  flex-shrink:0;
+}
+.nf-icon svg{width:24px;height:24px;color:var(--bg-0)}
+.nf-icon::after{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:14px;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  filter:blur(12px);
+  opacity:0.35;
+  z-index:-1;
+  transition:opacity 0.4s;
+}
+.nf-card:hover .nf-icon::after{opacity:0.6}
+
+.nf-num{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.15em;
+  color:var(--blue-bright);
+  background:rgba(59,130,246,0.12);
+  border:1px solid rgba(96,165,250,0.3);
+  padding:0.25rem 0.6rem;
+  border-radius:4px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+.nf-title{
+  font-size:1.1rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.5rem;
+  line-height:1.4;
+  letter-spacing:-0.01em;
+}
+.nf-desc{
+  color:var(--text-dim);
+  font-size:0.92rem;
+  line-height:1.75;
+  font-weight:500;
+  flex:1;
+}
+.nf-stat{
+  display:inline-flex;
+  align-items:center;
+  gap:0.4rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.1em;
+  color:var(--cyan);
+  background:rgba(34,211,238,0.08);
+  border:1px solid rgba(34,211,238,0.25);
+  padding:0.3rem 0.7rem;
+  border-radius:4px;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-top:0.9rem;
+  align-self:flex-start;
+}
+.nf-stat::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 8px var(--cyan);
+}
+
+@media (max-width:768px){
+  .news-features-grid{grid-template-columns:1fr}
+  .nf-card{padding:1.5rem 1.3rem 1.3rem}
+}
+
 </style>
 </head>
 <body>
@@ -524,36 +673,121 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
     </div>
   </div>
 
-  <div class="project-features">
-    <div class="p-feature">
-      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-      <h4 class="p-feature-title">تقاطع متعدد المصادر</h4>
-      <p class="p-feature-desc">500+ مصدر رسمي + 1000+ مصدر مجمّع بزمن حضور أقل من دقيقة.</p>
-      <span class="p-feature-stat">500+ رسمي · 1000+ مجمّع</span>
+  
+  <div class="news-features-grid">
+
+    <!-- 1. وكيل النشر المستقل -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <span class="nf-num">01</span>
+      </div>
+      <h4 class="nf-title">وكيل نشر مستقل</h4>
+      <p class="nf-desc">ينتج أخباراً حصرية من مئات المصادر الرسمية المالية العالمية — لا يعيد نشر، بل يصنع محتوى أصلياً.</p>
+      <span class="nf-stat">Original Content Engine</span>
     </div>
-    <div class="p-feature">
-      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h4 class="p-feature-title">تنقية ذكية للضوضاء</h4>
-      <p class="p-feature-desc">فلترة تلقائية للمكرر، وتصنيف للإشارات ذات الأثر السوقي الحقيقي.</p>
-      <span class="p-feature-stat">AI Filter</span>
+
+    <!-- 2. أنابيب الأخبار -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
+        <span class="nf-num">02</span>
+      </div>
+      <h4 class="nf-title">أنابيب الأخبار</h4>
+      <p class="nf-desc">تنتج آلاف الأخبار المجمّعة يومياً، تُحلّل، وتُولَّد لها صور تلقائياً، بـ 5 لغات.</p>
+      <span class="nf-stat">آلاف الأخبار · 5 لغات</span>
     </div>
-    <div class="p-feature">
-      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <h4 class="p-feature-title">تحليل أثر سوقي فوري</h4>
-      <p class="p-feature-desc">كل خبر يحمل وسم أثر: إيجابي / سلبي / محايد — مع درجة ثقة.</p>
-      <ul class="p-feature-list">
-        <li><strong>Arab Sentiment Index</strong> — فريد عالمياً</li>
-        <li><strong>Fear & Greed Index</strong></li>
-        <li><strong>Geopolitical Risk Index</strong></li>
-      </ul>
+
+    <!-- 3. أنابيب الإنفوجرافيك -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V9M15 17v-4M21 17H3"/></svg></div>
+        <span class="nf-num">03</span>
+      </div>
+      <h4 class="nf-title">أنابيب الإنفوجرافيك</h4>
+      <p class="nf-desc">تنتج عشرات الإنفوجرافيك الاحترافي مع الصور يومياً، بكل اللغات.</p>
+      <span class="nf-stat">عشرات الإنفوجرافيك يومياً</span>
     </div>
-    <div class="p-feature">
-      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-      <h4 class="p-feature-title">بحث دلالي</h4>
-      <p class="p-feature-desc">لا تبحث بالكلمات بل بالمعنى. اسأل: «ما الأخبار التي أثّرت في البنوك؟»</p>
-      <span class="p-feature-stat">Semantic Search</span>
+
+    <!-- 4. أنابيب تحليل الأسهم -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <span class="nf-num">04</span>
+      </div>
+      <h4 class="nf-title">أنابيب تحليل الأسهم</h4>
+      <p class="nf-desc">تُحلّل آلاف الأسهم يومياً بكل اللغات — تحليل فني + أساسي + توصيات.</p>
+      <span class="nf-stat">آلاف الأسهم يومياً</span>
     </div>
+
+    <!-- 5. أنابيب التقارير الاستراتيجية -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <span class="nf-num">05</span>
+      </div>
+      <h4 class="nf-title">أنابيب التقارير الاستراتيجية</h4>
+      <p class="nf-desc">تنتج عشرات التقارير والتحليلات والتقارير الاستراتيجية العميقة يومياً، بكل اللغات.</p>
+      <span class="nf-stat">تقارير عميقة يومياً</span>
+    </div>
+
+    <!-- 6. أنابيب الفيديو -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg></div>
+        <span class="nf-num">06</span>
+      </div>
+      <h4 class="nf-title">أنابيب الفيديو</h4>
+      <p class="nf-desc">تنتج عشرات الفيديوهات بأكثر من 7 أنواع يومياً، بكل اللغات.</p>
+        <span class="nf-stat">7+ أنواع فيديو يومياً</span>
+    </div>
+
+    <!-- 7. أنابيب المخاطر الجيوسياسية -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <span class="nf-num">07</span>
+      </div>
+      <h4 class="nf-title">أنابيب المخاطر الجيوسياسية</h4>
+      <p class="nf-desc">تنتج عشرات تحليلات المخاطر الجيوسياسية يومياً، بكل اللغات.</p>
+      <span class="nf-stat">تحليلات جيوسياسية يومياً</span>
+    </div>
+
+    <!-- 8. Global Financial Intelligence -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M2 12h20"/></svg></div>
+        <span class="nf-num">08</span>
+      </div>
+      <h4 class="nf-title">Global Financial Intelligence</h4>
+      <p class="nf-desc">مركز معلومات بأسلوب Bloomberg Terminal يجمع حقائق موثقة من 411 مصدر رسمي عالمي (FRED + ECB + BLS + Fed) وتتبع البنوك المركزية.</p>
+      <span class="nf-stat">411 مصدر رسمي · 6 فئات</span>
+    </div>
+
+    <!-- 9. نظام ثقة المصادر -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="nf-num">09</span>
+      </div>
+      <h4 class="nf-title">نظام ثقة المصادر</h4>
+      <p class="nf-desc">شارة ثقة بجانب كل خبر — مستوحى من NewsGuard — تصنّف 729+ مصدراً عالمياً حسب الموثوقية.</p>
+      <span class="nf-stat">Trust Index · NewsGuard-style</span>
+    </div>
+
+    <!-- 10. المحتوى الصوتي + التكامل -->
+    <div class="nf-card">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-7h3v5zM3 19a2 2 0 002 2h1v-7H3v5z"/></svg></div>
+        <span class="nf-num">10</span>
+      </div>
+      <h4 class="nf-title">المحتوى الصوتي + التكامل متعدد القنوات</h4>
+      <p class="nf-desc">يحوّل أهم الأخبار إلى ملخصات صوتية بـ 5 لغات — استمع وأنت تتنقّل. مع نشر تلقائي على الموقع + Telegram + Newsletter.</p>
+      <span class="nf-stat">Audio · Telegram · Newsletter</span>
+    </div>
+
   </div>
+iv>
 
   <div class="project-cta">
     <a href="#" class="btn-project news">
