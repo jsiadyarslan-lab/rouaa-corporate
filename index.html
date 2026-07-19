@@ -247,7 +247,8 @@ body {
 }
 
 /* ═══════════════════════════════════════
-   HERO SECTION
+   HERO SECTION — RADAR REDESIGN
+   Black background, large rotating radar with target blips
    ═══════════════════════════════════════ */
 .hero {
     position: relative;
@@ -256,207 +257,479 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 1.5rem 3rem;
     z-index: 1;
     overflow: hidden;
+    background: #000;
 }
 
+/* Subtle scanlines on the whole hero */
 .hero::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(0, 212, 170, 0.08), transparent 60%);
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 255, 130, 0.012) 2px,
+            rgba(0, 255, 130, 0.012) 3px
+        );
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+}
+
+/* Distant radial glow */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(0, 255, 130, 0.06), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-content {
-    text-align: center;
-    max-width: 900px;
     position: relative;
     z-index: 2;
+    text-align: center;
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
+/* ---------- Badge ---------- */
 .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 1.5rem;
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    animation: fadeInDown 1s ease 0.3s both;
+    gap: 0.6rem;
+    padding: 0.45rem 1.1rem;
+    background: rgba(0, 20, 10, 0.6);
+    border: 1px solid rgba(0, 255, 130, 0.3);
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: rgba(0, 255, 130, 0.85);
+    text-transform: uppercase;
+    animation: fadeInDown 0.8s ease 0.2s both;
 }
 
 .badge-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--neural-teal);
+    width: 7px; height: 7px;
+    background: #00ff82;
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--neural-teal), 0 0 20px rgba(0, 212, 170, 0.3);
-    animation: dotPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px #00ff82, 0 0 16px rgba(0, 255, 130, 0.5);
+    animation: dotPulse 1.8s ease-in-out infinite;
 }
 
 @keyframes dotPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
+    50% { opacity: 0.4; transform: scale(1.4); }
 }
 
+/* ---------- Title ---------- */
 .hero-title {
-    font-size: clamp(4rem, 12vw, 8rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    position: relative;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 255, 130, 0.6), 0 0 40px rgba(0, 255, 130, 0.3);
+    animation: fadeInUp 1s ease 0.4s both;
 }
 
-.title-line {
-    display: flex;
-    justify-content: center;
-    gap: 0.1em;
-}
-
-.char-reveal {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--neural-teal), #00ffcc, var(--quantum-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    filter: drop-shadow(0 0 20px rgba(0, 212, 170, 0.5)) drop-shadow(0 0 40px rgba(0, 212, 170, 0.3));
-    opacity: 0;
-    transform: translateY(50px) rotateX(-90deg);
-    animation: charReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.char-reveal:nth-child(1) { animation-delay: 0.5s; }
-.char-reveal:nth-child(2) { animation-delay: 0.7s; }
-.char-reveal:nth-child(3) { animation-delay: 0.9s; }
-
-@keyframes charReveal {
-    to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0);
-    }
+.hero-title .accent {
+    color: #00ff82;
+    font-weight: 700;
 }
 
 .hero-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0;
-    animation: fadeInUp 1s ease 1.2s both;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    max-width: 560px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.04em;
+    animation: fadeInUp 1s ease 0.6s both;
 }
 
+/* ---------- Radar ---------- */
+.radar-wrapper {
+    position: relative;
+    width: clamp(320px, 60vmin, 640px);
+    aspect-ratio: 1;
+    margin: 1rem 0;
+    animation: fadeInUp 1.2s ease 0.8s both;
+}
+
+.radar-screen {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center,
+            rgba(0, 30, 15, 0.95) 0%,
+            rgba(0, 12, 6, 0.98) 60%,
+            #000 100%);
+    border: 1px solid rgba(0, 255, 130, 0.35);
+    box-shadow:
+        0 0 80px rgba(0, 255, 130, 0.12),
+        0 0 200px rgba(0, 255, 130, 0.05),
+        inset 0 0 100px rgba(0, 255, 130, 0.08),
+        inset 0 0 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+/* Radar grid — concentric rings + azimuth lines */
+.radar-grid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.radar-grid .ring {
+    fill: none;
+    stroke: rgba(0, 255, 130, 0.18);
+    stroke-width: 0.4;
+}
+.radar-grid .ring.outer {
+    stroke: rgba(0, 255, 130, 0.4);
+    stroke-width: 0.6;
+}
+.radar-grid .ring.mid {
+    stroke: rgba(0, 255, 130, 0.25);
+    stroke-width: 0.5;
+}
+
+.radar-grid .azimuth {
+    stroke: rgba(0, 255, 130, 0.1);
+    stroke-width: 0.3;
+}
+.radar-grid .azimuth.cardinal {
+    stroke: rgba(0, 255, 130, 0.22);
+    stroke-width: 0.5;
+}
+
+.radar-grid .compass {
+    fill: rgba(0, 255, 130, 0.75);
+    font-family: 'Courier New', monospace;
+    font-size: 6px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.radar-grid .range-label {
+    fill: rgba(0, 255, 130, 0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 3.2px;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.radar-grid .center-dot {
+    fill: #00ff82;
+    filter: drop-shadow(0 0 4px #00ff82);
+}
+
+.radar-grid .center-cross {
+    stroke: rgba(0, 255, 130, 0.8);
+    stroke-width: 0.6;
+}
+
+/* Sweep — rotating conic gradient afterglow */
+.radar-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(0, 255, 130, 0.55) 0deg,
+        rgba(0, 255, 130, 0.25) 15deg,
+        rgba(0, 255, 130, 0.08) 35deg,
+        rgba(0, 255, 130, 0.02) 60deg,
+        transparent 90deg,
+        transparent 360deg
+    );
+    mix-blend-mode: screen;
+    animation: sweepRotate 4.5s linear infinite;
+    pointer-events: none;
+}
+
+/* The bright leading edge line */
+.radar-sweep-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 1.5px;
+    transform-origin: left center;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 255, 130, 0.9) 0%,
+        rgba(0, 255, 130, 0.5) 50%,
+        transparent 100%
+    );
+    box-shadow: 0 0 8px #00ff82, 0 0 16px rgba(0, 255, 130, 0.6);
+    animation: sweepRotate 4.5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes sweepRotate {
+    from { transform: translate(0, -50%) rotate(0deg); }
+    to   { transform: translate(0, -50%) rotate(360deg); }
+}
+
+.radar-sweep {
+    animation: sweepRotateBg 4.5s linear infinite;
+}
+@keyframes sweepRotateBg {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* Targets — blips */
+.radar-targets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.target {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #00ff82;
+    box-shadow: 0 0 8px #00ff82, 0 0 16px rgba(0, 255, 130, 0.7);
+    opacity: 0;
+    animation: targetAppear 3.5s ease-out forwards;
+}
+
+.target.hostile {
+    background: #ff3344;
+    box-shadow: 0 0 8px #ff3344, 0 0 16px rgba(255, 51, 68, 0.7);
+}
+
+.target.neutral {
+    background: #ffcc33;
+    box-shadow: 0 0 8px #ffcc33, 0 0 16px rgba(255, 204, 51, 0.7);
+}
+
+@keyframes targetAppear {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    8%   { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+    20%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Radar status bar below the screen */
+.radar-status {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(0, 255, 130, 0.65);
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.radar-status .item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.radar-status .item .val {
+    color: #00ff82;
+    font-weight: 700;
+}
+.radar-status .item .dot {
+    width: 6px; height: 6px;
+    background: #00ff82;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ff82;
+    animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+/* Corner brackets around radar (cinematic HUD style) */
+.radar-bracket {
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 2px solid rgba(0, 255, 130, 0.6);
+}
+.radar-bracket.tl { top: -6px; left: -6px; border-right: none; border-bottom: none; }
+.radar-bracket.tr { top: -6px; right: -6px; border-left: none; border-bottom: none; }
+.radar-bracket.bl { bottom: -6px; left: -6px; border-right: none; border-top: none; }
+.radar-bracket.br { bottom: -6px; right: -6px; border-left: none; border-top: none; }
+
+/* HUD labels around radar */
+.radar-label {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(0, 255, 130, 0.6);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.radar-label.top    { top: -28px; left: 50%; transform: translateX(-50%); }
+.radar-label.bottom { bottom: -28px; left: 50%; transform: translateX(-50%); }
+.radar-label.left   { top: 50%; left: -50px; transform: translateY(-50%) rotate(-90deg); transform-origin: center; }
+.radar-label.right  { top: 50%; right: -50px; transform: translateY(-50%) rotate(90deg); transform-origin: center; }
+
+/* ---------- CTAs ---------- */
 .hero-ctas {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
     justify-content: center;
-    margin-bottom: 4rem;
-    opacity: 0;
-    animation: fadeInUp 1s ease 1.5s both;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 1s both;
 }
 
 .btn-glow {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    background: linear-gradient(135deg, var(--neural-teal), var(--quantum-blue));
-    color: var(--primary-deep);
+    gap: 0.6rem;
+    background: rgba(0, 255, 130, 0.95);
+    color: #000;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    padding: 1rem 2rem;
-    border-radius: 16px;
-    border: none;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 130, 1);
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 4px 20px rgba(0, 212, 170, 0.4),
-        0 0 30px rgba(0, 212, 170, 0.2),
-        0 0 60px rgba(0, 212, 170, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    box-shadow: 0 0 20px rgba(0, 255, 130, 0.4);
 }
 
 .btn-glow::before {
     content: '';
     position: absolute;
-    inset: -2px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, var(--neural-teal), var(--quantum-blue), var(--neural-teal));
-    background-size: 200% 200%;
-    z-index: -1;
-    animation: glowRotate 3s linear infinite;
-    opacity: 0.5;
-    filter: blur(8px);
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
 }
 
-@keyframes glowRotate {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+.btn-glow:hover::before { left: 100%; }
 
 .btn-glow:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-        0 8px 30px rgba(0, 212, 170, 0.5),
-        0 0 50px rgba(0, 212, 170, 0.3),
-        0 0 100px rgba(0, 212, 170, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: #00ff82;
+    box-shadow: 0 0 30px rgba(0, 255, 130, 0.7), 0 0 60px rgba(0, 255, 130, 0.3);
+    transform: translateY(-2px);
 }
 
-.btn-glow svg {
-    transition: transform 0.3s ease;
-}
-
-.btn-glow:hover svg {
-    transform: translateX(-4px);
-}
+.btn-glow svg { transition: transform 0.3s ease; }
+.btn-glow:hover svg { transform: translateX(-4px); }
 
 .btn-glass {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    background: var(--glass-white);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    color: var(--text-primary);
+    gap: 0.6rem;
+    background: rgba(0, 20, 10, 0.4);
+    color: rgba(0, 255, 130, 0.9);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 1rem 2rem;
-    border-radius: 16px;
-    border: 1px solid var(--glass-border);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 130, 0.4);
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
 }
 
 .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: var(--neon-edge);
-    box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(0, 212, 170, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transform: translateY(-3px);
+    background: rgba(0, 255, 130, 0.1);
+    border-color: #00ff82;
+    color: #00ff82;
+    box-shadow: 0 0 20px rgba(0, 255, 130, 0.3);
+    transform: translateY(-2px);
 }
+
+/* ---------- Stats ---------- */
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 2rem;
+    animation: fadeInUp 1s ease 1.2s both;
+}
+
+.stat-card {
+    background: rgba(0, 15, 8, 0.6);
+    border: 1px solid rgba(0, 255, 130, 0.2);
+    border-radius: 4px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 130, 0.6), transparent);
+}
+
+.stat-card:hover {
+    border-color: rgba(0, 255, 130, 0.5);
+    background: rgba(0, 25, 12, 0.8);
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: #00ff82;
+    text-shadow: 0 0 12px rgba(0, 255, 130, 0.6);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.stat-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-ctas { flex-direction: column; width: 100%; max-width: 280px; }
+    .hero-ctas a { width: 100%; justify-content: center; }
+    .radar-status { gap: 0.8rem; font-size: 0.6rem; }
+}
+
 
 /* ═══════════════════════════════════════
    HERO STATS — GLASS CARDS
@@ -2320,32 +2593,97 @@ body {
         </div>
     </nav>
 
-    <!-- Hero Section -->
+        <!-- ═══════════════════════════════════════
+         HERO SECTION — RADAR
+         ═══════════════════════════════════════ -->
     <section id="hero" class="hero">
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                <span>سنة نماذج ذكاء اصطناعي متناغمة</span>
+                <span>SYSTEM ONLINE · منصة الاستخبار المالي</span>
             </div>
 
-            <h1 class="hero-title">
-                <span class="title-line">
-                    <span class="char-reveal">رُ</span>
-                    <span class="char-reveal">ؤ</span>
-                    <span class="char-reveal">ى</span>
-                </span>
-            </h1>
+            <h1 class="hero-title">رُؤى <span class="accent">·</span> ROUAA</h1>
 
             <p class="hero-subtitle">
-                منظومة ربط الحسابات المدعومة بالذكاء الاصطناعي الأكثر تقدماً في المنطقة.
-                <br>
-                حيث تلتقي شبكة الكون المالي بعقل آلة يتنبأ قبل أن يحدث.
+                منظومة استخبار مالي ترصد الفرص في الزمن الحقيقي.<br>
+                مسحٌ دائم، اكتشافٌ فوري، تنفيذٌ قبل لحظات من السوق.
             </p>
+
+            <!-- ====== RADAR ====== -->
+            <div class="radar-wrapper" id="radarWrapper">
+                <!-- HUD corner brackets -->
+                <span class="radar-bracket tl"></span>
+                <span class="radar-bracket tr"></span>
+                <span class="radar-bracket bl"></span>
+                <span class="radar-bracket br"></span>
+
+                <!-- HUD labels -->
+                <span class="radar-label top">SECTOR · ALPHA-7</span>
+                <span class="radar-label bottom">RANGE · 500KM</span>
+                <span class="radar-label left">SCAN · 360°</span>
+                <span class="radar-label right">FREQ · 2.4GHZ</span>
+
+                <div class="radar-screen">
+                    <!-- Grid SVG -->
+                    <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
+                        <!-- Range rings -->
+                        <circle cx="0" cy="0" r="20"  class="ring"/>
+                        <circle cx="0" cy="0" r="40"  class="ring mid"/>
+                        <circle cx="0" cy="0" r="60"  class="ring"/>
+                        <circle cx="0" cy="0" r="80"  class="ring mid"/>
+                        <circle cx="0" cy="0" r="100" class="ring outer"/>
+
+                        <!-- Azimuth lines (every 30°) -->
+                        <line x1="-100" y1="0" x2="100" y2="0" class="azimuth cardinal"/>
+                        <line x1="0" y1="-100" x2="0" y2="100" class="azimuth cardinal"/>
+                        <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="azimuth"/>
+                        <line x1="-86.6" y1="50" x2="86.6" y2="-50" class="azimuth"/>
+                        <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="azimuth"/>
+                        <line x1="-50" y1="86.6" x2="50" y2="-86.6" class="azimuth"/>
+
+                        <!-- Compass labels (Arabic + English) -->
+                        <text x="0" y="-106" class="compass">ش · N</text>
+                        <text x="106" y="0" class="compass">ق · E</text>
+                        <text x="0" y="106" class="compass">ج · S</text>
+                        <text x="-106" y="0" class="compass">غ · W</text>
+
+                        <!-- Range labels -->
+                        <text x="22" y="-3" class="range-label">100</text>
+                        <text x="42" y="-3" class="range-label">200</text>
+                        <text x="62" y="-3" class="range-label">300</text>
+                        <text x="82" y="-3" class="range-label">400</text>
+                        <text x="103" y="-3" class="range-label">500</text>
+
+                        <!-- Center crosshair -->
+                        <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/>
+                        <line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
+                        <circle cx="0" cy="0" r="1.5" class="center-dot"/>
+                    </svg>
+
+                    <!-- Sweep afterglow (conic gradient) -->
+                    <div class="radar-sweep"></div>
+
+                    <!-- Bright leading sweep line -->
+                    <div class="radar-sweep-line"></div>
+
+                    <!-- Targets container (populated by JS) -->
+                    <div class="radar-targets" id="radarTargets"></div>
+                </div>
+            </div>
+
+            <!-- Status line -->
+            <div class="radar-status">
+                <div class="item"><span class="dot"></span><span>STATUS: <span class="val" id="radarStatus">ACTIVE</span></span></div>
+                <div class="item"><span>TARGETS: <span class="val" id="radarTargetsCount">0</span></span></div>
+                <div class="item"><span>SWEEP: <span class="val" id="radarSweep">0°</span></span></div>
+                <div class="item"><span>TIME: <span class="val" id="radarClock">00:00:00</span></span></div>
+            </div>
 
             <div class="hero-ctas">
                 <a href="#" class="btn-glow magnetic">
-                    <span>ابدأ ربط حساباتك</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <span>ابدأ المسح</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
@@ -2355,72 +2693,26 @@ body {
             </div>
 
             <div class="hero-stats">
-                <div class="stat-card glass">
+                <div class="stat-card">
                     <div class="stat-number" data-target="24">0</div>
-                    <div class="stat-label">ساعة مراقبة يومية</div>
+                    <div class="stat-label">ساعة مراقبة</div>
                 </div>
-                <div class="stat-card glass">
+                <div class="stat-card">
                     <div class="stat-number" data-target="30">0</div>
                     <div class="stat-label">ثانية للإعداد</div>
                 </div>
-                <div class="stat-card glass">
+                <div class="stat-card">
                     <div class="stat-number" data-target="6">0</div>
-                    <div class="stat-label">فئات أصول مدعومة</div>
+                    <div class="stat-label">فئات أصول</div>
                 </div>
-                <div class="stat-card glass">
+                <div class="stat-card">
                     <div class="stat-number" data-target="8">0</div>
-                    <div class="stat-label">نماذج ذكاء اصطناعي</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Floating Ticker -->
-        <div class="ticker-bar glass">
-            <div class="ticker-track">
-                <div class="ticker-item up">
-                    <span class="ticker-pair">GOLD</span>
-                    <span class="ticker-signal">BUY</span>
-                    <span class="ticker-value">2.1%</span>
-                </div>
-                <div class="ticker-item down">
-                    <span class="ticker-pair">GBP/JPY</span>
-                    <span class="ticker-signal">SELL</span>
-                    <span class="ticker-value">0.8%</span>
-                </div>
-                <div class="ticker-item up">
-                    <span class="ticker-pair">BTC/USD</span>
-                    <span class="ticker-signal">BUY</span>
-                    <span class="ticker-value">3.4%</span>
-                </div>
-                <div class="ticker-item up">
-                    <span class="ticker-pair">EUR/USD</span>
-                    <span class="ticker-signal">BUY</span>
-                    <span class="ticker-value">1.2%</span>
-                </div>
-                <div class="ticker-item down">
-                    <span class="ticker-pair">USD/JPY</span>
-                    <span class="ticker-signal">SELL</span>
-                    <span class="ticker-value">0.5%</span>
-                </div>
-                <!-- Duplicate for seamless loop -->
-                <div class="ticker-item up">
-                    <span class="ticker-pair">GOLD</span>
-                    <span class="ticker-signal">BUY</span>
-                    <span class="ticker-value">2.1%</span>
-                </div>
-                <div class="ticker-item down">
-                    <span class="ticker-pair">GBP/JPY</span>
-                    <span class="ticker-signal">SELL</span>
-                    <span class="ticker-value">0.8%</span>
-                </div>
-                <div class="ticker-item up">
-                    <span class="ticker-pair">BTC/USD</span>
-                    <span class="ticker-signal">BUY</span>
-                    <span class="ticker-value">3.4%</span>
+                    <div class="stat-label">نماذج ذكاء</div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
