@@ -1112,6 +1112,96 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   font-weight:600;
 }
 
+
+/* ─── Hero text layout fix ─── */
+.hero-tagline{
+  font-size:clamp(1rem,1.6vw,1.2rem);
+  color:var(--white);
+  font-weight:600;
+  line-height:1.6;
+  margin-bottom:0.4rem;
+}
+.hero-tagline span{color:var(--blue-glow)}
+.hero-sub{
+  font-size:clamp(0.92rem,1.4vw,1.05rem);
+  color:var(--text-dim);
+  font-weight:500;
+  line-height:1.85;
+  max-width:580px;
+}
+@media (max-width:980px){.hero-sub{margin:0 auto}}
+
+/* ─── Radar target labels (new) ─── */
+.target{
+  position:absolute;
+  width:auto;
+  height:auto;
+  transform:translate(-50%,-50%);
+  border-radius:6px;
+  background:rgba(2,6,23,0.92);
+  border:1px solid rgba(96,165,250,0.4);
+  padding:3px 8px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.62rem;
+  letter-spacing:0.05em;
+  color:var(--blue-glow);
+  white-space:nowrap;
+  box-shadow:0 0 12px rgba(96,165,250,0.3);
+  opacity:0;
+  animation:targetLife 4s ease-out forwards;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  pointer-events:none;
+}
+.target::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--blue-bright);
+  box-shadow:0 0 8px var(--blue-bright);
+  flex-shrink:0;
+}
+.target.hostile{
+  background:rgba(40,5,5,0.92);
+  border-color:rgba(239,68,68,0.5);
+  color:#fca5a5;
+}
+.target.hostile::before{
+  background:#ef4444;
+  box-shadow:0 0 8px #ef4444;
+}
+.target.neutral{
+  background:rgba(40,30,5,0.92);
+  border-color:rgba(251,191,36,0.5);
+  color:#fde68a;
+}
+.target.neutral::before{
+  background:#fbbf24;
+  box-shadow:0 0 8px #fbbf24;
+}
+.target::after{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border:1px solid currentColor;
+  border-radius:8px;
+  opacity:0.3;
+  animation:targetRing 1.5s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes targetLife{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}
+  10%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+  25%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0.15;transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes targetRing{
+  from{transform:scale(1);opacity:0.4}
+  to{transform:scale(1.8);opacity:0}
+}
+
 </style>
 </head>
 <body>
@@ -1145,7 +1235,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   <div class="hero-text">
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span>النظام يعمل · بنية تحتية مالية ذكية</span>
+      <span>منظومة استخبارات مالية ذكية</span>
     </div>
     <h1 class="hero-title">رُؤى</h1>
     <div class="hero-title-en">رؤى · ببصيرة نحو الأسواق</div>
@@ -2060,8 +2150,33 @@ iv>
     else t.className = 'target';
     t.style.left = x + '%';
     t.style.top = y + '%';
-    const labels = ['GOLD','BTC','EUR','OIL','SP500','NIKKEI','GBP','ETH','SILVER','NASDAQ'];
-    t.title = labels[Math.floor(Math.random()*labels.length)];
+    const labels = [
+    {text:'EUR/USD', type:'fx'},
+    {text:'GBP/JPY', type:'fx'},
+    {text:'USD/JPY', type:'fx'},
+    {text:'XAU/USD', type:'commodity'},
+    {text:'BTC/USDT', type:'crypto'},
+    {text:'ETH/USDT', type:'crypto'},
+    {text:'FED RATE 5.50%', type:'rate', hostile:false},
+    {text:'US CPI 3.2%', type:'data'},
+    {text:'US GDP +1.3%', type:'data'},
+    {text:'ECB RATE 3.75%', type:'rate'},
+    {text:'NONFARM +272K', type:'data'},
+    {text:'OIL WTI $85', type:'commodity'},
+    {text:'NASDAQ +0.9%', type:'index'},
+    {text:'BOE RATE 5.25%', type:'rate'},
+    {text:'US JOBLESS 3.8%', type:'data'},
+  ];
+  const pick = labels[Math.floor(Math.random()*labels.length)];
+  t.title = pick.text;
+  // Hostile = bearish data (high inflation, rate hikes)
+  if(pick.text.includes('CPI') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') > 3) {
+    t.className = 'target hostile';
+  } else if(pick.text.includes('RATE') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') >= 5) {
+    t.className = 'target neutral';
+  } else {
+    t.className = 'target';
+  }
     targetsEl.appendChild(t);
     active.push({el:t});
     setTimeout(()=>{ t.remove(); active = active.filter(a=>a.el!==t); }, 4000);
