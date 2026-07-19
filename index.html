@@ -1064,6 +1064,54 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   font-weight:500;
 }
 
+
+/* ─── Trading quick-stats visual ─── */
+.trading-quick-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0.8rem;
+  margin:1.2rem 0 1.5rem;
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media (max-width:600px){
+  .trading-quick-stats{grid-template-columns:repeat(2,1fr)}
+}
+.tqs-item{
+  padding:0.8rem 0.5rem;
+  background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(34,211,238,0.04) 100%);
+  border:1px solid rgba(96,165,250,0.25);
+  border-radius:10px;
+  text-align:center;
+  transition:all 0.3s;
+}
+.tqs-item:hover{
+  border-color:var(--blue-bright);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(59,130,246,0.15);
+}
+.tqs-num{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+  font-size:1.4rem;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  direction:ltr;
+  line-height:1;
+}
+.tqs-lbl{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  margin-top:0.3rem;
+  font-weight:600;
+}
+
 </style>
 </head>
 <body>
@@ -1105,7 +1153,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
     <p class="hero-sub">
       منظومتان متكاملتان: <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> لبناء الاستخبارات المالية من المصادر العالمية،
       و<strong style="color:var(--blue-glow)">رؤى التداول</strong> لتحويلها إلى قرارات وتنفيذ آلي حسب قواعد المستخدم عبر مجلس ذكاء اصطناعي من 10 أدوار.
-      بلا وسيط بشري في سلسلة القرار، بخمس لغات، في الزمن الحقيقي.
+      دون وسيط بشري في سلسلة التحليل والقرار، بخمس لغات، في الزمن الحقيقي.
     </p>
     <div class="hero-cta">
       <a href="#advantage" class="btn-glow">
@@ -1430,7 +1478,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <span class="gradient">رؤى الأخبار</span><br>
       <span class="dim">من ألف مصدر إلى قرار واحد</span>
     </h2>
-    <p class="project-subtitle">استخبار إخباري لحظي بلغة السوق — يولّد تلقائياً وبدقة محرّر بشري، من 500+ مصدر رسمي و1000+ مصدر مجمّع.</p>
+    <p class="project-subtitle">محرك استخبارات مالية يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ — حقائق، أحداث، أدلة، وتقارير في الزمن الحقيقي.</p>
   </div>
 
   <div class="project-preview">
@@ -1583,7 +1631,28 @@ iv>
       <span class="gradient">رؤى التداول</span><br>
       <span class="dim">عقل مؤسسي ينفّذ في الزمن الحقيقي</span>
     </h2>
-    <p class="project-subtitle">منظومة ذكاء اصطناعي كاملة: مجلس من 10 أدوار، منفّذ ذكي بـ 15 فحص أمان، 3 وكلاء مستقلين، ولوحة شارت بـ 83 أداة رسم — كلها تعمل حسب قواعد المستخدم.</p>
+    <p class="project-subtitle">منظومة ذكاء اصطناعي متكاملة: مجلس من 10 أدوار · منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلين · لوحة شارت بـ 83 أداة رسم — كلها تعمل حسب قواعد المستخدم.</p>
+
+        <!-- Quick stats visual layout -->
+        <div class="trading-quick-stats">
+          <div class="tqs-item">
+            <div class="tqs-num">10</div>
+            <div class="tqs-lbl">أدوار AI</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">15</div>
+            <div class="tqs-lbl">فحص أمان</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">3</div>
+            <div class="tqs-lbl">وكلاء مستقلون</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">83</div>
+            <div class="tqs-lbl">أداة رسم</div>
+          </div>
+        </div>
+
   </div>
 
   <!-- القسم الفرعي 1: المجلس الذكي -->
@@ -1745,7 +1814,7 @@ iv>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
         <h4 class="p-feature-title">83 أداة رسم</h4>
-        <p class="p-feature-desc">في 11 فئة احترافية لا توجد في أي منصة أخرى.</p>
+        <p class="p-feature-desc">في 11 فئة احترافية مصممة خصيصاً لرؤى.</p>
         <ul class="p-feature-list">
           <li>خطوط · قنوات · شوك · فيبوناتشي</li>
           <li>جان · أشكال · تعليقات · علامات</li>
@@ -1760,7 +1829,7 @@ iv>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg></div>
-        <h4 class="p-feature-title">محركات فريدة عالمياً</h4>
+        <h4 class="p-feature-title">محركات فريدة ضمن منظومة رؤى</h4>
         <p class="p-feature-desc">قدرات لا توجد في أي منصة أخرى.</p>
         <ul class="p-feature-list">
           <li><strong>Predictive الأنماط Completion</strong> — يرسم ghost للأنماط غير المكتملة</li>
