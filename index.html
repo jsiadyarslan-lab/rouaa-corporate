@@ -223,9 +223,11 @@ nav{
 }
 .hero-tagline span{color:var(--blue-glow)}
 .hero-sub{
-  font-size:clamp(0.92rem,1.4vw,1.05rem);
+  font-size:clamp(1rem,1.5vw,1.15rem);
   color:var(--text-dim);
-  line-height:1.85;max-width:560px;
+  font-weight:500;
+  line-height:1.9;
+  max-width:560px;
 }
 @media (max-width:980px){.hero-sub{margin:0 auto}}
 .hero-cta{display:flex;gap:0.9rem;flex-wrap:wrap}
@@ -543,8 +545,9 @@ section{padding:5rem 3rem;max-width:1400px;margin:0 auto;position:relative;scrol
 }
 .advantage-text p{
   color:var(--text-dim);
-  font-size:1.05rem;
-  line-height:1.9;
+  font-size:1.08rem;
+  font-weight:500;
+  line-height:1.95;
 }
 .advantage-text p strong{
   color:var(--blue-glow);
@@ -664,14 +667,62 @@ footer .tagline{
   .ticker{font-size:0.68rem;padding:0.5rem 0}
   body{padding-bottom:40px}
 }
-.ticker-track{display:flex;gap:2.5rem;animation:tickerScroll 40s linear infinite;white-space:nowrap}
+.ticker-track{
+  display:inline-flex;
+  gap:0;
+  animation:tickerScroll 50s linear infinite;
+  white-space:nowrap;
+}
+.ticker::before,.ticker::after{
+  content:'';
+  position:absolute;
+  top:0;bottom:0;
+  width:60px;
+  z-index:2;
+  pointer-events:none;
+}
+.ticker::before{
+  right:0;
+  background:linear-gradient(to left, rgba(2,6,23,1), transparent);
+}
+.ticker::after{
+  left:0;
+  background:linear-gradient(to right, rgba(2,6,23,1), transparent);
+}
 @keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
-.ticker-item{display:flex;align-items:center;gap:0.5rem}
-.ticker-pair{color:var(--white);font-weight:700}
-.ticker-signal{padding:0.1rem 0.5rem;border-radius:3px;font-size:0.68rem}
+.ticker-item{
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  padding:0 1.2rem;
+  border-right:1px solid rgba(96,165,250,0.15);
+}
+.ticker-item:last-child{border-right:none}
+.ticker-pair{
+  color:var(--white);
+  font-weight:700;
+  font-size:0.82rem;
+  letter-spacing:0.05em;
+  min-width:60px;
+}
+.ticker-signal{
+  padding:0.15rem 0.6rem;
+  border-radius:4px;
+  font-size:0.68rem;
+  font-weight:700;
+  letter-spacing:0.05em;
+  min-width:36px;
+  text-align:center;
+}
 .ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
 .ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
-.ticker-val{color:var(--blue-bright)}
+.ticker-val{
+  color:var(--blue-bright);
+  font-weight:600;
+  font-size:0.78rem;
+  min-width:42px;
+  text-align:right;
+}
 
 @media (max-width:768px){
   nav{padding:1rem 1.2rem}
@@ -741,7 +792,9 @@ footer .tagline{
 .project-title .dim{color:var(--text-mute)}
 .project-subtitle{
   color:var(--text-dim);
-  font-size:1.05rem;line-height:1.85;
+  font-size:1.1rem;
+  font-weight:500;
+  line-height:1.9;
   max-width:640px;margin:0 auto;
 }
 
