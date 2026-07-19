@@ -791,6 +791,155 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   font-weight:500;
 }
 
+
+/* ─── Pipeline Visual Diagram ─── */
+.how-pipeline{
+  margin-top:var(--space-xl);
+  padding:var(--space-xl) var(--space-lg);
+  border-radius:var(--radius-xl);
+  background:linear-gradient(180deg, rgba(2,6,23,0.6) 0%, rgba(15,23,42,0.4) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.how-pipeline-title{
+  text-align:center;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;
+  letter-spacing:0.25em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:var(--space-lg);
+  opacity:0.85;
+}
+
+.how-pipe-flow{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  max-width:520px;
+  margin:0 auto;
+  position:relative;
+}
+
+.how-pipe-node{
+  width:100%;
+  padding:0.9rem 1.3rem;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(34,211,238,0.04) 100%);
+  border:1px solid rgba(96,165,250,0.25);
+  text-align:center;
+  position:relative;
+  transition:all 0.3s;
+}
+.how-pipe-node:hover{
+  border-color:var(--blue-bright);
+  transform:scale(1.02);
+  box-shadow:0 8px 25px rgba(59,130,246,0.15);
+}
+.how-pipe-node-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.66rem;
+  letter-spacing:0.18em;
+  color:var(--blue-bright);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.3rem;
+  opacity:0.7;
+}
+.how-pipe-node-text{
+  font-size:0.95rem;
+  font-weight:700;
+  color:var(--white);
+  line-height:1.4;
+}
+.how-pipe-node-text strong{
+  color:var(--blue-glow);
+  font-weight:800;
+}
+
+/* Variant colors for each stage */
+.how-pipe-node.sources{
+  background:linear-gradient(135deg, rgba(34,211,238,0.1) 0%, rgba(59,130,246,0.05) 100%);
+  border-color:rgba(34,211,238,0.35);
+}
+.how-pipe-node.sources .how-pipe-node-label{color:var(--cyan)}
+
+.how-pipe-node.intelligence{
+  background:linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(147,197,253,0.08) 100%);
+  border-color:rgba(96,165,250,0.5);
+  box-shadow:0 0 30px rgba(96,165,250,0.1);
+}
+.how-pipe-node.intelligence .how-pipe-node-label{color:var(--blue-bright)}
+
+.how-pipe-node.understanding{
+  background:linear-gradient(135deg, rgba(167,139,250,0.1) 0%, rgba(96,165,250,0.05) 100%);
+  border-color:rgba(167,139,250,0.3);
+}
+.how-pipe-node.understanding .how-pipe-node-label{color:#a78bfa}
+
+.how-pipe-node.decision{
+  background:linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.05) 100%);
+  border-color:rgba(251,191,36,0.3);
+}
+.how-pipe-node.decision .how-pipe-node-label{color:var(--gold)}
+
+.how-pipe-node.execution{
+  background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(34,197,94,0.05) 100%);
+  border-color:rgba(16,185,129,0.3);
+}
+.how-pipe-node.execution .how-pipe-node-label{color:#4ade80}
+
+.how-pipe-node.markets{
+  background:linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(251,113,133,0.04) 100%);
+  border-color:rgba(239,68,68,0.25);
+}
+.how-pipe-node.markets .how-pipe-node-label{color:#f87171}
+
+/* Connector arrow between nodes */
+.how-pipe-connector{
+  width:2px;
+  height:32px;
+  background:linear-gradient(180deg, var(--blue-bright) 0%, var(--cyan) 100%);
+  position:relative;
+  margin:0 auto;
+  opacity:0.6;
+}
+.how-pipe-connector::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--blue-bright);
+  box-shadow:0 0 10px var(--blue-bright);
+  animation:pipeFlow 2s linear infinite;
+}
+.how-pipe-connector::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:8px;height:8px;
+  border-right:2px solid var(--cyan);
+  border-bottom:2px solid var(--cyan);
+  margin-bottom:4px;
+}
+@keyframes pipeFlow{
+  0%{top:0;opacity:1}
+  100%{top:100%;opacity:0}
+}
+
+@media (max-width:600px){
+  .how-pipe-node{padding:0.8rem 1rem}
+  .how-pipe-node-text{font-size:0.88rem}
+  .how-pipe-connector{height:24px}
+}
+
 </style>
 </head>
 <body>
@@ -884,7 +1033,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 <section id="how-rouaa-works" class="how-rouaa reveal">
   <div class="how-header">
     <span class="section-tag">كيف تعمل رؤى؟</span>
-    <h2 class="how-title">من الخبر إلى القرار — في ثوانٍ</h2>
+    <h2 class="how-title">من البيانات إلى القرار — في ثوانٍ</h2>
     <p class="how-sub">
       رؤى ليست موقع أخبار، ولا منصة تداول، ولا وسيط. هي <strong>بنية تحتية للاستخبار المالي</strong> —
       تجمع، تُحلّل، وتُنفّذ في مسار واحد متكامل.
@@ -900,7 +1049,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
       <h4 class="how-stage-title">المصادر المالية العالمية</h4>
-      <p class="how-stage-desc">729+ مصدر رسمي · 5 لغات · بنوك مركزية وهيئات ووزارات</p>
+      <p class="how-stage-desc">729+ مصدر مالي موثوق · بنوك مركزية · هيئات تنظيمية · وزارات · مؤسسات إحصائية</p>
     </div>
 
     <div class="how-arrow">
@@ -913,7 +1062,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
       </div>
       <h4 class="how-stage-title">الاستخبارات بالذكاء الاصطناعي</h4>
-      <p class="how-stage-desc">10 أدوار ذكاء اصطناعي تُحلّل وتصوت وتُحدّد الأثر السوقي لحظياً</p>
+      <p class="how-stage-desc">10 أدوار ذكاء اصطناعي متخصصة تتعاون لتحليل البيانات، تقييم السيناريوهات، وتحديد الأثر السوقي</p>
     </div>
 
     <div class="how-arrow">
@@ -926,7 +1075,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
       <h4 class="how-stage-title">القرار والتنفيذ الذكي</h4>
-      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · 6 منصات تنفيذ</p>
+      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · بيئة تنفيذ متعددة الوسطاء</p>
     </div>
 
   </div>
@@ -936,7 +1085,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
     <div class="how-relation-grid">
 
       <div class="how-product news">
-        <div class="how-product-role">العقل</div>
+        <div class="how-product-role">العقل المالي</div>
         <h3 class="how-product-name">رؤى الأخبار</h3>
         <p class="how-product-tagline">يجمع ويفهم المعلومات</p>
         <p class="how-product-desc">يُغذّي المنظومة بذكاء مالي لحظي من 729+ مصدراً، يُحلّله بـ 10 أدوار ذكاء اصطناعي، ويُخرجه كإشارات قابلة للتنفيذ.</p>
@@ -948,7 +1097,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       </div>
 
       <div class="how-product trading">
-        <div class="how-product-role">الذراع</div>
+        <div class="how-product-role">ذراع التنفيذ الذكي</div>
         <h3 class="how-product-name">رؤى التداول</h3>
         <p class="how-product-tagline">يُحوّل الفهم إلى قرار وتنفيذ</p>
         <p class="how-product-desc">يستهلك إشارات العقل، يُطبّق 15 فحص أمان، ويُنفّذ تلقائياً عبر 6 منصات بـ 3 وكلاء مستقلين.</p>
@@ -962,7 +1111,54 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <div class="how-unification-text">رؤى الأخبار + رؤى التداول = بنية تحتية للاستخبار المالي</div>
       <div class="how-unification-sub">ليست منصة واحدة، بل منظومتان متكاملتان تعملان ب独立ية تامة، وتتكاملان عند الحاجة</div>
     </div>
+  
+
+    <!-- Pipeline Visual Diagram -->
+    <div class="how-pipeline">
+      <div class="how-pipeline-title">مسار الذكاء المالي الكامل</div>
+      <div class="how-pipe-flow">
+
+        <div class="how-pipe-node sources">
+          <div class="how-pipe-node-label">المدخل</div>
+          <div class="how-pipe-node-text"><strong>729+</strong> مصدر مالي عالمي</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node intelligence">
+          <div class="how-pipe-node-label">طبقة الذكاء</div>
+          <div class="how-pipe-node-text"><strong>10</strong> أدوار ذكاء اصطناعي متخصصة</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node understanding">
+          <div class="how-pipe-node-label">الفهم</div>
+          <div class="how-pipe-node-text">فهم السوق والأثر السوقي</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node decision">
+          <div class="how-pipe-node-label">القرار</div>
+          <div class="how-pipe-node-text">قرار ذكي موثّق بالأدلة</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node execution">
+          <div class="how-pipe-node-label">طبقة التنفيذ</div>
+          <div class="how-pipe-node-text"><strong>15</strong> فحص أمان قبل التنفيذ</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node markets">
+          <div class="how-pipe-node-label">المخرج</div>
+          <div class="how-pipe-node-text">وسطاء وأسواق عالمية</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
+</section>
+</div>
 
 </section>
 
