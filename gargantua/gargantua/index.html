@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GARGANTUA — Schwarzschild Black Hole Raytracer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="panel-hidden telemetry-hidden">
+
+  <!-- WebGL canvas -->
+  <canvas id="glcanvas"></canvas>
+
+  <!-- Loading overlay (removed once first frame renders) -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-ring"></div>
+      <div class="loader-text">INITIALIZING GARGANTUA</div>
+      <div class="loader-sub">Schwarzschild geodesic raytracer</div>
+    </div>
+  </div>
+
+  <!-- Top-left: title + indicators -->
+  <div id="topbar">
+    <div id="title">GARGANTUA</div>
+    <div id="subtitle">Schwarzschild BH Raytracer</div>
+    <div id="indicators">
+      <span id="preset-indicator">Preset: Cinematic</span>
+      <span id="quality-indicator">Quality: Medium</span>
+      <span id="camera-indicator">Camera: Orbit</span>
+      <span id="debug-indicator">Debug: 0</span>
+      <span id="audio-indicator"></span>
+    </div>
+  </div>
+
+  <!-- Top-right: panel toggle -->
+  <button id="panel-toggle" title="Toggle panel (H)">☰</button>
+
+  <!-- Bottom-left: telemetry -->
+  <div id="hud-telemetry"></div>
+
+  <!-- Bottom-center: flash messages -->
+  <div id="hud-flash"></div>
+
+  <!-- Bottom-right: hotkey help -->
+  <div id="hotkeys">
+    <div class="hk-title">HOTKEYS</div>
+    <div><kbd>0</kbd>-<kbd>9</kbd> Debug views</div>
+    <div><kbd>Space</kbd> Pause</div>
+    <div><kbd>C</kbd> Cycle camera</div>
+    <div><kbd>P</kbd> Cycle preset</div>
+    <div><kbd>Q</kbd>/<kbd>E</kbd> Quality</div>
+    <div><kbd>R</kbd> Reset params</div>
+    <div><kbd>Shift+R</kbd> Reset camera</div>
+    <div><kbd>S</kbd> Screenshot</div>
+    <div><kbd>A</kbd> Audio</div>
+    <div><kbd>H</kbd> Toggle panels</div>
+    <div><kbd>T</kbd> Toggle telemetry</div>
+    <div><kbd>F</kbd> Fullscreen</div>
+    <div class="hk-sub">Mouse: drag=rotate, wheel=zoom, right-drag=pan</div>
+  </div>
+
+  <!-- Right side: parameter panel -->
+  <div id="panel">
+    <div id="panel-header">
+      <span>PARAMETERS</span>
+      <span class="hint">21 live</span>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Presets</div>
+      <div id="panel-presets" class="btn-row"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Quality</div>
+      <div id="panel-quality" class="btn-row"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Camera Path</div>
+      <div id="panel-cameras" class="btn-row"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Debug Views</div>
+      <div id="panel-debug" class="btn-grid"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Live Parameters</div>
+      <div id="panel-list"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="section-title">Actions</div>
+      <button id="panel-audio-toggle" class="btn-action">Audio: OFF</button>
+      <button id="panel-screenshot" class="btn-action">Save Screenshot (S)</button>
+    </div>
+
+    <div id="panel-footer">
+      <div>Double-click any slider to reset.</div>
+      <div>State persists in localStorage.</div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
