@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#020617">
-<title>رُؤى — بنية تحتية مالية للمؤسسات | Roua</title>
-<meta name="description" content="رُؤى (Roua) — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط. رؤى الأخبار + رؤى التداول، منظومتان متكاملتان.">
+<title>رُؤى — بنية تحتية مالية للمؤسسات</title>
+<meta name="description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط. رؤى الأخبار + رؤى التداول، منظومتان متكاملتان.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -245,7 +245,7 @@ section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;
 .agent-card h4{font-size:1.2rem;font-weight:800;color:var(--white);line-height:1.3}
 .agent-card .desc{color:var(--text-dim);font-size:0.9rem;line-height:1.7;margin-bottom:1rem}
 
-/* Mini grid (Neural Lab + Prediction + Sanctuary) */
+/* Mini grid (الشبكة العصبية Lab + Prediction + Sanctuary) */
 .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-md)}
 @media (max-width:980px){.mini-grid{grid-template-columns:1fr}}
 .mini-card{padding:var(--space-lg);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.3s}
@@ -340,140 +340,138 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 @media (max-width:480px){.hud-label.top,.hud-label.bottom{display:none}.radar-status{bottom:-55px;flex-wrap:wrap;gap:0.4rem}}
 @media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
 
-/* ─── Premium News Feature Cards (redesigned) ─── */
+
+/* ─── Magazine-style Feature Cards (new design v2) ─── */
 .news-features-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:var(--space-md);
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:1.4rem;
   margin-top:var(--space-md);
 }
 .nf-card{
   position:relative;
-  padding:1.8rem 1.6rem 1.5rem;
-  border-radius:var(--radius-lg);
-  background:linear-gradient(160deg, rgba(59,130,246,0.05) 0%, rgba(34,211,238,0.02) 50%, rgba(2,6,23,0.4) 100%);
-  border:1px solid var(--glass-border);
+  padding:0;
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(2,6,23,0.9) 100%);
+  border:1px solid rgba(96,165,250,0.18);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
   overflow:hidden;
   isolation:isolate;
-  min-height:200px;
+  min-height:240px;
   display:flex;
   flex-direction:column;
 }
-/* Gradient border on hover */
+/* Top accent bar */
 .nf-card::before{
   content:'';
   position:absolute;
-  inset:0;
-  padding:1.5px;
-  border-radius:var(--radius-lg);
-  background:linear-gradient(135deg, rgba(96,165,250,0.5) 0%, rgba(34,211,238,0.3) 50%, transparent 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  pointer-events:none;
-  transition:background 0.4s, opacity 0.4s;
-  opacity:0.6;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg, transparent 0%, var(--blue-bright) 30%, var(--cyan) 70%, transparent 100%);
+  opacity:0.7;
+  transition:opacity 0.4s, height 0.4s;
 }
-/* Spotlight following cursor */
+/* Spotlight */
 .nf-card::after{
   content:'';
   position:absolute;
   inset:0;
-  background:radial-gradient(circle 250px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.12), transparent 70%);
+  background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.1), transparent 70%);
   opacity:0;
   transition:opacity 0.4s;
   pointer-events:none;
-  z-index:-1;
+  z-index:0;
 }
 .nf-card:hover{
-  transform:translateY(-6px);
-  background:linear-gradient(160deg, rgba(59,130,246,0.1) 0%, rgba(34,211,238,0.05) 50%, rgba(2,6,23,0.5) 100%);
-  box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.15);
+  transform:translateY(-4px);
+  border-color:rgba(96,165,250,0.5);
+  box-shadow:0 25px 50px rgba(0,0,0,0.5), 0 0 50px rgba(59,130,246,0.12);
 }
 .nf-card:hover::before{
-  background:linear-gradient(135deg, var(--blue-bright) 0%, var(--cyan) 50%, rgba(96,165,250,0.4) 100%);
   opacity:1;
+  height:4px;
 }
 .nf-card:hover::after{opacity:1}
 
-/* Card header: icon + number badge */
+.nf-card-inner{
+  padding:1.8rem 1.6rem 1.5rem;
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
 .nf-header{
   display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  margin-bottom:1rem;
-  gap:0.8rem;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.2rem;
 }
 .nf-icon{
-  width:48px;height:48px;
-  border-radius:12px;
-  background:linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+  width:54px;height:54px;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(34,211,238,0.08) 100%);
+  border:1px solid rgba(96,165,250,0.3);
   display:grid;place-items:center;
-  box-shadow:0 6px 18px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
   position:relative;
   flex-shrink:0;
+  transition:all 0.4s;
 }
-.nf-icon svg{width:24px;height:24px;color:var(--bg-0)}
-.nf-icon::after{
-  content:'';
-  position:absolute;
-  inset:-3px;
-  border-radius:14px;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  filter:blur(12px);
-  opacity:0.35;
-  z-index:-1;
-  transition:opacity 0.4s;
+.nf-icon svg{width:26px;height:26px;color:var(--blue-bright);transition:color 0.4s}
+.nf-card:hover .nf-icon{
+  background:linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+  border-color:transparent;
+  box-shadow:0 8px 20px rgba(59,130,246,0.4);
 }
-.nf-card:hover .nf-icon::after{opacity:0.6}
+.nf-card:hover .nf-icon svg{color:var(--bg-0)}
 
 .nf-num{
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.7rem;
-  letter-spacing:0.15em;
-  color:var(--blue-bright);
-  background:rgba(59,130,246,0.12);
-  border:1px solid rgba(96,165,250,0.3);
-  padding:0.25rem 0.6rem;
-  border-radius:4px;
+  font-family:'Orbitron',sans-serif;
+  font-size:0.85rem;
   font-weight:700;
-  text-transform:uppercase;
+  color:var(--blue-bright);
+  letter-spacing:0.1em;
+  margin-right:auto;
+  opacity:0.7;
+  transition:opacity 0.4s;
 }
+.nf-card:hover .nf-num{opacity:1}
 
 .nf-title{
-  font-size:1.1rem;
+  font-size:1.15rem;
   font-weight:800;
   color:var(--white);
-  margin-bottom:0.5rem;
+  margin-bottom:0.6rem;
   line-height:1.4;
   letter-spacing:-0.01em;
 }
 .nf-desc{
   color:var(--text-dim);
   font-size:0.92rem;
-  line-height:1.75;
-  font-weight:500;
+  line-height:1.8;
+  font-weight:400;
   flex:1;
+  margin-bottom:1rem;
 }
 .nf-stat{
   display:inline-flex;
   align-items:center;
-  gap:0.4rem;
+  gap:0.5rem;
   font-family:'Share Tech Mono',monospace;
-  font-size:0.7rem;
-  letter-spacing:0.1em;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
   color:var(--cyan);
-  background:rgba(34,211,238,0.08);
+  background:linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(59,130,246,0.05) 100%);
   border:1px solid rgba(34,211,238,0.25);
-  padding:0.3rem 0.7rem;
-  border-radius:4px;
+  padding:0.35rem 0.8rem;
+  border-radius:6px;
   text-transform:uppercase;
   font-weight:700;
-  margin-top:0.9rem;
   align-self:flex-start;
+  transition:all 0.3s;
 }
 .nf-stat::before{
   content:'';
@@ -481,11 +479,20 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   border-radius:50%;
   background:var(--cyan);
   box-shadow:0 0 8px var(--cyan);
+  animation:nfPulse 2s ease-in-out infinite;
+}
+@keyframes nfPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+.nf-card:hover .nf-stat{
+  background:linear-gradient(135deg, rgba(34,211,238,0.15) 0%, rgba(59,130,246,0.1) 100%);
+  border-color:rgba(34,211,238,0.5);
 }
 
 @media (max-width:768px){
   .news-features-grid{grid-template-columns:1fr}
-  .nf-card{padding:1.5rem 1.3rem 1.3rem}
+  .nf-card-inner{padding:1.5rem 1.3rem 1.3rem}
 }
 
 </style>
@@ -497,9 +504,9 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 <div class="orb orb-3"></div>
 
 <nav>
-  <div class="logo" role="img" aria-label="Roua - Vision into Markets">
+  <div class="logo" role="img" aria-label="رؤى - ببصيرة نحو الأسواق">
     <div class="logo-mark" aria-hidden="true"></div>
-    <span>ROUAA</span>
+    <span>رؤى</span>
   </div>
   <ul class="nav-links">
     <li><a href="#hero">الرئيسية</a></li>
@@ -520,10 +527,10 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   <div class="hero-text">
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span>SYSTEM ONLINE · FINANCIAL INTELLIGENCE INFRASTRUCTURE</span>
+      <span>النظام يعمل · بنية تحتية مالية ذكية</span>
     </div>
     <h1 class="hero-title">رُؤى</h1>
-    <div class="hero-title-en">ROUAA · VISION INTO MARKETS</div>
+    <div class="hero-title-en">رؤى · ببصيرة نحو الأسواق</div>
     <p class="hero-tagline">بنية تحتية مالية <span>للمؤسسات</span> — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
     <p class="hero-sub">
       منظومتان متكاملتان: <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> للاستخبار الإخباري الذكي،
@@ -567,17 +574,17 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       </div>
     </div>
     <div class="radar-status">
-      <div class="item"><span>STATUS</span><span class="val" id="rStatus">ACTIVE</span></div>
-      <div class="item"><span>SIGNALS</span><span class="val" id="rCount">00</span></div>
-      <div class="item"><span>SWEEP</span><span class="val" id="rSweep">000°</span></div>
-      <div class="item"><span>TIME</span><span class="val" id="rClock">00:00:00</span></div>
+      <div class="item"><span>الحالة</span><span class="val" id="rStatus">نشط</span></div>
+      <div class="item"><span>الإشارات</span><span class="val" id="rCount">00</span></div>
+      <div class="item"><span>المسح</span><span class="val" id="rSweep">000°</span></div>
+      <div class="item"><span>الوقت</span><span class="val" id="rClock">00:00:00</span></div>
     </div>
   </div>
 </section>
 
 <!-- الميزة التنافسية -->
 <section id="advantage" class="reveal">
-  <span class="section-tag">COMPETITIVE ADVANTAGE</span>
+  <span class="section-tag">الميزة التنافسية</span>
   <h2 class="section-title">الميزة التنافسية</h2>
   <p class="section-sub">لماذا رؤى؟ لأنها تختصر المسافة بين الحدث السوقي وقرار التنفيذ — من مصدر واحد، بلغة العميل، دون وسطاء أو فاقد زمني.</p>
   <div class="advantage-card">
@@ -599,18 +606,18 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 
 <!-- لمن صُممت رؤى -->
 <section id="audiences" class="reveal">
-  <span class="section-tag">FOR WHOM · الشرائح المستهدفة</span>
+  <span class="section-tag">لمن صُممت رؤى</span>
   <h2 class="section-title">لمن صُممت رؤى</h2>
   <p class="section-sub">ثلاث شرائح تستفيد من رؤى بطرق مختلفة — كل شريحة تجد طبقتها الجاهزة، بلا تخصيص معقد.</p>
   <div class="audiences">
     <div class="audience-card">
       <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg></div>
       <h3>مؤسسات مالية</h3>
-      <p class="desc">حلول API متكاملة لمنصات التداول والبنوك — تُدمج في بنيتك التحتية دون إعادة هندسة.</p>
+      <p class="desc">حلول برمجية متكاملة لمنصات التداول والبنوك — تُدمج في بنيتك التحتية دون إعادة هندسة.</p>
       <ul class="audience-features">
         <li><span>سرعة تنفيذ فائقة</span></li>
         <li><span>بيانات خام موثوقة</span></li>
-        <li><span>دعم White Label</span></li>
+        <li><span>دعم العلامة البيضاء</span></li>
       </ul>
     </div>
     <div class="audience-card">
@@ -619,7 +626,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <p class="desc">أتمتة إنتاج التقارير المالية الاستراتيجية — من مصدر الخبر إلى تقرير احترافي جاهز للنشر.</p>
       <ul class="audience-features">
         <li><span>46 تقريراً يومياً</span></li>
-        <li><span>تحليل بمساعدة 10 أدوار AI</span></li>
+        <li><span>تحليل بمساعدة 10 أدوار ذكاء اصطناعي</span></li>
         <li><span>متعدد اللغات</span></li>
       </ul>
     </div>
@@ -639,7 +646,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 <!-- ═══ رؤى الأخبار ═══ -->
 <section id="rouaa-news" class="project-section reveal">
   <div class="project-header">
-    <span class="project-tag news">المشروع الأول · ROUAA NEWS</span>
+    <span class="project-tag news">المشروع الأول</span>
     <h2 class="project-title">
       <span class="gradient">رؤى الأخبار</span><br>
       <span class="dim">من ألف مصدر إلى قرار واحد</span>
@@ -674,119 +681,111 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   </div>
 
   
+  
   <div class="news-features-grid">
 
-    <!-- 1. وكيل النشر المستقل -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <span class="nf-num">01</span>
+        <span class="nf-num">٠١</span>
       </div>
       <h4 class="nf-title">وكيل نشر مستقل</h4>
-      <p class="nf-desc">ينتج أخباراً حصرية من مئات المصادر الرسمية المالية العالمية — لا يعيد نشر، بل يصنع محتوى أصلياً.</p>
-      <span class="nf-stat">Original Content Engine</span>
-    </div>
+      <p class="nf-desc">ينتج أخباراً حصرية من مئات المصادر الرسمية المالية العالمية — لا يعيد نشر، بل يصنع محتوى أصلياً بـ 5 لغات.</p>
+      <span class="nf-stat">محرّك محتوى أصلي</span>
+    </div></div>
 
-    <!-- 2. أنابيب الأخبار -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
-        <span class="nf-num">02</span>
+        <span class="nf-num">٠٢</span>
       </div>
       <h4 class="nf-title">أنابيب الأخبار</h4>
-      <p class="nf-desc">تنتج آلاف الأخبار المجمّعة يومياً، تُحلّل، وتُولَّد لها صور تلقائياً، بـ 5 لغات.</p>
+      <p class="nf-desc">تنتج آلاف الأخبار المجمّعة يومياً، تُحلَّل، وتُولَّد لها صور تلقائياً، بـ 5 لغات حيّة.</p>
       <span class="nf-stat">آلاف الأخبار · 5 لغات</span>
-    </div>
+    </div></div>
 
-    <!-- 3. أنابيب الإنفوجرافيك -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V9M15 17v-4M21 17H3"/></svg></div>
-        <span class="nf-num">03</span>
+        <span class="nf-num">٠٣</span>
       </div>
       <h4 class="nf-title">أنابيب الإنفوجرافيك</h4>
       <p class="nf-desc">تنتج عشرات الإنفوجرافيك الاحترافي مع الصور يومياً، بكل اللغات.</p>
       <span class="nf-stat">عشرات الإنفوجرافيك يومياً</span>
-    </div>
+    </div></div>
 
-    <!-- 4. أنابيب تحليل الأسهم -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
-        <span class="nf-num">04</span>
+        <span class="nf-num">٠٤</span>
       </div>
       <h4 class="nf-title">أنابيب تحليل الأسهم</h4>
-      <p class="nf-desc">تُحلّل آلاف الأسهم يومياً بكل اللغات — تحليل فني + أساسي + توصيات.</p>
+      <p class="nf-desc">تُحلّل آلاف الأسهم يومياً بكل اللغات — تحليل فني وأساسي مع توصيات مدروسة.</p>
       <span class="nf-stat">آلاف الأسهم يومياً</span>
-    </div>
+    </div></div>
 
-    <!-- 5. أنابيب التقارير الاستراتيجية -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-        <span class="nf-num">05</span>
+        <span class="nf-num">٠٥</span>
       </div>
       <h4 class="nf-title">أنابيب التقارير الاستراتيجية</h4>
       <p class="nf-desc">تنتج عشرات التقارير والتحليلات والتقارير الاستراتيجية العميقة يومياً، بكل اللغات.</p>
       <span class="nf-stat">تقارير عميقة يومياً</span>
-    </div>
+    </div></div>
 
-    <!-- 6. أنابيب الفيديو -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg></div>
-        <span class="nf-num">06</span>
+        <span class="nf-num">٠٦</span>
       </div>
       <h4 class="nf-title">أنابيب الفيديو</h4>
       <p class="nf-desc">تنتج عشرات الفيديوهات بأكثر من 7 أنواع يومياً، بكل اللغات.</p>
-        <span class="nf-stat">7+ أنواع فيديو يومياً</span>
-    </div>
+      <span class="nf-stat">7+ أنواع فيديو يومياً</span>
+    </div></div>
 
-    <!-- 7. أنابيب المخاطر الجيوسياسية -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
-        <span class="nf-num">07</span>
+        <span class="nf-num">٠٧</span>
       </div>
       <h4 class="nf-title">أنابيب المخاطر الجيوسياسية</h4>
       <p class="nf-desc">تنتج عشرات تحليلات المخاطر الجيوسياسية يومياً، بكل اللغات.</p>
       <span class="nf-stat">تحليلات جيوسياسية يومياً</span>
-    </div>
+    </div></div>
 
-    <!-- 8. Global Financial Intelligence -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M2 12h20"/></svg></div>
-        <span class="nf-num">08</span>
+        <span class="nf-num">٠٨</span>
       </div>
-      <h4 class="nf-title">Global Financial Intelligence</h4>
-      <p class="nf-desc">مركز معلومات بأسلوب Bloomberg Terminal يجمع حقائق موثقة من 411 مصدر رسمي عالمي (FRED + ECB + BLS + Fed) وتتبع البنوك المركزية.</p>
+      <h4 class="nf-title">مركز الاستخبار المالي العالمي</h4>
+      <p class="nf-desc">مركز معلومات احترافي يجمع حقائق موثقة من 411 مصدراً رسمياً عالمياً (بنوك مركزية + هيئات إحصائية + وزارات مالية).</p>
       <span class="nf-stat">411 مصدر رسمي · 6 فئات</span>
-    </div>
+    </div></div>
 
-    <!-- 9. نظام ثقة المصادر -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <span class="nf-num">09</span>
+        <span class="nf-num">٠٩</span>
       </div>
       <h4 class="nf-title">نظام ثقة المصادر</h4>
-      <p class="nf-desc">شارة ثقة بجانب كل خبر — مستوحى من NewsGuard — تصنّف 729+ مصدراً عالمياً حسب الموثوقية.</p>
-      <span class="nf-stat">Trust Index · NewsGuard-style</span>
-    </div>
+      <p class="nf-desc">شارة ثقة بجانب كل خبر تصنّف 729+ مصدراً عالمياً حسب الموثوقية والمصداقية التحريرية.</p>
+      <span class="nf-stat">مؤشر الثقة · 4 مستويات</span>
+    </div></div>
 
-    <!-- 10. المحتوى الصوتي + التكامل -->
-    <div class="nf-card">
+    <div class="nf-card"><div class="nf-card-inner">
       <div class="nf-header">
         <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-7h3v5zM3 19a2 2 0 002 2h1v-7H3v5z"/></svg></div>
-        <span class="nf-num">10</span>
+        <span class="nf-num">١٠</span>
       </div>
-      <h4 class="nf-title">المحتوى الصوتي + التكامل متعدد القنوات</h4>
-      <p class="nf-desc">يحوّل أهم الأخبار إلى ملخصات صوتية بـ 5 لغات — استمع وأنت تتنقّل. مع نشر تلقائي على الموقع + Telegram + Newsletter.</p>
-      <span class="nf-stat">Audio · Telegram · Newsletter</span>
-    </div>
+      <h4 class="nf-title">المحتوى الصوتي والتكامل متعدد القنوات</h4>
+      <p class="nf-desc">يحوّل أهم الأخبار إلى ملخصات صوتية بـ 5 لغات — استمع وأنت تتنقّل. مع نشر تلقائي على الموقع والبريد والقنوات.</p>
+      <span class="nf-stat">صوت · بريد · قنوات</span>
+    </div></div>
 
   </div>
+
 iv>
 
   <div class="project-cta">
@@ -800,7 +799,7 @@ iv>
 <!-- ═══ رؤى التداول (مع الأقسام الفرعية 4-10) ═══ -->
 <section id="rouaa-trading" class="project-section reveal">
   <div class="project-header">
-    <span class="project-tag trading">المشروع الثاني · ROUAA TRADING</span>
+    <span class="project-tag trading">المشروع الثاني</span>
     <h2 class="project-title trading">
       <span class="gradient">رؤى التداول</span><br>
       <span class="dim">عقل مؤسسي ينفّذ في الزمن الحقيقي</span>
@@ -813,7 +812,7 @@ iv>
     <div class="subsection-header">
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="5" cy="10" r="2"/><circle cx="19" cy="10" r="2"/></svg></div>
       <div>
-        <div class="subsection-title">المجلس الذكي · Strategic Council</div>
+        <div class="subsection-title">المجلس الذكي</div>
         <div class="subsection-subtitle">10 أدوار ذكاء اصطناعي تتناقش وتصوت على كل قرار تداول</div>
       </div>
     </div>
@@ -823,22 +822,22 @@ iv>
         <h4 class="p-feature-title">8 أدوار AI متخصصة</h4>
         <p class="p-feature-desc">كل دور يحلّل جانباً محدداً وله نموذجه الخاص و fallback chain.</p>
         <ul class="p-feature-list">
-          <li><strong>Technical</strong> · <strong>Sentiment</strong> · <strong>Risk</strong></li>
-          <li><strong>Macro</strong> · <strong>Pattern</strong> · <strong>Execution</strong></li>
-          <li><strong>Divergence</strong> · <strong>Scenario</strong></li>
+          <li><strong>الفني</strong> · <strong>المشاعر</strong> · <strong>المخاطر</strong></li>
+          <li><strong>الماكرو</strong> · <strong>الأنماط</strong> · <strong>التنفيذ</strong></li>
+          <li><strong>التباين</strong> · <strong>السيناريوهات</strong></li>
         </ul>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
         <h4 class="p-feature-title">الأسواق التنبؤية (العضو 9)</h4>
-        <p class="p-feature-desc">Polymarket كعضو تاسع يُحقن signalBoost للحشود الذكية بأموال حقيقية.</p>
-        <span class="p-feature-stat">Polymarket · +0.05/-0.08</span>
+        <p class="p-feature-desc">سوق تنبؤي كعضو تاسع يحقن تعزيز الإشارة للحشود الذكية بأموال حقيقية.</p>
+        <span class="p-feature-stat">سوق تنبؤي · تعزيز ±</span>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
-        <h4 class="p-feature-title">11+ نماذج LLM</h4>
+        <h4 class="p-feature-title">11+ نماذج لغوية</h4>
         <p class="p-feature-desc">تنوع يضمن استمرارية الذكاء حتى عند تعطل أي مزود.</p>
-        <span class="p-feature-stat">Gemini · Groq · Cerebras · DeepSeek · Mistral · NVIDIA · Ollama · Bedrock · HuggingFace · OpenRouter · GLM</span>
+        <span class="p-feature-stat">أحد عشر نموذجاً لغوياً متخصصاً</span>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg></div>
@@ -858,7 +857,7 @@ iv>
     <div class="subsection-header">
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
       <div>
-        <div class="subsection-title">المنفّذ الذكي · Smart Executor</div>
+        <div class="subsection-title">المنفّذ الذكي</div>
         <div class="subsection-subtitle">"الجندي في الميدان" — يراقب الأسعار وينفّذ فور تحقق الشروط، بـ 15 فحص أمان</div>
       </div>
     </div>
@@ -868,8 +867,8 @@ iv>
         <h4 class="p-feature-title">15+ فحص أمان قبل التنفيذ</h4>
         <p class="p-feature-desc">طبقات حماية متعددة تمنع التنفيذ الخاطئ في كل سيناريو.</p>
         <ul class="p-feature-list">
-          <li>Cooldown على مستوى DB + Redis</li>
-          <li>Symbol-lock بعد كل إغلاق</li>
+          <li>فترة تبريد على مستوى قاعدة البيانات والذاكرة</li>
+          <li>قفل الزوج بعد كل إغلاق</li>
           <li>حد خسارة يومي موحّد</li>
           <li>فلتر الأخبار عالية الأثر</li>
         </ul>
@@ -885,16 +884,16 @@ iv>
         <h4 class="p-feature-title">عزل كامل لكل مستخدم</h4>
         <p class="p-feature-desc">كل مستخدم له سياق تداول مستقل تماماً — لا تسرّب بين الحسابات.</p>
         <ul class="p-feature-list">
-          <li>حالة المنفّذ في Redis معزولة</li>
+          <li>حالة المنفّذ في الذاكرة معزولة</li>
           <li>حدود مخاطر خاصة بكل مستخدم</li>
-          <li>Circuit breaker لكل زوج</li>
+          <li>قاطع دائرة لكل زوج</li>
         </ul>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
         <h4 class="p-feature-title">فلتر النظام السوقي</h4>
         <p class="p-feature-desc">يمنع الشراء في سوق هابط والبيع في سوق صاعد تلقائياً.</p>
-        <span class="p-feature-stat">BULL · BEAR · RANGE · VOLATILE</span>
+        <span class="p-feature-stat">صعود · هبوط · تذبذب · مدى</span>
       </div>
     </div>
   </div>
@@ -904,7 +903,7 @@ iv>
     <div class="subsection-header">
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3c0 1.5-1 2-1 3 0 2 2 3 2 5a3 3 0 01-6 0c0-2 2-3 2-5 0-1-1-1.5-1-3a3 3 0 013-3z"/><circle cx="12" cy="14" r="8"/></svg></div>
       <div>
-        <div class="subsection-title">الوكلاء الثلاثة · Three Autonomous Agents</div>
+        <div class="subsection-title">الوكلاء الثلاثة</div>
         <div class="subsection-subtitle">ثلاثة وكلاء مستقلون، كل واحد بوظيفة محددة وسرعة مختلفة</div>
       </div>
     </div>
@@ -917,10 +916,10 @@ iv>
         </div>
         <p class="desc">"العقل المدبّر" — يحلّل السوق، يقيّم الإشارات، يحسب المخاطر، ينفّذ، ويتتبّع الأداء في دورة كاملة.</p>
         <ul class="p-feature-list">
-          <li><strong>8 استراتيجيات:</strong> AUTO · SCALPING · SWING · GRID · MEAN_REVERSION · MOMENTUM_BREAKOUT · DCA · VWAP_RSI</li>
-          <li><strong>6 حالات:</strong> RUNNING · PAUSED · STOPPED · EMERGENCY_STOP · IDLE · DAILY_LIMIT_REACHED</li>
+          <li><strong>8 استراتيجيات:</strong> تلقائي · سكالبينج · سوينج · شبكي · عودة متوسط · زخم · متوسط تكلفة · مؤشرات</li>
+          <li><strong>6 حالات:</strong> يعمل · متوقف مؤقتاً · متوقف · إيقاف طارئ · خامل · حد يومي</li>
           <li><strong>حماية 48h</strong> لمراكز الوكيل (3 طبقات)</li>
-          <li>Adaptive Strategy Selector + Reinforcement Learning</li>
+          <li>مُختار استراتيجية تكيّفي + تعلم معزز</li>
         </ul>
       </div>
       <div class="agent-card">
@@ -929,11 +928,11 @@ iv>
           <h4>اللاسع</h4>
           <span class="agent-speed">&lt;5ms</span>
         </div>
-        <p class="desc">وكيل تداول فائق السرعة — يستمع لـ OANDA/Binance streaming مباشرة، يحسب OBI على كل tick، ينفّذ في أقل من 5 مللي ثانية.</p>
+        <p class="desc">وكيل تداول فائق السرعة — يستمع لتدفقات الأسعار مباشرة، يحسب خلل توازن دفتر الأوامر على كل نبضة، ينفّذ في أقل من 5 مللي ثانية.</p>
         <ul class="p-feature-list">
-          <li><strong>إشارة OBI</strong> — Order Book Imbalance</li>
-          <li><strong>3 شروط أمان فقط</strong> (كلها Redis، لا HTTP)</li>
-          <li>لا استدعاء AI في المسار الحرج</li>
+          <li><strong>إشارة خلل التوازن</strong> — خلل توازن دفتر الأوامر</li>
+          <li><strong>3 شروط أمان فقط</strong> (كلها في الذاكرة، لا اتصالات شبكة)</li>
+          <li>لا استدعاء ذكاء اصطناعي في المسار الحرج</li>
           <li>ثبات الإشارة في 3 ticks متتالية</li>
         </ul>
       </div>
@@ -943,12 +942,12 @@ iv>
           <h4>وكيل المحتوى</h4>
           <span class="agent-speed">دوري</span>
         </div>
-        <p class="desc">منصة تسويق محتوى AI ثنائية اللغة — من تجميع الخبر إلى نشر تقرير احترافي جاهز.</p>
+        <p class="desc">منصة تسويق محتوى ذكي ثنائية اللغة — من تجميع الخبر إلى نشر تقرير احترافي جاهز.</p>
         <ul class="p-feature-list">
           <li><strong>10 أنواع محتوى</strong> × <strong>11 فئة</strong></li>
-          <li>4 مراحل: Curator → Generator → Optimizer → Publisher</li>
-          <li>تقييم جودة على 5 محاور (SEO · قراءة · تفاعل · تكرار · امتثال)</li>
-          <li>نشر تلقائي على Telegram + JSON-LD للـ SEO</li>
+          <li>4 مراحل: المُجمّع ← المُولّد ← المُحسّن ← الناشر</li>
+          <li>تقييم جودة على 5 محاور (تحسين بحث · قراءة · تفاعل · تكرار · امتثال)</li>
+          <li>نشر تلقائي على القنوات + بيانات منظمة للبحث</li>
         </ul>
       </div>
     </div>
@@ -959,7 +958,7 @@ iv>
     <div class="subsection-header">
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
       <div>
-        <div class="subsection-title">لوحة الشارت الذكية · Smart Chart</div>
+        <div class="subsection-title">لوحة الشارت الذكية</div>
         <div class="subsection-subtitle">83 أداة رسم · 15 مؤشر · 64 محرك ذكي في شارت واحد</div>
       </div>
     </div>
@@ -967,27 +966,27 @@ iv>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
         <h4 class="p-feature-title">83 أداة رسم</h4>
-        <p class="p-feature-desc">في 11 فئة احترافية تفوق TradingView.</p>
+        <p class="p-feature-desc">في 11 فئة احترافية لا توجد في أي منصة أخرى.</p>
         <ul class="p-feature-list">
-          <li>Lines · Channels · Forks · Fibonacci</li>
-          <li>Gann · Shapes · Annotations · Markers</li>
-          <li>Harmonic Patterns · Elliott Wave</li>
+          <li>خطوط · قنوات · شوك · فيبوناتشي</li>
+          <li>جان · أشكال · تعليقات · علامات</li>
+          <li>Harmonic الأنماطs · Elliott Wave</li>
         </ul>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
         <h4 class="p-feature-title">15 مؤشر فني</h4>
         <p class="p-feature-desc">9 overlay + 6 oscillator بإعدادات قابلة للتخصيص الكامل.</p>
-        <span class="p-feature-stat">SMA · EMA · BB · VWAP · PSAR · Ichimoku · SuperTrend · RSI · MACD · ADX · CCI</span>
+        <span class="p-feature-stat">متوسطات · بولينجر · فيبوناتشي · إيشيموكو · سوبر ترند · مؤشرات قوة وزخم</span>
       </div>
       <div class="p-feature">
         <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg></div>
         <h4 class="p-feature-title">محركات فريدة عالمياً</h4>
         <p class="p-feature-desc">قدرات لا توجد في أي منصة أخرى.</p>
         <ul class="p-feature-list">
-          <li><strong>Predictive Pattern Completion</strong> — يرسم ghost للأنماط غير المكتملة</li>
-          <li><strong>AI Explanation Engine</strong> — "لماذا؟" لكل إشارة</li>
-          <li><strong>Visual Rule Builder</strong> — drag-and-drop AND/OR/NOT/XOR</li>
+          <li><strong>Predictive الأنماط Completion</strong> — يرسم ghost للأنماط غير المكتملة</li>
+          <li><strong>محرّك تفسير الذكاء الاصطناعي</strong> — "لماذا؟" لكل إشارة</li>
+          <li><strong>باني القواعد البصري</strong> — سحب وإفلات بمنطق «و/أو/لا»</li>
         </ul>
       </div>
       <div class="p-feature">
@@ -995,15 +994,15 @@ iv>
         <h4 class="p-feature-title">64 محرك شارت</h4>
         <p class="p-feature-desc">مكتبة شاملة تغطي كل أساليب التحليل التقني.</p>
         <ul class="p-feature-list">
-          <li>WyckoffEngine · ElliottEngine</li>
-          <li>AdaptiveBayesianEngine · ScenarioEngine</li>
-          <li>SpringDetection · ConfluenceZones</li>
+          <li>محرك ويكوف · محرك إليوت</li>
+          <li>AdaptiveBayesianEngine · السيناريوهاتEngine</li>
+          <li>كشف الارتداد · مناطق التقاطع</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- القسم الفرعي 5: Neural Lab + الأسواق التنبؤية + ملاذ المحفظة + المساعد + EA Bridge -->
+  <!-- القسم الفرعي 5: الشبكة العصبية Lab + الأسواق التنبؤية + ملاذ المحفظة + المساعد + EA Bridge -->
   <div class="subsection">
     <div class="subsection-header">
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg></div>
@@ -1014,22 +1013,22 @@ iv>
     </div>
     <div class="mini-grid">
       <div class="mini-card">
-        <h4>🧪 مختبر Neural</h4>
+        <h4>🧪 المختبر العصبي</h4>
         <p class="desc">5 تبويبات متخصصة لاختبار وتحسين الاستراتيجيات.</p>
         <ul class="p-feature-list">
-          <li><strong>Backtest</strong> — اختبار على البيانات التاريخية</li>
-          <li><strong>Optimizer</strong> — تحسين البارامترات تلقائياً</li>
-          <li><strong>Comparison</strong> — مقارنة استراتيجيتين</li>
-          <li><strong>Neural</strong> — تنبؤات AI Council</li>
-          <li><strong>Swarm</strong> — سرب وكلاء متعددين</li>
+          <li><strong>اختبار عكسي</strong> — اختبار على البيانات التاريخية</li>
+          <li><strong>المُحسّن</strong> — تحسين البارامترات تلقائياً</li>
+          <li><strong>المقارنة</strong> — مقارنة استراتيجيتين</li>
+          <li><strong>الشبكة العصبية</strong> — تنبؤات مجلس الذكاء</li>
+          <li><strong>سرب الوكلاء</strong> — سرب وكلاء متعددين</li>
         </ul>
       </div>
       <div class="mini-card">
         <h4>📊 الأسواق التنبؤية</h4>
-        <p class="desc">Polymarket كعضو تاسع في المجلس الذكي — حشود ذكية بأموال حقيقية.</p>
+        <p class="desc">سوق تنبؤي كعضو تاسع في المجلس الذكي — حشود ذكية بأموال حقيقية.</p>
         <ul class="p-feature-list">
-          <li>تحليل فجوة التوقعات (market vs AI)</li>
-          <li>signalBoost للاتفاق/التعارض</li>
+          <li>تحليل فجوة التوقعات بين السوق والذكاء الاصطناعي</li>
+          <li>تعزيز الإشارة للاتفاق أو التعارض</li>
           <li>تكامل مع قرار المجلس</li>
         </ul>
       </div>
@@ -1037,9 +1036,9 @@ iv>
         <h4>🛡️ ملاذ المحفظة</h4>
         <p class="desc">تحليل مخاطر شامل عبر كل حساباتك المرتبطة.</p>
         <ul class="p-feature-list">
-          <li>riskScore (0-100) + VaR</li>
-          <li>concentrationRisk + diversificationScore</li>
-          <li>توصيات AI لإعادة التوازن</li>
+          <li>درجة المخاطرة (0-100) + قيمة الخطر</li>
+          <li>concentrationالمخاطر + diversificationScore</li>
+          <li>توصيات ذكية لإعادة التوازن</li>
         </ul>
       </div>
       <div class="mini-card">
@@ -1052,11 +1051,11 @@ iv>
         </ul>
       </div>
       <div class="mini-card">
-        <h4>🔌 EA Bridge</h4>
-        <p class="desc">يحوّل MetaTrader 5 إلى remote execution node للمجلس الذكي.</p>
+        <h4>🔌 جسر المنفّذ</h4>
+        <p class="desc">يحوّل ميتاتريدر 5 إلى عقدة تنفيذ بعيدة للمجلس الذكي.</p>
         <ul class="p-feature-list">
           <li>9 endpoints كاملة + heartbeat كل 5 دقائق</li>
-          <li>Per-user tokens + Redis cache</li>
+          <li>رموز لكل مستخدم + ذاكرة مؤقتة</li>
           <li>تقارير تنفيذ ثنائية الاتجاه</li>
         </ul>
       </div>
@@ -1064,9 +1063,9 @@ iv>
         <h4>⚡ المنصات المدعومة</h4>
         <p class="desc">6 adapters تنفيذ موحدة عبر واجهة واحدة.</p>
         <ul class="p-feature-list">
-          <li>Binance · MetaTrader 5 · OANDA</li>
-          <li>Alpaca · Paper Trading</li>
-          <li>32 زوج تداول (Crypto + Forex + Stocks + Commodities + Indices)</li>
+          <li>بايننس · ميتاتريدر 5 · أوندا</li>
+          <li>ألباكا · تداول ورقي</li>
+          <li>32 زوج تداول (عملات رقمية + فوركس + أسهم + سلع + مؤشرات)</li>
         </ul>
       </div>
     </div>
@@ -1082,7 +1081,7 @@ iv>
 
 <!-- التكامل -->
 <section id="integration" class="integration-section reveal">
-  <span class="section-tag">التكامل · NEURAL BRIDGE</span>
+  <span class="section-tag">التكامل · الجسر العصبي</span>
   <h2 class="section-title">
     <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">الخبر يولد الإشارة.</span><br>
     <span style="color:var(--text-mute);">والإشارة تولد الفرصة.</span>
@@ -1120,7 +1119,7 @@ iv>
 
 <!-- الأمان -->
 <section id="security" class="security-section reveal">
-  <span class="section-tag">الأمان · SECURITY</span>
+  <span class="section-tag">الأمان</span>
   <h2 class="section-title">
     <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">حماية فولاذية.</span><br>
     <span style="color:var(--text-mute);">شفافية مطلقة.</span>
@@ -1128,7 +1127,7 @@ iv>
   <div class="security-grid">
     <div class="sec-card">
       <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h4 class="sec-title">تشفير AES-256</h4>
+      <h4 class="sec-title">تشفير عسكري AES-256</h4>
       <p class="sec-desc">كل بيانات الاعتماد مشفّرة at-rest و in-transit</p>
     </div>
     <div class="sec-card">
@@ -1139,7 +1138,7 @@ iv>
     <div class="sec-card">
       <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
       <h4 class="sec-title">سجل تدقيق</h4>
-      <p class="sec-desc">كل عملية موثقة بـ timestamp و IP و user-agent</p>
+      <p class="sec-desc">كل عملية موثقة بالتوقيت وعنوان الشبكة ونوع المتصفح</p>
     </div>
     <div class="sec-card">
       <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -1163,7 +1162,7 @@ iv>
 
 <footer>
   <p>&copy; 2026 رؤى — بنية تحتية مالية للمؤسسات.</p>
-  <p class="tagline">Vision into Markets · ببصيرة نحو الأسواق</p>
+  <p class="tagline">ببصيرة نحو الأسواق</p>
 </footer>
 
 <!-- Ticker -->
@@ -1235,7 +1234,7 @@ iv>
     requestAnimationFrame(loop);
   }
   loop();
-  const statuses = ['ACTIVE','SCANNING','TRACKING','LIVE'];
+  const statuses = ['نشط','يبحث','يتتبع','مباشر'];
   setInterval(()=>{
     if(statusEl) statusEl.textContent = statuses[Math.floor(Math.random()*statuses.length)];
   }, 3500);
