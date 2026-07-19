@@ -2431,7 +2431,6 @@ body {
         <span>اسحب للأسفل</span>
     </div>
 
-    <script src="main.js"></script>
 
     <!-- ═══════════════════════════════════════
          ROUAA NEWS SECTION — Intelligence Grid
@@ -3811,6 +3810,131 @@ class IntegrationSectionAnimations {
     new TradingSectionAnimations();
 
     
+
+
+
+// ═══════════════════════════════════════
+// TRADING CHART — Canvas Drawing
+// ═══════════════════════════════════════
+class TradingChart {
+    constructor() {
+        this.canvas = document.getElementById('trading-chart');
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        this.data = this.generateData();
+        this.animate();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        const parent = this.canvas.parentElement;
+        this.canvas.width = parent.clientWidth;
+        this.canvas.height = parent.clientHeight;
+    }
+
+    generateData() {
+        const points = 60;
+        const data = [];
+        let value = 570;
+        for (let i = 0; i < points; i++) {
+            value += (Math.random() - 0.5) * 4;
+            data.push(value);
+        }
+        return data;
+    }
+
+    animate() {
+        const ctx = this.ctx;
+        const w = this.canvas.width;
+        const h = this.canvas.height;
+        const data = this.data;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Grid
+        ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 5; i++) {
+            const y = (h / 4) * i;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+            ctx.stroke();
+        }
+
+        // Line chart
+        const min = Math.min(...data) - 2;
+        const max = Math.max(...data) + 2;
+        const range = max - min;
+
+        ctx.beginPath();
+        ctx.strokeStyle = '#00d4aa';
+        ctx.lineWidth = 2;
+        data.forEach((val, i) => {
+            const x = (i / (data.length - 1)) * w;
+            const y = h - ((val - min) / range) * h;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Gradient fill
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        const grad = ctx.createLinearGradient(0, 0, 0, h);
+        grad.addColorStop(0, 'rgba(0, 212, 170, 0.2)');
+        grad.addColorStop(1, 'rgba(0, 212, 170, 0)');
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// ═══════════════════════════════════════
+// TRADING SECTION ANIMATIONS
+// ═══════════════════════════════════════
+class TradingSectionAnimations {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.animateSectionHeader();
+        this.animateDashboard();
+        this.animateFeatureCards();
+    }
+
+    animateSectionHeader() {
+        const header = document.querySelector('.trading-section .section-header');
+        if (!header) return;
+        gsap.from(header.children, {
+            scrollTrigger: { trigger: header, start: 'top 80%', toggleActions: 'play none none reverse' },
+            y: 40, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+        });
+    }
+
+    animateDashboard() {
+        const dashboard = document.querySelector('.trading-dashboard');
+        if (!dashboard) return;
+        gsap.from(dashboard, {
+            scrollTrigger: { trigger: dashboard, start: 'top 80%', toggleActions: 'play none none reverse' },
+            y: 60, opacity: 0, duration: 1.2, ease: 'power3.out'
+        });
+    }
+
+    animateFeatureCards() {
+        const features = document.querySelectorAll('.trading-features .feature-item');
+        features.forEach((feature, index) => {
+            gsap.from(feature, {
+                scrollTrigger: { trigger: feature, start: 'top 85%', toggleActions: 'play none none reverse' },
+                y: 50, opacity: 0, duration: 0.8, delay: index * 0.1, ease: 'power3.out'
+            });
+        });
+    }
+}
 
 // ═══════════════════════════════════════
 // SECURITY & FOOTER ANIMATIONS
