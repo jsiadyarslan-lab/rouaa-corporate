@@ -35,3 +35,7 @@
 2. اذهب إلى Settings → Pages
 3. اختر Branch: main, Folder: root
 4. انتظر الدقيقتين وستجد الموقع جاهزاً
+
+
+# GitHub Pages Deployment Status
+Checking deployment...
