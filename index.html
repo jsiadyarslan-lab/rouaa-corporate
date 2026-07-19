@@ -1260,35 +1260,38 @@ nav{
   text-decoration:none;
   z-index:101;
 }
-/* Circular cutout: logo floats above nav border */
-.logo::before{
-  content:'';
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  background:rgba(2,6,23,0.95);
-  z-index:-1;
-  /* Create circular "hole" in the navbar border */
-  box-shadow:0 0 0 2px var(--glass-border);
-}
-/* SVG Logo */
+/* SVG Logo container — circular, floating above navbar border */
 .logo-svg{
   display:flex;
   align-items:center;
   justify-content:center;
   flex-shrink:0;
   position:relative;
-  z-index:2;
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  background:#0a0a12;
+  border:2px solid rgba(99,102,241,0.4);
+  box-shadow:
+    0 0 20px rgba(99,102,241,0.3),
+    0 4px 15px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(99,102,241,0.1);
+  overflow:hidden;
+  transition:border-color 0.3s, box-shadow 0.3s;
+}
+.logo:hover .logo-svg{
+  border-color:rgba(99,102,241,0.8);
+  box-shadow:
+    0 0 30px rgba(99,102,241,0.5),
+    0 4px 20px rgba(0,0,0,0.6),
+    inset 0 0 25px rgba(99,102,241,0.15);
 }
 .logo-svg svg{
-  width:88px;
-  height:88px;
-  filter:drop-shadow(0 0 12px rgba(99,102,241,0.4));
+  width:80px;
+  height:80px;
+  filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));
 }
+/* Keep the SVG background rect hidden */
 .logo-svg svg rect{display:none}
 
 </style>
