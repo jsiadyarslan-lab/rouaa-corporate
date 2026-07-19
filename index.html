@@ -940,6 +940,130 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   .how-pipe-connector{height:24px}
 }
 
+
+/* ─── 3-Layer Summary Card (mental anchor) ─── */
+.three-layers{
+  padding:var(--space-xl) var(--space-lg);
+  max-width:1100px;
+  margin:0 auto;
+  position:relative;
+  scroll-margin-top:80px;
+}
+.three-layers-header{
+  text-align:center;
+  margin-bottom:var(--space-lg);
+}
+.three-layers-title{
+  font-size:clamp(1.5rem,2.8vw,2rem);
+  font-weight:900;
+  line-height:1.25;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+}
+.three-layers-sub{
+  color:var(--text-mute);
+  font-size:0.9rem;
+  font-weight:500;
+  letter-spacing:0.02em;
+}
+
+.three-layers-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:var(--space-md);
+}
+@media (max-width:768px){
+  .three-layers-grid{grid-template-columns:1fr}
+}
+
+.tl-card{
+  padding:1.6rem 1.4rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(160deg, rgba(2,6,23,0.6) 0%, rgba(15,23,42,0.4) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s;
+  text-align:center;
+}
+.tl-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  opacity:0.7;
+}
+.tl-card.data::before{
+  background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.tl-card.intelligence::before{
+  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+}
+.tl-card.execution::before{
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.tl-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--glass-border-strong);
+  box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+.tl-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  display:grid;place-items:center;
+  margin:0 auto 1rem;
+  border:1px solid var(--glass-border);
+}
+.tl-card.data .tl-icon{
+  background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.04));
+  border-color:rgba(34,211,238,0.3);
+}
+.tl-card.intelligence .tl-icon{
+  background:linear-gradient(135deg, rgba(96,165,250,0.15), rgba(96,165,250,0.05));
+  border-color:rgba(96,165,250,0.4);
+}
+.tl-card.execution .tl-icon{
+  background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.04));
+  border-color:rgba(251,191,36,0.3);
+}
+.tl-icon svg{width:24px;height:24px}
+.tl-card.data .tl-icon svg{color:var(--cyan)}
+.tl-card.intelligence .tl-icon svg{color:var(--blue-bright)}
+.tl-card.execution .tl-icon svg{color:var(--gold)}
+
+.tl-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.2em;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+  opacity:0.7;
+}
+.tl-card.data .tl-label{color:var(--cyan)}
+.tl-card.intelligence .tl-label{color:var(--blue-bright)}
+.tl-card.execution .tl-label{color:var(--gold)}
+
+.tl-title{
+  font-size:1.1rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.4rem;
+  line-height:1.4;
+}
+.tl-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;
+  line-height:1.65;
+  font-weight:500;
+}
+
 </style>
 </head>
 <body>
@@ -979,9 +1103,9 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
     <div class="hero-title-en">رؤى · ببصيرة نحو الأسواق</div>
     <p class="hero-tagline">بنية تحتية مالية <span>للمؤسسات</span> — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
     <p class="hero-sub">
-      منظومتان متكاملتان: <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> للاستخبار الإخباري الذكي،
-      و<strong style="color:var(--blue-glow)">رؤى التداول</strong> للتنفيذ الآلي عبر مجلس ذكاء اصطناعي من 10 أدوار.
-      بلا وسيط، بخمس لغات، في الزمن الحقيقي.
+      منظومتان متكاملتان: <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> لبناء الاستخبارات المالية من المصادر العالمية،
+      و<strong style="color:var(--blue-glow)">رؤى التداول</strong> لتحويلها إلى قرارات وتنفيذ آلي حسب قواعد المستخدم عبر مجلس ذكاء اصطناعي من 10 أدوار.
+      بلا وسيط بشري في سلسلة القرار، بخمس لغات، في الزمن الحقيقي.
     </p>
     <div class="hero-cta">
       <a href="#advantage" class="btn-glow">
@@ -1075,7 +1199,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
       <h4 class="how-stage-title">القرار والتنفيذ الذكي</h4>
-      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · بيئة تنفيذ متعددة الوسطاء</p>
+      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · تنفيذ حسب قواعد المستخدم</p>
     </div>
 
   </div>
@@ -1099,7 +1223,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <div class="how-product trading">
         <div class="how-product-role">ذراع التنفيذ الذكي</div>
         <h3 class="how-product-name">رؤى التداول</h3>
-        <p class="how-product-tagline">يُحوّل الفهم إلى قرار وتنفيذ</p>
+        <p class="how-product-tagline">يُحوّل الفهم إلى قرار وتنفيذ حسب قواعدك</p>
         <p class="how-product-desc">يستهلك إشارات العقل، يُطبّق 15 فحص أمان، ويُنفّذ تلقائياً عبر 6 منصات بـ 3 وكلاء مستقلين.</p>
       </div>
 
@@ -1197,6 +1321,46 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
 </div>
 
 
+
+<!-- ═══ 3-Layer Summary — Mental Anchor ═══ -->
+<section class="three-layers">
+  <div class="three-layers-header">
+    <h3 class="three-layers-title">منصة واحدة · ثلاث طبقات</h3>
+    <p class="three-layers-sub">كل ما سبق يعمل ضمن هذه البساطة</p>
+  </div>
+  <div class="three-layers-grid">
+
+    <div class="tl-card data">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ١</div>
+      <h4 class="tl-title">مصادر مالية عالمية</h4>
+      <p class="tl-desc">729+ مصدر موثوق · بنوك مركزية · هيئات · مؤسسات إحصائية</p>
+    </div>
+
+    <div class="tl-card intelligence">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ٢</div>
+      <h4 class="tl-title">تحليل ذكاء اصطناعي وفهم السوق</h4>
+      <p class="tl-desc">10 أدوار AI تتعاون · تقييم السيناريوهات · تحديد الأثر السوقي</p>
+    </div>
+
+    <div class="tl-card execution">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ٣</div>
+      <h4 class="tl-title">قرارات وتنفيذ ذكي</h4>
+      <p class="tl-desc">15 فحص أمان · تنفيذ حسب قواعد المستخدم · أنت المتحكم</p>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- الميزة التنافسية -->
 <section id="advantage" class="reveal">
   <span class="section-tag">الميزة التنافسية</span>
@@ -1212,7 +1376,7 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
       <div class="advantage-visual">
         <div class="adv-stat"><div class="adv-stat-num">5</div><div class="adv-stat-lbl">لغات حيّة</div></div>
         <div class="adv-stat"><div class="adv-stat-num">3</div><div class="adv-stat-lbl">طبقات مدمجة</div></div>
-        <div class="adv-stat"><div class="adv-stat-num">0</div><div class="adv-stat-lbl">وسطاء</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">0</div><div class="adv-stat-lbl">وسطاء بشريين</div></div>
         <div class="adv-stat"><div class="adv-stat-num">24/7</div><div class="adv-stat-lbl">مراقبة دائمة</div></div>
       </div>
     </div>
@@ -1419,7 +1583,7 @@ iv>
       <span class="gradient">رؤى التداول</span><br>
       <span class="dim">عقل مؤسسي ينفّذ في الزمن الحقيقي</span>
     </h2>
-    <p class="project-subtitle">منظومة ذكاء اصطناعي كاملة: مجلس من 10 أدوار، منفّذ ذكي بـ 15 فحص أمان، 3 وكلاء مستقلين، ولوحة شارت بـ 83 أداة رسم.</p>
+    <p class="project-subtitle">منظومة ذكاء اصطناعي كاملة: مجلس من 10 أدوار، منفّذ ذكي بـ 15 فحص أمان، 3 وكلاء مستقلين، ولوحة شارت بـ 83 أداة رسم — كلها تعمل حسب قواعد المستخدم.</p>
   </div>
 
   <!-- القسم الفرعي 1: المجلس الذكي -->
@@ -1473,7 +1637,7 @@ iv>
       <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
       <div>
         <div class="subsection-title">المنفّذ الذكي</div>
-        <div class="subsection-subtitle">"الجندي في الميدان" — يراقب الأسعار وينفّذ فور تحقق الشروط، بـ 15 فحص أمان</div>
+        <div class="subsection-subtitle">"الجندي في الميدان" — يراقب الأسعار وينفّذ حسب قواعد المستخدم فور تحقق الشروط، بـ 15 فحص أمان</div>
       </div>
     </div>
     <div class="project-features">
@@ -1718,7 +1882,7 @@ iv>
     <div class="bridge-node trading">
       <div class="bridge-icon trading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
       <h3 class="bridge-title trading">رؤى التداول</h3>
-      <p class="bridge-desc">تنفيذ أتمت ذكي</p>
+      <p class="bridge-desc">تنفيذ ذكي حسب قواعد المستخدم</p>
       <div class="bridge-stats">
         <div><div class="bstat-num">10</div><div class="bstat-lbl">أدوار AI</div></div>
         <div><div class="bstat-num">32</div><div class="bstat-lbl">زوج تداول</div></div>
@@ -1728,7 +1892,7 @@ iv>
   <div class="steps-timeline">
     <div class="step-card"><div class="step-num">01</div><h4 class="step-title">اختر طريقك</h4><p class="step-desc">رؤى الأخبار أو رؤى التداول — أو كلاهما معاً</p></div>
     <div class="step-card"><div class="step-num">02</div><h4 class="step-title">اربط حسابك</h4><p class="step-desc">أدخل بيانات الوسيط أو اشترك في الإشارات</p></div>
-    <div class="step-card"><div class="step-num">03</div><h4 class="step-title">ابدأ التنفيذ</h4><p class="step-desc">راقب أو أتمت — أنت المتحكم، النظام المنفّذ</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4 class="step-title">ابدأ التنفيذ</h4><p class="step-desc">راقب أو فوّض حسب قواعدك — أنت المتحكم، النظام المنفّذ/p></div>
   </div>
 </section>
 
@@ -1767,7 +1931,7 @@ iv>
 <section id="contact" class="cta-section reveal">
   <div class="cta-card">
     <h2 class="cta-title">ابنِ فوق بنية تحتية تستحق ثقتك</h2>
-    <p class="cta-sub">رؤى ليست منتجاً نهائياً — هي طبقة أساس. اطلب عرضاً مخصصاً لشريحتك، واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر.</p>
+    <p class="cta-sub">رؤى ليست منتجاً نهائياً — هي طبقة أساس. اطلب عرضاً مخصصاً لشريحتك، واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر. التنفيذ يبقى دائماً حسب قواعدك.</p>
     <a href="#" class="btn-glow">
       <span>اطلب عرضاً</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
