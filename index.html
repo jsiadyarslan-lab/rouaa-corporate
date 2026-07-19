@@ -4,15 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#020617">
-<title>رُؤى — بنية تحتية مالية للمؤسسات</title>
-<meta name="description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط. حلول API متكاملة لمنصات التداول والبنوك.">
+<title>رُؤى — بنية تحتية مالية للمؤسسات | Roua</title>
+<meta name="description" content="رُؤى (Roua) — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط. رؤى الأخبار + رؤى التداول، منظومتان متكاملتان.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-/* ============================================================================
-   ROUAA — منصة استخبار مالي للمؤسسات
-   ============================================================================ */
 :root{
   --bg-0:#020617;
   --bg-1:#0a1530;
@@ -26,278 +23,81 @@
   --white:#f8fafc;
   --text-dim:rgba(248,250,252,0.80);
   --text-mute:rgba(248,250,252,0.62);
-
-  /* Unified spacing system */
-  --space-xs:0.5rem;
-  --space-sm:1rem;
-  --space-md:1.5rem;
-  --space-lg:2rem;
-  --space-xl:3rem;
-  --space-2xl:4rem;
-
-  /* Unified border radius */
-  --radius-sm:8px;
-  --radius-md:12px;
-  --radius-lg:16px;
-  --radius-xl:20px;
+  --space-xs:0.5rem; --space-sm:1rem; --space-md:1.5rem; --space-lg:2rem; --space-xl:3rem; --space-2xl:4rem;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px;
   --glass:rgba(255,255,255,0.04);
   --glass-strong:rgba(255,255,255,0.07);
   --glass-border:rgba(96,165,250,0.22);
   --glass-border-strong:rgba(96,165,250,0.5);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{
-  background:var(--bg-0);
-  color:var(--white);
-  font-family:'Cairo',-apple-system,sans-serif;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-  line-height:1.7;
-  padding-bottom:48px; /* ticker clearance */
-}
+html,body{background:var(--bg-0);color:var(--white);font-family:'Cairo',-apple-system,sans-serif;overflow-x:hidden;scroll-behavior:smooth;line-height:1.7;padding-bottom:48px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue-bright);outline-offset:3px;border-radius:6px}
 
-/* Accessibility: visible focus states */
-a:focus-visible,button:focus-visible{
-  outline:2px solid var(--blue-bright);
-  outline-offset:3px;
-  border-radius:6px;
-}
-
-/* ===== 3D Animated background ===== */
-.bg-3d{
-  position:fixed;inset:0;z-index:-1;perspective:1200px;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 20% 10%, rgba(59,130,246,0.18), transparent 50%),
-    radial-gradient(ellipse at 80% 90%, rgba(34,211,238,0.12), transparent 55%),
-    radial-gradient(ellipse at 50% 50%, rgba(30,58,138,0.22), transparent 70%),
-    linear-gradient(180deg,#020617 0%, #050b1f 50%, #020617 100%);
-}
-.bg-3d::before{
-  content:'';position:absolute;inset:-50%;
-  background-image:
-    linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);
-  background-size:80px 80px;
-  transform:rotateX(60deg) translateZ(0);
-  animation:gridScroll 20s linear infinite;
-}
-.bg-3d::after{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(59,130,246,0.15), transparent 35%),
-    radial-gradient(circle at 70% 60%, rgba(34,211,238,0.10), transparent 30%);
-  animation:blobPulse 8s ease-in-out infinite alternate;
-}
+/* 3D Background */
+.bg-3d{position:fixed;inset:0;z-index:-1;perspective:1200px;overflow:hidden;background:radial-gradient(ellipse at 20% 10%, rgba(59,130,246,0.18), transparent 50%),radial-gradient(ellipse at 80% 90%, rgba(34,211,238,0.12), transparent 55%),radial-gradient(ellipse at 50% 50%, rgba(30,58,138,0.22), transparent 70%),linear-gradient(180deg,#020617 0%, #050b1f 50%, #020617 100%)}
+.bg-3d::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);background-size:80px 80px;transform:rotateX(60deg) translateZ(0);animation:gridScroll 20s linear infinite}
+.bg-3d::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%, rgba(59,130,246,0.15), transparent 35%),radial-gradient(circle at 70% 60%, rgba(34,211,238,0.10), transparent 30%);animation:blobPulse 8s ease-in-out infinite alternate}
 @keyframes gridScroll{from{transform:rotateX(60deg) translateY(0)}to{transform:rotateX(60deg) translateY(80px)}}
 @keyframes blobPulse{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
-
-.orb{
-  position:fixed;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, rgba(96,165,250,0.4), rgba(59,130,246,0.1) 60%, transparent);
-  filter:blur(40px);
-  pointer-events:none;
-  z-index:-1;
-  animation:orbFloat 20s ease-in-out infinite;
-}
+.orb{position:fixed;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(96,165,250,0.4), rgba(59,130,246,0.1) 60%, transparent);filter:blur(40px);pointer-events:none;z-index:-1;animation:orbFloat 20s ease-in-out infinite}
 .orb-1{width:400px;height:400px;top:-100px;right:-100px;animation-delay:0s}
 .orb-2{width:300px;height:300px;bottom:-50px;left:-50px;animation-delay:-7s;background:radial-gradient(circle at 30% 30%, rgba(34,211,238,0.35), rgba(34,211,238,0.08) 60%, transparent)}
 .orb-3{width:250px;height:250px;top:40%;left:30%;animation-delay:-14s;opacity:0.5}
 @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(0.95)}}
 
-/* ===== NAV ===== */
-nav{
-  position:fixed;top:0;left:0;right:0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 3rem;
-  z-index:100;
-  background:rgba(2,6,23,0.55);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--glass-border);
-  transform:translateY(-100%);
-  animation:navDown 0.8s ease 0.3s forwards;
-}
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;z-index:100;background:rgba(2,6,23,0.55);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--glass-border);transform:translateY(-100%);animation:navDown 0.8s ease 0.3s forwards}
 @keyframes navDown{to{transform:translateY(0)}}
-.logo{
-  display:flex;align-items:center;gap:0.75rem;
-  font-family:'Orbitron',sans-serif;font-weight:900;
-  font-size:1.3rem;letter-spacing:0.2em;
-  color:var(--white);
-  text-shadow:0 0 20px rgba(96,165,250,0.8);
-}
-.logo-mark{
-  width:36px;height:36px;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  border-radius:10px;
-  display:grid;place-items:center;
-  box-shadow:0 0 25px rgba(96,165,250,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
-  transform:rotate(45deg);
-  animation:logoSpin 6s ease-in-out infinite;
-}
+.logo{display:flex;align-items:center;gap:0.75rem;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:0.2em;color:var(--white);text-shadow:0 0 20px rgba(96,165,250,0.8)}
+.logo-mark{width:36px;height:36px;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));border-radius:10px;display:grid;place-items:center;box-shadow:0 0 25px rgba(96,165,250,0.6), inset 0 1px 0 rgba(255,255,255,0.4);transform:rotate(45deg);animation:logoSpin 6s ease-in-out infinite}
 .logo-mark::before{content:'';width:14px;height:14px;background:var(--bg-0);border-radius:3px}
 @keyframes logoSpin{0%,100%{transform:rotate(45deg)}50%{transform:rotate(225deg)}}
 .nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{
-  color:var(--text-dim);text-decoration:none;
-  font-size:0.88rem;font-weight:500;
-  position:relative;transition:color 0.3s;
-  padding:0.3rem 0;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);
-  transform:scaleX(0);transition:transform 0.4s;
-}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.88rem;font-weight:500;position:relative;transition:color 0.3s;padding:0.3rem 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);transform:scaleX(0);transition:transform 0.4s}
 .nav-links a:hover{color:var(--white)}
 .nav-links a:hover::after{transform:scaleX(1)}
 .nav-cta{display:flex;gap:0.6rem;align-items:center}
-.btn-ghost,.btn-primary{
-  font-family:'Cairo',sans-serif;
-  padding:0.55rem 1.2rem;border-radius:8px;
-  font-size:0.85rem;font-weight:700;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;
-  transition:all 0.3s;border:none;
-}
+.btn-ghost,.btn-primary{font-family:'Cairo',sans-serif;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s;border:none}
 .btn-ghost{background:var(--glass);color:var(--white);border:1px solid var(--glass-border);backdrop-filter:blur(10px)}
 .btn-ghost:hover{background:var(--glass-strong);border-color:var(--glass-border-strong)}
-.btn-primary{
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  color:var(--bg-0);
-  box-shadow:0 4px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
-}
+.btn-primary{background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);box-shadow:0 4px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.6), inset 0 1px 0 rgba(255,255,255,0.4)}
 
-/* ===== HERO ===== */
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  gap:4rem;
-  align-items:center;
-  padding:8rem 4rem 7rem; /* extra bottom for radar-status */
-  max-width:1500px;
-  margin:0 auto;
-}
-@media (max-width:980px){
-  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:2.5rem;text-align:center}
-}
+/* Hero */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;padding:8rem 4rem 7rem;max-width:1500px;margin:0 auto;scroll-margin-top:80px}
+@media (max-width:980px){.hero{grid-template-columns:1fr;padding:7rem 1.5rem 5rem;gap:2.5rem;text-align:center}}
 .hero-text{display:flex;flex-direction:column;gap:1.4rem;animation:textReveal 1s ease 0.4s both}
 @media (max-width:980px){.hero-text{align-items:center}}
 @keyframes textReveal{from{opacity:0;transform:translateY(30px) translateX(20px)}to{opacity:1;transform:translateY(0) translateX(0)}}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:0.4rem 1rem;border-radius:50px;
-  background:rgba(59,130,246,0.1);
-  border:1px solid rgba(96,165,250,0.4);
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.72rem;letter-spacing:0.2em;
-  color:var(--blue-glow);text-transform:uppercase;
-  width:fit-content;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:50px;background:rgba(59,130,246,0.1);border:1px solid rgba(96,165,250,0.4);font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;color:var(--blue-glow);text-transform:uppercase;width:fit-content}
 .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 10px var(--blue-bright);animation:dotPulse 1.5s ease-in-out infinite}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
-.hero-title{
-  font-family:'Cairo',sans-serif;
-  font-size:clamp(3rem, 7vw, 5.5rem);
-  font-weight:900;line-height:1.05;
-  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 25px rgba(96,165,250,0.4));
-}
-.hero-title-en{
-  font-family:'Orbitron',sans-serif;
-  font-size:clamp(0.8rem,1.2vw,0.95rem);
-  font-weight:400;letter-spacing:0.3em;
-  color:var(--blue-bright);
-  text-transform:uppercase;
-  margin-top:-0.4rem;
-}
-.hero-tagline{
-  font-size:clamp(1rem, 1.6vw, 1.2rem);
-  color:var(--white);
-  font-weight:600;
-  line-height:1.7;
-}
+.hero-title{font-family:'Cairo',sans-serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1.05;background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(96,165,250,0.4))}
+.hero-title-en{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.2vw,0.95rem);font-weight:400;letter-spacing:0.3em;color:var(--blue-bright);text-transform:uppercase;margin-top:-0.4rem}
+.hero-tagline{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--white);font-weight:600;line-height:1.7}
 .hero-tagline span{color:var(--blue-glow)}
-.hero-sub{
-  font-size:clamp(1rem,1.5vw,1.15rem);
-  color:var(--text-dim);
-  font-weight:500;
-  line-height:1.9;
-  max-width:560px;
-}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--text-dim);font-weight:500;line-height:1.9;max-width:560px}
 @media (max-width:980px){.hero-sub{margin:0 auto}}
 .hero-cta{display:flex;gap:0.9rem;flex-wrap:wrap}
 @media (max-width:980px){.hero-cta{justify-content:center}}
-.btn-glow{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  padding:0.9rem 1.8rem;border-radius:10px;
-  font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  color:var(--bg-0);text-decoration:none;cursor:pointer;border:none;
-  position:relative;overflow:hidden;
-  box-shadow:0 0 25px rgba(59,130,246,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
-  transition:transform 0.3s, box-shadow 0.3s;
-}
+.btn-glow{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;box-shadow:0 0 25px rgba(59,130,246,0.5), inset 0 1px 0 rgba(255,255,255,0.4);transition:transform 0.3s, box-shadow 0.3s}
 .btn-glow::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
 .btn-glow:hover::before{left:100%}
-.btn-glow:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 12px 50px rgba(59,130,246,0.8), 0 0 60px rgba(96,165,250,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
-}
+.btn-glow:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 50px rgba(59,130,246,0.8), 0 0 60px rgba(96,165,250,0.3), inset 0 1px 0 rgba(255,255,255,0.5)}
 .btn-glow:active{transform:translateY(-1px) scale(1.01)}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  padding:0.9rem 1.8rem;border-radius:10px;
-  font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;
-  background:var(--glass);color:var(--white);
-  border:1px solid var(--glass-border);
-  text-decoration:none;cursor:pointer;
-  backdrop-filter:blur(10px);
-  transition:all 0.3s;
-}
-.btn-outline:hover{
-  background:var(--glass-strong);
-  border-color:var(--blue-bright);
-  color:var(--blue-bright);
-  transform:translateY(-2px);
-  box-shadow:0 8px 25px rgba(96,165,250,0.35);
-}
+.btn-outline{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:var(--glass);color:var(--white);border:1px solid var(--glass-border);text-decoration:none;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s}
+.btn-outline:hover{background:var(--glass-strong);border-color:var(--blue-bright);color:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,0.35)}
 .btn-outline:active{transform:translateY(0)}
 
-/* ===== BLUE RADAR ===== */
-.radar-wrap{
-  position:relative;
-  width:min(560px, 80vmin);
-  aspect-ratio:1;
-  justify-self:center;
-  perspective:1000px;
-  animation:radarEnter 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s both;
-}
+/* Blue Radar */
+.radar-wrap{position:relative;width:min(560px,80vmin);aspect-ratio:1;justify-self:center;perspective:1000px;animation:radarEnter 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s both}
 @keyframes radarEnter{from{opacity:0;transform:translateZ(-200px) rotateY(-30deg) scale(0.8)}to{opacity:1;transform:translateZ(0) rotateY(0) scale(1)}}
 .radar-pedestal{position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse at center, rgba(96,165,250,0.3), transparent 70%);filter:blur(15px);transform:rotateX(60deg)}
-.radar-frame{
-  position:absolute;inset:0;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(96,165,250,0.15), transparent 50%),
-    linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.03));
-  border:1px solid var(--glass-border-strong);
-  box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.3), inset 0 2px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);
-  backdrop-filter:blur(20px);
-  transform-style:preserve-3d;
-  animation:radarTilt 6s ease-in-out infinite;
-}
+.radar-frame{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(96,165,250,0.15), transparent 50%),linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.3), inset 0 2px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);backdrop-filter:blur(20px);transform-style:preserve-3d;animation:radarTilt 6s ease-in-out infinite}
 @keyframes radarTilt{0%,100%{transform:rotateX(8deg) rotateY(-3deg)}50%{transform:rotateX(8deg) rotateY(3deg)}}
-.radar-screen{
-  position:absolute;inset:5%;border-radius:50%;
-  background:radial-gradient(circle at center, rgba(30,58,138,0.6) 0%, rgba(10,21,48,0.9) 50%, rgba(2,6,23,1) 100%);
-  overflow:hidden;
-  box-shadow:inset 0 0 60px rgba(59,130,246,0.3), inset 0 0 20px rgba(0,0,0,0.8);
-}
+.radar-screen{position:absolute;inset:5%;border-radius:50%;background:radial-gradient(circle at center, rgba(30,58,138,0.6) 0%, rgba(10,21,48,0.9) 50%, rgba(2,6,23,1) 100%);overflow:hidden;box-shadow:inset 0 0 60px rgba(59,130,246,0.3), inset 0 0 20px rgba(0,0,0,0.8)}
 .radar-grid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .radar-grid .ring{fill:none;stroke:rgba(96,165,250,0.25);stroke-width:0.4}
 .radar-grid .ring.bright{stroke:rgba(96,165,250,0.5);stroke-width:0.6}
@@ -307,33 +107,12 @@ nav{
 .radar-grid .range{fill:rgba(96,165,250,0.5);font-family:'Share Tech Mono',monospace;font-size:3px;text-anchor:middle;dominant-baseline:middle}
 .radar-grid .center-dot{fill:var(--blue-bright);filter:drop-shadow(0 0 4px var(--blue-bright))}
 .radar-grid .center-cross{stroke:var(--blue-bright);stroke-width:0.7}
-.radar-sweep{
-  position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from 0deg, rgba(96,165,250,0.7) 0deg, rgba(96,165,250,0.35) 18deg, rgba(96,165,250,0.1) 45deg, rgba(96,165,250,0.02) 80deg, transparent 100deg, transparent 360deg);
-  mix-blend-mode:screen;
-  animation:sweepBg 4s linear infinite;
-  pointer-events:none;
-}
-.radar-sweep-line{
-  position:absolute;top:50%;left:50%;
-  width:50%;height:2px;
-  transform-origin:left center;
-  background:linear-gradient(90deg, rgba(147,197,253,1) 0%, rgba(96,165,250,0.7) 40%, rgba(59,130,246,0.2) 80%, transparent 100%);
-  box-shadow:0 0 10px var(--blue-bright), 0 0 25px rgba(96,165,250,0.7);
-  animation:sweep 4s linear infinite;
-  pointer-events:none;
-}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, rgba(96,165,250,0.7) 0deg, rgba(96,165,250,0.35) 18deg, rgba(96,165,250,0.1) 45deg, rgba(96,165,250,0.02) 80deg, transparent 100deg, transparent 360deg);mix-blend-mode:screen;animation:sweepBg 4s linear infinite;pointer-events:none}
+.radar-sweep-line{position:absolute;top:50%;left:50%;width:50%;height:2px;transform-origin:left center;background:linear-gradient(90deg, rgba(147,197,253,1) 0%, rgba(96,165,250,0.7) 40%, rgba(59,130,246,0.2) 80%, transparent 100%);box-shadow:0 0 10px var(--blue-bright), 0 0 25px rgba(96,165,250,0.7);animation:sweep 4s linear infinite;pointer-events:none}
 @keyframes sweep{from{transform:translate(0,-50%) rotate(0deg)}to{transform:translate(0,-50%) rotate(360deg)}}
 @keyframes sweepBg{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .radar-targets{position:absolute;inset:0;pointer-events:none}
-.target{
-  position:absolute;width:8px;height:8px;
-  transform:translate(-50%,-50%);border-radius:50%;
-  background:var(--blue-bright);
-  box-shadow:0 0 10px var(--blue-bright), 0 0 20px rgba(96,165,250,0.8);
-  opacity:0;
-  animation:targetLife 4s ease-out forwards;
-}
+.target{position:absolute;width:8px;height:8px;transform:translate(-50%,-50%);border-radius:50%;background:var(--blue-bright);box-shadow:0 0 10px var(--blue-bright), 0 0 20px rgba(96,165,250,0.8);opacity:0;animation:targetLife 4s ease-out forwards}
 .target.hostile{background:#ef4444;box-shadow:0 0 10px #ef4444, 0 0 20px rgba(239,68,68,0.7)}
 .target.neutral{background:#fbbf24;box-shadow:0 0 10px #fbbf24, 0 0 20px rgba(251,191,36,0.7)}
 .target::after{content:'';position:absolute;inset:-6px;border:1px solid currentColor;border-radius:50%;opacity:0.5;animation:targetRing 1.5s ease-out infinite}
@@ -353,987 +132,223 @@ nav{
 .radar-status .item{display:flex;flex-direction:column;align-items:center;gap:0.2rem}
 .radar-status .val{color:var(--blue-bright);font-weight:700;font-size:0.95rem;text-shadow:0 0 10px var(--blue-bright)}
 
-/* ===== SECTION COMMON ===== */
-section{padding:5rem 3rem;max-width:1400px;margin:0 auto;position:relative;scroll-margin-top:80px}
+/* Sections common */
+section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;position:relative;scroll-margin-top:80px}
 @media (max-width:768px){section{padding:4rem 1.5rem}}
-.section-tag{
-  display:inline-block;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.72rem;letter-spacing:0.3em;
-  color:var(--blue-bright);text-transform:uppercase;
-  padding:0.3rem 0.8rem;border-radius:4px;
-  background:rgba(59,130,246,0.1);
-  border:1px solid var(--glass-border);
-  margin-bottom:1rem;
-}
-.section-title{
-  font-size:clamp(2rem,4vw,3rem);font-weight:900;
-  line-height:1.2;margin-bottom:1rem;
-  background:linear-gradient(135deg, var(--white), var(--blue-glow));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.section-sub{
-  color:var(--text-dim);font-size:1.05rem;line-height:1.85;
-  max-width:680px;margin-bottom:3rem;
-}
+.section-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;color:var(--blue-bright);text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:4px;background:rgba(59,130,246,0.1);border:1px solid var(--glass-border);margin-bottom:1rem}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.2;margin-bottom:1rem;background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{color:var(--text-dim);font-size:1.05rem;line-height:1.9;max-width:680px;margin-bottom:var(--space-xl);font-weight:400}
 .section-sub strong{color:var(--blue-glow);font-weight:700}
 
-/* ============================================================================
-   AUDIENCES — 3 شرائح
-   ============================================================================ */
-.audiences{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:var(--space-md);
-  margin-top:var(--space-lg);
-  align-items:stretch;
-}
-@media (max-width:980px){.audiences{grid-template-columns:1fr}}
+/* Advantage */
+.advantage-card{background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);border-radius:var(--radius-xl);padding:var(--space-xl);margin-top:var(--space-md);position:relative;overflow:hidden;backdrop-filter:blur(20px)}
+.advantage-card::before{content:'';position:absolute;top:-50%;right:-30%;width:600px;height:600px;background:radial-gradient(circle, rgba(96,165,250,0.12), transparent 70%);filter:blur(40px);pointer-events:none}
+.advantage-content{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center}
+@media (max-width:768px){.advantage-content{grid-template-columns:1fr;gap:var(--space-lg)}}
+.advantage-text h3{font-size:1.6rem;font-weight:800;color:var(--white);margin-bottom:1rem;line-height:1.4}
+.advantage-text p{color:var(--text-dim);font-size:1.08rem;font-weight:500;line-height:1.95}
+.advantage-text p strong{color:var(--blue-glow);font-weight:700}
+.advantage-visual{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-sm)}
+.adv-stat{padding:var(--space-md);border-radius:var(--radius-md);background:rgba(2,6,23,0.4);border:1px solid var(--glass-border);text-align:center;transition:all 0.3s}
+.adv-stat:hover{border-color:var(--blue-bright);transform:translateY(-3px);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.adv-stat-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px rgba(96,165,250,0.5));direction:ltr;line-height:1;unicode-bidi:isolate}
+.adv-stat-lbl{font-size:0.78rem;color:var(--text-dim);margin-top:0.5rem;letter-spacing:0.05em;font-weight:500}
 
-.audience-card{
-  position:relative;
-  padding:var(--space-lg) var(--space-lg);
-  border-radius:var(--radius-xl);
-  background:linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.02));
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  overflow:hidden;
-  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  transform-style:preserve-3d;
-  isolation:isolate;
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  height:100%;
-}
-.audience-card::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  padding:1px;
-  border-radius:20px;
-  background:linear-gradient(135deg, rgba(96,165,250,0.5) 0%, rgba(34,211,238,0.3) 50%, rgba(96,165,250,0.1) 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  pointer-events:none;
-  transition:background 0.5s;
-}
-.audience-card::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle 300px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.12), transparent 70%);
-  opacity:0;
-  transition:opacity 0.4s;
-  pointer-events:none;
-  z-index:-1;
-}
+/* Audiences */
+.audiences{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);align-items:stretch}
+@media (max-width:980px){.audiences{grid-template-columns:1fr}}
+.audience-card{position:relative;padding:var(--space-lg) var(--space-lg);border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.02));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;isolation:isolate;display:flex;flex-direction:column;align-items:stretch;height:100%}
+.audience-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(96,165,250,0.5) 0%, rgba(34,211,238,0.3) 50%, rgba(96,165,250,0.1) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.5s}
+.audience-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle 300px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.12), transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:-1}
 .audience-card:hover{transform:translateY(-8px) rotateX(3deg) rotateY(-3deg)}
 .audience-card:hover::before{background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.8) 50%, rgba(96,165,250,0.4) 100%)}
 .audience-card:hover::after{opacity:1}
-
-.audience-icon{
-  width:60px;height:60px;
-  border-radius:14px;
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  display:grid;place-items:center;
-  box-shadow:0 8px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
-  margin-bottom:1.5rem;
-  position:relative;
-  flex-shrink:0;
-}
+.audience-icon{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 8px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);margin-bottom:1.5rem;position:relative;flex-shrink:0}
 .audience-icon svg{width:30px;height:30px;color:var(--bg-0)}
-.audience-icon::after{
-  content:'';position:absolute;inset:-3px;border-radius:16px;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  filter:blur(12px);opacity:0.4;z-index:-1;
-}
-
-.audience-card h3{
-  font-size:1.5rem;font-weight:800;
-  color:var(--white);
-  margin-bottom:0.8rem;
-  line-height:1.3;
-}
-.audience-card .desc{
-  color:var(--text-dim);
-  font-size:0.95rem;line-height:1.8;
-  margin-bottom:1.5rem;
-}
-.audience-features{
-  list-style:none;
-  display:flex;flex-direction:column;gap:0.7rem;
-  padding-top:1.2rem;
-  border-top:1px solid rgba(96,165,250,0.18);
-  margin-top:auto;
-}
-.audience-features li{
-  font-size:0.92rem;
-  color:var(--white);
-  padding-right:1.8rem;
-  position:relative;
-  line-height:1.7;
-  font-weight:500;
-  display:flex;
-  align-items:center;
-  gap:0.6rem;
-  margin-bottom:var(--space-xs);
-  text-align:right;
-}
-.audience-features li::before{
-  content:'';
-  width:18px;height:18px;
-  border-radius:50%;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  display:inline-block;
-  flex-shrink:0;
-  position:relative;
-  box-shadow:0 0 10px rgba(96,165,250,0.5);
-}
-.audience-features li::after{
-  content:'✓';
-  position:absolute;
-  right:0.5px;top:50%;
-  transform:translateY(-50%);
-  color:var(--bg-0);
-  font-weight:900;
-  font-size:0.7rem;
-  width:18px;height:18px;
-  display:grid;place-items:center;
-}
+.audience-icon::after{content:'';position:absolute;inset:-3px;border-radius:16px;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));filter:blur(12px);opacity:0.4;z-index:-1}
+.audience-card h3{font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:0.8rem;line-height:1.3}
+.audience-card .desc{color:var(--text-dim);font-size:0.95rem;line-height:1.8;margin-bottom:1.5rem}
+.audience-features{list-style:none;display:flex;flex-direction:column;gap:0.7rem;padding-top:1.2rem;border-top:1px solid rgba(96,165,250,0.18);margin-top:auto}
+.audience-features li{font-size:0.92rem;color:var(--white);padding-right:1.8rem;position:relative;line-height:1.7;font-weight:500;display:flex;align-items:center;gap:0.6rem;margin-bottom:var(--space-xs);text-align:right}
+.audience-features li::before{content:'';width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));display:inline-block;flex-shrink:0;position:relative;box-shadow:0 0 10px rgba(96,165,250,0.5)}
+.audience-features li::after{content:'✓';position:absolute;right:0.5px;top:50%;transform:translateY(-50%);color:var(--bg-0);font-weight:900;font-size:0.7rem;width:18px;height:18px;display:grid;place-items:center}
 .audience-features li span{flex:1}
 
-/* ============================================================================
-   ADVANTAGE — الميزة التنافسية
-   ============================================================================ */
-.advantage-card{
-  background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));
-  border:1px solid var(--glass-border-strong);
-  border-radius:20px;
-  padding:3rem;
-  margin-top:2rem;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(20px);
-}
-.advantage-card::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-30%;
-  width:600px;height:600px;
-  background:radial-gradient(circle, rgba(96,165,250,0.12), transparent 70%);
-  filter:blur(40px);
-  pointer-events:none;
-}
-.advantage-content{
-  position:relative;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3rem;
-  align-items:center;
-}
-@media (max-width:768px){.advantage-content{grid-template-columns:1fr;gap:2rem}}
-
-.advantage-text h3{
-  font-size:1.6rem;
-  font-weight:800;
-  color:var(--white);
-  margin-bottom:1rem;
-  line-height:1.4;
-}
-.advantage-text p{
-  color:var(--text-dim);
-  font-size:1.08rem;
-  font-weight:500;
-  line-height:1.95;
-}
-.advantage-text p strong{
-  color:var(--blue-glow);
-  font-weight:700;
-}
-
-.advantage-visual{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1rem;
-}
-.adv-stat{
-  padding:1.5rem;
-  border-radius:14px;
-  background:rgba(2,6,23,0.4);
-  border:1px solid var(--glass-border);
-  text-align:center;
-  transition:all 0.3s;
-}
-.adv-stat:hover{
-  border-color:var(--blue-bright);
-  transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(59,130,246,0.15);
-}
-.adv-stat-num{
-  font-family:'Orbitron',sans-serif;
-  font-weight:900;
-  font-size:2rem;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 15px rgba(96,165,250,0.5));
-  direction:ltr;
-  line-height:1;
-}
-.adv-stat-lbl{
-  font-size:0.78rem;
-  color:var(--text-mute);
-  margin-top:0.5rem;
-  letter-spacing:0.05em;
-}
-
-/* ============================================================================
-   CTA
-   ============================================================================ */
-.cta-section{text-align:center;padding:var(--space-2xl) var(--space-md)}
-.cta-card{
-  max-width:900px;margin:0 auto;
-  padding:4rem 2rem;border-radius:24px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(59,130,246,0.2), transparent 70%),
-    var(--glass);
-  border:1px solid var(--glass-border-strong);
-  backdrop-filter:blur(20px);
-  box-shadow:0 30px 80px rgba(0,0,0,0.4);
-  position:relative;
-  overflow:hidden;
-}
-.cta-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg, transparent 40%, rgba(96,165,250,0.08) 50%, transparent 60%);
-  animation:shimmer 4s linear infinite;
-}
-@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-.cta-title{
-  font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;
-  margin-bottom:1rem;position:relative;
-  background:linear-gradient(135deg, var(--white), var(--blue-glow));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative;font-size:1.05rem}
-
-/* Footer */
-footer{
-  padding:2.5rem 3rem;
-  border-top:1px solid var(--glass-border);
-  text-align:center;
-  color:var(--text-mute);
-  font-size:0.88rem;
-  background:rgba(2,6,23,0.6);
-  backdrop-filter:blur(10px);
-}
-footer .tagline{
-  font-family:'Orbitron',sans-serif;
-  letter-spacing:0.2em;
-  color:var(--blue-bright);
-  font-size:0.78rem;
-  margin-top:0.4rem;
-  text-transform:uppercase;
-}
-
-/* Scroll reveal */
-.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-track{background:var(--bg-0)}
-::-webkit-scrollbar-thumb{background:var(--blue-deep);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--blue)}
-
-/* Ticker */
-.ticker{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(2,6,23,0.92);
-  backdrop-filter:blur(20px) saturate(150%);
-  border-top:1px solid rgba(96,165,250,0.3);
-  padding:0.6rem 0;
-  overflow:hidden;
-  z-index:50;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.75rem;
-  box-shadow:0 -4px 20px rgba(0,0,0,0.4);
-}
-@media (max-width:600px){
-  .ticker{font-size:0.68rem;padding:0.5rem 0}
-  body{padding-bottom:40px}
-}
-.ticker-track{
-  display:inline-flex;
-  gap:0;
-  animation:tickerScroll 50s linear infinite;
-  white-space:nowrap;
-}
-.ticker::before,.ticker::after{
-  content:'';
-  position:absolute;
-  top:0;bottom:0;
-  width:60px;
-  z-index:2;
-  pointer-events:none;
-}
-.ticker::before{
-  right:0;
-  background:linear-gradient(to left, rgba(2,6,23,1), transparent);
-}
-.ticker::after{
-  left:0;
-  background:linear-gradient(to right, rgba(2,6,23,1), transparent);
-}
-@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
-.ticker-item{
-  display:inline-flex;
-  align-items:center;
-  gap:0.6rem;
-  padding:0 1.2rem;
-  border-right:1px solid rgba(96,165,250,0.15);
-}
-.ticker-item:last-child{border-right:none}
-.ticker-pair{
-  color:var(--white);
-  font-weight:700;
-  font-size:0.82rem;
-  letter-spacing:0.05em;
-  min-width:60px;
-}
-.ticker-signal{
-  padding:0.15rem 0.6rem;
-  border-radius:4px;
-  font-size:0.68rem;
-  font-weight:700;
-  letter-spacing:0.05em;
-  min-width:36px;
-  text-align:center;
-}
-.ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
-.ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
-.ticker-val{
-  color:var(--blue-bright);
-  font-weight:600;
-  font-size:0.78rem;
-  min-width:42px;
-  text-align:right;
-}
-
-@media (max-width:768px){
-  nav{padding:1rem 1.2rem}
-  .nav-links{display:none}
-  .hero{padding-top:6rem;padding-bottom:5rem}
-  .hud-label.left,.hud-label.right{display:none}
-  .hud-label.top{top:-22px;font-size:0.58rem}
-  .hud-label.bottom{bottom:-22px;font-size:0.58rem}
-  .radar-status{bottom:-60px;font-size:0.6rem;gap:0.3rem}
-  .radar-status .val{font-size:0.8rem}
-}
-@media (max-width:480px){
-  .hud-label.top,.hud-label.bottom{display:none}
-  .radar-status{bottom:-55px;flex-wrap:wrap;gap:0.4rem}
-}
-
-/* ============================================================================
-   PROJECT SECTIONS — Rouaa News + Rouaa Trading
-   ============================================================================ */
-.project-section{
-  padding:var(--space-2xl) var(--space-lg);
-  max-width:1400px;
-  margin:0 auto;
-  position:relative;
-}
+/* Project section (رؤى الأخبار + رؤى التداول) */
+.project-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;position:relative;scroll-margin-top:80px}
 @media (max-width:768px){.project-section{padding:4rem 1.5rem}}
-
-.project-header{
-  text-align:center;
-  margin-bottom:3.5rem;
-}
-.project-tag{
-  display:inline-block;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.72rem;letter-spacing:0.3em;
-  text-transform:uppercase;font-weight:700;
-  padding:0.35rem 1rem;border-radius:4px;
-  margin-bottom:1.2rem;
-}
-.project-tag.news{
-  background:rgba(34,211,238,0.15);
-  border:1px solid rgba(34,211,238,0.5);
-  color:var(--cyan);
-  box-shadow:0 0 15px rgba(34,211,238,0.15);
-}
-.project-tag.trading{
-  background:rgba(96,165,250,0.15);
-  border:1px solid rgba(96,165,250,0.5);
-  color:var(--blue-bright);
-  box-shadow:0 0 15px rgba(96,165,250,0.15);
-}
-.project-title{
-  font-size:clamp(2rem,4.2vw,3.2rem);
-  font-weight:900;line-height:1.2;
-  margin-bottom:1rem;
-}
-.project-title .gradient{
-  background:linear-gradient(135deg, var(--white), var(--blue-glow));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.project-title.trading .gradient{
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+.project-header{text-align:center;margin-bottom:3.5rem}
+.project-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;padding:0.35rem 1rem;border-radius:4px;margin-bottom:1.2rem}
+.project-tag.news{background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.5);color:var(--cyan);box-shadow:0 0 15px rgba(34,211,238,0.15)}
+.project-tag.trading{background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.5);color:var(--blue-bright);box-shadow:0 0 15px rgba(96,165,250,0.15)}
+.project-title{font-size:clamp(2rem,4.2vw,3.2rem);font-weight:900;line-height:1.2;margin-bottom:1rem}
+.project-title .gradient{background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.project-title.trading .gradient{background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .project-title .dim{color:var(--text-mute)}
-.project-subtitle{
-  color:var(--text-dim);
-  font-size:1.1rem;
-  font-weight:500;
-  line-height:1.9;
-  max-width:640px;margin:0 auto;
-}
-
-/* Project preview dashboard */
-.project-preview{
-  position:relative;
-  border-radius:20px;
-  background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));
-  border:1px solid var(--glass-border-strong);
-  backdrop-filter:blur(20px);
-  padding:1.5rem;
-  margin-bottom:3rem;
-  box-shadow:0 30px 60px rgba(0,0,0,0.3), 0 0 80px rgba(59,130,246,0.1);
-  overflow:hidden;
-}
-.project-preview::before{
-  content:'';
-  position:absolute;
-  top:-100px;right:-100px;
-  width:400px;height:400px;
-  background:radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);
-  filter:blur(40px);
-  pointer-events:none;
-}
+.project-subtitle{color:var(--text-dim);font-size:1.1rem;font-weight:500;line-height:1.9;max-width:640px;margin:0 auto}
+.project-preview{position:relative;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);padding:var(--space-md);margin-bottom:var(--space-xl);box-shadow:0 30px 60px rgba(0,0,0,0.3), 0 0 80px rgba(59,130,246,0.1);overflow:hidden}
+.project-preview::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);filter:blur(40px);pointer-events:none}
 
 /* News dashboard */
-.news-tabs{
-  display:flex;gap:0.5rem;
-  margin-bottom:1rem;
-  border-bottom:1px solid var(--glass-border);
-  padding-bottom:0.5rem;
-  flex-wrap:wrap;
-}
-.news-tab{
-  padding:0.5rem 1rem;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.78rem;letter-spacing:0.1em;
-  color:var(--text-dim);
-  background:transparent;border:none;
-  border-radius:6px;cursor:pointer;
-  transition:all 0.3s;
-}
-.news-tab.active{
-  background:rgba(59,130,246,0.15);
-  color:var(--blue-bright);
-}
-.news-cards{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
-  gap:0.8rem;
-}
+.news-tabs{display:flex;gap:0.5rem;margin-bottom:1rem;border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;flex-wrap:wrap}
+.news-tab{padding:0.5rem 1rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:all 0.3s}
+.news-tab.active{background:rgba(59,130,246,0.15);color:var(--blue-bright)}
+.news-cards{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:0.8rem}
 @media (max-width:768px){.news-cards{grid-template-columns:1fr}}
-.news-card{
-  padding:1rem;
-  background:rgba(2,6,23,0.5);
-  border:1px solid var(--glass-border);
-  border-radius:12px;
-  transition:all 0.3s;
-}
-.news-card:hover{
-  border-color:var(--blue-bright);
-  transform:translateY(-2px);
-}
-.news-card.featured{
-  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
-  border-color:var(--glass-border-strong);
-}
-.news-meta{
-  display:flex;justify-content:space-between;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.68rem;letter-spacing:0.1em;
-  color:var(--text-mute);
-  margin-bottom:0.5rem;
-  text-transform:uppercase;
-}
+.news-card{padding:1rem;background:rgba(2,6,23,0.5);border:1px solid var(--glass-border);border-radius:var(--radius-md);transition:all 0.3s}
+.news-card:hover{border-color:var(--blue-bright);transform:translateY(-2px)}
+.news-card.featured{background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));border-color:var(--glass-border-strong)}
+.news-meta{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--text-mute);margin-bottom:0.5rem;text-transform:uppercase}
 .news-source{color:var(--blue-bright);font-weight:700}
-.news-title{
-  font-size:0.95rem;font-weight:700;
-  color:var(--white);
-  line-height:1.55;
-  margin-bottom:0.8rem;
-  letter-spacing:-0.01em;
-}
-.news-impact{
-  display:flex;gap:0.6rem;align-items:center;
-  font-size:0.72rem;
-}
-.impact-badge{
-  padding:0.15rem 0.6rem;border-radius:4px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.65rem;font-weight:700;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-}
+.news-title{font-size:0.95rem;font-weight:700;color:var(--white);line-height:1.55;margin-bottom:0.8rem;letter-spacing:-0.01em}
+.news-impact{display:flex;gap:0.6rem;align-items:center;font-size:0.72rem}
+.impact-badge{padding:0.15rem 0.6rem;border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
 .impact-badge.positive{background:rgba(34,197,94,0.15);color:#4ade80}
 .impact-badge.neutral{background:rgba(148,163,184,0.15);color:#cbd5e1}
 .impact-badge.negative{background:rgba(239,68,68,0.15);color:#f87171}
 .impact-score{color:var(--text-mute);font-size:0.7rem}
 
-/* Trading dashboard */
-.trading-topbar{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:1rem;
-  padding-bottom:0.8rem;
-  border-bottom:1px solid var(--glass-border);
-  flex-wrap:wrap;gap:0.5rem;
-}
-.trading-pairs{display:flex;gap:0.5rem;flex-wrap:wrap}
-.pair-item{
-  padding:0.3rem 0.7rem;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.75rem;
-  color:var(--text-dim);
-  background:rgba(2,6,23,0.4);
-  border:1px solid var(--glass-border);
-  border-radius:4px;
-  cursor:pointer;
-  transition:all 0.3s;
-}
-.pair-item.active{
-  background:rgba(59,130,246,0.15);
-  color:var(--blue-bright);
-  border-color:var(--blue-bright);
-}
-.trading-price{
-  display:flex;align-items:center;gap:0.8rem;
-  font-family:'Orbitron',sans-serif;
-}
-.price-value{font-size:1.3rem;font-weight:700;color:var(--white)}
-.price-change{
-  font-size:0.85rem;font-weight:700;
-  padding:0.2rem 0.6rem;border-radius:4px;
-  font-family:'Share Tech Mono',monospace;
-}
-.price-change.up{background:rgba(34,197,94,0.15);color:#4ade80}
-.price-change.down{background:rgba(239,68,68,0.15);color:#f87171}
-
-.trading-chart{
-  background:rgba(2,6,23,0.6);
-  border:1px solid var(--glass-border);
-  border-radius:12px;
-  padding:1.5rem;
-  height:160px;
-  position:relative;
-  margin-bottom:1rem;
-  overflow:hidden;
-}
-.chart-bars{
-  display:flex;align-items:flex-end;justify-content:space-around;
-  height:100%;gap:4px;
-}
-.bar{
-  flex:1;
-  background:linear-gradient(180deg, var(--blue-bright), var(--blue-deep));
-  border-radius:3px 3px 0 0;
-  min-height:8px;
-  opacity:0.85;
-  animation:barPulse 3s ease-in-out infinite;
-  box-shadow:0 0 10px rgba(96,165,250,0.4);
-}
-.bar:nth-child(odd){animation-delay:-1.5s}
-.bar:nth-child(3n){animation-delay:-0.7s}
-@keyframes barPulse{
-  0%,100%{transform:scaleY(1);opacity:0.85}
-  50%{transform:scaleY(0.7);opacity:1}
-}
-
-.chart-signal{
-  position:absolute;
-  top:1rem;left:1rem;
-  display:flex;align-items:center;gap:0.5rem;
-  background:rgba(239,68,68,0.15);
-  border:1px solid rgba(239,68,68,0.4);
-  padding:0.4rem 0.8rem;
-  border-radius:6px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.78rem;font-weight:700;
-  color:#f87171;
-}
-.chart-signal.buy{
-  background:rgba(34,197,94,0.15);
-  border-color:rgba(34,197,94,0.4);
-  color:#4ade80;
-}
-.chart-signal-arrow{font-size:0.7rem}
-
-.trading-stats-bar{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0.8rem;
-}
-@media (max-width:600px){.trading-stats-bar{grid-template-columns:repeat(2,1fr)}}
-.tstat{
-  padding:0.7rem;
-  background:rgba(2,6,23,0.4);
-  border:1px solid var(--glass-border);
-  border-radius:8px;
-  text-align:center;
-}
-.tstat-label{
-  display:block;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.62rem;letter-spacing:0.1em;
-  color:var(--text-mute);
-  text-transform:uppercase;
-  margin-bottom:0.2rem;
-}
-.tstat-value{
-  font-family:'Orbitron',sans-serif;
-  font-size:0.92rem;font-weight:700;
-  color:var(--white);
-  direction:ltr;
-}
-.tstat-value.up{color:#4ade80}
-.tstat-value.down{color:#f87171}
-
-/* Project features grid */
-.project-features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:var(--space-md);
-}
-.p-feature{
-  position:relative;
-  padding:var(--space-lg) var(--space-md);
-  border-radius:var(--radius-lg);
-  background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(15px);
-  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-  overflow:hidden;
-}
-.p-feature::before{
-  content:'';
-  position:absolute;inset:0;padding:1px;
-  border-radius:16px;
-  background:linear-gradient(135deg, rgba(96,165,250,0.4) 0%, rgba(34,211,238,0.2) 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  pointer-events:none;
-  transition:background 0.4s;
-}
-.p-feature:hover{
-  transform:translateY(-5px);
-  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
-}
-.p-feature:hover::before{
-  background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.6) 100%);
-}
-.p-feature-icon{
-  width:44px;height:44px;
-  border-radius:11px;
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  display:grid;place-items:center;
-  box-shadow:0 4px 15px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
-  margin-bottom:1rem;
-}
+/* Project features grid (compact cards) */
+.project-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-md)}
+.p-feature{position:relative;padding:var(--space-lg) var(--space-md);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);overflow:hidden}
+.p-feature::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(96,165,250,0.4) 0%, rgba(34,211,238,0.2) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.4s}
+.p-feature:hover{transform:translateY(-5px);background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04))}
+.p-feature:hover::before{background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.6) 100%)}
+.p-feature-icon{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 4px 15px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.3);margin-bottom:1rem}
 .p-feature-icon svg{width:22px;height:22px;color:var(--bg-0)}
-.p-feature-title{
-  font-size:1.08rem;font-weight:700;
-  color:var(--white);
-  margin-bottom:0.6rem;
-  line-height:1.4;
-  letter-spacing:-0.01em;
-}
-.p-feature-desc{
-  color:var(--text-dim);
-  font-size:0.9rem;line-height:1.75;
-  margin-bottom:var(--space-sm);
-}
-.p-feature-stat{
-  display:inline-block;
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.7rem;letter-spacing:0.1em;
-  color:var(--blue-bright);
-  background:rgba(59,130,246,0.1);
-  border:1px solid rgba(59,130,246,0.25);
-  padding:0.2rem 0.6rem;
-  border-radius:4px;
-  text-transform:uppercase;
-}
+.p-feature-title{font-size:1.08rem;font-weight:700;color:var(--white);margin-bottom:0.6rem;line-height:1.4;letter-spacing:-0.01em}
+.p-feature-desc{color:var(--text-dim);font-size:0.9rem;line-height:1.75;margin-bottom:var(--space-sm)}
+.p-feature-list{list-style:none;padding-right:0;margin:0}
+.p-feature-list li{font-size:0.83rem;color:var(--text-dim);padding-right:1.1rem;position:relative;line-height:1.7;margin-bottom:0.3rem}
+.p-feature-list li::before{content:'';position:absolute;right:0;top:0.55em;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));box-shadow:0 0 6px rgba(96,165,250,0.6)}
+.p-feature-list li strong{color:var(--blue-glow);font-weight:600}
+.p-feature-stat{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--blue-bright);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);padding:0.2rem 0.6rem;border-radius:4px;text-transform:uppercase;margin-top:0.5rem}
+
+/* Trading sub-sections (المنفذ الذكي، الوكلاء، إلخ) */
+.subsection{margin-top:var(--space-xl);padding-top:var(--space-xl);border-top:1px solid var(--glass-border)}
+.subsection:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.subsection-header{display:flex;align-items:center;gap:1rem;margin-bottom:var(--space-md);flex-wrap:wrap}
+.subsection-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 4px 15px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3);flex-shrink:0}
+.subsection-icon svg{width:24px;height:24px;color:var(--bg-0)}
+.subsection-title{font-size:1.5rem;font-weight:800;color:var(--white);line-height:1.3}
+.subsection-subtitle{color:var(--text-dim);font-size:0.95rem;line-height:1.7;margin-top:0.2rem}
+
+/* Agents grid (3 وكلاء) */
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-md)}
+@media (max-width:980px){.agents-grid{grid-template-columns:1fr}}
+.agent-card{position:relative;padding:var(--space-lg);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);overflow:hidden;transition:all 0.4s;transform-style:preserve-3d}
+.agent-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(96,165,250,0.6) 0%, rgba(34,211,238,0.4) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.4s}
+.agent-card:hover{transform:translateY(-6px) rotateX(3deg)}
+.agent-card:hover::before{background:linear-gradient(135deg, var(--blue-bright), var(--cyan))}
+.agent-card-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.agent-speed{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);padding:0.2rem 0.6rem;border-radius:4px;text-transform:uppercase;font-weight:700;margin-right:auto}
+.agent-card h4{font-size:1.2rem;font-weight:800;color:var(--white);line-height:1.3}
+.agent-card .desc{color:var(--text-dim);font-size:0.9rem;line-height:1.7;margin-bottom:1rem}
+
+/* Mini grid (Neural Lab + Prediction + Sanctuary) */
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-md)}
+@media (max-width:980px){.mini-grid{grid-template-columns:1fr}}
+.mini-card{padding:var(--space-lg);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.3s}
+.mini-card:hover{transform:translateY(-4px);border-color:var(--blue-bright);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.mini-card h4{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;line-height:1.4}
+.mini-card .desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7;margin-bottom:0.8rem}
 
 /* Project CTA */
-.project-cta{
-  text-align:center;
-  margin-top:2.5rem;
-}
-.btn-project{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  padding:0.9rem 2rem;border-radius:10px;
-  font-family:'Cairo',sans-serif;
-  font-size:0.95rem;font-weight:700;
-  text-decoration:none;cursor:pointer;border:none;
-  position:relative;overflow:hidden;
-  transition:transform 0.3s, box-shadow 0.3s;
-}
-.btn-project.news{
-  background:linear-gradient(135deg, var(--cyan), var(--blue-bright));
-  color:var(--bg-0);
-  box-shadow:0 0 25px rgba(34,211,238,0.4);
-}
-.btn-project.trading{
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  color:var(--bg-0);
-  box-shadow:0 0 25px rgba(59,130,246,0.4);
-}
-.btn-project::before{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
-  transition:left 0.6s;
-}
+.project-cta{text-align:center;margin-top:2.5rem}
+.btn-project{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;transition:transform 0.3s, box-shadow 0.3s}
+.btn-project.news{background:linear-gradient(135deg, var(--cyan), var(--blue-bright));color:var(--bg-0);box-shadow:0 0 25px rgba(34,211,238,0.4)}
+.btn-project.trading{background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);box-shadow:0 0 25px rgba(59,130,246,0.4)}
+.btn-project::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
 .btn-project:hover::before{left:100%}
 .btn-project:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(96,165,250,0.6)}
 
-/* ============================================================================
-   INTEGRATION SECTION — Neural Bridge
-   ============================================================================ */
-.integration-section{
-  padding:var(--space-2xl) var(--space-lg);
-  max-width:1400px;margin:0 auto;
-  text-align:center;
-}
-.integration-section .section-title{
-  margin-bottom:3rem;
-}
-.neural-bridge{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  gap:2rem;
-  align-items:center;
-  margin-bottom:3rem;
-}
-@media (max-width:768px){
-  .neural-bridge{grid-template-columns:1fr;gap:1.5rem}
-}
-.bridge-node{
-  padding:2rem;
-  border-radius:20px;
-  background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));
-  border:1px solid var(--glass-border-strong);
-  backdrop-filter:blur(20px);
-  position:relative;
-  transition:transform 0.4s;
-}
+/* Integration */
+.integration-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+.integration-section .section-title{margin-bottom:3rem}
+.neural-bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;margin-bottom:3rem}
+@media (max-width:768px){.neural-bridge{grid-template-columns:1fr;gap:1.5rem}}
+.bridge-node{padding:2rem;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);position:relative;transition:transform 0.4s}
 .bridge-node:hover{transform:translateY(-5px)}
 .bridge-node.news{border-color:rgba(34,211,238,0.4)}
 .bridge-node.trading{border-color:rgba(96,165,250,0.5)}
-.bridge-icon{
-  width:64px;height:64px;
-  border-radius:16px;
-  display:grid;place-items:center;
-  margin:0 auto 1rem;
-}
-.bridge-icon.news{
-  background:linear-gradient(135deg, var(--cyan), var(--blue-bright));
-  box-shadow:0 0 30px rgba(34,211,238,0.4);
-}
-.bridge-icon.trading{
-  background:linear-gradient(135deg, var(--blue), var(--cyan));
-  box-shadow:0 0 30px rgba(59,130,246,0.4);
-}
+.bridge-icon{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;margin:0 auto 1rem}
+.bridge-icon.news{background:linear-gradient(135deg, var(--cyan), var(--blue-bright));box-shadow:0 0 30px rgba(34,211,238,0.4)}
+.bridge-icon.trading{background:linear-gradient(135deg, var(--blue), var(--cyan));box-shadow:0 0 30px rgba(59,130,246,0.4)}
 .bridge-icon svg{width:32px;height:32px;color:var(--bg-0)}
-.bridge-title{
-  font-size:1.4rem;font-weight:800;
-  margin-bottom:0.4rem;
-  color:var(--white);
-}
+.bridge-title{font-size:1.4rem;font-weight:800;margin-bottom:0.4rem;color:var(--white)}
 .bridge-title.news{color:var(--cyan)}
 .bridge-title.trading{color:var(--blue-bright)}
-.bridge-desc{
-  color:var(--text-dim);
-  font-size:0.92rem;
-  margin-bottom:1.2rem;
-}
-.bridge-stats{
-  display:flex;justify-content:center;gap:1.5rem;
-  padding-top:1rem;
-  border-top:1px solid var(--glass-border);
-}
-.bstat-num{
-  font-family:'Orbitron',sans-serif;
-  font-weight:900;font-size:1.6rem;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  direction:ltr;
-}
-.bstat-lbl{
-  font-size:0.7rem;color:var(--text-mute);
-  margin-top:0.2rem;
-}
-
-/* Bridge connection */
-.bridge-conn{
-  display:flex;flex-direction:column;align-items:center;gap:0.8rem;
-}
-@media (max-width:768px){
-  .bridge-conn{transform:rotate(90deg);margin:0.5rem 0}
-}
-.bridge-line{
-  width:80px;height:2px;
-  background:linear-gradient(90deg, var(--cyan), var(--blue-bright));
-  position:relative;
-  border-radius:2px;
-  box-shadow:0 0 10px rgba(96,165,250,0.6);
-}
-.bridge-pulse{
-  position:absolute;
-  top:50%;left:0;
-  width:20px;height:20px;
-  background:radial-gradient(circle, var(--blue-bright), transparent);
-  border-radius:50%;
-  transform:translateY(-50%);
-  animation:pulseMove 2s linear infinite;
-}
-@keyframes pulseMove{
-  0%{left:0;opacity:1}
-  100%{left:calc(100% - 20px);opacity:0}
-}
-.bridge-label{
-  font-family:'Share Tech Mono',monospace;
-  font-size:0.7rem;letter-spacing:0.15em;
-  color:var(--blue-glow);
-  text-transform:uppercase;
-}
-
-/* Steps timeline */
-.steps-timeline{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
-  margin-top:3rem;
-}
+.bridge-desc{color:var(--text-dim);font-size:0.92rem;margin-bottom:1.2rem}
+.bridge-stats{display:flex;justify-content:center;gap:1.5rem;padding-top:1rem;border-top:1px solid var(--glass-border)}
+.bstat-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;direction:ltr}
+.bstat-lbl{font-size:0.7rem;color:var(--text-mute);margin-top:0.2rem}
+.bridge-conn{display:flex;flex-direction:column;align-items:center;gap:0.8rem}
+@media (max-width:768px){.bridge-conn{transform:rotate(90deg);margin:0.5rem 0}}
+.bridge-line{width:80px;height:2px;background:linear-gradient(90deg, var(--cyan), var(--blue-bright));position:relative;border-radius:2px;box-shadow:0 0 10px rgba(96,165,250,0.6)}
+.bridge-pulse{position:absolute;top:50%;left:0;width:20px;height:20px;background:radial-gradient(circle, var(--blue-bright), transparent);border-radius:50%;transform:translateY(-50%);animation:pulseMove 2s linear infinite}
+@keyframes pulseMove{0%{left:0;opacity:1}100%{left:calc(100% - 20px);opacity:0}}
+.bridge-label{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--blue-glow);text-transform:uppercase}
+.steps-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
 @media (max-width:768px){.steps-timeline{grid-template-columns:1fr}}
-.step-card{
-  padding:1.8rem;
-  border-radius:16px;
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(15px);
-  text-align:center;
-  position:relative;
-  transition:all 0.3s;
-}
-.step-card:hover{
-  border-color:var(--blue-bright);
-  transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(59,130,246,0.15);
-}
-.step-num{
-  font-family:'Orbitron',sans-serif;
-  font-weight:900;font-size:2.2rem;
-  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:0.8rem;
-  line-height:1;
-}
-.step-title{
-  font-size:1.1rem;font-weight:700;
-  color:var(--white);
-  margin-bottom:0.5rem;
-}
-.step-desc{
-  color:var(--text-dim);
-  font-size:0.88rem;line-height:1.7;
-}
+.step-card{padding:1.8rem;border-radius:var(--radius-lg);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(15px);text-align:center;position:relative;transition:all 0.3s}
+.step-card:hover{border-color:var(--blue-bright);transform:translateY(-4px);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.step-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2.2rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.8rem;line-height:1}
+.step-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem}
+.step-desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7}
 
-/* ============================================================================
-   SECURITY SECTION
-   ============================================================================ */
-.security-section{
-  padding:var(--space-2xl) var(--space-lg);
-  max-width:1400px;margin:0 auto;
-  text-align:center;
-}
-.security-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1.5rem;
-  margin-top:3rem;
-}
-.sec-card{
-  padding:2rem 1.5rem;
-  border-radius:16px;
-  background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(15px);
-  transition:all 0.4s;
-  position:relative;
-  overflow:hidden;
-}
-.sec-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
-  opacity:0;
-  transition:opacity 0.4s;
-}
+/* Security */
+.security-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem}
+.sec-card{padding:2rem 1.5rem;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.4s;position:relative;overflow:hidden}
+.sec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);opacity:0;transition:opacity 0.4s}
 .sec-card:hover::before{opacity:1}
-.sec-card:hover{
-  transform:translateY(-6px);
-  border-color:var(--blue-bright);
-  box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.15);
-}
-.sec-icon{
-  width:54px;height:54px;
-  border-radius:50%;
-  background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.1));
-  border:1px solid var(--glass-border-strong);
-  display:grid;place-items:center;
-  margin:0 auto 1.2rem;
-  box-shadow:inset 0 0 15px rgba(96,165,250,0.1);
-}
+.sec-card:hover{transform:translateY(-6px);border-color:var(--blue-bright);box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.15)}
+.sec-icon{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.1));border:1px solid var(--glass-border-strong);display:grid;place-items:center;margin:0 auto 1.2rem;box-shadow:inset 0 0 15px rgba(96,165,250,0.1)}
 .sec-icon svg{width:26px;height:26px;color:var(--blue-bright)}
-.sec-title{
-  font-size:1.05rem;font-weight:700;
-  color:var(--white);
-  margin-bottom:0.6rem;
-}
-.sec-desc{
-  color:var(--text-dim);
-  font-size:0.88rem;line-height:1.7;
-}
+.sec-title{font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.6rem}
+.sec-desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7}
 
+/* CTA + Footer */
+.cta-section{text-align:center;padding:var(--space-2xl) var(--space-md);scroll-margin-top:80px}
+.cta-card{max-width:900px;margin:0 auto;padding:4rem 2rem;border-radius:24px;background:radial-gradient(circle at 50% 0%, rgba(59,130,246,0.2), transparent 70%), var(--glass);border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, transparent 40%, rgba(96,165,250,0.08) 50%, transparent 60%);animation:shimmer 4s linear infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.cta-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem;position:relative;background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative;font-size:1.05rem}
+footer{padding:2.5rem 3rem;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-mute);font-size:0.88rem;background:rgba(2,6,23,0.6);backdrop-filter:blur(10px)}
+footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var(--blue-bright);font-size:0.78rem;margin-top:0.4rem;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:var(--blue-deep);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+.ticker{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,0.92);backdrop-filter:blur(20px) saturate(150%);border-top:1px solid rgba(96,165,250,0.3);padding:0.6rem 0;overflow:hidden;z-index:50;font-family:'Share Tech Mono',monospace;font-size:0.75rem;box-shadow:0 -4px 20px rgba(0,0,0,0.4);position:fixed;overflow:hidden}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker::before{right:0;background:linear-gradient(to left, rgba(2,6,23,1), transparent)}
+.ticker::after{left:0;background:linear-gradient(to right, rgba(2,6,23,1), transparent)}
+.ticker-track{display:inline-flex;gap:0;animation:tickerScroll 50s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:0.6rem;padding:0 1.2rem;border-right:1px solid rgba(96,165,250,0.15)}
+.ticker-item:last-child{border-right:none}
+.ticker-pair{color:var(--white);font-weight:700;font-size:0.82rem;letter-spacing:0.05em;min-width:60px}
+.ticker-signal{padding:0.15rem 0.6rem;border-radius:4px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;min-width:36px;text-align:center}
+.ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
+.ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
+.ticker-val{color:var(--blue-bright);font-weight:600;font-size:0.78rem;min-width:42px;text-align:right}
+@media (max-width:768px){nav{padding:1rem 1.2rem}.nav-links{display:none}.hero{padding-top:6rem;padding-bottom:5rem}.hud-label.left,.hud-label.right{display:none}.hud-label.top{top:-22px;font-size:0.58rem}.hud-label.bottom{bottom:-22px;font-size:0.58rem}.radar-status{bottom:-60px;font-size:0.6rem;gap:0.3rem}.radar-status .val{font-size:0.8rem}}
+@media (max-width:480px){.hud-label.top,.hud-label.bottom{display:none}.radar-status{bottom:-55px;flex-wrap:wrap;gap:0.4rem}}
+@media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
 </style>
 </head>
 <body>
-
-<!-- 3D animated background -->
 <div class="bg-3d"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
-<!-- Navigation -->
 <nav>
-  <div class="logo" role="img" aria-label="ROUAA - Vision into Markets">
+  <div class="logo" role="img" aria-label="Roua - Vision into Markets">
     <div class="logo-mark" aria-hidden="true"></div>
     <span>ROUAA</span>
   </div>
@@ -1341,6 +356,8 @@ footer .tagline{
     <li><a href="#hero">الرئيسية</a></li>
     <li><a href="#advantage">الميزة التنافسية</a></li>
     <li><a href="#audiences">لمن صُممت رؤى</a></li>
+    <li><a href="#rouaa-news">رؤى الأخبار</a></li>
+    <li><a href="#rouaa-trading">رؤى التداول</a></li>
     <li><a href="#contact">تواصل</a></li>
   </ul>
   <div class="nav-cta">
@@ -1358,33 +375,25 @@ footer .tagline{
     </div>
     <h1 class="hero-title">رُؤى</h1>
     <div class="hero-title-en">ROUAA · VISION INTO MARKETS</div>
-    <p class="hero-tagline">
-      بنية تحتية مالية <span>للمؤسسات</span> —
-      حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.
-    </p>
+    <p class="hero-tagline">بنية تحتية مالية <span>للمؤسسات</span> — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
     <p class="hero-sub">
-      أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط.
-      رؤى تربط مصادر البيانات العالمية بآليات اتخاذ القرار المؤسسي،
-      وتُسلّمها بلغة العميل ووفق سرعته.
+      منظومتان متكاملتان: <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> للاستخبار الإخباري الذكي،
+      و<strong style="color:var(--blue-glow)">رؤى التداول</strong> للتنفيذ الآلي عبر مجلس ذكاء اصطناعي من 10 أدوار.
+      بلا وسيط، بخمس لغات، في الزمن الحقيقي.
     </p>
     <div class="hero-cta">
       <a href="#advantage" class="btn-glow">
         <span>الميزة التنافسية</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#audiences" class="btn-outline">لمن صُممت رؤى</a>
+      <a href="#rouaa-trading" class="btn-outline">استكشف رؤى التداول</a>
     </div>
   </div>
 
-  <!-- BLUE RADAR -->
   <div class="radar-wrap">
     <div class="radar-pedestal"></div>
-    <div class="hud-bracket tl"></div>
-    <div class="hud-bracket tr"></div>
-    <div class="hud-bracket bl"></div>
-    <div class="hud-bracket br"></div>
+    <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
+    <div class="hud-bracket bl"></div><div class="hud-bracket br"></div>
     <span class="hud-label top">SECTOR · GLOBAL</span>
     <span class="hud-label bottom">RANGE · LIVE</span>
     <span class="hud-label left">SCAN · 360°</span>
@@ -1392,23 +401,15 @@ footer .tagline{
     <div class="radar-frame">
       <div class="radar-screen">
         <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
-          <circle cx="0" cy="0" r="20"  class="ring"/>
-          <circle cx="0" cy="0" r="40"  class="ring bright"/>
-          <circle cx="0" cy="0" r="60"  class="ring"/>
-          <circle cx="0" cy="0" r="80"  class="ring bright"/>
+          <circle cx="0" cy="0" r="20" class="ring"/><circle cx="0" cy="0" r="40" class="ring bright"/>
+          <circle cx="0" cy="0" r="60" class="ring"/><circle cx="0" cy="0" r="80" class="ring bright"/>
           <circle cx="0" cy="0" r="100" class="ring bright"/>
-          <line x1="-100" y1="0" x2="100" y2="0" class="az cardinal"/>
-          <line x1="0" y1="-100" x2="0" y2="100" class="az cardinal"/>
-          <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="az"/>
-          <line x1="-86.6" y1="50" x2="86.6" y2="-50" class="az"/>
-          <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="az"/>
-          <line x1="-50" y1="86.6" x2="50" y2="-86.6" class="az"/>
-          <text x="0" y="-106" class="compass">N</text>
-          <text x="106" y="0" class="compass">E</text>
-          <text x="0" y="106" class="compass">S</text>
-          <text x="-106" y="0" class="compass">W</text>
-          <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/>
-          <line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
+          <line x1="-100" y1="0" x2="100" y2="0" class="az cardinal"/><line x1="0" y1="-100" x2="0" y2="100" class="az cardinal"/>
+          <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="az"/><line x1="-86.6" y1="50" x2="86.6" y2="-50" class="az"/>
+          <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="az"/><line x1="-50" y1="86.6" x2="50" y2="-86.6" class="az"/>
+          <text x="0" y="-106" class="compass">N</text><text x="106" y="0" class="compass">E</text>
+          <text x="0" y="106" class="compass">S</text><text x="-106" y="0" class="compass">W</text>
+          <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/><line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
           <circle cx="0" cy="0" r="1.8" class="center-dot"/>
         </svg>
         <div class="radar-sweep"></div>
@@ -1429,65 +430,32 @@ footer .tagline{
 <section id="advantage" class="reveal">
   <span class="section-tag">COMPETITIVE ADVANTAGE</span>
   <h2 class="section-title">الميزة التنافسية</h2>
-  <p class="section-sub">
-    لماذا رؤى؟ لأنها تختصر المسافة بين الحدث السوقي وقرار التنفيذ —
-    من مصدر واحد، بلغة العميل، دون وسطاء أو فاقد زمني.
-  </p>
-
+  <p class="section-sub">لماذا رؤى؟ لأنها تختصر المسافة بين الحدث السوقي وقرار التنفيذ — من مصدر واحد، بلغة العميل، دون وسطاء أو فاقد زمني.</p>
   <div class="advantage-card">
     <div class="advantage-content">
       <div class="advantage-text">
         <h3>الخبر · التحليل · التنفيذ<br>في منصة واحدة</h3>
-        <p>
-          المنصات التقليدية تبيعك أدوات منفصلة: محطة أخبار، ومحطة تحليل، ومحطة تنفيذ.
-          <strong>رؤى</strong> تدمج الطبقات الثلاث في بنية واحدة متماسكة —
-          الخبر يدخل، يُحلَّل فوراً، ويخرج كقرار قابل للتنفيذ مباشرة.
-        </p>
-        <p style="margin-top:1rem;">
-          بلا وسيط بشري، بلا تأخير، بلا فقدان للسياق بين الطبقات.
-          وبخمس لغات حيّة تخدم أسواقاً لا يصلها أحد بهذا المستوى.
-        </p>
+        <p>المنصات التقليدية تبيعك أدوات منفصلة: محطة أخبار، ومحطة تحليل، ومحطة تنفيذ. <strong>رؤى</strong> تدمج الطبقات الثلاث في بنية واحدة متماسكة — الخبر يدخل، يُحلَّل فوراً، ويخرج كقرار قابل للتنفيذ مباشرة.</p>
+        <p style="margin-top:1rem;">بلا وسيط بشري، بلا تأخير، بلا فقدان للسياق بين الطبقات. وبخمس لغات حيّة تخدم أسواقاً لا يصلها أحد بهذا المستوى.</p>
       </div>
-
       <div class="advantage-visual">
-        <div class="adv-stat">
-          <div class="adv-stat-num">5</div>
-          <div class="adv-stat-lbl">لغات حيّة</div>
-        </div>
-        <div class="adv-stat">
-          <div class="adv-stat-num">3</div>
-          <div class="adv-stat-lbl">طبقات مدمجة</div>
-        </div>
-        <div class="adv-stat">
-          <div class="adv-stat-num">0</div>
-          <div class="adv-stat-lbl">وسطاء</div>
-        </div>
-        <div class="adv-stat">
-          <div class="adv-stat-num">24/7</div>
-          <div class="adv-stat-lbl">مراقبة دائمة</div>
-        </div>
+        <div class="adv-stat"><div class="adv-stat-num">5</div><div class="adv-stat-lbl">لغات حيّة</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">3</div><div class="adv-stat-lbl">طبقات مدمجة</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">0</div><div class="adv-stat-lbl">وسطاء</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">24/7</div><div class="adv-stat-lbl">مراقبة دائمة</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AUDIENCES — لمن صُممت رؤى -->
+<!-- لمن صُممت رؤى -->
 <section id="audiences" class="reveal">
   <span class="section-tag">FOR WHOM · الشرائح المستهدفة</span>
   <h2 class="section-title">لمن صُممت رؤى</h2>
-  <p class="section-sub">
-    ثلاث شرائح تستفيد من رؤى بطرق مختلفة — كل شريحة تجد طبقتها الجاهزة، بلا تخصيص معقد.
-  </p>
-
+  <p class="section-sub">ثلاث شرائح تستفيد من رؤى بطرق مختلفة — كل شريحة تجد طبقتها الجاهزة، بلا تخصيص معقد.</p>
   <div class="audiences">
-
-    <!-- 1. مؤسسات مالية -->
     <div class="audience-card">
-      <div class="audience-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h.01M15 11h.01"/>
-        </svg>
-      </div>
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg></div>
       <h3>مؤسسات مالية</h3>
       <p class="desc">حلول API متكاملة لمنصات التداول والبنوك — تُدمج في بنيتك التحتية دون إعادة هندسة.</p>
       <ul class="audience-features">
@@ -1496,34 +464,18 @@ footer .tagline{
         <li><span>دعم White Label</span></li>
       </ul>
     </div>
-
-    <!-- 2. مكاتب الأبحاث -->
     <div class="audience-card">
-      <div class="audience-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 2v6l-4 4v10h14V12l-4-4V2M9 2h6M9 12h6"/>
-        </svg>
-      </div>
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v6l-4 4v10h14V12l-4-4V2M9 2h6M9 12h6"/></svg></div>
       <h3>مكاتب الأبحاث</h3>
       <p class="desc">أتمتة إنتاج التقارير المالية الاستراتيجية — من مصدر الخبر إلى تقرير احترافي جاهز للنشر.</p>
       <ul class="audience-features">
         <li><span>46 تقريراً يومياً</span></li>
-        <li><span>تحليل بمساعدة 8 نماذج AI</span></li>
+        <li><span>تحليل بمساعدة 10 أدوار AI</span></li>
         <li><span>متعدد اللغات</span></li>
       </ul>
     </div>
-
-    <!-- 3. المتداولون المحترفون -->
     <div class="audience-card">
-      <div class="audience-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 3v18h18"/>
-          <path d="M7 14l4-4 4 4 5-5"/>
-          <circle cx="11" cy="10" r="1"/>
-          <circle cx="15" cy="14" r="1"/>
-          <circle cx="20" cy="9" r="1"/>
-        </svg>
-      </div>
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
       <h3>المتداولون المحترفون</h3>
       <p class="desc">أدوات اتخاذ القرار المعتمدة على البيانات — لا حدس، لا ضجيج، فقط إشارات صافية قابلة للتنفيذ.</p>
       <ul class="audience-features">
@@ -1532,399 +484,445 @@ footer .tagline{
         <li><span>إدارة مخاطر آلية</span></li>
       </ul>
     </div>
-
   </div>
 </section>
 
+<!-- ═══ رؤى الأخبار ═══ -->
+<section id="rouaa-news" class="project-section reveal">
+  <div class="project-header">
+    <span class="project-tag news">المشروع الأول · ROUAA NEWS</span>
+    <h2 class="project-title">
+      <span class="gradient">رؤى الأخبار</span><br>
+      <span class="dim">من ألف مصدر إلى قرار واحد</span>
+    </h2>
+    <p class="project-subtitle">استخبار إخباري لحظي بلغة السوق — يولّد تلقائياً وبدقة محرّر بشري، من 500+ مصدر رسمي و1000+ مصدر مجمّع.</p>
+  </div>
 
-    <!-- ═══════════════════════════════════════
-         PROJECT 1 — Rouaa News
-         ═══════════════════════════════════════ -->
-    <section id="rouaa-news" class="project-section reveal">
-      <div class="project-header">
-        <span class="project-tag news">الطريق الأول · ROUAA NEWS</span>
-        <h2 class="project-title">
-          <span class="gradient">السوق يفيض بالأخبار.</span><br>
-          <span class="dim">والفرصة تضيع.</span>
-        </h2>
-        <p class="project-subtitle">
-          رؤى نيوز — استخبار إخباري لحظي بلغة السوق، يولّد تلقائياً وبدقة محرّر بشري.
-        </p>
+  <div class="project-preview">
+    <div class="news-tabs">
+      <button class="news-tab active">الرئيسية</button>
+      <button class="news-tab">الأخبار</button>
+      <button class="news-tab">تحليل الأسهم</button>
+      <button class="news-tab">القطاعات</button>
+    </div>
+    <div class="news-cards">
+      <div class="news-card featured">
+        <div class="news-meta"><span class="news-source">Bloomberg</span><span>منذ 2 دقيقة</span></div>
+        <h4 class="news-title">النفط يتجاوز 85$ مع تصاعد التوترات الجيوسياسية</h4>
+        <div class="news-impact"><span class="impact-badge positive">إيجابي</span><span class="impact-score">ثقة 92%</span></div>
       </div>
-
-      <!-- News dashboard preview -->
-      <div class="project-preview">
-        <div class="news-tabs">
-          <button class="news-tab active">الرئيسية</button>
-          <button class="news-tab">الأخبار</button>
-          <button class="news-tab">تحليل الأسهم</button>
-          <button class="news-tab">القطاعات</button>
-        </div>
-        <div class="news-cards">
-          <div class="news-card featured">
-            <div class="news-meta">
-              <span class="news-source">Bloomberg</span>
-              <span>منذ 2 دقيقة</span>
-            </div>
-            <h4 class="news-title">النفط يتجاوز 85$ مع تصاعد التوترات الجيوسياسية</h4>
-            <div class="news-impact">
-              <span class="impact-badge positive">إيجابي</span>
-              <span class="impact-score">ثقة 92%</span>
-            </div>
-          </div>
-          <div class="news-card">
-            <div class="news-meta">
-              <span class="news-source">Reuters</span>
-              <span>منذ 5 دقائق</span>
-            </div>
-            <h4 class="news-title">الفيدرالي يشير إلى تباطؤ في وتيرة رفع الفائدة</h4>
-            <div class="news-impact">
-              <span class="impact-badge neutral">محايد</span>
-              <span class="impact-score">ثقة 78%</span>
-            </div>
-          </div>
-          <div class="news-card">
-            <div class="news-meta">
-              <span class="news-source">CNBC</span>
-              <span>منذ 12 دقيقة</span>
-            </div>
-            <h4 class="news-title">تسلا تعلن عن نتائج فصلية تفوق التوقعات</h4>
-            <div class="news-impact">
-              <span class="impact-badge positive">إيجابي</span>
-              <span class="impact-score">ثقة 88%</span>
-            </div>
-          </div>
-        </div>
+      <div class="news-card">
+        <div class="news-meta"><span class="news-source">Reuters</span><span>منذ 5 دقائق</span></div>
+        <h4 class="news-title">الفيدرالي يشير إلى تباطؤ في وتيرة رفع الفائدة</h4>
+        <div class="news-impact"><span class="impact-badge neutral">محايد</span><span class="impact-score">ثقة 78%</span></div>
       </div>
-
-      <!-- News features -->
-      <div class="project-features">
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h4 class="p-feature-title">تقاطع متعدد المصادر</h4>
-          <p class="p-feature-desc">14 مزوداً، 65 خلاصة RSS، 5 لغات — بزمن حضور أقل من دقيقة</p>
-          <span class="p-feature-stat">14 مصدر · 65 RSS</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h4 class="p-feature-title">تنقية ذكية للضوضاء</h4>
-          <p class="p-feature-desc">فلترة تلقائية للمكرر، وتصنيف للإشارات ذات الأثر السوقي</p>
-          <span class="p-feature-stat">AI Filter</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-          </div>
-          <h4 class="p-feature-title">توليد بالذكاء الاصطناعي</h4>
-          <p class="p-feature-desc">9 نماذج لغوية تتنافس على صياغة الخبر الأدق</p>
-          <span class="p-feature-stat">9 نماذج LLM</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h4 class="p-feature-title">تحليل أثر سوقي فوري</h4>
-          <p class="p-feature-desc">كل خبر يحمل وسم أثر: إيجابي / سلبي / محايد — مع درجة ثقة</p>
-          <span class="p-feature-stat">Real-time</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          </div>
-          <h4 class="p-feature-title">رسوم بيانية حية</h4>
-          <p class="p-feature-desc">64 محركاً لتحويل الأرقام في النص إلى مخططات تفاعلية</p>
-          <span class="p-feature-stat">64 Engines</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          </div>
-          <h4 class="p-feature-title">بحث دلالي</h4>
-          <p class="p-feature-desc">لا تبحث بالكلمات بل بالمعنى. اسأل: «ما الأخبار التي أثّرت في البنوك؟»</p>
-          <span class="p-feature-stat">Semantic</span>
-        </div>
+      <div class="news-card">
+        <div class="news-meta"><span class="news-source">CNBC</span><span>منذ 12 دقيقة</span></div>
+        <h4 class="news-title">تسلا تعلن عن نتائج فصلية تفوق التوقعات</h4>
+        <div class="news-impact"><span class="impact-badge positive">إيجابي</span><span class="impact-score">ثقة 88%</span></div>
       </div>
+    </div>
+  </div>
 
-      <div class="project-cta">
-        <a href="#" class="btn-project news">
-          <span>ادخل رؤى نيوز</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+  <div class="project-features">
+    <div class="p-feature">
+      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h4 class="p-feature-title">تقاطع متعدد المصادر</h4>
+      <p class="p-feature-desc">500+ مصدر رسمي + 1000+ مصدر مجمّع بزمن حضور أقل من دقيقة.</p>
+      <span class="p-feature-stat">500+ رسمي · 1000+ مجمّع</span>
+    </div>
+    <div class="p-feature">
+      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4 class="p-feature-title">تنقية ذكية للضوضاء</h4>
+      <p class="p-feature-desc">فلترة تلقائية للمكرر، وتصنيف للإشارات ذات الأثر السوقي الحقيقي.</p>
+      <span class="p-feature-stat">AI Filter</span>
+    </div>
+    <div class="p-feature">
+      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h4 class="p-feature-title">تحليل أثر سوقي فوري</h4>
+      <p class="p-feature-desc">كل خبر يحمل وسم أثر: إيجابي / سلبي / محايد — مع درجة ثقة.</p>
+      <ul class="p-feature-list">
+        <li><strong>Arab Sentiment Index</strong> — فريد عالمياً</li>
+        <li><strong>Fear & Greed Index</strong></li>
+        <li><strong>Geopolitical Risk Index</strong></li>
+      </ul>
+    </div>
+    <div class="p-feature">
+      <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <h4 class="p-feature-title">بحث دلالي</h4>
+      <p class="p-feature-desc">لا تبحث بالكلمات بل بالمعنى. اسأل: «ما الأخبار التي أثّرت في البنوك؟»</p>
+      <span class="p-feature-stat">Semantic Search</span>
+    </div>
+  </div>
+
+  <div class="project-cta">
+    <a href="#" class="btn-project news">
+      <span>ادخل رؤى الأخبار</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ رؤى التداول (مع الأقسام الفرعية 4-10) ═══ -->
+<section id="rouaa-trading" class="project-section reveal">
+  <div class="project-header">
+    <span class="project-tag trading">المشروع الثاني · ROUAA TRADING</span>
+    <h2 class="project-title trading">
+      <span class="gradient">رؤى التداول</span><br>
+      <span class="dim">عقل مؤسسي ينفّذ في الزمن الحقيقي</span>
+    </h2>
+    <p class="project-subtitle">منظومة ذكاء اصطناعي كاملة: مجلس من 10 أدوار، منفّذ ذكي بـ 15 فحص أمان، 3 وكلاء مستقلين، ولوحة شارت بـ 83 أداة رسم.</p>
+  </div>
+
+  <!-- القسم الفرعي 1: المجلس الذكي -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="5" cy="10" r="2"/><circle cx="19" cy="10" r="2"/></svg></div>
+      <div>
+        <div class="subsection-title">المجلس الذكي · Strategic Council</div>
+        <div class="subsection-subtitle">10 أدوار ذكاء اصطناعي تتناقش وتصوت على كل قرار تداول</div>
       </div>
-    </section>
-
-
-    <!-- ═══════════════════════════════════════
-         PROJECT 2 — Rouaa Trading
-         ═══════════════════════════════════════ -->
-    <section id="rouaa-trading" class="project-section reveal">
-      <div class="project-header">
-        <span class="project-tag trading">الطريق الثاني · ROUAA TRADING</span>
-        <h2 class="project-title trading">
-          <span class="gradient">تنفيذ أتمت.</span><br>
-          <span class="dim">شفافية كاملة في كل خطوة.</span>
-        </h2>
-        <p class="project-subtitle">
-          رؤى تريد — تنفيذ أتمت، إدارة مخاطر مدمجة، شفافية كاملة في كل خطوة.
-        </p>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4 class="p-feature-title">8 أدوار AI متخصصة</h4>
+        <p class="p-feature-desc">كل دور يحلّل جانباً محدداً وله نموذجه الخاص و fallback chain.</p>
+        <ul class="p-feature-list">
+          <li><strong>Technical</strong> · <strong>Sentiment</strong> · <strong>Risk</strong></li>
+          <li><strong>Macro</strong> · <strong>Pattern</strong> · <strong>Execution</strong></li>
+          <li><strong>Divergence</strong> · <strong>Scenario</strong></li>
+        </ul>
       </div>
-
-      <!-- Trading dashboard preview -->
-      <div class="project-preview">
-        <div class="trading-topbar">
-          <div class="trading-pairs">
-            <span class="pair-item active">BNB/USDT</span>
-            <span class="pair-item">BTC/USD</span>
-            <span class="pair-item">ETH/USD</span>
-            <span class="pair-item">XAU/USD</span>
-          </div>
-          <div class="trading-price">
-            <span class="price-value">572.25</span>
-            <span class="price-change up">+2.1%</span>
-          </div>
-        </div>
-
-        <div class="trading-chart">
-          <div class="chart-bars">
-            <div class="bar" style="height:35%"></div>
-            <div class="bar" style="height:55%"></div>
-            <div class="bar" style="height:42%"></div>
-            <div class="bar" style="height:68%"></div>
-            <div class="bar" style="height:48%"></div>
-            <div class="bar" style="height:75%"></div>
-            <div class="bar" style="height:60%"></div>
-            <div class="bar" style="height:82%"></div>
-            <div class="bar" style="height:52%"></div>
-            <div class="bar" style="height:70%"></div>
-            <div class="bar" style="height:45%"></div>
-            <div class="bar" style="height:62%"></div>
-            <div class="bar" style="height:55%"></div>
-            <div class="bar" style="height:78%"></div>
-            <div class="bar" style="height:40%"></div>
-            <div class="bar" style="height:65%"></div>
-          </div>
-          <div class="chart-signal">
-            <span class="chart-signal-arrow">▼</span>
-            <span>SELL · 20%</span>
-          </div>
-        </div>
-
-        <div class="trading-stats-bar">
-          <div class="tstat">
-            <span class="tstat-label">الرصيد</span>
-            <span class="tstat-value">$3,917.51</span>
-          </div>
-          <div class="tstat">
-            <span class="tstat-label">الربح اليومي</span>
-            <span class="tstat-value up">+$8.46</span>
-          </div>
-          <div class="tstat">
-            <span class="tstat-label">الصفقات</span>
-            <span class="tstat-value">210</span>
-          </div>
-          <div class="tstat">
-            <span class="tstat-label">المخاطرة</span>
-            <span class="tstat-value">$4,330</span>
-          </div>
-        </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4 class="p-feature-title">الأسواق التنبؤية (العضو 9)</h4>
+        <p class="p-feature-desc">Polymarket كعضو تاسع يُحقن signalBoost للحشود الذكية بأموال حقيقية.</p>
+        <span class="p-feature-stat">Polymarket · +0.05/-0.08</span>
       </div>
-
-      <!-- Trading features -->
-      <div class="project-features">
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <h4 class="p-feature-title">تنفيذ متعدد الوسطاء</h4>
-          <p class="p-feature-desc">ثلاثة منفّذين تقنيين يتنافسون على أفضل سعر تنفيذ لحظية</p>
-          <span class="p-feature-stat">3 منفّذين</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-          </div>
-          <h4 class="p-feature-title">أتمتة قابلة للبرمجة</h4>
-          <p class="p-feature-desc">عرّف قاعدتك مرة: «اشترِ إذا X، بِع إذا Y» — والنظام ينفّذ</p>
-          <span class="p-feature-stat">Auto</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h4 class="p-feature-title">إدارة مخاطر مدمجة</h4>
-          <p class="p-feature-desc">حد خسارة يومي، حد حجم مركز، إيقاف تلقائي عند الانحراف</p>
-          <span class="p-feature-stat">Risk Engine</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-          </div>
-          <h4 class="p-feature-title">سجل تنفيذ شفّاف</h4>
-          <p class="p-feature-desc">كل صفقة موثقة: السبب، التوقيت، الانزلاق، التكلفة — قابل للتدقيق</p>
-          <span class="p-feature-stat">Audit</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <h4 class="p-feature-title">ربط مباشر مع رؤى نيوز</h4>
-          <p class="p-feature-desc">الإشارة الإخبارية تتحول إلى أمر تنفيذي خلال ثوانٍ معدودة</p>
-          <span class="p-feature-stat">~3 ثوانٍ</span>
-        </div>
-        <div class="p-feature">
-          <div class="p-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
-          </div>
-          <h4 class="p-feature-title">وضع محاكاة</h4>
-          <p class="p-feature-desc">اختبر استراتيجيتك على بيانات حقيقية تاريخية قبل المخاطرة</p>
-          <span class="p-feature-stat">Backtest</span>
-        </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <h4 class="p-feature-title">11+ نماذج LLM</h4>
+        <p class="p-feature-desc">تنوع يضمن استمرارية الذكاء حتى عند تعطل أي مزود.</p>
+        <span class="p-feature-stat">Gemini · Groq · Cerebras · DeepSeek · Mistral · NVIDIA · Ollama · Bedrock · HuggingFace · OpenRouter · GLM</span>
       </div>
-
-      <div class="project-cta">
-        <a href="#" class="btn-project trading">
-          <span>ادخل رؤى تريد</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4 class="p-feature-title">حلقة التعلم الذاتي</h4>
+        <p class="p-feature-desc">المجلس يتعلّم من أخطائه — أوزان ديناميكية تتعدّل بعد كل صفقة.</p>
+        <ul class="p-feature-list">
+          <li>تتبع دقة كل عضو عبر 20 صفقة</li>
+          <li>أوزان: 70% أداء حديث + 30% إجمالي</li>
+          <li>كشف الأنماط المتكررة + ذاكرة النظام</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </div>
 
-
-    <!-- ═══════════════════════════════════════
-         INTEGRATION — Neural Bridge
-         ═══════════════════════════════════════ -->
-    <section id="integration" class="integration-section reveal">
-      <span class="section-tag">التكامل · NEURAL BRIDGE</span>
-      <h2 class="section-title">
-        <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">الخبر يولد الإشارة.</span><br>
-        <span style="color:var(--text-mute);">والإشارة تولد الفرصة.</span>
-      </h2>
-
-      <div class="neural-bridge">
-        <div class="bridge-node news">
-          <div class="bridge-icon news">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3 class="bridge-title news">رؤى نيوز</h3>
-          <p class="bridge-desc">استخبار إخباري ذكي</p>
-          <div class="bridge-stats">
-            <div>
-              <div class="bstat-num">14</div>
-              <div class="bstat-lbl">مصدراً عالمياً</div>
-            </div>
-            <div>
-              <div class="bstat-num">9</div>
-              <div class="bstat-lbl">نماذج AI</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bridge-conn">
-          <div class="bridge-line">
-            <div class="bridge-pulse"></div>
-          </div>
-          <div class="bridge-label">إشارة ← إشارة</div>
-        </div>
-
-        <div class="bridge-node trading">
-          <div class="bridge-icon trading">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-          </div>
-          <h3 class="bridge-title trading">رؤى تريد</h3>
-          <p class="bridge-desc">تنفيذ أتمت ذكي</p>
-          <div class="bridge-stats">
-            <div>
-              <div class="bstat-num">64</div>
-              <div class="bstat-lbl">محرك رسومي</div>
-            </div>
-            <div>
-              <div class="bstat-num">3</div>
-              <div class="bstat-lbl">منفّذين تقنيين</div>
-            </div>
-          </div>
-        </div>
+  <!-- القسم الفرعي 2: المنفّذ الذكي -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div>
+        <div class="subsection-title">المنفّذ الذكي · Smart Executor</div>
+        <div class="subsection-subtitle">"الجندي في الميدان" — يراقب الأسعار وينفّذ فور تحقق الشروط، بـ 15 فحص أمان</div>
       </div>
-
-      <div class="steps-timeline">
-        <div class="step-card">
-          <div class="step-num">01</div>
-          <h4 class="step-title">اختر طريقك</h4>
-          <p class="step-desc">رؤى نيوز أو رؤى تريد — أو كلاهما معاً</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">02</div>
-          <h4 class="step-title">اربط حسابك</h4>
-          <p class="step-desc">أدخل بيانات الوسيط أو اشترك في الإشارات</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">03</div>
-          <h4 class="step-title">ابدأ التنفيذ</h4>
-          <p class="step-desc">راقب أو أتمت — أنت المتحكم، النظام المنفّذ</p>
-        </div>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4 class="p-feature-title">15+ فحص أمان قبل التنفيذ</h4>
+        <p class="p-feature-desc">طبقات حماية متعددة تمنع التنفيذ الخاطئ في كل سيناريو.</p>
+        <ul class="p-feature-list">
+          <li>Cooldown على مستوى DB + Redis</li>
+          <li>Symbol-lock بعد كل إغلاق</li>
+          <li>حد خسارة يومي موحّد</li>
+          <li>فلتر الأخبار عالية الأثر</li>
+        </ul>
       </div>
-    </section>
-
-
-    <!-- ═══════════════════════════════════════
-         SECURITY SECTION
-         ═══════════════════════════════════════ -->
-    <section id="security" class="security-section reveal">
-      <span class="section-tag">الأمان · SECURITY</span>
-      <h2 class="section-title">
-        <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">حماية فولاذية.</span><br>
-        <span style="color:var(--text-mute);">شفافية مطلقة.</span>
-      </h2>
-
-      <div class="security-grid">
-        <div class="sec-card">
-          <div class="sec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h4 class="sec-title">تشفير AES-256</h4>
-          <p class="sec-desc">كل بيانات الاعتماد مشفّرة at-rest و in-transit</p>
-        </div>
-        <div class="sec-card">
-          <div class="sec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          </div>
-          <h4 class="sec-title">عزل كامل</h4>
-          <p class="sec-desc">حسابات المستخدمين معزولة 100% — لا وصول متبادل</p>
-        </div>
-        <div class="sec-card">
-          <div class="sec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h4 class="sec-title">سجل تدقيق</h4>
-          <p class="sec-desc">كل عملية موثقة بـ timestamp و IP و user-agent</p>
-        </div>
-        <div class="sec-card">
-          <div class="sec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          </div>
-          <h4 class="sec-title">لا نلمس أموالك</h4>
-          <p class="sec-desc">التداول على وسيطك مباشرة — نحن نوفّر الذكاء فقط</p>
-        </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <h4 class="p-feature-title">حجم مركز ذكي (5 مستويات)</h4>
+        <p class="p-feature-desc">معادلة مضاعفة تحسب الحجم الأمثل بدقة.</p>
+        <span class="p-feature-stat">portfolio × risk × confidence × drawdown × correlation</span>
       </div>
-    </section>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <h4 class="p-feature-title">عزل كامل لكل مستخدم</h4>
+        <p class="p-feature-desc">كل مستخدم له سياق تداول مستقل تماماً — لا تسرّب بين الحسابات.</p>
+        <ul class="p-feature-list">
+          <li>حالة المنفّذ في Redis معزولة</li>
+          <li>حدود مخاطر خاصة بكل مستخدم</li>
+          <li>Circuit breaker لكل زوج</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+        <h4 class="p-feature-title">فلتر النظام السوقي</h4>
+        <p class="p-feature-desc">يمنع الشراء في سوق هابط والبيع في سوق صاعد تلقائياً.</p>
+        <span class="p-feature-stat">BULL · BEAR · RANGE · VOLATILE</span>
+      </div>
+    </div>
+  </div>
 
+  <!-- القسم الفرعي 3: الوكلاء الثلاثة -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3c0 1.5-1 2-1 3 0 2 2 3 2 5a3 3 0 01-6 0c0-2 2-3 2-5 0-1-1-1.5-1-3a3 3 0 013-3z"/><circle cx="12" cy="14" r="8"/></svg></div>
+      <div>
+        <div class="subsection-title">الوكلاء الثلاثة · Three Autonomous Agents</div>
+        <div class="subsection-subtitle">ثلاثة وكلاء مستقلون، كل واحد بوظيفة محددة وسرعة مختلفة</div>
+      </div>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.7 1 6.3 2.7"/><path d="M21 3v6h-6"/></svg></div>
+          <h4>وكيل التداول المستقل</h4>
+          <span class="agent-speed">دوري</span>
+        </div>
+        <p class="desc">"العقل المدبّر" — يحلّل السوق، يقيّم الإشارات، يحسب المخاطر، ينفّذ، ويتتبّع الأداء في دورة كاملة.</p>
+        <ul class="p-feature-list">
+          <li><strong>8 استراتيجيات:</strong> AUTO · SCALPING · SWING · GRID · MEAN_REVERSION · MOMENTUM_BREAKOUT · DCA · VWAP_RSI</li>
+          <li><strong>6 حالات:</strong> RUNNING · PAUSED · STOPPED · EMERGENCY_STOP · IDLE · DAILY_LIMIT_REACHED</li>
+          <li><strong>حماية 48h</strong> لمراكز الوكيل (3 طبقات)</li>
+          <li>Adaptive Strategy Selector + Reinforcement Learning</li>
+        </ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h4>اللاسع</h4>
+          <span class="agent-speed">&lt;5ms</span>
+        </div>
+        <p class="desc">وكيل تداول فائق السرعة — يستمع لـ OANDA/Binance streaming مباشرة، يحسب OBI على كل tick، ينفّذ في أقل من 5 مللي ثانية.</p>
+        <ul class="p-feature-list">
+          <li><strong>إشارة OBI</strong> — Order Book Imbalance</li>
+          <li><strong>3 شروط أمان فقط</strong> (كلها Redis، لا HTTP)</li>
+          <li>لا استدعاء AI في المسار الحرج</li>
+          <li>ثبات الإشارة في 3 ticks متتالية</li>
+        </ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <h4>وكيل المحتوى</h4>
+          <span class="agent-speed">دوري</span>
+        </div>
+        <p class="desc">منصة تسويق محتوى AI ثنائية اللغة — من تجميع الخبر إلى نشر تقرير احترافي جاهز.</p>
+        <ul class="p-feature-list">
+          <li><strong>10 أنواع محتوى</strong> × <strong>11 فئة</strong></li>
+          <li>4 مراحل: Curator → Generator → Optimizer → Publisher</li>
+          <li>تقييم جودة على 5 محاور (SEO · قراءة · تفاعل · تكرار · امتثال)</li>
+          <li>نشر تلقائي على Telegram + JSON-LD للـ SEO</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <!-- CTA -->
+  <!-- القسم الفرعي 4: لوحة الشارت الذكية -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+      <div>
+        <div class="subsection-title">لوحة الشارت الذكية · Smart Chart</div>
+        <div class="subsection-subtitle">83 أداة رسم · 15 مؤشر · 64 محرك ذكي في شارت واحد</div>
+      </div>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <h4 class="p-feature-title">83 أداة رسم</h4>
+        <p class="p-feature-desc">في 11 فئة احترافية تفوق TradingView.</p>
+        <ul class="p-feature-list">
+          <li>Lines · Channels · Forks · Fibonacci</li>
+          <li>Gann · Shapes · Annotations · Markers</li>
+          <li>Harmonic Patterns · Elliott Wave</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <h4 class="p-feature-title">15 مؤشر فني</h4>
+        <p class="p-feature-desc">9 overlay + 6 oscillator بإعدادات قابلة للتخصيص الكامل.</p>
+        <span class="p-feature-stat">SMA · EMA · BB · VWAP · PSAR · Ichimoku · SuperTrend · RSI · MACD · ADX · CCI</span>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg></div>
+        <h4 class="p-feature-title">محركات فريدة عالمياً</h4>
+        <p class="p-feature-desc">قدرات لا توجد في أي منصة أخرى.</p>
+        <ul class="p-feature-list">
+          <li><strong>Predictive Pattern Completion</strong> — يرسم ghost للأنماط غير المكتملة</li>
+          <li><strong>AI Explanation Engine</strong> — "لماذا؟" لكل إشارة</li>
+          <li><strong>Visual Rule Builder</strong> — drag-and-drop AND/OR/NOT/XOR</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+        <h4 class="p-feature-title">64 محرك شارت</h4>
+        <p class="p-feature-desc">مكتبة شاملة تغطي كل أساليب التحليل التقني.</p>
+        <ul class="p-feature-list">
+          <li>WyckoffEngine · ElliottEngine</li>
+          <li>AdaptiveBayesianEngine · ScenarioEngine</li>
+          <li>SpringDetection · ConfluenceZones</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- القسم الفرعي 5: Neural Lab + الأسواق التنبؤية + ملاذ المحفظة + المساعد + EA Bridge -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg></div>
+      <div>
+        <div class="subsection-title">طبقات الذكاء الإضافية</div>
+        <div class="subsection-subtitle">5 أدوات متخصصة تكمل منظومة التداول الذكي</div>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <h4>🧪 مختبر Neural</h4>
+        <p class="desc">5 تبويبات متخصصة لاختبار وتحسين الاستراتيجيات.</p>
+        <ul class="p-feature-list">
+          <li><strong>Backtest</strong> — اختبار على البيانات التاريخية</li>
+          <li><strong>Optimizer</strong> — تحسين البارامترات تلقائياً</li>
+          <li><strong>Comparison</strong> — مقارنة استراتيجيتين</li>
+          <li><strong>Neural</strong> — تنبؤات AI Council</li>
+          <li><strong>Swarm</strong> — سرب وكلاء متعددين</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>📊 الأسواق التنبؤية</h4>
+        <p class="desc">Polymarket كعضو تاسع في المجلس الذكي — حشود ذكية بأموال حقيقية.</p>
+        <ul class="p-feature-list">
+          <li>تحليل فجوة التوقعات (market vs AI)</li>
+          <li>signalBoost للاتفاق/التعارض</li>
+          <li>تكامل مع قرار المجلس</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🛡️ ملاذ المحفظة</h4>
+        <p class="desc">تحليل مخاطر شامل عبر كل حساباتك المرتبطة.</p>
+        <ul class="p-feature-list">
+          <li>riskScore (0-100) + VaR</li>
+          <li>concentrationRisk + diversificationScore</li>
+          <li>توصيات AI لإعادة التوازن</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🧠 مساعد التداول الذكي</h4>
+        <p class="desc">"المايسترو" — يجمع كل طبقات الذكاء في واجهة دردشة واحدة.</p>
+        <ul class="p-feature-list">
+          <li>14 خدمة متخصصة (تشخيص + كشف أنماط + ملخص يومي + تنبيهات مخاطر)</li>
+          <li>توجيه لغوي ذكي (32 لغة)</li>
+          <li>تفسير مالي + مسرد مدمج</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🔌 EA Bridge</h4>
+        <p class="desc">يحوّل MetaTrader 5 إلى remote execution node للمجلس الذكي.</p>
+        <ul class="p-feature-list">
+          <li>9 endpoints كاملة + heartbeat كل 5 دقائق</li>
+          <li>Per-user tokens + Redis cache</li>
+          <li>تقارير تنفيذ ثنائية الاتجاه</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>⚡ المنصات المدعومة</h4>
+        <p class="desc">6 adapters تنفيذ موحدة عبر واجهة واحدة.</p>
+        <ul class="p-feature-list">
+          <li>Binance · MetaTrader 5 · OANDA</li>
+          <li>Alpaca · Paper Trading</li>
+          <li>32 زوج تداول (Crypto + Forex + Stocks + Commodities + Indices)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-cta">
+    <a href="#" class="btn-project trading">
+      <span>ادخل رؤى التداول</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- التكامل -->
+<section id="integration" class="integration-section reveal">
+  <span class="section-tag">التكامل · NEURAL BRIDGE</span>
+  <h2 class="section-title">
+    <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">الخبر يولد الإشارة.</span><br>
+    <span style="color:var(--text-mute);">والإشارة تولد الفرصة.</span>
+  </h2>
+  <div class="neural-bridge">
+    <div class="bridge-node news">
+      <div class="bridge-icon news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h3 class="bridge-title news">رؤى الأخبار</h3>
+      <p class="bridge-desc">استخبار إخباري ذكي</p>
+      <div class="bridge-stats">
+        <div><div class="bstat-num">500+</div><div class="bstat-lbl">مصدر رسمي</div></div>
+        <div><div class="bstat-num">1000+</div><div class="bstat-lbl">مصدر مجمّع</div></div>
+      </div>
+    </div>
+    <div class="bridge-conn">
+      <div class="bridge-line"><div class="bridge-pulse"></div></div>
+      <div class="bridge-label">إشارة ← إشارة</div>
+    </div>
+    <div class="bridge-node trading">
+      <div class="bridge-icon trading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+      <h3 class="bridge-title trading">رؤى التداول</h3>
+      <p class="bridge-desc">تنفيذ أتمت ذكي</p>
+      <div class="bridge-stats">
+        <div><div class="bstat-num">10</div><div class="bstat-lbl">أدوار AI</div></div>
+        <div><div class="bstat-num">32</div><div class="bstat-lbl">زوج تداول</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="steps-timeline">
+    <div class="step-card"><div class="step-num">01</div><h4 class="step-title">اختر طريقك</h4><p class="step-desc">رؤى الأخبار أو رؤى التداول — أو كلاهما معاً</p></div>
+    <div class="step-card"><div class="step-num">02</div><h4 class="step-title">اربط حسابك</h4><p class="step-desc">أدخل بيانات الوسيط أو اشترك في الإشارات</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4 class="step-title">ابدأ التنفيذ</h4><p class="step-desc">راقب أو أتمت — أنت المتحكم، النظام المنفّذ</p></div>
+  </div>
+</section>
+
+<!-- الأمان -->
+<section id="security" class="security-section reveal">
+  <span class="section-tag">الأمان · SECURITY</span>
+  <h2 class="section-title">
+    <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">حماية فولاذية.</span><br>
+    <span style="color:var(--text-mute);">شفافية مطلقة.</span>
+  </h2>
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4 class="sec-title">تشفير AES-256</h4>
+      <p class="sec-desc">كل بيانات الاعتماد مشفّرة at-rest و in-transit</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <h4 class="sec-title">عزل كامل</h4>
+      <p class="sec-desc">حسابات المستخدمين معزولة 100% — لا وصول متبادل</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <h4 class="sec-title">سجل تدقيق</h4>
+      <p class="sec-desc">كل عملية موثقة بـ timestamp و IP و user-agent</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h4 class="sec-title">لا نلمس أموالك</h4>
+      <p class="sec-desc">التداول على وسيطك مباشرة — نحن نوفّر الذكاء فقط</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section id="contact" class="cta-section reveal">
   <div class="cta-card">
     <h2 class="cta-title">ابنِ فوق بنية تحتية تستحق ثقتك</h2>
-    <p class="cta-sub">
-      رؤى ليست منتجاً نهائياً — هي طبقة أساس. اطلب عرضاً مخصصاً لشريحتك،
-      واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر.
-    </p>
+    <p class="cta-sub">رؤى ليست منتجاً نهائياً — هي طبقة أساس. اطلب عرضاً مخصصاً لشريحتك، واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر.</p>
     <a href="#" class="btn-glow">
       <span>اطلب عرضاً</span>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
 </section>
@@ -1957,13 +955,12 @@ footer .tagline{
 </div>
 
 <script>
-// ===== RADAR =====
 (function(){
   const targetsEl = document.getElementById('radarTargets');
-  const countEl   = document.getElementById('rCount');
-  const sweepEl   = document.getElementById('rSweep');
-  const clockEl   = document.getElementById('rClock');
-  const statusEl  = document.getElementById('rStatus');
+  const countEl = document.getElementById('rCount');
+  const sweepEl = document.getElementById('rSweep');
+  const clockEl = document.getElementById('rClock');
+  const statusEl = document.getElementById('rStatus');
   if(!targetsEl) return;
   const SWEEP_DUR = 4000;
   let active = [];
@@ -1977,11 +974,11 @@ footer .tagline{
     const y = 50 + Math.sin(ang)*r;
     const t = document.createElement('div');
     const roll = Math.random();
-    if(roll < 0.12)      t.className = 'target hostile';
+    if(roll < 0.12) t.className = 'target hostile';
     else if(roll < 0.30) t.className = 'target neutral';
-    else                 t.className = 'target';
+    else t.className = 'target';
     t.style.left = x + '%';
-    t.style.top  = y + '%';
+    t.style.top = y + '%';
     const labels = ['GOLD','BTC','EUR','OIL','SP500','NIKKEI','GBP','ETH','SILVER','NASDAQ'];
     t.title = labels[Math.floor(Math.random()*labels.length)];
     targetsEl.appendChild(t);
@@ -2010,7 +1007,6 @@ footer .tagline{
   }, 3500);
 })();
 
-// ===== Scroll reveal =====
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
@@ -2018,7 +1014,6 @@ const io = new IntersectionObserver((entries)=>{
 }, {threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ===== 3D tilt on audience cards =====
 document.querySelectorAll('.audience-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const r = card.getBoundingClientRect();
@@ -2030,11 +1025,8 @@ document.querySelectorAll('.audience-card').forEach(card => {
     const ry = (x - 0.5) * 6;
     card.style.transform = `translateY(-8px) perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 </script>
-
 </body>
 </html>
