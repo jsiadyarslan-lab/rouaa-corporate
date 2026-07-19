@@ -1241,31 +1241,25 @@ nav{
   background:rgba(2,6,23,0.55);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:none;  /* REMOVE straight line */
+  border-bottom:none;
   transform:translateY(-100%);
   animation:navDown 0.8s ease 0.3s forwards;
 }
 @keyframes navDown{to{transform:translateY(0)}}
-/* Bottom border with semicircular notch around logo */
+/* SVG border with semicircular notch around logo */
 nav::after{
   content:'';
   position:absolute;
   bottom:0;
   left:0;
   right:0;
-  height:2px;
-  background:var(--glass-border);
+  height:52px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='52' preserveAspectRatio='none' viewBox='0 0 1400 52'%3E%3Cpath d='M0,1 L1254,1 A50,50 0 0,1 1354,1 L1400,1' fill='none' stroke='rgba(96,165,250,0.22)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:100% 52px;
+  background-position:bottom center;
+  background-repeat:no-repeat;
   z-index:99;
   pointer-events:none;
-  /* Cut semicircle where logo is (left:3rem area, 100px wide) */
-  -webkit-mask:
-    linear-gradient(black, black),
-    radial-gradient(circle 50px at calc(3rem + 50px) 0px, transparent 50px, black 51px);
-  -webkit-mask-composite:destination-out;
-  mask:
-    linear-gradient(black, black),
-    radial-gradient(circle 50px at calc(3rem + 50px) 0px, transparent 50px, black 51px);
-  mask-composite:subtract;
 }
 .logo{
   position:relative;
