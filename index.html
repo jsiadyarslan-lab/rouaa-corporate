@@ -1138,21 +1138,23 @@ footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var
   height:auto;
   transform:translate(-50%,-50%);
   border-radius:6px;
-  background:rgba(2,6,23,0.92);
-  border:1px solid rgba(96,165,250,0.4);
-  padding:3px 8px;
+  background:rgba(2,6,23,0.95);
+  border:1px solid rgba(96,165,250,0.5);
+  padding:4px 9px;
   font-family:'Share Tech Mono',monospace;
   font-size:0.62rem;
+  font-weight:700;
   letter-spacing:0.05em;
   color:var(--blue-glow);
   white-space:nowrap;
-  box-shadow:0 0 12px rgba(96,165,250,0.3);
+  box-shadow:0 0 15px rgba(96,165,250,0.4), 0 2px 8px rgba(0,0,0,0.5);
   opacity:0;
   animation:targetLife 4s ease-out forwards;
   display:flex;
   align-items:center;
-  gap:4px;
+  gap:5px;
   pointer-events:none;
+  z-index:10;
 }
 .target::before{
   content:'';
@@ -2169,6 +2171,11 @@ iv>
   ];
   const pick = labels[Math.floor(Math.random()*labels.length)];
   t.title = pick.text;
+    // Add visible label text
+    const label = document.createElement('span');
+    label.textContent = pick.text;
+    label.style.cssText = 'font-size:0.62rem;font-weight:700;letter-spacing:0.05em;line-height:1;';
+    t.appendChild(label);
   // Hostile = bearish data (high inflation, rate hikes)
   if(pick.text.includes('CPI') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') > 3) {
     t.className = 'target hostile';
