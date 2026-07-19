@@ -635,6 +635,583 @@ footer .tagline{
   .nav-links{display:none}
   .hero{padding-top:6rem}
 }
+
+/* ============================================================================
+   PROJECT SECTIONS — Rouaa News + Rouaa Trading
+   ============================================================================ */
+.project-section{
+  padding:6rem 3rem;
+  max-width:1400px;
+  margin:0 auto;
+  position:relative;
+}
+@media (max-width:768px){.project-section{padding:4rem 1.5rem}}
+
+.project-header{
+  text-align:center;
+  margin-bottom:3.5rem;
+}
+.project-tag{
+  display:inline-block;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.3em;
+  text-transform:uppercase;font-weight:700;
+  padding:0.35rem 1rem;border-radius:4px;
+  margin-bottom:1.2rem;
+}
+.project-tag.news{
+  background:rgba(34,211,238,0.1);
+  border:1px solid rgba(34,211,238,0.35);
+  color:var(--cyan);
+}
+.project-tag.trading{
+  background:rgba(96,165,250,0.1);
+  border:1px solid rgba(96,165,250,0.4);
+  color:var(--blue-bright);
+}
+.project-title{
+  font-size:clamp(2rem,4.2vw,3.2rem);
+  font-weight:900;line-height:1.2;
+  margin-bottom:1rem;
+}
+.project-title .gradient{
+  background:linear-gradient(135deg, var(--white), var(--blue-glow));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.project-title.trading .gradient{
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.project-title .dim{color:var(--text-mute)}
+.project-subtitle{
+  color:var(--text-dim);
+  font-size:1.05rem;line-height:1.85;
+  max-width:640px;margin:0 auto;
+}
+
+/* Project preview dashboard */
+.project-preview{
+  position:relative;
+  border-radius:20px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));
+  border:1px solid var(--glass-border-strong);
+  backdrop-filter:blur(20px);
+  padding:1.5rem;
+  margin-bottom:3rem;
+  box-shadow:0 30px 60px rgba(0,0,0,0.3), 0 0 80px rgba(59,130,246,0.1);
+  overflow:hidden;
+}
+.project-preview::before{
+  content:'';
+  position:absolute;
+  top:-100px;right:-100px;
+  width:400px;height:400px;
+  background:radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);
+  filter:blur(40px);
+  pointer-events:none;
+}
+
+/* News dashboard */
+.news-tabs{
+  display:flex;gap:0.5rem;
+  margin-bottom:1rem;
+  border-bottom:1px solid var(--glass-border);
+  padding-bottom:0.5rem;
+  flex-wrap:wrap;
+}
+.news-tab{
+  padding:0.5rem 1rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;letter-spacing:0.1em;
+  color:var(--text-dim);
+  background:transparent;border:none;
+  border-radius:6px;cursor:pointer;
+  transition:all 0.3s;
+}
+.news-tab.active{
+  background:rgba(59,130,246,0.15);
+  color:var(--blue-bright);
+}
+.news-cards{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:0.8rem;
+}
+@media (max-width:768px){.news-cards{grid-template-columns:1fr}}
+.news-card{
+  padding:1rem;
+  background:rgba(2,6,23,0.5);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  transition:all 0.3s;
+}
+.news-card:hover{
+  border-color:var(--blue-bright);
+  transform:translateY(-2px);
+}
+.news-card.featured{
+  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
+  border-color:var(--glass-border-strong);
+}
+.news-meta{
+  display:flex;justify-content:space-between;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.1em;
+  color:var(--text-mute);
+  margin-bottom:0.5rem;
+  text-transform:uppercase;
+}
+.news-source{color:var(--blue-bright);font-weight:700}
+.news-title{
+  font-size:0.92rem;font-weight:600;
+  color:var(--white);
+  line-height:1.5;
+  margin-bottom:0.7rem;
+}
+.news-impact{
+  display:flex;gap:0.6rem;align-items:center;
+  font-size:0.72rem;
+}
+.impact-badge{
+  padding:0.15rem 0.6rem;border-radius:4px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.impact-badge.positive{background:rgba(34,197,94,0.15);color:#4ade80}
+.impact-badge.neutral{background:rgba(148,163,184,0.15);color:#cbd5e1}
+.impact-badge.negative{background:rgba(239,68,68,0.15);color:#f87171}
+.impact-score{color:var(--text-mute);font-size:0.7rem}
+
+/* Trading dashboard */
+.trading-topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1rem;
+  padding-bottom:0.8rem;
+  border-bottom:1px solid var(--glass-border);
+  flex-wrap:wrap;gap:0.5rem;
+}
+.trading-pairs{display:flex;gap:0.5rem;flex-wrap:wrap}
+.pair-item{
+  padding:0.3rem 0.7rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.75rem;
+  color:var(--text-dim);
+  background:rgba(2,6,23,0.4);
+  border:1px solid var(--glass-border);
+  border-radius:4px;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+.pair-item.active{
+  background:rgba(59,130,246,0.15);
+  color:var(--blue-bright);
+  border-color:var(--blue-bright);
+}
+.trading-price{
+  display:flex;align-items:center;gap:0.8rem;
+  font-family:'Orbitron',sans-serif;
+}
+.price-value{font-size:1.3rem;font-weight:700;color:var(--white)}
+.price-change{
+  font-size:0.85rem;font-weight:700;
+  padding:0.2rem 0.6rem;border-radius:4px;
+  font-family:'Share Tech Mono',monospace;
+}
+.price-change.up{background:rgba(34,197,94,0.15);color:#4ade80}
+.price-change.down{background:rgba(239,68,68,0.15);color:#f87171}
+
+.trading-chart{
+  background:rgba(2,6,23,0.6);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  padding:1.5rem;
+  height:160px;
+  position:relative;
+  margin-bottom:1rem;
+  overflow:hidden;
+}
+.chart-bars{
+  display:flex;align-items:flex-end;justify-content:space-around;
+  height:100%;gap:4px;
+}
+.bar{
+  flex:1;
+  background:linear-gradient(180deg, var(--blue-bright), var(--blue-deep));
+  border-radius:3px 3px 0 0;
+  min-height:8px;
+  opacity:0.85;
+  animation:barPulse 3s ease-in-out infinite;
+  box-shadow:0 0 10px rgba(96,165,250,0.4);
+}
+.bar:nth-child(odd){animation-delay:-1.5s}
+.bar:nth-child(3n){animation-delay:-0.7s}
+@keyframes barPulse{
+  0%,100%{transform:scaleY(1);opacity:0.85}
+  50%{transform:scaleY(0.7);opacity:1}
+}
+
+.chart-signal{
+  position:absolute;
+  top:1rem;left:1rem;
+  display:flex;align-items:center;gap:0.5rem;
+  background:rgba(239,68,68,0.15);
+  border:1px solid rgba(239,68,68,0.4);
+  padding:0.4rem 0.8rem;
+  border-radius:6px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;font-weight:700;
+  color:#f87171;
+}
+.chart-signal.buy{
+  background:rgba(34,197,94,0.15);
+  border-color:rgba(34,197,94,0.4);
+  color:#4ade80;
+}
+.chart-signal-arrow{font-size:0.7rem}
+
+.trading-stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0.8rem;
+}
+@media (max-width:600px){.trading-stats-bar{grid-template-columns:repeat(2,1fr)}}
+.tstat{
+  padding:0.7rem;
+  background:rgba(2,6,23,0.4);
+  border:1px solid var(--glass-border);
+  border-radius:8px;
+  text-align:center;
+}
+.tstat-label{
+  display:block;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.1em;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  margin-bottom:0.2rem;
+}
+.tstat-value{
+  font-family:'Orbitron',sans-serif;
+  font-size:0.92rem;font-weight:700;
+  color:var(--white);
+  direction:ltr;
+}
+.tstat-value.up{color:#4ade80}
+.tstat-value.down{color:#f87171}
+
+/* Project features grid */
+.project-features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.2rem;
+}
+.p-feature{
+  position:relative;
+  padding:1.8rem;
+  border-radius:16px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(15px);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;
+}
+.p-feature::before{
+  content:'';
+  position:absolute;inset:0;padding:1px;
+  border-radius:16px;
+  background:linear-gradient(135deg, rgba(96,165,250,0.4) 0%, rgba(34,211,238,0.2) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  transition:background 0.4s;
+}
+.p-feature:hover{
+  transform:translateY(-5px);
+  background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));
+}
+.p-feature:hover::before{
+  background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.6) 100%);
+}
+.p-feature-icon{
+  width:44px;height:44px;
+  border-radius:11px;
+  background:linear-gradient(135deg, var(--blue), var(--cyan));
+  display:grid;place-items:center;
+  box-shadow:0 4px 15px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+  margin-bottom:1rem;
+}
+.p-feature-icon svg{width:22px;height:22px;color:var(--bg-0)}
+.p-feature-title{
+  font-size:1.05rem;font-weight:700;
+  color:var(--white);
+  margin-bottom:0.5rem;
+  line-height:1.4;
+}
+.p-feature-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;line-height:1.7;
+  margin-bottom:0.8rem;
+}
+.p-feature-stat{
+  display:inline-block;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.1em;
+  color:var(--blue-bright);
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(59,130,246,0.25);
+  padding:0.2rem 0.6rem;
+  border-radius:4px;
+  text-transform:uppercase;
+}
+
+/* Project CTA */
+.project-cta{
+  text-align:center;
+  margin-top:2.5rem;
+}
+.btn-project{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.9rem 2rem;border-radius:10px;
+  font-family:'Cairo',sans-serif;
+  font-size:0.95rem;font-weight:700;
+  text-decoration:none;cursor:pointer;border:none;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.btn-project.news{
+  background:linear-gradient(135deg, var(--cyan), var(--blue-bright));
+  color:var(--bg-0);
+  box-shadow:0 0 25px rgba(34,211,238,0.4);
+}
+.btn-project.trading{
+  background:linear-gradient(135deg, var(--blue), var(--cyan));
+  color:var(--bg-0);
+  box-shadow:0 0 25px rgba(59,130,246,0.4);
+}
+.btn-project::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
+  transition:left 0.6s;
+}
+.btn-project:hover::before{left:100%}
+.btn-project:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(96,165,250,0.6)}
+
+/* ============================================================================
+   INTEGRATION SECTION — Neural Bridge
+   ============================================================================ */
+.integration-section{
+  padding:6rem 3rem;
+  max-width:1400px;margin:0 auto;
+  text-align:center;
+}
+.integration-section .section-title{
+  margin-bottom:3rem;
+}
+.neural-bridge{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:2rem;
+  align-items:center;
+  margin-bottom:3rem;
+}
+@media (max-width:768px){
+  .neural-bridge{grid-template-columns:1fr;gap:1.5rem}
+}
+.bridge-node{
+  padding:2rem;
+  border-radius:20px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));
+  border:1px solid var(--glass-border-strong);
+  backdrop-filter:blur(20px);
+  position:relative;
+  transition:transform 0.4s;
+}
+.bridge-node:hover{transform:translateY(-5px)}
+.bridge-node.news{border-color:rgba(34,211,238,0.4)}
+.bridge-node.trading{border-color:rgba(96,165,250,0.5)}
+.bridge-icon{
+  width:64px;height:64px;
+  border-radius:16px;
+  display:grid;place-items:center;
+  margin:0 auto 1rem;
+}
+.bridge-icon.news{
+  background:linear-gradient(135deg, var(--cyan), var(--blue-bright));
+  box-shadow:0 0 30px rgba(34,211,238,0.4);
+}
+.bridge-icon.trading{
+  background:linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow:0 0 30px rgba(59,130,246,0.4);
+}
+.bridge-icon svg{width:32px;height:32px;color:var(--bg-0)}
+.bridge-title{
+  font-size:1.4rem;font-weight:800;
+  margin-bottom:0.4rem;
+  color:var(--white);
+}
+.bridge-title.news{color:var(--cyan)}
+.bridge-title.trading{color:var(--blue-bright)}
+.bridge-desc{
+  color:var(--text-dim);
+  font-size:0.92rem;
+  margin-bottom:1.2rem;
+}
+.bridge-stats{
+  display:flex;justify-content:center;gap:1.5rem;
+  padding-top:1rem;
+  border-top:1px solid var(--glass-border);
+}
+.bstat-num{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;font-size:1.6rem;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  direction:ltr;
+}
+.bstat-lbl{
+  font-size:0.7rem;color:var(--text-mute);
+  margin-top:0.2rem;
+}
+
+/* Bridge connection */
+.bridge-conn{
+  display:flex;flex-direction:column;align-items:center;gap:0.8rem;
+}
+@media (max-width:768px){
+  .bridge-conn{transform:rotate(90deg);margin:0.5rem 0}
+}
+.bridge-line{
+  width:80px;height:2px;
+  background:linear-gradient(90deg, var(--cyan), var(--blue-bright));
+  position:relative;
+  border-radius:2px;
+  box-shadow:0 0 10px rgba(96,165,250,0.6);
+}
+.bridge-pulse{
+  position:absolute;
+  top:50%;left:0;
+  width:20px;height:20px;
+  background:radial-gradient(circle, var(--blue-bright), transparent);
+  border-radius:50%;
+  transform:translateY(-50%);
+  animation:pulseMove 2s linear infinite;
+}
+@keyframes pulseMove{
+  0%{left:0;opacity:1}
+  100%{left:calc(100% - 20px);opacity:0}
+}
+.bridge-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.15em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+}
+
+/* Steps timeline */
+.steps-timeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+}
+@media (max-width:768px){.steps-timeline{grid-template-columns:1fr}}
+.step-card{
+  padding:1.8rem;
+  border-radius:16px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(15px);
+  text-align:center;
+  position:relative;
+  transition:all 0.3s;
+}
+.step-card:hover{
+  border-color:var(--blue-bright);
+  transform:translateY(-4px);
+  box-shadow:0 10px 30px rgba(59,130,246,0.15);
+}
+.step-num{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;font-size:2.2rem;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:0.8rem;
+  line-height:1;
+}
+.step-title{
+  font-size:1.1rem;font-weight:700;
+  color:var(--white);
+  margin-bottom:0.5rem;
+}
+.step-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;line-height:1.7;
+}
+
+/* ============================================================================
+   SECURITY SECTION
+   ============================================================================ */
+.security-section{
+  padding:6rem 3rem;
+  max-width:1400px;margin:0 auto;
+  text-align:center;
+}
+.security-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.sec-card{
+  padding:2rem 1.5rem;
+  border-radius:16px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(15px);
+  transition:all 0.4s;
+  position:relative;
+  overflow:hidden;
+}
+.sec-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+  opacity:0;
+  transition:opacity 0.4s;
+}
+.sec-card:hover::before{opacity:1}
+.sec-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--blue-bright);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.15);
+}
+.sec-icon{
+  width:54px;height:54px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.1));
+  border:1px solid var(--glass-border-strong);
+  display:grid;place-items:center;
+  margin:0 auto 1.2rem;
+  box-shadow:inset 0 0 15px rgba(96,165,250,0.1);
+}
+.sec-icon svg{width:26px;height:26px;color:var(--blue-bright)}
+.sec-title{
+  font-size:1.05rem;font-weight:700;
+  color:var(--white);
+  margin-bottom:0.6rem;
+}
+.sec-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;line-height:1.7;
+}
+
 </style>
 </head>
 <body>
@@ -850,7 +1427,383 @@ footer .tagline{
   </div>
 </section>
 
-<!-- CTA -->
+
+    <!-- ═══════════════════════════════════════
+         PROJECT 1 — Rouaa News
+         ═══════════════════════════════════════ -->
+    <section id="rouaa-news" class="project-section reveal">
+      <div class="project-header">
+        <span class="project-tag news">الطريق الأول · ROUAA NEWS</span>
+        <h2 class="project-title">
+          <span class="gradient">السوق يفيض بالأخبار.</span><br>
+          <span class="dim">والفرصة تضيع.</span>
+        </h2>
+        <p class="project-subtitle">
+          رؤى نيوز — استخبار إخباري لحظي بلغة السوق، يولّد تلقائياً وبدقة محرّر بشري.
+        </p>
+      </div>
+
+      <!-- News dashboard preview -->
+      <div class="project-preview">
+        <div class="news-tabs">
+          <button class="news-tab active">الرئيسية</button>
+          <button class="news-tab">الأخبار</button>
+          <button class="news-tab">تحليل الأسهم</button>
+          <button class="news-tab">القطاعات</button>
+        </div>
+        <div class="news-cards">
+          <div class="news-card featured">
+            <div class="news-meta">
+              <span class="news-source">Bloomberg</span>
+              <span>منذ 2 دقيقة</span>
+            </div>
+            <h4 class="news-title">النفط يتجاوز 85$ مع تصاعد التوترات الجيوسياسية</h4>
+            <div class="news-impact">
+              <span class="impact-badge positive">إيجابي</span>
+              <span class="impact-score">ثقة 92%</span>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-meta">
+              <span class="news-source">Reuters</span>
+              <span>منذ 5 دقائق</span>
+            </div>
+            <h4 class="news-title">الفيدرالي يشير إلى تباطؤ في وتيرة رفع الفائدة</h4>
+            <div class="news-impact">
+              <span class="impact-badge neutral">محايد</span>
+              <span class="impact-score">ثقة 78%</span>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-meta">
+              <span class="news-source">CNBC</span>
+              <span>منذ 12 دقيقة</span>
+            </div>
+            <h4 class="news-title">تسلا تعلن عن نتائج فصلية تفوق التوقعات</h4>
+            <div class="news-impact">
+              <span class="impact-badge positive">إيجابي</span>
+              <span class="impact-score">ثقة 88%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- News features -->
+      <div class="project-features">
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4 class="p-feature-title">تقاطع متعدد المصادر</h4>
+          <p class="p-feature-desc">14 مزوداً، 65 خلاصة RSS، 5 لغات — بزمن حضور أقل من دقيقة</p>
+          <span class="p-feature-stat">14 مصدر · 65 RSS</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4 class="p-feature-title">تنقية ذكية للضوضاء</h4>
+          <p class="p-feature-desc">فلترة تلقائية للمكرر، وتصنيف للإشارات ذات الأثر السوقي</p>
+          <span class="p-feature-stat">AI Filter</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h4 class="p-feature-title">توليد بالذكاء الاصطناعي</h4>
+          <p class="p-feature-desc">9 نماذج لغوية تتنافس على صياغة الخبر الأدق</p>
+          <span class="p-feature-stat">9 نماذج LLM</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4 class="p-feature-title">تحليل أثر سوقي فوري</h4>
+          <p class="p-feature-desc">كل خبر يحمل وسم أثر: إيجابي / سلبي / محايد — مع درجة ثقة</p>
+          <span class="p-feature-stat">Real-time</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h4 class="p-feature-title">رسوم بيانية حية</h4>
+          <p class="p-feature-desc">64 محركاً لتحويل الأرقام في النص إلى مخططات تفاعلية</p>
+          <span class="p-feature-stat">64 Engines</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h4 class="p-feature-title">بحث دلالي</h4>
+          <p class="p-feature-desc">لا تبحث بالكلمات بل بالمعنى. اسأل: «ما الأخبار التي أثّرت في البنوك؟»</p>
+          <span class="p-feature-stat">Semantic</span>
+        </div>
+      </div>
+
+      <div class="project-cta">
+        <a href="#" class="btn-project news">
+          <span>ادخل رؤى نيوز</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         PROJECT 2 — Rouaa Trading
+         ═══════════════════════════════════════ -->
+    <section id="rouaa-trading" class="project-section reveal">
+      <div class="project-header">
+        <span class="project-tag trading">الطريق الثاني · ROUAA TRADING</span>
+        <h2 class="project-title trading">
+          <span class="gradient">تنفيذ أتمت.</span><br>
+          <span class="dim">شفافية كاملة في كل خطوة.</span>
+        </h2>
+        <p class="project-subtitle">
+          رؤى تريد — تنفيذ أتمت، إدارة مخاطر مدمجة، شفافية كاملة في كل خطوة.
+        </p>
+      </div>
+
+      <!-- Trading dashboard preview -->
+      <div class="project-preview">
+        <div class="trading-topbar">
+          <div class="trading-pairs">
+            <span class="pair-item active">BNB/USDT</span>
+            <span class="pair-item">BTC/USD</span>
+            <span class="pair-item">ETH/USD</span>
+            <span class="pair-item">XAU/USD</span>
+          </div>
+          <div class="trading-price">
+            <span class="price-value">572.25</span>
+            <span class="price-change up">+2.1%</span>
+          </div>
+        </div>
+
+        <div class="trading-chart">
+          <div class="chart-bars">
+            <div class="bar" style="height:35%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:42%"></div>
+            <div class="bar" style="height:68%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:75%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:82%"></div>
+            <div class="bar" style="height:52%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:62%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:78%"></div>
+            <div class="bar" style="height:40%"></div>
+            <div class="bar" style="height:65%"></div>
+          </div>
+          <div class="chart-signal">
+            <span class="chart-signal-arrow">▼</span>
+            <span>SELL · 20%</span>
+          </div>
+        </div>
+
+        <div class="trading-stats-bar">
+          <div class="tstat">
+            <span class="tstat-label">الرصيد</span>
+            <span class="tstat-value">$3,917.51</span>
+          </div>
+          <div class="tstat">
+            <span class="tstat-label">الربح اليومي</span>
+            <span class="tstat-value up">+$8.46</span>
+          </div>
+          <div class="tstat">
+            <span class="tstat-label">الصفقات</span>
+            <span class="tstat-value">210</span>
+          </div>
+          <div class="tstat">
+            <span class="tstat-label">المخاطرة</span>
+            <span class="tstat-value">$4,330</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trading features -->
+      <div class="project-features">
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4 class="p-feature-title">تنفيذ متعدد الوسطاء</h4>
+          <p class="p-feature-desc">ثلاثة منفّذين تقنيين يتنافسون على أفضل سعر تنفيذ لحظية</p>
+          <span class="p-feature-stat">3 منفّذين</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <h4 class="p-feature-title">أتمتة قابلة للبرمجة</h4>
+          <p class="p-feature-desc">عرّف قاعدتك مرة: «اشترِ إذا X، بِع إذا Y» — والنظام ينفّذ</p>
+          <span class="p-feature-stat">Auto</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4 class="p-feature-title">إدارة مخاطر مدمجة</h4>
+          <p class="p-feature-desc">حد خسارة يومي، حد حجم مركز، إيقاف تلقائي عند الانحراف</p>
+          <span class="p-feature-stat">Risk Engine</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+          </div>
+          <h4 class="p-feature-title">سجل تنفيذ شفّاف</h4>
+          <p class="p-feature-desc">كل صفقة موثقة: السبب، التوقيت، الانزلاق، التكلفة — قابل للتدقيق</p>
+          <span class="p-feature-stat">Audit</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h4 class="p-feature-title">ربط مباشر مع رؤى نيوز</h4>
+          <p class="p-feature-desc">الإشارة الإخبارية تتحول إلى أمر تنفيذي خلال ثوانٍ معدودة</p>
+          <span class="p-feature-stat">~3 ثوانٍ</span>
+        </div>
+        <div class="p-feature">
+          <div class="p-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+          </div>
+          <h4 class="p-feature-title">وضع محاكاة</h4>
+          <p class="p-feature-desc">اختبر استراتيجيتك على بيانات حقيقية تاريخية قبل المخاطرة</p>
+          <span class="p-feature-stat">Backtest</span>
+        </div>
+      </div>
+
+      <div class="project-cta">
+        <a href="#" class="btn-project trading">
+          <span>ادخل رؤى تريد</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         INTEGRATION — Neural Bridge
+         ═══════════════════════════════════════ -->
+    <section id="integration" class="integration-section reveal">
+      <span class="section-tag">التكامل · NEURAL BRIDGE</span>
+      <h2 class="section-title">
+        <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">الخبر يولد الإشارة.</span><br>
+        <span style="color:var(--text-mute);">والإشارة تولد الفرصة.</span>
+      </h2>
+
+      <div class="neural-bridge">
+        <div class="bridge-node news">
+          <div class="bridge-icon news">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="bridge-title news">رؤى نيوز</h3>
+          <p class="bridge-desc">استخبار إخباري ذكي</p>
+          <div class="bridge-stats">
+            <div>
+              <div class="bstat-num">14</div>
+              <div class="bstat-lbl">مصدراً عالمياً</div>
+            </div>
+            <div>
+              <div class="bstat-num">9</div>
+              <div class="bstat-lbl">نماذج AI</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bridge-conn">
+          <div class="bridge-line">
+            <div class="bridge-pulse"></div>
+          </div>
+          <div class="bridge-label">إشارة ← إشارة</div>
+        </div>
+
+        <div class="bridge-node trading">
+          <div class="bridge-icon trading">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+          </div>
+          <h3 class="bridge-title trading">رؤى تريد</h3>
+          <p class="bridge-desc">تنفيذ أتمت ذكي</p>
+          <div class="bridge-stats">
+            <div>
+              <div class="bstat-num">64</div>
+              <div class="bstat-lbl">محرك رسومي</div>
+            </div>
+            <div>
+              <div class="bstat-num">3</div>
+              <div class="bstat-lbl">منفّذين تقنيين</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-timeline">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4 class="step-title">اختر طريقك</h4>
+          <p class="step-desc">رؤى نيوز أو رؤى تريد — أو كلاهما معاً</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4 class="step-title">اربط حسابك</h4>
+          <p class="step-desc">أدخل بيانات الوسيط أو اشترك في الإشارات</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4 class="step-title">ابدأ التنفيذ</h4>
+          <p class="step-desc">راقب أو أتمت — أنت المتحكم، النظام المنفّذ</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECURITY SECTION
+         ═══════════════════════════════════════ -->
+    <section id="security" class="security-section reveal">
+      <span class="section-tag">الأمان · SECURITY</span>
+      <h2 class="section-title">
+        <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">حماية فولاذية.</span><br>
+        <span style="color:var(--text-mute);">شفافية مطلقة.</span>
+      </h2>
+
+      <div class="security-grid">
+        <div class="sec-card">
+          <div class="sec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4 class="sec-title">تشفير AES-256</h4>
+          <p class="sec-desc">كل بيانات الاعتماد مشفّرة at-rest و in-transit</p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h4 class="sec-title">عزل كامل</h4>
+          <p class="sec-desc">حسابات المستخدمين معزولة 100% — لا وصول متبادل</p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4 class="sec-title">سجل تدقيق</h4>
+          <p class="sec-desc">كل عملية موثقة بـ timestamp و IP و user-agent</p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h4 class="sec-title">لا نلمس أموالك</h4>
+          <p class="sec-desc">التداول على وسيطك مباشرة — نحن نوفّر الذكاء فقط</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CTA -->
 <section id="contact" class="cta-section reveal">
   <div class="cta-card">
     <h2 class="cta-title">ابنِ فوق بنية تحتية تستحق ثقتك</h2>
