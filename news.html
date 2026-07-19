@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020617">
+<title>رؤى الأخبار — المنصة الإخبارية المالية | رؤى</title>
+<meta name="description" content="رؤى الأخبار — محرك استخبارات مالية يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ. أخبار، تحليلات، تقارير، فيديو، إنفوجرافيك بـ 5 لغات.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg-0:#020617;--bg-1:#0a1530;--blue:#3b82f6;--blue-bright:#60a5fa;--blue-glow:#93c5fd;--blue-deep:#1e3a8a;--cyan:#22d3ee;--gold:#fbbf24;--gold-bright:#fde047;--white:#f8fafc;--text-dim:rgba(248,250,252,0.80);--text-mute:rgba(248,250,252,0.62);--space-xs:0.5rem;--space-sm:1rem;--space-md:1.5rem;--space-lg:2rem;--space-xl:3rem;--space-2xl:4rem;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--glass:rgba(255,255,255,0.04);--glass-strong:rgba(255,255,255,0.07);--glass-border:rgba(96,165,250,0.22);--glass-border-strong:rgba(96,165,250,0.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg-0);color:var(--white);font-family:'Cairo',-apple-system,sans-serif;overflow-x:hidden;scroll-behavior:smooth;line-height:1.7;padding-bottom:48px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.bg-3d{position:fixed;inset:0;z-index:-1;perspective:1200px;overflow:hidden;background:radial-gradient(ellipse at 20% 10%,rgba(34,211,238,0.15),transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(59,130,246,0.12),transparent 55%),radial-gradient(ellipse at 50% 50%,rgba(30,58,138,0.22),transparent 70%),linear-gradient(180deg,#020617 0%,#050b1f 50%,#020617 100%)}
+.bg-3d::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(96,165,250,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,0.05) 1px,transparent 1px);background-size:80px 80px;transform:rotateX(60deg) translateZ(0);animation:gridScroll 20s linear infinite}
+.bg-3d::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(34,211,238,0.12),transparent 35%),radial-gradient(circle at 70% 60%,rgba(59,130,246,0.10),transparent 30%);animation:blobPulse 8s ease-in-out infinite alternate}
+@keyframes gridScroll{from{transform:rotateX(60deg) translateY(0)}to{transform:rotateX(60deg) translateY(80px)}}
+@keyframes blobPulse{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+.orb{position:fixed;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(34,211,238,0.35),rgba(59,130,246,0.1) 60%,transparent);filter:blur(40px);pointer-events:none;z-index:-1;animation:orbFloat 20s ease-in-out infinite}
+.orb-1{width:400px;height:400px;top:-100px;right:-100px}
+.orb-2{width:300px;height:300px;bottom:-50px;left:-50px;animation-delay:-7s;background:radial-gradient(circle at 30% 30%,rgba(59,130,246,0.35),rgba(59,130,246,0.08) 60%,transparent)}
+.orb-3{width:250px;height:250px;top:40%;left:30%;animation-delay:-14s;opacity:0.5}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(0.95)}}
+nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;z-index:100;background:rgba(2,6,23,0.55);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--glass-border);transform:translateY(-100%);animation:navDown 0.8s ease 0.3s forwards}
+@keyframes navDown{to{transform:translateY(0)}}
+.logo{display:flex;align-items:center;gap:0.75rem;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:0.2em;color:var(--white);text-shadow:0 0 20px rgba(96,165,250,0.8);text-decoration:none}
+.logo-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));border-radius:10px;display:grid;place-items:center;box-shadow:0 0 25px rgba(34,211,238,0.6),inset 0 1px 0 rgba(255,255,255,0.4);transform:rotate(45deg);animation:logoSpin 6s ease-in-out infinite}
+.logo-mark::before{content:'';width:14px;height:14px;background:var(--bg-0);border-radius:3px}
+@keyframes logoSpin{0%,100%{transform:rotate(45deg)}50%{transform:rotate(225deg)}}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.88rem;font-weight:500;position:relative;transition:color 0.3s;padding:0.3rem 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform 0.4s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--cyan)}
+.nav-links a.active::after{transform:scaleX(1)}
+.nav-cta{display:flex;gap:0.6rem;align-items:center}
+.btn-ghost,.btn-primary{font-family:'Cairo',sans-serif;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s;border:none}
+.btn-ghost{background:var(--glass);color:var(--white);border:1px solid var(--glass-border);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--glass-strong);border-color:var(--glass-border-strong)}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue-bright));color:var(--bg-0);box-shadow:0 4px 20px rgba(34,211,238,0.4),inset 0 1px 0 rgba(255,255,255,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,211,238,0.6),inset 0 1px 0 rgba(255,255,255,0.4)}
+.page-hero{padding:10rem 3rem 4rem;max-width:1300px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+@media (max-width:768px){.page-hero{padding:8rem 1.5rem 3rem}}
+.page-hero-tag{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:50px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.4);font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;color:var(--cyan);text-transform:uppercase;width:fit-content;margin:0 auto 1.5rem}
+.page-hero-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:dotPulse 1.5s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+.page-hero-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--white) 0%,var(--cyan) 50%,var(--blue-glow) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(34,211,238,0.4));margin-bottom:1rem}
+.page-hero-sub{font-size:clamp(1rem,1.5vw,1.2rem);color:var(--text-dim);font-weight:500;line-height:1.9;max-width:680px;margin:0 auto 2rem}
+.page-hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;max-width:800px;margin:0 auto}
+@media (max-width:600px){.page-hero-stats{grid-template-columns:repeat(2,1fr)}}
+.phs-item{padding:1rem 0.5rem;border-radius:var(--radius-md);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);text-align:center}
+.phs-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;direction:ltr;line-height:1}
+.phs-lbl{font-size:0.72rem;color:var(--text-mute);margin-top:0.3rem;letter-spacing:0.05em;font-weight:500}
+.page-hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.btn-glow{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));color:var(--bg-0);text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;box-shadow:0 0 25px rgba(34,211,238,0.5),inset 0 1px 0 rgba(255,255,255,0.4);transition:transform 0.3s,box-shadow 0.3s}
+.btn-glow::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
+.btn-glow:hover::before{left:100%}
+.btn-glow:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 50px rgba(34,211,238,0.7),inset 0 1px 0 rgba(255,255,255,0.5)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:var(--glass);color:var(--white);border:1px solid var(--glass-border);text-decoration:none;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s}
+.btn-outline:hover{background:var(--glass-strong);border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,211,238,0.35)}
+.products-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;scroll-margin-top:80px}
+@media (max-width:768px){.products-section{padding:4rem 1.5rem}}
+.products-header{text-align:center;margin-bottom:var(--space-xl)}
+.products-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.25;background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.8rem}
+.products-sub{color:var(--text-dim);font-size:1.05rem;font-weight:500;line-height:1.85;max-width:640px;margin:0 auto}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.4rem;margin-top:var(--space-md)}
+.product-card{position:relative;padding:0;border-radius:18px;background:linear-gradient(180deg,rgba(15,23,42,0.7) 0%,rgba(2,6,23,0.9) 100%);border:1px solid rgba(34,211,238,0.18);backdrop-filter:blur(20px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);overflow:hidden;isolation:isolate;min-height:240px;display:flex;flex-direction:column}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,var(--cyan) 30%,var(--blue-bright) 70%,transparent 100%);opacity:0.7;transition:opacity 0.4s,height 0.4s}
+.product-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%),rgba(34,211,238,0.1),transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:0}
+.product-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.5);box-shadow:0 25px 50px rgba(0,0,0,0.5),0 0 50px rgba(34,211,238,0.12)}
+.product-card:hover::before{opacity:1;height:4px}
+.product-card:hover::after{opacity:1}
+.product-card-inner{padding:1.8rem 1.6rem 1.5rem;position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+.product-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.product-icon{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(34,211,238,0.15) 0%,rgba(59,130,246,0.08) 100%);border:1px solid rgba(34,211,238,0.3);display:grid;place-items:center;flex-shrink:0;transition:all 0.4s}
+.product-icon svg{width:26px;height:26px;color:var(--cyan);transition:color 0.4s}
+.product-card:hover .product-icon{background:linear-gradient(135deg,var(--cyan) 0%,var(--blue-bright) 100%);border-color:transparent;box-shadow:0 8px 20px rgba(34,211,238,0.4)}
+.product-card:hover .product-icon svg{color:var(--bg-0)}
+.product-num{font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;margin-right:auto;opacity:0.7;transition:opacity 0.4s}
+.product-card:hover .product-num{opacity:1}
+.product-title{font-size:1.15rem;font-weight:800;color:var(--white);margin-bottom:0.6rem;line-height:1.4;letter-spacing:-0.01em}
+.product-desc{color:var(--text-dim);font-size:0.92rem;line-height:1.8;font-weight:400;flex:1;margin-bottom:1rem}
+.product-features{list-style:none;padding:0;margin:0 0 1rem}
+.product-features li{font-size:0.83rem;color:var(--text-dim);padding-right:1.1rem;position:relative;line-height:1.7;margin-bottom:0.3rem}
+.product-features li::before{content:'';position:absolute;right:0;top:0.55em;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));box-shadow:0 0 6px rgba(34,211,238,0.6)}
+.product-features li strong{color:var(--cyan);font-weight:600}
+.product-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--cyan);background:linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(59,130,246,0.05) 100%);border:1px solid rgba(34,211,238,0.25);padding:0.35rem 0.8rem;border-radius:6px;text-transform:uppercase;font-weight:700;align-self:flex-start;transition:all 0.3s;text-decoration:none}
+.product-link::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:dotPulse 2s ease-in-out infinite}
+.product-link:hover{background:linear-gradient(135deg,rgba(34,211,238,0.15) 0%,rgba(59,130,246,0.1) 100%);border-color:rgba(34,211,238,0.5);transform:translateX(-3px)}
+@media (max-width:768px){.products-grid{grid-template-columns:1fr}.product-card-inner{padding:1.5rem 1.3rem 1.3rem}}
+.cta-section{text-align:center;padding:var(--space-2xl) var(--space-md);scroll-margin-top:80px}
+.cta-card{max-width:900px;margin:0 auto;padding:4rem 2rem;border-radius:24px;background:radial-gradient(circle at 50% 0%,rgba(34,211,238,0.2),transparent 70%),var(--glass);border:1px solid rgba(34,211,238,0.4);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(34,211,238,0.08) 50%,transparent 60%);animation:shimmer 4s linear infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.cta-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem;position:relative;background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative;font-size:1.05rem}
+footer{padding:2.5rem 3rem;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-mute);font-size:0.88rem;background:rgba(2,6,23,0.6);backdrop-filter:blur(10px)}
+footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var(--cyan);font-size:0.78rem;margin-top:0.4rem;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:var(--blue-deep);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+.ticker{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,0.92);backdrop-filter:blur(20px) saturate(150%);border-top:1px solid rgba(34,211,238,0.3);padding:0.6rem 0;overflow:hidden;z-index:50;font-family:'Share Tech Mono',monospace;font-size:0.75rem;box-shadow:0 -4px 20px rgba(0,0,0,0.4)}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker::before{right:0;background:linear-gradient(to left,rgba(2,6,23,1),transparent)}
+.ticker::after{left:0;background:linear-gradient(to right,rgba(2,6,23,1),transparent)}
+.ticker-track{display:inline-flex;gap:0;animation:tickerScroll 50s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:0.6rem;padding:0 1.2rem;border-right:1px solid rgba(34,211,238,0.15)}
+.ticker-item:last-child{border-right:none}
+.ticker-pair{color:var(--white);font-weight:700;font-size:0.82rem;letter-spacing:0.05em;min-width:60px}
+.ticker-signal{padding:0.15rem 0.6rem;border-radius:4px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;min-width:36px;text-align:center}
+.ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
+.ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
+.ticker-val{color:var(--cyan);font-weight:600;font-size:0.78rem;min-width:42px;text-align:right}
+@media (max-width:768px){nav{padding:1rem 1.2rem}.nav-links{display:none}}
+@media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
+</style>
+</head>
+<body>
+<div class="bg-3d"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <a href="/" class="logo"><div class="logo-mark"></div><span>رؤى</span></a>
+  <ul class="nav-links">
+    <li><a href="/">الرئيسية</a></li>
+    <li><a href="/news" class="active">رؤى الأخبار</a></li>
+    <li><a href="/trading">رؤى التداول</a></li>
+    <li><a href="/#contact">تواصل</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="btn-primary">ادخل المنصة</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-tag"><span class="dot"></span><span>رؤى الأخبار</span></div>
+  <h1 class="page-hero-title">رؤى الأخبار</h1>
+  <p class="page-hero-sub">محرك استخبارات مالية يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ — أخبار، تحليلات، تقارير، فيديو، وإنفوجرافيك بـ 5 لغات حيّة.</p>
+  <div class="page-hero-stats">
+    <div class="phs-item"><div class="phs-num">729+</div><div class="phs-lbl">مصدر مالي</div></div>
+    <div class="phs-item"><div class="phs-num">5</div><div class="phs-lbl">لغات حيّة</div></div>
+    <div class="phs-item"><div class="phs-num">411</div><div class="phs-lbl">مصدر رسمي</div></div>
+    <div class="phs-item"><div class="phs-num">7</div><div class="phs-lbl">أنواع فيديو</div></div>
+  </div>
+  <div class="page-hero-cta">
+    <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="btn-glow"><span>ادخل منصة رؤى الأخبار</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="/trading" class="btn-outline">استكشف رؤى التداول</a>
+  </div>
+</section>
+
+<section class="products-section reveal">
+  <div class="products-header">
+    <h2 class="products-title">منتجات رؤى الأخبار</h2>
+    <p class="products-sub">10 منتجات متكاملة تبني الاستخبارات المالية من المصادر العالمية</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><span class="product-num">٠١</span></div>
+      <h3 class="product-title">وكيل النشر المستقل</h3>
+      <p class="product-desc">ينتج أخباراً حصرية من مئات المصادر الرسمية المالية العالمية — لا يعيد نشر، بل يصنع محتوى أصلياً بـ 5 لغات.</p>
+      <ul class="product-features"><li><strong>إنتاج أصلي</strong> وليس إعادة نشر</li><li>5 لغات حيّة</li><li>تصنيف تلقائي للأثر السوقي</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><span class="product-num">٠٢</span></div>
+      <h3 class="product-title">أنابيب الأخبار</h3>
+      <p class="product-desc">تنتج آلاف الأخبار المجمّعة يومياً، تُحلّل، وتُولَّد لها صور تلقائياً، بـ 5 لغات.</p>
+      <ul class="product-features"><li><strong>آلاف الأخبار</strong> يومياً</li><li>صور تلقائية لكل خبر</li><li>تحليل أثر سوقي فوري</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/news" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V9M15 17v-4M21 17H3"/></svg></div><span class="product-num">٠٣</span></div>
+      <h3 class="product-title">أنابيب الإنفوجرافيك</h3>
+      <p class="product-desc">تنتج عشرات الإنفوجرافيك الاحترافي مع الصور يومياً، بكل اللغات.</p>
+      <ul class="product-features"><li><strong>عشرات إنفوجرافيك</strong> يومياً</li><li>64 محرك رسوم بيانية</li><li>تصدير بجودة عالية</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/infographics" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><span class="product-num">٠٤</span></div>
+      <h3 class="product-title">أنابيب تحليل الأسهم</h3>
+      <p class="product-desc">تُحلّل آلاف الأسهم يومياً بكل اللغات — تحليل فني وأساسي مع توصيات مدروسة.</p>
+      <ul class="product-features"><li><strong>آلاف الأسهم</strong> يومياً</li><li>تحليل فني + أساسي</li><li>توصيات مدروسة</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/stock-analysis" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div><span class="product-num">٠٥</span></div>
+      <h3 class="product-title">أنابيب التقارير الاستراتيجية</h3>
+      <p class="product-desc">تنتج عشرات التقارير والتحليلات والتقارير الاستراتيجية العميقة يومياً، بكل اللغات.</p>
+      <ul class="product-features"><li><strong>تقارير عميقة</strong> يومياً</li><li>تحليل قطاعي وأسبوعي</li><li>قوالب احترافية جاهزة</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/strategic-reports" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg></div><span class="product-num">٠٦</span></div>
+      <h3 class="product-title">أنابيب الفيديو</h3>
+      <p class="product-desc">تنتج عشرات الفيديوهات بأكثر من 7 أنواع يومياً، بكل اللغات.</p>
+      <ul class="product-features"><li><strong>7+ أنواع فيديو</strong> يومياً</li><li>مولّد آلياً بالذكاء الاصطناعي</li><li>تصدير متعدد الجودات</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/videos" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><span class="product-num">٠٧</span></div>
+      <h3 class="product-title">أنابيب المخاطر الجيوسياسية</h3>
+      <p class="product-desc">تنتج عشرات تحليلات المخاطر الجيوسياسية يومياً، بكل اللغات.</p>
+      <ul class="product-features"><li><strong>تحليلات جيوسياسية</strong> يومياً</li><li>خرائط تفاعلية</li><li>نماذج تأثير اقتصادي</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/geopolitical-risks" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M2 12h20"/></svg></div><span class="product-num">٠٨</span></div>
+      <h3 class="product-title">مركز الاستخبارات المالية العالمي</h3>
+      <p class="product-desc">مركز معلومات احترافي يجمع حقائق موثقة من 411 مصدراً رسمياً عالمياً (بنوك مركزية + هيئات إحصائية + وزارات مالية).</p>
+      <ul class="product-features"><li><strong>411 مصدر رسمي</strong></li><li>6 فئات للحقائق الاقتصادية</li><li>تتبع البنوك المركزية</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app/intelligence" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><span class="product-num">٠٩</span></div>
+      <h3 class="product-title">نظام ثقة المصادر</h3>
+      <p class="product-desc">شارة ثقة بجانب كل خبر تصنّف 729+ مصدراً عالمياً حسب الموثوقية والمصداقية التحريرية.</p>
+      <ul class="product-features"><li><strong>4 مستويات ثقة</strong></li><li>تصنيف تلقائي لكل مصدر</li><li>شفافية كاملة للمصدر</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+    <div class="product-card"><div class="product-card-inner">
+      <div class="product-header"><div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-7h3v5zM3 19a2 2 0 002 2h1v-7H3v5z"/></svg></div><span class="product-num">١٠</span></div>
+      <h3 class="product-title">المحتوى الصوتي والتكامل متعدد القنوات</h3>
+      <p class="product-desc">يحوّل أهم الأخبار إلى ملخصات صوتية بـ 5 لغات — استمع وأنت تتنقّل. مع نشر تلقائي على الموقع والبريد والقنوات.</p>
+      <ul class="product-features"><li><strong>ملخصات صوتية</strong> بـ 5 لغات</li><li>نشر تلقائي على القنوات</li><li>تكامل مع البريد الإلكتروني</li></ul>
+      <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="product-link">ادخل المنتج</a>
+    </div></div>
+  </div>
+</section>
+
+<section class="cta-section reveal">
+  <div class="cta-card">
+    <h2 class="cta-title">جرّب رؤى الأخبار الآن</h2>
+    <p class="cta-sub">ادخل المنصة مباشرة واستكشف آلاف الأخبار والتحليلات والتقارير في الزمن الحقيقي.</p>
+    <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="btn-glow"><span>ادخل منصة رؤى الأخبار</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<footer><p>&copy; 2026 رؤى — بنية تحتية للاستخبارات المالية.</p><p class="tagline">ببصيرة نحو الأسواق</p></footer>
+
+<div class="ticker" role="marquee" aria-label="أسعار الأسواق الحية">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+3.4%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+3.4%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+0.9%</span></div>
+  </div>
+</div>
+
+<script>
+const io=new IntersectionObserver((e)=>{e.forEach((x)=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+document.querySelectorAll('.product-card').forEach((card)=>{card.addEventListener('mousemove',(e)=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width;const y=(e.clientY-r.top)/r.height;card.style.setProperty('--mx',(x*100)+'%');card.style.setProperty('--my',(y*100)+'%');});});
+</script>
+</body>
+</html>
