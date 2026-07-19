@@ -4355,5 +4355,78 @@ class SecurityFooterAnimations {
 });
 
     </script>
+
+<script>
+(function() {
+    'use strict';
+    const targetsEl = document.getElementById('radarTargets');
+    const countEl   = document.getElementById('radarTargetsCount');
+    const sweepEl   = document.getElementById('radarSweep');
+    const clockEl   = document.getElementById('radarClock');
+    const statusEl  = document.getElementById('radarStatus');
+    if (!targetsEl) return;
+
+    const SWEEP_DURATION = 4500;
+    let activeTargets = [];
+    const MAX_TARGETS = 7;
+
+    function rand(min, max) { return min + Math.random() * (max - min); }
+
+    function spawnTarget() {
+        if (activeTargets.length >= MAX_TARGETS) return;
+        const r = rand(15, 92);
+        const angle = rand(0, Math.PI * 2);
+        const x = 50 + Math.cos(angle) * r;
+        const y = 50 + Math.sin(angle) * r;
+
+        const t = document.createElement('div');
+        const roll = Math.random();
+        if (roll < 0.1)      t.className = 'target hostile';
+        else if (roll < 0.3) t.className = 'target neutral';
+        else                 t.className = 'target';
+        t.style.left = x + '%';
+        t.style.top  = y + '%';
+
+        const labels = ['GOLD', 'BTC', 'EUR', 'OIL', 'SP500', 'NIKKEI', 'GBP', 'ETH', 'SILVER', 'NASDAQ'];
+        const lbl = labels[Math.floor(Math.random() * labels.length)];
+        t.setAttribute('title', lbl);
+
+        targetsEl.appendChild(t);
+        activeTargets.push({ el: t, label: lbl, born: performance.now() });
+
+        setTimeout(() => {
+            t.remove();
+            activeTargets = activeTargets.filter(a => a.el !== t);
+        }, 3500);
+    }
+
+    setInterval(spawnTarget, 700);
+    for (let i = 0; i < 3; i++) setTimeout(spawnTarget, i * 200);
+
+    function pad(n) { return n.toString().padStart(2, '0'); }
+    function updateLoop() {
+        if (countEl) countEl.textContent = activeTargets.length.toString().padStart(2, '0');
+        if (clockEl) {
+            const d = new Date();
+            clockEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+        }
+        if (sweepEl) {
+            const elapsed = (performance.now() % SWEEP_DURATION) / SWEEP_DURATION;
+            const deg = Math.floor(elapsed * 360);
+            sweepEl.textContent = deg.toString().padStart(3, '0') + '°';
+        }
+        requestAnimationFrame(updateLoop);
+    }
+    updateLoop();
+
+    const statuses = ['ACTIVE', 'SCANNING', 'TRACKING', 'LOCKED'];
+    setInterval(() => {
+        if (statusEl) {
+            statusEl.textContent = statuses[Math.floor(Math.random() * statuses.length)];
+        }
+    }, 3500);
+})();
+</script>
+
 </body>
 </html>
