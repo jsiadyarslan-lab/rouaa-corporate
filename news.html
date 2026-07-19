@@ -158,29 +158,31 @@ nav{
   background:rgba(2,6,23,0.55);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--glass-border);
+  border-bottom:none;  /* REMOVE straight line */
   transform:translateY(-100%);
   animation:navDown 0.8s ease 0.3s forwards;
 }
 @keyframes navDown{to{transform:translateY(0)}}
-/* Semicircular notch in nav bottom border around logo */
+/* Bottom border with semicircular notch around logo */
 nav::after{
   content:'';
   position:absolute;
-  bottom:-1px;
-  left:3rem;
-  width:100px;
-  height:50px;
-  border-radius:0 0 50px 50px;
-  background:rgba(2,6,23,0.95);
-  border:1px solid var(--glass-border);
-  border-top:none;
+  bottom:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:var(--glass-border);
   z-index:99;
   pointer-events:none;
-  transform:translateX(-2px);
-  /* Mask out the straight border behind the notch */
-  -webkit-mask:radial-gradient(circle 50px at 50% 0%, transparent 99%, black 100%);
-  mask:radial-gradient(circle 50px at 50% 0%, transparent 99%, black 100%);
+  /* Cut semicircle where logo is (left:3rem area, 100px wide) */
+  -webkit-mask:
+    linear-gradient(black, black),
+    radial-gradient(circle 50px at calc(3rem + 50px) 0px, transparent 50px, black 51px);
+  -webkit-mask-composite:destination-out;
+  mask:
+    linear-gradient(black, black),
+    radial-gradient(circle 50px at calc(3rem + 50px) 0px, transparent 50px, black 51px);
+  mask-composite:subtract;
 }
 .logo{
   position:relative;
