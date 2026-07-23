@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="assets/css/layout.css">
 
 <style>
-/* === Page-specific styles for news.html === */
+/* === Page-specific styles for news.html — هوية رؤى الخالصة === */
 .page-hero {
   padding: var(--space-2xl) 0 var(--space-xl);
   text-align: center;
@@ -36,16 +36,16 @@
   gap: var(--space-xl);
   flex-wrap: wrap;
   justify-content: center;
-  padding: var(--space-lg) 0;
+  padding: var(--space-md) 0;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   width: 100%;
-  max-width: 720px;
+  max-width: 640px;
   margin: var(--space-sm) 0;
 }
 .page-hero-cta {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -53,39 +53,28 @@
   .page-hero-stats { gap: var(--space-md); }
 }
 
-/* === Products grid === */
+/* === Products grid — جراحي، لا tilt === */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--space-md);
   margin-top: var(--space-xl);
 }
 .product-card {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: var(--r-lg);
   padding: var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  transition: all var(--dur) var(--ease);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
   position: relative;
-  overflow: hidden;
-}
-.product-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 60%, rgba(96,165,250,0.04));
-  opacity: 0;
-  transition: opacity var(--dur) var(--ease);
-  pointer-events: none;
 }
 .product-card:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-3px);
+  border-color: var(--border-accent);
+  background: #0e131c;
 }
-.product-card:hover::before { opacity: 1; }
 
 .product-header {
   display: flex;
@@ -93,27 +82,27 @@
   align-items: center;
 }
 .product-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(59,130,246,0.08);
-  border: 1px solid var(--border-soft);
+  background: var(--accent-faint);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--r-md);
-  color: var(--accent-glow);
+  color: var(--accent);
 }
-.product-icon svg { width: 22px; height: 22px; }
+.product-icon svg { width: 20px; height: 20px; }
 .product-num {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   letter-spacing: var(--ls-mono);
   color: var(--text-faint);
 }
 .product-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1875rem;
+  font-weight: 500;
   color: var(--text-primary);
   margin-top: var(--space-2xs);
 }
@@ -126,15 +115,15 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.3rem;
   padding-top: var(--space-sm);
   border-top: 1px solid var(--border-subtle);
   margin-top: var(--space-2xs);
 }
 .product-features li {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  padding-right: 1.2rem;
+  padding-right: 1rem;
   position: relative;
 }
 .product-features li::before {
@@ -142,25 +131,24 @@
   position: absolute;
   right: 0;
   color: var(--accent);
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .product-features li strong {
-  color: var(--accent-glow);
-  font-weight: 600;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 .product-link {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-2xs);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--accent-glow);
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
   transition: gap var(--dur) var(--ease);
 }
-.product-card:hover .product-link { gap: 0.7rem; }
+.product-card:hover .product-link { gap: 0.6rem; }
 
-/* === CTA section (Railway-style: centered, single CTA) === */
 .cta-block {
   text-align: center;
   padding: var(--space-section) 0;
@@ -172,7 +160,7 @@
 .cta-block p {
   color: var(--text-muted);
   font-size: var(--fs-lead);
-  max-width: 50ch;
+  max-width: 48ch;
   margin: 0 auto var(--space-lg);
 }
 </style>
