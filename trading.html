@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a14">
+<title>رؤى التداول — ذكاء اصطناعي للقرار والتنفيذ | رُؤى</title>
+<meta name="description" content="رؤى التداول — منظومة ذكاء اصطناعي متكاملة لاتخاذ القرار والتنفيذ. 11 منتجاً: مجلس ذكي بـ 10 أدوار، منفّذ بـ 15 فحص أمان، ووكلاء مستقلون.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="رؤى التداول — ذكاء اصطناعي للقرار والتنفيذ">
+<meta property="og:description" content="11 منتجاً يحوّل الاستخبارات المالية إلى قرارات وتنفيذ ذكي.">
+<meta property="og:locale" content="ar_AR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+
+<style>
+.page-hero {
+  padding: var(--space-2xl) 0 var(--space-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+.page-hero-stats {
+  display: flex;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+  max-width: 720px;
+  margin: var(--space-sm) 0;
+}
+.page-hero-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .page-hero-stats { gap: var(--space-md); }
+}
+
+/* === Status bar (مميز لـ trading: إحساس تقني حي) === */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0.75rem 1.25rem;
+  background: rgba(59,130,246,0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.status-bar .live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #4ade80;
+  font-weight: 700;
+  letter-spacing: var(--ls-caps);
+}
+.status-bar .live::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.status-bar .sep { color: var(--text-faint); }
+
+/* === Products grid (نفس نمط news.html) === */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+.product-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: all var(--dur) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(251,191,36,0.04));
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.product-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+.product-card:hover::before { opacity: 1; }
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(251,191,36,0.06);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  color: var(--accent-gold);
+}
+.product-icon svg { width: 22px; height: 22px; }
+.product-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: var(--ls-mono);
+  color: var(--text-faint);
+}
+.product-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: var(--space-2xs);
+}
+.product-desc {
+  color: var(--text-body);
+  font-size: 0.9375rem;
+  line-height: var(--lh-body);
+}
+.product-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-2xs);
+}
+.product-features li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding-right: 1.2rem;
+  position: relative;
+}
+.product-features li::before {
+  content: '←';
+  position: absolute;
+  right: 0;
+  color: var(--accent-gold);
+  opacity: 0.7;
+}
+.product-features li strong {
+  color: var(--accent-glow);
+  font-weight: 600;
+}
+.product-link {
+  margin-top: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  transition: gap var(--dur) var(--ease);
+}
+.product-card:hover .product-link { gap: 0.7rem; }
+
+.cta-block {
+  text-align: center;
+  padding: var(--space-section) 0;
+}
+.cta-block h2 {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--space-sm);
+}
+.cta-block p {
+  color: var(--text-muted);
+  font-size: var(--fs-lead);
+  max-width: 50ch;
+  margin: 0 auto var(--space-lg);
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+<div class="bg-ambient"></div>
+<div class="bg-grid"></div>
+
+<!-- ============= NAV ============= -->
+<nav class="nav" aria-label="القائمة الرئيسية">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="رؤى — الصفحة الرئيسية">
+      <div class="logo-svg" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="44" height="44">
+          <defs>
+            <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#B388FF"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+            <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B388FF" stop-opacity="0.8"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/></radialGradient>
+            <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.9"/><stop offset="50%" stop-color="#B388FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/></radialGradient>
+            <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#000000" stop-opacity="0.7"/><stop offset="70%" stop-color="#0a0a1a" stop-opacity="0.3"/><stop offset="100%" stop-color="#1a1a2e" stop-opacity="0"/></radialGradient>
+            <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#B388FF" stop-opacity="0"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.15"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0.5"/></linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <style>
+            .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+            .center-dot { fill: #1a1a2e; } .center-glow { fill: url(#centerGrad); }
+            @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+            @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+            .node { animation: pulse 2.5s ease-in-out infinite; }
+            .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+            @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+            @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+            .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+            .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+            @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+            .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+            @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+            .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+            .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+          </style>
+          <rect width="200" height="200" rx="20" fill="#0a0a12"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(179,136,255,0.12)" stroke-width="0.5" class="range-ring" style="animation-delay:1s"/>
+          <g class="network"><line class="network-line" x1="100" y1="20" x2="147.02" y2="35.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="147.02" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="100" y2="180"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="147.02" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="75.28" x2="176.08" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="124.72" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="164.72" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="35.28"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="52.98" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="23.92" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="75.28" x2="52.98" y2="35.28"/></g>
+          <g class="radar-group"><path fill="url(#radarGrad)" d="M 100,100 L 100,5 A 95,95 0 0,1 195,100 Z"/><line x1="100" y1="100" x2="100" y2="5" stroke="#B388FF" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/><circle cx="100" cy="5" r="2" fill="#06B6D4" opacity="0.8"/></g>
+          <circle class="center-glow" cx="100" cy="100" r="25"/>
+          <circle class="center-dot" cx="100" cy="100" r="8"/>
+          <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="#fff" opacity="0.95" letter-spacing="2" style="text-shadow:0 0 10px rgba(179,136,255,0.6);">R</text>
+        </svg>
+      </div>
+      <span class="nav-logo-text">رؤى</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="news.html">رؤى الأخبار</a></li>
+      <li><a href="trading.html" class="active">رؤى التداول</a></li>
+      <li><a href="services.html">الخدمات</a></li>
+      <li><a href="index.html#contact">تواصل</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="https://roua-trading-production.up.railway.app" target="_blank" rel="noopener" class="btn btn-primary">ادخل المنصة</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="container">
+
+<!-- ============= PAGE HERO ============= -->
+<section class="page-hero">
+  <div class="badge" style="background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.30); color: var(--accent-gold);">
+    <span class="badge-dot" style="background: var(--accent-gold); box-shadow: 0 0 8px var(--accent-gold);"></span>
+    <span>رؤى التداول</span>
+  </div>
+  <h1 class="hero-title" style="font-size: var(--fs-h1);">رؤى التداول</h1>
+  <p class="lead" style="max-width: 60ch; text-align: center;">
+    منظومة ذكاء اصطناعي متكاملة لاتخاذ القرار والتنفيذ — مجلس ذكي بـ 10 أدوار،
+    منفّذ بـ 15 فحص أمان، ووكلاء مستقلون بزمن استجابة أقل من 5 مللي ثانية.
+  </p>
+
+  <div class="status-bar">
+    <span class="live">LIVE</span>
+    <span class="sep">·</span>
+    <span>MT5 Bridge: <strong style="color:#4ade80">Online</strong></span>
+    <span class="sep">·</span>
+    <span>Latency: <strong style="color:var(--accent-glow)">4.2ms</strong></span>
+    <span class="sep">·</span>
+    <span>Active Sessions: <strong style="color:var(--accent-glow)">14</strong></span>
+  </div>
+
+  <div class="page-hero-stats">
+    <div class="stat"><span class="stat-num">10</span><span class="stat-lbl">أدوار AI</span></div>
+    <div class="stat"><span class="stat-num">15</span><span class="stat-lbl">فحص أمان</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-lbl">وكلاء مستقلون</span></div>
+    <div class="stat"><span class="stat-num">83</span><span class="stat-lbl">أداة رسم</span></div>
+  </div>
+
+  <div class="page-hero-cta">
+    <a href="https://roua-trading-production.up.railway.app" target="_blank" rel="noopener" class="btn btn-primary">
+      <span>ادخل منصة رؤى التداول</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="news.html" class="btn btn-ghost">استكشف رؤى الأخبار</a>
+  </div>
+</section>
+
+<!-- ============= PRODUCTS GRID (11 منتج — كل المحتوى محفوظ) ============= -->
+<section class="section reveal" style="padding-top: 0;">
+  <div class="section-header">
+    <span class="section-tag">المنتجات</span>
+    <h2>11 منتجاً يحوّل الاستخبارات إلى قرار وتنفيذ</h2>
+    <p>من المجلس الذكي إلى جسر MetaTrader 5 — منظومة كاملة بذكاء مستقل وتنفيذ حسب قواعدك.</p>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- 01 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="5" cy="10" r="2"/><circle cx="19" cy="10" r="2"/></svg></div>
+        <span class="product-num">٠١</span>
+      </div>
+      <h3 class="product-title">المجلس الذكي</h3>
+      <p class="product-desc">10 أدوار ذكاء اصطناعي متخصصة تتعاون لتحليل البيانات، تقييم السيناريوهات، وتحديد الأثر السوقي.</p>
+      <ul class="product-features">
+        <li><strong>8 أدوار AI</strong> + سوق تنبؤي + سكانر</li>
+        <li>11+ نموذجاً لغوياً</li>
+        <li>حلقة تعلّم ذاتي</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/council" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 02 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <span class="product-num">٠٢</span>
+      </div>
+      <h3 class="product-title">المنفّذ الذكي</h3>
+      <p class="product-desc">"الجندي في الميدان" — يراقب الأسعار وينفّذ حسب قواعد المستخدم فور تحقق الشروط، بـ 15 فحص أمان.</p>
+      <ul class="product-features">
+        <li><strong>15+ فحص أمان</strong> قبل التنفيذ</li>
+        <li>حجم مركز ذكي (5 مستويات)</li>
+        <li>عزل كامل لكل مستخدم</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 03 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.7 1 6.3 2.7"/><path d="M21 3v6h-6"/></svg></div>
+        <span class="product-num">٠٣</span>
+      </div>
+      <h3 class="product-title">وكيل التداول المستقل</h3>
+      <p class="product-desc">"العقل المدبّر" — يحلّل السوق، يقيّم الإشارات، يحسب المخاطر، ينفّذ، ويتتبّع الأداء في دورة كاملة.</p>
+      <ul class="product-features">
+        <li><strong>8 استراتيجيات</strong> مختلفة</li>
+        <li>6 حالات تشغيل</li>
+        <li>تعلم معزز وتكيّف</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/autonomous-trader" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 04 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <span class="product-num">٠٤</span>
+      </div>
+      <h3 class="product-title">اللاسع</h3>
+      <p class="product-desc">وكيل تداول فائق السرعة — يستمع لتدفقات الأسعار مباشرة، يحسب خلل توازن دفتر الأوامر، ينفّذ في أقل من 5 مللي ثانية.</p>
+      <ul class="product-features">
+        <li><strong>تنفيذ في &lt;5ms</strong></li>
+        <li>إشارة خلل التوازن</li>
+        <li>لا اتصال شبكة في المسار الحرج</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 05 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
+        <span class="product-num">٠٥</span>
+      </div>
+      <h3 class="product-title">وكيل المحتوى</h3>
+      <p class="product-desc">منصة تسويق محتوى ذكي ثنائية اللغة — من تجميع الخبر إلى نشر تقرير احترافي جاهز.</p>
+      <ul class="product-features">
+        <li><strong>10 أنواع محتوى</strong> × 11 فئة</li>
+        <li>4 مراحل: تجميع ← توليد ← تحسين ← نشر</li>
+        <li>تقييم جودة على 5 محاور</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/content-agent" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 06 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <span class="product-num">٠٦</span>
+      </div>
+      <h3 class="product-title">لوحة الشارت الذكية</h3>
+      <p class="product-desc">83 أداة رسم · 15 مؤشر · 64 محرك ذكي في شارت واحد — قدرات متقدمة مصممة خصيصاً لرؤى.</p>
+      <ul class="product-features">
+        <li><strong>83 أداة رسم</strong> في 11 فئة</li>
+        <li>15 مؤشر فني</li>
+        <li>إكمال الأنماط التنبؤي</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/trading" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 07 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <span class="product-num">٠٧</span>
+      </div>
+      <h3 class="product-title">المختبر العصبي</h3>
+      <p class="product-desc">5 تبويبات متخصصة لاختبار وتحسين الاستراتيجيات على البيانات التاريخية.</p>
+      <ul class="product-features">
+        <li><strong>اختبار عكسي</strong> + مُحسّن</li>
+        <li>مقارنة استراتيجيتين</li>
+        <li>سرب وكلاء متعددين</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/neural" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 08 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+        <span class="product-num">٠٨</span>
+      </div>
+      <h3 class="product-title">الأسواق التنبؤية</h3>
+      <p class="product-desc">سوق تنبؤي كعضو تاسع في المجلس الذكي — حشود ذكية بأموال حقيقية.</p>
+      <ul class="product-features">
+        <li><strong>تحليل فجوة التوقعات</strong></li>
+        <li>تعزيز الإشارة للاتفاق/التعارض</li>
+        <li>تكامل مع قرار المجلس</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/prediction-market" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 09 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <span class="product-num">٠٩</span>
+      </div>
+      <h3 class="product-title">ملاذ المحفظة</h3>
+      <p class="product-desc">تحليل مخاطر شامل عبر كل حساباتك المرتبطة — درجة مخاطرة، قيمة الخطر، وتوصيات ذكية.</p>
+      <ul class="product-features">
+        <li><strong>درجة المخاطرة</strong> (0-100) + قيمة الخطر</li>
+        <li>مخاطرة التركيز + درجة التنويع</li>
+        <li>توصيات ذكية لإعادة التوازن</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/sanctuary" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 10 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <span class="product-num">١٠</span>
+      </div>
+      <h3 class="product-title">مساعد التداول الذكي</h3>
+      <p class="product-desc">"المايسترو" — يجمع كل طبقات الذكاء في واجهة دردشة واحدة، بـ 14 خدمة متخصصة.</p>
+      <ul class="product-features">
+        <li><strong>14 خدمة</strong> متخصصة</li>
+        <li>توجيه لغوي ذكي (32 لغة)</li>
+        <li>تفسير مالي + مسرد مدمج</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard/ai" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+    <!-- 11 -->
+    <article class="product-card">
+      <div class="product-header">
+        <div class="product-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/><path d="M8 14l4 4 4-4"/></svg></div>
+        <span class="product-num">١١</span>
+      </div>
+      <h3 class="product-title">جسر المنفّذ</h3>
+      <p class="product-desc">يحوّل ميتاتريدر 5 إلى عقدة تنفيذ بعيدة للمجلس الذكي — تنفيذ مباشر على وسيطك.</p>
+      <ul class="product-features">
+        <li><strong>9 نقاط اتصال</strong> كاملة</li>
+        <li>مراقبة نبض كل 5 دقائق</li>
+        <li>رموز لكل مستخدم + ذاكرة مؤقتة</li>
+      </ul>
+      <a href="https://roua-trading-production.up.railway.app/dashboard" target="_blank" rel="noopener" class="product-link">ادخل المنتج <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============= CTA ============= -->
+<section class="cta-block reveal">
+  <span class="section-tag" style="justify-content:center;">جاهز للدخول؟</span>
+  <h2>جرّب رؤى التداول الآن</h2>
+  <p>ادخل المنصة مباشرة واستكشف المجلس الذكي والمنفّذ الذكي والوكلاء الثلاثة. التنفيذ يبقى دائماً حسب قواعدك.</p>
+  <a href="https://roua-trading-production.up.railway.app" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 1rem; padding: 0.9rem 1.8rem;">
+    <span>ادخل منصة رؤى التداول</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+</main>
+
+<!-- ============= FOOTER ============= -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-logo-text" style="font-size: 1.25rem;">رؤى</span>
+      <p>بنية تحتية مالية للمؤسسات — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
+      <p class="mono" style="color: var(--text-faint); margin-top: 0.5rem;">v0.9.0-beta · Q3 2025</p>
+    </div>
+    <div class="footer-col">
+      <h4>المنتجات</h4>
+      <ul>
+        <li><a href="news.html">رؤى الأخبار</a></li>
+        <li><a href="trading.html">رؤى التداول</a></li>
+        <li><a href="services.html">كل الخدمات</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>الشركة</h4>
+      <ul>
+        <li><a href="#">من نحن</a></li>
+        <li><a href="#">المدونة</a></li>
+        <li><a href="index.html#contact">تواصل</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>قانوني</h4>
+      <ul>
+        <li><a href="#">سياسة الخصوصية</a></li>
+        <li><a href="#">شروط الخدمة</a></li>
+        <li><a href="#">الأمان</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 رؤى — جميع الحقوق محفوظة</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<!-- ============= TICKER ============= -->
+<div class="ticker" aria-label="شريط الأسعار المباشر">
+  <div class="ticker-label"><span class="dot"></span><span>LIVE</span></div>
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL WTI</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">↑</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+3.4%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL WTI</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">↑</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+3.4%</span></div>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
