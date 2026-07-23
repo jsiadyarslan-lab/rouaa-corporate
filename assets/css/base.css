@@ -1,30 +1,27 @@
 /* ============================================================
-   رؤى · Base — Reset + Typography Foundation
+   رؤى · Base — مطابق لـ Railway
    ============================================================ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  background: var(--bg-base);
-  color: var(--text-primary);
+  background: var(--bg);
+  color: var(--text);
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--text-body);
-  background: var(--bg-base);
+  color: var(--text);
+  background: var(--bg);
   overflow-x: hidden;
-  padding-bottom: 36px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* === Links === */
 a {
   color: inherit;
   text-decoration: none;
@@ -33,95 +30,84 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 1px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 3px;
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: var(--radius-btn);
 }
 
-/* === Headings — IBM Plex Sans Arabic === */
+/* === Headings — Serif مثل Railway === */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  color: var(--text-primary);
-  line-height: var(--lh-tight);
-  letter-spacing: var(--ls-tight);
-  font-weight: 600;
+  color: var(--text-bright);
+  font-weight: 500;
 }
 
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); font-weight: 500; }
-h3 { font-size: var(--fs-h3); font-weight: 500; }
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+}
 
-p { line-height: var(--lh-body); }
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+h2.large {
+  font-size: var(--fs-h2-lg);
+  letter-spacing: var(--ls-h2-lg);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+p { line-height: var(--lh-body); color: var(--text-dim); }
 
 .lead {
   font-size: var(--fs-lead);
-  line-height: var(--lh-body);
-  color: var(--text-body);
-  max-width: 62ch;
+  line-height: var(--lh-lead);
+  color: var(--text-dim);
+  max-width: 740px;
 }
 
-.mono {
-  font-family: var(--font-mono);
-  letter-spacing: var(--ls-mono);
-  font-size: var(--fs-mono);
-}
+.small { font-size: var(--fs-small); color: var(--text-mute); line-height: 1.5; }
 
-/* === Section tag — قراءة لوحة قيادة === */
-.section-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: var(--ls-caps);
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--space-md);
-}
+.mono { font-family: var(--font-mono); font-size: var(--fs-mono); }
 
-.section-tag::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-/* === Container === */
+/* === Container — Railway pattern === */
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--container-pad);
+  padding: 0 var(--container-pad-x);
 }
 
-/* === Selection === */
-::selection {
-  background: var(--accent);
-  color: var(--bg-base);
+@media (min-width: 768px) {
+  .container { padding: 0 var(--container-pad-md); }
 }
 
-/* === Scrollbar === */
+::selection { background: var(--link); color: var(--bg); }
+
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-deep); }
-::-webkit-scrollbar-thumb { background: rgba(96,165,250,0.15); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(96,165,250,0.3); }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
-/* === Reveal — بطيء وهادئ === */
+/* === Reveal === */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--dur-reveal) var(--ease), transform var(--dur-reveal) var(--ease);
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

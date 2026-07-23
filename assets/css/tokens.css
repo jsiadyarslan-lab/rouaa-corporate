@@ -1,82 +1,74 @@
 /* ============================================================
-   رؤى · Design Tokens — Pure Rouaa Identity
-   فلسفة "المرصد": ظلام عميق + مصدر ضوء واحد (الرادار)
+   رؤى · Design Tokens — نسخ Railway حرفياً
+   كل القيم من railway.com الفعلي
    ============================================================ */
 
 :root {
-  /* === Colors — لون مميز واحد فقط === */
-  --bg-base:      #060912;   /* ظلام المرصد — أزرق-أسود عميق */
-  --bg-elevated:  #0c1018;   /* كروت وأقسام مرتفعة */
-  --bg-deep:      #030509;   /* أعمق — footer، أقسام مظلمة */
-  --bg-glow:      rgba(96,165,250,0.06);  /* وهج الرادار الخلفي */
+  /* === Colors — من Railway DOM مباشرة === */
+  --bg:              #13111c;   /* خلفية الصفحة الأساسية */
+  --bg-card:         #1b2132;   /* بطاقة قسم */
+  --bg-card-2:       #0d0c14;   /* بطاقة أعمق */
+  --bg-purple:       #55394f;   /* قسم بنفسجي محمر */
+  --bg-oatmeal:      #f5f0e8;   /* قسم فاتح (نادر) */
 
-  --accent:        #60a5fa;   /* الأزرق السماوي — لون رؤى الوحيد */
-  --accent-bright: #93c5fd;
-  --accent-dim:    #3b82f6;
-  --accent-soft:   rgba(96,165,250,0.10);
-  --accent-faint:  rgba(96,165,250,0.04);
+  --text:            #f7f7f8;
+  --text-bright:     #ffffff;
+  --text-dim:        rgba(247, 247, 248, 0.80);
+  --text-mute:       #878593;
 
-  --text-primary: #f1f5f9;   /* أبيض مائل للأزرق — أقل حدّة من #fff */
-  --text-body:    rgba(241,245,249,0.78);
-  --text-muted:   rgba(241,245,249,0.50);
-  --text-faint:   rgba(241,245,249,0.30);
+  --border-inset:    rgba(255, 255, 255, 0.20);   /* الظل الداخلي المميز لـ Railway */
+  --border-inset-soft: rgba(255, 255, 255, 0.10);
 
-  --border-subtle: rgba(241,245,249,0.06);
-  --border-soft:   rgba(241,245,249,0.10);
-  --border-accent: rgba(96,165,250,0.25);
+  --accent:          #ffffff;   /* Railway لا يستخدم أكسنت لوني صريح */
+  --link:            #bf93ec;   /* لافندر للروابط */
+  --link-2:          #f9a8d4;   /* وردي للروابط الثانوية */
 
-  /* === Typography — هوية رؤى الصوتية === */
-  --font-display: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
-  --font-body:    'Cairo', 'IBM Plex Sans Arabic', sans-serif;
-  --font-mono:    'Share Tech Mono', ui-monospace, monospace;
+  /* === Typography — Railway حرفياً === */
+  --font-display: 'Amiri', 'Noto Naskh Arabic', serif;   /* بديل IBM Plex Serif */
+  --font-body:    'Cairo', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
-  --fs-h1:    clamp(2.5rem, 5.5vw, 4rem);
-  --fs-h2:    clamp(1.75rem, 3vw, 2.25rem);
-  --fs-h3:    clamp(1.25rem, 1.6vw, 1.5rem);
-  --fs-body:  1.0625rem;
-  --fs-small: 0.875rem;
-  --fs-mono:  0.8125rem;
-  --fs-lead:  clamp(1.0625rem, 1.3vw, 1.25rem);
+  /* أحجام خطوط مطابقة لـ Railway */
+  --fs-h1:    54px;
+  --fs-h2:    36px;
+  --fs-h2-lg: 40px;
+  --fs-h3:    24px;
+  --fs-lead:  20px;
+  --fs-body:  16px;
+  --fs-small: 14px;
+  --fs-mono:  13px;
 
-  --lh-tight: 1.2;
-  --lh-snug:  1.4;
-  --lh-body:  1.75;
+  /* إزاحات سلبية مثل Railway بالضبط */
+  --ls-h1:    -1.96px;
+  --ls-h2:    -0.72px;
+  --ls-h2-lg: -0.80px;
+  --ls-body:  0;
+  --ls-mono:  0;
 
-  --ls-tight:  -0.015em;
-  --ls-normal: 0;
-  --ls-mono:   0.06em;
-  --ls-caps:   0.16em;
+  --lh-h1:    1.12;   /* 60.48 / 54 */
+  --lh-h2:    1.33;   /* 48 / 36 */
+  --lh-body:  1.75;   /* 28 / 16 */
+  --lh-lead:  1.4;    /* 28 / 20 */
 
-  /* === Spacing — فراغ سخي === */
-  --space-3xs: 0.25rem;
-  --space-2xs: 0.5rem;
-  --space-xs:  0.75rem;
-  --space-sm:  1rem;
-  --space-md:  1.5rem;
-  --space-lg:  2rem;
-  --space-xl:  3rem;
-  --space-2xl: 4.5rem;
-  --space-3xl: 6rem;
-  --space-section: clamp(5rem, 10vw, 8rem);
+  /* === Layout — Railway حرفياً === */
+  --container-max:    1696px;
+  --container-pad-x:  16px;
+  --container-pad-md: 32px;
+  --inner-max:        1160px;
 
-  --container-max: 1200px;
-  --container-pad: 2rem;
+  --radius-card: 16px;     /* rounded-2xl */
+  --radius-btn:  6px;
+  --radius-pill: 999px;
 
-  /* === Radius — متّسق === */
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-pill: 999px;
+  /* === Section pattern — Railway: كل قسم بطاقة === */
+  --section-gap:    0;     /* الأقسام تلصق ببعضها */
+  --card-pad:       16px;  /* padding داخلي للبطاقة */
 
-  /* === Shadows — خفيفة جداً === */
-  --shadow-card: 0 1px 0 rgba(255,255,255,0.02) inset;
-  --shadow-glow: 0 0 80px rgba(96,165,250,0.15);
+  /* === Shadow — السر: ظل داخلي رفيع === */
+  --shadow-inset: inset 0 0 0 1.5px var(--border-inset);
+  --shadow-inset-soft: inset 0 0 0 1px var(--border-inset-soft);
 
-  /* === Transitions — بطيئة وهادئة === */
+  /* === Transitions === */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --dur-fast: 0.15s;
-  --dur: 0.25s;
-  --dur-slow: 0.6s;
-  --dur-reveal: 0.9s;
+  --dur:  0.2s;
 }
