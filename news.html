@@ -9,46 +9,216 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg-0:#020617;--bg-1:#0a1530;--blue:#3b82f6;--blue-bright:#60a5fa;--blue-glow:#93c5fd;--blue-deep:#1e3a8a;--cyan:#22d3ee;--gold:#fbbf24;--gold-bright:#fde047;--white:#f8fafc;--text-dim:rgba(248,250,252,0.80);--text-mute:rgba(248,250,252,0.62);--space-xs:0.5rem;--space-sm:1rem;--space-md:1.5rem;--space-lg:2rem;--space-xl:3rem;--space-2xl:4rem;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;--glass:rgba(255,255,255,0.04);--glass-strong:rgba(255,255,255,0.07);--glass-border:rgba(96,165,250,0.22);--glass-border-strong:rgba(96,165,250,0.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg-0);color:var(--white);font-family:'Cairo',-apple-system,sans-serif;overflow-x:hidden;scroll-behavior:smooth;line-height:1.7;padding-bottom:48px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.bg-3d{position:fixed;inset:0;z-index:-1;perspective:1200px;overflow:hidden;background:radial-gradient(ellipse at 20% 10%,rgba(34,211,238,0.15),transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(59,130,246,0.12),transparent 55%),radial-gradient(ellipse at 50% 50%,rgba(30,58,138,0.22),transparent 70%),linear-gradient(180deg,#020617 0%,#050b1f 50%,#020617 100%)}
+.bg-3d::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(96,165,250,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,0.05) 1px,transparent 1px);background-size:80px 80px;transform:rotateX(60deg) translateZ(0);animation:gridScroll 20s linear infinite}
+.bg-3d::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(34,211,238,0.12),transparent 35%),radial-gradient(circle at 70% 60%,rgba(59,130,246,0.10),transparent 30%);animation:blobPulse 8s ease-in-out infinite alternate}
+@keyframes gridScroll{from{transform:rotateX(60deg) translateY(0)}to{transform:rotateX(60deg) translateY(80px)}}
+@keyframes blobPulse{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+.orb{position:fixed;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(34,211,238,0.35),rgba(59,130,246,0.1) 60%,transparent);filter:blur(40px);pointer-events:none;z-index:-1;animation:orbFloat 20s ease-in-out infinite}
+.orb-1{width:400px;height:400px;top:-100px;right:-100px}
+.orb-2{width:300px;height:300px;bottom:-50px;left:-50px;animation-delay:-7s;background:radial-gradient(circle at 30% 30%,rgba(59,130,246,0.35),rgba(59,130,246,0.08) 60%,transparent)}
+.orb-3{width:250px;height:250px;top:40%;left:30%;animation-delay:-14s;opacity:0.5}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(0.95)}}
 
-<base target="_blank">
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-<link rel="apple-touch-icon" href="assets/logo.svg">
+.nav-links{display:flex;gap:1.8rem;list-style:none;margin-right:170px}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.88rem;font-weight:500;position:relative;transition:color 0.3s;padding:0.3rem 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform 0.4s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--cyan)}
+.nav-links a.active::after{transform:scaleX(1)}
+.nav-cta{display:flex;gap:0.6rem;align-items:center}
+.btn-ghost,.btn-primary{font-family:'Cairo',sans-serif;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s;border:none}
+.btn-ghost{background:var(--glass);color:var(--white);border:1px solid var(--glass-border);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--glass-strong);border-color:var(--glass-border-strong)}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue-bright));color:var(--bg-0);box-shadow:0 4px 20px rgba(34,211,238,0.4),inset 0 1px 0 rgba(255,255,255,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,211,238,0.6),inset 0 1px 0 rgba(255,255,255,0.4)}
+.page-hero{padding:10rem 3rem 4rem;max-width:1300px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+@media (max-width:768px){.page-hero{padding:8rem 1.5rem 3rem}}
+.page-hero-tag{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:50px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.4);font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;color:var(--cyan);text-transform:uppercase;width:fit-content;margin:0 auto 1.5rem}
+.page-hero-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:dotPulse 1.5s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+.page-hero-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--white) 0%,var(--cyan) 50%,var(--blue-glow) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(34,211,238,0.4));margin-bottom:1rem}
+.page-hero-sub{font-size:clamp(1rem,1.5vw,1.2rem);color:var(--text-dim);font-weight:500;line-height:1.9;max-width:680px;margin:0 auto 2rem}
+.page-hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;max-width:800px;margin:0 auto}
+@media (max-width:600px){.page-hero-stats{grid-template-columns:repeat(2,1fr)}}
+.phs-item{padding:1rem 0.5rem;border-radius:var(--radius-md);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);text-align:center}
+.phs-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;direction:ltr;line-height:1}
+.phs-lbl{font-size:0.72rem;color:var(--text-mute);margin-top:0.3rem;letter-spacing:0.05em;font-weight:500}
+.page-hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.btn-glow{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));color:var(--bg-0);text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;box-shadow:0 0 25px rgba(34,211,238,0.5),inset 0 1px 0 rgba(255,255,255,0.4);transition:transform 0.3s,box-shadow 0.3s}
+.btn-glow::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
+.btn-glow:hover::before{left:100%}
+.btn-glow:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 50px rgba(34,211,238,0.7),inset 0 1px 0 rgba(255,255,255,0.5)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:var(--glass);color:var(--white);border:1px solid var(--glass-border);text-decoration:none;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s}
+.btn-outline:hover{background:var(--glass-strong);border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,211,238,0.35)}
+.products-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;scroll-margin-top:80px}
+@media (max-width:768px){.products-section{padding:4rem 1.5rem}}
+.products-header{text-align:center;margin-bottom:var(--space-xl)}
+.products-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.25;background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.8rem}
+.products-sub{color:var(--text-dim);font-size:1.05rem;font-weight:500;line-height:1.85;max-width:640px;margin:0 auto}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.4rem;margin-top:var(--space-md)}
+.product-card{position:relative;padding:0;border-radius:18px;background:linear-gradient(180deg,rgba(15,23,42,0.7) 0%,rgba(2,6,23,0.9) 100%);border:1px solid rgba(34,211,238,0.18);backdrop-filter:blur(20px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);overflow:hidden;isolation:isolate;min-height:240px;display:flex;flex-direction:column}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,var(--cyan) 30%,var(--blue-bright) 70%,transparent 100%);opacity:0.7;transition:opacity 0.4s,height 0.4s}
+.product-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%),rgba(34,211,238,0.1),transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:0}
+.product-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.5);box-shadow:0 25px 50px rgba(0,0,0,0.5),0 0 50px rgba(34,211,238,0.12)}
+.product-card:hover::before{opacity:1;height:4px}
+.product-card:hover::after{opacity:1}
+.product-card-inner{padding:1.8rem 1.6rem 1.5rem;position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+.product-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.product-icon{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(34,211,238,0.15) 0%,rgba(59,130,246,0.08) 100%);border:1px solid rgba(34,211,238,0.3);display:grid;place-items:center;flex-shrink:0;transition:all 0.4s}
+.product-icon svg{width:26px;height:26px;color:var(--cyan);transition:color 0.4s}
+.product-card:hover .product-icon{background:linear-gradient(135deg,var(--cyan) 0%,var(--blue-bright) 100%);border-color:transparent;box-shadow:0 8px 20px rgba(34,211,238,0.4)}
+.product-card:hover .product-icon svg{color:var(--bg-0)}
+.product-num{font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;margin-right:auto;opacity:0.7;transition:opacity 0.4s}
+.product-card:hover .product-num{opacity:1}
+.product-title{font-size:1.15rem;font-weight:800;color:var(--white);margin-bottom:0.6rem;line-height:1.4;letter-spacing:-0.01em}
+.product-desc{color:var(--text-dim);font-size:0.92rem;line-height:1.8;font-weight:400;flex:1;margin-bottom:1rem}
+.product-features{list-style:none;padding:0;margin:0 0 1rem}
+.product-features li{font-size:0.83rem;color:var(--text-dim);padding-right:1.1rem;position:relative;line-height:1.7;margin-bottom:0.3rem}
+.product-features li::before{content:'';position:absolute;right:0;top:0.55em;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--blue-bright));box-shadow:0 0 6px rgba(34,211,238,0.6)}
+.product-features li strong{color:var(--cyan);font-weight:600}
+.product-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--cyan);background:linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(59,130,246,0.05) 100%);border:1px solid rgba(34,211,238,0.25);padding:0.35rem 0.8rem;border-radius:6px;text-transform:uppercase;font-weight:700;align-self:flex-start;transition:all 0.3s;text-decoration:none}
+.product-link::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:dotPulse 2s ease-in-out infinite}
+.product-link:hover{background:linear-gradient(135deg,rgba(34,211,238,0.15) 0%,rgba(59,130,246,0.1) 100%);border-color:rgba(34,211,238,0.5);transform:translateX(-3px)}
+@media (max-width:768px){.products-grid{grid-template-columns:1fr}.product-card-inner{padding:1.5rem 1.3rem 1.3rem}}
+.cta-section{text-align:center;padding:var(--space-2xl) var(--space-md);scroll-margin-top:80px}
+.cta-card{max-width:900px;margin:0 auto;padding:4rem 2rem;border-radius:24px;background:radial-gradient(circle at 50% 0%,rgba(34,211,238,0.2),transparent 70%),var(--glass);border:1px solid rgba(34,211,238,0.4);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(34,211,238,0.08) 50%,transparent 60%);animation:shimmer 4s linear infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.cta-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem;position:relative;background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative;font-size:1.05rem}
+footer{padding:2.5rem 3rem;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-mute);font-size:0.88rem;background:rgba(2,6,23,0.6);backdrop-filter:blur(10px)}
+footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var(--cyan);font-size:0.78rem;margin-top:0.4rem;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:var(--blue-deep);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+.ticker{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,0.92);backdrop-filter:blur(20px) saturate(150%);border-top:1px solid rgba(34,211,238,0.3);padding:0.6rem 0;overflow:hidden;z-index:50;font-family:'Share Tech Mono',monospace;font-size:0.75rem;box-shadow:0 -4px 20px rgba(0,0,0,0.4)}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker::before{right:0;background:linear-gradient(to left,rgba(2,6,23,1),transparent)}
+.ticker::after{left:0;background:linear-gradient(to right,rgba(2,6,23,1),transparent)}
+.ticker-track{display:inline-flex;gap:0;animation:tickerScroll 50s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:0.6rem;padding:0 1.2rem;border-right:1px solid rgba(34,211,238,0.15)}
+.ticker-item:last-child{border-right:none}
+.ticker-pair{color:var(--white);font-weight:700;font-size:0.82rem;letter-spacing:0.05em;min-width:60px}
+.ticker-signal{padding:0.15rem 0.6rem;border-radius:4px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;min-width:36px;text-align:center}
+.ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
+.ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
+.ticker-val{color:var(--cyan);font-weight:600;font-size:0.78rem;min-width:42px;text-align:right}
+@media (max-width:768px){nav{padding:1rem 1.2rem}.nav-links{display:none}}
+@media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
 
-<!-- Canonical -->
-<link rel="canonical" href="https://jsiadyarslan-lab.github.io/rouaa-corporate/news.html">
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/news.html">
-<meta property="og:title" content="رؤى الأخبار — استخبارات مالية ذكية">
-<meta property="og:description" content="رؤى الأخبار: محرك استخبارات مالي يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ.">
-<meta property="og:image" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/og-image.png">
-<meta property="og:locale" content="ar_SA">
+/* Hide the background rect */
 
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="رؤى الأخبار — استخبارات مالية ذكية">
-<meta name="twitter:description" content="محرك استخبارات مالي يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ.">
-<meta name="twitter:image" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/og-image.png">
 
-<!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "رؤى الأخبار",
-  "description": "محرك استخبارات مالي يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ.",
-  "url": "https://jsiadyarslan-lab.github.io/rouaa-corporate/news.html",
-  "isPartOf": {
-    "@type": "Organization",
-    "name": "رُؤى",
-    "url": "https://jsiadyarslan-lab.github.io/rouaa-corporate/"
-  }
+
+
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      
+
+.nav-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:40px;
+  overflow:visible;
+  z-index:98;
+  pointer-events:none;
 }
-</script>
-<link rel="stylesheet" href="styles.css">
+/* ─── Navbar ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  z-index:100;
+  background:rgba(2,6,23,0.65);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:none;
+  transform:translateY(-100%);
+  animation:navDown 0.8s ease 0.3s forwards;
+  overflow:visible;
+}
+@keyframes navDown{to{transform:translateY(0)}}
+/* Logo — absolute position, hangs below nav */
+.logo{
+  position:absolute;
+  bottom:-44px;
+  right:3rem;
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  font-family:'Cairo',sans-serif;
+  font-weight:700;
+  font-size:1.5rem;
+  letter-spacing:0;
+  color:var(--white);
+  text-shadow:0 0 15px rgba(96,165,250,0.6);
+  text-decoration:none;
+  z-index:101;
+}
+/* Circular logo container */
+.logo-svg{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  position:relative;
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  background:#0a0a12;
+  border:2px solid rgba(99,102,241,0.4);
+  box-shadow:0 0 20px rgba(99,102,241,0.3),0 4px 15px rgba(0,0,0,0.5),inset 0 0 20px rgba(99,102,241,0.1);
+  overflow:visible;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.logo:hover .logo-svg{
+  border-color:rgba(99,102,241,0.8);
+  box-shadow:0 0 30px rgba(99,102,241,0.5),0 4px 20px rgba(0,0,0,0.6),inset 0 0 25px rgba(99,102,241,0.15);
+}
+.logo-svg svg{width:80px;height:80px;filter:drop-shadow(0 0 8px rgba(99,102,241,0.4))}
+.logo-svg svg rect{display:none}
+
+
+
+
+</style>
+<base target="_blank">
 </head>
 <body>
 <div class="bg-3d"></div>
@@ -56,8 +226,6 @@
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
-<a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
-<header>
 <nav>
   <!-- Nav bottom border with arc around logo -->
   <svg class="nav-line" viewBox="0 0 100 4" preserveAspectRatio="none"><path d="M0,2 L88,2 A6,6 0 0,1 94,2 L100,2" fill="none" stroke="rgba(96,165,250,0.3)" stroke-width="0.3"/></svg>
@@ -94,7 +262,31 @@
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      
+      <style>
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      </style>
       <rect width="200" height="200" rx="20" fill="#0a0a12"/>
       <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
       <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
@@ -238,9 +430,7 @@
     <a href="https://rouatradingnews-production.up.railway.app" target="_blank" rel="noopener" class="btn-primary">ادخل المنصة</a>
   </div>
 </nav>
-</header>
 
-<main id="main-content">
 <section class="page-hero">
   <div class="page-hero-tag"><span class="dot"></span><span>رؤى الأخبار</span></div>
       <h1 class="page-hero-title">رؤى الأخبار</h1>
@@ -344,7 +534,6 @@
   </div>
 </section>
 
-</main>
 <footer><p>&copy; 2026 رؤى — بنية تحتية للاستخبارات المالية.</p><p class="tagline">ببصيرة نحو الأسواق</p></footer>
 
 <div class="ticker" role="marquee" aria-label="أسعار الأسواق الحية">
@@ -373,11 +562,5 @@ const io=new IntersectionObserver((e)=>{e.forEach((x)=>{if(x.isIntersecting){x.t
 document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
 document.querySelectorAll('.product-card').forEach((card)=>{card.addEventListener('mousemove',(e)=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width;const y=(e.clientY-r.top)/r.height;card.style.setProperty('--mx',(x*100)+'%');card.style.setProperty('--my',(y*100)+'%');});});
 </script>
-
-<noscript>
-  <div style="position:fixed;bottom:0;left:0;right:0;background:var(--bg-1);border-top:1px solid var(--glass-border);padding:1rem;text-align:center;z-index:9999;">
-    <p style="margin:0;color:var(--gold);font-weight:700;">⚠️ يتطلب الموقع تشغيل JavaScript لعرض التأثيرات التفاعلية بشكل كامل.</p>
-  </div>
-</noscript>
 </body>
 </html>

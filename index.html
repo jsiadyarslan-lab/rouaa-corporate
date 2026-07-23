@@ -5,526 +5,2518 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#020617">
 <title>رُؤى — بنية تحتية مالية للمؤسسات</title>
-<meta name="description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط.">
-
-<!-- Fonts -->
+<meta name="description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط. رؤى الأخبار + رؤى التداول، منظومتان متكاملتان.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-<link rel="apple-touch-icon" href="assets/logo.svg">
-
-<!-- Canonical -->
-<link rel="canonical" href="https://jsiadyarslan-lab.github.io/rouaa-corporate/">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/">
-<meta property="og:title" content="رُؤى — بنية تحتية مالية للمؤسسات">
-<meta property="og:description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط.">
-<meta property="og:image" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/og-image.png">
-<meta property="og:locale" content="ar_SA">
-
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="رُؤى — بنية تحتية مالية للمؤسسات">
-<meta name="twitter:description" content="رُؤى — أول منصة تجمع الخبر والتحليل والتنفيذ في خمس لغات بلا وسيط.">
-<meta name="twitter:image" content="https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/og-image.png">
-
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "رُؤى",
-  "alternateName": "Rouaa",
-  "url": "https://jsiadyarslan-lab.github.io/rouaa-corporate/",
-  "logo": "https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/logo.svg",
-  "description": "بنية تحتية مالية للمؤسسات — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.",
-  "sameAs": ["https://github.com/jsiadyarslan-lab"],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "sales",
-    "availableLanguage": ["Arabic", "English"]
-  }
-}
-</script>
-
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg-0:#020617;
   --bg-1:#0a1530;
-  --bg-2:#0f1d3d;
   --blue:#3b82f6;
   --blue-bright:#60a5fa;
   --blue-glow:#93c5fd;
+  --blue-deep:#1e3a8a;
   --cyan:#22d3ee;
   --gold:#fbbf24;
+  --gold-bright:#fde047;
   --white:#f8fafc;
-  --text-dim:rgba(248,250,252,0.70);
-  --text-mute:rgba(248,250,252,0.45);
+  --text-dim:rgba(248,250,252,0.80);
+  --text-mute:rgba(248,250,252,0.62);
+  --space-xs:0.5rem; --space-sm:1rem; --space-md:1.5rem; --space-lg:2rem; --space-xl:3rem; --space-2xl:4rem;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:20px;
   --glass:rgba(255,255,255,0.04);
-  --glass-border:rgba(96,165,250,0.18);
-  --radius:16px;
-  --max-w:1200px;
-  --space: clamp(4rem, 10vw, 8rem);
+  --glass-strong:rgba(255,255,255,0.07);
+  --glass-border:rgba(96,165,250,0.22);
+  --glass-border-strong:rgba(96,165,250,0.5);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg-0);color:var(--white);font-family:'Cairo',sans-serif;
-  line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;height:auto;display:block}
+html,body{background:var(--bg-0);color:var(--white);font-family:'Cairo',-apple-system,sans-serif;overflow-x:hidden;scroll-behavior:smooth;line-height:1.7;padding-bottom:48px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue-bright);outline-offset:3px;border-radius:6px}
 
-/* Skip Link */
-.skip-link{
-  position:absolute;top:-40px;left:0;background:var(--blue);color:var(--bg-0);
-  padding:8px 16px;z-index:10000;font-weight:700;border-radius:0 0 8px 0;
-  text-decoration:none;transition:top .3s
-}
-.skip-link:focus{top:0}
+/* 3D Background */
+.bg-3d{position:fixed;inset:0;z-index:-1;perspective:1200px;overflow:hidden;background:radial-gradient(ellipse at 20% 10%, rgba(59,130,246,0.18), transparent 50%),radial-gradient(ellipse at 80% 90%, rgba(34,211,238,0.12), transparent 55%),radial-gradient(ellipse at 50% 50%, rgba(30,58,138,0.22), transparent 70%),linear-gradient(180deg,#020617 0%, #050b1f 50%, #020617 100%)}
+.bg-3d::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);background-size:80px 80px;transform:rotateX(60deg) translateZ(0);animation:gridScroll 20s linear infinite}
+.bg-3d::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%, rgba(59,130,246,0.15), transparent 35%),radial-gradient(circle at 70% 60%, rgba(34,211,238,0.10), transparent 30%);animation:blobPulse 8s ease-in-out infinite alternate}
+@keyframes gridScroll{from{transform:rotateX(60deg) translateY(0)}to{transform:rotateX(60deg) translateY(80px)}}
+@keyframes blobPulse{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+.orb{position:fixed;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(96,165,250,0.4), rgba(59,130,246,0.1) 60%, transparent);filter:blur(40px);pointer-events:none;z-index:-1;animation:orbFloat 20s ease-in-out infinite}
+.orb-1{width:400px;height:400px;top:-100px;right:-100px;animation-delay:0s}
+.orb-2{width:300px;height:300px;bottom:-50px;left:-50px;animation-delay:-7s;background:radial-gradient(circle at 30% 30%, rgba(34,211,238,0.35), rgba(34,211,238,0.08) 60%, transparent)}
+.orb-3{width:250px;height:250px;top:40%;left:30%;animation-delay:-14s;opacity:0.5}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(0.95)}}
 
 /* Nav */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:linear-gradient(180deg, rgba(2,6,23,0.95), rgba(2,6,23,0.7));
-  backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);
-}
-.nav-inner{
-  max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;
-  justify-content:space-between;padding:1rem 2rem;
-}
-.nav-logo{
-  font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;
-  color:var(--white);text-decoration:none;letter-spacing:2px;
-}
-.nav-logo span{color:var(--cyan)}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{
-  color:var(--text-dim);text-decoration:none;font-size:0.9rem;
-  font-weight:500;transition:color .3s;position:relative
-}
+
+
+.nav-links{display:flex;gap:1.8rem;list-style:none;margin-right:170px}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.88rem;font-weight:500;position:relative;transition:color 0.3s;padding:0.3rem 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue-bright),transparent);transform:scaleX(0);transition:transform 0.4s}
 .nav-links a:hover{color:var(--white)}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;
-  background:var(--blue-bright);transform:scaleX(0);transition:transform .3s;border-radius:1px
-}
 .nav-links a:hover::after{transform:scaleX(1)}
-.nav-cta{
-  background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--bg-0);
-  padding:.6rem 1.4rem;border-radius:10px;font-weight:700;font-size:0.85rem;
-  text-decoration:none;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer
-}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.4)}
+.nav-cta{display:flex;gap:0.6rem;align-items:center}
+.btn-ghost,.btn-primary{font-family:'Cairo',sans-serif;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s;border:none}
+.btn-ghost{background:var(--glass);color:var(--white);border:1px solid var(--glass-border);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--glass-strong);border-color:var(--glass-border-strong)}
+.btn-primary{background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);box-shadow:0 4px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.6), inset 0 1px 0 rgba(255,255,255,0.4)}
 
 /* Hero */
-.hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  position:relative;padding:8rem 2rem 4rem;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.15), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(34,211,238,0.08), transparent);
-}
-.hero-inner{max-width:var(--max-w);width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;text-align:center}}
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;padding:8rem 4rem 7rem;max-width:1500px;margin:0 auto;scroll-margin-top:80px}
+@media (max-width:980px){.hero{grid-template-columns:1fr;padding:7rem 1.5rem 5rem;gap:2.5rem;text-align:center}}
+.hero-text{display:flex;flex-direction:column;gap:1.4rem;animation:textReveal 1s ease 0.4s both}
+@media (max-width:980px){.hero-text{align-items:center}}
+@keyframes textReveal{from{opacity:0;transform:translateY(30px) translateX(20px)}to{opacity:1;transform:translateY(0) translateX(0)}}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:50px;background:rgba(59,130,246,0.1);border:1px solid rgba(96,165,250,0.4);font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;color:var(--blue-glow);text-transform:uppercase;width:fit-content}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 10px var(--blue-bright);animation:dotPulse 1.5s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+.hero-title{font-family:'Cairo',sans-serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1.05;background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(96,165,250,0.4))}
+.hero-title-en{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.2vw,0.95rem);font-weight:400;letter-spacing:0.3em;color:var(--blue-bright);text-transform:uppercase;margin-top:-0.4rem}
+.hero-tagline{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--white);font-weight:600;line-height:1.7}
+.hero-tagline span{color:var(--blue-glow)}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--text-dim);font-weight:500;line-height:1.9;max-width:560px}
+@media (max-width:980px){.hero-sub{margin:0 auto}}
+.hero-cta{display:flex;gap:0.9rem;flex-wrap:wrap}
+@media (max-width:980px){.hero-cta{justify-content:center}}
+.btn-glow{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;box-shadow:0 0 25px rgba(59,130,246,0.5), inset 0 1px 0 rgba(255,255,255,0.4);transition:transform 0.3s, box-shadow 0.3s}
+.btn-glow::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
+.btn-glow:hover::before{left:100%}
+.btn-glow:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 50px rgba(59,130,246,0.8), 0 0 60px rgba(96,165,250,0.3), inset 0 1px 0 rgba(255,255,255,0.5)}
+.btn-glow:active{transform:translateY(-1px) scale(1.01)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;background:var(--glass);color:var(--white);border:1px solid var(--glass-border);text-decoration:none;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s}
+.btn-outline:hover{background:var(--glass-strong);border-color:var(--blue-bright);color:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,0.35)}
+.btn-outline:active{transform:translateY(0)}
 
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:50px;
-  background:rgba(59,130,246,0.1);border:1px solid rgba(96,165,250,0.3);
-  font-family:'Orbitron',monospace;font-size:.72rem;letter-spacing:.15em;
-  color:var(--blue-glow);margin-bottom:1.5rem
-}
-.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* Blue Radar */
+.radar-wrap{position:relative;width:min(560px,80vmin);aspect-ratio:1;justify-self:center;perspective:1000px;animation:radarEnter 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s both}
+@keyframes radarEnter{from{opacity:0;transform:translateZ(-200px) rotateY(-30deg) scale(0.8)}to{opacity:1;transform:translateZ(0) rotateY(0) scale(1)}}
+.radar-pedestal{position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse at center, rgba(96,165,250,0.3), transparent 70%);filter:blur(15px);transform:rotateX(60deg)}
+.radar-frame{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(96,165,250,0.15), transparent 50%),linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.3), inset 0 2px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);backdrop-filter:blur(20px);transform-style:preserve-3d;animation:radarTilt 6s ease-in-out infinite}
+@keyframes radarTilt{0%,100%{transform:rotateX(8deg) rotateY(-3deg)}50%{transform:rotateX(8deg) rotateY(3deg)}}
+.radar-screen{position:absolute;inset:5%;border-radius:50%;background:radial-gradient(circle at center, rgba(30,58,138,0.6) 0%, rgba(10,21,48,0.9) 50%, rgba(2,6,23,1) 100%);overflow:hidden;box-shadow:inset 0 0 60px rgba(59,130,246,0.3), inset 0 0 20px rgba(0,0,0,0.8)}
+.radar-grid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.radar-grid .ring{fill:none;stroke:rgba(96,165,250,0.25);stroke-width:0.4}
+.radar-grid .ring.bright{stroke:rgba(96,165,250,0.5);stroke-width:0.6}
+.radar-grid .az{stroke:rgba(96,165,250,0.15);stroke-width:0.3}
+.radar-grid .az.cardinal{stroke:rgba(96,165,250,0.3);stroke-width:0.5}
+.radar-grid .compass{fill:var(--blue-glow);font-family:'Share Tech Mono',monospace;font-size:5px;font-weight:700;text-anchor:middle;dominant-baseline:middle}
+.radar-grid .range{fill:rgba(96,165,250,0.5);font-family:'Share Tech Mono',monospace;font-size:3px;text-anchor:middle;dominant-baseline:middle}
+.radar-grid .center-dot{fill:var(--blue-bright);filter:drop-shadow(0 0 4px var(--blue-bright))}
+.radar-grid .center-cross{stroke:var(--blue-bright);stroke-width:0.7}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, rgba(96,165,250,0.7) 0deg, rgba(96,165,250,0.35) 18deg, rgba(96,165,250,0.1) 45deg, rgba(96,165,250,0.02) 80deg, transparent 100deg, transparent 360deg);mix-blend-mode:screen;animation:sweepBg 4s linear infinite;pointer-events:none}
+.radar-sweep-line{position:absolute;top:50%;left:50%;width:50%;height:2px;transform-origin:left center;background:linear-gradient(90deg, rgba(147,197,253,1) 0%, rgba(96,165,250,0.7) 40%, rgba(59,130,246,0.2) 80%, transparent 100%);box-shadow:0 0 10px var(--blue-bright), 0 0 25px rgba(96,165,250,0.7);animation:sweep 4s linear infinite;pointer-events:none}
+@keyframes sweep{from{transform:translate(0,-50%) rotate(0deg)}to{transform:translate(0,-50%) rotate(360deg)}}
+@keyframes sweepBg{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.radar-targets{position:absolute;inset:0;pointer-events:none}
+.target{position:absolute;width:8px;height:8px;transform:translate(-50%,-50%);border-radius:50%;background:var(--blue-bright);box-shadow:0 0 10px var(--blue-bright), 0 0 20px rgba(96,165,250,0.8);opacity:0;animation:targetLife 4s ease-out forwards}
+.target.hostile{background:#ef4444;box-shadow:0 0 10px #ef4444, 0 0 20px rgba(239,68,68,0.7)}
+.target.neutral{background:#fbbf24;box-shadow:0 0 10px #fbbf24, 0 0 20px rgba(251,191,36,0.7)}
+.target::after{content:'';position:absolute;inset:-6px;border:1px solid currentColor;border-radius:50%;opacity:0.5;animation:targetRing 1.5s ease-out infinite}
+@keyframes targetLife{0%{opacity:0;transform:translate(-50%,-50%) scale(0.3)}10%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}25%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0.1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes targetRing{from{transform:scale(1);opacity:0.6}to{transform:scale(2.5);opacity:0}}
+.hud-bracket{position:absolute;width:32px;height:32px;border:2px solid var(--blue-bright);filter:drop-shadow(0 0 6px rgba(96,165,250,0.6))}
+.hud-bracket.tl{top:-8px;left:-8px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+.hud-bracket.tr{top:-8px;right:-8px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+.hud-bracket.bl{bottom:-8px;left:-8px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+.hud-bracket.br{bottom:-8px;right:-8px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+.hud-label{position:absolute;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--blue-glow);text-transform:uppercase;white-space:nowrap;text-shadow:0 0 8px rgba(96,165,250,0.5)}
+.hud-label.top{top:-26px;left:50%;transform:translateX(-50%)}
+.hud-label.bottom{bottom:-26px;left:50%;transform:translateX(-50%)}
+.hud-label.left{top:50%;left:-12px;transform:translate(-100%,-50%)}
+.hud-label.right{top:50%;right:-12px;transform:translate(100%,-50%)}
+.radar-status{position:absolute;bottom:-70px;left:0;right:0;display:flex;justify-content:space-around;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--blue-glow);text-transform:uppercase}
+.radar-status .item{display:flex;flex-direction:column;align-items:center;gap:0.2rem}
+.radar-status .val{color:var(--blue-bright);font-weight:700;font-size:0.95rem;text-shadow:0 0 10px var(--blue-bright)}
 
-.hero h1{
-  font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:1rem;
-  background:linear-gradient(135deg,var(--white) 0%,var(--blue-glow) 50%,var(--cyan) 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-.hero-sub{font-size:clamp(1rem,1.8vw,1.25rem);color:var(--text-dim);max-width:480px;line-height:1.8;font-weight:400}
-@media(max-width:900px){.hero-sub{margin:0 auto}}
+/* Sections common */
+section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;position:relative;scroll-margin-top:80px}
+@media (max-width:768px){section{padding:4rem 1.5rem}}
+.section-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;color:var(--blue-bright);text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:4px;background:rgba(59,130,246,0.1);border:1px solid var(--glass-border);margin-bottom:1rem}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.2;margin-bottom:1rem;background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{color:var(--text-dim);font-size:1.05rem;line-height:1.9;max-width:680px;margin-bottom:var(--space-xl);font-weight:400}
+.section-sub strong{color:var(--blue-glow);font-weight:700}
 
-.hero-cta-group{display:flex;gap:1rem;margin-top:2rem}
-@media(max-width:900px){.hero-cta-group{justify-content:center}}
+/* Advantage */
+.advantage-card{background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);border-radius:var(--radius-xl);padding:var(--space-xl);margin-top:var(--space-md);position:relative;overflow:hidden;backdrop-filter:blur(20px)}
+.advantage-card::before{content:'';position:absolute;top:-50%;right:-30%;width:600px;height:600px;background:radial-gradient(circle, rgba(96,165,250,0.12), transparent 70%);filter:blur(40px);pointer-events:none}
+.advantage-content{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center}
+@media (max-width:768px){.advantage-content{grid-template-columns:1fr;gap:var(--space-lg)}}
+.advantage-text h3{font-size:1.6rem;font-weight:800;color:var(--white);margin-bottom:1rem;line-height:1.4}
+.advantage-text p{color:var(--text-dim);font-size:1.08rem;font-weight:500;line-height:1.95}
+.advantage-text p strong{color:var(--blue-glow);font-weight:700}
+.advantage-visual{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-sm)}
+.adv-stat{padding:var(--space-md);border-radius:var(--radius-md);background:rgba(2,6,23,0.4);border:1px solid var(--glass-border);text-align:center;transition:all 0.3s}
+.adv-stat:hover{border-color:var(--blue-bright);transform:translateY(-3px);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.adv-stat-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px rgba(96,165,250,0.5));direction:ltr;line-height:1;unicode-bidi:isolate}
+.adv-stat-lbl{font-size:0.78rem;color:var(--text-dim);margin-top:0.5rem;letter-spacing:0.05em;font-weight:500}
 
-.btn-primary{
-  background:linear-gradient(135deg,var(--blue),var(--cyan));color:var(--bg-0);
-  padding:1rem 2rem;border-radius:12px;font-weight:800;font-size:1rem;
-  text-decoration:none;transition:all .3s;border:none;cursor:pointer;
-  box-shadow:0 4px 20px rgba(59,130,246,0.35)
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(59,130,246,0.5)}
-.btn-secondary{
-  background:var(--glass);color:var(--white);padding:1rem 2rem;border-radius:12px;
-  font-weight:700;font-size:1rem;text-decoration:none;border:1px solid var(--glass-border);
-  transition:all .3s;backdrop-filter:blur(10px)
-}
-.btn-secondary:hover{border-color:var(--blue-bright);color:var(--blue-glow)}
+/* Audiences */
+.audiences{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);align-items:stretch}
+@media (max-width:980px){.audiences{grid-template-columns:1fr}}
+.audience-card{position:relative;padding:var(--space-lg) var(--space-lg);border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.05), rgba(34,211,238,0.02));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;isolation:isolate;display:flex;flex-direction:column;align-items:stretch;height:100%}
+.audience-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(96,165,250,0.5) 0%, rgba(34,211,238,0.3) 50%, rgba(96,165,250,0.1) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.5s}
+.audience-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle 300px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.12), transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:-1}
+.audience-card:hover{transform:translateY(-8px) rotateX(3deg) rotateY(-3deg)}
+.audience-card:hover::before{background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.8) 50%, rgba(96,165,250,0.4) 100%)}
+.audience-card:hover::after{opacity:1}
+.audience-icon{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 8px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.4);margin-bottom:1.5rem;position:relative;flex-shrink:0}
+.audience-icon svg{width:30px;height:30px;color:var(--bg-0)}
+.audience-icon::after{content:'';position:absolute;inset:-3px;border-radius:16px;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));filter:blur(12px);opacity:0.4;z-index:-1}
+.audience-card h3{font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:0.8rem;line-height:1.3}
+.audience-card .desc{color:var(--text-dim);font-size:0.95rem;line-height:1.8;margin-bottom:1.5rem}
+.audience-features{list-style:none;display:flex;flex-direction:column;gap:0.7rem;padding-top:1.2rem;border-top:1px solid rgba(96,165,250,0.18);margin-top:auto}
+.audience-features li{font-size:0.92rem;color:var(--white);padding-right:1.8rem;position:relative;line-height:1.7;font-weight:500;display:flex;align-items:center;gap:0.6rem;margin-bottom:var(--space-xs);text-align:right}
+.audience-features li::before{content:'';width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));display:inline-block;flex-shrink:0;position:relative;box-shadow:0 0 10px rgba(96,165,250,0.5)}
+.audience-features li::after{content:'✓';position:absolute;right:0.5px;top:50%;transform:translateY(-50%);color:var(--bg-0);font-weight:900;font-size:0.7rem;width:18px;height:18px;display:grid;place-items:center}
+.audience-features li span{flex:1}
 
-.hero-visual img{
-  border-radius:var(--radius);border:1px solid var(--glass-border);
-  box-shadow:0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.1);
+/* Project section (رؤى الأخبار + رؤى التداول) */
+.project-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;position:relative;scroll-margin-top:80px}
+@media (max-width:768px){.project-section{padding:4rem 1.5rem}}
+.project-header{text-align:center;margin-bottom:3.5rem}
+.project-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;font-weight:700;padding:0.35rem 1rem;border-radius:4px;margin-bottom:1.2rem}
+.project-tag.news{background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.5);color:var(--cyan);box-shadow:0 0 15px rgba(34,211,238,0.15)}
+.project-tag.trading{background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.5);color:var(--blue-bright);box-shadow:0 0 15px rgba(96,165,250,0.15)}
+.project-title{font-size:clamp(2rem,4.2vw,3.2rem);font-weight:900;line-height:1.2;margin-bottom:1rem}
+.project-title .gradient{background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.project-title.trading .gradient{background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.project-title .dim{color:var(--text-mute)}
+.project-subtitle{color:var(--text-dim);font-size:1.1rem;font-weight:500;line-height:1.9;max-width:640px;margin:0 auto}
+.project-preview{position:relative;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);padding:var(--space-md);margin-bottom:var(--space-xl);box-shadow:0 30px 60px rgba(0,0,0,0.3), 0 0 80px rgba(59,130,246,0.1);overflow:hidden}
+.project-preview::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);filter:blur(40px);pointer-events:none}
+
+/* News dashboard */
+.news-tabs{display:flex;gap:0.5rem;margin-bottom:1rem;border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;flex-wrap:wrap}
+.news-tab{padding:0.5rem 1rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);background:transparent;border:none;border-radius:6px;cursor:pointer;transition:all 0.3s}
+.news-tab.active{background:rgba(59,130,246,0.15);color:var(--blue-bright)}
+.news-cards{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:0.8rem}
+@media (max-width:768px){.news-cards{grid-template-columns:1fr}}
+.news-card{padding:1rem;background:rgba(2,6,23,0.5);border:1px solid var(--glass-border);border-radius:var(--radius-md);transition:all 0.3s}
+.news-card:hover{border-color:var(--blue-bright);transform:translateY(-2px)}
+.news-card.featured{background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04));border-color:var(--glass-border-strong)}
+.news-meta{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--text-mute);margin-bottom:0.5rem;text-transform:uppercase}
+.news-source{color:var(--blue-bright);font-weight:700}
+.news-title{font-size:0.95rem;font-weight:700;color:var(--white);line-height:1.55;margin-bottom:0.8rem;letter-spacing:-0.01em}
+.news-impact{display:flex;gap:0.6rem;align-items:center;font-size:0.72rem}
+.impact-badge{padding:0.15rem 0.6rem;border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+.impact-badge.positive{background:rgba(34,197,94,0.15);color:#4ade80}
+.impact-badge.neutral{background:rgba(148,163,184,0.15);color:#cbd5e1}
+.impact-badge.negative{background:rgba(239,68,68,0.15);color:#f87171}
+.impact-score{color:var(--text-mute);font-size:0.7rem}
+
+/* Project features grid (compact cards) */
+.project-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-md)}
+.p-feature{position:relative;padding:var(--space-lg) var(--space-md);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);overflow:hidden}
+.p-feature::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(96,165,250,0.4) 0%, rgba(34,211,238,0.2) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.4s}
+.p-feature:hover{transform:translateY(-5px);background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.04))}
+.p-feature:hover::before{background:linear-gradient(135deg, rgba(96,165,250,1) 0%, rgba(34,211,238,0.6) 100%)}
+.p-feature-icon{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 4px 15px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.3);margin-bottom:1rem}
+.p-feature-icon svg{width:22px;height:22px;color:var(--bg-0)}
+.p-feature-title{font-size:1.08rem;font-weight:700;color:var(--white);margin-bottom:0.6rem;line-height:1.4;letter-spacing:-0.01em}
+.p-feature-desc{color:var(--text-dim);font-size:0.9rem;line-height:1.75;margin-bottom:var(--space-sm)}
+.p-feature-list{list-style:none;padding-right:0;margin:0}
+.p-feature-list li{font-size:0.83rem;color:var(--text-dim);padding-right:1.1rem;position:relative;line-height:1.7;margin-bottom:0.3rem}
+.p-feature-list li::before{content:'';position:absolute;right:0;top:0.55em;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));box-shadow:0 0 6px rgba(96,165,250,0.6)}
+.p-feature-list li strong{color:var(--blue-glow);font-weight:600}
+.p-feature-stat{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--blue-bright);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);padding:0.2rem 0.6rem;border-radius:4px;text-transform:uppercase;margin-top:0.5rem}
+
+/* Trading sub-sections (المنفذ الذكي، الوكلاء، إلخ) */
+.subsection{margin-top:var(--space-xl);padding-top:var(--space-xl);border-top:1px solid var(--glass-border)}
+.subsection:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.subsection-header{display:flex;align-items:center;gap:1rem;margin-bottom:var(--space-md);flex-wrap:wrap}
+.subsection-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg, var(--blue), var(--cyan));display:grid;place-items:center;box-shadow:0 4px 15px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3);flex-shrink:0}
+.subsection-icon svg{width:24px;height:24px;color:var(--bg-0)}
+.subsection-title{font-size:1.5rem;font-weight:800;color:var(--white);line-height:1.3}
+.subsection-subtitle{color:var(--text-dim);font-size:0.95rem;line-height:1.7;margin-top:0.2rem}
+
+/* Agents grid (3 وكلاء) */
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-md)}
+@media (max-width:980px){.agents-grid{grid-template-columns:1fr}}
+.agent-card{position:relative;padding:var(--space-lg);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);overflow:hidden;transition:all 0.4s;transform-style:preserve-3d}
+.agent-card::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(96,165,250,0.6) 0%, rgba(34,211,238,0.4) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:background 0.4s}
+.agent-card:hover{transform:translateY(-6px) rotateX(3deg)}
+.agent-card:hover::before{background:linear-gradient(135deg, var(--blue-bright), var(--cyan))}
+.agent-card-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.agent-speed{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);padding:0.2rem 0.6rem;border-radius:4px;text-transform:uppercase;font-weight:700;margin-right:auto}
+.agent-card h4{font-size:1.2rem;font-weight:800;color:var(--white);line-height:1.3}
+.agent-card .desc{color:var(--text-dim);font-size:0.9rem;line-height:1.7;margin-bottom:1rem}
+
+/* Mini grid (الشبكة العصبية Lab + Prediction + Sanctuary) */
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-md)}
+@media (max-width:980px){.mini-grid{grid-template-columns:1fr}}
+.mini-card{padding:var(--space-lg);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.3s}
+.mini-card:hover{transform:translateY(-4px);border-color:var(--blue-bright);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.mini-card h4{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;line-height:1.4}
+.mini-card .desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7;margin-bottom:0.8rem}
+
+/* Project CTA */
+.project-cta{text-align:center;margin-top:2.5rem}
+.btn-project{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.95rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;position:relative;overflow:hidden;transition:transform 0.3s, box-shadow 0.3s}
+.btn-project.news{background:linear-gradient(135deg, var(--cyan), var(--blue-bright));color:var(--bg-0);box-shadow:0 0 25px rgba(34,211,238,0.4)}
+.btn-project.trading{background:linear-gradient(135deg, var(--blue), var(--cyan));color:var(--bg-0);box-shadow:0 0 25px rgba(59,130,246,0.4)}
+.btn-project::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transition:left 0.6s}
+.btn-project:hover::before{left:100%}
+.btn-project:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(96,165,250,0.6)}
+
+/* Integration */
+.integration-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+.integration-section .section-title{margin-bottom:3rem}
+.neural-bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;margin-bottom:3rem}
+@media (max-width:768px){.neural-bridge{grid-template-columns:1fr;gap:1.5rem}}
+.bridge-node{padding:2rem;border-radius:var(--radius-xl);background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.03));border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);position:relative;transition:transform 0.4s}
+.bridge-node:hover{transform:translateY(-5px)}
+.bridge-node.news{border-color:rgba(34,211,238,0.4)}
+.bridge-node.trading{border-color:rgba(96,165,250,0.5)}
+.bridge-icon{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;margin:0 auto 1rem}
+.bridge-icon.news{background:linear-gradient(135deg, var(--cyan), var(--blue-bright));box-shadow:0 0 30px rgba(34,211,238,0.4)}
+.bridge-icon.trading{background:linear-gradient(135deg, var(--blue), var(--cyan));box-shadow:0 0 30px rgba(59,130,246,0.4)}
+.bridge-icon svg{width:32px;height:32px;color:var(--bg-0)}
+.bridge-title{font-size:1.4rem;font-weight:800;margin-bottom:0.4rem;color:var(--white)}
+.bridge-title.news{color:var(--cyan)}
+.bridge-title.trading{color:var(--blue-bright)}
+.bridge-desc{color:var(--text-dim);font-size:0.92rem;margin-bottom:1.2rem}
+.bridge-stats{display:flex;justify-content:center;gap:1.5rem;padding-top:1rem;border-top:1px solid var(--glass-border)}
+.bstat-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;direction:ltr}
+.bstat-lbl{font-size:0.7rem;color:var(--text-mute);margin-top:0.2rem}
+.bridge-conn{display:flex;flex-direction:column;align-items:center;gap:0.8rem}
+@media (max-width:768px){.bridge-conn{transform:rotate(90deg);margin:0.5rem 0}}
+.bridge-line{width:80px;height:2px;background:linear-gradient(90deg, var(--cyan), var(--blue-bright));position:relative;border-radius:2px;box-shadow:0 0 10px rgba(96,165,250,0.6)}
+.bridge-pulse{position:absolute;top:50%;left:0;width:20px;height:20px;background:radial-gradient(circle, var(--blue-bright), transparent);border-radius:50%;transform:translateY(-50%);animation:pulseMove 2s linear infinite}
+@keyframes pulseMove{0%{left:0;opacity:1}100%{left:calc(100% - 20px);opacity:0}}
+.bridge-label{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--blue-glow);text-transform:uppercase}
+.steps-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+@media (max-width:768px){.steps-timeline{grid-template-columns:1fr}}
+.step-card{padding:1.8rem;border-radius:var(--radius-lg);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(15px);text-align:center;position:relative;transition:all 0.3s}
+.step-card:hover{border-color:var(--blue-bright);transform:translateY(-4px);box-shadow:0 10px 30px rgba(59,130,246,0.15)}
+.step-num{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2.2rem;background:linear-gradient(135deg, var(--blue-bright), var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.8rem;line-height:1}
+.step-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem}
+.step-desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7}
+
+/* Security */
+.security-section{padding:var(--space-2xl) var(--space-lg);max-width:1400px;margin:0 auto;text-align:center;scroll-margin-top:80px}
+.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem}
+.sec-card{padding:2rem 1.5rem;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(59,130,246,0.04), rgba(34,211,238,0.02));border:1px solid var(--glass-border);backdrop-filter:blur(15px);transition:all 0.4s;position:relative;overflow:hidden}
+.sec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);opacity:0;transition:opacity 0.4s}
+.sec-card:hover::before{opacity:1}
+.sec-card:hover{transform:translateY(-6px);border-color:var(--blue-bright);box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.15)}
+.sec-icon{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.1));border:1px solid var(--glass-border-strong);display:grid;place-items:center;margin:0 auto 1.2rem;box-shadow:inset 0 0 15px rgba(96,165,250,0.1)}
+.sec-icon svg{width:26px;height:26px;color:var(--blue-bright)}
+.sec-title{font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.6rem}
+.sec-desc{color:var(--text-dim);font-size:0.88rem;line-height:1.7}
+
+/* CTA + Footer */
+.cta-section{text-align:center;padding:var(--space-2xl) var(--space-md);scroll-margin-top:80px}
+.cta-card{max-width:900px;margin:0 auto;padding:4rem 2rem;border-radius:24px;background:radial-gradient(circle at 50% 0%, rgba(59,130,246,0.2), transparent 70%), var(--glass);border:1px solid var(--glass-border-strong);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, transparent 40%, rgba(96,165,250,0.08) 50%, transparent 60%);animation:shimmer 4s linear infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.cta-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:1rem;position:relative;background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-sub{color:var(--text-dim);margin-bottom:2rem;line-height:1.7;position:relative;font-size:1.05rem}
+footer{padding:2.5rem 3rem;border-top:1px solid var(--glass-border);text-align:center;color:var(--text-mute);font-size:0.88rem;background:rgba(2,6,23,0.6);backdrop-filter:blur(10px)}
+footer .tagline{font-family:'Orbitron',sans-serif;letter-spacing:0.2em;color:var(--blue-bright);font-size:0.78rem;margin-top:0.4rem;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:var(--blue-deep);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+.ticker{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,0.92);backdrop-filter:blur(20px) saturate(150%);border-top:1px solid rgba(96,165,250,0.3);padding:0.6rem 0;overflow:hidden;z-index:50;font-family:'Share Tech Mono',monospace;font-size:0.75rem;box-shadow:0 -4px 20px rgba(0,0,0,0.4);position:fixed;overflow:hidden}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker::before{right:0;background:linear-gradient(to left, rgba(2,6,23,1), transparent)}
+.ticker::after{left:0;background:linear-gradient(to right, rgba(2,6,23,1), transparent)}
+.ticker-track{display:inline-flex;gap:0;animation:tickerScroll 50s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:0.6rem;padding:0 1.2rem;border-right:1px solid rgba(96,165,250,0.15)}
+.ticker-item:last-child{border-right:none}
+.ticker-pair{color:var(--white);font-weight:700;font-size:0.82rem;letter-spacing:0.05em;min-width:60px}
+.ticker-signal{padding:0.15rem 0.6rem;border-radius:4px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;min-width:36px;text-align:center}
+.ticker-signal.up{background:rgba(34,197,94,0.2);color:#4ade80}
+.ticker-signal.down{background:rgba(239,68,68,0.2);color:#f87171}
+.ticker-val{color:var(--blue-bright);font-weight:600;font-size:0.78rem;min-width:42px;text-align:right}
+@media (max-width:768px){nav{padding:1rem 1.2rem}.nav-links{display:none}.hero{padding-top:6rem;padding-bottom:5rem}.hud-label.left,.hud-label.right{display:none}.hud-label.top{top:-22px;font-size:0.58rem}.hud-label.bottom{bottom:-22px;font-size:0.58rem}.radar-status{bottom:-60px;font-size:0.6rem;gap:0.3rem}.radar-status .val{font-size:0.8rem}}
+@media (max-width:480px){.hud-label.top,.hud-label.bottom{display:none}.radar-status{bottom:-55px;flex-wrap:wrap;gap:0.4rem}}
+@media (max-width:600px){.ticker{font-size:0.68rem;padding:0.5rem 0}body{padding-bottom:40px}}
+
+
+/* ─── Magazine-style Feature Cards (new design v2) ─── */
+.news-features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:1.4rem;
+  margin-top:var(--space-md);
+}
+.nf-card{
+  position:relative;
+  padding:0;
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(2,6,23,0.9) 100%);
+  border:1px solid rgba(96,165,250,0.18);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;
+  isolation:isolate;
+  min-height:240px;
+  display:flex;
+  flex-direction:column;
+}
+/* Top accent bar */
+.nf-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg, transparent 0%, var(--blue-bright) 30%, var(--cyan) 70%, transparent 100%);
+  opacity:0.7;
+  transition:opacity 0.4s, height 0.4s;
+}
+/* Spotlight */
+.nf-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.1), transparent 70%);
+  opacity:0;
+  transition:opacity 0.4s;
+  pointer-events:none;
+  z-index:0;
+}
+.nf-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(96,165,250,0.5);
+  box-shadow:0 25px 50px rgba(0,0,0,0.5), 0 0 50px rgba(59,130,246,0.12);
+}
+.nf-card:hover::before{
+  opacity:1;
+  height:4px;
+}
+.nf-card:hover::after{opacity:1}
+
+.nf-card-inner{
+  padding:1.8rem 1.6rem 1.5rem;
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  height:100%;
 }
 
-/* Trusted */
-.trusted{
-  padding:2.5rem 2rem;border-top:1px solid var(--glass-border);
-  border-bottom:1px solid var(--glass-border);text-align:center
+.nf-header{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.2rem;
 }
-.trusted-label{
-  font-size:.8rem;color:var(--text-mute);letter-spacing:.1em;
-  margin-bottom:1.5rem;font-weight:600
+.nf-icon{
+  width:54px;height:54px;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(34,211,238,0.08) 100%);
+  border:1px solid rgba(96,165,250,0.3);
+  display:grid;place-items:center;
+  position:relative;
+  flex-shrink:0;
+  transition:all 0.4s;
 }
-.trusted-logos{display:flex;justify-content:center;align-items:center}
-.trusted-logos img{opacity:.6;transition:opacity .3s}
-.trusted-logos img:hover{opacity:1}
+.nf-icon svg{width:26px;height:26px;color:var(--blue-bright);transition:color 0.4s}
+.nf-card:hover .nf-icon{
+  background:linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+  border-color:transparent;
+  box-shadow:0 8px 20px rgba(59,130,246,0.4);
+}
+.nf-card:hover .nf-icon svg{color:var(--bg-0)}
 
-/* Section Base */
-.section{padding:var(--space) 2rem;position:relative}
-.section-inner{max-width:var(--max-w);margin:0 auto}
-.section-header{
-  text-align:center;margin-bottom:4rem;max-width:700px;margin-left:auto;margin-right:auto
+.nf-num{
+  font-family:'Orbitron',sans-serif;
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--blue-bright);
+  letter-spacing:0.1em;
+  margin-right:auto;
+  opacity:0.7;
+  transition:opacity 0.4s;
 }
-.section-tag{
-  display:inline-block;font-family:'Orbitron',monospace;font-size:.7rem;
-  letter-spacing:.15em;color:var(--blue-bright);margin-bottom:1rem;
-  background:rgba(59,130,246,0.1);padding:.3rem .8rem;border-radius:6px
-}
-.section h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem;line-height:1.2}
-.section-desc{font-size:1.1rem;color:var(--text-dim);line-height:1.8}
+.nf-card:hover .nf-num{opacity:1}
 
-/* Feature Grid */
-.features-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem
+.nf-title{
+  font-size:1.15rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.6rem;
+  line-height:1.4;
+  letter-spacing:-0.01em;
 }
-.feature-card{
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:var(--radius);padding:2rem;transition:all .4s;position:relative;overflow:hidden
+.nf-desc{
+  color:var(--text-dim);
+  font-size:0.92rem;
+  line-height:1.8;
+  font-weight:400;
+  flex:1;
+  margin-bottom:1rem;
 }
-.feature-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:0;transition:opacity .3s
+.nf-stat{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  color:var(--cyan);
+  background:linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(59,130,246,0.05) 100%);
+  border:1px solid rgba(34,211,238,0.25);
+  padding:0.35rem 0.8rem;
+  border-radius:6px;
+  text-transform:uppercase;
+  font-weight:700;
+  align-self:flex-start;
+  transition:all 0.3s;
 }
-.feature-card:hover::before{opacity:1}
-.feature-card:hover{
-  transform:translateY(-6px);border-color:rgba(96,165,250,0.4);
-  box-shadow:0 20px 60px rgba(59,130,246,0.12)
+.nf-stat::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 8px var(--cyan);
+  animation:nfPulse 2s ease-in-out infinite;
 }
-.f-icon{
-  width:48px;height:48px;border-radius:12px;
-  background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(34,211,238,0.15));
-  display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;
-  border:1px solid rgba(96,165,250,0.2)
+@keyframes nfPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
 }
-.feature-card h3{font-size:1.15rem;font-weight:800;margin-bottom:.6rem}
-.feature-card p{font-size:.9rem;color:var(--text-dim);line-height:1.7}
-
-/* Two Column */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-@media(max-width:900px){.two-col{grid-template-columns:1fr;gap:2rem}}
-
-.col-visual img{
-  border-radius:var(--radius);border:1px solid var(--glass-border);
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);width:100%
-}
-.col-content h3{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;margin-bottom:1rem}
-.col-content p{color:var(--text-dim);margin-bottom:1.5rem;line-height:1.8}
-.bullet-list{list-style:none;display:flex;flex-direction:column;gap:.8rem}
-.bullet-list li{
-  display:flex;align-items:center;gap:.7rem;color:var(--text-dim);font-size:.95rem
-}
-.bullet-list li::before{
-  content:'✓';color:var(--cyan);font-weight:900;font-size:1rem;flex-shrink:0
-}
-
-/* Stats */
-.stats-bar{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
-  max-width:900px;margin:0 auto;text-align:center
-}
-@media(max-width:700px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
-.stat-num{
-  font-family:'Orbitron',sans-serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:900;color:var(--white);line-height:1
-}
-.stat-num span{color:var(--cyan)}
-.stat-label{font-size:.85rem;color:var(--text-mute);margin-top:.5rem;font-weight:500}
-
-/* CTA */
-.cta-section{
-  text-align:center;padding:var(--space) 2rem;
-  background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(59,130,246,0.1),transparent)
-}
-.cta-section h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem}
-.cta-section p{color:var(--text-dim);max-width:500px;margin:0 auto 2rem;font-size:1.1rem}
-
-/* Footer */
-footer{
-  border-top:1px solid var(--glass-border);padding:3rem 2rem;text-align:center
-}
-.footer-inner{max-width:var(--max-w);margin:0 auto}
-.footer-logo{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:1rem}
-.footer-logo span{color:var(--cyan)}
-.footer-links{display:flex;gap:2rem;justify-content:center;list-style:none;margin-bottom:1.5rem;flex-wrap:wrap}
-.footer-links a{color:var(--text-mute);text-decoration:none;font-size:.85rem;transition:color .3s}
-.footer-links a:hover{color:var(--white)}
-.footer-copy{font-size:.8rem;color:var(--text-mute)}
-
-/* Reduced Motion */
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+.nf-card:hover .nf-stat{
+  background:linear-gradient(135deg, rgba(34,211,238,0.15) 0%, rgba(59,130,246,0.1) 100%);
+  border-color:rgba(34,211,238,0.5);
 }
 
-/* Print */
-@media print{
-  .hero-visual img,.col-visual img,.f-icon,.badge-dot{display:none!important}
-  body{background:#fff!important;color:#000!important}
-  .feature-card,.col-visual{background:transparent!important;border:1px solid #ccc!important}
-  .btn-primary,.btn-secondary,.nav-cta{background:#fff!important;color:#000!important;border:1px solid #000!important}
-  nav{position:static!important;border:none!important}
+@media (max-width:768px){
+  .news-features-grid{grid-template-columns:1fr}
+  .nf-card-inner{padding:1.5rem 1.3rem 1.3rem}
 }
+
+
+/* ─── كيف تعمل رؤى؟ — Mental Map Section ─── */
+.how-rouaa{
+  padding:var(--space-2xl) var(--space-lg);
+  max-width:1300px;
+  margin:0 auto;
+  position:relative;
+  scroll-margin-top:80px;
+}
+.how-header{
+  text-align:center;
+  margin-bottom:var(--space-xl);
+}
+.how-title{
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:900;
+  line-height:1.25;
+  margin-bottom:0.8rem;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.how-sub{
+  color:var(--text-dim);
+  font-size:1.05rem;
+  font-weight:500;
+  line-height:1.85;
+  max-width:680px;
+  margin:0 auto;
+}
+.how-sub strong{
+  color:var(--blue-glow);
+  font-weight:700;
+}
+
+/* ── 3-stage flow ── */
+.how-flow{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:1rem;
+  align-items:center;
+  margin:var(--space-xl) 0;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media (max-width:880px){
+  .how-flow{
+    grid-template-columns:1fr;
+    gap:0.8rem;
+  }
+  .how-arrow{transform:rotate(90deg);margin:0.3rem auto}
+}
+.how-stage{
+  padding:1.6rem 1.3rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(160deg, rgba(59,130,246,0.06) 0%, rgba(34,211,238,0.03) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  text-align:center;
+  position:relative;
+  transition:all 0.4s;
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.how-stage::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:60%;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+  opacity:0.6;
+  transition:opacity 0.4s, width 0.4s;
+}
+.how-stage:hover{
+  transform:translateY(-4px);
+  border-color:var(--blue-bright);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(59,130,246,0.12);
+}
+.how-stage:hover::before{
+  opacity:1;
+  width:80%;
+}
+.how-stage-num{
+  font-family:'Orbitron',sans-serif;
+  font-size:0.85rem;
+  font-weight:900;
+  color:var(--blue-bright);
+  letter-spacing:0.15em;
+  margin-bottom:0.8rem;
+  opacity:0.7;
+}
+.how-stage-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(34,211,238,0.08) 100%);
+  border:1px solid rgba(96,165,250,0.3);
+  display:grid;place-items:center;
+  margin:0 auto 0.8rem;
+}
+.how-stage-icon svg{width:24px;height:24px;color:var(--blue-bright)}
+.how-stage-title{
+  font-size:1.05rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.4rem;
+  line-height:1.4;
+}
+.how-stage-desc{
+  color:var(--text-dim);
+  font-size:0.85rem;
+  line-height:1.6;
+  font-weight:500;
+}
+.how-arrow{
+  display:grid;
+  place-items:center;
+  color:var(--blue-bright);
+  opacity:0.6;
+}
+.how-arrow svg{width:32px;height:32px}
+
+/* ── Two-products relationship ── */
+.how-relation{
+  margin-top:var(--space-2xl);
+  padding:var(--space-xl);
+  border-radius:var(--radius-xl);
+  background:linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(34,211,238,0.02) 100%);
+  border:1px solid var(--glass-border-strong);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.how-relation::before{
+  content:'';
+  position:absolute;
+  top:-50%;right:-30%;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(96,165,250,0.1), transparent 70%);
+  filter:blur(40px);
+  pointer-events:none;
+}
+.how-relation-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:var(--space-lg);
+  align-items:stretch;
+  position:relative;
+}
+@media (max-width:880px){
+  .how-relation-grid{
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+  .how-link{transform:rotate(90deg);margin:0.5rem auto}
+}
+.how-product{
+  padding:var(--space-lg);
+  border-radius:var(--radius-lg);
+  background:rgba(2,6,23,0.5);
+  border:1px solid var(--glass-border);
+  text-align:center;
+  transition:all 0.4s;
+  position:relative;
+}
+.how-product.news{border-color:rgba(34,211,238,0.3)}
+.how-product.trading{border-color:rgba(96,165,250,0.4)}
+.how-product:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+.how-product.news:hover{border-color:var(--cyan)}
+.how-product.trading:hover{border-color:var(--blue-bright)}
+
+.how-product-role{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.7rem;
+  padding:0.3rem 0.8rem;
+  border-radius:4px;
+  display:inline-block;
+}
+.how-product.news .how-product-role{
+  color:var(--cyan);
+  background:rgba(34,211,238,0.1);
+  border:1px solid rgba(34,211,238,0.3);
+}
+.how-product.trading .how-product-role{
+  color:var(--blue-bright);
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(96,165,250,0.3);
+}
+.how-product-name{
+  font-size:1.5rem;
+  font-weight:900;
+  margin-bottom:0.5rem;
+  line-height:1.2;
+}
+.how-product.news .how-product-name{color:var(--cyan)}
+.how-product.trading .how-product-name{color:var(--blue-bright)}
+.how-product-tagline{
+  color:var(--white);
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:0.5rem;
+  line-height:1.5;
+}
+.how-product-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;
+  line-height:1.7;
+}
+
+.how-link{
+  display:grid;
+  place-items:center;
+  align-self:center;
+  color:var(--blue-bright);
+  position:relative;
+}
+.how-link-arrow{
+  width:60px;height:2px;
+  background:linear-gradient(90deg, var(--cyan), var(--blue-bright));
+  position:relative;
+  border-radius:2px;
+  box-shadow:0 0 10px rgba(96,165,250,0.6);
+}
+.how-link-arrow::before{
+  content:'';
+  position:absolute;
+  top:50%;left:0;
+  width:14px;height:14px;
+  background:radial-gradient(circle, var(--blue-bright), transparent);
+  border-radius:50%;
+  transform:translateY(-50%);
+  animation:linkPulse 2s linear infinite;
+}
+@keyframes linkPulse{
+  0%{left:0;opacity:1}
+  100%{left:calc(100% - 14px);opacity:0}
+}
+.how-link-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.15em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  margin-top:0.5rem;
+  white-space:nowrap;
+}
+
+/* ── Unification footer ── */
+.how-unification{
+  margin-top:var(--space-lg);
+  text-align:center;
+  padding:1.5rem 2rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(135deg, rgba(96,165,250,0.08) 0%, rgba(34,211,238,0.05) 100%);
+  border:1px solid rgba(96,165,250,0.3);
+  position:relative;
+}
+.how-unification-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.2em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.6rem;
+  opacity:0.8;
+}
+.how-unification-text{
+  font-size:1.25rem;
+  font-weight:800;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 50%, var(--cyan) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1.4;
+}
+.how-unification-sub{
+  color:var(--text-dim);
+  font-size:0.9rem;
+  margin-top:0.5rem;
+  font-weight:500;
+}
+
+
+/* ─── Pipeline Visual Diagram ─── */
+.how-pipeline{
+  margin-top:var(--space-xl);
+  padding:var(--space-xl) var(--space-lg);
+  border-radius:var(--radius-xl);
+  background:linear-gradient(180deg, rgba(2,6,23,0.6) 0%, rgba(15,23,42,0.4) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.how-pipeline-title{
+  text-align:center;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;
+  letter-spacing:0.25em;
+  color:var(--blue-glow);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:var(--space-lg);
+  opacity:0.85;
+}
+
+.how-pipe-flow{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  max-width:520px;
+  margin:0 auto;
+  position:relative;
+}
+
+.how-pipe-node{
+  width:100%;
+  padding:0.9rem 1.3rem;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(34,211,238,0.04) 100%);
+  border:1px solid rgba(96,165,250,0.25);
+  text-align:center;
+  position:relative;
+  transition:all 0.3s;
+}
+.how-pipe-node:hover{
+  border-color:var(--blue-bright);
+  transform:scale(1.02);
+  box-shadow:0 8px 25px rgba(59,130,246,0.15);
+}
+.how-pipe-node-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.66rem;
+  letter-spacing:0.18em;
+  color:var(--blue-bright);
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:0.3rem;
+  opacity:0.7;
+}
+.how-pipe-node-text{
+  font-size:0.95rem;
+  font-weight:700;
+  color:var(--white);
+  line-height:1.4;
+}
+.how-pipe-node-text strong{
+  color:var(--blue-glow);
+  font-weight:800;
+}
+
+/* Variant colors for each stage */
+.how-pipe-node.sources{
+  background:linear-gradient(135deg, rgba(34,211,238,0.1) 0%, rgba(59,130,246,0.05) 100%);
+  border-color:rgba(34,211,238,0.35);
+}
+.how-pipe-node.sources .how-pipe-node-label{color:var(--cyan)}
+
+.how-pipe-node.intelligence{
+  background:linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(147,197,253,0.08) 100%);
+  border-color:rgba(96,165,250,0.5);
+  box-shadow:0 0 30px rgba(96,165,250,0.1);
+}
+.how-pipe-node.intelligence .how-pipe-node-label{color:var(--blue-bright)}
+
+.how-pipe-node.understanding{
+  background:linear-gradient(135deg, rgba(167,139,250,0.1) 0%, rgba(96,165,250,0.05) 100%);
+  border-color:rgba(167,139,250,0.3);
+}
+.how-pipe-node.understanding .how-pipe-node-label{color:#a78bfa}
+
+.how-pipe-node.decision{
+  background:linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.05) 100%);
+  border-color:rgba(251,191,36,0.3);
+}
+.how-pipe-node.decision .how-pipe-node-label{color:var(--gold)}
+
+.how-pipe-node.execution{
+  background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(34,197,94,0.05) 100%);
+  border-color:rgba(16,185,129,0.3);
+}
+.how-pipe-node.execution .how-pipe-node-label{color:#4ade80}
+
+.how-pipe-node.markets{
+  background:linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(251,113,133,0.04) 100%);
+  border-color:rgba(239,68,68,0.25);
+}
+.how-pipe-node.markets .how-pipe-node-label{color:#f87171}
+
+/* Connector arrow between nodes */
+.how-pipe-connector{
+  width:2px;
+  height:32px;
+  background:linear-gradient(180deg, var(--blue-bright) 0%, var(--cyan) 100%);
+  position:relative;
+  margin:0 auto;
+  opacity:0.6;
+}
+.how-pipe-connector::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--blue-bright);
+  box-shadow:0 0 10px var(--blue-bright);
+  animation:pipeFlow 2s linear infinite;
+}
+.how-pipe-connector::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:8px;height:8px;
+  border-right:2px solid var(--cyan);
+  border-bottom:2px solid var(--cyan);
+  margin-bottom:4px;
+}
+@keyframes pipeFlow{
+  0%{top:0;opacity:1}
+  100%{top:100%;opacity:0}
+}
+
+@media (max-width:600px){
+  .how-pipe-node{padding:0.8rem 1rem}
+  .how-pipe-node-text{font-size:0.88rem}
+  .how-pipe-connector{height:24px}
+}
+
+
+/* ─── 3-Layer Summary Card (mental anchor) ─── */
+.three-layers{
+  padding:var(--space-xl) var(--space-lg);
+  max-width:1100px;
+  margin:0 auto;
+  position:relative;
+  scroll-margin-top:80px;
+}
+.three-layers-header{
+  text-align:center;
+  margin-bottom:var(--space-lg);
+}
+.three-layers-title{
+  font-size:clamp(1.5rem,2.8vw,2rem);
+  font-weight:900;
+  line-height:1.25;
+  background:linear-gradient(135deg, var(--white) 0%, var(--blue-glow) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+}
+.three-layers-sub{
+  color:var(--text-mute);
+  font-size:0.9rem;
+  font-weight:500;
+  letter-spacing:0.02em;
+}
+
+.three-layers-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:var(--space-md);
+}
+@media (max-width:768px){
+  .three-layers-grid{grid-template-columns:1fr}
+}
+
+.tl-card{
+  padding:1.6rem 1.4rem;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(160deg, rgba(2,6,23,0.6) 0%, rgba(15,23,42,0.4) 100%);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s;
+  text-align:center;
+}
+.tl-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  opacity:0.7;
+}
+.tl-card.data::before{
+  background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.tl-card.intelligence::before{
+  background:linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+}
+.tl-card.execution::before{
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.tl-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--glass-border-strong);
+  box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+.tl-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  display:grid;place-items:center;
+  margin:0 auto 1rem;
+  border:1px solid var(--glass-border);
+}
+.tl-card.data .tl-icon{
+  background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.04));
+  border-color:rgba(34,211,238,0.3);
+}
+.tl-card.intelligence .tl-icon{
+  background:linear-gradient(135deg, rgba(96,165,250,0.15), rgba(96,165,250,0.05));
+  border-color:rgba(96,165,250,0.4);
+}
+.tl-card.execution .tl-icon{
+  background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.04));
+  border-color:rgba(251,191,36,0.3);
+}
+.tl-icon svg{width:24px;height:24px}
+.tl-card.data .tl-icon svg{color:var(--cyan)}
+.tl-card.intelligence .tl-icon svg{color:var(--blue-bright)}
+.tl-card.execution .tl-icon svg{color:var(--gold)}
+
+.tl-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.2em;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+  opacity:0.7;
+}
+.tl-card.data .tl-label{color:var(--cyan)}
+.tl-card.intelligence .tl-label{color:var(--blue-bright)}
+.tl-card.execution .tl-label{color:var(--gold)}
+
+.tl-title{
+  font-size:1.1rem;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:0.4rem;
+  line-height:1.4;
+}
+.tl-desc{
+  color:var(--text-dim);
+  font-size:0.88rem;
+  line-height:1.65;
+  font-weight:500;
+}
+
+
+/* ─── Trading quick-stats visual ─── */
+.trading-quick-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0.8rem;
+  margin:1.2rem 0 1.5rem;
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media (max-width:600px){
+  .trading-quick-stats{grid-template-columns:repeat(2,1fr)}
+}
+.tqs-item{
+  padding:0.8rem 0.5rem;
+  background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(34,211,238,0.04) 100%);
+  border:1px solid rgba(96,165,250,0.25);
+  border-radius:10px;
+  text-align:center;
+  transition:all 0.3s;
+}
+.tqs-item:hover{
+  border-color:var(--blue-bright);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(59,130,246,0.15);
+}
+.tqs-num{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+  font-size:1.4rem;
+  background:linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  direction:ltr;
+  line-height:1;
+}
+.tqs-lbl{
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  margin-top:0.3rem;
+  font-weight:600;
+}
+
+
+/* ─── Hero text layout fix ─── */
+.hero-tagline{
+  font-size:clamp(1rem,1.6vw,1.2rem);
+  color:var(--white);
+  font-weight:600;
+  line-height:1.6;
+  margin-bottom:0.4rem;
+}
+.hero-tagline span{color:var(--blue-glow)}
+.hero-sub{
+  font-size:clamp(0.92rem,1.4vw,1.05rem);
+  color:var(--text-dim);
+  font-weight:500;
+  line-height:1.85;
+  max-width:580px;
+}
+@media (max-width:980px){.hero-sub{margin:0 auto}}
+
+/* ─── Radar target labels (new) ─── */
+.target{
+  position:absolute;
+  width:auto;
+  height:auto;
+  transform:translate(-50%,-50%);
+  border-radius:6px;
+  background:rgba(2,6,23,0.95);
+  border:1px solid rgba(96,165,250,0.5);
+  padding:5px 10px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;
+  font-weight:700;
+  letter-spacing:0.03em;
+  color:var(--blue-glow);
+  white-space:nowrap;
+  box-shadow:0 0 15px rgba(96,165,250,0.4), 0 2px 8px rgba(0,0,0,0.5);
+  opacity:0;
+  animation:targetLife 4s ease-out forwards;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  pointer-events:none;
+  z-index:10;
+}
+.target::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--blue-bright);
+  box-shadow:0 0 8px var(--blue-bright);
+  flex-shrink:0;
+}
+.target.hostile{
+  background:rgba(40,5,5,0.92);
+  border-color:rgba(239,68,68,0.5);
+  color:#fca5a5;
+}
+.target.hostile::before{
+  background:#ef4444;
+  box-shadow:0 0 8px #ef4444;
+}
+.target.neutral{
+  background:rgba(40,30,5,0.92);
+  border-color:rgba(251,191,36,0.5);
+  color:#fde68a;
+}
+.target.neutral::before{
+  background:#fbbf24;
+  box-shadow:0 0 8px #fbbf24;
+}
+.target::after{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border:1px solid currentColor;
+  border-radius:8px;
+  opacity:0.3;
+  animation:targetRing 1.5s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes targetLife{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}
+  10%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+  25%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0.15;transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes targetRing{
+  from{transform:scale(1);opacity:0.4}
+  to{transform:scale(1.8);opacity:0}
+}
+
+
+
+/* Hide the background rect */
+
+
+
+
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      
+
+.nav-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:40px;
+  overflow:visible;
+  z-index:98;
+  pointer-events:none;
+}
+/* ─── Navbar ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  z-index:100;
+  background:rgba(2,6,23,0.65);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:none;
+  transform:translateY(-100%);
+  animation:navDown 0.8s ease 0.3s forwards;
+  overflow:visible;
+}
+@keyframes navDown{to{transform:translateY(0)}}
+/* Logo — absolute position, hangs below nav */
+.logo{
+  position:absolute;
+  bottom:-44px;
+  right:3rem;
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  font-family:'Cairo',sans-serif;
+  font-weight:700;
+  font-size:1.5rem;
+  letter-spacing:0;
+  color:var(--white);
+  text-shadow:0 0 15px rgba(96,165,250,0.6);
+  text-decoration:none;
+  z-index:101;
+}
+/* Circular logo container */
+.logo-svg{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  position:relative;
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  background:#0a0a12;
+  border:2px solid rgba(99,102,241,0.4);
+  box-shadow:0 0 20px rgba(99,102,241,0.3),0 4px 15px rgba(0,0,0,0.5),inset 0 0 20px rgba(99,102,241,0.1);
+  overflow:visible;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.logo:hover .logo-svg{
+  border-color:rgba(99,102,241,0.8);
+  box-shadow:0 0 30px rgba(99,102,241,0.5),0 4px 20px rgba(0,0,0,0.6),inset 0 0 25px rgba(99,102,241,0.15);
+}
+.logo-svg svg{width:80px;height:80px;filter:drop-shadow(0 0 8px rgba(99,102,241,0.4))}
+.logo-svg svg rect{display:none}
+
+
+
+
 </style>
+<base target="_blank">
 </head>
-
 <body>
-<a href="#main" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+<div class="bg-3d"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-<nav role="navigation" aria-label="التنقل الرئيسي">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo" aria-label="رؤى - الصفحة الرئيسية">رُؤ<span>ى</span></a>
-    <ul class="nav-links">
-      <li><a href="#features">المميزات</a></li>
-      <li><a href="#news">الأخبار</a></li>
-      <li><a href="#trading">التداول</a></li>
-      <li><a href="#security">الأمان</a></li>
-    </ul>
-    <a href="#cta" class="nav-cta">اطلب عرضاً</a>
+<nav>
+  <!-- Nav bottom border with arc around logo -->
+  <svg class="nav-line" viewBox="0 0 100 4" preserveAspectRatio="none"><path d="M0,2 L88,2 A6,6 0 0,1 94,2 L100,2" fill="none" stroke="rgba(96,165,250,0.3)" stroke-width="0.3"/></svg>
+  
+  <div class="logo" role="img" aria-label="رؤى - ببصيرة نحو الأسواق">
+    <div class="logo-svg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="88" height="88">
+      <defs>
+        <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#B388FF"/>
+          <stop offset="50%" stop-color="#6366F1"/>
+          <stop offset="100%" stop-color="#06B6D4"/>
+        </linearGradient>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#B388FF" stop-opacity="0.8"/>
+          <stop offset="40%" stop-color="#6366F1" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/>
+          <stop offset="50%" stop-color="#B388FF" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#000000" stop-opacity="0.7"/>
+          <stop offset="70%" stop-color="#0a0a1a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#1a1a2e" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#B388FF" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#6366F1" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.5"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <style>
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; }
+        .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        .n0{animation-delay:0s} .n1{animation-delay:0.25s} .n2{animation-delay:0.5s} .n3{animation-delay:0.75s} .n4{animation-delay:1.0s}
+        .n5{animation-delay:1.25s} .n6{animation-delay:1.5s} .n7{animation-delay:1.75s} .n8{animation-delay:2.0s} .n9{animation-delay:2.25s}
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        .in0{animation-delay:0s} .in1{animation-delay:0.25s} .in2{animation-delay:0.5s} .in3{animation-delay:0.75s} .in4{animation-delay:1.0s}
+        .in5{animation-delay:1.25s} .in6{animation-delay:1.5s} .in7{animation-delay:1.75s} .in8{animation-delay:2.0s} .in9{animation-delay:2.25s}
+        .in10{animation-delay:2.5s} .in11{animation-delay:2.75s} .in12{animation-delay:3.0s} .in13{animation-delay:3.25s} .in14{animation-delay:3.5s}
+        .in15{animation-delay:3.75s} .in16{animation-delay:4.0s} .in17{animation-delay:4.25s} .in18{animation-delay:4.5s} .in19{animation-delay:4.75s}
+        .in20{animation-delay:5.0s} .in21{animation-delay:5.25s} .in22{animation-delay:5.5s} .in23{animation-delay:5.75s}
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      </style>
+      <rect width="200" height="200" rx="20" fill="#0a0a12"/>
+      <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
+      <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
+      <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(179,136,255,0.12)" stroke-width="0.5" class="range-ring" style="animation-delay:1s"/>
+      <g class="network">
+        <line class="network-line" x1="100" y1="20" x2="147.02" y2="35.28"/>
+        <line class="network-line" x1="100" y1="20" x2="176.08" y2="75.28"/>
+        <line class="network-line" x1="100" y1="20" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="100" y1="20" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="100" y1="20" x2="100" y2="180"/>
+        <line class="network-line" x1="100" y1="20" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="100" y1="20" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="100" y1="20" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="100" y1="20" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="100" y2="180"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="176.08" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="100" y2="180"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="147.02" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="100" y2="180"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="100" y2="180"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="100" y1="180" x2="52.98" y2="164.72"/>
+        <line class="network-line" x1="100" y1="180" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="100" y1="180" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="100" y1="180" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="124.72"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="52.98" y1="164.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="23.92" y1="124.72" x2="23.92" y2="75.28"/>
+        <line class="network-line" x1="23.92" y1="124.72" x2="52.98" y2="35.28"/>
+        <line class="network-line" x1="23.92" y1="75.28" x2="52.98" y2="35.28"/>
+      </g>
+      <g class="radar-group">
+        <path fill="url(#radarGrad)" d="M 100,100 L 100,5 A 95,95 0 0,1 195,100 Z"/>
+        <line x1="100" y1="100" x2="100" y2="5" stroke="#B388FF" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
+        <circle cx="100" cy="5" r="2" fill="#06B6D4" opacity="0.8"/>
+      </g>
+      <circle class="center-glow" cx="100" cy="100" r="25"/>
+      <circle class="center-dot" cx="100" cy="100" r="8"/>
+      <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+      <g class="inner-nodes">
+        <circle class="inner-halo in0" cx="158.12" cy="100.0" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in0" cx="158.12" cy="100.0" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in1" cx="152.57" cy="107.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in1" cx="152.57" cy="107.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in2" cx="160.02" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in2" cx="160.02" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in3" cx="155.05" cy="140.0" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in3" cx="155.05" cy="140.0" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in4" cx="117.96" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in4" cx="117.96" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in5" cx="123.51" cy="147.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in5" cx="123.51" cy="147.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in6" cx="111.1" cy="145.83" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in6" cx="111.1" cy="145.83" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in7" cx="100.0" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in7" cx="100.0" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in8" cx="91.97" cy="124.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in8" cx="91.97" cy="124.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in9" cx="70.94" cy="158.88" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in9" cx="70.94" cy="158.88" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in10" cx="57.94" cy="149.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in10" cx="57.94" cy="149.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in11" cx="78.97" cy="115.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in11" cx="78.97" cy="115.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in12" cx="52.98" cy="115.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in12" cx="52.98" cy="115.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in13" cx="35.02" cy="109.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in13" cx="35.02" cy="109.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in14" cx="52.98" cy="96.39" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in14" cx="52.98" cy="96.39" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in15" cx="76.49" cy="92.36" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in15" cx="76.49" cy="92.36" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in16" cx="52.98" cy="65.84" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in16" cx="52.98" cy="65.84" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in17" cx="52.98" cy="54.16" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in17" cx="52.98" cy="54.16" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in18" cx="65.98" cy="44.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in18" cx="65.98" cy="44.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in19" cx="82.04" cy="44.72" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in19" cx="82.04" cy="44.72" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in20" cx="100.0" cy="69.44" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in20" cx="100.0" cy="69.44" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in21" cx="111.1" cy="35.28" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in21" cx="111.1" cy="35.28" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in22" cx="117.96" cy="56.39" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in22" cx="117.96" cy="56.39" r="1.1" fill="#fff" filter="url(#glow)"/>
+        <circle class="inner-halo in23" cx="138.04" cy="47.64" r="3" fill="url(#innerGlow)"/>
+        <circle class="inner-node in23" cx="138.04" cy="47.64" r="1.1" fill="#fff" filter="url(#glow)"/>
+      </g>
+      <g class="outer-nodes">
+        <circle class="node-halo n0" cx="100" cy="20" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n0" cx="100" cy="20" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n1" cx="147.02" cy="35.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n1" cx="147.02" cy="35.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n2" cx="176.08" cy="75.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n2" cx="176.08" cy="75.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n3" cx="176.08" cy="124.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n3" cx="176.08" cy="124.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n4" cx="147.02" cy="164.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n4" cx="147.02" cy="164.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n5" cx="100" cy="180" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n5" cx="100" cy="180" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n6" cx="52.98" cy="164.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n6" cx="52.98" cy="164.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n7" cx="23.92" cy="124.72" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n7" cx="23.92" cy="124.72" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n8" cx="23.92" cy="75.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n8" cx="23.92" cy="75.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+        <circle class="node-halo n9" cx="52.98" cy="35.28" r="10" fill="url(#glowGrad)"/>
+        <circle class="node n9" cx="52.98" cy="35.28" r="3.5" fill="url(#nodeGrad)" filter="url(#glow)"/>
+      </g>
+      <text x="100" y="100" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="#fff" opacity="0.95" letter-spacing="2" style="text-shadow:0 0 10px rgba(179,136,255,0.6);">R</text>
+    </svg></div>
+    <span>رؤى</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#hero">الرئيسية</a></li>
+    <li><a href="#how-rouaa-works">كيف تعمل رؤى؟</a></li>
+    <li><a href="news.html">رؤى الأخبار</a></li>
+    <li><a href="trading.html">رؤى التداول</a></li>
+    <li><a href="#contact">تواصل</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn-ghost">دخول</a>
+    <a href="#" class="btn-primary">اطلب عرضاً</a>
   </div>
 </nav>
 
-<main id="main">
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>منظومة استخبارات مالية ذكية</span>
+    </div>
+      <h1 class="hero-title">رُؤى</h1>
+    <div class="hero-title-en">رؤى · ببصيرة نحو الأسواق</div>
+    <p class="hero-tagline">بنية تحتية مالية <span>للمؤسسات</span> — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
+    <p class="hero-sub">
+      <strong style="color:var(--blue-glow)">رؤى الأخبار</strong> تبني الاستخبارات المالية من 729+ مصدراً عالمياً.<br>
+      <strong style="color:var(--blue-glow)">رؤى التداول</strong> تحوّلها إلى قرارات وتنفيذ آلي حسب قواعد المستخدم، عبر مجلس ذكاء اصطناعي من 10 أدوار.<br>
+      دون وسيط بشري في سلسلة التحليل والقرار · بخمس لغات · في الزمن الحقيقي.
+    </p>
+    <div class="hero-cta">
+      <a href="#advantage" class="btn-glow">
+        <span>الميزة التنافسية</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#rouaa-trading" class="btn-outline">استكشف رؤى التداول</a>
+    </div>
+  </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero" aria-label="الصفحة الرئيسية">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        منظومة استخبارات مالية ذكية
-      </div>
-      <h1>بنية تحتية مالية<br>للمؤسسات</h1>
-      <p class="hero-sub">
-        حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة — بلا وسيط بشري، بخمس لغات، في الزمن الحقيقي.
-      </p>
-      <div class="hero-cta-group">
-        <a href="#cta" class="btn-primary">ابدأ الآن</a>
-        <a href="#features" class="btn-secondary">اكتشف المزيد</a>
+  <div class="radar-wrap">
+    <div class="radar-pedestal"></div>
+    <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
+    <div class="hud-bracket bl"></div><div class="hud-bracket br"></div>
+    <span class="hud-label top">SECTOR · GLOBAL</span>
+    <span class="hud-label bottom">RANGE · LIVE</span>
+    <span class="hud-label left">SCAN · 360°</span>
+    <span class="hud-label right">FEED · REAL-TIME</span>
+    <div class="radar-frame">
+      <div class="radar-screen">
+        <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
+          <circle cx="0" cy="0" r="20" class="ring"/><circle cx="0" cy="0" r="40" class="ring bright"/>
+          <circle cx="0" cy="0" r="60" class="ring"/><circle cx="0" cy="0" r="80" class="ring bright"/>
+          <circle cx="0" cy="0" r="100" class="ring bright"/>
+          <line x1="-100" y1="0" x2="100" y2="0" class="az cardinal"/><line x1="0" y1="-100" x2="0" y2="100" class="az cardinal"/>
+          <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="az"/><line x1="-86.6" y1="50" x2="86.6" y2="-50" class="az"/>
+          <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="az"/><line x1="-50" y1="86.6" x2="50" y2="-86.6" class="az"/>
+          <text x="0" y="-106" class="compass">N</text><text x="106" y="0" class="compass">E</text>
+          <text x="0" y="106" class="compass">S</text><text x="-106" y="0" class="compass">W</text>
+          <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/><line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
+          <circle cx="0" cy="0" r="1.8" class="center-dot"/>
+        </svg>
+        <div class="radar-sweep"></div>
+        <div class="radar-sweep-line"></div>
+        <div class="radar-targets" id="radarTargets"></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="images/hero-radar.png" alt="رادار مالي تفاعلي يعرض نقاط بيانات متصلة لأزواج العملات والعملات الرقمية" loading="eager" width="800" height="450">
+    <div class="radar-status">
+      <div class="item"><span>الحالة</span><span class="val" id="rStatus">نشط</span></div>
+      <div class="item"><span>الإشارات</span><span class="val" id="rCount">00</span></div>
+      <div class="item"><span>المسح</span><span class="val" id="rSweep">000°</span></div>
+      <div class="item"><span>الوقت</span><span class="val" id="rClock">00:00:00</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== TRUSTED BY ===== -->
-<section class="trusted" aria-label="الجهات الموثوقة">
-  <div class="trusted-label">يُستخدم من قبل فرق مالية حول العالم</div>
-  <div class="trusted-logos">
-    <img src="images/trusted-logos.png" alt="شعارات جهات مالية موثوقة: Bloomberg, Reuters, CNBC, FED, ECB, BOE, IMF, WEF" loading="lazy" width="900" height="80">
-  </div>
-</section>
 
-<!-- ===== FEATURES ===== -->
-<section class="section" id="features" aria-labelledby="features-title">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-tag">المنظومتان</span>
-      <h2 id="features-title">كل ما تحتاجه في مكان واحد</h2>
-      <p class="section-desc">ليست منصة واحدة، بل منظومتان متكاملتان تعملان باستقلالية تامة.</p>
-    </div>
-    <div class="features-grid">
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">📰</div>
-        <h3>رؤى الأخبار</h3>
-        <p>محرك استخبارات يحوّل 729+ مصدراً إلى معرفة قابلة للتنفيذ — بخمس لغات حية.</p>
-      </article>
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">⚡</div>
-        <h3>رؤى التداول</h3>
-        <p>منظومة ذكاء اصطناعي متكاملة لاتخاذ القرار والتنفيذ الآلي حسب قواعدك.</p>
-      </article>
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">🔒</div>
-        <h3>حماية فولاذية</h3>
-        <p>تشفير AES-256، عزل كامل للحسابات، وسجل تدقيق لكل عملية.</p>
-      </article>
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">🌍</div>
-        <h3>خمس لغات حية</h3>
-        <p>محتوى أصلي مولّد آلياً بالعربية والإنجليزية والفرنسية والإسبانية والألمانية.</p>
-      </article>
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">🤖</div>
-        <h3>مجلس ذكاء اصطناعي</h3>
-        <p>10 أدوار متخصصة تتعاون لتحليل البيانات وتقييم السيناريوهات.</p>
-      </article>
-      <article class="feature-card">
-        <div class="f-icon" aria-hidden="true">📊</div>
-        <h3>تنفيذ ذكي</h3>
-        <p>15 فحص أمان قبل التنفيذ، حجم مركز ذكي، وعزل تام لكل مستخدم.</p>
-      </article>
-    </div>
+<!-- ═══ كيف تعمل رؤى؟ — Mental Map ═══ -->
+<section id="how-rouaa-works" class="how-rouaa reveal">
+  <div class="how-header">
+    <span class="section-tag">كيف تعمل رؤى؟</span>
+    <h2 class="how-title">من البيانات إلى القرار والتنفيذ — في ثوانٍ</h2>
+    <p class="how-sub">
+      رؤى ليست موقع أخبار، ولا منصة تداول، ولا وسيط. هي <strong>بنية تحتية للاستخبارات المالية</strong> —
+      تجمع، تُحلّل، وتُنفّذ في مسار واحد متكامل.
+    </p>
   </div>
-</section>
 
-<!-- ===== NEWS PIPELINE ===== -->
-<section class="section" id="news" aria-labelledby="news-title" style="background:linear-gradient(180deg,transparent,rgba(59,130,246,0.03),transparent)">
-  <div class="section-inner">
-    <div class="two-col">
-      <div class="col-visual">
-        <img src="images/news-pipeline.png" alt="تصور بصري لأنابيب البيانات المالية المتدفقة نحو معالج ذكاء اصطناعي مركزي" loading="lazy" width="700" height="400">
+  <!-- 3-stage flow -->
+  <div class="how-flow">
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠١</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
-      <div class="col-content">
-        <span class="section-tag">رؤى الأخبار</span>
-        <h3 id="news-title">استخبارات مالية لحظية</h3>
-        <p>يُغذّي المنظومة بذكاء مالي من 729+ مصدراً موثوقاً، يُحلّله بـ 10 أدوار ذكاء اصطناعي، ويُخرجه كإشارات قابلة للتنفيذ.</p>
-        <ul class="bullet-list">
-          <li>أنابيب أخبار وأنفوجرافيك آلية</li>
-          <li>تحليل فني وأساسي لآلاف الأسهم</li>
-          <li>تقارير استراتيجية عميقة يومياً</li>
-          <li>ملخصات صوتية بخمس لغات</li>
-        </ul>
-        <br>
-        <a href="news.html" class="btn-primary">استكشف رؤى الأخبار</a>
-      </div>
+      <h4 class="how-stage-title">المصادر المالية العالمية</h4>
+      <p class="how-stage-desc">729+ مصدر مالي موثوق · بنوك مركزية · هيئات تنظيمية · وزارات · مؤسسات إحصائية</p>
     </div>
+
+    <div class="how-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠٢</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+      </div>
+      <h4 class="how-stage-title">الاستخبارات بالذكاء الاصطناعي</h4>
+      <p class="how-stage-desc">10 أدوار ذكاء اصطناعي متخصصة تتعاون لتحليل البيانات، تقييم السيناريوهات، وتحديد الأثر السوقي</p>
+    </div>
+
+    <div class="how-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+
+    <div class="how-stage">
+      <div class="how-stage-num">المرحلة ٠٣</div>
+      <div class="how-stage-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h4 class="how-stage-title">القرار والتنفيذ الذكي</h4>
+      <p class="how-stage-desc">منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلون · تنفيذ حسب قواعد المستخدم</p>
+    </div>
+
   </div>
-</section>
 
-<!-- ===== TRADING ===== -->
-<section class="section" id="trading" aria-labelledby="trading-title">
-  <div class="section-inner">
-    <div class="two-col" style="direction:ltr">
-      <div class="col-content" style="direction:rtl">
-        <span class="section-tag">رؤى التداول</span>
-        <h3 id="trading-title">تنفيذ ذكي حسب قواعدك</h3>
-        <p>يستهلك إشارات العقل، يُطبّق 15 فحص أمان، ويُنفّذ تلقائياً عبر 6 منصات بـ 3 وكلاء مستقلين.</p>
-        <ul class="bullet-list">
-          <li>8 استراتيجيات تداول تكيفية</li>
-          <li>وكيل فائق السرعة (&lt;5 مللي ثانية)</li>
-          <li>سوق تنبؤي لتعزيز الإشارة</li>
-          <li>عزل كامل لكل مستخدم</li>
-        </ul>
-        <br>
-        <a href="#cta" class="btn-primary">اكتشف رؤى التداول</a>
-      </div>
-      <div class="col-visual">
-        <img src="images/trading-chart.png" alt="شارت شموع يابانية لزوج XAU/USD مع إشارة شراء مولدة بواسطة الذكاء الاصطناعي" loading="lazy" width="700" height="400">
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- Two-products relationship -->
+  <div class="how-relation">
+    <div class="how-relation-grid">
 
-<!-- ===== STATS ===== -->
-<section class="section" style="padding-top:2rem;padding-bottom:2rem" aria-label="إحصائيات رئيسية">
-  <div class="section-inner">
-    <div class="stats-bar">
-      <div>
-        <div class="stat-num">729<span>+</span></div>
-        <div class="stat-label">مصدر مالي</div>
+      <div class="how-product news">
+        <div class="how-product-role">العقل المالي</div>
+        <h3 class="how-product-name">رؤى الأخبار</h3>
+        <p class="how-product-tagline">يجمع ويفهم المعلومات</p>
+        <p class="how-product-desc">يُغذّي المنظومة بذكاء مالي لحظي من 729+ مصدراً، يُحلّله بـ 10 أدوار ذكاء اصطناعي، ويُخرجه كإشارات قابلة للتنفيذ.</p>
       </div>
-      <div>
-        <div class="stat-num">10</div>
-        <div class="stat-label">أدوار AI</div>
-      </div>
-      <div>
-        <div class="stat-num">15<span>+</span></div>
-        <div class="stat-label">فحص أمان</div>
-      </div>
-      <div>
-        <div class="stat-num">5</div>
-        <div class="stat-label">لغات حية</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== SECURITY ===== -->
-<section class="section" id="security" aria-labelledby="security-title" style="background:linear-gradient(180deg,transparent,rgba(251,191,36,0.03),transparent)">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-tag" style="color:var(--gold);background:rgba(251,191,36,0.1)">الأمان</span>
-      <h2 id="security-title">حماية فولاذية. شفافية مطلقة.</h2>
-      <p class="section-desc">كل بياناتك مشفرة، كل عملية موثقة، وأموالك تبقى في حسابك.</p>
-    </div>
-    <div class="two-col">
-      <div class="col-visual">
-        <img src="images/security-shield.png" alt="درع حماية رقمي مع قفل ذهبي يمثل تشفير AES-256 وحماية البيانات" loading="lazy" width="600" height="400">
+      <div class="how-link">
+        <div class="how-link-arrow"></div>
+        <div class="how-link-label">يغذي طبقة التنفيذ بالذكاء</div>
       </div>
-      <div class="col-content">
-        <div class="features-grid" style="grid-template-columns:1fr">
-          <article class="feature-card">
-            <div class="f-icon" style="background:linear-gradient(135deg,rgba(251,191,36,0.2),rgba(251,191,36,0.1));border-color:rgba(251,191,36,0.3)">🔐</div>
-            <h3>تشفير AES-256</h3>
-            <p>بيانات الاعتماد مشفرة at-rest و in-transit بمعايير عسكرية.</p>
-          </article>
-          <article class="feature-card">
-            <div class="f-icon" style="background:linear-gradient(135deg,rgba(251,191,36,0.2),rgba(251,191,36,0.1));border-color:rgba(251,191,36,0.3)">🛡️</div>
-            <h3>عزل كامل</h3>
-            <p>حسابات المستخدمين معزولة 100% — لا وصول متبادل بين الحسابات.</p>
-          </article>
-          <article class="feature-card">
-            <div class="f-icon" style="background:linear-gradient(135deg,rgba(251,191,36,0.2),rgba(251,191,36,0.1));border-color:rgba(251,191,36,0.3)">📋</div>
-            <h3>سجل تدقيق</h3>
-            <p>كل عملية موثقة بالتوقيت وعنوان الشبكة ونوع المتصفح.</p>
-          </article>
-          <article class="feature-card">
-            <div class="f-icon" style="background:linear-gradient(135deg,rgba(251,191,36,0.2),rgba(251,191,36,0.1));border-color:rgba(251,191,36,0.3)">💰</div>
-            <h3>لا نلمس أموالك</h3>
-            <p>التداول على وسيطك مباشرة — نحن نوفّر الذكاء فقط.</p>
-          </article>
+
+      <div class="how-product trading">
+        <div class="how-product-role">ذراع التنفيذ الذكي</div>
+        <h3 class="how-product-name">رؤى التداول</h3>
+        <p class="how-product-tagline">يُحوّل الفهم إلى قرار وتنفيذ حسب قواعدك</p>
+        <p class="how-product-desc">يستهلك إشارات العقل، يُطبّق 15 فحص أمان، ويُنفّذ تلقائياً عبر 6 منصات بـ 3 وكلاء مستقلين.</p>
+      </div>
+
+    </div>
+
+    <!-- Unification footer -->
+    <div class="how-unification">
+      <div class="how-unification-label">المعادلة الكاملة</div>
+      <div class="how-unification-text">رؤى الأخبار + رؤى التداول = بنية تحتية للاستخبارات المالية</div>
+      <div class="how-unification-sub">ليست منصة واحدة، بل منظومتان متكاملتان تعملان ب独立ية تامة، وتتكاملان عند الحاجة</div>
+    </div>
+  
+
+    <!-- Pipeline Visual Diagram -->
+    <div class="how-pipeline">
+      <div class="how-pipeline-title">مسار الذكاء المالي الكامل</div>
+      <div class="how-pipe-flow">
+
+        <div class="how-pipe-node sources">
+          <div class="how-pipe-node-label">المدخل</div>
+          <div class="how-pipe-node-text"><strong>729+</strong> مصدر مالي عالمي</div>
         </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node intelligence">
+          <div class="how-pipe-node-label">طبقة الذكاء</div>
+          <div class="how-pipe-node-text"><strong>10</strong> أدوار ذكاء اصطناعي متخصصة</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node understanding">
+          <div class="how-pipe-node-label">الفهم</div>
+          <div class="how-pipe-node-text">فهم السوق والأثر السوقي</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node decision">
+          <div class="how-pipe-node-label">القرار</div>
+          <div class="how-pipe-node-text">قرار ذكي موثّق بالأدلة</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node execution">
+          <div class="how-pipe-node-label">طبقة التنفيذ</div>
+          <div class="how-pipe-node-text"><strong>15</strong> فحص أمان قبل التنفيذ</div>
+        </div>
+        <div class="how-pipe-connector"></div>
+
+        <div class="how-pipe-node markets">
+          <div class="how-pipe-node-label">المخرج</div>
+          <div class="how-pipe-node-text">وسطاء وأسواق عالمية</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+</section>
+
+
+
+<!-- Closing statement — bridges to next section -->
+<div class="how-closing-statement" style="
+  text-align:center;
+  padding:1.5rem 2rem;
+  margin-top:var(--space-lg);
+  max-width:780px;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+">
+  <div style="
+    font-size:1.15rem;
+    font-weight:700;
+    color:var(--white);
+    line-height:1.7;
+    letter-spacing:-0.005em;
+  ">
+    حلقة كاملة من الرصد والفهم والقرار والتنفيذ — دون فقدان السياق بين المراحل
+  </div>
+  <div style="
+    font-family:'Share Tech Mono',monospace;
+    font-size:0.75rem;
+    letter-spacing:0.2em;
+    color:var(--blue-glow);
+    text-transform:uppercase;
+    margin-top:0.8rem;
+    opacity:0.85;
+  ">
+    من طبقة البيانات إلى طبقة التنفيذ · حلقة استخبارات مالية مغلقة
+  </div>
+</div>
+
+
+
+<!-- ═══ 3-Layer Summary — Mental Anchor ═══ -->
+<section class="three-layers">
+  <div class="three-layers-header">
+    <h3 class="three-layers-title">منصة واحدة · ثلاث طبقات</h3>
+    <p class="three-layers-sub">كل ما سبق يعمل ضمن هذه البساطة</p>
+  </div>
+  <div class="three-layers-grid">
+
+    <div class="tl-card data">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ١</div>
+      <h4 class="tl-title">مصادر مالية عالمية</h4>
+      <p class="tl-desc">729+ مصدر موثوق · بنوك مركزية · هيئات · مؤسسات إحصائية</p>
+    </div>
+
+    <div class="tl-card intelligence">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ٢</div>
+      <h4 class="tl-title">تحليل ذكاء اصطناعي وفهم السوق</h4>
+      <p class="tl-desc">10 أدوار AI تتعاون · تقييم السيناريوهات · تحديد الأثر السوقي</p>
+    </div>
+
+    <div class="tl-card execution">
+      <div class="tl-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="tl-label">الطبقة ٣</div>
+      <h4 class="tl-title">قرارات وتنفيذ ذكي</h4>
+      <p class="tl-desc">15 فحص أمان · تنفيذ حسب قواعد المستخدم · أنت المتحكم</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- الميزة التنافسية -->
+<section id="advantage" class="reveal">
+  <span class="section-tag">الميزة التنافسية</span>
+  <h2 class="section-title">الميزة التنافسية</h2>
+  <p class="section-sub">لماذا رؤى؟ لأنها تختصر المسافة بين الحدث السوقي وقرار التنفيذ — من مصدر واحد، بلغة العميل، دون وسطاء أو فاقد زمني.</p>
+  <div class="advantage-card">
+    <div class="advantage-content">
+      <div class="advantage-text">
+        <h3>الخبر · التحليل · التنفيذ<br>في منصة واحدة</h3>
+        <p>المنصات التقليدية تبيعك أدوات منفصلة: محطة أخبار، ومحطة تحليل، ومحطة تنفيذ. <strong>رؤى</strong> تدمج الطبقات الثلاث في بنية واحدة متماسكة — الخبر يدخل، يُحلَّل فوراً، ويخرج كقرار قابل للتنفيذ مباشرة.</p>
+        <p style="margin-top:1rem;">بلا وسيط بشري، بلا تأخير، بلا فقدان للسياق بين الطبقات. وبخمس لغات حيّة تخدم أسواقاً لا يصلها أحد بهذا المستوى.</p>
+      </div>
+      <div class="advantage-visual">
+        <div class="adv-stat"><div class="adv-stat-num">5</div><div class="adv-stat-lbl">لغات حيّة</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">3</div><div class="adv-stat-lbl">طبقات مدمجة</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">0</div><div class="adv-stat-lbl">وسطاء بشريين</div></div>
+        <div class="adv-stat"><div class="adv-stat-num">24/7</div><div class="adv-stat-lbl">مراقبة دائمة</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
-<section class="cta-section" id="cta" aria-label="دعوة للعمل">
-  <div class="section-inner">
-    <h2>ابنِ فوق بنية تحتية تستحق ثقتك</h2>
-    <p>اطلب عرضاً مخصصاً لشريحتك، واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر.</p>
-    <a href="mailto:contact@rouaa.io" class="btn-primary" style="font-size:1.1rem;padding:1.1rem 2.5rem">اطلب عرضاً مخصصاً</a>
+<!-- لمن صُممت رؤى -->
+<section id="audiences" class="reveal">
+  <span class="section-tag">لمن صُممت رؤى</span>
+  <h2 class="section-title">لمن صُممت رؤى</h2>
+  <p class="section-sub">ثلاث شرائح تستفيد من رؤى بطرق مختلفة — كل شريحة تجد طبقتها الجاهزة، بلا تخصيص معقد.</p>
+  <div class="audiences">
+    <div class="audience-card">
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg></div>
+      <h3>مؤسسات مالية</h3>
+      <p class="desc">حلول برمجية متكاملة لمنصات التداول والبنوك — تُدمج في بنيتك التحتية دون إعادة هندسة.</p>
+      <ul class="audience-features">
+        <li><span>سرعة تنفيذ فائقة</span></li>
+        <li><span>بيانات خام موثوقة</span></li>
+        <li><span>دعم العلامة البيضاء</span></li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v6l-4 4v10h14V12l-4-4V2M9 2h6M9 12h6"/></svg></div>
+      <h3>مكاتب الأبحاث</h3>
+      <p class="desc">أتمتة إنتاج التقارير المالية الاستراتيجية — من مصدر الخبر إلى تقرير احترافي جاهز للنشر.</p>
+      <ul class="audience-features">
+        <li><span>46 تقريراً يومياً</span></li>
+        <li><span>تحليل بمساعدة 10 أدوار ذكاء اصطناعي</span></li>
+        <li><span>متعدد اللغات</span></li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+      <h3>المتداولون المحترفون</h3>
+      <p class="desc">أدوات اتخاذ القرار المعتمدة على البيانات — لا حدس، لا ضجيج، فقط إشارات صافية قابلة للتنفيذ.</p>
+      <ul class="audience-features">
+        <li><span>تنبيهات لحظية</span></li>
+        <li><span>إجماع السوق</span></li>
+        <li><span>إدارة مخاطر آلية</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer role="contentinfo">
-  <div class="footer-inner">
-    <div class="footer-logo">رُؤ<span>ى</span></div>
-    <ul class="footer-links">
-      <li><a href="#">الرئيسية</a></li>
-      <li><a href="news.html">رؤى الأخبار</a></li>
-      <li><a href="#">رؤى التداول</a></li>
-      <li><a href="#">التواصل</a></li>
-    </ul>
-    <p class="footer-copy">© 2026 رُؤى. جميع الحقوق محفوظة.</p>
+<!-- ═══ رؤى الأخبار ═══ -->
+<section id="rouaa-news" class="project-section reveal">
+  <div class="project-header">
+    <span class="project-tag news">المشروع الأول</span>
+    <h2 class="project-title">
+      <span class="gradient">رؤى الأخبار</span><br>
+      <span class="dim">من ألف مصدر إلى قرار واحد</span>
+    </h2>
+    <p class="project-subtitle">محرك استخبارات مالية يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ — حقائق، أحداث، أدلة، وتقارير في الزمن الحقيقي.</p>
   </div>
+
+  <div class="project-preview">
+    <div class="news-tabs">
+      <button class="news-tab active">الرئيسية</button>
+      <button class="news-tab">الأخبار</button>
+      <button class="news-tab">تحليل الأسهم</button>
+      <button class="news-tab">القطاعات</button>
+    </div>
+    <div class="news-cards">
+      <div class="news-card featured">
+        <div class="news-meta"><span class="news-source">Bloomberg</span><span>منذ 2 دقيقة</span></div>
+        <h4 class="news-title">النفط يتجاوز 85$ مع تصاعد التوترات الجيوسياسية</h4>
+        <div class="news-impact"><span class="impact-badge positive">إيجابي</span><span class="impact-score">ثقة 92%</span></div>
+      </div>
+      <div class="news-card">
+        <div class="news-meta"><span class="news-source">Reuters</span><span>منذ 5 دقائق</span></div>
+        <h4 class="news-title">الفيدرالي يشير إلى تباطؤ في وتيرة رفع الفائدة</h4>
+        <div class="news-impact"><span class="impact-badge neutral">محايد</span><span class="impact-score">ثقة 78%</span></div>
+      </div>
+      <div class="news-card">
+        <div class="news-meta"><span class="news-source">CNBC</span><span>منذ 12 دقيقة</span></div>
+        <h4 class="news-title">تسلا تعلن عن نتائج فصلية تفوق التوقعات</h4>
+        <div class="news-impact"><span class="impact-badge positive">إيجابي</span><span class="impact-score">ثقة 88%</span></div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  <div class="news-features-grid">
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <span class="nf-num">٠١</span>
+      </div>
+      <h4 class="nf-title">وكيل نشر مستقل</h4>
+      <p class="nf-desc">ينتج أخباراً حصرية من مئات المصادر الرسمية المالية العالمية — لا يعيد نشر، بل يصنع محتوى أصلياً بـ 5 لغات.</p>
+      <span class="nf-stat">محرّك محتوى أصلي</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
+        <span class="nf-num">٠٢</span>
+      </div>
+      <h4 class="nf-title">أنابيب الأخبار</h4>
+      <p class="nf-desc">تنتج آلاف الأخبار المجمّعة يومياً، تُحلَّل، وتُولَّد لها صور تلقائياً، بـ 5 لغات حيّة.</p>
+      <span class="nf-stat">آلاف الأخبار · 5 لغات</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V9M15 17v-4M21 17H3"/></svg></div>
+        <span class="nf-num">٠٣</span>
+      </div>
+      <h4 class="nf-title">أنابيب الإنفوجرافيك</h4>
+      <p class="nf-desc">تنتج عشرات الإنفوجرافيك الاحترافي مع الصور يومياً، بكل اللغات.</p>
+      <span class="nf-stat">عشرات الإنفوجرافيك يومياً</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <span class="nf-num">٠٤</span>
+      </div>
+      <h4 class="nf-title">أنابيب تحليل الأسهم</h4>
+      <p class="nf-desc">تُحلّل آلاف الأسهم يومياً بكل اللغات — تحليل فني وأساسي مع توصيات مدروسة.</p>
+      <span class="nf-stat">آلاف الأسهم يومياً</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <span class="nf-num">٠٥</span>
+      </div>
+      <h4 class="nf-title">أنابيب التقارير الاستراتيجية</h4>
+      <p class="nf-desc">تنتج عشرات التقارير والتحليلات والتقارير الاستراتيجية العميقة يومياً، بكل اللغات.</p>
+      <span class="nf-stat">تقارير عميقة يومياً</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg></div>
+        <span class="nf-num">٠٦</span>
+      </div>
+      <h4 class="nf-title">أنابيب الفيديو</h4>
+      <p class="nf-desc">تنتج عشرات الفيديوهات بأكثر من 7 أنواع يومياً، بكل اللغات.</p>
+      <span class="nf-stat">7+ أنواع فيديو يومياً</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <span class="nf-num">٠٧</span>
+      </div>
+      <h4 class="nf-title">أنابيب المخاطر الجيوسياسية</h4>
+      <p class="nf-desc">تنتج عشرات تحليلات المخاطر الجيوسياسية يومياً، بكل اللغات.</p>
+      <span class="nf-stat">تحليلات جيوسياسية يومياً</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M2 12h20"/></svg></div>
+        <span class="nf-num">٠٨</span>
+      </div>
+      <h4 class="nf-title">مركز الاستخبارات المالية العالمي</h4>
+      <p class="nf-desc">مركز معلومات احترافي يجمع حقائق موثقة من 411 مصدراً رسمياً عالمياً (بنوك مركزية + هيئات إحصائية + وزارات مالية).</p>
+      <span class="nf-stat">411 مصدر رسمي · 6 فئات</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="nf-num">٠٩</span>
+      </div>
+      <h4 class="nf-title">نظام ثقة المصادر</h4>
+      <p class="nf-desc">شارة ثقة بجانب كل خبر تصنّف 729+ مصدراً عالمياً حسب الموثوقية والمصداقية التحريرية.</p>
+      <span class="nf-stat">مؤشر الثقة · 4 مستويات</span>
+    </div></div>
+
+    <div class="nf-card"><div class="nf-card-inner">
+      <div class="nf-header">
+        <div class="nf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-7h3v5zM3 19a2 2 0 002 2h1v-7H3v5z"/></svg></div>
+        <span class="nf-num">١٠</span>
+      </div>
+      <h4 class="nf-title">المحتوى الصوتي والتكامل متعدد القنوات</h4>
+      <p class="nf-desc">يحوّل أهم الأخبار إلى ملخصات صوتية بـ 5 لغات — استمع وأنت تتنقّل. مع نشر تلقائي على الموقع والبريد والقنوات.</p>
+      <span class="nf-stat">صوت · بريد · قنوات</span>
+    </div></div>
+
+  </div>
+
+iv>
+
+  <div class="project-cta">
+    <a href="#" class="btn-project news">
+      <span>ادخل رؤى الأخبار</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ رؤى التداول (مع الأقسام الفرعية 4-10) ═══ -->
+<section id="rouaa-trading" class="project-section reveal">
+  <div class="project-header">
+    <span class="project-tag trading">المشروع الثاني</span>
+    <h2 class="project-title trading">
+      <span class="gradient">رؤى التداول</span><br>
+      <span class="dim">عقل مؤسسي ينفّذ في الزمن الحقيقي</span>
+    </h2>
+    <p class="project-subtitle">منظومة ذكاء اصطناعي متكاملة: مجلس من 10 أدوار · منفّذ ذكي بـ 15 فحص أمان · 3 وكلاء مستقلين · لوحة شارت بـ 83 أداة رسم — كلها تعمل حسب قواعد المستخدم.</p>
+
+        <!-- Quick stats visual layout -->
+        <div class="trading-quick-stats">
+          <div class="tqs-item">
+            <div class="tqs-num">10</div>
+            <div class="tqs-lbl">أدوار AI</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">15</div>
+            <div class="tqs-lbl">فحص أمان</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">3</div>
+            <div class="tqs-lbl">وكلاء مستقلون</div>
+          </div>
+          <div class="tqs-item">
+            <div class="tqs-num">83</div>
+            <div class="tqs-lbl">أداة رسم</div>
+          </div>
+        </div>
+
+  </div>
+
+  <!-- القسم الفرعي 1: المجلس الذكي -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="5" cy="10" r="2"/><circle cx="19" cy="10" r="2"/></svg></div>
+      <div>
+        <div class="subsection-title">المجلس الذكي</div>
+        <div class="subsection-subtitle">10 أدوار ذكاء اصطناعي تتناقش وتصوت على كل قرار تداول</div>
+      </div>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4 class="p-feature-title">8 أدوار AI متخصصة</h4>
+        <p class="p-feature-desc">كل دور يحلّل جانباً محدداً وله نموذجه الخاص و fallback chain.</p>
+        <ul class="p-feature-list">
+          <li><strong>الفني</strong> · <strong>المشاعر</strong> · <strong>المخاطر</strong></li>
+          <li><strong>الماكرو</strong> · <strong>الأنماط</strong> · <strong>التنفيذ</strong></li>
+          <li><strong>التباين</strong> · <strong>السيناريوهات</strong></li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4 class="p-feature-title">الأسواق التنبؤية (العضو 9)</h4>
+        <p class="p-feature-desc">سوق تنبؤي كعضو تاسع يحقن تعزيز الإشارة للحشود الذكية بأموال حقيقية.</p>
+        <span class="p-feature-stat">سوق تنبؤي · تعزيز ±</span>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <h4 class="p-feature-title">11+ نماذج لغوية</h4>
+        <p class="p-feature-desc">تنوع يضمن استمرارية الذكاء حتى عند تعطل أي مزود.</p>
+        <span class="p-feature-stat">أحد عشر نموذجاً لغوياً متخصصاً</span>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4 class="p-feature-title">حلقة التعلم الذاتي</h4>
+        <p class="p-feature-desc">المجلس يتعلّم من أخطائه — أوزان ديناميكية تتعدّل بعد كل صفقة.</p>
+        <ul class="p-feature-list">
+          <li>تتبع دقة كل عضو عبر 20 صفقة</li>
+          <li>أوزان: 70% أداء حديث + 30% إجمالي</li>
+          <li>كشف الأنماط المتكررة + ذاكرة النظام</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- القسم الفرعي 2: المنفّذ الذكي -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div>
+        <div class="subsection-title">المنفّذ الذكي</div>
+        <div class="subsection-subtitle">"الجندي في الميدان" — يراقب الأسعار وينفّذ حسب قواعد المستخدم فور تحقق الشروط، بـ 15 فحص أمان</div>
+      </div>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4 class="p-feature-title">15+ فحص أمان قبل التنفيذ</h4>
+        <p class="p-feature-desc">طبقات حماية متعددة تمنع التنفيذ الخاطئ في كل سيناريو.</p>
+        <ul class="p-feature-list">
+          <li>فترة تبريد على مستوى قاعدة البيانات والذاكرة</li>
+          <li>قفل الزوج بعد كل إغلاق</li>
+          <li>حد خسارة يومي موحّد</li>
+          <li>فلتر الأخبار عالية الأثر</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <h4 class="p-feature-title">حجم مركز ذكي (5 مستويات)</h4>
+        <p class="p-feature-desc">معادلة مضاعفة تحسب الحجم الأمثل بدقة.</p>
+        <span class="p-feature-stat">portfolio × risk × confidence × drawdown × correlation</span>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <h4 class="p-feature-title">عزل كامل لكل مستخدم</h4>
+        <p class="p-feature-desc">كل مستخدم له سياق تداول مستقل تماماً — لا تسرّب بين الحسابات.</p>
+        <ul class="p-feature-list">
+          <li>حالة المنفّذ في الذاكرة معزولة</li>
+          <li>حدود مخاطر خاصة بكل مستخدم</li>
+          <li>قاطع دائرة لكل زوج</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+        <h4 class="p-feature-title">فلتر النظام السوقي</h4>
+        <p class="p-feature-desc">يمنع الشراء في سوق هابط والبيع في سوق صاعد تلقائياً.</p>
+        <span class="p-feature-stat">صعود · هبوط · تذبذب · مدى</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- القسم الفرعي 3: الوكلاء الثلاثة -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 013 3c0 1.5-1 2-1 3 0 2 2 3 2 5a3 3 0 01-6 0c0-2 2-3 2-5 0-1-1-1.5-1-3a3 3 0 013-3z"/><circle cx="12" cy="14" r="8"/></svg></div>
+      <div>
+        <div class="subsection-title">الوكلاء الثلاثة</div>
+        <div class="subsection-subtitle">ثلاثة وكلاء مستقلون، كل واحد بوظيفة محددة وسرعة مختلفة</div>
+      </div>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.7 1 6.3 2.7"/><path d="M21 3v6h-6"/></svg></div>
+          <h4>وكيل التداول المستقل</h4>
+          <span class="agent-speed">دوري</span>
+        </div>
+        <p class="desc">"العقل المدبّر" — يحلّل السوق، يقيّم الإشارات، يحسب المخاطر، ينفّذ، ويتتبّع الأداء في دورة كاملة.</p>
+        <ul class="p-feature-list">
+          <li><strong>8 استراتيجيات:</strong> تلقائي · سكالبينج · سوينج · شبكي · عودة متوسط · زخم · متوسط تكلفة · مؤشرات</li>
+          <li><strong>6 حالات:</strong> يعمل · متوقف مؤقتاً · متوقف · إيقاف طارئ · خامل · حد يومي</li>
+          <li><strong>حماية 48h</strong> لمراكز الوكيل (3 طبقات)</li>
+          <li>مُختار استراتيجية تكيّفي + تعلم معزز</li>
+        </ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h4>اللاسع</h4>
+          <span class="agent-speed">&lt;5ms</span>
+        </div>
+        <p class="desc">وكيل تداول فائق السرعة — يستمع لتدفقات الأسعار مباشرة، يحسب خلل توازن دفتر الأوامر على كل نبضة، ينفّذ في أقل من 5 مللي ثانية.</p>
+        <ul class="p-feature-list">
+          <li><strong>إشارة خلل التوازن</strong> — خلل توازن دفتر الأوامر</li>
+          <li><strong>3 شروط أمان فقط</strong> (كلها في الذاكرة، لا اتصالات شبكة)</li>
+          <li>لا استدعاء ذكاء اصطناعي في المسار الحرج</li>
+          <li>ثبات الإشارة في 3 ticks متتالية</li>
+        </ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="subsection-icon" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <h4>وكيل المحتوى</h4>
+          <span class="agent-speed">دوري</span>
+        </div>
+        <p class="desc">منصة تسويق محتوى ذكي ثنائية اللغة — من تجميع الخبر إلى نشر تقرير احترافي جاهز.</p>
+        <ul class="p-feature-list">
+          <li><strong>10 أنواع محتوى</strong> × <strong>11 فئة</strong></li>
+          <li>4 مراحل: المُجمّع ← المُولّد ← المُحسّن ← الناشر</li>
+          <li>تقييم جودة على 5 محاور (تحسين بحث · قراءة · تفاعل · تكرار · امتثال)</li>
+          <li>نشر تلقائي على القنوات + بيانات منظمة للبحث</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- القسم الفرعي 4: لوحة الشارت الذكية -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+      <div>
+        <div class="subsection-title">لوحة الشارت الذكية</div>
+        <div class="subsection-subtitle">83 أداة رسم · 15 مؤشر · 64 محرك ذكي في شارت واحد</div>
+      </div>
+    </div>
+    <div class="project-features">
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <h4 class="p-feature-title">83 أداة رسم</h4>
+        <p class="p-feature-desc">في 11 فئة احترافية مصممة خصيصاً لرؤى.</p>
+        <ul class="p-feature-list">
+          <li>خطوط · قنوات · شوك · فيبوناتشي</li>
+          <li>جان · أشكال · تعليقات · علامات</li>
+          <li>Harmonic الأنماطs · Elliott Wave</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+        <h4 class="p-feature-title">15 مؤشر فني</h4>
+        <p class="p-feature-desc">9 overlay + 6 oscillator بإعدادات قابلة للتخصيص الكامل.</p>
+        <span class="p-feature-stat">متوسطات · بولينجر · فيبوناتشي · إيشيموكو · سوبر ترند · مؤشرات قوة وزخم</span>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg></div>
+        <h4 class="p-feature-title">محركات فريدة ضمن منظومة رؤى</h4>
+        <p class="p-feature-desc">قدرات متقدمة مصممة خصيصاً لرؤى.</p>
+        <ul class="p-feature-list">
+          <li><strong>Predictive الأنماط Completion</strong> — يرسم ghost للأنماط غير المكتملة</li>
+          <li><strong>محرّك تفسير الذكاء الاصطناعي</strong> — "لماذا؟" لكل إشارة</li>
+          <li><strong>باني القواعد البصري</strong> — سحب وإفلات بمنطق «و/أو/لا»</li>
+        </ul>
+      </div>
+      <div class="p-feature">
+        <div class="p-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+        <h4 class="p-feature-title">64 محرك شارت</h4>
+        <p class="p-feature-desc">مكتبة شاملة تغطي كل أساليب التحليل التقني.</p>
+        <ul class="p-feature-list">
+          <li>محرك ويكوف · محرك إليوت</li>
+          <li>AdaptiveBayesianEngine · السيناريوهاتEngine</li>
+          <li>كشف الارتداد · مناطق التقاطع</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- القسم الفرعي 5: الشبكة العصبية Lab + الأسواق التنبؤية + ملاذ المحفظة + المساعد + EA Bridge -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <div class="subsection-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg></div>
+      <div>
+        <div class="subsection-title">طبقات الذكاء الإضافية</div>
+        <div class="subsection-subtitle">5 أدوات متخصصة تكمل منظومة التداول الذكي</div>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <h4>🧪 المختبر العصبي</h4>
+        <p class="desc">5 تبويبات متخصصة لاختبار وتحسين الاستراتيجيات.</p>
+        <ul class="p-feature-list">
+          <li><strong>اختبار عكسي</strong> — اختبار على البيانات التاريخية</li>
+          <li><strong>المُحسّن</strong> — تحسين البارامترات تلقائياً</li>
+          <li><strong>المقارنة</strong> — مقارنة استراتيجيتين</li>
+          <li><strong>الشبكة العصبية</strong> — تنبؤات مجلس الذكاء</li>
+          <li><strong>سرب الوكلاء</strong> — سرب وكلاء متعددين</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>📊 الأسواق التنبؤية</h4>
+        <p class="desc">سوق تنبؤي كعضو تاسع في المجلس الذكي — حشود ذكية بأموال حقيقية.</p>
+        <ul class="p-feature-list">
+          <li>تحليل فجوة التوقعات بين السوق والذكاء الاصطناعي</li>
+          <li>تعزيز الإشارة للاتفاق أو التعارض</li>
+          <li>تكامل مع قرار المجلس</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🛡️ ملاذ المحفظة</h4>
+        <p class="desc">تحليل مخاطر شامل عبر كل حساباتك المرتبطة.</p>
+        <ul class="p-feature-list">
+          <li>درجة المخاطرة (0-100) + قيمة الخطر</li>
+          <li>concentrationالمخاطر + diversificationScore</li>
+          <li>توصيات ذكية لإعادة التوازن</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🧠 مساعد التداول الذكي</h4>
+        <p class="desc">"المايسترو" — يجمع كل طبقات الذكاء في واجهة دردشة واحدة.</p>
+        <ul class="p-feature-list">
+          <li>14 خدمة متخصصة (تشخيص + كشف أنماط + ملخص يومي + تنبيهات مخاطر)</li>
+          <li>توجيه لغوي ذكي (32 لغة)</li>
+          <li>تفسير مالي + مسرد مدمج</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>🔌 جسر المنفّذ</h4>
+        <p class="desc">يحوّل ميتاتريدر 5 إلى عقدة تنفيذ بعيدة للمجلس الذكي.</p>
+        <ul class="p-feature-list">
+          <li>9 endpoints كاملة + heartbeat كل 5 دقائق</li>
+          <li>رموز لكل مستخدم + ذاكرة مؤقتة</li>
+          <li>تقارير تنفيذ ثنائية الاتجاه</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4>⚡ المنصات المدعومة</h4>
+        <p class="desc">6 adapters تنفيذ موحدة عبر واجهة واحدة.</p>
+        <ul class="p-feature-list">
+          <li>بايننس · ميتاتريدر 5 · أوندا</li>
+          <li>ألباكا · تداول ورقي</li>
+          <li>32 زوج تداول (عملات رقمية + فوركس + أسهم + سلع + مؤشرات)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-cta">
+    <a href="#" class="btn-project trading">
+      <span>ادخل رؤى التداول</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- التكامل -->
+<section id="integration" class="integration-section reveal">
+  <span class="section-tag">التكامل · الجسر العصبي</span>
+  <h2 class="section-title">
+    <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">الخبر يولد الإشارة.</span><br>
+    <span style="color:var(--text-mute);">والإشارة تولد الفرصة.</span>
+  </h2>
+  <div class="neural-bridge">
+    <div class="bridge-node news">
+      <div class="bridge-icon news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h3 class="bridge-title news">رؤى الأخبار</h3>
+      <p class="bridge-desc">استخبار إخباري ذكي</p>
+      <div class="bridge-stats">
+        <div><div class="bstat-num">500+</div><div class="bstat-lbl">مصدر رسمي</div></div>
+        <div><div class="bstat-num">1000+</div><div class="bstat-lbl">مصدر مجمّع</div></div>
+      </div>
+    </div>
+    <div class="bridge-conn">
+      <div class="bridge-line"><div class="bridge-pulse"></div></div>
+      <div class="bridge-label">إشارة ← إشارة</div>
+    </div>
+    <div class="bridge-node trading">
+      <div class="bridge-icon trading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+      <h3 class="bridge-title trading">رؤى التداول</h3>
+      <p class="bridge-desc">تنفيذ ذكي حسب قواعد المستخدم</p>
+      <div class="bridge-stats">
+        <div><div class="bstat-num">10</div><div class="bstat-lbl">أدوار AI</div></div>
+        <div><div class="bstat-num">32</div><div class="bstat-lbl">زوج تداول</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="steps-timeline">
+    <div class="step-card"><div class="step-num">01</div><h4 class="step-title">اختر طريقك</h4><p class="step-desc">رؤى الأخبار أو رؤى التداول — أو كلاهما معاً</p></div>
+    <div class="step-card"><div class="step-num">02</div><h4 class="step-title">اربط حسابك</h4><p class="step-desc">أدخل بيانات الوسيط أو اشترك في الإشارات</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4 class="step-title">ابدأ التنفيذ</h4><p class="step-desc">راقب أو فوّض حسب قواعدك — أنت المتحكم، النظام المنفّذ/p></div>
+  </div>
+</section>
+
+<!-- الأمان -->
+<section id="security" class="security-section reveal">
+  <span class="section-tag">الأمان</span>
+  <h2 class="section-title">
+    <span style="background:linear-gradient(135deg, var(--white), var(--blue-glow));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">حماية فولاذية.</span><br>
+    <span style="color:var(--text-mute);">شفافية مطلقة.</span>
+  </h2>
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4 class="sec-title">تشفير عسكري AES-256</h4>
+      <p class="sec-desc">كل بيانات الاعتماد مشفّرة at-rest و in-transit</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <h4 class="sec-title">عزل كامل</h4>
+      <p class="sec-desc">حسابات المستخدمين معزولة 100% — لا وصول متبادل</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <h4 class="sec-title">سجل تدقيق</h4>
+      <p class="sec-desc">كل عملية موثقة بالتوقيت وعنوان الشبكة ونوع المتصفح</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h4 class="sec-title">لا نلمس أموالك</h4>
+      <p class="sec-desc">التداول على وسيطك مباشرة — نحن نوفّر الذكاء فقط</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section reveal">
+  <div class="cta-card">
+    <h2 class="cta-title">ابنِ فوق بنية تحتية تستحق ثقتك</h2>
+    <p class="cta-sub">رؤى ليست منتجاً نهائياً — هي طبقة أساس. اطلب عرضاً مخصصاً لشريحتك، واكتشف كيف تندمج المنصة في بنيتك خلال أيام لا أشهر. التنفيذ يبقى دائماً حسب قواعدك.</p>
+    <a href="#" class="btn-glow">
+      <span>اطلب عرضاً</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 رؤى — بنية تحتية مالية للمؤسسات.</p>
+  <p class="tagline">ببصيرة نحو الأسواق</p>
 </footer>
 
-<noscript>
-  <div style="position:fixed;bottom:0;left:0;right:0;background:var(--bg-1);border-top:1px solid var(--glass-border);padding:1rem;text-align:center;z-index:9999;">
-    <p style="margin:0;color:var(--gold);font-weight:700;font-size:.9rem">⚠️ يتطلب الموقع تشغيل JavaScript لعرض التأثيرات التفاعلية بشكل كامل.</p>
+<!-- Ticker -->
+<div class="ticker" role="marquee" aria-label="Live market prices ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+3.4%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+3.4%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">SELL</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">BUY</span><span class="ticker-val">+0.9%</span></div>
   </div>
-</noscript>
+</div>
 
+<script>
+(function(){
+  const targetsEl = document.getElementById('radarTargets');
+  const countEl = document.getElementById('rCount');
+  const sweepEl = document.getElementById('rSweep');
+  const clockEl = document.getElementById('rClock');
+  const statusEl = document.getElementById('rStatus');
+  if(!targetsEl) return;
+  const SWEEP_DUR = 4000;
+  let active = [];
+  const MAX = 7;
+  const rand = (a,b) => a + Math.random()*(b-a);
+  function spawn(){
+    if(active.length >= MAX) return;
+    const r = rand(15, 92);
+    const ang = rand(0, Math.PI*2);
+    const x = 50 + Math.cos(ang)*r;
+    const y = 50 + Math.sin(ang)*r;
+    const t = document.createElement('div');
+    const roll = Math.random();
+    if(roll < 0.12) t.className = 'target hostile';
+    else if(roll < 0.30) t.className = 'target neutral';
+    else t.className = 'target';
+    t.style.left = x + '%';
+    t.style.top = y + '%';
+    const labels = [
+    {text:'EUR/USD', type:'fx'},
+    {text:'GBP/JPY', type:'fx'},
+    {text:'USD/JPY', type:'fx'},
+    {text:'XAU/USD', type:'commodity'},
+    {text:'BTC/USDT', type:'crypto'},
+    {text:'ETH/USDT', type:'crypto'},
+    {text:'FED RATE 5.50%', type:'rate', hostile:false},
+    {text:'US CPI 3.2%', type:'data'},
+    {text:'US GDP +1.3%', type:'data'},
+    {text:'ECB RATE 3.75%', type:'rate'},
+    {text:'NONFARM +272K', type:'data'},
+    {text:'OIL WTI $85', type:'commodity'},
+    {text:'NASDAQ +0.9%', type:'index'},
+    {text:'BOE RATE 5.25%', type:'rate'},
+    {text:'US JOBLESS 3.8%', type:'data'},
+  ];
+  const pick = labels[Math.floor(Math.random()*labels.length)];
+  t.title = pick.text;
+    // Add visible label text
+    const label = document.createElement('span');
+    label.textContent = pick.text;
+    label.style.cssText = 'font-size:0.78rem;font-weight:700;letter-spacing:0.03em;line-height:1;';
+    t.appendChild(label);
+  // Hostile = bearish data (high inflation, rate hikes)
+  if(pick.text.includes('CPI') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') > 3) {
+    t.className = 'target hostile';
+  } else if(pick.text.includes('RATE') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') >= 5) {
+    t.className = 'target neutral';
+  } else {
+    t.className = 'target';
+  }
+    targetsEl.appendChild(t);
+    active.push({el:t});
+    setTimeout(()=>{ t.remove(); active = active.filter(a=>a.el!==t); }, 4000);
+  }
+  setInterval(spawn, 650);
+  for(let i=0;i<4;i++) setTimeout(spawn, i*150);
+  const pad = n => n.toString().padStart(2,'0');
+  function loop(){
+    if(countEl) countEl.textContent = pad(active.length);
+    if(clockEl){
+      const d = new Date();
+      clockEl.textContent = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+    }
+    if(sweepEl){
+      const e = (performance.now() % SWEEP_DUR) / SWEEP_DUR;
+      sweepEl.textContent = Math.floor(e*360).toString().padStart(3,'0') + '°';
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+  const statuses = ['نشط','يبحث','يتتبع','مباشر'];
+  setInterval(()=>{
+    if(statusEl) statusEl.textContent = statuses[Math.floor(Math.random()*statuses.length)];
+  }, 3500);
+})();
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.querySelectorAll('.audience-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    card.style.setProperty('--mx', (x*100)+'%');
+    card.style.setProperty('--my', (y*100)+'%');
+    const rx = (y - 0.5) * -6;
+    const ry = (x - 0.5) * 6;
+    card.style.transform = `translateY(-8px) perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+</script>
 </body>
 </html>
