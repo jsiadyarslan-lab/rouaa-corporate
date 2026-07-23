@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#04060a">
+<title>رُؤى — الخط المُذهب | مثال</title>
+<meta name="description" content="رُؤى — لا تقرأ عن المنصة. شاهدها تعمل. رحلة إشارة واحدة من المصدر إلى التنفيذ.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   رؤى · الخط المُذهب — The Living Pipeline
+   مثال تجريبي: رحلة إشارة واحدة من المصدر إلى التنفيذ
+   ============================================================ */
+
+:root {
+  --bg:           #04060a;
+  --bg-card:      #0a0e16;
+  --bg-deep:      #02030420;
+  --indigo:       #1e3a5f;
+  --indigo-light: #2d5a8a;
+  --turquoise:    #5eead4;
+  --turquoise-bright: #99f6e4;
+  --turquoise-dim: rgba(94, 234, 212, 0.12);
+  --turquoise-faint: rgba(94, 234, 212, 0.04);
+  --text:         #e2e8f0;
+  --text-dim:     rgba(226, 232, 240, 0.60);
+  --text-faint:   rgba(226, 232, 240, 0.30);
+  --border:       rgba(94, 234, 212, 0.10);
+  --border-mid:   rgba(94, 234, 212, 0.20);
+  --red:          #f87171;
+  --green:        #4ade80;
+
+  --font-display: 'Noto Naskh Arabic', serif;
+  --font-body:    'IBM Plex Sans Arabic', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--turquoise); color: var(--bg); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--turquoise-dim); }
+
+/* === Ambient background — ظلام + وهج فيروزي خافت === */
+.bg-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(94,234,212,0.04), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 70%, rgba(30,58,95,0.15), transparent 70%),
+    var(--bg);
+}
+
+/* === Scene base — كل مشهد بارتفاع كامل === */
+.scene {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.scene-label {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--turquoise);
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.scene-label::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--turquoise);
+}
+
+.scene-num {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+}
+
+/* === Nav — ضئيل جداً، شفاف === */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(180deg, rgba(4,6,10,0.8), transparent);
+  pointer-events: none;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+.nav-logo svg { width: 32px; height: 32px; }
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.nav-counter {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  pointer-events: auto;
+}
+.nav-counter .num { color: var(--turquoise); }
+
+/* ============================================================
+   المشهد 1: الماسح (Hero)
+   ============================================================ */
+.scene-1 {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* تدفقات البيانات الخام descending */
+.data-streams {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.data-stream {
+  position: absolute;
+  top: -20%;
+  width: 1px;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, var(--turquoise-dim), transparent);
+  animation: streamFall 3s linear infinite;
+}
+@keyframes streamFall {
+  from { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { transform: translateY(250%); opacity: 0; }
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--text-dim);
+  max-width: 30ch;
+  line-height: 1.5;
+}
+
+/* الرادار — محفوظ بالكامل */
+.radar-wrap {
+  position: relative;
+  width: min(420px, 70vmin);
+  aspect-ratio: 1;
+  z-index: 2;
+}
+.radar-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(94,234,212,0.05), transparent 50%);
+  border: 1px solid var(--border-mid);
+  box-shadow: 0 0 80px rgba(94,234,212,0.08), inset 0 0 60px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+.radar-screen {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(30,58,95,0.3) 0%, rgba(4,6,10,0.9) 60%, var(--bg) 100%);
+  overflow: hidden;
+}
+.radar-grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.radar-grid .ring { fill: none; stroke: rgba(94,234,212,0.2); stroke-width: 0.4; }
+.radar-grid .ring.bright { stroke: rgba(94,234,212,0.4); stroke-width: 0.6; }
+.radar-grid .az { stroke: rgba(94,234,212,0.1); stroke-width: 0.3; }
+.radar-grid .az.cardinal { stroke: rgba(94,234,212,0.25); stroke-width: 0.5; }
+.radar-grid .compass { fill: var(--turquoise); font-family: var(--font-mono); font-size: 5px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+.radar-grid .center-dot { fill: var(--turquoise); filter: drop-shadow(0 0 4px var(--turquoise)); }
+.radar-grid .center-cross { stroke: var(--turquoise); stroke-width: 0.7; }
+.radar-sweep {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(94,234,212,0.5) 0deg, rgba(94,234,212,0.2) 30deg, transparent 90deg, transparent 360deg);
+  mix-blend-mode: screen;
+  animation: sweepBg 4s linear infinite;
+}
+.radar-sweep-line {
+  position: absolute; top: 50%; left: 50%; width: 50%; height: 1.5px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--turquoise-bright), transparent);
+  box-shadow: 0 0 8px var(--turquoise);
+  animation: sweep 4s linear infinite;
+}
+@keyframes sweep { from { transform: translate(0,-50%) rotate(0deg); } to { transform: translate(0,-50%) rotate(360deg); } }
+@keyframes sweepBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.radar-targets { position: absolute; inset: 0; pointer-events: none; }
+.target {
+  position: absolute; width: 6px; height: 6px; transform: translate(-50%,-50%);
+  border-radius: 50%; background: var(--turquoise);
+  box-shadow: 0 0 6px var(--turquoise);
+  opacity: 0; animation: targetLife 4s ease-out forwards;
+}
+.target.hostile { background: var(--red); box-shadow: 0 0 6px var(--red); }
+.target.neutral { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+@keyframes targetLife {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+  15% { opacity: 1; transform: translate(-50%,-50%) scale(1.5); }
+  30% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0.1; transform: translate(-50%,-50%) scale(1); }
+}
+
+/* Signal emerging from radar */
+.signal-emerge {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--turquoise), transparent);
+  opacity: 0;
+  animation: signalEmerge 3s ease-in-out infinite;
+}
+@keyframes signalEmerge {
+  0%, 100% { opacity: 0; height: 20px; }
+  50% { opacity: 0.8; height: 80px; }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-faint);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: scrollHint 2s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(180deg, var(--turquoise), transparent);
+}
+@keyframes scrollHint {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(4px); }
+}
+
+/* ============================================================
+   المشهد 2: المجلس (Council)
+   ============================================================ */
+.scene-2 { flex-direction: column; }
+
+.council-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.council-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--turquoise);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.council-network {
+  position: relative;
+  width: min(700px, 90vw);
+  height: min(500px, 60vh);
+  margin: 0 auto;
+}
+
+.council-node {
+  position: absolute;
+  width: 100px;
+  text-align: center;
+  opacity: 0.15;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.council-node.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.council-node .node-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--indigo-light);
+  margin: 0 auto 0.5rem;
+  border: 1px solid var(--border);
+  transition: all 0.4s ease;
+}
+.council-node.active .node-dot {
+  background: var(--turquoise);
+  box-shadow: 0 0 12px var(--turquoise);
+  border-color: var(--turquoise);
+}
+.council-node .node-name {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.council-node.active .node-name { color: var(--text); }
+.council-node .node-time {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--turquoise);
+  margin-top: 0.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.2s;
+}
+.council-node.active .node-time { opacity: 1; }
+
+/* Signal path line */
+.signal-path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, var(--turquoise), var(--turquoise-dim));
+  box-shadow: 0 0 8px var(--turquoise);
+  transform: translateX(-50%);
+  transition: height 0.5s ease;
+}
+
+.council-timestamp {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+}
+.council-timestamp .val { color: var(--turquoise); }
+
+/* ============================================================
+   المشهد 3: القرار (Decision)
+   ============================================================ */
+.scene-3 { flex-direction: column; }
+
+.decision-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  border-radius: 16px;
+  padding: 2rem;
+  width: min(500px, 90vw);
+  margin-bottom: 2rem;
+  position: relative;
+}
+.decision-card::before {
+  content: 'القرار';
+  position: absolute;
+  top: -10px;
+  right: 1.5rem;
+  background: var(--bg);
+  padding: 0 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--turquoise);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.decision-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.decision-row:last-child { border-bottom: none; }
+.decision-row .key {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+.decision-row .val { color: var(--text); font-weight: 500; }
+.decision-row .val.up { color: var(--green); }
+.decision-row .val.confidence { color: var(--turquoise); }
+
+/* 15 security gates */
+.gates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: min(500px, 90vw);
+}
+.gate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+.gate.passed {
+  opacity: 1;
+  border-color: var(--border-mid);
+  color: var(--text-dim);
+}
+.gate.passed .gate-status { color: var(--green); }
+.gate .gate-name { display: flex; align-items: center; gap: 0.5rem; }
+.gate .gate-num { color: var(--text-faint); }
+.gate .gate-status { font-weight: 700; }
+
+/* ============================================================
+   المشهد 4: التنفيذ (Execution)
+   ============================================================ */
+.scene-4 { flex-direction: column; }
+
+.execution-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.execution-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--turquoise);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.agents {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: min(700px, 90vw);
+  margin-bottom: 2rem;
+}
+@media (max-width: 600px) { .agents { grid-template-columns: 1fr; } }
+
+.agent {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color 0.4s ease;
+}
+.agent.active { border-color: var(--turquoise); }
+.agent-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.agent-role {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-faint);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.agent-latency {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--turquoise);
+}
+.agent-latency .unit { font-size: 0.875rem; color: var(--text-dim); }
+.agent-status {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--green);
+  margin-top: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.execution-log {
+  width: min(700px, 90vw);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.execution-log .log-line { display: flex; gap: 0.75rem; }
+.execution-log .log-time { color: var(--text-faint); }
+.execution-log .log-msg { color: var(--text); }
+.execution-log .log-ok { color: var(--green); }
+
+/* ============================================================
+   المشهد 5: الحلقة (The Loop)
+   ============================================================ */
+.scene-5 { flex-direction: column; }
+
+.loop-arc {
+  width: min(500px, 80vw);
+  height: 200px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.loop-arc svg { width: 100%; height: 100%; }
+.loop-arc path {
+  fill: none;
+  stroke: var(--turquoise);
+  stroke-width: 1.5;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawArc 3s ease-in-out forwards;
+}
+@keyframes drawArc { to { stroke-dashoffset: 0; } }
+
+.loop-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  color: var(--text);
+  text-align: center;
+  max-width: 30ch;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.loop-text .accent { color: var(--turquoise); }
+
+.loop-counter {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+.loop-counter .num {
+  font-size: 1.5rem;
+  color: var(--turquoise);
+  font-weight: 500;
+}
+
+/* ============================================================
+   المشهد 6: الدعوة (Invitation)
+   ============================================================ */
+.scene-6 { flex-direction: column; }
+
+.invitation-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.invitation-sub {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.btn-invite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  background: var(--turquoise);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-invite:hover {
+  background: var(--turquoise-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(94,234,212,0.3);
+}
+
+.invitation-footer {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-faint);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-ambient"></div>
+
+<!-- ============= NAV (ضئيل) ============= -->
+<nav class="nav">
+  <div class="nav-logo">
+    <!-- اللوغو محفوظ بالكامل -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="32" height="32">
+      <defs>
+        <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#B388FF"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B388FF" stop-opacity="0.8"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/></radialGradient>
+        <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.9"/><stop offset="50%" stop-color="#B388FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/></radialGradient>
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#000000" stop-opacity="0.7"/><stop offset="70%" stop-color="#0a0a1a" stop-opacity="0.3"/><stop offset="100%" stop-color="#1a1a2e" stop-opacity="0"/></radialGradient>
+        <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#B388FF" stop-opacity="0"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.15"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0.5"/></linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <style>
+        .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+        .center-dot { fill: #1a1a2e; } .center-glow { fill: url(#centerGrad); }
+        @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+        .node { animation: pulse 2.5s ease-in-out infinite; }
+        .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+        @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+        @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+        .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+        .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+        @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+        @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+        .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+        .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+      </style>
+      <rect width="200" height="200" rx="20" fill="#0a0a12"/>
+      <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
+      <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
+      <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(179,136,255,0.12)" stroke-width="0.5" class="range-ring" style="animation-delay:1s"/>
+      <g class="network"><line class="network-line" x1="100" y1="20" x2="147.02" y2="35.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="147.02" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="100" y2="180"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="147.02" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="75.28" x2="176.08" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="124.72" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="164.72" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="35.28"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="52.98" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="23.92" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="75.28" x2="52.98" y2="35.28"/></g>
+      <g class="radar-group"><path fill="url(#radarGrad)" d="M 100,100 L 100,5 A 95,95 0 0,1 195,100 Z"/><line x1="100" y1="100" x2="100" y2="5" stroke="#B388FF" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/><circle cx="100" cy="5" r="2" fill="#06B6D4" opacity="0.8"/></g>
+      <circle class="center-glow" cx="100" cy="100" r="25"/>
+      <circle class="center-dot" cx="100" cy="100" r="8"/>
+      <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+      <text x="100" y="100" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="#fff" opacity="0.95" letter-spacing="2" style="text-shadow:0 0 10px rgba(179,136,255,0.6);">R</text>
+    </svg>
+    <span class="nav-logo-text">رؤى</span>
+  </div>
+  <div class="nav-counter">إشارات اليوم · <span class="num" id="navCounter">47,392</span></div>
+</nav>
+
+<!-- ============================================================
+     المشهد 1: الماسح (Hero)
+     ============================================================ -->
+<section class="scene scene-1" id="scene1">
+  <span class="scene-num">٠١ / ٠٦</span>
+  <span class="scene-label">الماسح</span>
+
+  <div class="data-streams" id="dataStreams"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">رُؤى</h1>
+    <p class="hero-tagline">لا تقرأ عن المنصة. شاهدها تعمل.</p>
+  </div>
+
+  <!-- الرادار محفوظ بالكامل -->
+  <div class="radar-wrap">
+    <div class="radar-frame">
+      <div class="radar-screen">
+        <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
+          <circle cx="0" cy="0" r="20" class="ring"/><circle cx="0" cy="0" r="40" class="ring bright"/>
+          <circle cx="0" cy="0" r="60" class="ring"/><circle cx="0" cy="0" r="80" class="ring bright"/>
+          <circle cx="0" cy="0" r="100" class="ring bright"/>
+          <line x1="-100" y1="0" x2="100" y2="0" class="az cardinal"/><line x1="0" y1="-100" x2="0" y2="100" class="az cardinal"/>
+          <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="az"/><line x1="-86.6" y1="50" x2="86.6" y2="-50" class="az"/>
+          <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="az"/><line x1="-50" y1="86.6" x2="50" y2="-86.6" class="az"/>
+          <text x="0" y="-106" class="compass">N</text><text x="106" y="0" class="compass">E</text>
+          <text x="0" y="106" class="compass">S</text><text x="-106" y="0" class="compass">W</text>
+          <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/><line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
+          <circle cx="0" cy="0" r="1.8" class="center-dot"/>
+        </svg>
+        <div class="radar-sweep"></div>
+        <div class="radar-sweep-line"></div>
+        <div class="radar-targets" id="radarTargets"></div>
+      </div>
+    </div>
+    <div class="signal-emerge"></div>
+  </div>
+
+  <div class="scroll-hint">تابع الإشارة</div>
+</section>
+
+<!-- ============================================================
+     المشهد 2: المجلس (Council)
+     ============================================================ -->
+<section class="scene scene-2" id="scene2">
+  <span class="scene-num">٠٢ / ٠٦</span>
+  <span class="scene-label">المجلس الذكي</span>
+
+  <h2 class="council-title">10 أدوار ذكاء اصطناعي تعالج الإشارة</h2>
+  <p class="council-sub">من الإشارة الخام إلى الذكاء المنظّم</p>
+
+  <div class="council-network" id="councilNetwork">
+    <!-- Nodes generated by JS -->
+  </div>
+
+  <div class="council-timestamp">
+    زمن المعالجة الكلي · <span class="val" id="councilTime">0.000s</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     المشهد 3: القرار (Decision)
+     ============================================================ -->
+<section class="scene scene-3" id="scene3">
+  <span class="scene-num">٠٣ / ٠٦</span>
+  <span class="scene-label">القرار</span>
+
+  <div class="decision-card">
+    <div class="decision-row">
+      <span class="key">الأصل</span>
+      <span class="val">EUR/USD</span>
+    </div>
+    <div class="decision-row">
+      <span class="key">الاتجاه</span>
+      <span class="val up">شراء ↑</span>
+    </div>
+    <div class="decision-row">
+      <span class="key">درجة الثقة</span>
+      <span class="val confidence">87%</span>
+    </div>
+    <div class="decision-row">
+      <span class="key">حجم المركز</span>
+      <span class="val">2.5% (مستوى 3)</span>
+    </div>
+    <div class="decision-row">
+      <span class="key">التبرير</span>
+      <span class="val" style="font-size:0.8125rem;">CPI 3.2% + ECB hold + سيولة آسيوية</span>
+    </div>
+  </div>
+
+  <div class="gates" id="gates">
+    <!-- 15 gates generated by JS -->
+  </div>
+</section>
+
+<!-- ============================================================
+     المشهد 4: التنفيذ (Execution)
+     ============================================================ -->
+<section class="scene scene-4" id="scene4">
+  <span class="scene-num">٠٤ / ٠٦</span>
+  <span class="scene-label">التنفيذ</span>
+
+  <h2 class="execution-title">3 وكلاء مستقلون · تنفيذ في أقل من 5 مللي ثانية</h2>
+  <p class="execution-sub">القرار يصبح أمراً · الأمر يصبح صفقة</p>
+
+  <div class="agents">
+    <div class="agent" id="agent1">
+      <div class="agent-name">المنفّذ الذكي</div>
+      <div class="agent-role">الجندي</div>
+      <div class="agent-latency"><span id="lat1">3.2</span><span class="unit"> ms</span></div>
+      <div class="agent-status">✓ نُفّذ</div>
+    </div>
+    <div class="agent" id="agent2">
+      <div class="agent-name">اللاسع</div>
+      <div class="agent-role">الفائق السرعة</div>
+      <div class="agent-latency"><span id="lat2">2.1</span><span class="unit"> ms</span></div>
+      <div class="agent-status">✓ نُفّذ</div>
+    </div>
+    <div class="agent" id="agent3">
+      <div class="agent-name">وكيل مستقل</div>
+      <div class="agent-role">العقل المدبّر</div>
+      <div class="agent-latency"><span id="lat3">4.7</span><span class="unit"> ms</span></div>
+      <div class="agent-status">✓ نُفّذ</div>
+    </div>
+  </div>
+
+  <div class="execution-log">
+    <div class="log-line"><span class="log-time">14:32:18.0042</span><span class="log-msg">أمر شراء EUR/USD · 0.5 لوت</span><span class="log-ok">✓ نُفّذ</span></div>
+    <div class="log-line"><span class="log-time">14:32:18.0063</span><span class="log-msg">سعر التنفيذ: 1.0847 · انزلاق: 0.2 pip</span></div>
+    <div class="log-line"><span class="log-time">14:32:18.0089</span><span class="log-msg">وقف خسارة: 1.0820 · جني أرباح: 1.0890</span></div>
+    <div class="log-line"><span class="log-time">14:32:18.0124</span><span class="log-msg">الصفقة مؤرّفة · MT5 Bridge · جلسة #14</span></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     المشهد 5: الحلقة (The Loop)
+     ============================================================ -->
+<section class="scene scene-5" id="scene5">
+  <span class="scene-num">٠٥ / ٠٦</span>
+  <span class="scene-label">الحلقة</span>
+
+  <div class="loop-arc">
+    <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+      <path d="M 250,180 Q 100,100 250,20 Q 400,100 250,180" />
+      <circle cx="250" cy="180" r="4" fill="var(--turquoise)" />
+    </svg>
+  </div>
+
+  <p class="loop-text">
+    هذا يحدث <span class="accent">24/7</span> · بـ <span class="accent">5 لغات</span> · عبر <span class="accent">6 منصات</span>
+  </p>
+
+  <div class="loop-counter">
+    <span class="num" id="loopCount">47,392</span><br>
+    إشارة معالجة اليوم
+  </div>
+</section>
+
+<!-- ============================================================
+     المشهد 6: الدعوة (Invitation)
+     ============================================================ -->
+<section class="scene scene-6" id="scene6">
+  <span class="scene-num">٠٦ / ٠٦</span>
+  <span class="scene-label">الدعوة</span>
+
+  <h1 class="invitation-title">رُؤى</h1>
+  <p class="invitation-sub">ببصيرة نحو الأسواق</p>
+
+  <a href="mailto:contact@rouaa.ai" class="btn-invite">
+    <span>اطلب عرضاً</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <div class="invitation-footer">
+    بنية تحتية مالية للمؤسسات · 729+ مصدر · 10 أدوار AI · 15 فحص أمان
+  </div>
+</section>
+
+<script>
+(function(){
+  // === Data streams (Scene 1) ===
+  const streams = document.getElementById('dataStreams');
+  if (streams) {
+    for (let i = 0; i < 12; i++) {
+      const s = document.createElement('div');
+      s.className = 'data-stream';
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.animationDelay = (Math.random() * 3) + 's';
+      s.style.animationDuration = (2 + Math.random() * 2) + 's';
+      streams.appendChild(s);
+    }
+  }
+
+  // === Radar targets (preserved logic) ===
+  const targetsEl = document.getElementById('radarTargets');
+  if (targetsEl) {
+    const labels = [
+      {text:'EUR/USD'}, {text:'GBP/JPY'}, {text:'USD/JPY'}, {text:'XAU/USD'},
+      {text:'BTC/USDT'}, {text:'ETH/USDT'}, {text:'US CPI 3.2%', hostile:true},
+      {text:'FED RATE 5.50%', neutral:true}, {text:'OIL WTI $85'}, {text:'NASDAQ +0.9%'},
+    ];
+    const rand = (a,b) => a + Math.random()*(b-a);
+    function spawn(){
+      const r = rand(15, 92);
+      const ang = rand(0, Math.PI*2);
+      const x = 50 + Math.cos(ang)*r;
+      const y = 50 + Math.sin(ang)*r;
+      const t = document.createElement('div');
+      const pick = labels[Math.floor(Math.random()*labels.length)];
+      if (pick.hostile) t.className = 'target hostile';
+      else if (pick.neutral) t.className = 'target neutral';
+      else t.className = 'target';
+      t.style.left = x + '%';
+      t.style.top = y + '%';
+      targetsEl.appendChild(t);
+      setTimeout(()=>{ t.remove(); }, 4000);
+    }
+    setInterval(spawn, 800);
+    for(let i=0;i<3;i++) setTimeout(spawn, i*200);
+  }
+
+  // === Council nodes (Scene 2) ===
+  const council = document.getElementById('councilNetwork');
+  const roles = [
+    'المحلل الفني', 'المحلل الأساسي', 'مدير المخاطر', 'الاستراتيجي',
+    'المنظّر', 'عالم السلوك', 'محلل السيولة', 'مراقب الأخبار',
+    'مقياس الزخم', 'المنفّذ التكتيكي'
+  ];
+  if (council) {
+    // Arrange in a circle
+    const radius = 200;
+    roles.forEach((role, i) => {
+      const angle = (i / roles.length) * Math.PI * 2 - Math.PI/2;
+      const x = 50 + (Math.cos(angle) * 38);
+      const y = 50 + (Math.sin(angle) * 42);
+      const node = document.createElement('div');
+      node.className = 'council-node';
+      node.style.left = `calc(${x}% - 50px)`;
+      node.style.top = `calc(${y}% - 30px)`;
+      node.innerHTML = `
+        <div class="node-dot"></div>
+        <div class="node-name">${role}</div>
+        <div class="node-time">+${(i * 0.043).toFixed(3)}s</div>
+      `;
+      council.appendChild(node);
+    });
+  }
+
+  // === Gates (Scene 3) ===
+  const gatesEl = document.getElementById('gates');
+  const gateNames = [
+    'حد المخاطرة اليومي', 'حجم المركز', 'الرافعة المالية', 'هامش الصيانة',
+    'الانزلاق السعري', 'السيولة', 'الفجوة السعري', 'ساعات التداول',
+    'الأخبار الحرجة', 'التقلب الضمني', 'ارتباط الأزواج', 'المخاطر الجيوسياسية',
+    'حد الخسارة', 'جني الأرباح', 'تأكيد المجلس'
+  ];
+  if (gatesEl) {
+    gateNames.forEach((name, i) => {
+      const g = document.createElement('div');
+      g.className = 'gate';
+      g.innerHTML = `
+        <span class="gate-name"><span class="gate-num">${String(i+1).padStart(2,'0')}</span> ${name}</span>
+        <span class="gate-status">✓ اجتاز</span>
+      `;
+      gatesEl.appendChild(g);
+    });
+  }
+
+  // === IntersectionObserver — activate scenes on scroll ===
+  const scenes = document.querySelectorAll('.scene');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const scene = entry.target;
+        const id = scene.id;
+
+        if (id === 'scene2') activateCouncil();
+        if (id === 'scene3') activateGates();
+        if (id === 'scene4') activateAgents();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  scenes.forEach(s => observer.observe(s));
+
+  // === Council activation ===
+  let councilActivated = false;
+  function activateCouncil() {
+    if (councilActivated) return;
+    councilActivated = true;
+    const nodes = document.querySelectorAll('.council-node');
+    const timeEl = document.getElementById('councilTime');
+    let totalTime = 0;
+    nodes.forEach((node, i) => {
+      setTimeout(() => {
+        node.classList.add('active');
+        totalTime = (i + 1) * 0.043;
+        if (timeEl) timeEl.textContent = totalTime.toFixed(3) + 's';
+      }, i * 250);
+    });
+  }
+
+  // === Gates activation ===
+  let gatesActivated = false;
+  function activateGates() {
+    if (gatesActivated) return;
+    gatesActivated = true;
+    const gates = document.querySelectorAll('.gate');
+    gates.forEach((gate, i) => {
+      setTimeout(() => gate.classList.add('passed'), i * 120);
+    });
+  }
+
+  // === Agents activation ===
+  let agentsActivated = false;
+  function activateAgents() {
+    if (agentsActivated) return;
+    agentsActivated = true;
+    const agents = document.querySelectorAll('.agent');
+    agents.forEach((agent, i) => {
+      setTimeout(() => agent.classList.add('active'), i * 400);
+    });
+    // Animate latency countdown
+    const latencies = [
+      {el: 'lat1', target: 3.2},
+      {el: 'lat2', target: 2.1},
+      {el: 'lat3', target: 4.7}
+    ];
+    latencies.forEach(l => {
+      const el = document.getElementById(l.el);
+      if (!el) return;
+      let current = 5.0;
+      const interval = setInterval(() => {
+        current = current - 0.1 + Math.random() * 0.15;
+        if (current <= l.target) {
+          current = l.target;
+          clearInterval(interval);
+        }
+        el.textContent = current.toFixed(1);
+      }, 50);
+    });
+  }
+
+  // === Nav counter increment ===
+  const navCounter = document.getElementById('navCounter');
+  const loopCount = document.getElementById('loopCount');
+  let count = 47392;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3) + 1;
+    const formatted = count.toLocaleString('en-US');
+    if (navCounter) navCounter.textContent = formatted;
+    if (loopCount) loopCount.textContent = formatted;
+  }, 2500);
+})();
+</script>
+
+</body>
+</html>
