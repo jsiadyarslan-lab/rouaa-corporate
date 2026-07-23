@@ -1,0 +1,141 @@
+/* ============================================================
+   رؤى · Base — Reset + Typography Foundation
+   ============================================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  background: var(--bg-base);
+  overflow-x: hidden;
+  padding-bottom: 48px; /* space for ticker */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Links === */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* === Headings — Railway-style Serif === */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: 500;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+}
+
+/* === Lead paragraph === */
+.lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  max-width: 60ch;
+}
+
+/* === Mono utility === */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: var(--ls-mono);
+  font-size: var(--fs-mono);
+}
+
+/* === Section tag (Railway style: small caps mono) === */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent-glow);
+  margin-bottom: var(--space-sm);
+}
+
+.section-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  box-shadow: 0 0 10px var(--accent-bright);
+}
+
+/* === Container === */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* === Selection === */
+::selection {
+  background: var(--accent);
+  color: var(--bg-base);
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(96,165,250,0.2); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(96,165,250,0.4); }
+
+/* === Reveal animation === */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

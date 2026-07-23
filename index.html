@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a14">
+<title>رُؤى — بنية تحتية مالية للمؤسسات</title>
+<meta name="description" content="رُؤى — بنية تحتية مالية تجمع الاستخبارات والتحليل والتنفيذ في منصة واحدة. رؤى الأخبار + رؤى التداول، منظومتان متكاملتان بخمس لغات.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="رُؤى — بنية تحتية مالية للمؤسسات">
+<meta property="og:description" content="منظومتان متكاملتان: رؤى الأخبار + رؤى التداول. بلا وسيط، بخمس لغات، في الزمن الحقيقي.">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Fonts: Reem Kufi (عناوين) + Cairo (نصوص) + Share Tech Mono (تقني) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<!-- Design System -->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "رؤى",
+  "alternateName": "Rouaa",
+  "description": "بنية تحتية مالية للمؤسسات — رؤى الأخبار + رؤى التداول",
+  "url": "https://jsiadyarslan-lab.github.io/rouaa-corporate/"
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<div class="bg-ambient"></div>
+<div class="bg-grid"></div>
+
+<!-- ============= NAV (Railway-style: شفاف، بدون border صريح) ============= -->
+<nav class="nav" aria-label="القائمة الرئيسية">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="رؤى — الصفحة الرئيسية">
+      <div class="logo-svg" aria-hidden="true">
+        <!-- اللوغو محفوظ بالكامل كما هو -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="44" height="44">
+          <defs>
+            <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#B388FF"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#B388FF" stop-opacity="0.8"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/><stop offset="50%" stop-color="#B388FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#000000" stop-opacity="0.7"/><stop offset="70%" stop-color="#0a0a1a" stop-opacity="0.3"/><stop offset="100%" stop-color="#1a1a2e" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#B388FF" stop-opacity="0"/><stop offset="40%" stop-color="#6366F1" stop-opacity="0.15"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0.5"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <style>
+            .network-line { stroke: rgba(255,255,255,0.10); stroke-width: 0.7; fill: none; }
+            .center-dot { fill: #1a1a2e; } .center-glow { fill: url(#centerGrad); }
+            @keyframes pulse { 0%,100%{r:3.5;opacity:0.6;} 50%{r:5.5;opacity:1;} }
+            @keyframes glowPulse { 0%,100%{opacity:0.2;r:8;} 50%{opacity:0.55;r:13;} }
+            .node { animation: pulse 2.5s ease-in-out infinite; }
+            .node-halo { animation: glowPulse 2.5s ease-in-out infinite; }
+            .n0{animation-delay:0s}.n1{animation-delay:.25s}.n2{animation-delay:.5s}.n3{animation-delay:.75s}.n4{animation-delay:1s}
+            .n5{animation-delay:1.25s}.n6{animation-delay:1.5s}.n7{animation-delay:1.75s}.n8{animation-delay:2s}.n9{animation-delay:2.25s}
+            @keyframes innerPulse { 0%,100%{r:1.1;opacity:0.35;} 50%{r:2.5;opacity:1;} }
+            @keyframes innerGlowPulse { 0%,100%{opacity:0.1;r:3;} 50%{opacity:0.5;r:6;} }
+            .inner-node { animation: innerPulse 2s ease-in-out infinite; }
+            .inner-halo { animation: innerGlowPulse 2s ease-in-out infinite; }
+            @keyframes radarSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+            .radar-group { transform-origin:100px 100px; animation:radarSpin 6s linear infinite; }
+            @keyframes ringPulse { 0%,100%{opacity:0.25;stroke-width:0.6;} 50%{opacity:0.5;stroke-width:0.8;} }
+            .range-ring { animation: ringPulse 3s ease-in-out infinite; }
+            .outer-ring { animation: ringPulse 4s ease-in-out infinite; }
+          </style>
+          <rect width="200" height="200" rx="20" fill="#0a0a12"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="url(#nodeGrad)" stroke-width="1" stroke-dasharray="6 4" opacity="0.35" class="outer-ring"/>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(179,136,255,0.15)" stroke-width="0.5" class="range-ring"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(179,136,255,0.12)" stroke-width="0.5" class="range-ring" style="animation-delay:1s"/>
+          <g class="network">
+            <line class="network-line" x1="100" y1="20" x2="147.02" y2="35.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="176.08" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="147.02" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="100" y2="180"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="20" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="20" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="176.08" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="147.02" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="35.28" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="35.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="75.28" x2="176.08" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="75.28" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="75.28" x2="52.98" y2="35.28"/><line class="network-line" x1="176.08" y1="124.72" x2="147.02" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="100" y2="180"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="164.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="124.72"/><line class="network-line" x1="176.08" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="176.08" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="147.02" y1="164.72" x2="100" y2="180"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="164.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="147.02" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="147.02" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="164.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="124.72"/><line class="network-line" x1="100" y1="180" x2="23.92" y2="75.28"/><line class="network-line" x1="100" y1="180" x2="52.98" y2="35.28"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="124.72"/><line class="network-line" x1="52.98" y1="164.72" x2="23.92" y2="75.28"/><line class="network-line" x1="52.98" y1="164.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="124.72" x2="23.92" y2="75.28"/><line class="network-line" x1="23.92" y1="124.72" x2="52.98" y2="35.28"/><line class="network-line" x1="23.92" y1="75.28" x2="52.98" y2="35.28"/>
+          </g>
+          <g class="radar-group">
+            <path fill="url(#radarGrad)" d="M 100,100 L 100,5 A 95,95 0 0,1 195,100 Z"/>
+            <line x1="100" y1="100" x2="100" y2="5" stroke="#B388FF" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
+            <circle cx="100" cy="5" r="2" fill="#06B6D4" opacity="0.8"/>
+          </g>
+          <circle class="center-glow" cx="100" cy="100" r="25"/>
+          <circle class="center-dot" cx="100" cy="100" r="8"/>
+          <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="#fff" opacity="0.95" letter-spacing="2" style="text-shadow:0 0 10px rgba(179,136,255,0.6);">R</text>
+        </svg>
+      </div>
+      <span class="nav-logo-text">رؤى</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#how">كيف تعمل</a></li>
+      <li><a href="news.html">رؤى الأخبار</a></li>
+      <li><a href="trading.html">رؤى التداول</a></li>
+      <li><a href="services.html">الخدمات</a></li>
+      <li><a href="#contact">تواصل</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">دخول</a>
+      <a href="#contact" class="btn btn-primary">اطلب عرضاً</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============= HERO (Railway layout: نص علوي + رادار سفلي مركزي) ============= -->
+<section class="hero container" id="hero">
+  <div class="hero-text">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>منظومة استخبارات مالية ذكية</span>
+    </div>
+
+    <h1 class="hero-title">رُؤى</h1>
+
+    <p class="hero-tagline">
+      بنية تحتية مالية <span class="accent">للمؤسسات</span>
+      <br>
+      حيث يلتقي الخبر بالتحليل والتنفيذ
+    </p>
+
+    <p class="hero-sub">
+      <strong>رؤى الأخبار</strong> تبني الاستخبارات المالية من 729+ مصدراً عالمياً.
+      <strong>رؤى التداول</strong> تحوّلها إلى قرارات وتنفيذ آلي عبر مجلس ذكاء اصطناعي من 10 أدوار.
+      دون وسيط بشري · بخمس لغات · في الزمن الحقيقي.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#how" class="btn btn-primary">
+        <span>كيف تعمل رؤى</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost">اطلب عرضاً</a>
+    </div>
+
+    <!-- Hero meta strip (Railway-style stat row) -->
+    <div class="hero-meta">
+      <div class="stat">
+        <span class="stat-num">729+</span>
+        <span class="stat-lbl">مصدر مالي</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10</span>
+        <span class="stat-lbl">أدوار AI</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">15</span>
+        <span class="stat-lbl">فحص أمان</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-lbl">لغات حيّة</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============= الرادار (مقدّس — محفوظ بالكامل، فقط موضعه تغيّر) ============= -->
+  <div class="radar-wrap">
+    <div class="radar-pedestal"></div>
+    <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
+    <div class="hud-bracket bl"></div><div class="hud-bracket br"></div>
+    <span class="hud-label top">SECTOR · GLOBAL</span>
+    <span class="hud-label bottom">RANGE · LIVE</span>
+    <span class="hud-label left">SCAN · 360°</span>
+    <span class="hud-label right">FEED · REAL-TIME</span>
+    <div class="radar-frame">
+      <div class="radar-screen">
+        <svg class="radar-grid" viewBox="-100 -100 200 200" preserveAspectRatio="xMidYMid meet">
+          <circle cx="0" cy="0" r="20" class="ring"/><circle cx="0" cy="0" r="40" class="ring bright"/>
+          <circle cx="0" cy="0" r="60" class="ring"/><circle cx="0" cy="0" r="80" class="ring bright"/>
+          <circle cx="0" cy="0" r="100" class="ring bright"/>
+          <line x1="-100" y1="0" x2="100" y2="0" class="az cardinal"/><line x1="0" y1="-100" x2="0" y2="100" class="az cardinal"/>
+          <line x1="-86.6" y1="-50" x2="86.6" y2="50" class="az"/><line x1="-86.6" y1="50" x2="86.6" y2="-50" class="az"/>
+          <line x1="-50" y1="-86.6" x2="50" y2="86.6" class="az"/><line x1="-50" y1="86.6" x2="50" y2="-86.6" class="az"/>
+          <text x="0" y="-106" class="compass">N</text><text x="106" y="0" class="compass">E</text>
+          <text x="0" y="106" class="compass">S</text><text x="-106" y="0" class="compass">W</text>
+          <line x1="-4" y1="0" x2="4" y2="0" class="center-cross"/><line x1="0" y1="-4" x2="0" y2="4" class="center-cross"/>
+          <circle cx="0" cy="0" r="1.8" class="center-dot"/>
+        </svg>
+        <div class="radar-sweep"></div>
+        <div class="radar-sweep-line"></div>
+        <div class="radar-targets" id="radarTargets"></div>
+      </div>
+    </div>
+    <div class="radar-status">
+      <div class="item"><span>الحالة</span><span class="val" id="rStatus">نشط</span></div>
+      <div class="item"><span>الإشارات</span><span class="val" id="rCount">00</span></div>
+      <div class="item"><span>المسح</span><span class="val" id="rSweep">000°</span></div>
+      <div class="item"><span>الوقت</span><span class="val" id="rClock">00:00:00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= TEASER (مثال على نمط الكروت الجديد) ============= -->
+<section class="section container reveal" id="how">
+  <div class="section-header">
+    <span class="section-tag">المنظومتان</span>
+    <h2>منظومتان متكاملتان، استقلال تام</h2>
+    <p>ليست منصة واحدة، بل بنية تحتية تجمع العقل المالي وذراع التنفيذ في مسار واحد مغلق.</p>
+  </div>
+
+  <div class="teaser-grid">
+
+    <article class="teaser-card">
+      <span class="role">العقل المالي</span>
+      <h3>رؤى الأخبار</h3>
+      <p>محرك استخبارات مالي يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ — أخبار، تحليلات، تقارير، فيديو، وإنفوجرافيك بـ 5 لغات حيّة.</p>
+      <div class="meta">
+        <span class="meta-item"><strong>729+</strong> مصدر</span>
+        <span class="meta-item"><strong>10</strong> منتجات</span>
+        <span class="meta-item"><strong>5</strong> لغات</span>
+      </div>
+      <a href="services.html#news" class="teaser-link">
+        استكشف الخدمات
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </article>
+
+    <article class="teaser-card">
+      <span class="role">ذراع التنفيذ الذكي</span>
+      <h3>رؤى التداول</h3>
+      <p>منظومة ذكاء اصطناعي متكاملة لاتخاذ القرار والتنفيذ — مجلس ذكي بـ 10 أدوار، منفّذ بـ 15 فحص أمان، ووكلاء مستقلون بزمن استجابة أقل من 5 مللي ثانية.</p>
+      <div class="meta">
+        <span class="meta-item"><strong>10</strong> أدوار AI</span>
+        <span class="meta-item"><strong>15</strong> فحص أمان</span>
+        <span class="meta-item"><strong>&lt;5ms</strong> زمن الاستجابة</span>
+      </div>
+      <a href="services.html#trading" class="teaser-link">
+        استكشف الخدمات
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </article>
+
+    <article class="teaser-card">
+      <span class="role">المعادلة الكاملة</span>
+      <h3>التكامل</h3>
+      <p>رؤى الأخبار + رؤى التداول = بنية تحتية للاستخبارات المالية. تعملان باستقلالية تامة، وتتكاملان عند الحاجة عبر طبقة ذكاء موحدة.</p>
+      <div class="meta">
+        <span class="meta-item"><strong>3</strong> وكلاء مستقلون</span>
+        <span class="meta-item"><strong>6</strong> منصات تنفيذ</span>
+        <span class="meta-item"><strong>24/7</strong> مراقبة</span>
+      </div>
+      <a href="services.html#integration" class="teaser-link">
+        استكشف التكامل
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============= CTA (Railway-style: نص محوري + زر واحد) ============= -->
+<section class="section container reveal" id="contact" style="text-align:center;">
+  <span class="section-tag" style="justify-content:center;">جاهز للبدء؟</span>
+  <h2 style="font-size: var(--fs-h1); max-width: 18ch; margin: 0 auto var(--space-md);">
+    ببصيرة نحو الأسواق
+  </h2>
+  <p class="lead" style="margin: 0 auto var(--space-lg);">
+    تواصل معنا لمعرفة كيف تبني رؤى بنية تحتية مالية لمؤسستك.
+  </p>
+  <a href="mailto:contact@rouaa.ai" class="btn btn-primary" style="font-size: 1rem; padding: 0.9rem 1.8rem;">
+    <span>اطلب عرضاً مخصصاً</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+</main>
+
+<!-- ============= FOOTER (Railway-style: شفاف، padding كبير، 4 أعمدة) ============= -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="gap: 0.6rem;">
+        <span class="nav-logo-text" style="font-size: 1.25rem;">رؤى</span>
+      </div>
+      <p>بنية تحتية مالية للمؤسسات — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة.</p>
+      <p class="mono" style="color: var(--text-faint); margin-top: 0.5rem;">v0.9.0-beta · Q3 2025</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>المنتجات</h4>
+      <ul>
+        <li><a href="news.html">رؤى الأخبار</a></li>
+        <li><a href="trading.html">رؤى التداول</a></li>
+        <li><a href="services.html">كل الخدمات</a></li>
+        <li><a href="#">الأسعار</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>الشركة</h4>
+      <ul>
+        <li><a href="#">من نحن</a></li>
+        <li><a href="#">المدونة</a></li>
+        <li><a href="#">الوظائف</a></li>
+        <li><a href="#contact">تواصل</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>قانوني</h4>
+      <ul>
+        <li><a href="#">سياسة الخصوصية</a></li>
+        <li><a href="#">شروط الخدمة</a></li>
+        <li><a href="#">الأمان</a></li>
+        <li><a href="#">SOC2 Roadmap</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 رؤى — جميع الحقوق محفوظة</span>
+    <span>contact@rouaa.ai · @rouaa_ai</span>
+  </div>
+</footer>
+
+<!-- ============= TICKER (مُكرّر مرتين لحركة لا نهائية) ============= -->
+<div class="ticker" aria-label="شريط الأسعار المباشر">
+  <div class="ticker-label">
+    <span class="dot"></span>
+    <span>LIVE</span>
+  </div>
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL WTI</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">↑</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+3.4%</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ticker-pair">EUR/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GBP/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">OIL WTI</span><span class="ticker-signal up">↑</span><span class="ticker-val">+1.7%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">USD/JPY</span><span class="ticker-signal down">↓</span><span class="ticker-val">-0.5%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">SILVER</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.8%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">NASDAQ</span><span class="ticker-signal up">↑</span><span class="ticker-val">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">GOLD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+2.1%</span></div>
+    <div class="ticker-item"><span class="ticker-pair">BTC/USD</span><span class="ticker-signal up">↑</span><span class="ticker-val">+3.4%</span></div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/radar.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
