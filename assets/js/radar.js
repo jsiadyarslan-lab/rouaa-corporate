@@ -1,5 +1,6 @@
 /* ============================================================
-   رؤى · Radar Logic (محفوظ بالكامل من index.html الأصلي)
+   رؤى · Radar Logic + Live Feed + System Status
+   الرادار محفوظ بالكامل — أضفنا فقط تغذية Live Feed
    ============================================================ */
 
 (function(){
@@ -10,10 +11,67 @@
   const statusEl = document.getElementById('rStatus');
   if(!targetsEl) return;
 
+  // === Live Feed elements ===
+  const feedList = document.getElementById('liveFeedList');
+  const feedCount = document.getElementById('feedCount');
+  const sysUpdate = document.getElementById('sysUpdate');
+  const sysSignals = document.getElementById('sysSignals');
+  const sysLatency = document.getElementById('sysLatency');
+  const sysSources = document.getElementById('sysSources');
+  const pulseSources = document.getElementById('pulseSources');
+  const pulseAI = document.getElementById('pulseAI');
+
+  let totalSignals = 0;
+  const feedItems = [];
+  const MAX_FEED = 7;
+
   const SWEEP_DUR = 4000;
   let active = [];
   const MAX = 7;
   const rand = (a,b) => a + Math.random()*(b-a);
+
+  function pad(n) { return n.toString().padStart(2,'0'); }
+  function nowStr() {
+    const d = new Date();
+    return pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  }
+
+  function addToFeed(label, type) {
+    if (!feedList) return;
+    totalSignals++;
+
+    // Determine signal
+    let signal = '↑', signalClass = 'up';
+    if (type === 'hostile') { signal = '↓'; signalClass = 'down'; }
+    else if (type === 'neutral') { signal = '◆'; signalClass = 'neutral'; }
+
+    const li = document.createElement('li');
+    li.className = 'live-feed-item';
+    li.innerHTML = `
+      <span class="lf-time">${nowStr()}</span>
+      <span class="lf-pair">${label}</span>
+      <span class="lf-signal ${signalClass}">${signal}</span>
+    `;
+    feedList.insertBefore(li, feedList.firstChild);
+    feedItems.unshift(li);
+
+    // Mark older items as fading
+    feedItems.forEach((item, i) => {
+      if (i >= 3) item.classList.add('fading');
+      else item.classList.remove('fading');
+    });
+
+    // Remove excess
+    while (feedItems.length > MAX_FEED) {
+      const old = feedItems.pop();
+      old.remove();
+    }
+
+    // Update counts
+    if (feedCount) feedCount.textContent = totalSignals;
+    if (sysSignals) sysSignals.textContent = totalSignals;
+    if (sysUpdate) sysUpdate.textContent = nowStr();
+  }
 
   function spawn(){
     if(active.length >= MAX) return;
@@ -47,11 +105,14 @@
     label.textContent = pick.text;
     t.appendChild(label);
 
+    let targetType = 'target';
     // Hostile = bearish data (high inflation, rate hikes)
     if(pick.text.includes('CPI') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') > 3) {
       t.className = 'target hostile';
+      targetType = 'hostile';
     } else if(pick.text.includes('RATE') && parseFloat(pick.text.match(/[\d.]+/)?.[0] || '0') >= 5) {
       t.className = 'target neutral';
+      targetType = 'neutral';
     } else {
       t.className = 'target';
     }
@@ -60,19 +121,19 @@
     t.style.top = y + '%';
     targetsEl.appendChild(t);
     active.push({el:t});
+
+    // === أضف إلى Live Feed ===
+    addToFeed(pick.text, targetType);
+
     setTimeout(()=>{ t.remove(); active = active.filter(a=>a.el!==t); }, 4000);
   }
 
   setInterval(spawn, 650);
   for(let i=0;i<4;i++) setTimeout(spawn, i*150);
 
-  const pad = n => n.toString().padStart(2,'0');
   function loop(){
     if(countEl) countEl.textContent = pad(active.length);
-    if(clockEl){
-      const d = new Date();
-      clockEl.textContent = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-    }
+    if(clockEl) clockEl.textContent = nowStr();
     if(sweepEl){
       const e = (performance.now() % SWEEP_DUR) / SWEEP_DUR;
       sweepEl.textContent = Math.floor(e*360).toString().padStart(3,'0') + '°';
@@ -85,4 +146,33 @@
   setInterval(()=>{
     if(statusEl) statusEl.textContent = statuses[Math.floor(Math.random()*statuses.length)];
   }, 3500);
+
+  // === System status updates ===
+  // Latency fluctuation
+  setInterval(()=>{
+    if (sysLatency) {
+      const lat = (3.8 + Math.random() * 1.2).toFixed(1);
+      sysLatency.textContent = lat + 'ms';
+    }
+  }, 2000);
+
+  // Active sources fluctuation
+  setInterval(()=>{
+    if (sysSources) {
+      const n = 12 + Math.floor(Math.random() * 6);
+      sysSources.textContent = n;
+    }
+    if (pulseSources) {
+      const n = 12 + Math.floor(Math.random() * 6);
+      pulseSources.textContent = n + ' نشط الآن';
+    }
+  }, 4000);
+
+  // AI roles fluctuation
+  setInterval(()=>{
+    if (pulseAI) {
+      const n = 2 + Math.floor(Math.random() * 4);
+      pulseAI.textContent = n + ' تحلل الآن';
+    }
+  }, 5000);
 })();

@@ -38,6 +38,19 @@
 
 <div class="bg-ambient"></div>
 
+<!-- ============= SYSTEM STATUS BAR (حية) ============= -->
+<div class="system-status" id="systemStatus">
+  <span class="sys-live">SYSTEM LIVE</span>
+  <span class="sys-sep">·</span>
+  <span class="sys-item">729 مصدر · <strong class="val" id="sysSources">14</strong> نشط</span>
+  <span class="sys-sep">·</span>
+  <span class="sys-item">Latency <strong class="val" id="sysLatency">4.2ms</strong></span>
+  <span class="sys-sep">·</span>
+  <span class="sys-item">آخر تحديث <strong class="val" id="sysUpdate">--:--:--</strong></span>
+  <span class="sys-sep">·</span>
+  <span class="sys-item">إشارات اليوم <strong class="val" id="sysSignals">0</strong></span>
+</div>
+
 <!-- ============= NAV ============= -->
 <nav class="nav" aria-label="القائمة الرئيسية">
   <div class="nav-inner">
@@ -132,28 +145,32 @@
       <a href="#contact" class="btn btn-ghost">اطلب عرضاً</a>
     </div>
 
-    <!-- قراءات أجهزة هادئة (بدلاً من بطاقات صاخبة) -->
+    <!-- قراءات أجهزة حية (بدلاً من بطاقات صاخبة) -->
     <div class="hero-readings">
       <div class="reading">
         <span class="reading-num">729+</span>
         <span class="reading-lbl">مصدر مالي</span>
+        <span class="reading-pulse" id="pulseSources">14 نشط الآن</span>
       </div>
       <div class="reading">
         <span class="reading-num">10</span>
         <span class="reading-lbl">أدوار AI</span>
+        <span class="reading-pulse warn" id="pulseAI">3 تحلل الآن</span>
       </div>
       <div class="reading">
         <span class="reading-num">15</span>
         <span class="reading-lbl">فحص أمان</span>
+        <span class="reading-pulse">مفعّل</span>
       </div>
       <div class="reading">
         <span class="reading-num">5</span>
         <span class="reading-lbl">لغات حيّة</span>
+        <span class="reading-pulse">مدعومة</span>
       </div>
     </div>
   </div>
 
-  <!-- ============= الرادار (مقدّس — محفوظ بالكامل) ============= -->
+  <!-- ============= الرادار (مقدّس — محفوظ بالكامل) + Live Feed ============= -->
   <div class="radar-wrap">
     <div class="radar-pedestal"></div>
     <div class="hud-bracket tl"></div><div class="hud-bracket tr"></div>
@@ -181,6 +198,16 @@
         <div class="radar-targets" id="radarTargets"></div>
       </div>
     </div>
+
+    <!-- Live Feed — يتغذى من أهداف الرادار -->
+    <aside class="live-feed" aria-label="آخر الإشارات المرصودة">
+      <div class="live-feed-header">
+        <span class="live-feed-title">LIVE FEED</span>
+        <span class="live-feed-count" id="feedCount">0</span>
+      </div>
+      <ul class="live-feed-list" id="liveFeedList"></ul>
+    </aside>
+
     <div class="radar-status">
       <div class="item"><span>الحالة</span><span class="val" id="rStatus">نشط</span></div>
       <div class="item"><span>الإشارات</span><span class="val" id="rCount">00</span></div>
