@@ -4,59 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى — طبقة الاستخبارات المالية</title>
-<meta name="description" content="طبقة الاستخبارات المالية التي تحوّل المعلومات الرسمية إلى معرفة استثمارية.">
+<title>رؤى الأخبار — من الأحداث المالية إلى الرؤية الاستثمارية</title>
+<meta name="description" content="رؤى تراقب المصادر المالية الرسمية وتحوّل البيانات إلى أحداث مفهومة وتحليلات موثّقة.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
-  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
-  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;
-  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
-  --border-soft:rgba(243,244,246,.06);
-  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
-}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--navy);scroll-behavior:smooth}
-body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-::selection{background:var(--gold);color:var(--navy)}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-a{color:inherit;text-decoration:none;transition:color .2s}
-a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
 .mono{font-family:var(--font-mono);letter-spacing:.04em}
-.container{max-width:1280px;margin:0 auto;padding:0 2rem}
-@media(max-width:768px){.container{padding:0 1.25rem}}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}@media(max-width:768px){.container{padding:0 1.25rem}}
 .section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
-.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
 .section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}
-.btn-trade:hover{background:var(--gold-dim)}
+.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}.btn-trade:hover{background:var(--gold-dim)}
 
 .nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
-.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
-@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
-.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
-.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
-.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
-.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
-.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
-.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
-@media(max-width:1024px){.nav-links{display:none}}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-/* === Hero === */
 .hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
 .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
@@ -64,695 +43,236 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
 
-/* === Intelligence Factory (3 layers) === */
-.factory{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:800px;margin-left:auto;margin-right:auto;gap:0}
-.factory-layer{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .3s}
-.factory-layer:hover{border-color:var(--gold)}
-.factory-layer.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
-.factory-layer-lbl{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.75rem;text-align:center}
-.factory-layer.gold .factory-layer-lbl{color:var(--gold)}
-.factory-items{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
-.factory-pill{padding:.4rem .8rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim)}
-.factory-layer.gold .factory-pill{background:var(--card);border-color:var(--border)}
-.factory-arrow{color:var(--gold);opacity:.5;font-size:1.5rem;margin:.25rem 0}
-
-/* === Live Intelligence Room === */
-.live-room{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.live-room-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.live-room-title{display:flex;align-items:center;gap:.75rem}
-.live-room-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
+/* === Live Intelligence Event === */
+.live-event{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:700px;margin-left:auto;margin-right:auto}
+.le-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.le-source{display:flex;align-items:center;gap:.6rem}
+.le-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.live-room-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
-.live-room-meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.live-room-stages{padding:1.5rem;display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
-@media(max-width:768px){.live-room-stages{grid-template-columns:1fr 1fr}}
-.live-stage{padding:1rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;text-align:center;transition:border-color .3s}
-.live-stage.done{border-color:var(--emerald)}
-.live-stage.active{border-color:var(--gold);background:var(--gold-dim)}
-.live-stage-num{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);margin-bottom:.5rem}
-.live-stage.active .live-stage-num{color:var(--gold)}
-.live-stage-name{font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
-.live-stage-val{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.live-stage.done .live-stage-val{color:var(--emerald)}
-.live-stage.active .live-stage-val{color:var(--gold)}
-.live-room-impact{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-@media(max-width:768px){.live-room-impact{grid-template-columns:1fr 1fr}}
-.impact-cell{text-align:center}
-.impact-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
-.impact-val{font-family:var(--font-mono);font-size:.875rem;font-weight:600;color:var(--text)}
-.impact-val.up{color:var(--emerald)}
-.impact-val.down{color:var(--rose)}
-.impact-val.gold{color:var(--gold)}
-.live-room-trade{padding:1rem 1.5rem;background:var(--gold-dim);border-top:1px solid rgba(200,169,81,.2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
-.live-room-trade-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
-.live-room-trade-link{font-size:.8125rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:.4rem}
+.le-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
+.le-time{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.le-body{padding:1.5rem}
+.le-steps{display:flex;flex-direction:column;gap:0}
+.le-step{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft)}
+.le-step:last-child{border-bottom:none}
+.le-check{width:20px;height:20px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
+.le-step.active .le-check{background:var(--gold);animation:pulse 1.5s ease-in-out infinite}
+.le-step-text{font-size:.875rem;color:var(--text);font-weight:500}
+.le-step.active .le-step-text{color:var(--gold)}
+.le-step-val{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-right:auto}
+.le-output{margin-top:1rem;padding:1rem;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:8px;text-align:center}
+.le-output-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
+.le-output-val{font-size:.9375rem;color:var(--text);font-weight:600}
+.le-trade{padding:.875rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.le-trade-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+.le-trade-vals{display:flex;gap:1rem;font-family:var(--font-mono);font-size:.75rem}
+.le-trade-vals .up{color:var(--emerald)}
+.le-trade-vals .neutral{color:var(--text-dim)}
+.le-trade-vals .gold{color:var(--gold)}
+.le-trade-link{font-size:.8125rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:.3rem}
 
-/* === Evidence Viewer === */
-.ev-viewer{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:800px;margin-left:auto;margin-right:auto}
-.ev-viewer-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
-.ev-viewer-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
-.ev-viewer-title{font-size:1.125rem;font-weight:700;color:var(--text)}
-.ev-viewer-body{padding:1.5rem}
-.ev-viewer-section{margin-bottom:1.5rem}
-.ev-viewer-section:last-child{margin-bottom:0}
-.ev-viewer-section-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
-.ev-source-row{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;margin-bottom:.4rem;font-size:.8125rem}
-.ev-source-check{width:18px;height:18px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
-.ev-source-name{font-family:var(--font-en);font-weight:600;color:var(--text)}
-.ev-source-url{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-right:auto}
-.ev-source-date{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.ev-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
-@media(max-width:600px){.ev-stats{grid-template-columns:1fr 1fr}}
-.ev-stat{text-align:center;padding:.75rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px}
-.ev-stat-num{font-family:var(--font-mono);font-size:1.25rem;color:var(--gold);font-weight:600}
-.ev-stat-lbl{font-size:.625rem;color:var(--text-mute);margin-top:.125rem}
-.ev-viewer-footer{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+/* === Intelligence Pipeline === */
+.pipe-flow{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:600px;margin-left:auto;margin-right:auto;gap:0}
+.pipe-stage{width:100%;max-width:440px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;text-align:center;transition:border-color .3s}.pipe-stage:hover{border-color:var(--gold)}
+.pipe-stage.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
+.pipe-stage-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
+.pipe-stage.gold .pipe-stage-lbl{color:var(--gold)}
+.pipe-stage-name{font-size:.9375rem;font-weight:600;color:var(--text)}
+.pipe-arrow{color:var(--gold);opacity:.4;font-size:1.25rem;margin:.2rem 0}
 
-/* === Intelligence Graph === */
-.intel-graph{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;justify-content:center;position:relative}
-.intel-graph svg{max-width:100%;height:auto}
-.ig-node{cursor:pointer;transition:all .3s}
-.ig-node:hover .ig-circle{fill:var(--gold-dim);stroke:var(--gold)}
-.ig-circle{fill:var(--card);stroke:var(--border);stroke-width:1.5;transition:all .3s}
-.ig-circle.gold{fill:var(--gold-dim);stroke:var(--gold)}
-.ig-circle.active{fill:var(--gold);stroke:var(--gold-bright);stroke-width:2}
-.ig-label{fill:var(--text);font-family:var(--font-en);font-size:11px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
-.ig-label.gold{fill:var(--gold)}
-.ig-link{stroke:var(--border);stroke-width:1;fill:none;transition:stroke .3s}
-.ig-link.active{stroke:var(--gold);stroke-width:1.5}
-.ig-info{position:absolute;top:1rem;left:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;min-width:200px;max-width:240px;opacity:0;transition:opacity .3s;pointer-events:none}
-.ig-info.visible{opacity:1}
-.ig-info-title{font-family:var(--font-en);font-weight:700;color:var(--gold);font-size:.875rem;margin-bottom:.5rem}
-.ig-info-row{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-bottom:.25rem}
-.ig-info-row span{color:var(--text)}
+/* === Research Products === */
+.rp-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+@media(max-width:900px){.rp-grid{grid-template-columns:1fr}}
+.rp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .3s}.rp-card:hover{border-color:var(--gold)}
+.rp-card-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+.rp-card-h{font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:1rem}
+.rp-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.rp-list li{font-size:.875rem;color:var(--text-dim);padding-right:1rem;position:relative}
+.rp-list li::before{content:'←';position:absolute;right:0;color:var(--gold);opacity:.6}
 
-/* === Research Terminal === */
-.research-terminal{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.rt-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
-.rt-title{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
-.rt-tabs{display:flex;gap:.25rem}
-.rt-tab{padding:.3rem .6rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);border-radius:4px;cursor:pointer;transition:all .2s}
-.rt-tab.active{background:var(--gold-dim);color:var(--gold)}
-.rt-list{padding:.5rem}
-.rt-item{padding:1rem 1.25rem;border-bottom:1px solid var(--border-soft);display:grid;grid-template-columns:1fr auto auto;gap:1rem;align-items:center;transition:background .2s;cursor:pointer}
-.rt-item:hover{background:rgba(255,255,255,.02)}
-.rt-item:last-child{border-bottom:none}
-@media(max-width:768px){.rt-item{grid-template-columns:1fr;gap:.5rem}}
-.rt-item-topic{font-size:.9375rem;font-weight:600;color:var(--text)}
-.rt-item-meta{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-top:.25rem}
-.rt-item-evidence{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);padding:.2rem .5rem;background:rgba(52,211,153,.1);border-radius:4px;white-space:nowrap}
-.rt-item-conf{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);font-weight:600;min-width:40px;text-align:center}
+/* === Evidence Layer === */
+.ev-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:700px;margin-left:auto;margin-right:auto}
+.ev-panel-h{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.ev-panel-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
+.ev-panel-title{font-size:1.0625rem;font-weight:700;color:var(--text)}
+.ev-panel-body{padding:1.5rem}
+.ev-row{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font-size:.875rem;align-items:center}
+.ev-row:last-child{border-bottom:none}
+@media(max-width:600px){.ev-row{grid-template-columns:1fr;gap:.2rem}}
+.ev-row-k{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+.ev-row-v{color:var(--text);font-weight:500}
+.ev-row-v.gold{color:var(--gold);font-family:var(--font-mono);font-weight:600}
+.ev-row-v .check{color:var(--emerald);margin-left:.25rem}
+.ev-panel-footer{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);text-align:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
 
-/* === CTA + Footer === */
+/* === Trade Connection === */
+.tc-box{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:12px;padding:1.5rem}
+.tc-title{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;text-align:center}
+.tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1rem}
+@media(max-width:600px){.tc-grid{grid-template-columns:1fr 1fr}}
+.tc-cell{text-align:center;padding:.6rem;background:var(--card);border-radius:6px}
+.tc-cell-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+.tc-cell-val{font-family:var(--font-mono);font-size:.8125rem;font-weight:600;color:var(--text)}
+.tc-cell-val.up{color:var(--emerald)}
+.tc-cell-val.gold{color:var(--gold)}
+.tc-link{text-align:center}
+
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
-.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
-.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
 .footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
-.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
-@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
-.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
-.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
-.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
-@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى · الاستخبارات</span>
-        <span class="sub">طبقة الاستخبارات المالية</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="news.html" class="active">الأخبار</a></li>
-      <li><a href="core.html">المحرك</a></li>
-      <li><a href="trade.html">التداول</a></li>
-      <li><a href="api.html">واجهة برمجة</a></li>
-      <li><a href="enterprise.html">المؤسسات</a></li>
-    </ul>
-    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div>
-  </div>
-</nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · الأخبار</span><span class="sub">نافذة المؤسسة</span></div></a><ul class="nav-links"><li><a href="news.html" class="active">الأخبار</a></li><li><a href="core.html">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
-<!-- ============= HERO ============= -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-      <h1 class="hero-h1">من البيانات المالية الرسمية<br>إلى المعرفة الاستثمارية</h1>
-      <p class="hero-sub">تعاني المؤسسات المالية من وفرة البيانات ونقص السياق. رؤى تحوّل المصادر الرسمية إلى معرفة قابلة للتنفيذ — كل رؤية لها مصدر، كل ادعاء له دليل، كل قرار قابل للتفسير.</p>
+<!-- ============= 1. HERO ============= -->
+<section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
+<div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
+<h1 class="hero-h1">من الأحداث المالية<br>إلى الرؤية الاستثمارية</h1>
+<p class="hero-sub">رؤى تراقب المصادر المالية الرسمية حول العالم، وتحوّل البيانات والوثائق الاقتصادية إلى أحداث مفهومة وتحليلات موثّقة تساعد المؤسسات على فهم الأسواق.</p>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#live" class="btn btn-primary">استكشف الاستخبارات المالية</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
+</div></div></section>
 
-      <!-- Intelligence Factory: 3 layers -->
-      <div class="factory">
-        <div class="factory-layer">
-          <div class="factory-layer-lbl">طبقة المصادر الرسمية</div>
-          <div class="factory-items">
-            <span class="factory-pill">الفيدرالي</span>
-            <span class="factory-pill">البنك المركزي الأوروبي</span>
-            <span class="factory-pill">صندوق النقد</span>
-            <span class="factory-pill">مكتب إحصاءات العمل</span>
-            <span class="factory-pill">هيئة الأوراق المالية</span>
-            <span class="factory-pill">+406</span>
-          </div>
-        </div>
-        <div class="factory-arrow">↓</div>
-        <div class="factory-layer gold">
-          <div class="factory-layer-lbl">محرّك الاستخبارات</div>
-          <div class="factory-items">
-            <span class="factory-pill">الاستخراج</span>
-            <span class="factory-pill">التصنيف</span>
-            <span class="factory-pill">التحقق</span>
-            <span class="factory-pill">الاستدلال</span>
-            <span class="factory-pill">ربط الأدلة</span>
-          </div>
-        </div>
-        <div class="factory-arrow">↓</div>
-        <div class="factory-layer">
-          <div class="factory-layer-lbl">منتجات المعرفة</div>
-          <div class="factory-items">
-            <span class="factory-pill">أخبار</span>
-            <span class="factory-pill">تقارير</span>
-            <span class="factory-pill">أبحاث</span>
-            <span class="factory-pill">فيديو</span>
-            <span class="factory-pill">واجهة برمجة</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ============= 2. LIVE INTELLIGENCE EVENT ============= -->
+<section class="section reveal" id="live"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">حدث مالي حي</span><h2 class="section-h" style="margin:0 auto 1rem">من وثيقة إلى استخبارات — في ثوانٍ</h2><p class="section-lead" style="margin:0 auto">في اللحظة التي يُنشر فيها بيان رسمي، تبدأ رؤى. هذه ليست محاكاة — هذا ما يحدث فعلاً.</p></div>
 
-<!-- ============= 1. LIVE INTELLIGENCE ROOM ============= -->
-<section class="section reveal" id="live-room">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">غرفة الاستخبارات الحية</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">حدث مالي واحد · سلسلة معالجة كاملة</h2>
-      <p class="section-lead" style="margin:0 auto">في اللحظة التي يُنشر فيها بيان رسمي، تبدأ رؤى. هذه ليست محاكاة — هذا ما يحدث فعلاً.</p>
-    </div>
+<div class="live-event">
+<div class="le-header"><div class="le-source"><div class="le-dot"></div><div><div class="le-name">الفيدرالي · بيان FOMC</div><div class="le-time">24 يوليو 2026 · 14:32 شرق</div></div></div><div class="le-time">معالجة في 3.7 ثوانٍ</div></div>
 
-    <div class="live-room">
-      <div class="live-room-header">
-        <div class="live-room-title">
-          <div class="live-room-dot"></div>
-          <div>
-            <div class="live-room-name">الفيدرالي · بيان FOMC</div>
-            <div class="live-room-meta">24 يوليو 2026 · 14:32 شرق · معالجة في 3.7 ثوانٍ</div>
-          </div>
-        </div>
-        <div class="live-room-meta">ثقة 87% · 5 مصادر · 12 حقيقة</div>
-      </div>
+<div class="le-body">
+<div class="le-steps">
+<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">اكتشاف الوثيقة</span><span class="le-step-val">14:32:00</span></div>
+<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">استخراج الحقائق</span><span class="le-step-val">12 حقيقة · 0.4ث</span></div>
+<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">تصنيف الحدث</span><span class="le-step-val">قرار سياسة نقدية</span></div>
+<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">ربط الأدلة</span><span class="le-step-val">5 وثائق · 3 أحداث</span></div>
+<div class="le-step active"><div class="le-check">●</div><span class="le-step-text">توليد السياق السوقي</span><span class="le-step-val">مباشر</span></div>
+</div>
+<div class="le-output">
+<div class="le-output-lbl">المخرج</div>
+<div class="le-output-val">مذكرة استخبارات السياسة النقدية · ثقة 87%</div>
+</div>
+</div>
 
-      <!-- 5 stages -->
-      <div class="live-room-stages">
-        <div class="live-stage done">
-          <div class="live-stage-num">01</div>
-          <div class="live-stage-name">اكتُشف</div>
-          <div class="live-stage-val">✓ 14:32:00</div>
-        </div>
-        <div class="live-stage done">
-          <div class="live-stage-num">02</div>
-          <div class="live-stage-name">استُخرج</div>
-          <div class="live-stage-val">✓ 12 حقيقة</div>
-        </div>
-        <div class="live-stage done">
-          <div class="live-stage-num">03</div>
-          <div class="live-stage-name">تُحقّق</div>
-          <div class="live-stage-val">✓ 5 مصادر</div>
-        </div>
-        <div class="live-stage done">
-          <div class="live-stage-num">04</div>
-          <div class="live-stage-name">نُشر</div>
-          <div class="live-stage-val">✓ 14:32:04</div>
-        </div>
-        <div class="live-stage active">
-          <div class="live-stage-num">05</div>
-          <div class="live-stage-name">الأثر السوقي</div>
-          <div class="live-stage-val">● مباشر</div>
-        </div>
-      </div>
+<div class="le-trade">
+<div>
+<span class="le-trade-lbl">الأثر السوقي:</span>
+<span class="le-trade-vals">
+<span class="up">الدولار: صاعد</span>
+<span class="neutral">السندات: إيجابي</span>
+<span class="gold">المخاطرة: متوسطة</span>
+</span>
+</div>
+<a href="trade.html" class="le-trade-link">فتح سياق التداول ←</a>
+</div>
+</div>
+</div></section>
 
-      <!-- Market impact -->
-      <div class="live-room-impact">
-        <div class="impact-cell">
-          <div class="impact-lbl">الدولار</div>
-          <div class="impact-val up">حيادي ← صاعد</div>
-        </div>
-        <div class="impact-cell">
-          <div class="impact-lbl">السندات</div>
-          <div class="impact-val up">إيجابي</div>
-        </div>
-        <div class="impact-cell">
-          <div class="impact-lbl">الأسهم</div>
-          <div class="impact-val">مختلط</div>
-        </div>
-        <div class="impact-cell">
-          <div class="impact-lbl">المخاطرة</div>
-          <div class="impact-val gold">متوسطة</div>
-        </div>
-      </div>
+<!-- ============= 3. INTELLIGENCE PIPELINE ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">مسار الاستخبارات</span>
+<h2 class="section-h">من المصدر إلى المعرفة</h2>
+<p class="section-lead">ليست معالجة تقنية — قيمة في كل خطوة. كل مرحلة تحوّل البيانات الخام إلى فهم أعمق.</p>
 
-      <!-- Trade integration -->
-      <div class="live-room-trade">
-        <div class="live-room-trade-lbl">استخبارات تداول مرتبطة · إشارة شراء EUR/USD · ثقة 87%</div>
-        <a href="trade.html" class="live-room-trade-link">
-          حلّل في رؤى التداول
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="pipe-flow">
+<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 01</div><div class="pipe-stage-name">المصدر الرسمي</div></div>
+<div class="pipe-arrow">↓</div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 02</div><div class="pipe-stage-name">معلومات موثّقة</div></div>
+<div class="pipe-arrow">↓</div>
+<div class="pipe-stage gold"><div class="pipe-stage-lbl">المرحلة 03</div><div class="pipe-stage-name">حدث مالي</div></div>
+<div class="pipe-arrow">↓</div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 04</div><div class="pipe-stage-name">سياق سوقي</div></div>
+<div class="pipe-arrow">↓</div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 05</div><div class="pipe-stage-name">معرفة استثمارية</div></div>
+</div>
+</div></section>
 
-<!-- ============= 2. EVIDENCE VIEWER ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">عارض الأدلة</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">دليل خلف كل رؤية</h2>
-      <p class="section-lead" style="margin:0 auto">ليست مجرد تحليل — استخبارات موثّقة. اضغط أي رؤية لترى المصدر، الوثيقة، الحقيقة، وسلسلة الإثبات الكاملة.</p>
-    </div>
+<!-- ============= 4. RESEARCH PRODUCTS ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">منتجات الاستخبارات</span>
+<h2 class="section-h">ما الذي تحصل عليه المؤسسة</h2>
+<p class="section-lead">ليست أخباراً تُقرأ — استخبارات تُتخذ بها القرارات. ثلاث طبقات منتجات تغطي احتياجات فرق الاستثمار.</p>
 
-    <div class="ev-viewer">
-      <div class="ev-viewer-header">
-        <div class="ev-viewer-tag">رؤية #28492 · استخبارات موثّقة</div>
-        <div class="ev-viewer-title">«ثبات الفيدرالي يشير إلى قوة الدولار قريباً مقابل العملات الرئيسية»</div>
-      </div>
-      <div class="ev-viewer-body">
+<div class="rp-grid">
+<div class="rp-card">
+<div class="rp-card-tag">استخبارات السوق اليومية</div>
+<div class="rp-card-h">ما يحدث اليوم</div>
+<ul class="rp-list">
+<li>استخبارات يومية مباشرة</li>
+<li>أحداث اقتصادية مع الأثر</li>
+<li>مذكرة استخبارات لكل حدث</li>
+</ul>
+</div>
+<div class="rp-card">
+<div class="rp-card-tag">أبحاث مؤسسية</div>
+<div class="rp-card-h">ما يعنيه للأمد البعيد</div>
+<ul class="rp-list">
+<li>تقارير الاقتصاد الكلي</li>
+<li>استخبارات الدول والقطاعات</li>
+<li>تحليلات استراتيجية موثّقة</li>
+</ul>
+</div>
+<div class="rp-card">
+<div class="rp-card-tag">استخبارات إعلامية</div>
+<div class="rp-card-h">ما يُوزَّع ويُستهلك</div>
+<ul class="rp-list">
+<li>تقارير بصرية وإنفوجرافيك</li>
+<li>موجزات فيديو</li>
+<li>واجهة برمجة للتكامل</li>
+</ul>
+</div>
+</div>
+</div></section>
 
-        <div class="ev-viewer-section">
-          <div class="ev-viewer-section-lbl">مولّد من — مصادر رسمية موثّقة</div>
-          <div class="ev-source-row">
-            <div class="ev-source-check">✓</div>
-            <div class="ev-source-name">الفيدرالي</div>
-            <div class="ev-source-url">federalreserve.gov · بيان FOMC</div>
-            <div class="ev-source-date">24 يوليو</div>
-          </div>
-          <div class="ev-source-row">
-            <div class="ev-source-check">✓</div>
-            <div class="ev-source-name">مكتب إحصاءات العمل</div>
-            <div class="ev-source-url">bls.gov · بيان CPI</div>
-            <div class="ev-source-date">18 يوليو</div>
-          </div>
-          <div class="ev-source-row">
-            <div class="ev-source-check">✓</div>
-            <div class="ev-source-name">خزانة الولايات المتحدة</div>
-            <div class="ev-source-url">treasury.gov · منحنى العائد</div>
-            <div class="ev-source-date">24 يوليو</div>
-          </div>
-        </div>
+<!-- ============= 5. EVIDENCE LAYER ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">لماذا تثق المؤسسات برؤى</span><h2 class="section-h" style="margin:0 auto 1rem">كل رؤية لها دليل</h2><p class="section-lead" style="margin:0 auto">المنافسون يمكنهم بناء تحليلات ولوحات. لكن ليس بسهولة: «أثبت لي لماذا قلت ذلك.» رؤى تجيب.</p></div>
 
-        <div class="ev-viewer-section">
-          <div class="ev-viewer-section-lbl">سلسلة الأدلة</div>
-          <div class="ev-stats">
-            <div class="ev-stat">
-              <div class="ev-stat-num">5</div>
-              <div class="ev-stat-lbl">وثائق رسمية</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-num">12</div>
-              <div class="ev-stat-lbl">حقائق مستخرجة</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-num">3</div>
-              <div class="ev-stat-lbl">أحداث مرتبطة</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-num">87%</div>
-              <div class="ev-stat-lbl">درجة الثقة</div>
-            </div>
-          </div>
-        </div>
+<div class="ev-panel">
+<div class="ev-panel-h"><div class="ev-panel-tag">رؤية #28492 · استخبارات موثّقة</div><div class="ev-panel-title">«ثبات الفيدرالي يشير إلى قوة الدولار قريباً»</div></div>
+<div class="ev-panel-body">
+<div class="ev-row"><span class="ev-row-k">المصدر</span><span class="ev-row-v">الفيدرالي<span class="check">✓</span></span></div>
+<div class="ev-row"><span class="ev-row-k">الوثيقة</span><span class="ev-row-v">بيان FOMC · 24 صفحة</span></div>
+<div class="ev-row"><span class="ev-row-k">الحقائق</span><span class="ev-row-v">12 حقيقة مستخرجة</span></div>
+<div class="ev-row"><span class="ev-row-k">الأدلة</span><span class="ev-row-v">5 وثائق مرتبطة</span></div>
+<div class="ev-row"><span class="ev-row-k">الثقة</span><span class="ev-row-v gold">87%</span></div>
+<div class="ev-row"><span class="ev-row-k">التتبّع</span><span class="ev-row-v">الرؤية ← الحقيقة ← الوثيقة ← المصدر الرسمي</span></div>
+</div>
+<div class="ev-panel-footer">كل ادعاء قابل للتتبّع إلى مصدر رسمي · لا قرارات مظلمة</div>
+</div>
+</div></section>
 
-        <div class="ev-viewer-section">
-          <div class="ev-viewer-section-lbl">سلسلة التتبّع</div>
-          <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim);line-height:1.8;direction:ltr;text-align:left">
-            الرؤية ← الحقيقة (الفائدة 5.50%) ← الوثيقة (FOMC_2026_07) ← المصدر الرسمي (federalreserve.gov) ← الاسترجاع (14:32:18 شرق)
-          </div>
-        </div>
+<!-- ============= 6. TRADE CONNECTION ============= -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">العلاقة مع رؤى التداول</span><h2 class="section-h" style="margin:0 auto 1rem">من الفهم إلى القرار</h2><p class="section-lead" style="margin:0 auto">الاستخبارات لا تنتهي عند المعرفة — تنتقل إلى القرار. داخل كل حدث، سياق تداول جاهز.</p></div>
 
-      </div>
-      <div class="ev-viewer-footer">
-        <span>كل ادعاء قابل للتتبّع إلى مصدر رسمي · لا قرارات مظلمة</span>
-        <a href="trade.html" style="color:var(--gold)">حلّل في رؤى التداول ←</a>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="tc-box">
+<div class="tc-title">سياق التداول · حدث FOMC</div>
+<div class="tc-grid">
+<div class="tc-cell"><div class="tc-cell-lbl">الدولار</div><div class="tc-cell-val up">صاعد</div></div>
+<div class="tc-cell"><div class="tc-cell-lbl">الذهب</div><div class="tc-cell-val up">إيجابي</div></div>
+<div class="tc-cell"><div class="tc-cell-lbl">السندات</div><div class="tc-cell-val">مراقبة</div></div>
+<div class="tc-cell"><div class="tc-cell-lbl">المخاطرة</div><div class="tc-cell-val gold">متوسطة</div></div>
+</div>
+<div class="tc-link"><a href="trade.html" class="btn-trade" style="font-family:var(--font-ar)">فتح سياق التداول ←</a></div>
+</div>
+</div></section>
 
-<!-- ============= 3. INTELLIGENCE GRAPH ============= -->
-<section class="section reveal">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">خريطة الاستخبارات</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">شبكة المعرفة المالية</h2>
-      <p class="section-lead" style="margin:0 auto">رؤى لا تعرض الأحداث منفصلة — تربطها. اضغط أي عقدة لترى المصدر والوثيقة والتأثير.</p>
-    </div>
-
-    <div class="intel-graph">
-      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" id="intelGraph">
-        <!-- Links -->
-        <line class="ig-link active" x1="300" y1="60" x2="300" y2="140"/>
-        <line class="ig-link active" x1="300" y1="140" x2="150" y2="220"/>
-        <line class="ig-link active" x1="300" y1="140" x2="300" y2="220"/>
-        <line class="ig-link active" x1="300" y1="140" x2="450" y2="220"/>
-        <line class="ig-link" x1="150" y1="220" x2="150" y2="320"/>
-        <line class="ig-link" x1="300" y1="220" x2="300" y2="320"/>
-        <line class="ig-link" x1="450" y1="220" x2="450" y2="320"/>
-
-        <!-- Nodes -->
-        <g class="ig-node" data-info="التضخم|مكتب إحصاءات العمل|CPI Release|2.4% YoY">
-          <circle class="ig-circle gold" cx="300" cy="60" r="30"/>
-          <text class="ig-label gold" x="300" y="60">التضخم</text>
-        </g>
-        <g class="ig-node" data-info="الفيدرالي|federalreserve.gov|FOMC Statement|Rate 5.50%">
-          <circle class="ig-circle" cx="300" cy="140" r="30"/>
-          <text class="ig-label" x="300" y="140">الفيدرالي</text>
-        </g>
-        <g class="ig-node" data-info="سعر الفائدة|الفيدرالي|FOMC Decision|5.25% - 5.50%">
-          <circle class="ig-circle gold" cx="150" cy="220" r="30"/>
-          <text class="ig-label gold" x="150" y="220">الفائدة</text>
-        </g>
-        <g class="ig-node" data-info="الدولار|سوق الصرف|DXY Index|+0.42%">
-          <circle class="ig-circle" cx="300" cy="220" r="30"/>
-          <text class="ig-label" x="300" y="220">الدولار</text>
-        </g>
-        <g class="ig-node" data-info="السندات|خزانة الولايات المتحدة|Yield Curve|10Y: 4.32%">
-          <circle class="ig-circle" cx="450" cy="220" r="30"/>
-          <text class="ig-label" x="450" y="220">السندات</text>
-        </g>
-        <g class="ig-node" data-info="الأسهم|S&P 500|Market Index|-0.3%">
-          <circle class="ig-circle" cx="150" cy="320" r="30"/>
-          <text class="ig-label" x="150" y="320">الأسهم</text>
-        </g>
-        <g class="ig-node" data-info="الذهب|COMEX|XAU/USD|2,389">
-          <circle class="ig-circle" cx="300" cy="320" r="30"/>
-          <text class="ig-label" x="300" y="320">الذهب</text>
-        </g>
-        <g class="ig-node" data-info="النفط|WTI Crude|OIL/USD|$85.20">
-          <circle class="ig-circle" cx="450" cy="320" r="30"/>
-          <text class="ig-label" x="450" y="320">النفط</text>
-        </g>
-      </svg>
-
-      <!-- Info panel -->
-      <div class="ig-info" id="igInfo">
-        <div class="ig-info-title" id="igInfoTitle">—</div>
-        <div class="ig-info-row">المصدر: <span id="igInfoSource">—</span></div>
-        <div class="ig-info-row">الوثيقة: <span id="igInfoDoc">—</span></div>
-        <div class="ig-info-row">القيمة: <span id="igInfoVal">—</span></div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-mono);font-size:.875rem;color:var(--text-mute)">
-      التضخم ← الفيدرالي ← (الفائدة · الدولار · السندات) ← (الأسهم · الذهب · النفط)
-    </div>
-  </div>
-</section>
-
-<!-- ============= 4. RESEARCH TERMINAL ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">طرفية الأبحاث</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">أبحاث بمظهر مؤسسي</h2>
-      <p class="section-lead" style="margin:0 auto">ليست مقالات — أبحاث استخباراتية. كل تقرير مدعوم بأدلة رسمية، أحداث مرتبطة، وأثر سوقي.</p>
-    </div>
-
-    <div class="research-terminal">
-      <div class="rt-header">
-        <div class="rt-title">طرفية أبحاث رؤى</div>
-        <div class="rt-tabs">
-          <span class="rt-tab active">الكل</span>
-          <span class="rt-tab">اقتصاد كلي</span>
-          <span class="rt-tab">أسواق</span>
-          <span class="rt-tab">دول</span>
-        </div>
-      </div>
-
-      <div class="rt-list">
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">السياسة النقدية الأمريكية: ثبات الفيدرالي وتأثيره على الدولار</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-014 · 24 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 14 وثيقة · 6 أحداث</div>
-          <div class="rt-item-conf">87%</div>
-        </div>
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">تضخم منطقة اليورو: تباطؤ أسرع من المتوقع</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-013 · 18 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 8 وثائق · 4 أحداث</div>
-          <div class="rt-item-conf">91%</div>
-        </div>
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">سوق التوظيف الأمريكي: تجاوز التوقعات للمرة الرابعة</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-012 · 11 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 6 وثائق · 3 أحداث</div>
-          <div class="rt-item-conf">96%</div>
-        </div>
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">منحنى العائد: إشارة ركود نشطة للشهر الثالث</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-011 · 9 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 5 وثائق · 2 أحداث</div>
-          <div class="rt-item-conf">89%</div>
-        </div>
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">صندوق النقد يرفع توقعات النمو العالمي: أثر على الأسواق الناشئة</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-010 · 5 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 11 وثيقة · 5 أحداث</div>
-          <div class="rt-item-conf">93%</div>
-        </div>
-        <div class="rt-item">
-          <div>
-            <div class="rt-item-topic">بنك إنجلترا: تصويت متقارب يبشر بتخفيض قريب</div>
-            <div class="rt-item-meta">ROUAA-RB-2026-07-009 · 2 يوليو 2026</div>
-          </div>
-          <div class="rt-item-evidence">✓ 7 وثائق · 3 أحداث</div>
-          <div class="rt-item-conf">84%</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= 5. SOURCE TRUST CENTER ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">مركز ثقة المصادر</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">411 مصدر رسمي · كل واحد موثّق ومُراقب</h2>
-      <p class="section-lead" style="margin:0 auto">ليست أرقاماً تسويقية — كل مصدر مُفهرس بنوعه وبلده وصحته ومستوى ثقته وآخر تحديث له.</p>
-    </div>
-
-    <div style="max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem" id="trustGrid">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">الفيدرالي</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">بنك مركزي · أمريكا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">البنك المركزي الأوروبي</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">بنك مركزي · أوروبا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">صندوق النقد</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">مؤسسي · عالمي</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">مكتب إحصاءات العمل</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">إحصائي · أمريكا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">هيئة الأوراق المالية</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">تنظيمي · أمريكا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">خزانة الولايات المتحدة</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">حكومي · أمريكا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 100% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">بنك إنجلترا</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">بنك مركزي · بريطانيا</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 99% · ثقة A+</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.375rem">بنك اليابان</div>
-        <div style="font-size:.75rem;color:var(--text-dim);margin-bottom:.25rem">بنك مركزي · اليابان</div>
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)">● صحة 99% · ثقة A+</div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:2rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.8125rem;color:var(--text-mute)">
-      <span>411 مصدر رسمي</span>
-      <span>·</span>
-      <span>729+ مصدر مالي</span>
-      <span>·</span>
-      <span>24/7 مراقبة نشطة</span>
-      <span>·</span>
-      <span>كل مصدر مُفهرس بدرجة ثقة</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============= 6. NEWS → CORE → TRADE RELATIONSHIP ============= -->
-<section class="section reveal">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">المنظومة الكاملة</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">الأخبار تخلق المعرفة · المحرك يعالجها · التداول ينفذها</h2>
-      <p class="section-lead" style="margin:0 auto">رؤى ليست ثلاث منتجات منفصلة — هي منظومة واحدة. الأخبار مدخل، المحرك قلب، التداول مخرج.</p>
-    </div>
-
-    <div style="max-width:700px;margin:2rem auto;display:flex;flex-direction:column;align-items:center;gap:0">
-      <!-- News -->
-      <div style="width:100%;max-width:400px;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:12px;padding:1.5rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem">المخرج المعرفي</div>
-        <div style="font-family:var(--font-en);font-size:1.25rem;font-weight:700;color:var(--text)">رؤى الأخبار</div>
-        <div style="font-size:.8125rem;color:var(--text-dim);margin-top:.25rem">تخلق الاستخبارات من المصادر الرسمية</div>
-      </div>
-
-      <div style="color:var(--gold);font-size:1.5rem;opacity:.5;margin:.5rem 0">↓</div>
-
-      <!-- Core -->
-      <div style="width:100%;max-width:400px;background:var(--card);border:1px solid var(--gold);border-radius:12px;padding:1.5rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem">القلب المعالج</div>
-        <div style="font-family:var(--font-en);font-size:1.25rem;font-weight:700;color:var(--text)">رؤى المحرك</div>
-        <div style="font-size:.8125rem;color:var(--text-dim);margin-top:.25rem">يربط المعرفة بالقرار عبر مخطط الأدلة</div>
-        <div style="margin-top:.75rem"><a href="core.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف المحرك ←</a></div>
-      </div>
-
-      <div style="color:var(--gold);font-size:1.5rem;opacity:.5;margin:.5rem 0">↓</div>
-
-      <!-- Trade -->
-      <div style="width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center">
-        <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem">طبقة التنفيذ</div>
-        <div style="font-family:var(--font-en);font-size:1.25rem;font-weight:700;color:var(--text)">رؤى التداول</div>
-        <div style="font-size:.8125rem;color:var(--text-dim);margin-top:.25rem">يحوّل القرار إلى صفقة مع دليل كامل</div>
-        <div style="margin-top:.75rem"><a href="trade.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف التداول ←</a></div>
-      </div>
-    </div>
-
-    <div style="text-align:center;font-family:var(--font-mono);font-size:.8125rem;color:var(--text-mute)">
-      مصدر رسمي ← حقيقة ← حدث ← فهم ← تأثير ← قرار ← تنفيذ
-    </div>
-  </div>
-</section>
-
-<!-- ============= CTA ============= -->
-<section class="cta-section reveal">
-  <div class="container">
-    <span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
-    <h2>اطلب وصولاً مؤسسياً</h2>
-    <p>هذا ليس اشتراكاً تجريبياً — هذا وصول مؤسسي إلى طبقة معرفة مالية فوق العالم المالي الرسمي.</p>
-    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a>
-  </div>
-</section>
+<!-- CTA -->
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>اطلب وصولاً مؤسسياً</h2><p>نافذة مؤسستك إلى العالم المالي — استخبارات موثّقة، لا مجرد أخبار.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="name">رؤى · ROUAA</div>
-      <div class="tagline">طبقة الاستخبارات المالية — من المصدر الرسمي إلى المعرفة الاستثمارية.</div>
-      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
-    </div>
-    <div class="footer-col">
-      <h4>المنصة</h4>
-      <ul>
-        <li><a href="news.html">رؤى الأخبار</a></li>
-        <li><a href="core.html">رؤى المحرك</a></li>
-        <li><a href="trade.html">رؤى التداول</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>المؤسسات</h4>
-      <ul>
-        <li><a href="api.html">واجهة برمجة REST</a></li>
-        <li><a href="enterprise.html">الأمان</a></li>
-        <li><a href="index.html#cta">اطلب وصولاً</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>الشركة</h4>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="#">من نحن</a></li>
-        <li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
-    <span>contact@rouaa.ai · @rouaa_ai</span>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">نافذة المؤسسة إلى العالم المالي — ما حدث، لماذا، من أين نعرف، وما قد يعنيه.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة REST</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai · @rouaa_ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// === Intelligence Graph interactivity ===
-(function(){
-  const nodes = document.querySelectorAll('.ig-node');
-  const info = document.getElementById('igInfo');
-  const title = document.getElementById('igInfoTitle');
-  const source = document.getElementById('igInfoSource');
-  const doc = document.getElementById('igInfoDoc');
-  const val = document.getElementById('igInfoVal');
-
-  nodes.forEach(node => {
-    node.addEventListener('mouseenter', () => {
-      const data = node.dataset.info.split('|');
-      title.textContent = data[0];
-      source.textContent = data[1];
-      doc.textContent = data[2];
-      val.textContent = data[3];
-      info.classList.add('visible');
-      // highlight node
-      const circle = node.querySelector('.ig-circle');
-      circle.classList.add('active');
-    });
-    node.addEventListener('mouseleave', () => {
-      info.classList.remove('visible');
-      const circle = node.querySelector('.ig-circle');
-      circle.classList.remove('active');
-    });
-    node.addEventListener('click', () => {
-      const data = node.dataset.info.split('|');
-      title.textContent = data[0];
-      source.textContent = data[1];
-      doc.textContent = data[2];
-      val.textContent = data[3];
-      info.classList.add('visible');
-    });
-  });
-})();
 </script>
 </body>
 </html>
