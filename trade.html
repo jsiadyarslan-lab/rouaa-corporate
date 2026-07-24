@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>ROUAA Trade — Decision Execution Intelligence</title>
+<meta name="description" content="From intelligence to execution. Decision + Execution layer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
+  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
+  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;
+  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
+  --border-soft:rgba(243,244,246,.06);
+  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--navy);scroll-behavior:smooth}
+body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
+.mono{font-family:var(--font-mono);letter-spacing:.04em}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.25rem}}
+.section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
+.section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
+.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
+.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
+@media(max-width:1024px){.nav-links{display:none}}
+.nav-cta{flex-shrink:0}
+
+.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+
+/* Trading dashboard */
+.terminal{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.terminal-titlebar{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.terminal-dot{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.terminal-dot.r{background:#FF5F57}.terminal-dot.y{background:#FEBC2E}.terminal-dot.g{background:#28C840}
+.terminal-title{margin:0 auto;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.terminal-grid{display:grid;grid-template-columns:240px 1fr 280px;gap:1px;background:var(--border)}
+@media(max-width:1024px){.terminal-grid{grid-template-columns:1fr}}
+
+.term-panel{background:var(--card);padding:1rem}
+.term-panel-h{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-soft)}
+.term-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem}
+.term-row:last-child{border-bottom:none}
+.term-row .key{color:var(--text-mute);font-family:var(--font-mono);font-size:.75rem}
+.term-row .val{color:var(--text);font-family:var(--font-mono);font-weight:600}
+.term-row .val.up{color:var(--emerald)}
+.term-row .val.down{color:var(--rose)}
+.term-row .val.gold{color:var(--gold)}
+
+/* Chart placeholder */
+.chart-area{background:var(--navy);padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.chart-header{display:flex;justify-content:space-between;align-items:baseline;padding:.5rem 0}
+.chart-pair{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.chart-price{font-family:var(--font-mono);font-size:1.125rem;color:var(--emerald)}
+.chart-svg{width:100%;height:240px;background:var(--card);border:1px solid var(--border-soft);border-radius:6px}
+.chart-svg path{fill:none;stroke:var(--gold);stroke-width:1.5}
+.chart-event-marker{fill:var(--emerald);opacity:.6}
+.chart-tabs{display:flex;gap:.25rem}
+.chart-tab{padding:.25rem .5rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);border-radius:3px;cursor:pointer}
+.chart-tab.active{background:var(--gold-dim);color:var(--gold)}
+
+/* Decision Panel */
+.decision-panel{background:var(--gold-dim);border:1px solid var(--gold);border-radius:8px;padding:1rem;margin-top:.5rem}
+.decision-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+.decision-signal{font-family:var(--font-en);font-size:1.75rem;font-weight:800;color:var(--emerald);margin-bottom:.5rem}
+.decision-reason{font-size:.8125rem;color:var(--text);margin-bottom:.75rem;line-height:1.5}
+.decision-evidence{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);margin-bottom:.75rem}
+.decision-execute{width:100%;padding:.75rem;background:var(--gold);color:var(--navy);border:none;border-radius:6px;font-family:var(--font-ar);font-size:.9375rem;font-weight:700;cursor:pointer;transition:background .2s}
+.decision-execute:hover{background:var(--gold-bright)}
+
+/* Portfolio */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.pos-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:border-color .3s}
+.pos-card:hover{border-color:var(--gold)}
+.pos-pair{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.5rem;display:flex;justify-content:space-between;align-items:center}
+.pos-side{font-family:var(--font-mono);font-size:.6875rem;padding:2px 6px;border-radius:3px}
+.pos-side.long{background:rgba(52,211,153,.15);color:var(--emerald)}
+.pos-side.short{background:rgba(248,113,113,.15);color:var(--rose)}
+.pos-pl{font-family:var(--font-mono);font-size:1.25rem;font-weight:600;margin-bottom:.5rem}
+.pos-pl.up{color:var(--emerald)}
+.pos-pl.down{color:var(--rose)}
+.pos-detail{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);padding:.25rem 0}
+
+/* Risk Engine */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+@media(max-width:768px){.risk-grid{grid-template-columns:1fr}}
+.risk-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
+.risk-lbl{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.5rem}
+.risk-val{font-family:var(--font-mono);font-size:1.75rem;font-weight:600;color:var(--gold);margin-bottom:.5rem}
+.risk-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6}
+.risk-bar{height:6px;background:var(--border);border-radius:3px;margin-top:.75rem;overflow:hidden}
+.risk-bar-fill{height:100%;background:var(--gold);border-radius:3px}
+
+/* Execution brokers */
+.brokers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-top:1.5rem}
+.broker{padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center;transition:border-color .3s}
+.broker:hover{border-color:var(--gold)}
+.broker-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.25rem}
+.broker-status{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald)}
+
+.cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
+.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
+.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
+@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · Trade</span>
+        <span class="sub">ROUAA · Decision Execution Layer</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="news.html">News</a></li>
+      <li><a href="core.html">Core</a></li>
+      <li><a href="trade.html" class="active">Trade</a></li>
+      <li><a href="api.html">API</a></li>
+      <li><a href="enterprise.html">Enterprise</a></li>
+    </ul>
+    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">Request Institutional Access</a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tagline">Decision Execution Intelligence</div>
+      <h1 class="hero-h1">From intelligence to execution</h1>
+      <p class="hero-sub">ليست Trading Terminal — هي طبقة تنفيذ القرار. كل صفقة لها سبب، كل سبب له دليل، كل دليل قابل للتتبع.</p>
+      <div class="hero-cta">
+        <a href="#terminal" class="btn btn-primary">استكشف Terminal</a>
+        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+<section class="section reveal" id="terminal">
+  <div class="container">
+    <span class="section-tag">Trading Workspace</span>
+    <h2 class="section-h">لوحة تداول مؤسسية</h2>
+    <p class="section-lead">ثلاث لوحات متكاملة: Market Intelligence يساراً · Advanced Chart وسطاً · Decision Panel يميناً.</p>
+
+    <div class="terminal">
+      <div class="terminal-titlebar">
+        <div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div>
+        <div class="terminal-title">rouaa.trade · Decision Execution · Live</div>
+      </div>
+
+      <div class="terminal-grid">
+
+        <!-- LEFT — Market Intelligence -->
+        <div class="term-panel">
+          <div class="term-panel-h">Market Intelligence</div>
+          <div class="term-row"><span class="key">Pair</span><span class="val">EUR/USD</span></div>
+          <div class="term-row"><span class="key">Price</span><span class="val up">1.0847</span></div>
+          <div class="term-row"><span class="key">Change</span><span class="val up">+0.42%</span></div>
+          <div class="term-row"><span class="key">Spread</span><span class="val">0.8 pip</span></div>
+
+          <div class="term-panel-h" style="margin-top:1rem">AI Context</div>
+          <div class="term-row"><span class="key">Signal</span><span class="val up">LONG</span></div>
+          <div class="term-row"><span class="key">Confidence</span><span class="val gold">87%</span></div>
+          <div class="term-row"><span class="key">Evidence</span><span class="val">5 sources</span></div>
+
+          <div class="term-panel-h" style="margin-top:1rem">Macro Drivers</div>
+          <div class="term-row"><span class="key">FED</span><span class="val">Hold 5.50%</span></div>
+          <div class="term-row"><span class="key">ECB</span><span class="val">Cut likely</span></div>
+          <div class="term-row"><span class="key">Divergence</span><span class="val up">Bullish USD</span></div>
+
+          <div class="term-panel-h" style="margin-top:1rem">Risk</div>
+          <div class="term-row"><span class="key">Volatility</span><span class="val">14.2%</span></div>
+          <div class="term-row"><span class="key">VaR (1d)</span><span class="val">1.8%</span></div>
+          <div class="term-row"><span class="key">Level</span><span class="val gold">Medium</span></div>
+        </div>
+
+        <!-- CENTER — Chart -->
+        <div class="term-panel" style="padding:0">
+          <div class="chart-area">
+            <div class="chart-header">
+              <div>
+                <div class="chart-pair">EUR/USD</div>
+                <div class="chart-price">1.0847 ↑ +0.42%</div>
+              </div>
+              <div class="chart-tabs">
+                <span class="chart-tab">1H</span>
+                <span class="chart-tab">4H</span>
+                <span class="chart-tab active">1D</span>
+                <span class="chart-tab">1W</span>
+                <span class="chart-tab">1M</span>
+              </div>
+            </div>
+
+            <svg class="chart-svg" viewBox="0 0 600 240" preserveAspectRatio="none">
+              <!-- Grid lines -->
+              <line x1="0" y1="60" x2="600" y2="60" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
+              <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
+              <line x1="0" y1="180" x2="600" y2="180" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
+              <!-- Price line -->
+              <path d="M 0,180 L 40,175 L 80,170 L 120,178 L 160,165 L 200,160 L 240,150 L 280,155 L 320,140 L 360,135 L 400,125 L 440,130 L 480,115 L 520,110 L 560,100 L 600,95"/>
+              <!-- AI event markers -->
+              <circle cx="200" cy="160" r="4" class="chart-event-marker"/>
+              <text x="200" y="148" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">FED</text>
+              <circle cx="360" cy="135" r="4" class="chart-event-marker"/>
+              <text x="360" y="123" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">CPI</text>
+              <circle cx="520" cy="110" r="4" class="chart-event-marker"/>
+              <text x="520" y="98" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">NFP</text>
+            </svg>
+
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);padding:.25rem .5rem">
+              <span>14:32 · FED Hold</span>
+              <span>14:35 · CPI Beat</span>
+              <span>14:38 · NFP Strong</span>
+            </div>
+
+            <!-- Why this position -->
+            <div style="margin-top:.5rem;padding:.875rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px">
+              <div style="font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;margin-bottom:.5rem">WHY THIS POSITION EXISTS</div>
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;font-size:.75rem">
+                <div><span style="color:var(--text-mute);font-family:var(--font-mono)">Evidence:</span> <span style="color:var(--text)">Fed rate hold</span></div>
+                <div><span style="color:var(--text-mute);font-family:var(--font-mono)">Reasoning:</span> <span style="color:var(--text)">USD strength</span></div>
+                <div><span style="color:var(--text-mute);font-family:var(--font-mono)">Risk:</span> <span style="color:var(--gold)">Medium</span></div>
+                <div><span style="color:var(--text-mute);font-family:var(--font-mono)">Confidence:</span> <span style="color:var(--gold)">82%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — Decision Panel -->
+        <div class="term-panel">
+          <div class="term-panel-h">AI Trade Intelligence</div>
+
+          <div class="decision-panel">
+            <div class="decision-lbl">SIGNAL</div>
+            <div class="decision-signal">LONG</div>
+            <div class="decision-reason">ECB/FED divergence · USD strength expected · Inflation cooling supports rate hold</div>
+            <div class="decision-evidence">5 official sources · 8 documents · 12 facts</div>
+            <div class="decision-lbl" style="margin-top:.75rem">CONFIDENCE</div>
+            <div style="font-family:var(--font-mono);font-size:1.5rem;color:var(--gold);font-weight:700;margin-bottom:.75rem">87%</div>
+            <div class="decision-lbl">RISK</div>
+            <div style="font-family:var(--font-mono);font-size:1.125rem;color:var(--text);font-weight:600;margin-bottom:.75rem">Medium</div>
+            <button class="decision-execute">EXECUTE · 0.5 lot</button>
+          </div>
+
+          <div style="margin-top:1rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);text-align:center;padding:.5rem">
+            15 risk checks · Latency 4.2ms · Audit trail active
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
+  <div class="container">
+    <span class="section-tag">Portfolio Intelligence</span>
+    <h2 class="section-h">محفظة + مراكز + مخاطر + أداء</h2>
+    <p class="section-lead">كل مركز مرتبط بقراره الاستخباراتي. P/L، التعرض، المخاطر، توصيات AI — في واجهة واحدة.</p>
+
+    <div class="portfolio-grid">
+      <div class="pos-card">
+        <div class="pos-pair">EUR/USD <span class="pos-side long">LONG 0.5L</span></div>
+        <div class="pos-pl up">+$6,234</div>
+        <div class="pos-detail"><span>Entry</span><span>1.0825</span></div>
+        <div class="pos-detail"><span>Current</span><span>1.0847</span></div>
+        <div class="pos-detail"><span>SL / TP</span><span>1.0780 / 1.0900</span></div>
+      </div>
+      <div class="pos-card">
+        <div class="pos-pair">XAU/USD <span class="pos-side long">LONG 0.3L</span></div>
+        <div class="pos-pl up">+$3,847</div>
+        <div class="pos-detail"><span>Entry</span><span>2,341</span></div>
+        <div class="pos-detail"><span>Current</span><span>2,389</span></div>
+        <div class="pos-detail"><span>SL / TP</span><span>2,320 / 2,420</span></div>
+      </div>
+      <div class="pos-card">
+        <div class="pos-pair">GBP/JPY <span class="pos-side short">SHORT 0.2S</span></div>
+        <div class="pos-pl down">-$1,247</div>
+        <div class="pos-detail"><span>Entry</span><span>198.45</span></div>
+        <div class="pos-detail"><span>Current</span><span>198.92</span></div>
+        <div class="pos-detail"><span>SL / TP</span><span>199.50 / 197.80</span></div>
+      </div>
+      <div class="pos-card">
+        <div class="pos-pair">BTC/USD <span class="pos-side long">LONG 0.1L</span></div>
+        <div class="pos-pl up">+$2,180</div>
+        <div class="pos-detail"><span>Entry</span><span>63,420</span></div>
+        <div class="pos-detail"><span>Current</span><span>65,600</span></div>
+        <div class="pos-detail"><span>SL / TP</span><span>61,500 / 68,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK ENGINE -->
+<section class="section reveal">
+  <div class="container">
+    <span class="section-tag">Risk Engine</span>
+    <h2 class="section-h">إدارة مخاطر استخباراتية</h2>
+    <p class="section-lead">Portfolio Risk Score · Exposure · Drawdown · Correlation · Stress Test — كلها في لوحة واحدة.</p>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-lbl">Portfolio Risk Score</div>
+        <div class="risk-val">42 / 100</div>
+        <div class="risk-desc">منخفض-متوسط · التنويع جيد · التعرض مُدار</div>
+        <div class="risk-bar"><div class="risk-bar-fill" style="width:42%"></div></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-lbl">Total Exposure</div>
+        <div class="risk-val">$84,200</div>
+        <div class="risk-desc">6.7% من المحفظة · ضمن الحدود المؤسسية</div>
+        <div class="risk-bar"><div class="risk-bar-fill" style="width:6.7%;background:var(--emerald)"></div></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-lbl">Max Drawdown (30d)</div>
+        <div class="risk-val">-3.2%</div>
+        <div class="risk-desc">ضمن الحدود · أقل من VaR المتوقع</div>
+        <div class="risk-bar"><div class="risk-bar-fill" style="width:32%;background:var(--emerald)"></div></div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-lbl">Correlation Risk</div>
+        <div class="risk-val">0.34</div>
+        <div class="risk-desc">منخفض · المراكز غير مترابطة بشكل مفرط</div>
+        <div class="risk-bar"><div class="risk-bar-fill" style="width:34%;background:var(--emerald)"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTION LAYER -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
+  <div class="container">
+    <span class="section-tag">Execution Layer</span>
+    <h2 class="section-h">وسطاء متعددون · تدقيق كامل</h2>
+    <p class="section-lead">Order → Risk Check → Confirmation → Execution → Audit Trail. لا نلمس أموالك — التنفيذ على وسيطك.</p>
+
+    <div class="brokers">
+      <div class="broker">
+        <div class="broker-name">MetaTrader 5</div>
+        <div class="broker-status">● Connected</div>
+      </div>
+      <div class="broker">
+        <div class="broker-name">OANDA</div>
+        <div class="broker-status">● Connected</div>
+      </div>
+      <div class="broker">
+        <div class="broker-name">IBKR</div>
+        <div class="broker-status">● Connected</div>
+      </div>
+      <div class="broker">
+        <div class="broker-name">Binance</div>
+        <div class="broker-status">● Connected</div>
+      </div>
+      <div class="broker">
+        <div class="broker-name">Alpaca</div>
+        <div class="broker-status">● Connected</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <span class="section-tag" style="justify-content:center">Institutional Access</span>
+    <h2>Trade على وسيطك — الذكاء من رؤى</h2>
+    <p>اطلب وصولاً مؤسسياً لتشغيل Decision Execution Layer على بنيتك.</p>
+    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">Request Institutional Access</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name">رؤى · ROUAA</div>
+      <div class="tagline">Decision Execution Intelligence — القرار هو المنتج، التنفيذ آخر خطوة.</div>
+      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="news.html">ROUAA News</a></li>
+        <li><a href="core.html">ROUAA Core</a></li>
+        <li><a href="trade.html">ROUAA Trade</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Enterprise</h4>
+      <ul>
+        <li><a href="api.html">REST API</a></li>
+        <li><a href="enterprise.html">Security</a></li>
+        <li><a href="index.html#cta">Request Access</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="mailto:contact@rouaa.ai">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
+    <span>contact@rouaa.ai · @rouaa_ai</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

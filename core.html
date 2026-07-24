@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>ROUAA Core — The Intelligence Engine</title>
+<meta name="description" content="The intelligence infrastructure powering every ROUAA decision.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
+  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
+  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;
+  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
+  --border-soft:rgba(243,244,246,.06);
+  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--navy);scroll-behavior:smooth}
+body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
+.mono{font-family:var(--font-mono);letter-spacing:.04em}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.25rem}}
+.section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
+.section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
+.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
+.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
+@media(max-width:1024px){.nav-links{display:none}}
+.nav-cta{flex-shrink:0}
+
+/* Hero */
+.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+
+/* Architecture stack */
+.arch-stack{display:flex;flex-direction:column;align-items:center;max-width:900px;margin:3rem auto 0;gap:.5rem}
+.arch-layer{width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .3s}
+.arch-layer:hover{border-color:var(--gold)}
+.arch-layer.core{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
+.arch-layer-num{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);width:32px;flex-shrink:0}
+.arch-layer-name{font-family:var(--font-en);font-weight:700;font-size:1rem;color:var(--text);min-width:240px}
+.arch-layer-name-ar{font-size:.8125rem;color:var(--text-dim)}
+.arch-layer-desc{font-size:.8125rem;color:var(--text-mute);margin-right:auto;text-align:left}
+.arch-arrow{color:var(--gold);opacity:.5;font-size:1rem}
+@media(max-width:768px){.arch-layer{flex-wrap:wrap}.arch-layer-name{min-width:auto}.arch-layer-desc{width:100%;text-align:right}}
+
+/* Module cards */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.module-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:border-color .3s}
+.module-card:hover{border-color:var(--gold)}
+.module-card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.75rem}
+.module-card-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.module-card-desc{font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1rem}
+.module-card-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding-top:.75rem;border-top:1px solid var(--border-soft)}
+
+/* Source Registry table */
+.sr-table{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sr-row{display:grid;grid-template-columns:1fr 1fr 1fr 100px 120px 80px;padding:.75rem 1rem;align-items:center;gap:1rem;border-bottom:1px solid var(--border-soft);font-size:.875rem}
+.sr-row.header{background:var(--surface);font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+.sr-row:last-child{border-bottom:none}
+.sr-health{display:inline-block;padding:2px 8px;border-radius:3px;font-family:var(--font-mono);font-size:.6875rem}
+.sr-health.good{background:rgba(52,211,153,.15);color:var(--emerald)}
+.sr-trust{font-family:var(--font-mono);color:var(--gold);font-weight:600}
+@media(max-width:768px){.sr-row{grid-template-columns:1fr 1fr;font-size:.75rem}.sr-row>div:nth-child(n+3){display:none}}
+
+/* Document Intelligence */
+.doc-demo{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.doc-demo{grid-template-columns:1fr}}
+.doc-input{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
+.doc-input-header{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1rem;border-bottom:1px solid var(--border-soft);margin-bottom:1rem}
+.doc-input-name{font-family:var(--font-en);font-weight:700;color:var(--text)}
+.doc-input-type{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.doc-input-lines{display:flex;flex-direction:column;gap:.4rem}
+.doc-input-line{height:5px;background:var(--border);border-radius:2px}
+.doc-input-highlight{margin:.5rem 0;padding:.5rem;background:var(--gold-dim);border-radius:4px;border:1px solid rgba(200,169,81,.3)}
+.doc-input-highlight-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.25rem}
+.doc-input-highlight-val{font-size:.75rem;color:var(--text);font-weight:600}
+.doc-output{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
+.doc-output-header{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+.doc-stat{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.875rem}
+.doc-stat:last-child{border-bottom:none}
+.doc-stat-key{color:var(--text-dim);font-family:var(--font-mono);font-size:.75rem}
+.doc-stat-val{color:var(--gold);font-family:var(--font-mono);font-weight:600}
+
+/* Evidence Graph */
+.evidence-graph{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem}
+.eg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-soft)}
+.eg-title{font-family:var(--font-en);font-weight:700;color:var(--text)}
+.eg-conf{padding:.4rem .8rem;background:var(--gold-dim);border:1px solid var(--gold);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--gold)}
+.eg-flow{display:flex;flex-direction:column;gap:0;align-items:center}
+.eg-node{width:100%;max-width:480px;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center;transition:border-color .3s}
+.eg-node:hover{border-color:var(--gold)}
+.eg-node.gold{background:var(--gold-dim);border-color:var(--gold)}
+.eg-node-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
+.eg-node.gold .eg-node-lbl{color:var(--gold)}
+.eg-node-val{font-size:.9375rem;font-weight:600;color:var(--text)}
+.eg-connector{width:1px;height:24px;background:var(--gold);opacity:.5;margin:.25rem 0}
+.eg-arrow{color:var(--gold);font-size:1rem;opacity:.6}
+
+/* CTA + Footer (shared) */
+.cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
+.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
+.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
+@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · Core</span>
+        <span class="sub">ROUAA · The Intelligence Layer</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="news.html">News</a></li>
+      <li><a href="core.html" class="active">Core</a></li>
+      <li><a href="trade.html">Trade</a></li>
+      <li><a href="api.html">API</a></li>
+      <li><a href="enterprise.html">Enterprise</a></li>
+    </ul>
+    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">Request Institutional Access</a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tagline">The Intelligence Engine</div>
+      <h1 class="hero-h1">البنية التحتية الذكية التي تشغّل كل قرار في رؤى</h1>
+      <p class="hero-sub">ليست منتجاً منفصلاً — هي القلب. مثل Neural Engine في Apple أو Infrastructure في AWS، تشغّل كل طبقة أخرى.</p>
+      <div class="hero-cta">
+        <a href="#architecture" class="btn btn-primary">استكشف المعمارية</a>
+        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section reveal" id="architecture">
+  <div class="container">
+    <span class="section-tag">Architecture</span>
+    <h2 class="section-h">9 طبقات من المصدر إلى القرار</h2>
+    <p class="section-lead">المعمارية الكاملة — كل طبقة تبني على ما قبلها، وكل طبقة قابلة للتتبع والتدقيق.</p>
+
+    <div class="arch-stack">
+      <div class="arch-layer">
+        <div class="arch-layer-num">01</div>
+        <div>
+          <div class="arch-layer-name">Global Financial Sources</div>
+          <div class="arch-layer-name-ar">المصادر المالية العالمية</div>
+        </div>
+        <div class="arch-layer-desc">FED · ECB · IMF · BLS · SEC · BOE · BOJ · +404</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">02</div>
+        <div>
+          <div class="arch-layer-name">Source Registry</div>
+          <div class="arch-layer-name-ar">سجل المصادر</div>
+        </div>
+        <div class="arch-layer-desc">فهرسة · تصنيف · موثوقية · تكرار</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">03</div>
+        <div>
+          <div class="arch-layer-name">Document Intelligence</div>
+          <div class="arch-layer-name-ar">ذكاء الوثائق</div>
+        </div>
+        <div class="arch-layer-desc">PDF/HTML/XML → Structured data</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">04</div>
+        <div>
+          <div class="arch-layer-name">Fact Engine</div>
+          <div class="arch-layer-name-ar">محرّك الحقائق</div>
+        </div>
+        <div class="arch-layer-desc">NLP extraction · numbers · entities · dates</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">05</div>
+        <div>
+          <div class="arch-layer-name">Event Engine</div>
+          <div class="arch-layer-name-ar">محرّك الأحداث</div>
+        </div>
+        <div class="arch-layer-desc">Classification · rate decisions · data releases</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer core">
+        <div class="arch-layer-num">06</div>
+        <div>
+          <div class="arch-layer-name">Evidence Graph</div>
+          <div class="arch-layer-name-ar">مخطط الأدلة</div>
+        </div>
+        <div class="arch-layer-desc">ربط كل حقيقة بمصدرها · طابع زمني · درجة ثقة</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">07</div>
+        <div>
+          <div class="arch-layer-name">Knowledge Graph</div>
+          <div class="arch-layer-name-ar">رسم المعرفة</div>
+        </div>
+        <div class="arch-layer-desc">عقد وروابط بين الكيانات والأحداث والقرارات</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">08</div>
+        <div>
+          <div class="arch-layer-name">AI Reasoning</div>
+          <div class="arch-layer-name-ar">استدلال AI</div>
+        </div>
+        <div class="arch-layer-desc">استنتاج التأثيرات السوقية المحتملة</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">09</div>
+        <div>
+          <div class="arch-layer-name">Decision Intelligence</div>
+          <div class="arch-layer-name-ar">ذكاء القرار</div>
+        </div>
+        <div class="arch-layer-desc">توصية موثقة بالأدلة · درجة ثقة · تبرير</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCE REGISTRY -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
+  <div class="container">
+    <span class="section-tag">Source Registry</span>
+    <h2 class="section-h">سجل المصادر الرسمية</h2>
+    <p class="section-lead">411 مصدر رسمي · كل مصدر مُفهرس بنوعه، بلده، درجة صحته، آخر تحديث، ومستوى الثقة.</p>
+
+    <div class="sr-table">
+      <div class="sr-row header">
+        <div>Source</div><div>Type</div><div>Country</div><div>Health</div><div>Last Update</div><div>Trust</div>
+      </div>
+      <div class="sr-row">
+        <div>Federal Reserve</div><div>Central Bank</div><div>USA</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">14:32 EST</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>European Central Bank</div><div>Central Bank</div><div>EU</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">11:00 CET</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>Bank of England</div><div>Central Bank</div><div>UK</div>
+        <div><span class="sr-health good">99%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">12:00 BST</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>IMF</div><div>Institutional</div><div>Global</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">Daily</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>BLS</div><div>Statistical</div><div>USA</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 EST</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>BEA</div><div>Statistical</div><div>USA</div>
+        <div><span class="sr-health good">99%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 EST</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>SEC</div><div>Regulatory</div><div>USA</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">Continuous</div>
+        <div class="sr-trust">A+</div>
+      </div>
+      <div class="sr-row">
+        <div>U.S. Treasury</div><div>Government</div><div>USA</div>
+        <div><span class="sr-health good">100%</span></div>
+        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">16:00 EST</div>
+        <div class="sr-trust">A+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENT INTELLIGENCE -->
+<section class="section reveal">
+  <div class="container">
+    <span class="section-tag">Document Intelligence</span>
+    <h2 class="section-h">من PDF إلى معرفة مهيكلة</h2>
+    <p class="section-lead">كل وثيقة رسمية تمرّ بـ pipeline ذكي يستخرج الحقائق والأحداث والكيانات ودرجة الثقة.</p>
+
+    <div class="doc-demo">
+      <div class="doc-input">
+        <div class="doc-input-header">
+          <div class="doc-input-name">Federal Reserve Statement</div>
+          <div class="doc-input-type">PDF · 24 pages</div>
+        </div>
+        <div class="doc-input-lines">
+          <div class="doc-input-line" style="width:90%"></div>
+          <div class="doc-input-line" style="width:78%"></div>
+          <div class="doc-input-line" style="width:85%"></div>
+          <div class="doc-input-highlight">
+            <div class="doc-input-highlight-lbl">KEY EXTRACT</div>
+            <div class="doc-input-highlight-val">"The Committee decided to maintain the target range for the federal funds rate at 5.25 to 5.50 percent."</div>
+          </div>
+          <div class="doc-input-line" style="width:72%"></div>
+          <div class="doc-input-line" style="width:80%"></div>
+          <div class="doc-input-line" style="width:68%"></div>
+        </div>
+      </div>
+
+      <div class="doc-output">
+        <div class="doc-output-header">→ Structured Intelligence</div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Document</span>
+          <span class="doc-stat-val">FOMC_2026_07</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Facts extracted</span>
+          <span class="doc-stat-val">12</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Events detected</span>
+          <span class="doc-stat-val">3</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Entities identified</span>
+          <span class="doc-stat-val">18</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Key fact</span>
+          <span class="doc-stat-val">Rate 5.50%</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Confidence</span>
+          <span class="doc-stat-val">96%</span>
+        </div>
+        <div class="doc-stat">
+          <span class="doc-stat-key">Processing time</span>
+          <span class="doc-stat-val">0.4s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVIDENCE GRAPH -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
+  <div class="container">
+    <span class="section-tag">Evidence Graph — القلب</span>
+    <h2 class="section-h">كل رؤية لها سلسلة إثبات</h2>
+    <p class="section-lead">الشاشة الأهم في رؤى — تتبّع كامل من الرؤية إلى الحقيقة إلى الوثيقة إلى المصدر الرسمي.</p>
+
+    <div class="evidence-graph">
+      <div class="eg-header">
+        <div class="eg-title">Insight #28492 — "Fed hold signals near-term USD strength"</div>
+        <div class="eg-conf">CONFIDENCE 87%</div>
+      </div>
+
+      <div class="eg-flow">
+        <div class="eg-node gold">
+          <div class="eg-node-lbl">INSIGHT · الرؤية</div>
+          <div class="eg-node-val">Fed hold signals near-term USD strength against majors</div>
+        </div>
+        <div class="eg-connector"></div>
+        <div class="eg-node">
+          <div class="eg-node-lbl">FACT · الحقيقة</div>
+          <div class="eg-node-val">Federal funds rate: 5.25% – 5.50%</div>
+        </div>
+        <div class="eg-connector"></div>
+        <div class="eg-node">
+          <div class="eg-node-lbl">DOCUMENT · الوثيقة</div>
+          <div class="eg-node-val">FOMC Statement · July 2026 · 24 pages</div>
+        </div>
+        <div class="eg-connector"></div>
+        <div class="eg-node">
+          <div class="eg-node-lbl">OFFICIAL SOURCE · المصدر</div>
+          <div class="eg-node-val">federalreserve.gov · Trust A+ · Retrieved 14:32:18 EST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <span class="section-tag" style="justify-content:center">Institutional Access</span>
+    <h2>Core يعمل في الخلفية — وصولك المؤسسي يفتحه</h2>
+    <p>اطّلع على Evidence Graph الكامل، Source Registry، و Document Intelligence مباشرة.</p>
+    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">Request Institutional Access</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name">رؤى · ROUAA</div>
+      <div class="tagline">Evidence-backed Financial Intelligence — البنية التحتية الذكية لكل قرار.</div>
+      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="news.html">ROUAA News</a></li>
+        <li><a href="core.html">ROUAA Core</a></li>
+        <li><a href="trade.html">ROUAA Trade</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Enterprise</h4>
+      <ul>
+        <li><a href="api.html">REST API</a></li>
+        <li><a href="enterprise.html">Security</a></li>
+        <li><a href="index.html#cta">Request Access</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="mailto:contact@rouaa.ai">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
+    <span>contact@rouaa.ai · @rouaa_ai</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
