@@ -1200,6 +1200,445 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* ============================================================
+   HERO — Intelligence Flow (4 steps)
+   ============================================================ */
+.intel-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.intel-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-width: 160px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.intel-step:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.intel-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+.intel-step-name {
+  font-family: var(--font-en);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.intel-step-desc {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+}
+.intel-arrow {
+  color: var(--gold);
+  font-size: 1.5rem;
+  padding: 0 0.5rem;
+  opacity: 0.6;
+}
+@media (max-width: 768px) {
+  .intel-flow { flex-direction: column; gap: 0.5rem; }
+  .intel-arrow { transform: rotate(90deg); padding: 0.25rem 0; }
+}
+
+/* ============================================================
+   THE ROUAA MOMENT — 3 columns: Source · Engine · Intelligence
+   ============================================================ */
+.moment-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .moment-stage { grid-template-columns: 1fr; }
+}
+.moment-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.moment-col-label {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  padding: 0.5rem;
+  background: var(--gold-dim);
+  border-radius: 6px;
+}
+
+/* Document (column 1) */
+.moment-doc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  flex: 1;
+}
+.moment-doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 1rem;
+}
+.moment-doc-org {
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+.moment-doc-type {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+}
+.moment-doc-body { display: flex; flex-direction: column; gap: 0.5rem; }
+.moment-doc-line {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+}
+.moment-doc-highlight {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 6px;
+}
+.moment-doc-fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+.moment-doc-fact-val {
+  font-size: 0.8125rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.moment-doc-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+}
+
+/* Engine (column 2) */
+.moment-engine {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.moment-engine-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  transition: background 0.3s ease;
+}
+.moment-engine-step.done { color: var(--text-dim); }
+.moment-engine-step.active {
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+.moment-engine-step .moment-engine-check {
+  width: 18px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+.moment-engine-step.done .moment-engine-check { color: var(--emerald); }
+.moment-engine-step.active .moment-engine-check {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.moment-engine-text { flex: 1; }
+.moment-engine-time {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+}
+
+/* Intelligence (column 3) */
+.moment-intel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.moment-intel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.875rem;
+}
+.moment-intel-key {
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.moment-intel-val { font-weight: 600; color: var(--text); }
+.moment-intel-val.up { color: var(--emerald); }
+.moment-intel-val.down { color: var(--rose); }
+.moment-intel-val.neutral { color: var(--text-dim); }
+.moment-intel-val.gold { color: var(--gold); }
+.moment-intel-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 0;
+}
+.moment-intel-action {
+  margin-top: auto;
+  padding: 0.875rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+.moment-intel-action-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.375rem;
+}
+.moment-intel-action-val {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.moment-footer {
+  text-align: center;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-mute);
+}
+
+/* ============================================================
+   EVIDENCE — large card
+   ============================================================ */
+.evidence-card-large {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) { .evidence-card-large { padding: 1.5rem; } }
+
+.evidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.evidence-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.evidence-claim {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+}
+.evidence-confidence {
+  text-align: center;
+  flex-shrink: 0;
+}
+.evidence-confidence-num {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+.evidence-confidence-lbl {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.evidence-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 1.5rem 0;
+}
+
+.evidence-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.evidence-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.evidence-source {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+.evidence-source-icon {
+  width: 28px; height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--emerald);
+  color: var(--navy);
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.evidence-source-name {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+.evidence-source-url {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-mute);
+}
+
+.evidence-chain-title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.evidence-chain-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 600px) { .evidence-chain-stats { grid-template-columns: repeat(2, 1fr); } }
+.evidence-chain-stat {
+  text-align: center;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+.evidence-chain-num {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+.evidence-chain-lbl {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  margin-top: 0.25rem;
+}
+
+.evidence-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-mute);
+}
+
+/* ============================================================
+   TRADE — WHY THIS POSITION EXISTS
+   ============================================================ */
+.trade-why {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem;
+}
+.trade-why-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.875rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+.trade-why-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .trade-why-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+}
+.trade-why-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.trade-why-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.trade-why-val {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.trade-why-val.gold { color: var(--gold); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
@@ -1231,62 +1670,254 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
   </div>
 </nav>
 
-<!-- ============= HERO — 3 columns ============= -->
+<!-- ============= HERO — Intelligence Flow ============= -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="particles" id="particles"></div>
   <div class="container">
     <div class="hero-content">
 
-      <div class="hero-tagline-top">منظومة الاستخبارات المالية</div>
+      <div class="hero-tagline-top">Financial Intelligence Infrastructure</div>
 
-      <!-- Connecting arrow -->
-      <div class="hero-arrow">
-        <svg viewBox="0 0 700 40" preserveAspectRatio="none">
-          <path d="M 350,5 L 350,35 M 340,25 L 350,35 L 360,25" />
-        </svg>
-      </div>
-
-      <!-- 3 columns: NEWS · CORE · TRADE -->
-      <div class="hero-columns">
-        <div class="hero-col">
-          <div class="hero-col-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-          </div>
-          <div class="hero-col-name">ROUAA NEWS</div>
-          <div class="hero-col-name-ar">منصة الأخبار الذكية</div>
-          <div class="hero-col-desc">المعرفة والتحليل</div>
-        </div>
-        <div class="hero-col">
-          <div class="hero-col-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
-          </div>
-          <div class="hero-col-name">ROUAA CORE</div>
-          <div class="hero-col-name-ar">المحرك الداخلي</div>
-          <div class="hero-col-desc">طبقة الذكاء والاستدلال</div>
-        </div>
-        <div class="hero-col">
-          <div class="hero-col-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-          </div>
-          <div class="hero-col-name">ROUAA TRADE</div>
-          <div class="hero-col-name-ar">منصة التداول الذكية</div>
-          <div class="hero-col-desc">القرار والتنفيذ</div>
-        </div>
-      </div>
-
-      <h1 class="hero-headline">من الاستخبارات المالية الرسمية إلى التنفيذ الاستثماري</h1>
+      <h1 class="hero-headline">من الاستخبارات المالية الرسمية<br>إلى التنفيذ الاستثماري</h1>
 
       <p class="hero-sub">
         رؤى هي الطبقة المفقودة بين البيانات المالية الرسمية والقرارات الاستثمارية.
         من الخبر الرسمي إلى الصفقة، مع دليل لكل خطوة.
       </p>
 
-      <div class="hero-cta">
-        <a href="#cta" class="btn btn-primary">طلب وصول مؤسسي</a>
-        <a href="#journey" class="btn btn-ghost">استكشف الرحلة</a>
+      <!-- Intelligence Flow — 4 steps -->
+      <div class="intel-flow">
+        <div class="intel-step">
+          <div class="intel-step-num">01</div>
+          <div class="intel-step-name">Official Data</div>
+          <div class="intel-step-desc">المصادر الرسمية</div>
+        </div>
+        <div class="intel-arrow">↓</div>
+        <div class="intel-step">
+          <div class="intel-step-num">02</div>
+          <div class="intel-step-name">Financial Intelligence</div>
+          <div class="intel-step-desc">طبقة الذكاء</div>
+        </div>
+        <div class="intel-arrow">↓</div>
+        <div class="intel-step">
+          <div class="intel-step-num">03</div>
+          <div class="intel-step-name">Investment Decision</div>
+          <div class="intel-step-desc">القرار الاستثماري</div>
+        </div>
+        <div class="intel-arrow">↓</div>
+        <div class="intel-step">
+          <div class="intel-step-num">04</div>
+          <div class="intel-step-name">Execution</div>
+          <div class="intel-step-desc">التنفيذ</div>
+        </div>
       </div>
 
+      <div class="hero-cta">
+        <a href="#moment" class="btn btn-primary">شاهد اللحظة</a>
+        <a href="#cta" class="btn btn-ghost">طلب وصول مؤسسي</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============= THE ROUAA MOMENT — مثال حي ============= -->
+<section class="section reveal" id="moment" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <span class="section-tag" style="justify-content: center;">The ROUAA Moment</span>
+      <h2 class="section-h" style="margin: 0 auto 1rem;">شاهد رؤى تعمل</h2>
+      <p class="section-lead" style="margin: 0 auto;">في اللحظة التي يُنشر فيها تقرير رسمي، تبدأ رؤى. هذه ليست محاكاة — هذا ما يحدث فعلاً.</p>
+    </div>
+
+    <div class="moment-stage">
+
+      <!-- Column 1: Official Source -->
+      <div class="moment-col">
+        <div class="moment-col-label">Official Source</div>
+        <div class="moment-doc">
+          <div class="moment-doc-header">
+            <div class="moment-doc-org">Federal Reserve</div>
+            <div class="moment-doc-type">FOMC Statement</div>
+          </div>
+          <div class="moment-doc-body">
+            <div class="moment-doc-line" style="width: 90%;"></div>
+            <div class="moment-doc-line" style="width: 75%;"></div>
+            <div class="moment-doc-line" style="width: 85%;"></div>
+            <div class="moment-doc-highlight">
+              <div class="moment-doc-fact-label">KEY FACT</div>
+              <div class="moment-doc-fact-val">Federal funds rate held at 5.25% – 5.50%</div>
+            </div>
+            <div class="moment-doc-line" style="width: 70%;"></div>
+            <div class="moment-doc-line" style="width: 80%;"></div>
+          </div>
+          <div class="moment-doc-meta">
+            <span>federalreserve.gov</span>
+            <span>·</span>
+            <span>14:32:18 EST</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Intelligence Engine -->
+      <div class="moment-col">
+        <div class="moment-col-label">ROUAA Intelligence Engine</div>
+        <div class="moment-engine">
+          <div class="moment-engine-step done">
+            <span class="moment-engine-check">✓</span>
+            <span class="moment-engine-text">Extracting facts</span>
+            <span class="moment-engine-time">0.4s</span>
+          </div>
+          <div class="moment-engine-step done">
+            <span class="moment-engine-check">✓</span>
+            <span class="moment-engine-text">Validating source</span>
+            <span class="moment-engine-time">0.2s</span>
+          </div>
+          <div class="moment-engine-step done">
+            <span class="moment-engine-check">✓</span>
+            <span class="moment-engine-text">Linking evidence</span>
+            <span class="moment-engine-time">0.6s</span>
+          </div>
+          <div class="moment-engine-step done">
+            <span class="moment-engine-check">✓</span>
+            <span class="moment-engine-text">AI Council analysis</span>
+            <span class="moment-engine-time">2.1s</span>
+          </div>
+          <div class="moment-engine-step active">
+            <span class="moment-engine-check">●</span>
+            <span class="moment-engine-text">Generating recommendation</span>
+            <span class="moment-engine-time">...</span>
+          </div>
+          <div class="moment-engine-step">
+            <span class="moment-engine-check">○</span>
+            <span class="moment-engine-text">Risk assessment</span>
+            <span class="moment-engine-time">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Investment Intelligence -->
+      <div class="moment-col">
+        <div class="moment-col-label">Investment Intelligence</div>
+        <div class="moment-intel">
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">USD Impact</span>
+            <span class="moment-intel-val up">Bullish ↑</span>
+          </div>
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">Bond Impact</span>
+            <span class="moment-intel-val down">Bearish ↓</span>
+          </div>
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">Equities</span>
+            <span class="moment-intel-val neutral">Mixed ◆</span>
+          </div>
+          <div class="moment-intel-divider"></div>
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">Risk Level</span>
+            <span class="moment-intel-val">Medium</span>
+          </div>
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">Confidence</span>
+            <span class="moment-intel-val gold">87%</span>
+          </div>
+          <div class="moment-intel-row">
+            <span class="moment-intel-key">Evidence</span>
+            <span class="moment-intel-val">3 sources</span>
+          </div>
+          <div class="moment-intel-action">
+            <div class="moment-intel-action-lbl">RECOMMENDED ACTION</div>
+            <div class="moment-intel-action-val">USD Long · EUR/USD Short</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="moment-footer">
+      <span class="mono">Total latency: <strong style="color: var(--gold);">3.7 seconds</strong></span>
+      <span class="mono">·</span>
+      <span class="mono">From publication to recommendation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============= EVIDENCE — Every insight has a source ============= -->
+<section class="section reveal" id="evidence">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <span class="section-tag" style="justify-content: center;">Evidence-First</span>
+      <h2 class="section-h" style="margin: 0 auto 1rem;">كل رؤية لها مصدر</h2>
+      <p class="section-lead" style="margin: 0 auto;">معظم منصات AI تقول "تحليل ذكي". رؤى تقول "تحليل ذكي مدعوم بدليل". هذا هو الفرق.</p>
+    </div>
+
+    <div class="evidence-card-large">
+      <div class="evidence-header">
+        <div>
+          <div class="evidence-id">Insight #28492</div>
+          <div class="evidence-claim">"Fed hold signals near-term USD strength against majors"</div>
+        </div>
+        <div class="evidence-confidence">
+          <div class="evidence-confidence-num">87%</div>
+          <div class="evidence-confidence-lbl">Confidence</div>
+        </div>
+      </div>
+
+      <div class="evidence-divider"></div>
+
+      <div class="evidence-section-title">Generated from</div>
+      <div class="evidence-sources">
+        <div class="evidence-source">
+          <div class="evidence-source-icon">✓</div>
+          <div>
+            <div class="evidence-source-name">Federal Reserve</div>
+            <div class="evidence-source-url">federalreserve.gov · FOMC Statement</div>
+          </div>
+        </div>
+        <div class="evidence-source">
+          <div class="evidence-source-icon">✓</div>
+          <div>
+            <div class="evidence-source-name">BLS</div>
+            <div class="evidence-source-url">bls.gov · CPI Release</div>
+          </div>
+        </div>
+        <div class="evidence-source">
+          <div class="evidence-source-icon">✓</div>
+          <div>
+            <div class="evidence-source-name">U.S. Treasury</div>
+            <div class="evidence-source-url">treasury.gov · Yield Curve Data</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="evidence-divider"></div>
+
+      <div class="evidence-chain">
+        <div class="evidence-chain-title">Evidence chain</div>
+        <div class="evidence-chain-stats">
+          <div class="evidence-chain-stat">
+            <div class="evidence-chain-num">5</div>
+            <div class="evidence-chain-lbl">Documents</div>
+          </div>
+          <div class="evidence-chain-stat">
+            <div class="evidence-chain-num">12</div>
+            <div class="evidence-chain-lbl">Extracted facts</div>
+          </div>
+          <div class="evidence-chain-stat">
+            <div class="evidence-chain-num">3</div>
+            <div class="evidence-chain-lbl">Linked events</div>
+          </div>
+          <div class="evidence-chain-stat">
+            <div class="evidence-chain-num">8</div>
+            <div class="evidence-chain-lbl">AI roles</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="evidence-footer">
+        <span class="mono">Every claim is traceable to an official source · No black-box decisions</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1545,12 +2176,12 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
   </div>
 </section>
 
-<!-- ============= ROUAA CORE ============= -->
+<!-- ============= ROUAA CORE — Intelligence Layer (داخلي، يأتي بعد المنتجات) ============= -->
 <section class="section reveal" id="core" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
   <div class="container">
-    <span class="section-tag">ROUAA CORE</span>
-    <h2 class="section-h">المحرك الداخلي — طبقة الذكاء</h2>
-    <p class="section-lead">Intelligence Engine — المعمارية الكاملة من المصدر الرسمي إلى القرار. كل طبقة تبني على ما قبلها.</p>
+    <span class="section-tag">The Intelligence Layer</span>
+    <h2 class="section-h">ROUAA Core — الطبقة الداخلية</h2>
+    <p class="section-lead">مثل Neural Engine في Apple أو Infrastructure في AWS — ليست منتجاً تباعه منفرداً، بل طبقة تشغّل كل شيء آخر.</p>
 
     <div class="core-layers">
       <div class="core-layer">
@@ -1634,13 +2265,44 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
   <div class="container">
     <span class="section-tag">ROUAA TRADE</span>
     <h2 class="section-h">منصة التداول الذكية</h2>
-    <p class="section-lead">Execution Intelligence Platform — لوحة تحكم كاملة. محفظة، إشارات، مراكز، أوامر، مخاطر، AI، أداء، تنفيذ.</p>
+    <p class="section-lead">Execution Intelligence — ليست Terminal. Intelligence → Decision → Execution. كل مركز له سبب، كل سبب له دليل.</p>
 
     <div class="demo-window">
       <div class="demo-titlebar">
         <div class="demo-dot r"></div><div class="demo-dot y"></div><div class="demo-dot g"></div>
-        <div class="demo-title">rouaa.trade · Execution Intelligence Platform</div>
+        <div class="demo-title">rouaa.trade · Execution Intelligence</div>
       </div>
+
+      <!-- WHY THIS POSITION EXISTS — بصمة رؤى -->
+      <div class="trade-why">
+        <div class="trade-why-header">
+          <span class="mono" style="color: var(--gold);">WHY THIS POSITION EXISTS</span>
+          <span class="mono" style="color: var(--text-mute);">EUR/USD · Long · 0.5 lot</span>
+        </div>
+        <div class="trade-why-grid">
+          <div class="trade-why-col">
+            <div class="trade-why-lbl">Evidence</div>
+            <div class="trade-why-val">Fed statement · rate hold</div>
+          </div>
+          <div class="trade-why-col">
+            <div class="trade-why-lbl">Reasoning</div>
+            <div class="trade-why-val">Inflation slowing · USD strength</div>
+          </div>
+          <div class="trade-why-col">
+            <div class="trade-why-lbl">Risk</div>
+            <div class="trade-why-val">Medium</div>
+          </div>
+          <div class="trade-why-col">
+            <div class="trade-why-lbl">Confidence</div>
+            <div class="trade-why-val gold">82%</div>
+          </div>
+          <div class="trade-why-col">
+            <div class="trade-why-lbl">Execution</div>
+            <div class="trade-why-val">EUR/USD Long</div>
+          </div>
+        </div>
+      </div>
+
       <div class="trade-grid">
 
         <div class="trade-panel">
