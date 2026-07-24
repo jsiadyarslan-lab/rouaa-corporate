@@ -1200,6 +1200,60 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* === Hero Intelligence Flow === */
+.hero-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 1.5rem 0;
+}
+.hero-flow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-flow-pill {
+  padding: 0.5rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-ar);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.hero-flow-engine {
+  padding: 0.7rem 1.5rem;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  font-family: var(--font-ar);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.hero-flow-arrow {
+  color: var(--gold);
+  font-size: 1.25rem;
+  opacity: 0.5;
+  margin: 0.4rem 0;
+  line-height: 1;
+}
+.hero-flow-sep {
+  color: var(--gold);
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+@media (max-width: 600px) {
+  .hero-flow-row { flex-direction: column; gap: 0.4rem; }
+  .hero-flow-sep { transform: rotate(90deg); }
+}
+
 /* ============================================================
    HERO — Strategic punch (reduced glow for v8)
    ============================================================ */
@@ -2162,25 +2216,43 @@ h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2
   </div>
 </nav>
 
-<!-- ============= HERO — From Official Intelligence to Investment Execution ============= -->
+<!-- ============= HERO — من البيانات المالية الرسمية إلى القرار الاستثماري الموثوق ============= -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="particles" id="particles"></div>
   <div class="container">
     <div class="hero-content">
 
-      <div class="hero-tagline-top">استخبارات مالية مبنية على الدليل</div>
+      <div class="hero-tagline-top">كل قرار يبدأ بمعلومة موثوقة</div>
 
-      <h1 class="hero-headline">من الاستخبارات المالية الرسمية<br>إلى التنفيذ الاستثماري</h1>
+      <h1 class="hero-headline">من البيانات المالية الرسمية<br>إلى القرار الاستثماري الموثوق</h1>
 
       <p class="hero-strategic">
-        الأسواق المالية تنتج ملايين الإشارات يومياً.<br>
-        رؤى تحوّل المعلومات المالية الموثّقة إلى قرارات استثمارية يمكن تتبّعها والدفاع عنها.
+        تعاني المؤسسات المالية من وفرة البيانات ونقص السياق.<br>
+        رؤى تربط المصادر الرسمية، والحقائق الموثّقة، والتحليل الذكي في طبقة واحدة<br>
+        تساعد فرق الاستثمار على فهم الأحداث واتخاذ قرارات أفضل.
       </p>
 
+      <!-- Intelligence flow: Sources → ROUAA → Understanding → Decision → Execution -->
+      <div class="hero-flow">
+        <div class="hero-flow-row">
+          <span class="hero-flow-pill">المصادر المالية الرسمية</span>
+        </div>
+        <div class="hero-flow-arrow">↓</div>
+        <div class="hero-flow-engine">رؤى · الاستخبارات المالية</div>
+        <div class="hero-flow-arrow">↓</div>
+        <div class="hero-flow-row">
+          <span class="hero-flow-pill">الفهم</span>
+          <span class="hero-flow-sep">←</span>
+          <span class="hero-flow-pill">القرار</span>
+          <span class="hero-flow-sep">←</span>
+          <span class="hero-flow-pill">التنفيذ</span>
+        </div>
+      </div>
+
       <div class="hero-cta">
-        <a href="#moment" class="btn btn-primary">شاهد اللحظة</a>
-        <a href="#evidence-network" class="btn btn-ghost">شبكة الاستخبارات</a>
+        <a href="#moment" class="btn btn-primary">استكشف المنظومة</a>
+        <a href="#cta" class="btn btn-ghost">طلب وصول مؤسسي</a>
       </div>
 
     </div>
