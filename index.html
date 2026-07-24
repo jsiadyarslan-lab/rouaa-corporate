@@ -3,3496 +3,493 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#05070D">
-<title>رؤى · ROUAA — من الاستخبارات المالية الرسمية إلى التنفيذ الاستثماري</title>
-<meta name="description" content="رؤى هي الطبقة المفقودة بين البيانات المالية الرسمية والقرارات الاستثمارية. من الخبر الرسمي إلى الصفقة، مع دليل لكل خطوة.">
+<meta name="theme-color" content="#0D0D0D">
+<title>رؤى · QUANT LAB — بنية تحتية مالية مؤسسية</title>
+<meta name="description" content="من المعلومات المالية إلى القرارات الاستثمارية الموثوقة. بنية تحتية استخباراتية مالية مؤسسية.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   رؤى · ROUAA — Creative Direction Brief v1.0
-   الطبقة المفقودة في البنية التحتية المالية
+   رؤى · QUANT LAB — Ultimate Enterprise UI
+   Apple minimalism + cyberpunk neon accents (3-5%)
+   Dark mode foundation · Modular · Premium
    ============================================================ */
 
-:root {
-  --navy:    #05070D;
-  --surface: #0B101D;
-  --card:    #111827;
-  --border:  #1F293D;
-  --gold:    #C8A951;
-  --gold-bright: #D4B566;
-  --gold-dim: rgba(200, 169, 81, 0.12);
-  --white:   #F3F4F6;
-  --emerald: #34D399;
-  --rose:    #EF4444;
-
-  --text:      #F3F4F6;
-  --text-dim:  rgba(243, 244, 246, 0.70);
-  --text-mute: rgba(243, 244, 246, 0.42);
-  --text-faint:rgba(243, 244, 246, 0.25);
-
-  --border-soft: rgba(243, 244, 246, 0.06);
-  --border-mid:  rgba(243, 244, 246, 0.12);
-
-  --font-ar:   'Cairo', sans-serif;
-  --font-en:   'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --fs-hero:   clamp(2.5rem, 5vw, 4rem);
-  --fs-h1:     clamp(2rem, 4vw, 3rem);
-  --fs-h2:     clamp(1.5rem, 2.5vw, 2rem);
-  --fs-h3:     clamp(1.125rem, 1.5vw, 1.375rem);
-  --fs-lead:   clamp(1.0625rem, 1.3vw, 1.25rem);
-  --fs-body:   0.9375rem;
-  --fs-small:  0.8125rem;
-  --fs-mono:   0.75rem;
-
-  --container: 1280px;
-  --space-section: clamp(5rem, 10vw, 8rem);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  background: var(--navy);
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  font-family: var(--font-ar);
-  background: var(--navy);
-  color: var(--text);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
-}
-
-::selection { background: var(--gold); color: var(--navy); }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--navy); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
-a:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
-
-h1, h2, h3, h4 { font-family: var(--font-ar); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
-.en { font-family: var(--font-en); }
-.mono { font-family: var(--font-mono); letter-spacing: 0.04em; }
-
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-@media (max-width: 768px) { .container { padding: 0 1.25rem; } }
-
-.section { padding: var(--space-section) 0; position: relative; }
-
-.section-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-.section-tag::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.section-h {
-  font-size: var(--fs-h1);
-  font-weight: 800;
-  margin-bottom: 1rem;
-  max-width: 24ch;
-}
-.section-lead {
-  font-size: var(--fs-lead);
-  color: var(--text-dim);
-  max-width: 60ch;
-  line-height: 1.7;
-}
-
-/* === Particles background for hero === */
-.particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: floatUp 15s linear infinite;
-}
-@keyframes floatUp {
-  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-  10% { opacity: 0.4; }
-  90% { opacity: 0.4; }
-  100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
-}
-
-/* ============================================================
-   NAVBAR — Institutional
-   ============================================================ */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(5, 7, 13, 0.80);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-soft);
-}
-.nav-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 2rem;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-@media (max-width: 768px) { .nav-inner { padding: 0 1.25rem; height: 64px; } }
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-.nav-brand-logo {
-  width: 36px; height: 36px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-en);
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--gold);
-}
-.nav-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-.nav-brand-text .name {
-  font-family: var(--font-ar);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text);
-}
-.nav-brand-text .sub {
-  font-family: var(--font-en);
-  font-size: 0.625rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-mute);
-}
-
-.nav-links {
-  display: flex;
-  gap: 0.25rem;
-  list-style: none;
-  flex: 1;
-  justify-content: center;
-}
-.nav-links a {
-  padding: 0.5rem 0.875rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-dim);
-  border-radius: 6px;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-@media (max-width: 1024px) { .nav-links { display: none; } }
-
-.nav-cta { flex-shrink: 0; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  font-family: var(--font-ar);
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-.btn-primary {
-  background: var(--gold);
-  color: var(--navy);
-}
-.btn-primary:hover { background: var(--gold-bright); transform: translateY(-1px); }
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-/* ============================================================
-   HERO — 3 columns: NEWS · CORE · TRADE
-   ============================================================ */
-.hero {
-  position: relative;
-  padding: 6rem 0 5rem;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, var(--gold-dim), transparent 70%),
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,169,81,0.04), transparent 70%);
-  z-index: 0;
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-}
-
-.hero-tagline-top {
-  font-family: var(--font-en);
-  font-size: var(--fs-mono);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-/* Connecting arrow above 3 columns */
-.hero-arrow {
-  width: 100%;
-  max-width: 700px;
-  height: 40px;
-  margin: 0 auto;
-}
-.hero-arrow svg { width: 100%; height: 100%; }
-.hero-arrow path {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 1.5;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: drawArrow 2s ease 0.5s forwards;
-}
-@keyframes drawArrow { to { stroke-dashoffset: 0; } }
-
-/* 3 columns */
-.hero-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 900px;
-}
-@media (max-width: 768px) { .hero-columns { grid-template-columns: 1fr; } }
-
-.hero-col {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.hero-col::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.hero-col:hover { border-color: var(--gold); transform: translateY(-4px); }
-.hero-col:hover::before { opacity: 1; }
-
-.hero-col-icon {
-  width: 48px; height: 48px;
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gold-dim);
-  border-radius: 10px;
-  color: var(--gold);
-}
-.hero-col-icon svg { width: 24px; height: 24px; }
-.hero-col-name {
-  font-family: var(--font-en);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.hero-col-name-ar {
-  font-size: 0.875rem;
-  color: var(--text-dim);
-  margin-bottom: 0.5rem;
-}
-.hero-col-desc {
-  font-size: var(--fs-small);
-  color: var(--text-mute);
-  line-height: 1.5;
-}
-
-.hero-headline {
-  font-size: var(--fs-hero);
-  font-weight: 800;
-  line-height: 1.15;
-  max-width: 18ch;
-  margin: 0 auto;
-  background: linear-gradient(135deg, var(--white) 0%, var(--gold-bright) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-sub {
-  font-size: var(--fs-lead);
-  color: var(--text-dim);
-  max-width: 50ch;
-  line-height: 1.7;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* ============================================================
-   PROBLEM SECTION
-   ============================================================ */
-.problem {
-  background: var(--surface);
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-}
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-@media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; gap: 2rem; } }
-
-.problem-stat {
-  text-align: center;
-  padding: 2rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.problem-stat-num {
-  font-family: var(--font-mono);
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  font-weight: 500;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-.problem-stat-lbl {
-  font-size: 0.9375rem;
-  color: var(--text-dim);
-  max-width: 24ch;
-  margin: 0 auto;
-}
-
-/* ============================================================
-   ECOSYSTEM — 3 large cards
-   ============================================================ */
-.ecosystem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-@media (max-width: 900px) { .ecosystem-grid { grid-template-columns: 1fr; } }
-
-.eco-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.eco-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-
-.eco-card-icon {
-  width: 56px; height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gold-dim);
-  border-radius: 12px;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-}
-.eco-card-icon svg { width: 28px; height: 28px; }
-.eco-card-name {
-  font-family: var(--font-en);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.eco-card-name-ar {
-  font-size: 1rem;
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-}
-.eco-card-desc {
-  font-size: 0.9375rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-.eco-card-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-soft);
-}
-.eco-card-list li {
-  font-size: var(--fs-small);
-  color: var(--text-mute);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.eco-card-list li::before {
-  content: '';
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-}
-
-/* ============================================================
-   JOURNEY — Financial Intelligence Journey (الأهم)
-   ============================================================ */
-.journey {
-  background: var(--surface);
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-}
-.journey-diagram {
-  margin-top: 3rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 3rem 2rem;
-  overflow-x: auto;
-}
-.journey-flow {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  min-width: 1000px;
-  justify-content: center;
-}
-.journey-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-  width: 110px;
-}
-.journey-node-dot {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--navy);
-  border: 1.5px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  transition: all 0.3s ease;
-}
-.journey-node.active .journey-node-dot {
-  border-color: var(--gold);
-  background: var(--gold-dim);
-  color: var(--gold);
-  box-shadow: 0 0 20px var(--gold-dim);
-}
-.journey-node-name {
-  font-family: var(--font-en);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  text-align: center;
-  color: var(--text-dim);
-  letter-spacing: 0.02em;
-}
-.journey-node.active .journey-node-name { color: var(--gold); }
-
-.journey-connector {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-  position: relative;
-  min-width: 20px;
-}
-.journey-connector::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  height: 3px;
-  background: var(--gold);
-  width: 0;
-  transition: width 0.4s ease;
-}
-.journey-connector.active::after { width: 100%; }
-
-/* ============================================================
-   PLATFORM DEMOS — News, Core, Trade
-   ============================================================ */
-.demo-window {
-  margin-top: 3rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.demo-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-.demo-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--border);
-}
-.demo-dot.r { background: #FF5F57; }
-.demo-dot.y { background: #FEBC2E; }
-.demo-dot.g { background: #28C840; }
-.demo-title {
-  margin-right: auto;
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  color: var(--text-mute);
-  letter-spacing: 0.05em;
-}
-.demo-body { padding: 1.5rem; }
-
-/* === News platform demo === */
-.news-demo-grid {
-  display: grid;
-  grid-template-columns: 200px 1fr 280px;
-  gap: 1px;
-  background: var(--border);
-  min-height: 480px;
-}
-@media (max-width: 900px) { .news-demo-grid { grid-template-columns: 1fr; } }
-
-.news-sidebar, .news-main, .news-aside {
-  background: var(--card);
-  padding: 1rem;
-}
-.news-sidebar h4, .news-aside h4 {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-mute);
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-.news-sidebar ul { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
-.news-sidebar li {
-  padding: 0.5rem 0.75rem;
-  font-size: var(--fs-small);
-  color: var(--text-dim);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.news-sidebar li:hover { background: rgba(255,255,255,0.03); }
-.news-sidebar li.active { background: var(--gold-dim); color: var(--gold); }
-.news-sidebar li .count {
-  margin-right: auto;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-
-.news-article {
-  padding: 1rem;
-  border-bottom: 1px solid var(--border-soft);
-}
-.news-article-tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-.news-article-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-  line-height: 1.4;
-}
-.news-article-meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  display: flex;
-  gap: 0.75rem;
-}
-.news-article-meta .src { color: var(--emerald); }
-
-.news-aside .evidence-card {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  padding: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-.news-aside .evidence-card .src {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--emerald);
-  margin-bottom: 0.25rem;
-}
-.news-aside .evidence-card .fact {
-  font-size: 0.8125rem;
-  color: var(--text);
-  line-height: 1.5;
-}
-.news-aside .evidence-card .trust {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gold);
-  margin-top: 0.5rem;
-}
-
-/* === Core architecture === */
-.core-layers {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-.core-layer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
-.core-layer:hover { border-color: var(--gold); }
-.core-layer-num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  color: var(--gold);
-  width: 32px;
-}
-.core-layer-name {
-  font-family: var(--font-en);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--text);
-  width: 180px;
-}
-.core-layer-name-ar {
-  font-size: var(--fs-small);
-  color: var(--text-dim);
-}
-.core-layer-desc {
-  font-size: var(--fs-small);
-  color: var(--text-mute);
-  margin-right: auto;
-}
-@media (max-width: 768px) {
-  .core-layer { flex-wrap: wrap; }
-  .core-layer-name { width: auto; }
-  .core-layer-desc { width: 100%; }
-}
-
-/* === Trade dashboard === */
-.trade-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  min-height: 420px;
-}
-@media (max-width: 900px) { .trade-grid { grid-template-columns: 1fr; } }
-
-.trade-panel {
-  background: var(--card);
-  padding: 1rem;
-}
-.trade-panel h4 {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-mute);
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-.trade-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-soft);
-  font-size: var(--fs-small);
-}
-.trade-row:last-child { border-bottom: none; }
-.trade-row .pair { font-family: var(--font-mono); color: var(--text); }
-.trade-row .val { font-family: var(--font-mono); }
-.trade-row .val.up { color: var(--emerald); }
-.trade-row .val.down { color: var(--rose); }
-
-/* Mini chart SVG */
-.mini-chart { width: 100%; height: 60px; margin: 0.5rem 0; }
-.mini-chart path { fill: none; stroke: var(--gold); stroke-width: 1.5; }
-
-/* ============================================================
-   INTEGRATION
-   ============================================================ */
-.integration-diagram {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  gap: 1rem;
-  align-items: center;
-}
-@media (max-width: 900px) {
-  .integration-diagram { grid-template-columns: 1fr; gap: 2rem; }
-  .integration-arrow { transform: rotate(90deg); }
-}
-.integration-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transition: border-color 0.3s ease;
-}
-.integration-box:hover { border-color: var(--gold); }
-.integration-box .name {
-  font-family: var(--font-en);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.integration-box .name-ar {
-  font-size: var(--fs-small);
-  color: var(--text-dim);
-  margin-bottom: 0.75rem;
-}
-.integration-box .desc {
-  font-size: 0.8125rem;
-  color: var(--text-mute);
-  line-height: 1.6;
-}
-.integration-arrow {
-  color: var(--gold);
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-/* ============================================================
-   ENTERPRISE + SECURITY (grid)
-   ============================================================ */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-.feature-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  transition: border-color 0.3s ease;
-}
-.feature-box:hover { border-color: var(--gold); }
-.feature-box .icon {
-  width: 36px; height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gold-dim);
-  border-radius: 8px;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-}
-.feature-box .icon svg { width: 18px; height: 18px; }
-.feature-box h4 {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.375rem;
-}
-.feature-box p {
-  font-size: var(--fs-small);
-  color: var(--text-mute);
-  line-height: 1.6;
-}
-
-/* ============================================================
-   API EXPLORER
-   ============================================================ */
-.api-explorer {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-@media (max-width: 900px) { .api-explorer { grid-template-columns: 1fr; } }
-
-.api-endpoints {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-}
-.api-endpoint {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  font-family: var(--font-mono);
-  font-size: var(--fs-small);
-}
-.api-endpoint:hover { background: rgba(255,255,255,0.03); }
-.api-endpoint.active { background: var(--gold-dim); }
-.api-method {
-  font-size: 0.625rem;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 3px;
-  letter-spacing: 0.05em;
-}
-.api-method.GET { background: rgba(52,211,153,0.15); color: var(--emerald); }
-.api-method.POST { background: rgba(200,169,81,0.15); color: var(--gold); }
-.api-method.STREAM { background: rgba(96,165,250,0.15); color: #60a5fa; }
-.api-path { color: var(--text-dim); }
-
-.api-response {
-  background: var(--navy);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  font-family: var(--font-mono);
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  overflow-x: auto;
-  direction: ltr;
-  text-align: left;
-}
-.api-response .key { color: var(--gold); }
-.api-response .str { color: var(--emerald); }
-.api-response .num { color: #60a5fa; }
-.api-response .cmt { color: var(--text-mute); }
-
-/* ============================================================
-   USE CASES
-   ============================================================ */
-.usecases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-.usecase {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem 1.25rem;
-  text-align: center;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.usecase:hover { border-color: var(--gold); transform: translateY(-2px); }
-.usecase .icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-.usecase .name {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.usecase .desc {
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-
-/* ============================================================
-   ROADMAP
-   ============================================================ */
-.roadmap-timeline {
-  margin-top: 3rem;
-  position: relative;
-  padding: 2rem 0;
-}
-.roadmap-timeline::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  right: 50%;
-  width: 1px;
-  background: var(--border);
-}
-@media (max-width: 768px) {
-  .roadmap-timeline::before { right: 20px; }
-}
-.roadmap-item {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 2rem;
-  align-items: center;
-  margin-bottom: 2rem;
-  position: relative;
-}
-@media (max-width: 768px) {
-  .roadmap-item { grid-template-columns: 40px 1fr; gap: 1rem; }
-  .roadmap-item .roadmap-content:first-child { display: none; }
-}
-.roadmap-content {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-}
-.roadmap-content.right { text-align: left; }
-.roadmap-content.left { text-align: right; }
-.roadmap-content .phase {
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  color: var(--gold);
-  margin-bottom: 0.25rem;
-}
-.roadmap-content h4 {
-  font-size: 0.9375rem;
-  color: var(--text);
-  margin-bottom: 0.375rem;
-}
-.roadmap-content p {
-  font-size: var(--fs-small);
-  color: var(--text-mute);
-  line-height: 1.6;
-}
-.roadmap-dot {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--navy);
-  border: 2px solid var(--gold);
-  position: relative;
-  z-index: 1;
-}
-.roadmap-dot.done { background: var(--gold); }
-
-/* ============================================================
-   CTA + FORM
-   ============================================================ */
-.cta {
-  background: var(--surface);
-  border-top: 1px solid var(--border-soft);
-  text-align: center;
-}
-.cta h2 {
-  font-size: var(--fs-h1);
-  font-weight: 800;
-  margin-bottom: 1rem;
-  max-width: 20ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-.cta p {
-  font-size: var(--fs-lead);
-  color: var(--text-dim);
-  max-width: 50ch;
-  margin: 0 auto 3rem;
-}
-
-.form-card {
-  max-width: 560px;
-  margin: 0 auto;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2.5rem;
-  text-align: right;
-}
-@media (max-width: 600px) { .form-card { padding: 1.5rem; } }
-
-.form-row {
-  margin-bottom: 1.25rem;
-}
-.form-row label {
-  display: block;
-  font-size: var(--fs-small);
-  color: var(--text-dim);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-.form-row input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: var(--navy);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  font-family: var(--font-ar);
-  font-size: 0.9375rem;
-  transition: border-color 0.2s ease;
-}
-.form-row input:focus {
-  outline: none;
-  border-color: var(--gold);
-}
-.form-row input::placeholder { color: var(--text-faint); }
-
-.form-submit {
-  width: 100%;
-  padding: 0.875rem;
-  background: var(--gold);
-  color: var(--navy);
-  border: none;
-  border-radius: 8px;
-  font-family: var(--font-ar);
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 0.5rem;
-}
-.form-submit:hover { background: var(--gold-bright); }
-
-.form-note {
-  font-size: 0.75rem;
-  color: var(--text-mute);
-  text-align: center;
-  margin-top: 1rem;
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
-  background: var(--navy);
-  padding: 4rem 0 2rem;
-  border-top: 1px solid var(--border-soft);
-}
-.footer-inner {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-@media (max-width: 768px) {
-  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-}
-.footer-brand .name {
-  font-family: var(--font-ar);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
-.footer-brand .tagline {
-  font-size: 0.9375rem;
-  color: var(--text-dim);
-  max-width: 32ch;
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-.footer-brand .meta {
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  color: var(--text-mute);
-}
-.footer-col h4 {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-mute);
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-.footer-col a { font-size: var(--fs-small); color: var(--text-dim); }
-.footer-col a:hover { color: var(--gold); }
-.footer-bottom {
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-soft);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  color: var(--text-mute);
-}
-@media (max-width: 768px) {
-  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-}
-
-/* === Reveal animation === */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* === Hero Intelligence Flow === */
-.hero-flow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  margin: 1.5rem 0;
-}
-.hero-flow-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.hero-flow-pill {
-  padding: 0.5rem 1.1rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-family: var(--font-ar);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text);
-  white-space: nowrap;
-}
-.hero-flow-engine {
-  padding: 0.7rem 1.5rem;
-  background: var(--gold-dim);
-  border: 1px solid var(--gold);
-  border-radius: 10px;
-  font-family: var(--font-ar);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--gold);
-  white-space: nowrap;
-}
-.hero-flow-arrow {
-  color: var(--gold);
-  font-size: 1.25rem;
-  opacity: 0.5;
-  margin: 0.4rem 0;
-  line-height: 1;
-}
-.hero-flow-sep {
-  color: var(--gold);
-  opacity: 0.5;
-  font-size: 0.875rem;
-}
-@media (max-width: 600px) {
-  .hero-flow-row { flex-direction: column; gap: 0.4rem; }
-  .hero-flow-sep { transform: rotate(90deg); }
-}
-
-/* ============================================================
-   HERO — Strategic punch (reduced glow for v8)
-   ============================================================ */
-.hero-strategic {
-  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  color: var(--text-dim);
-  max-width: 50ch;
-  line-height: 1.7;
-  font-weight: 500;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(200,169,81,0.06), transparent 70%);
-  z-index: 0;
-}
-/* Reduce particles intensity for v8 */
-.particle { opacity: 0.15 !important; }
-.hero-col::before, .eco-card::before, .intel-step::before, .source-node::before { display: none; }
-.hero-col:hover, .eco-card:hover, .intel-step:hover, .source-node:hover {
-  transform: none;
-}
-/* Remove all transform: translateY on hover (more calm) */
-.trade-why-col:hover, .feature-box:hover, .usecase:hover, .core-layer:hover,
-.eco-card:hover, .hero-col:hover, .intel-step:hover, .source-node:hover,
-.integration-box:hover, .api-endpoint:hover, .moment-step-card:hover,
-.live-step-card:hover, .trust-card:hover, .committee-card:hover,
-.footer-col a:hover, .news-sidebar li:hover {
-  transform: none !important;
-}
-
-/* ============================================================
-   INVESTMENT COMMITTEE VIEW
-   ============================================================ */
-.committee-card {
-  max-width: 720px;
-  margin: 0 auto;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-.committee-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-.committee-memo-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 0.25rem;
-}
-.committee-memo-id {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--text);
-}
-.committee-stamp {
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--gold);
-  border-radius: 6px;
-  background: var(--gold-dim);
-}
-.committee-stamp-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 0.125rem;
-}
-.committee-stamp-val {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-.committee-body {
-  padding: 1.5rem;
-}
-.committee-row {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1rem;
-  padding: 0.75rem 0;
-  align-items: start;
-}
-@media (max-width: 600px) {
-  .committee-row { grid-template-columns: 1fr; gap: 0.25rem; }
-}
-.committee-row-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  color: var(--text-mute);
-  text-transform: uppercase;
-  padding-top: 0.125rem;
-}
-.committee-row-val {
-  font-size: 0.9375rem;
-  color: var(--text);
-  line-height: 1.6;
-}
-.committee-row-val.gold {
-  color: var(--gold);
-  font-weight: 600;
-}
-.committee-divider {
-  height: 1px;
-  background: var(--border-soft);
-  margin: 0;
-}
-.committee-evidence-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 0.75rem;
-}
-.committee-evidence-item {
-  display: grid;
-  grid-template-columns: 20px 1fr auto;
-  gap: 0.5rem;
-  align-items: center;
-  padding: 0.4rem 0.6rem;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: 6px;
-  font-size: 0.8125rem;
-}
-.committee-evidence-check {
-  color: var(--emerald);
-  font-weight: 700;
-}
-.committee-evidence-src {
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-}
-.committee-evidence-date {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-.committee-evidence-count {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  padding-top: 0.25rem;
-}
-.committee-footer {
-  padding: 1rem 1.5rem;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-
-/* ============================================================
-   TRUST CENTER — 6 pillars
-   ============================================================ */
-.trust-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-}
-.trust-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.75rem 1.5rem;
-  transition: border-color 0.3s ease;
-  position: relative;
-}
-.trust-card:hover { border-color: var(--gold); }
-.trust-card-num {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--gold);
-  letter-spacing: 0.18em;
-  margin-bottom: 0.75rem;
-}
-.trust-card-name {
-  font-family: var(--font-en);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
-.trust-card-desc {
-  font-size: 0.875rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-.trust-card-stat {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--gold);
-  letter-spacing: 0.05em;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-soft);
-}
-.trust-footer {
-  text-align: center;
-  margin-top: 3rem;
-  font-size: 0.875rem;
-  color: var(--text-mute);
-}
-
-/* ============================================================
-   HERO — Strategic punch
-   ============================================================ */
-.hero-strategic {
-  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  color: var(--text-dim);
-  max-width: 50ch;
-  line-height: 1.7;
-  font-weight: 500;
-}
-
-/* ============================================================
-   LIVE INTELLIGENCE EXAMPLE — vertical flow
-   ============================================================ */
-.live-flow {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  max-width: 560px;
-  margin: 0 auto;
-  gap: 0;
-}
-.live-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.live-step-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-.live-step-card {
-  width: 100%;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: center;
-  transition: border-color 0.3s ease;
-}
-.live-step-card:hover { border-color: var(--gold); }
-.live-step-card.intel { padding: 0.5rem 1.25rem; }
-.live-step-card.decision {
-  background: var(--gold-dim);
-  border-color: rgba(200,169,81,0.4);
-}
-.live-step-org {
-  font-family: var(--font-en);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.live-step-doc {
-  font-size: 0.875rem;
-  color: var(--text-dim);
-  margin-bottom: 0.5rem;
-}
-.live-step-fact {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
-.live-step-meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-.live-step-intel-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border-soft);
-  font-size: 0.875rem;
-}
-.live-step-intel-row:last-child { border-bottom: none; }
-.live-step-intel-row .up { color: var(--emerald); font-weight: 600; }
-.live-step-intel-row .down { color: var(--emerald); font-weight: 600; }
-.live-step-intel-row .neutral { color: var(--text-dim); font-weight: 600; }
-.live-step-decision-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  margin-bottom: 0.375rem;
-}
-.live-step-decision-val {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.375rem;
-}
-.live-step-decision-meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-.live-connector {
-  width: 1px;
-  height: 32px;
-  background: linear-gradient(180deg, var(--border), var(--gold), var(--border));
-  margin: 0 auto;
-  opacity: 0.5;
-}
-
-/* ============================================================
-   EVIDENCE NETWORK — sources grid (trust moment)
-   ============================================================ */
-.sources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.75rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.source-node {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem 1rem;
-  text-align: center;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.source-node:hover {
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-.source-node-abbr {
-  font-family: var(--font-en);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 0.05em;
-  margin-bottom: 0.375rem;
-}
-.source-node-name {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-  line-height: 1.3;
-}
-.source-node-type {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--text-mute);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.sources-footer {
-  text-align: center;
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  font-size: 0.875rem;
-  color: var(--text-mute);
-  flex-wrap: wrap;
-}
-.sources-footer .mono { color: var(--gold); font-weight: 500; }
-
-/* ============================================================
-   CORE STACK — 3 layers (Products · Core · Sources)
-   ============================================================ */
-.core-stack {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-.core-stack-layer {
-  width: 100%;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-}
-.core-stack-layer.products {
-  background: var(--surface);
-}
-.core-stack-layer.core {
-  background: var(--gold-dim);
-  border-color: rgba(200,169,81,0.3);
-}
-.core-stack-layer-label {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-mute);
-  margin-bottom: 1rem;
-}
-.core-stack-layer.core .core-stack-layer-label {
-  color: var(--gold);
-}
-.core-stack-products {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-.core-stack-product {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.75rem;
-}
-.core-stack-product-name {
-  font-family: var(--font-en);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--text);
-}
-.core-stack-product-desc {
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  margin-top: 0.125rem;
-}
-.core-stack-core-flow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.core-pill {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  padding: 0.35rem 0.65rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  color: var(--text);
-  white-space: nowrap;
-}
-.core-arrow {
-  color: var(--gold);
-  font-size: 0.875rem;
-  opacity: 0.6;
-}
-.core-stack-sources {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  letter-spacing: 0.05em;
-}
-.core-stack-sources span:nth-child(odd) {
-  color: var(--gold);
-  font-weight: 700;
-}
-.core-stack-connector {
-  color: var(--gold);
-  font-size: 1.5rem;
-  padding: 0.5rem 0;
-  opacity: 0.6;
-}
-
-/* ============================================================
-   HERO — Intelligence Flow (4 steps)
-   ============================================================ */
-.intel-flow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  flex-wrap: wrap;
-  margin: 1rem 0;
-}
-.intel-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 1rem 1.5rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  min-width: 160px;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.intel-step:hover {
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-.intel-step-num {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-}
-.intel-step-name {
-  font-family: var(--font-en);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-.intel-step-desc {
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-.intel-arrow {
-  color: var(--gold);
-  font-size: 1.5rem;
-  padding: 0 0.5rem;
-  opacity: 0.6;
-}
-@media (max-width: 768px) {
-  .intel-flow { flex-direction: column; gap: 0.5rem; }
-  .intel-arrow { transform: rotate(90deg); padding: 0.25rem 0; }
-}
-
-/* ============================================================
-   THE ROUAA MOMENT — 3 columns: Source · Engine · Intelligence
-   ============================================================ */
-.moment-stage {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.5rem;
-  align-items: stretch;
-}
-@media (max-width: 900px) {
-  .moment-stage { grid-template-columns: 1fr; }
-}
-.moment-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.moment-col-label {
-  font-family: var(--font-en);
-  font-size: 0.6875rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-align: center;
-  padding: 0.5rem;
-  background: var(--gold-dim);
-  border-radius: 6px;
-}
-
-/* Document (column 1) */
-.moment-doc {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  flex: 1;
-}
-.moment-doc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 1rem;
-}
-.moment-doc-org {
-  font-family: var(--font-en);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  color: var(--text);
-}
-.moment-doc-type {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-.moment-doc-body { display: flex; flex-direction: column; gap: 0.5rem; }
-.moment-doc-line {
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-}
-.moment-doc-highlight {
-  margin: 0.75rem 0;
-  padding: 0.75rem;
-  background: var(--gold-dim);
-  border: 1px solid rgba(200,169,81,0.3);
-  border-radius: 6px;
-}
-.moment-doc-fact-label {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.25rem;
-}
-.moment-doc-fact-val {
-  font-size: 0.8125rem;
-  color: var(--text);
-  font-weight: 600;
-}
-.moment-doc-meta {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-soft);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-
-/* Engine (column 2) */
-.moment-engine {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.moment-engine-step {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  transition: background 0.3s ease;
-}
-.moment-engine-step.done { color: var(--text-dim); }
-.moment-engine-step.active {
-  background: var(--gold-dim);
-  color: var(--gold);
-}
-.moment-engine-step .moment-engine-check {
-  width: 18px;
-  text-align: center;
-  font-family: var(--font-mono);
-}
-.moment-engine-step.done .moment-engine-check { color: var(--emerald); }
-.moment-engine-step.active .moment-engine-check {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.moment-engine-text { flex: 1; }
-.moment-engine-time {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-}
-
-/* Intelligence (column 3) */
-.moment-intel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.moment-intel-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-soft);
-  font-size: 0.875rem;
-}
-.moment-intel-key {
-  color: var(--text-mute);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-}
-.moment-intel-val { font-weight: 600; color: var(--text); }
-.moment-intel-val.up { color: var(--emerald); }
-.moment-intel-val.down { color: var(--rose); }
-.moment-intel-val.neutral { color: var(--text-dim); }
-.moment-intel-val.gold { color: var(--gold); }
-.moment-intel-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0.5rem 0;
-}
-.moment-intel-action {
-  margin-top: auto;
-  padding: 0.875rem;
-  background: var(--gold-dim);
-  border: 1px solid rgba(200,169,81,0.3);
-  border-radius: 8px;
-  text-align: center;
-}
-.moment-intel-action-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  margin-bottom: 0.375rem;
-}
-.moment-intel-action-val {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.moment-footer {
-  text-align: center;
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  font-size: 0.8125rem;
-  color: var(--text-mute);
-}
-
-/* ============================================================
-   EVIDENCE — large card
-   ============================================================ */
-.evidence-card-large {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2.5rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-@media (max-width: 600px) { .evidence-card-large { padding: 1.5rem; } }
-
-.evidence-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-}
-.evidence-id {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-}
-.evidence-claim {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.5;
-}
-.evidence-confidence {
-  text-align: center;
-  flex-shrink: 0;
-}
-.evidence-confidence-num {
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  color: var(--gold);
-  font-weight: 500;
-}
-.evidence-confidence-lbl {
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.evidence-divider {
-  height: 1px;
-  background: var(--border-soft);
-  margin: 1.5rem 0;
-}
-
-.evidence-section-title {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.evidence-sources {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.evidence-source {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-}
-.evidence-source-icon {
-  width: 28px; height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--emerald);
-  color: var(--navy);
-  border-radius: 50%;
-  font-size: 0.875rem;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.evidence-source-name {
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--text);
-}
-.evidence-source-url {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-
-.evidence-chain-title {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-.evidence-chain-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-@media (max-width: 600px) { .evidence-chain-stats { grid-template-columns: repeat(2, 1fr); } }
-.evidence-chain-stat {
-  text-align: center;
-  padding: 1rem;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-}
-.evidence-chain-num {
-  font-family: var(--font-mono);
-  font-size: 1.75rem;
-  color: var(--gold);
-  font-weight: 500;
-}
-.evidence-chain-lbl {
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  margin-top: 0.25rem;
-}
-
-.evidence-footer {
-  margin-top: 1.5rem;
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-
-/* ============================================================
-   TRADE — WHY THIS POSITION EXISTS
-   ============================================================ */
-.trade-why {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 1.25rem;
-}
-.trade-why-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.875rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-}
-.trade-why-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-}
-@media (max-width: 768px) {
-  .trade-why-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-}
-.trade-why-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.trade-why-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--text-mute);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.trade-why-val {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text);
-}
-.trade-why-val.gold { color: var(--gold); }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .reveal { opacity: 1; transform: none; }
-}
+:root{
+  /* Foundation — Dark Mode */
+  --bg-0:#0D0D0D;
+  --bg-1:#111111;
+  --bg-2:#161616;
+  --bg-3:#1A1A1A;
+
+  /* Accents — Neon (3-5% only) */
+  --neon:#00F5D4;
+  --neon-dim:rgba(0,245,212,.08);
+  --neon-glow:rgba(0,245,212,.15);
+  --gold:#C8A951;
+  --gold-dim:rgba(200,169,81,.10);
+  --emerald:#34D399;
+  --rose:#F87171;
+
+  /* Text */
+  --text:#F5F5F7;
+  --text-dim:rgba(245,245,247,.70);
+  --text-mute:rgba(245,245,247,.42);
+  --text-faint:rgba(245,245,247,.20);
+
+  /* Borders — thin, premium */
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.14);
+  --border-neon:rgba(0,245,212,.25);
+
+  /* Shadows — soft */
+  --shadow:0 4px 12px rgba(0,0,0,.25);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.4);
+  --shadow-neon:0 0 20px rgba(0,245,212,.08);
+
+  /* Typography */
+  --font-sans:'Inter','Cairo',-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+  --font-ar:'Cairo','Inter',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+
+  /* Layout */
+  --container:1280px;
+  --space-section:clamp(4rem,8vw,7rem);
+
+  /* Radius */
+  --r-sm:8px;
+  --r-md:12px;
+  --r-lg:16px;
+  --r-xl:24px;
+
+  /* Transitions */
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  --dur:.2s;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg-0);scroll-behavior:smooth}
+body{font-family:var(--font-ar);background:var(--bg-0);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--neon);color:var(--bg-0)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg-0)}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+a{color:inherit;text-decoration:none;transition:color var(--dur) var(--ease)}
+a:focus-visible{outline:1px solid var(--neon);outline-offset:3px;border-radius:2px}
+h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.mono{font-family:var(--font-mono);letter-spacing:0}
+.en{font-family:var(--font-sans)}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.25rem}}
+.section{padding:var(--space-section) 0;position:relative}
+
+/* Section tag — minimal */
+.tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.15em;text-transform:uppercase;color:var(--neon);margin-bottom:.75rem}
+.tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--neon);box-shadow:0 0 6px var(--neon)}
+
+.h2{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:800;max-width:22ch;margin-bottom:.75rem}
+.lead{font-size:1.0625rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border-radius:var(--r-sm);cursor:pointer;transition:all var(--dur) var(--ease);white-space:nowrap;border:1px solid transparent}
+.btn-primary{background:var(--neon);color:var(--bg-0);box-shadow:0 0 12px var(--neon-glow)}
+.btn-primary:hover{box-shadow:0 0 24px var(--neon-glow);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border-strong)}
+.btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+
+/* === Glass card === */
+.glass{background:rgba(255,255,255,.02);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.glass:hover{border-color:var(--border-strong);box-shadow:var(--shadow),var(--shadow-neon)}
+
+/* === Nav === */
+.nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.80);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--container);margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+@media(max-width:768px){.nav-inner{padding:0 1.25rem}}
+.nav-brand{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.nav-brand-logo{width:32px;height:32px;background:var(--bg-2);border:1px solid var(--border-strong);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;font-size:16px;color:var(--neon)}
+.nav-brand-text{font-family:var(--font-sans);font-size:1rem;font-weight:600;color:var(--text)}
+.nav-brand-sub{font-family:var(--font-mono);font-size:.5625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.15rem;list-style:none;flex:1;justify-content:center}
+.nav-links a{padding:.4rem .75rem;font-size:.8125rem;font-weight:500;color:var(--text-dim);border-radius:var(--r-sm);transition:color var(--dur),background var(--dur)}
+.nav-links a:hover,.nav-links a.active{color:var(--neon);background:rgba(255,255,255,.03)}
+@media(max-width:1024px){.nav-links{display:none}}
+.nav-cta{flex-shrink:0}
+
+/* === Hero === */
+.hero{position:relative;padding:4rem 0 2rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--neon-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.hero-tagline{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;color:var(--neon)}
+.hero-h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.1;max-width:20ch}
+.hero-sub{font-size:1.0625rem;color:var(--text-dim);max-width:50ch;line-height:1.7}
+.hero-cta{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem}
+
+/* === Hero flow === */
+.hero-flow{display:flex;flex-direction:column;align-items:center;gap:0;margin:1.25rem 0}
+.hero-flow-row{display:flex;align-items:center;gap:.5rem}
+.hero-flow-pill{padding:.4rem .9rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.8125rem;font-weight:600;color:var(--text)}
+.hero-flow-engine{padding:.5rem 1.2rem;background:var(--neon-dim);border:1px solid var(--border-neon);border-radius:var(--r-sm);font-size:.875rem;font-weight:700;color:var(--neon)}
+.hero-flow-arrow{color:var(--neon);opacity:.4;font-size:1rem;margin:.3rem 0}
+
+/* === Proof section === */
+.proof-grid{margin-top:2.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+@media(max-width:768px){.proof-grid{grid-template-columns:1fr}}
+.proof-card{padding:1.25rem}
+.proof-card-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.proof-card-val{font-size:.875rem;color:var(--text);font-weight:600}
+.proof-card-val.neon{color:var(--neon)}
+.proof-arrow{text-align:center;color:var(--neon);opacity:.3;font-size:1rem;margin:.25rem 0}
+@media(max-width:768px){.proof-arrow{transform:rotate(90deg)}}
+
+/* === Architecture — modular blocks === */
+.arch-grid{margin-top:2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:900px){.arch-grid{grid-template-columns:1fr}}
+.arch-block{padding:1.5rem}
+.arch-block-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--neon);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.arch-block-h{font-size:.9375rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.arch-block-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6}
+.arch-block-items{margin-top:.75rem;display:flex;flex-direction:column;gap:.3rem}
+.arch-block-item{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);padding:.2rem .5rem;background:var(--bg-2);border-radius:4px;border:1px solid var(--border)}
+
+/* === Modules === */
+.mod-grid{margin-top:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.mod-card{padding:1.5rem;text-align:center;transition:border-color var(--dur),box-shadow var(--dur)}
+.mod-card:hover{border-color:var(--border-neon);box-shadow:var(--shadow),var(--shadow-neon)}
+.mod-icon{width:40px;height:40px;margin:0 auto .75rem;background:var(--neon-dim);border:1px solid var(--border-neon);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--neon)}
+.mod-icon svg{width:20px;height:20px}
+.mod-h{font-size:.9375rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.mod-desc{font-size:.75rem;color:var(--text-mute)}
+
+/* === Benchmarks — monospace numbers === */
+.bench-grid{margin-top:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+.bench-card{padding:1.5rem;text-align:center}
+.bench-num{font-family:var(--font-mono);font-size:1.75rem;font-weight:500;color:var(--neon);line-height:1;margin-bottom:.25rem}
+.bench-lbl{font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+
+/* === Security === */
+.sec-grid{margin-top:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.sec-card{padding:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.sec-icon{width:36px;height:36px;background:var(--neon-dim);border:1px solid var(--border-neon);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--neon)}
+.sec-icon svg{width:18px;height:18px}
+.sec-h{font-size:.875rem;font-weight:700;color:var(--text)}
+.sec-desc{font-size:.75rem;color:var(--text-mute);line-height:1.6}
+
+/* === CTA === */
+.cta-section{text-align:center;padding:var(--space-section) 0;background:var(--bg-1);border-top:1px solid var(--border)}
+.cta-section h2{font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.75rem}
+.cta-section p{color:var(--text-dim);max-width:45ch;margin:0 auto 1.5rem;font-size:1.0625rem}
+
+/* === Footer === */
+.footer{background:var(--bg-0);padding:3rem 0 1.5rem;border-top:1px solid var(--border)}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem;max-width:var(--container);margin-left:auto;margin-right:auto;padding:0 2rem}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:1.5rem}}
+.footer-brand .name{font-family:var(--font-sans);font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.footer-brand .tagline{font-size:.875rem;color:var(--text-mute);max-width:30ch;line-height:1.6;margin-bottom:.5rem}
+.footer-brand .meta{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-faint)}
+.footer-col h4{font-family:var(--font-mono);font-size:.625rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:.75rem;font-weight:500}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--neon)}
+.footer-bottom{max-width:var(--container);margin:0 auto;padding:1.5rem 2rem 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-faint)}
+@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.3rem;text-align:center}}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<!-- ============= NAVBAR ============= -->
+<!-- ============= NAV ============= -->
 <nav class="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى</span>
-        <span class="sub">استخبارات مالية مبنية على الدليل</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="news.html">الأخبار</a></li>
-      <li><a href="core.html">المحرك</a></li>
-      <li><a href="trade.html">التداول</a></li>
-      <li><a href="api.html">واجهة برمجة</a></li>
-      <li><a href="enterprise.html">المؤسسات</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a>
-    </div>
-  </div>
+<div class="nav-inner">
+<a href="index.html" class="nav-brand">
+<div class="nav-brand-logo">R</div>
+<div>
+<div class="nav-brand-text">رؤى · QUANT LAB</div>
+<div class="nav-brand-sub">بنية تحتية مالية مؤسسية</div>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="news.html">الأخبار</a></li>
+<li><a href="core.html">المحرك</a></li>
+<li><a href="trade.html">التداول</a></li>
+<li><a href="api.html">واجهة برمجة</a></li>
+<li><a href="enterprise.html">المؤسسات</a></li>
+</ul>
+<div class="nav-cta"><a href="#cta" class="btn btn-primary">طلب وصول مؤسسي</a></div>
+</div>
 </nav>
 
-<!-- ============= HERO — من المعلومات المالية إلى القرارات الاستثمارية الموثوقة ============= -->
+<!-- ============= 1. HERO ============= -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="particles" id="particles"></div>
-  <div class="container">
-    <div class="hero-content">
+<div class="hero-bg"></div>
+<div class="container">
+<div class="hero-content">
 
-      <div class="hero-tagline-top">كل قرار يبدأ بمعلومة موثوقة</div>
+<div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
 
-      <h1 class="hero-headline">من المعلومات المالية<br>إلى القرارات الاستثمارية الموثوقة</h1>
+<h1 class="hero-h1">من المعلومات المالية<br>إلى القرارات الاستثمارية الموثوقة</h1>
 
-      <p class="hero-strategic">
-        الأسواق لا تعاني من نقص المعلومات.<br>
-        رؤى تحوّل البيانات المالية الرسمية المتفرقة إلى استخبارات موثّقة،<br>
-        قابلة للتتبع، ومهيّأة للقرار والتنفيذ.
-      </p>
+<p class="hero-sub">الأسواق لا تعاني من نقص المعلومات. رؤى تحوّل البيانات المالية الرسمية المتفرقة إلى استخبارات موثّقة، قابلة للتتبع، ومهيّأة للقرار والتنفيذ.</p>
 
-      <!-- Intelligence flow: Sources → Verified Intelligence → Investment Decisions -->
-      <div class="hero-flow">
-        <div class="hero-flow-row">
-          <span class="hero-flow-pill">مصادر رسمية</span>
-        </div>
-        <div class="hero-flow-arrow">↓</div>
-        <div class="hero-flow-engine">استخبارات موثّقة</div>
-        <div class="hero-flow-arrow">↓</div>
-        <div class="hero-flow-row">
-          <span class="hero-flow-pill">قرارات استثمارية</span>
-        </div>
-      </div>
+<div class="hero-flow">
+<div class="hero-flow-row"><span class="hero-flow-pill">مصادر رسمية</span></div>
+<div class="hero-flow-arrow">↓</div>
+<div class="hero-flow-engine">استخبارات موثّقة</div>
+<div class="hero-flow-arrow">↓</div>
+<div class="hero-flow-row"><span class="hero-flow-pill">قرارات استثمارية</span></div>
+</div>
 
-      <div class="hero-cta">
-        <a href="#moment" class="btn btn-primary">استكشف المنظومة</a>
-        <a href="#cta" class="btn btn-ghost">طلب وصول مؤسسي</a>
-      </div>
+<div class="hero-cta">
+<a href="#proof" class="btn btn-primary">استكشف المنظومة</a>
+<a href="#cta" class="btn btn-ghost">طلب وصول مؤسسي</a>
+</div>
 
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
-<!-- ============= PROOF — مثال صغير بعد الـ Hero مباشرة ============= -->
-<section class="section reveal" id="moment" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); padding-top: 3rem; padding-bottom: 3rem;">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <span class="section-tag" style="justify-content: center;">إثبات</span>
-      <h2 class="section-h" style="margin: 0 auto 0.5rem; font-size: clamp(1.5rem, 2.5vw, 2rem);">كيف يعمل؟</h2>
-    </div>
+<!-- ============= 2. PROOF ============= -->
+<section class="section reveal" id="proof" style="padding-top:3rem;padding-bottom:3rem">
+<div class="container">
+<div style="text-align:center;margin-bottom:1.5rem">
+<span class="tag" style="justify-content:center">إثبات</span>
+<h2 class="h2" style="margin:0 auto .5rem;font-size:clamp(1.5rem,2.5vw,2rem)">كيف يعمل؟</h2>
+</div>
 
-    <div style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0;">
-      <!-- Source -->
-      <div style="width: 100%; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; text-align: center;">
-        <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.375rem;">المصدر الرسمي</div>
-        <div style="font-family: var(--font-en); font-weight: 700; color: var(--text); font-size: 0.9375rem;">الفيدرالي يُنشر بيان FOMC</div>
-      </div>
+<div class="proof-grid">
+<div class="glass proof-card">
+<div class="proof-card-lbl">المصدر الرسمي</div>
+<div class="proof-card-val">الفيدرالي يُنشر بيان FOMC</div>
+</div>
+<div class="glass proof-card">
+<div class="proof-card-lbl">رؤى تستخرج</div>
+<div class="proof-card-val">الحدث · 12 حقيقة · 5 أدلة · السياق</div>
+</div>
+<div class="glass proof-card">
+<div class="proof-card-lbl">الاستخبارات</div>
+<div class="proof-card-val neon">«قوة الدولار» · ثقة 87%</div>
+</div>
+</div>
 
-      <div style="color: var(--gold); opacity: 0.5; font-size: 1.25rem; margin: 0.3rem 0;">↓</div>
-
-      <!-- ROUAA extracts -->
-      <div style="width: 100%; max-width: 460px; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: 10px; padding: 1rem 1.25rem;">
-        <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; text-align: center;">رؤى تستخرج</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-          <div style="background: var(--card); border-radius: 6px; padding: 0.5rem; text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute);">الحدث</div>
-            <div style="font-size: 0.75rem; color: var(--text); font-weight: 600;">قرار الفائدة</div>
-          </div>
-          <div style="background: var(--card); border-radius: 6px; padding: 0.5rem; text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute);">الحقائق</div>
-            <div style="font-size: 0.75rem; color: var(--text); font-weight: 600;">12 حقيقة</div>
-          </div>
-          <div style="background: var(--card); border-radius: 6px; padding: 0.5rem; text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute);">الدليل</div>
-            <div style="font-size: 0.75rem; color: var(--text); font-weight: 600;">5 وثائق</div>
-          </div>
-          <div style="background: var(--card); border-radius: 6px; padding: 0.5rem; text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute);">السياق</div>
-            <div style="font-size: 0.75rem; color: var(--text); font-weight: 600;">الدولار · السندات</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="color: var(--gold); opacity: 0.5; font-size: 1.25rem; margin: 0.3rem 0;">↓</div>
-
-      <!-- Output -->
-      <div style="width: 100%; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; text-align: center;">
-        <div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.375rem;">استخبارات استثمارية</div>
-        <div style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">«ثبات الفيدرالي يشير إلى قوة الدولار» · ثقة 87%</div>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute);">
-      زمن المعالجة الكلي: <span style="color: var(--gold);">3.7 ثوانٍ</span> · من النشر إلى الاستخبارات
-    </div>
-  </div>
+<div style="text-align:center;margin-top:1rem;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)">زمن المعالجة: <span style="color:var(--neon)">3.7 ثوانٍ</span> · من النشر إلى الاستخبارات</div>
+</div>
 </section>
 
-<!-- ============= EVIDENCE — Every insight has a source ============= -->
-<section class="section reveal" id="evidence">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <span class="section-tag" style="justify-content: center;">الدليل أولاً</span>
-      <h2 class="section-h" style="margin: 0 auto 1rem;">كل رؤية لها مصدر</h2>
-      <p class="section-lead" style="margin: 0 auto;">معظم منصات AI تقول "تحليل ذكي". رؤى تقول "تحليل ذكي مدعوم بدليل". هذا هو الفرق.</p>
-    </div>
+<!-- ============= 3. ARCHITECTURE ============= -->
+<section class="section reveal" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="container">
+<span class="tag">المعمارية المعيارية</span>
+<h2 class="h2">ثلاث طبقات · منظومة واحدة</h2>
+<p class="lead">بنية معيارية: مصادر رسمية ← محرك استخبارات ← منتجات قرار. كل طبقة مستقلة، ومتكاملة.</p>
 
-    <div class="evidence-card-large">
-      <div class="evidence-header">
-        <div>
-          <div class="evidence-id">رؤية #28492</div>
-          <div class="evidence-claim">"ثبات سعر فائدة الفيدرالي يشير إلى قوة الدولار قريباً"</div>
-        </div>
-        <div class="evidence-confidence">
-          <div class="evidence-confidence-num">87%</div>
-          <div class="evidence-confidence-lbl">الثقة</div>
-        </div>
-      </div>
+<div class="arch-grid">
+<div class="glass arch-block">
+<div class="arch-block-lbl">الطبقة 01 · المصادر</div>
+<div class="arch-block-h">مصادر مالية رسمية</div>
+<div class="arch-block-desc">بنوك مركزية · هيئات تنظيمية · وزارات مالية · هيئات إحصائية</div>
+<div class="arch-block-items">
+<span class="arch-block-item">411 مصدر رسمي</span>
+<span class="arch-block-item">729+ مصدر مالي</span>
+<span class="arch-block-item">مراقبة 24/7</span>
+</div>
+</div>
 
-      <div class="evidence-divider"></div>
+<div class="glass arch-block" style="border-color:var(--border-neon)">
+<div class="arch-block-lbl">الطبقة 02 · المحرك</div>
+<div class="arch-block-h">محرّك الاستخبارات</div>
+<div class="arch-block-desc">استخراج · تصنيف · تحقق · استدلال · ربط أدلة · توليد قرار</div>
+<div class="arch-block-items">
+<span class="arch-block-item">9 طبقات معالجة</span>
+<span class="arch-block-item">دليل لكل ادعاء</span>
+<span class="arch-block-item">0.4 ثانية معالجة</span>
+</div>
+</div>
 
-      <div class="evidence-section-title">مولّد من</div>
-      <div class="evidence-sources">
-        <div class="evidence-source">
-          <div class="evidence-source-icon">✓</div>
-          <div>
-            <div class="evidence-source-name">Federal Reserve</div>
-            <div class="evidence-source-url">federalreserve.gov · FOMC Statement</div>
-          </div>
-        </div>
-        <div class="evidence-source">
-          <div class="evidence-source-icon">✓</div>
-          <div>
-            <div class="evidence-source-name">BLS</div>
-            <div class="evidence-source-url">bls.gov · CPI Release</div>
-          </div>
-        </div>
-        <div class="evidence-source">
-          <div class="evidence-source-icon">✓</div>
-          <div>
-            <div class="evidence-source-name">U.S. Treasury</div>
-            <div class="evidence-source-url">treasury.gov · Yield Curve Data</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="evidence-divider"></div>
-
-      <div class="evidence-chain">
-        <div class="evidence-chain-title">Evidence chain</div>
-        <div class="evidence-chain-stats">
-          <div class="evidence-chain-stat">
-            <div class="evidence-chain-num">5</div>
-            <div class="evidence-chain-lbl">Documents</div>
-          </div>
-          <div class="evidence-chain-stat">
-            <div class="evidence-chain-num">12</div>
-            <div class="evidence-chain-lbl">Extracted facts</div>
-          </div>
-          <div class="evidence-chain-stat">
-            <div class="evidence-chain-num">3</div>
-            <div class="evidence-chain-lbl">Linked events</div>
-          </div>
-          <div class="evidence-chain-stat">
-            <div class="evidence-chain-num">8</div>
-            <div class="evidence-chain-lbl">AI roles</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="evidence-footer">
-        <span class="mono">Every claim is traceable to an official source · No black-box decisions</span>
-      </div>
-    </div>
-  </div>
+<div class="glass arch-block">
+<div class="arch-block-lbl">الطبقة 03 · المنتجات</div>
+<div class="arch-block-h">منتجات القرار</div>
+<div class="arch-block-desc">أخبار استخباراتية · أبحاث مؤسسية · إشارات تداول · تنفيذ موثّق</div>
+<div class="arch-block-items">
+<span class="arch-block-item">رؤى الأخبار</span>
+<span class="arch-block-item">رؤى التداول</span>
+<span class="arch-block-item">واجهة برمجة</span>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- ============= EVIDENCE NETWORK — لحظة الثقة ============= -->
-<section class="section reveal" id="evidence-network">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <span class="section-tag" style="justify-content: center;">شبكة المصادر الرسمية</span>
-      <h2 class="section-h" style="margin: 0 auto 1rem;">متصّل بالمصادر التي تُحرّك الأسواق</h2>
-      <p class="section-lead" style="margin: 0 auto;">ليست أرقاماً تسويقية — هذه قائمة حقيقية بالمصادر الرسمية التي ترتبط بها رؤى، مباشرة.</p>
-    </div>
+<!-- ============= 4. MODULES ============= -->
+<section class="section reveal">
+<div class="container">
+<span class="tag">الوحدات المؤسسية</span>
+<h2 class="h2">خمس وحدات · منصة واحدة</h2>
+<p class="lead">تداول · مخاطر · تحليلات · امتثال · تقارير — كل وحدة مستقلة، ومتكاملة.</p>
 
-    <div class="sources-grid">
-
-      <div class="source-node">
-        <div class="source-node-abbr">FED</div>
-        <div class="source-node-name">Federal Reserve</div>
-        <div class="source-node-type">بنك مركزي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">ECB</div>
-        <div class="source-node-name">European Central Bank</div>
-        <div class="source-node-type">بنك مركزي · أوروبا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">BOE</div>
-        <div class="source-node-name">Bank of England</div>
-        <div class="source-node-type">بنك مركزي · بريطانيا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">BOJ</div>
-        <div class="source-node-name">Bank of Japan</div>
-        <div class="source-node-type">بنك مركزي · اليابان</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">IMF</div>
-        <div class="source-node-name">International Monetary Fund</div>
-        <div class="source-node-type">مؤسسي</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">BIS</div>
-        <div class="source-node-name">بنك التسويات الدولية</div>
-        <div class="source-node-type">مؤسسي</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">BLS</div>
-        <div class="source-node-name">Bureau of Labor Statistics</div>
-        <div class="source-node-type">إحصائي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">BEA</div>
-        <div class="source-node-name">مكتب التحليل الاقتصادي</div>
-        <div class="source-node-type">إحصائي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">SEC</div>
-        <div class="source-node-name">هيئة الأوراق المالية والبورصات</div>
-        <div class="source-node-type">تنظيمي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">CFTC</div>
-        <div class="source-node-name">هيئة تداول السلع الآجلة</div>
-        <div class="source-node-type">تنظيمي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">TREAS</div>
-        <div class="source-node-name">خزانة الولايات المتحدة</div>
-        <div class="source-node-type">حكومي · أمريكا</div>
-      </div>
-      <div class="source-node">
-        <div class="source-node-abbr">+</div>
-        <div class="source-node-name">400+ مصدر رسمي</div>
-        <div class="source-node-type">بنوك · هيئات · وزارات</div>
-      </div>
-
-    </div>
-
-    <div class="sources-footer">
-      <span class="mono">411 مصدر رسمي</span>
-      <span class="mono">·</span>
-      <span class="mono">729+ مصدر مالي</span>
-      <span class="mono">·</span>
-      <span class="mono">24/7 مراقبة نشطة</span>
-    </div>
-  </div>
+<div class="mod-grid">
+<div class="glass mod-card">
+<div class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+<div class="mod-h">التداول</div>
+<div class="mod-desc">تنفيذ موثّق · 15 فحص أمان</div>
+</div>
+<div class="glass mod-card">
+<div class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<div class="mod-h">المخاطر</div>
+<div class="mod-desc">درجة مخاطرة · VaR · اختبار إجهاد</div>
+</div>
+<div class="glass mod-card">
+<div class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+<div class="mod-h">التحليلات</div>
+<div class="mod-desc">83 أداة رسم · 15 مؤشر · 64 محرك</div>
+</div>
+<div class="glass mod-card">
+<div class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+<div class="mod-h">الامتثال</div>
+<div class="mod-desc">GDPR · SOC2 · سجل تدقيق</div>
+</div>
+<div class="glass mod-card">
+<div class="mod-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
+<div class="mod-h">التقارير</div>
+<div class="mod-desc">مذكرات بحثية · أثر سوقي · أدلة</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- ============= INVESTMENT COMMITTEE VIEW — سيناريو لجنة الاستثمار ============= -->
-<section class="section reveal" id="committee">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <span class="section-tag" style="justify-content: center;">عرض لجنة الاستثمار</span>
-      <h2 class="section-h" style="margin: 0 auto 1rem;">قبل اجتماع لجنة الاستثمار</h2>
-      <p class="section-lead" style="margin: 0 auto;">كل قرار يصل إلى لجنة الاستثمار مدعوم بسلسلة إثبات كاملة — قابل للتفسير، قابل للدفاع، قابل للمراجعة.</p>
-    </div>
+<!-- ============= 5. BENCHMARKS ============= -->
+<section class="section reveal" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="container">
+<div style="text-align:center;margin-bottom:1.5rem">
+<span class="tag" style="justify-content:center">مقاييس الأداء</span>
+<h2 class="h2" style="margin:0 auto .5rem">أرقام المؤسسة</h2>
+<p class="lead" style="margin:0 auto">ليست وعوداً — مقاييس تشغيل فعلية.</p>
+</div>
 
-    <div class="committee-card">
-
-      <div class="committee-header">
-        <div class="committee-memo">
-          <div class="committee-memo-lbl">مذكرة · توصية</div>
-          <div class="committee-memo-id">#IC-2026-07-24-014</div>
-        </div>
-        <div class="committee-stamp">
-          <div class="committee-stamp-lbl">الثقة</div>
-          <div class="committee-stamp-val">87%</div>
-        </div>
-      </div>
-
-      <div class="committee-body">
-
-        <div class="committee-row">
-          <div class="committee-row-lbl">التعرّض</div>
-          <div class="committee-row-val">EUR/USD · Long · 0.5 lot</div>
-        </div>
-
-        <div class="committee-divider"></div>
-
-        <div class="committee-row">
-          <div class="committee-row-lbl">السبب</div>
-          <div class="committee-row-val">
-            بيان ECB + بيانات تضخم منطقة اليورو + بيانات التوظيف الأمريكية
-          </div>
-        </div>
-
-        <div class="committee-divider"></div>
-
-        <div class="committee-row">
-          <div class="committee-row-lbl">الدليل</div>
-          <div class="committee-row-val">
-            <div class="committee-evidence-list">
-              <div class="committee-evidence-item">
-                <span class="committee-evidence-check">✓</span>
-                <span class="committee-evidence-src">ECB · Monetary Policy Statement</span>
-                <span class="committee-evidence-date">Jul 24</span>
-              </div>
-              <div class="committee-evidence-item">
-                <span class="committee-evidence-check">✓</span>
-                <span class="committee-evidence-src">Eurostat · HICP Release</span>
-                <span class="committee-evidence-date">Jul 18</span>
-              </div>
-              <div class="committee-evidence-item">
-                <span class="committee-evidence-check">✓</span>
-                <span class="committee-evidence-src">BLS · Nonfarm Payrolls</span>
-                <span class="committee-evidence-date">Jul 11</span>
-              </div>
-              <div class="committee-evidence-item">
-                <span class="committee-evidence-check">✓</span>
-                <span class="committee-evidence-src">Federal Reserve · FOMC Minutes</span>
-                <span class="committee-evidence-date">Jul 09</span>
-              </div>
-              <div class="committee-evidence-item">
-                <span class="committee-evidence-check">✓</span>
-                <span class="committee-evidence-src">U.S. Treasury · Yield Curve</span>
-                <span class="committee-evidence-date">Jul 24</span>
-              </div>
-            </div>
-            <div class="committee-evidence-count">8 official documents · 12 extracted facts · 3 linked events</div>
-          </div>
-        </div>
-
-        <div class="committee-divider"></div>
-
-        <div class="committee-row">
-          <div class="committee-row-lbl">المخاطرة</div>
-          <div class="committee-row-val">متوسطة · تقلّب 14.2% · VaR 1.8%</div>
-        </div>
-
-        <div class="committee-divider"></div>
-
-        <div class="committee-row">
-          <div class="committee-row-lbl">التوصية</div>
-          <div class="committee-row-val gold">تخفيض التعرّض لـ EUR/USD · تحوّط بشراء الدولار</div>
-        </div>
-
-      </div>
-
-      <div class="committee-footer">
-        <span class="mono">قابل للدفاع أمام أي لجنة استثمار</span>
-        <span class="mono">·</span>
-        <span class="mono">كل ادعاء مرتبط بمصدر رسمي</span>
-        <span class="mono">·</span>
-        <span class="mono">سجل تدقيق كامل محفوظ</span>
-      </div>
-
-    </div>
-  </div>
+<div class="bench-grid">
+<div class="glass bench-card">
+<div class="bench-num">411</div>
+<div class="bench-lbl">مصدر رسمي</div>
+</div>
+<div class="glass bench-card">
+<div class="bench-num">10K+</div>
+<div class="bench-lbl">وثيقة مُعالَجة</div>
+</div>
+<div class="glass bench-card">
+<div class="bench-num">3.7s</div>
+<div class="bench-lbl">زمن المعالجة</div>
+</div>
+<div class="glass bench-card">
+<div class="bench-num">87%</div>
+<div class="bench-lbl">متوسط الثقة</div>
+</div>
+<div class="glass bench-card">
+<div class="bench-num">4.2ms</div>
+<div class="bench-lbl">زمن التنفيذ</div>
+</div>
+<div class="glass bench-card">
+<div class="bench-num">24/7</div>
+<div class="bench-lbl">مراقبة نشطة</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- ============= PROBLEM ============= -->
-<section class="section problem reveal" id="problem">
-  <div class="container">
-    <div class="problem-grid">
-      <div>
-        <span class="section-tag">المشكلة</span>
-        <h2 class="section-h">المؤسسات المالية لا تعاني من نقص البيانات.<br>تعاني من فقدان السياق.</h2>
-        <p class="section-lead">
-          آلاف الوثائق الرسمية تُنشر يومياً — تقارير بنوك مركزية، بيانات اقتصادية، قرارات سياسة نقدية.
-          لا أحد يربطها بقرارات التداول. الفجوة ليست في البيانات، بل في تحويلها إلى معرفة قابلة للتنفيذ.
-        </p>
-      </div>
-      <div class="problem-stat">
-        <div class="problem-stat-num">+10,000</div>
-        <div class="problem-stat-lbl">مستند رسمي شهرياً لا تتم معالجته أو ربطه بقرارات الاستثمار</div>
-      </div>
-    </div>
-  </div>
+<!-- ============= 6. SECURITY ============= -->
+<section class="section reveal">
+<div class="container">
+<span class="tag">الأمان والامتثال</span>
+<h2 class="h2">أمان مؤسسي · ثقة مطلقة</h2>
+<p class="lead">كل قرار قابل للتفسير والدفاع. كل عملية موثّقة. كل حساب معزول.</p>
+
+<div class="sec-grid">
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<div class="sec-h">تشفير AES-256</div>
+<div class="sec-desc">أثناء التخزين والنقل · معيار البنوك المركزية</div>
+</div>
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+<div class="sec-h">عزل كامل</div>
+<div class="sec-desc">100% لكل حساب · لا وصول متبادل</div>
+</div>
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+<div class="sec-h">سجل تدقيق</div>
+<div class="sec-desc">كل عملية موثّقة · IP · طابع زمني · نتيجة</div>
+</div>
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<div class="sec-h">جاهز للامتثال</div>
+<div class="sec-desc">GDPR · SOC2 · قابل للدفاع أمام أي لجنة</div>
+</div>
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+<div class="sec-h">لا حضانة</div>
+<div class="sec-desc">لا نلمس أموالك · التنفيذ على وسيطك</div>
+</div>
+<div class="glass sec-card">
+<div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+<div class="sec-h">15 فحص أمان</div>
+<div class="sec-desc">قبل كل تنفيذ · تلقائياً</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- ============= ECOSYSTEM ============= -->
-<section class="section reveal" id="ecosystem">
-  <div class="container">
-    <span class="section-tag">المنظومة</span>
-    <h2 class="section-h">ثلاثة منتجات، منظومة واحدة</h2>
-    <p class="section-lead">رؤى ليست منصة واحدة. هي ثلاث طبقات مترابطة: المعرفة، الذكاء، التنفيذ — تعمل كمنظومة متكاملة.</p>
-
-    <div class="ecosystem-grid">
-
-      <div class="eco-card">
-        <div class="eco-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-        </div>
-        <div class="eco-card-name">رؤى الأخبار</div>
-        <div class="eco-card-name-ar">منصة الأخبار الذكية</div>
-        <p class="eco-card-desc">منصة استخبارات مالية تحوّل المصادر الرسمية إلى معرفة قابلة للتنفيذ. تقارير، أبحاث، أخبار، أحداث، رسوم بيانية، أدلة.</p>
-        <ul class="eco-card-list">
-          <li>تقارير استراتيجية</li>
-          <li>أبحاث معمّقة</li>
-          <li>أخبار ذكية</li>
-          <li>أحداث اقتصادية</li>
-          <li>رسوم بيانية</li>
-          <li>أدلة موثقة</li>
-          <li>تحليلات</li>
-          <li>تقويم اقتصادي</li>
-        </ul>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
-        </div>
-        <div class="eco-card-name">رؤى المحرك</div>
-        <div class="eco-card-name-ar">المحرك الداخلي</div>
-        <p class="eco-card-desc">طبقة الذكاء التي تربط المصادر بالقرار. سجل، وثائق، حقائق، أدلة، رسم معرفة، استدلال، مجلس ذكي.</p>
-        <ul class="eco-card-list">
-          <li>سجل المصادر الرسمية</li>
-          <li>معالجة الوثائق</li>
-          <li>استخراج الحقائق</li>
-          <li>مخطط الأدلة</li>
-          <li>رسم المعرفة</li>
-          <li>محرّك الاستدلال</li>
-          <li>المجلس الذكي (10 أدوار)</li>
-          <li>طبقة القرار</li>
-        </ul>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-        </div>
-        <div class="eco-card-name">رؤى التداول</div>
-        <div class="eco-card-name-ar">منصة التداول الذكية</div>
-        <p class="eco-card-desc">يحوّل القرار إلى صفقة. محفظة، إشارات، مراكز، أوامر، مخاطر، أداء، تنفيذ.</p>
-        <ul class="eco-card-list">
-          <li>إدارة المحفظة</li>
-          <li>تدفّق الإشارات</li>
-          <li>تتبّع المراكز</li>
-          <li>محرّك الأوامر</li>
-          <li>إدارة المخاطر (15 فحصاً)</li>
-          <li>مساعد ذكي</li>
-          <li>تحليلات الأداء</li>
-          <li>جسر التنفيذ (MT5)</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============= JOURNEY — Financial Intelligence Journey ============= -->
-<section class="section journey reveal" id="journey">
-  <div class="container">
-    <span class="section-tag">رحلة المعلومة</span>
-    <h2 class="section-h">من المصدر الرسمي إلى الصفقة</h2>
-    <p class="section-lead">الرسمة الأهم في الموقع — رحلة كاملة من الخبر الرسمي إلى التنفيذ، مع دليل موثق لكل خطوة.</p>
-
-    <div class="journey-diagram">
-      <div class="journey-flow" id="journeyFlow">
-        <div class="journey-node" data-step="0">
-          <div class="journey-node-dot">01</div>
-          <div class="journey-node-name">المصدر</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="1">
-          <div class="journey-node-dot">02</div>
-          <div class="journey-node-name">الوثيقة</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="2">
-          <div class="journey-node-dot">03</div>
-          <div class="journey-node-name">الحقيقة</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="3">
-          <div class="journey-node-dot">04</div>
-          <div class="journey-node-name">الحدث</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="4">
-          <div class="journey-node-dot">05</div>
-          <div class="journey-node-name">الدليل</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="5">
-          <div class="journey-node-dot">06</div>
-          <div class="journey-node-name">المعرفة</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="6">
-          <div class="journey-node-dot">07</div>
-          <div class="journey-node-name">المجلس الذكي</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="7">
-          <div class="journey-node-dot">08</div>
-          <div class="journey-node-name">التوصية</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="8">
-          <div class="journey-node-dot">09</div>
-          <div class="journey-node-name">فحص المخاطر</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="9">
-          <div class="journey-node-dot">10</div>
-          <div class="journey-node-name">التنفيذ</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="10">
-          <div class="journey-node-dot">11</div>
-          <div class="journey-node-name">المركز</div>
-        </div>
-        <div class="journey-connector"></div>
-        <div class="journey-node" data-step="11">
-          <div class="journey-node-dot">12</div>
-          <div class="journey-node-name">التعلّم</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= ROUAA NEWS ============= -->
-<section class="section reveal" id="news">
-  <div class="container">
-    <span class="section-tag">رؤى الأخبار</span>
-    <h2 class="section-h">منصة الأخبار الذكية</h2>
-    <p class="section-lead">منصة استخبارات مالية — واجهة تفاعلية تحاكي المنصة الحقيقية. تقارير، أبحاث، أخبار، أحداث، رسوم بيانية، أدلة، تحليلات، واجهة برمجة، تقويم اقتصادي.</p>
-
-    <div class="demo-window">
-      <div class="demo-titlebar">
-        <div class="demo-dot r"></div><div class="demo-dot y"></div><div class="demo-dot g"></div>
-        <div class="demo-title">رؤى · منصة الاستخبارات المالية</div>
-      </div>
-      <div class="news-demo-grid">
-
-        <div class="news-sidebar">
-          <h4>الأقسام</h4>
-          <ul>
-            <li class="active">📊 التقارير <span class="count">142</span></li>
-            <li>🔬 الأبحاث <span class="count">87</span></li>
-            <li>📰 الأخبار <span class="count">2,431</span></li>
-            <li>📅 الأحداث <span class="count">38</span></li>
-            <li>📈 الرسوم <span class="count">56</span></li>
-            <li>🔍 الأدلة <span class="count">411</span></li>
-            <li>💡 التحليلات <span class="count">219</span></li>
-            <li>🗓 التقويم <span class="count">24</span></li>
-          </ul>
-        </div>
-
-        <div class="news-main">
-          <div class="news-article">
-            <div class="news-article-tag">الفيدرالي · قرار الفائدة</div>
-            <div class="news-article-title">الفيدرالي يُبقي على أسعار الفائدة بين 5.25% - 5.50% للمرة الثامنة</div>
-            <div class="news-article-meta">
-              <span class="src">federalreserve.gov</span>
-              <span>قبل 4 دقائق</span>
-              <span>ثقة 98%</span>
-            </div>
-          </div>
-          <div class="news-article">
-            <div class="news-article-tag">البنك المركزي الأوروبي · التضخم</div>
-            <div class="news-article-title">تضخم منطقة اليورو يتباطأ إلى 2.4% في يونيو</div>
-            <div class="news-article-meta">
-              <span class="src">ecb.europa.eu</span>
-              <span>قبل 12 دقيقة</span>
-              <span>ثقة 96%</span>
-            </div>
-          </div>
-          <div class="news-article">
-            <div class="news-article-tag">مكتب إحصاءات العمل · التوظيف</div>
-            <div class="news-article-title">الوظائف غير الزراعية ترتفع 272 ألف في مايو، تتجاوز التوقعات</div>
-            <div class="news-article-meta">
-              <span class="src">bls.gov</span>
-              <span>قبل 38 دقيقة</span>
-              <span>ثقة 99%</span>
-            </div>
-          </div>
-          <div class="news-article">
-            <div class="news-article-tag">صندوق النقد · التوقعات</div>
-            <div class="news-article-title">صندوق النقد يرفع توقعات نمو الاقتصاد العالمي إلى 3.2% لعام 2026</div>
-            <div class="news-article-meta">
-              <span class="src">imf.org</span>
-              <span>قبل ساعة</span>
-              <span>ثقة 97%</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="news-aside">
-          <h4>الأدلة الموثقة</h4>
-          <div class="evidence-card">
-            <div class="src">federalreserve.gov</div>
-            <div class="fact">المعدل المستهدف لأسعار الفائدة الفيدرالية: 5.25% - 5.50%</div>
-            <div class="trust">✓ موثوق · مستوى A+</div>
-          </div>
-          <div class="evidence-card">
-            <div class="src">ecb.europa.eu</div>
-            <div class="fact">معدل تضخم منطقة اليورو: 2.4% سنوياً (يونيو 2026)</div>
-            <div class="trust">✓ موثوق · مستوى A+</div>
-          </div>
-          <div class="evidence-card">
-            <div class="src">bls.gov</div>
-            <div class="fact">الوظائف غير الزراعية: +272 ألف (مايو 2026)</div>
-            <div class="trust">✓ موثوق · مستوى A+</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= ROUAA CORE — The Intelligence Layer (طبقة تحت المنتجات) ============= -->
-<section class="section reveal" id="core" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <span class="section-tag" style="justify-content: center;">طبقة الذكاء</span>
-      <h2 class="section-h" style="margin: 0 auto 1rem;">ROUAA Core — البنية التحتية الذكية</h2>
-      <p class="section-lead" style="margin: 0 auto;">مثل Neural Engine في Apple — لا تُباع منفردة، بل تشغّل كل شيء آخر. تحتها مصادر، فوقها منتجات.</p>
-    </div>
-
-    <div class="core-stack">
-
-      <!-- Top layer: Products -->
-      <div class="core-stack-layer products">
-        <div class="core-stack-layer-label">PRODUCTS · المنتجات</div>
-        <div class="core-stack-products">
-          <div class="core-stack-product">
-            <div class="core-stack-product-name">ROUAA NEWS</div>
-            <div class="core-stack-product-desc">استخبارات</div>
-          </div>
-          <div class="core-stack-product">
-            <div class="core-stack-product-name">ROUAA TRADE</div>
-            <div class="core-stack-product-desc">تنفيذ</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="core-stack-connector">↑</div>
-
-      <!-- Middle layer: Core -->
-      <div class="core-stack-layer core">
-        <div class="core-stack-layer-label">ROUAA CORE · Intelligence Infrastructure</div>
-        <div class="core-stack-core-flow">
-          <span class="core-pill">سجل المصادر</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">الوثائق</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">الحقائق</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">الدليل</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">رسم المعرفة</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">الاستدلال</span>
-          <span class="core-arrow">→</span>
-          <span class="core-pill">المجلس الذكي</span>
-        </div>
-      </div>
-
-      <div class="core-stack-connector">↑</div>
-
-      <!-- Bottom layer: Sources -->
-      <div class="core-stack-layer sources">
-        <div class="core-stack-layer-label">OFFICIAL SOURCES · 411 مصدر رسمي</div>
-        <div class="core-stack-sources">
-          <span>FED</span><span>·</span><span>ECB</span><span>·</span><span>BOE</span><span>·</span><span>BOJ</span><span>·</span><span>IMF</span><span>·</span><span>BIS</span><span>·</span><span>BLS</span><span>·</span><span>BEA</span><span>·</span><span>SEC</span><span>·</span><span>CFTC</span><span>·</span><span>TREAS</span><span>·</span><span>+400</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============= ROUAA TRADE → Decision Execution Layer ============= -->
-<section class="section reveal" id="trade">
-  <div class="container">
-    <span class="section-tag">طبقة تنفيذ القرار</span>
-    <h2 class="section-h">التنفيذ ليس المنتج — القرار هو المنتج</h2>
-    <p class="section-lead">التداول مجرد آخر خطوة. المسار: Understand → Analyze → Decide → Execute → Learn. كل صفقة لها سبب، كل سبب له دليل.</p>
-
-    <div class="demo-window">
-      <div class="demo-titlebar">
-        <div class="demo-dot r"></div><div class="demo-dot y"></div><div class="demo-dot g"></div>
-        <div class="demo-title">rouaa.trade · Decision Execution Layer</div>
-      </div>
-
-      <!-- WHY THIS POSITION EXISTS — بصمة رؤى -->
-      <div class="trade-why">
-        <div class="trade-why-header">
-          <span class="mono" style="color: var(--gold);">WHY THIS POSITION EXISTS</span>
-          <span class="mono" style="color: var(--text-mute);">EUR/USD · Long · 0.5 lot</span>
-        </div>
-        <div class="trade-why-grid">
-          <div class="trade-why-col">
-            <div class="trade-why-lbl">الدليل</div>
-            <div class="trade-why-val">Fed statement · rate hold</div>
-          </div>
-          <div class="trade-why-col">
-            <div class="trade-why-lbl">الاستدلال</div>
-            <div class="trade-why-val">Inflation slowing · USD strength</div>
-          </div>
-          <div class="trade-why-col">
-            <div class="trade-why-lbl">المخاطرة</div>
-            <div class="trade-why-val">Medium</div>
-          </div>
-          <div class="trade-why-col">
-            <div class="trade-why-lbl">الثقة</div>
-            <div class="trade-why-val gold">82%</div>
-          </div>
-          <div class="trade-why-col">
-            <div class="trade-why-lbl">التنفيذ</div>
-            <div class="trade-why-val">EUR/USD Long</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="trade-grid">
-
-        <div class="trade-panel">
-          <h4>المحفظة</h4>
-          <div class="trade-row"><span class="pair">رصيد</span><span class="val">1,247,832 دولار</span></div>
-          <div class="trade-row"><span class="pair">P/L اليوم</span><span class="val up">+18,427 دولار</span></div>
-          <div class="trade-row"><span class="pair">P/L الكلي</span><span class="val up">+247,832 دولار</span></div>
-          <div class="trade-row"><span class="pair">الهامش</span><span class="val">84,200 دولار</span></div>
-          <div class="trade-row"><span class="pair">حر</span><span class="val">1,163,632 دولار</span></div>
-          <h4 style="margin-top: 1rem;">الأداء (7 أيام)</h4>
-          <svg class="mini-chart" viewBox="0 0 200 60" preserveAspectRatio="none">
-            <path d="M 0,40 L 25,35 L 50,38 L 75,28 L 100,30 L 125,20 L 150,22 L 175,12 L 200,8" />
-          </svg>
-        </div>
-
-        <div class="trade-panel">
-          <h4>الإشارات الحية</h4>
-          <div class="trade-row"><span class="pair">EUR/USD</span><span class="val up">شراء · 87%</span></div>
-          <div class="trade-row"><span class="pair">GBP/JPY</span><span class="val down">بيع · 72%</span></div>
-          <div class="trade-row"><span class="pair">XAU/USD</span><span class="val up">شراء · 91%</span></div>
-          <div class="trade-row"><span class="pair">BTC/USD</span><span class="val up">شراء · 68%</span></div>
-          <div class="trade-row"><span class="pair">OIL WTI</span><span class="val up">شراء · 79%</span></div>
-          <div class="trade-row"><span class="pair">NASDAQ</span><span class="val up">شراء · 83%</span></div>
-          <h4 style="margin-top: 1rem;">المجلس الذكي</h4>
-          <div class="trade-row"><span class="pair">أدوار نشطة</span><span class="val">8 / 10</span></div>
-          <div class="trade-row"><span class="pair">قرارات اليوم</span><span class="val">47</span></div>
-        </div>
-
-        <div class="trade-panel">
-          <h4>المراكز المفتوحة</h4>
-          <div class="trade-row"><span class="pair">EUR/USD</span><span class="val up">+1.2% · شراء 0.5</span></div>
-          <div class="trade-row"><span class="pair">XAU/USD</span><span class="val up">+2.1% · شراء 0.3</span></div>
-          <div class="trade-row"><span class="pair">GBP/JPY</span><span class="val down">-0.8% · بيع 0.2</span></div>
-          <div class="trade-row"><span class="pair">BTC/USD</span><span class="val up">+3.4% · شراء 0.1</span></div>
-          <div class="trade-row"><span class="pair">OIL WTI</span><span class="val up">+1.7% · شراء 0.4</span></div>
-          <h4 style="margin-top: 1rem;">فحوصات الأمان</h4>
-          <div class="trade-row"><span class="pair">اجتاز</span><span class="val up">15 / 15</span></div>
-          <div class="trade-row"><span class="pair">زمن التنفيذ</span><span class="val">4.2ms</span></div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= INTEGRATION ============= -->
-<section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-  <div class="container">
-    <span class="section-tag">التكامل</span>
-    <h2 class="section-h">كيف ترتبط المنظومة</h2>
-    <p class="section-lead">الأخبار + المحرك + التداول يعملون كمنظومة واحدة. البيانات تتدفق من المصدر إلى التنفيذ، والنتائج تتدفق عائدة للتعلم.</p>
-
-    <div class="integration-diagram">
-      <div class="integration-box">
-        <div class="name">رؤى الأخبار</div>
-        <div class="name-ar">المعرفة والتحليل</div>
-        <div class="desc">يجمع المصادر الرسمية ويحوّلها إلى معرفة قابلة للتنفيذ</div>
-      </div>
-      <div class="integration-arrow">←</div>
-      <div class="integration-box">
-        <div class="name">رؤى المحرك</div>
-        <div class="name-ar">طبقة الذكاء</div>
-        <div class="desc">يربط المعرفة بالقرار عبر رسم المعرفة والمجلس الذكي</div>
-      </div>
-      <div class="integration-arrow">←</div>
-      <div class="integration-box">
-        <div class="name">رؤى التداول</div>
-        <div class="name-ar">القرار والتنفيذ</div>
-        <div class="desc">ينفّذ القرار كصفقة مع 15 فحص أمان ومتابعة كاملة</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= ENTERPRISE ============= -->
-<section class="section reveal" id="enterprise">
-  <div class="container">
-    <span class="section-tag">المؤسسات</span>
-    <h2 class="section-h">جاهز للمؤسسات</h2>
-    <p class="section-lead">العلامة البيضاء · واجهة برمجة · SDK · خيارات نشر — مرنة تناسب أي بنية تحتية.</p>
-
-    <div class="features-grid">
-      <div class="feature-box">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
-        <h4>العلامة البيضاء</h4>
-        <p>انشر رؤى بهويتك التجارية. تخصيص كامل للواجهة والمحتوى.</p>
-      </div>
-      <div class="feature-box">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
-        <h4>واجهة برمجة REST</h4>
-        <p>وصول كامل لكل طبقات المنظومة. استهلك المعرفة والقرارات برمجياً.</p>
-      </div>
-      <div class="feature-box">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
-        <h4>SDK</h4>
-        <p>Python · JavaScript · Go · Rust. ادمج رؤى في تطبيقاتك بسطرين.</p>
-      </div>
-      <div class="feature-box">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
-        <h4>سحابة / على الموقع</h4>
-        <p>انشر في السحابة أو على بنيتك التحتية. تحكم كامل في البيانات.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= TRUST CENTER — قلب الثقة المؤسسية ============= -->
-<section class="section reveal" id="trust" style="background: var(--surface); border-top: 1px solid var(--border-soft);">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <span class="section-tag" style="justify-content: center;">مركز الثقة</span>
-      <h2 class="section-h" style="margin: 0 auto 1rem;">ست ركائز للثقة المؤسسية</h2>
-      <p class="section-lead" style="margin: 0 auto;">المؤسسات لا تخاف من نقص الذكاء الاصطناعي. تخاف من: هل المصدر صحيح؟ هل يمكن مراجعة القرار؟ هل يمكن الدفاع عنه؟ هنا تجد الإجابات.</p>
-    </div>
-
-    <div class="trust-grid">
-
-      <div class="trust-card">
-        <div class="trust-card-num">01</div>
-        <div class="trust-card-name">المصادر الرسمية</div>
-        <div class="trust-card-desc">411 مصدر رسمي مباشر · بنوك مركزية · هيئات تنظيمية · وزارات مالية · هيئات إحصائية</div>
-        <div class="trust-card-stat">FED · ECB · IMF · BLS · SEC</div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-card-num">02</div>
-        <div class="trust-card-name">سلسلة الأدلة</div>
-        <div class="trust-card-desc">كل ادعاء مرتبط بمصدره الأصلي · طابع زمني · درجة ثقة · لا قرارات مظلمة</div>
-        <div class="trust-card-stat">5 وثائق · 12 حقيقة · 3 أحداث</div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-card-num">03</div>
-        <div class="trust-card-name">سجلات التدقيق</div>
-        <div class="trust-card-desc">سجل كامل لكل عملية من الإشارة إلى التنفيذ · قابل للتدقيق · IP + طابع زمني + متصفح</div>
-        <div class="trust-card-stat">تتبّع كامل</div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-card-num">04</div>
-        <div class="trust-card-name">حوكمة البيانات</div>
-        <div class="trust-card-desc">عزل كامل لكل حساب · لا وصول متبادل · سياق مستقل 100% · حوكمة بيانات مؤسسية</div>
-        <div class="trust-card-stat">عزل 100%</div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-card-num">05</div>
-        <div class="trust-card-name">ضوابط الأمان</div>
-        <div class="trust-card-desc">تشفير AES-256 أثناء التخزين · TLS 1.3 أثناء النقل · 15 فحص أمان قبل التنفيذ · لا نلمس أموالك</div>
-        <div class="trust-card-stat">معيار عسكري</div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-card-num">06</div>
-        <div class="trust-card-name">جاهز للامتثال</div>
-        <div class="trust-card-desc">جاهز لـ GDPR · خارطة طريق SOC2 · قابل للدفاع أمام أي لجنة استثمار · امتثال مؤسسي</div>
-        <div class="trust-card-stat">قابل للدفاع</div>
-      </div>
-
-    </div>
-
-    <div class="trust-footer">
-      <span class="mono">مصمّم للمؤسسات التي تحتاج الدفاع عن كل قرار</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============= API ============= -->
-<section class="section reveal" id="api">
-  <div class="container">
-    <span class="section-tag">واجهة المطورين</span>
-    <h2 class="section-h">REST API Explorer</h2>
-    <p class="section-lead">وصول كامل لكل طبقات المنظومة. استهلك المصادر، الحقائق، الأدلة، القرارات، والإشارات برمجياً.</p>
-
-    <div class="api-explorer">
-      <div class="api-endpoints">
-        <h4 style="margin-bottom: 0.75rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute);">المسارات</h4>
-        <div class="api-endpoint active">
-          <span class="api-method GET">GET</span>
-          <span class="api-path">/v1/sources</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method GET">GET</span>
-          <span class="api-path">/v1/facts</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method GET">GET</span>
-          <span class="api-path">/v1/evidence/:id</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method POST">POST</span>
-          <span class="api-path">/v1/council/ask</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method GET">GET</span>
-          <span class="api-path">/v1/signals</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method STREAM">STREAM</span>
-          <span class="api-path">/v1/stream/signals</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method POST">POST</span>
-          <span class="api-path">/v1/execute</span>
-        </div>
-        <div class="api-endpoint">
-          <span class="api-method GET">GET</span>
-          <span class="api-path">/v1/portfolio</span>
-        </div>
-      </div>
-
-      <div class="api-response">
-<span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
-{
-  <span class="key">"total"</span>: <span class="num">411</span>,
-  <span class="key">"sources"</span>: [
-    {
-      <span class="key">"id"</span>: <span class="str">"fed"</span>,
-      <span class="key">"name"</span>: <span class="str">"Federal Reserve"</span>,
-      <span class="key">"type"</span>: <span class="str">"central_bank"</span>,
-      <span class="key">"trust"</span>: <span class="str">"A+"</span>,
-      <span class="key">"url"</span>: <span class="str">"federalreserve.gov"</span>
-    },
-    {
-      <span class="key">"id"</span>: <span class="str">"ecb"</span>,
-      <span class="key">"name"</span>: <span class="str">"European Central Bank"</span>,
-      <span class="key">"type"</span>: <span class="str">"central_bank"</span>,
-      <span class="key">"trust"</span>: <span class="str">"A+"</span>
-    }
-  ],
-  <span class="key">"rate_limit"</span>: <span class="num">1000</span>,
-  <span class="key">"remaining"</span>: <span class="num">987</span>
-}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= USE CASES ============= -->
-<section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft);">
-  <div class="container">
-    <span class="section-tag">حالات الاستخدام</span>
-    <h2 class="section-h">لمن صُممت رؤى</h2>
-    <p class="section-lead">للمؤسسات التي تحتاج طبقة ذكاء بين البيانات والقرار.</p>
-
-    <div class="usecases-grid">
-      <div class="usecase"><div class="icon">🏦</div><div class="name">بنوك استثمارية</div><div class="desc">أبحاث + تنفيذ</div></div>
-      <div class="usecase"><div class="icon">📊</div><div class="name">صناديق تحوّط</div><div class="desc">إشارات + مخاطر</div></div>
-      <div class="usecase"><div class="icon">🔬</div><div class="name">شركات أبحاث</div><div class="desc">مصادر + أدلة</div></div>
-      <div class="usecase"><div class="icon">🏛</div><div class="name">حكومات</div><div class="desc">استخبارات مالية</div></div>
-      <div class="usecase"><div class="icon">💳</div><div class="name">بنوك مركزية</div><div class="desc">مراقبة + تحليل</div></div>
-      <div class="usecase"><div class="icon">👨‍👩‍👦</div><div class="name">مكاتب عائلية</div><div class="desc">محفظة + تنفيذ</div></div>
-      <div class="usecase"><div class="icon">📈</div><div class="name">متداولون محترفون</div><div class="desc">إشارات + تنفيذ</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= ROADMAP ============= -->
-<section class="section reveal" id="roadmap">
-  <div class="container">
-    <span class="section-tag">خارطة الطريق</span>
-    <h2 class="section-h">رؤية الشركة</h2>
-    <p class="section-lead">ليست قائمة ميزات — بل رؤية واضحة لما ستكونه رؤى.</p>
-
-    <div class="roadmap-timeline">
-
-      <div class="roadmap-item">
-        <div class="roadmap-content right">
-          <div class="phase">الربع الثالث 2025</div>
-          <h4>الأساس</h4>
-          <p>بنية رؤى الأخبار · 411 مصدر رسمي · أنابيب المحتوى · نظام ثقة المصادر</p>
-        </div>
-        <div class="roadmap-dot done"></div>
-        <div></div>
-      </div>
-
-      <div class="roadmap-item">
-        <div></div>
-        <div class="roadmap-dot done"></div>
-        <div class="roadmap-content left">
-          <div class="phase">الربع الرابع 2025</div>
-          <h4>الذكاء</h4>
-          <p>المجلس الذكي (10 أدوار) · المنفّذ الذكي (15 فحص) · اللاسع (&lt;5ms) · لوحة الشارت</p>
-        </div>
-      </div>
-
-      <div class="roadmap-item">
-        <div class="roadmap-content right">
-          <div class="phase">الربع الأول 2026</div>
-          <h4>التكامل</h4>
-          <p>جسر MetaTrader 5 · تكامل Binance · Alpaca · OANDA · واجهة برمجة للمؤسسات · العلامة البيضاء</p>
-        </div>
-        <div class="roadmap-dot"></div>
-        <div></div>
-      </div>
-
-      <div class="roadmap-item">
-        <div></div>
-        <div class="roadmap-dot"></div>
-        <div class="roadmap-content left">
-          <div class="phase">الربع الثاني 2026</div>
-          <h4>النضج</h4>
-          <p>SOC2 Type II · الترخيص التنظيمي · الشراكات المؤسسية · التوسع الجغرافي</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============= CTA + FORM — Request Institutional Access ============= -->
-<section class="section cta reveal" id="cta">
-  <div class="container">
-    <span class="section-tag" style="justify-content:center;">وصول مؤسسي</span>
-    <h2>اطلب وصولاً مؤسسياً</h2>
-    <p>هذا ليس SaaS Trial. هذا وصول مؤسسي إلى طبقة استخبارات مالية مبنية على الدليل — لمن يحتاج الدفاع عن كل قرار.</p>
-
-    <div class="form-card">
-      <form onsubmit="event.preventDefault(); alert('تم استلام طلبك. سن تواصل معك خلال 48 ساعة.');">
-        <div class="form-row">
-          <label for="name">الاسم الكامل</label>
-          <input type="text" id="name" placeholder="مثال: أحمد محمد" required>
-        </div>
-        <div class="form-row">
-          <label for="email">البريد الإلكتروني المؤسسي</label>
-          <input type="email" id="email" placeholder="name@company.com" required>
-        </div>
-        <div class="form-row">
-          <label for="company">المؤسسة</label>
-          <input type="text" id="company" placeholder="اسم المؤسسة المالية" required>
-        </div>
-        <div class="form-row">
-          <label for="role">الدور الوظيفي</label>
-          <input type="text" id="role" placeholder="مدير استثمار · مدير صندوق · رئيس أبحاث">
-        </div>
-        <button type="submit" class="form-submit">اطلب وصولاً مؤسسياً</button>
-        <p class="form-note">سنتواصل معك خلال 48 ساعة عملية · سرية تامة · مراجعة طلب يدوية</p>
-      </form>
-    </div>
-  </div>
+<!-- ============= CTA ============= -->
+<section class="cta-section reveal" id="cta">
+<div class="container">
+<span class="tag" style="justify-content:center">وصول مؤسسي</span>
+<h2>قبل رؤى: بيانات كثيرة. بعد رؤى: فهم موثّق.</h2>
+<p>هذا ليس SaaS Trial — هذا وصول مؤسسي إلى بنية تحتية استخباراتية مالية.</p>
+<a href="mailto:contact@rouaa.ai" class="btn btn-primary" style="font-size:1rem;padding:.8rem 1.6rem">طلب وصول مؤسسي</a>
+</div>
 </section>
 
 <!-- ============= FOOTER ============= -->
 <footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="name">رؤى · ROUAA</div>
-        <div class="tagline">Evidence-backed Financial Intelligence — الطبقة المفقودة بين البيانات المالية الرسمية والقرارات الاستثمارية. كل قرار قابل للتفسير والدفاع.</div>
-        <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
-      </div>
-      <div class="footer-col">
-        <h4>المنظومة</h4>
-        <ul>
-          <li><a href="#news">رؤى الأخبار</a></li>
-          <li><a href="#core">رؤى المحرك</a></li>
-          <li><a href="#trade">رؤى التداول</a></li>
-          <li><a href="#ecosystem">التكامل</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>المؤسسات</h4>
-        <ul>
-          <li><a href="#enterprise">العلامة البيضاء</a></li>
-          <li><a href="#api">واجهة برمجة REST</a></li>
-          <li><a href="#enterprise">SDK</a></li>
-          <li><a href="#cta">وصول مؤسسي</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>الشركة</h4>
-        <ul>
-          <li><a href="#">من نحن</a></li>
-          <li><a href="#roadmap">خارطة الطريق</a></li>
-          <li><a href="#">المدونة</a></li>
-          <li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
-      <span>contact@rouaa.ai · @rouaa_ai</span>
-    </div>
-  </div>
+<div class="footer-inner">
+<div class="footer-brand">
+<div class="name">رؤى · QUANT LAB</div>
+<div class="tagline">بنية تحتية مالية مؤسسية — من المعلومات إلى القرار الموثوق.</div>
+<div class="meta">v1.0 · 2026</div>
+</div>
+<div class="footer-col">
+<h4>المنصة</h4>
+<ul>
+<li><a href="news.html">رؤى الأخبار</a></li>
+<li><a href="core.html">رؤى المحرك</a></li>
+<li><a href="trade.html">رؤى التداول</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>المؤسسات</h4>
+<ul>
+<li><a href="api.html">واجهة برمجة</a></li>
+<li><a href="enterprise.html">الأمان</a></li>
+<li><a href="#cta">اطلب وصولاً</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>الشركة</h4>
+<ul>
+<li><a href="#">من نحن</a></li>
+<li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 رؤى · QUANT LAB</span>
+<span>contact@rouaa.ai</span>
+</div>
 </footer>
 
 <script>
-// === Particles ===
-(function(){
-  const c = document.getElementById('particles');
-  if (!c) return;
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 15 + 's';
-    p.style.animationDuration = (10 + Math.random() * 10) + 's';
-    c.appendChild(p);
-  }
-})();
-
-// === Reveal on scroll ===
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// === Journey animation ===
-(function(){
-  const journeySection = document.getElementById('journey');
-  if (!journeySection) return;
-  const nodes = journeySection.querySelectorAll('.journey-node');
-  const connectors = journeySection.querySelectorAll('.journey-connector');
-  let current = 0;
-  let interval;
-
-  function activate(idx) {
-    nodes.forEach((n, i) => n.classList.toggle('active', i <= idx));
-    connectors.forEach((c, i) => c.classList.toggle('active', i < idx));
-  }
-
-  function start() {
-    interval = setInterval(() => {
-      current = (current + 1) % (nodes.length + 1);
-      if (current === 0) {
-        nodes.forEach(n => n.classList.remove('active'));
-        connectors.forEach(c => c.classList.remove('active'));
-      } else {
-        activate(current - 1);
-      }
-    }, 600);
-  }
-
-  const journeyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        activate(0);
-        start();
-      } else {
-        clearInterval(interval);
-      }
-    });
-  }, { threshold: 0.3 });
-  journeyObserver.observe(journeySection);
-})();
-
-// === API Explorer ===
-(function(){
-  const endpoints = document.querySelectorAll('.api-endpoint');
-  const response = document.querySelector('.api-response');
-  if (!endpoints.length || !response) return;
-
-  const responses = {
-    0: `<span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
-{
-  <span class="key">"total"</span>: <span class="num">411</span>,
-  <span class="key">"sources"</span>: [
-    {
-      <span class="key">"id"</span>: <span class="str">"fed"</span>,
-      <span class="key">"name"</span>: <span class="str">"Federal Reserve"</span>,
-      <span class="key">"type"</span>: <span class="str">"central_bank"</span>,
-      <span class="key">"trust"</span>: <span class="str">"A+"</span>
-    }
-  ]
-}`,
-    1: `<span class="cmt">// GET /v1/facts — الحقائق المستخرجة</span>
-{
-  <span class="key">"total"</span>: <span class="num">1247</span>,
-  <span class="key">"facts"</span>: [
-    {
-      <span class="key">"id"</span>: <span class="str">"fed_rate_2026_06"</span>,
-      <span class="key">"value"</span>: <span class="str">"5.25% - 5.50%"</span>,
-      <span class="key">"source"</span>: <span class="str">"federalreserve.gov"</span>,
-      <span class="key">"confidence"</span>: <span class="num">0.99</span>
-    }
-  ]
-}`,
-    2: `<span class="cmt">// GET /v1/evidence/:id — دليل موثق</span>
-{
-  <span class="key">"id"</span>: <span class="str">"ev_fed_hold_2026"</span>,
-  <span class="key">"claim"</span>: <span class="str">"Fed holds rate at 5.25-5.50%"</span>,
-  <span class="key">"source"</span>: {
-    <span class="key">"url"</span>: <span class="str">"federalreserve.gov/..."</span>,
-    <span class="key">"retrieved"</span>: <span class="str">"2026-07-24T14:32:18Z"</span>
-  },
-  <span class="key">"trust"</span>: <span class="str">"A+"</span>
-}`,
-    3: `<span class="cmt">// POST /v1/council/ask — اسأل المجلس الذكي</span>
-{
-  <span class="key">"question"</span>: <span class="str">"What is the impact of Fed hold on EUR/USD?"</span>,
-  <span class="key">"council"</span>: {
-    <span class="key">"consensus"</span>: <span class="str">"BULLISH EUR/USD"</span>,
-    <span class="key">"confidence"</span>: <span class="num">0.87</span>,
-    <span class="key">"votes"</span>: <span class="num">8</span>,
-    <span class="key">"dissent"</span>: <span class="num">2</span>
-  }
-}`,
-    4: `<span class="cmt">// GET /v1/signals — الإشارات الحية</span>
-{
-  <span class="key">"signals"</span>: [
-    {
-      <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>,
-      <span class="key">"direction"</span>: <span class="str">"BUY"</span>,
-      <span class="key">"confidence"</span>: <span class="num">0.87</span>,
-      <span class="key">"evidence"</span>: <span class="num">3</span>
-    }
-  ]
-}`,
-    5: `<span class="cmt">// STREAM /v1/stream/signals — بث مباشر</span>
-<span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"XAU/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.91</span>}
-
-<span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"BTC/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.68</span>}`,
-    6: `<span class="cmt">// POST /v1/execute — تنفيذ أمر</span>
-{
-  <span class="key">"order"</span>: {
-    <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>,
-    <span class="key">"side"</span>: <span class="str">"BUY"</span>,
-    <span class="key">"size"</span>: <span class="num">0.5</span>
-  },
-  <span class="key">"checks_passed"</span>: <span class="num">15</span>,
-  <span class="key">"executed"</span>: <span class="num">true</span>,
-  <span class="key">"latency_ms"</span>: <span class="num">4.2</span>
-}`,
-    7: `<span class="cmt">// GET /v1/portfolio — المحفظة</span>
-{
-  <span class="key">"balance"</span>: <span class="num">1247832</span>,
-  <span class="key">"pnl_today"</span>: <span class="num">18427</span>,
-  <span class="key">"positions"</span>: <span class="num">5</span>,
-  <span class="key">"margin_used"</span>: <span class="num">84200</span>
-}`
-  };
-
-  endpoints.forEach((ep, idx) => {
-    ep.addEventListener('click', () => {
-      endpoints.forEach(e => e.classList.remove('active'));
-      ep.classList.add('active');
-      response.innerHTML = responses[idx] || responses[0];
-    });
-  });
-})();
-
-// === News sidebar tabs ===
-(function(){
-  const items = document.querySelectorAll('.news-sidebar li');
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      items.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    });
-  });
-})();
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-
 </body>
 </html>
