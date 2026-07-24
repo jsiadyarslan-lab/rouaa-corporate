@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى الأخبار — من الأحداث المالية إلى الرؤية الاستثمارية</title>
-<meta name="description" content="رؤى تراقب المصادر المالية الرسمية وتحوّل البيانات إلى أحداث مفهومة وتحليلات موثّقة.">
+<title>رؤى الأخبار — افهم العالم المالي قبل اتخاذ القرار</title>
+<meta name="description" content="رؤى تجمع المعلومات المالية الرسمية، تربط الأحداث بالحقائق، وتحوّلها إلى معرفة استثمارية قابلة للتنفيذ.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,47 +40,52 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
 .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
 .hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:20ch}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
 
-/* === Live Intelligence Event === */
-.live-event{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:700px;margin-left:auto;margin-right:auto}
-.le-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
-.le-source{display:flex;align-items:center;gap:.6rem}
-.le-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.le-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
-.le-time{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.le-body{padding:1.5rem}
-.le-steps{display:flex;flex-direction:column;gap:0}
-.le-step{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft)}
-.le-step:last-child{border-bottom:none}
-.le-check{width:20px;height:20px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
-.le-step.active .le-check{background:var(--gold);animation:pulse 1.5s ease-in-out infinite}
-.le-step-text{font-size:.875rem;color:var(--text);font-weight:500}
-.le-step.active .le-step-text{color:var(--gold)}
-.le-step-val{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-right:auto}
-.le-output{margin-top:1rem;padding:1rem;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:8px;text-align:center}
-.le-output-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
-.le-output-val{font-size:.9375rem;color:var(--text);font-weight:600}
-.le-trade{padding:.875rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
-.le-trade-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.le-trade-vals{display:flex;gap:1rem;font-family:var(--font-mono);font-size:.75rem}
-.le-trade-vals .up{color:var(--emerald)}
-.le-trade-vals .neutral{color:var(--text-dim)}
-.le-trade-vals .gold{color:var(--gold)}
-.le-trade-link{font-size:.8125rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:.3rem}
+/* === Intelligence Moment — timeline === */
+.im-timeline{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:600px;margin-left:auto;margin-right:auto}
+.im-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);text-align:center}
+.im-header-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
+.im-header-title{font-size:1rem;font-weight:700;color:var(--text)}
+.im-body{padding:1.5rem}
+.im-step{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border-soft)}
+.im-step:last-child{border-bottom:none}
+.im-time{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);min-width:70px;text-align:center}
+.im-action{font-size:.875rem;color:var(--text);font-weight:500}
+.im-step.gold .im-action{color:var(--gold)}
+.im-check{width:20px;height:20px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
+.im-step.gold .im-check{background:var(--gold)}
+.im-step.pending .im-check{background:var(--border);color:var(--text-mute)}
+.im-output{margin-top:1rem;padding:1rem;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:8px;text-align:center}
+.im-output-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
+.im-output-val{font-size:.9375rem;color:var(--text);font-weight:600}
 
-/* === Intelligence Pipeline === */
-.pipe-flow{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:600px;margin-left:auto;margin-right:auto;gap:0}
-.pipe-stage{width:100%;max-width:440px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;text-align:center;transition:border-color .3s}.pipe-stage:hover{border-color:var(--gold)}
+/* === Comparison === */
+.cmp-grid{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin-left:auto;margin-right:auto}
+@media(max-width:768px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem}
+.cmp-card.gold{border-color:var(--gold)}
+.cmp-card-h{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text-mute);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.1em}
+.cmp-card.gold .cmp-card-h{color:var(--gold)}
+.cmp-flow{display:flex;flex-direction:column;gap:.4rem}
+.cmp-step{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--surface);border-radius:6px;font-size:.8125rem;color:var(--text-dim)}
+.cmp-card.gold .cmp-step{color:var(--text)}
+.cmp-step-num{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);width:20px}
+.cmp-card.gold .cmp-step-num{color:var(--gold)}
+.cmp-arrow{text-align:center;color:var(--text-faint);font-size:.75rem;margin:.1rem 0}
+.cmp-card.gold .cmp-arrow{color:var(--gold);opacity:.5}
+
+/* === Pipeline === */
+.pipe-flow{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:500px;margin-left:auto;margin-right:auto;gap:0}
+.pipe-stage{width:100%;max-width:380px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.875rem 1.5rem;text-align:center;transition:border-color .3s}.pipe-stage:hover{border-color:var(--gold)}
 .pipe-stage.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
-.pipe-stage-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
+.pipe-stage-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.2rem}
 .pipe-stage.gold .pipe-stage-lbl{color:var(--gold)}
-.pipe-stage-name{font-size:.9375rem;font-weight:600;color:var(--text)}
-.pipe-arrow{color:var(--gold);opacity:.4;font-size:1.25rem;margin:.2rem 0}
+.pipe-stage-name{font-size:.875rem;font-weight:600;color:var(--text)}
+.pipe-arrow{color:var(--gold);opacity:.4;font-size:1rem;margin:.15rem 0}
 
-/* === Research Products === */
+/* === Products === */
 .rp-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
 @media(max-width:900px){.rp-grid{grid-template-columns:1fr}}
 .rp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .3s}.rp-card:hover{border-color:var(--gold)}
@@ -90,8 +95,8 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .rp-list li{font-size:.875rem;color:var(--text-dim);padding-right:1rem;position:relative}
 .rp-list li::before{content:'←';position:absolute;right:0;color:var(--gold);opacity:.6}
 
-/* === Evidence Layer === */
-.ev-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:700px;margin-left:auto;margin-right:auto}
+/* === Evidence === */
+.ev-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:650px;margin-left:auto;margin-right:auto}
 .ev-panel-h{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
 .ev-panel-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
 .ev-panel-title{font-size:1.0625rem;font-weight:700;color:var(--text)}
@@ -105,11 +110,20 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .ev-row-v .check{color:var(--emerald);margin-left:.25rem}
 .ev-panel-footer{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);text-align:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
 
+/* === Network === */
+.net-box{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center}
+.net-num{font-family:var(--font-mono);font-size:2.5rem;color:var(--gold);font-weight:600;margin-bottom:.5rem}
+.net-lbl{font-size:.875rem;color:var(--text-dim);margin-bottom:1.5rem}
+.net-features{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;text-align:right}
+@media(max-width:500px){.net-features{grid-template-columns:1fr}}
+.net-feat{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;color:var(--text-dim);padding:.4rem .6rem;background:var(--surface);border-radius:6px}
+.net-feat .check{color:var(--emerald);font-weight:700;flex-shrink:0}
+
 /* === Trade Connection === */
-.tc-box{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:12px;padding:1.5rem}
+.tc-box{margin-top:3rem;max-width:550px;margin-left:auto;margin-right:auto;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:12px;padding:1.5rem}
 .tc-title{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;text-align:center}
-.tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1rem}
-@media(max-width:600px){.tc-grid{grid-template-columns:1fr 1fr}}
+.tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
+@media(max-width:500px){.tc-grid{grid-template-columns:1fr 1fr}}
 .tc-cell{text-align:center;padding:.6rem;background:var(--card);border-radius:6px}
 .tc-cell-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
 .tc-cell-val{font-family:var(--font-mono);font-size:.8125rem;font-weight:600;color:var(--text)}
@@ -134,105 +148,96 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 <!-- ============= 1. HERO ============= -->
 <section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
 <div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-<h1 class="hero-h1">من الأحداث المالية<br>إلى الرؤية الاستثمارية</h1>
-<p class="hero-sub">رؤى تراقب المصادر المالية الرسمية حول العالم، وتحوّل البيانات والوثائق الاقتصادية إلى أحداث مفهومة وتحليلات موثّقة تساعد المؤسسات على فهم الأسواق.</p>
-<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#live" class="btn btn-primary">استكشف الاستخبارات المالية</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
+<h1 class="hero-h1">افهم العالم المالي<br>قبل اتخاذ القرار</h1>
+<p class="hero-sub">آلاف الإشارات المالية يومياً. قرار استثماري واحد. رؤى تجمع المعلومات المالية الرسمية، تربط الأحداث بالحقائق، وتحوّلها إلى معرفة استثمارية قابلة للتنفيذ.</p>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#moment" class="btn btn-primary">شاهد لحظة الاستخبارات</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
 </div></div></section>
 
-<!-- ============= 2. LIVE INTELLIGENCE EVENT ============= -->
-<section class="section reveal" id="live"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">حدث مالي حي</span><h2 class="section-h" style="margin:0 auto 1rem">من وثيقة إلى استخبارات — في ثوانٍ</h2><p class="section-lead" style="margin:0 auto">في اللحظة التي يُنشر فيها بيان رسمي، تبدأ رؤى. هذه ليست محاكاة — هذا ما يحدث فعلاً.</p></div>
+<!-- ============= 2. THE INTELLIGENCE MOMENT ============= -->
+<section class="section reveal" id="moment"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">لحظة الاستخبارات</span><h2 class="section-h" style="margin:0 auto 1rem">حدث واحد · من النشر إلى المعرفة</h2><p class="section-lead" style="margin:0 auto">قبل رؤى: بيان رسمي يُنشر ويُنسى. بعد رؤى: بيان رسمي يصبح معرفة استثمارية في ثوانٍ.</p></div>
 
-<div class="live-event">
-<div class="le-header"><div class="le-source"><div class="le-dot"></div><div><div class="le-name">الفيدرالي · بيان FOMC</div><div class="le-time">24 يوليو 2026 · 14:32 شرق</div></div></div><div class="le-time">معالجة في 3.7 ثوانٍ</div></div>
-
-<div class="le-body">
-<div class="le-steps">
-<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">اكتشاف الوثيقة</span><span class="le-step-val">14:32:00</span></div>
-<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">استخراج الحقائق</span><span class="le-step-val">12 حقيقة · 0.4ث</span></div>
-<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">تصنيف الحدث</span><span class="le-step-val">قرار سياسة نقدية</span></div>
-<div class="le-step"><div class="le-check">✓</div><span class="le-step-text">ربط الأدلة</span><span class="le-step-val">5 وثائق · 3 أحداث</span></div>
-<div class="le-step active"><div class="le-check">●</div><span class="le-step-text">توليد السياق السوقي</span><span class="le-step-val">مباشر</span></div>
-</div>
-<div class="le-output">
-<div class="le-output-lbl">المخرج</div>
-<div class="le-output-val">مذكرة استخبارات السياسة النقدية · ثقة 87%</div>
-</div>
-</div>
-
-<div class="le-trade">
-<div>
-<span class="le-trade-lbl">الأثر السوقي:</span>
-<span class="le-trade-vals">
-<span class="up">الدولار: صاعد</span>
-<span class="neutral">السندات: إيجابي</span>
-<span class="gold">المخاطرة: متوسطة</span>
-</span>
-</div>
-<a href="trade.html" class="le-trade-link">فتح سياق التداول ←</a>
+<div class="im-timeline">
+<div class="im-header"><div class="im-header-tag">الفيدرالي · بيان FOMC · 24 يوليو 2026</div><div class="im-header-title">من النشر إلى المعرفة — في 3.7 ثوانٍ</div></div>
+<div class="im-body">
+<div class="im-step"><span class="im-time">14:32:00</span><span class="im-action">الفيدرالي يُنشر بيان FOMC</span><div class="im-check">✓</div></div>
+<div class="im-step"><span class="im-time">+5 ثوانٍ</span><span class="im-action">رؤى تكتشف الوثيقة</span><div class="im-check">✓</div></div>
+<div class="im-step"><span class="im-time">+20 ثانية</span><span class="im-action">استخراج 12 حقيقة · تصنيف الحدث</span><div class="im-check">✓</div></div>
+<div class="im-step"><span class="im-time">+60 ثانية</span><span class="im-action">ربط الأدلة · توليد السياق السوقي</span><div class="im-check">✓</div></div>
+<div class="im-step gold"><span class="im-time">+2 دقيقة</span><span class="im-action">مذكرة استخبارات متاحة · ثقة 87%</span><div class="im-check">★</div></div>
+<div class="im-output"><div class="im-output-lbl">النتيجة</div><div class="im-output-val">معرفة استثمارية موثّقة — جاهزة للقرار</div></div>
 </div>
 </div>
 </div></section>
 
-<!-- ============= 3. INTELLIGENCE PIPELINE ============= -->
+<!-- ============= 3. COMPARISON — لماذا تثق ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">لماذا تثق المؤسسات برؤى</span><h2 class="section-h" style="margin:0 auto 1rem">الفرق بين الإعلام المالي والاستخبارات المالية</h2><p class="section-lead" style="margin:0 auto">الإعلام المالي يخبرك بما حدث. رؤى تشرح ما حدث، لماذا، من أين نعرف، وما قد يعنيه.</p></div>
+
+<div class="cmp-grid">
+<div class="cmp-card">
+<div class="cmp-card-h">الإعلام المالي التقليدي</div>
+<div class="cmp-flow">
+<div class="cmp-step"><span class="cmp-step-num">01</span>معلومة</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">02</span>مقال</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">03</span>رأي</div>
+</div>
+</div>
+
+<div class="cmp-card gold">
+<div class="cmp-card-h">رؤى · الاستخبارات المالية</div>
+<div class="cmp-flow">
+<div class="cmp-step"><span class="cmp-step-num">01</span>مصدر رسمي</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">02</span>وثيقة</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">03</span>حقيقة مستخرجة</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">04</span>دليل موثّق</div>
+<div class="cmp-arrow">↓</div>
+<div class="cmp-step"><span class="cmp-step-num">05</span>استخبارات</div>
+</div>
+</div>
+</div>
+</div></section>
+
+<!-- ============= 4. PIPELINE ============= -->
+<section class="section reveal"><div class="container">
 <span class="section-tag">مسار الاستخبارات</span>
 <h2 class="section-h">من المصدر إلى المعرفة</h2>
 <p class="section-lead">ليست معالجة تقنية — قيمة في كل خطوة. كل مرحلة تحوّل البيانات الخام إلى فهم أعمق.</p>
 
 <div class="pipe-flow">
-<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 01</div><div class="pipe-stage-name">المصدر الرسمي</div></div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">01</div><div class="pipe-stage-name">مصدر رسمي</div></div>
 <div class="pipe-arrow">↓</div>
-<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 02</div><div class="pipe-stage-name">معلومات موثّقة</div></div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">02</div><div class="pipe-stage-name">معلومة موثّقة</div></div>
 <div class="pipe-arrow">↓</div>
-<div class="pipe-stage gold"><div class="pipe-stage-lbl">المرحلة 03</div><div class="pipe-stage-name">حدث مالي</div></div>
+<div class="pipe-stage gold"><div class="pipe-stage-lbl">03</div><div class="pipe-stage-name">حدث مالي</div></div>
 <div class="pipe-arrow">↓</div>
-<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 04</div><div class="pipe-stage-name">سياق سوقي</div></div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">04</div><div class="pipe-stage-name">سياق سوقي</div></div>
 <div class="pipe-arrow">↓</div>
-<div class="pipe-stage"><div class="pipe-stage-lbl">المرحلة 05</div><div class="pipe-stage-name">معرفة استثمارية</div></div>
+<div class="pipe-stage"><div class="pipe-stage-lbl">05</div><div class="pipe-stage-name">معرفة استثمارية</div></div>
 </div>
 </div></section>
 
-<!-- ============= 4. RESEARCH PRODUCTS ============= -->
-<section class="section reveal"><div class="container">
+<!-- ============= 5. PRODUCTS ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
 <span class="section-tag">منتجات الاستخبارات</span>
-<h2 class="section-h">ما الذي تحصل عليه المؤسسة</h2>
-<p class="section-lead">ليست أخباراً تُقرأ — استخبارات تُتخذ بها القرارات. ثلاث طبقات منتجات تغطي احتياجات فرق الاستثمار.</p>
+<h2 class="section-h">ما الذي تتغير به طريقة عملك</h2>
+<p class="section-lead">ليست أخباراً تُقرأ — استخبارات تُتخذ بها القرارات. ثلاث طبقات تغطي احتياجات فرق الاستثمار.</p>
 
 <div class="rp-grid">
-<div class="rp-card">
-<div class="rp-card-tag">استخبارات السوق اليومية</div>
-<div class="rp-card-h">ما يحدث اليوم</div>
-<ul class="rp-list">
-<li>استخبارات يومية مباشرة</li>
-<li>أحداث اقتصادية مع الأثر</li>
-<li>مذكرة استخبارات لكل حدث</li>
-</ul>
-</div>
-<div class="rp-card">
-<div class="rp-card-tag">أبحاث مؤسسية</div>
-<div class="rp-card-h">ما يعنيه للأمد البعيد</div>
-<ul class="rp-list">
-<li>تقارير الاقتصاد الكلي</li>
-<li>استخبارات الدول والقطاعات</li>
-<li>تحليلات استراتيجية موثّقة</li>
-</ul>
-</div>
-<div class="rp-card">
-<div class="rp-card-tag">استخبارات إعلامية</div>
-<div class="rp-card-h">ما يُوزَّع ويُستهلك</div>
-<ul class="rp-list">
-<li>تقارير بصرية وإنفوجرافيك</li>
-<li>موجزات فيديو</li>
-<li>واجهة برمجة للتكامل</li>
-</ul>
-</div>
+<div class="rp-card"><div class="rp-card-tag">استخبارات السوق اليومية</div><div class="rp-card-h">ما يحدث اليوم</div><ul class="rp-list"><li>استخبارات يومية مباشرة</li><li>أحداث اقتصادية مع الأثر</li><li>مذكرة استخبارات لكل حدث</li></ul></div>
+<div class="rp-card"><div class="rp-card-tag">أبحاث مؤسسية</div><div class="rp-card-h">ما يعنيه للأمد البعيد</div><ul class="rp-list"><li>تقارير الاقتصاد الكلي</li><li>استخبارات الدول والقطاعات</li><li>تحليلات استراتيجية موثّقة</li></ul></div>
+<div class="rp-card"><div class="rp-card-tag">استخبارات إعلامية</div><div class="rp-card-h">ما يُوزَّع ويُستهلك</div><ul class="rp-list"><li>تقارير بصرية وإنفوجرافيك</li><li>موجزات فيديو</li><li>واجهة برمجة للتكامل</li></ul></div>
 </div>
 </div></section>
 
-<!-- ============= 5. EVIDENCE LAYER ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">لماذا تثق المؤسسات برؤى</span><h2 class="section-h" style="margin:0 auto 1rem">كل رؤية لها دليل</h2><p class="section-lead" style="margin:0 auto">المنافسون يمكنهم بناء تحليلات ولوحات. لكن ليس بسهولة: «أثبت لي لماذا قلت ذلك.» رؤى تجيب.</p></div>
+<!-- ============= 6. EVIDENCE DETAIL ============= -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">الدليل خلف كل رؤية</span><h2 class="section-h" style="margin:0 auto 1rem">«أثبت لي لماذا قلت ذلك»</h2><p class="section-lead" style="margin:0 auto">المنافسون يمكنهم بناء تحليلات ولوحات. لكن ليس بسهولة إثبات كل ادعاء. رؤى تجيب.</p></div>
 
 <div class="ev-panel">
 <div class="ev-panel-h"><div class="ev-panel-tag">رؤية #28492 · استخبارات موثّقة</div><div class="ev-panel-title">«ثبات الفيدرالي يشير إلى قوة الدولار قريباً»</div></div>
@@ -248,9 +253,25 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </div>
 </div></section>
 
-<!-- ============= 6. TRADE CONNECTION ============= -->
+<!-- ============= 7. NETWORK ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">شبكة المصادر الرسمية</span><h2 class="section-h" style="margin:0 auto 1rem">411+ مؤسسة رسمية موثّقة</h2><p class="section-lead" style="margin:0 auto">ليست أسماء يعرفها الجميع — قيمة. كل رؤية مرتبطة بمصدر موثّق ومُراقب.</p></div>
+
+<div class="net-box">
+<div class="net-num">411+</div>
+<div class="net-lbl">مؤسسة مالية رسمية مراقبة 24/7</div>
+<div class="net-features">
+<div class="net-feat"><span class="check">✓</span> مصدر موثّق لكل رؤية</div>
+<div class="net-feat"><span class="check">✓</span> وثيقة أصلية لكل ادعاء</div>
+<div class="net-feat"><span class="check">✓</span> دليل قابل للتتبع</div>
+<div class="net-feat"><span class="check">✓</span> درجة ثقة لكل استخبارات</div>
+</div>
+</div>
+</div></section>
+
+<!-- ============= 8. TRADE CONNECTION ============= -->
 <section class="section reveal"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">العلاقة مع رؤى التداول</span><h2 class="section-h" style="margin:0 auto 1rem">من الفهم إلى القرار</h2><p class="section-lead" style="margin:0 auto">الاستخبارات لا تنتهي عند المعرفة — تنتقل إلى القرار. داخل كل حدث، سياق تداول جاهز.</p></div>
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">من الفهم إلى القرار</span><h2 class="section-h" style="margin:0 auto 1rem">الاستخبارات لا تنتهي عند المعرفة</h2><p class="section-lead" style="margin:0 auto">حدث مالي يُكتشف في رؤى الأخبار يصبح سياق تداول في رؤى التداول — طبيعياً، دون إعلان.</p></div>
 
 <div class="tc-box">
 <div class="tc-title">سياق التداول · حدث FOMC</div>
@@ -265,7 +286,7 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>اطلب وصولاً مؤسسياً</h2><p>نافذة مؤسستك إلى العالم المالي — استخبارات موثّقة، لا مجرد أخبار.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>قبل رؤى: بيانات كثيرة. بعد رؤى: فهم موثّق.</h2><p>نافذة مؤسستك إلى العالم المالي — استخبارات موثّقة، لا مجرد أخبار.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
 <footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">نافذة المؤسسة إلى العالم المالي — ما حدث، لماذا، من أين نعرف، وما قد يعنيه.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة REST</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai · @rouaa_ai</span></div></footer>
