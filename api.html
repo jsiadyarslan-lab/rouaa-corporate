@@ -5,187 +5,126 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
 <title>رؤى واجهة البرمجة — طبقة التكامل المؤسسي</title>
-<meta name="description" content="دمج الاستخبارات المالية في أنظمتك.">
+<meta name="description" content="دمج الاستخبارات المالية في أنظمتك. واجهة REST تفاعلية + Webhooks + Streaming + SDK.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
-  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
-  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;
-  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
-  --border-soft:rgba(243,244,246,.06);
-  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
-}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--navy);scroll-behavior:smooth}
-body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-::selection{background:var(--gold);color:var(--navy)}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-a{color:inherit;text-decoration:none;transition:color .2s}
-a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
 .mono{font-family:var(--font-mono);letter-spacing:.04em}
-.container{max-width:1280px;margin:0 auto;padding:0 2rem}
-@media(max-width:768px){.container{padding:0 1.25rem}}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}@media(max-width:768px){.container{padding:0 1.25rem}}
 .section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
-.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
 .section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
-.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
-.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
-@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
-.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
-.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
-.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
-.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
-.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
-.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
-@media(max-width:1024px){.nav-links{display:none}}
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
-.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
 .hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
-.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
 
 /* API Explorer */
-.api-explorer{margin-top:3rem;display:grid;grid-template-columns:340px 1fr;gap:1rem}
+.api-explorer{margin-top:3rem;display:grid;grid-template-columns:340px 1fr;gap:1rem;max-width:1000px;margin-left:auto;margin-right:auto}
 @media(max-width:900px){.api-explorer{grid-template-columns:1fr}}
-.api-endpoints{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.75rem}
-.api-endpoint{display:flex;align-items:center;gap:.6rem;padding:.5rem .65rem;border-radius:6px;cursor:pointer;transition:background .2s;font-family:var(--font-mono);font-size:.75rem;margin-bottom:.25rem}
-.api-endpoint:hover{background:rgba(255,255,255,.03)}
-.api-endpoint.active{background:var(--gold-dim)}
+.api-eps{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.75rem}
+.api-eps-h{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);padding:.5rem .65rem .75rem}
+.api-ep{display:flex;align-items:center;gap:.6rem;padding:.5rem .65rem;border-radius:6px;cursor:pointer;transition:background .2s;font-family:var(--font-mono);font-size:.75rem;margin-bottom:.2rem}
+.api-ep:hover{background:rgba(255,255,255,.03)}.api-ep.active{background:var(--gold-dim)}
 .api-method{font-size:.625rem;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.05em;min-width:50px;text-align:center}
-.api-method.GET{background:rgba(52,211,153,.15);color:var(--emerald)}
-.api-method.POST{background:rgba(200,169,81,.15);color:var(--gold)}
-.api-method.STREAM{background:rgba(96,165,250,.15);color:var(--blue)}
+.api-method.GET{background:rgba(52,211,153,.15);color:var(--emerald)}.api-method.POST{background:rgba(200,169,81,.15);color:var(--gold)}.api-method.STREAM{background:rgba(96,165,250,.15);color:var(--blue)}
 .api-path{color:var(--text-dim);direction:ltr}
-.api-response{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left;min-height:340px}
-.api-response .key{color:var(--gold)}
-.api-response .str{color:var(--emerald)}
-.api-response .num{color:var(--blue)}
-.api-response .cmt{color:var(--text-mute)}
+.api-resp{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left;min-height:340px}
+.api-resp .key{color:var(--gold)}.api-resp .str{color:var(--emerald)}.api-resp .num{color:var(--blue)}.api-resp .cmt{color:var(--text-mute)}
 
 /* Code samples */
 .code-tabs{display:flex;gap:.25rem;margin-bottom:.75rem}
 .code-tab{padding:.4rem .875rem;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .2s}
 .code-tab.active{background:var(--gold-dim);color:var(--gold);border-color:var(--gold)}
-.code-block{background:var(--navy);border:1px solid var(--border);border-radius:8px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left}
-.code-block .k{color:#c678dd}
-.code-block .s{color:var(--emerald)}
-.code-block .c{color:var(--text-mute)}
-.code-block .f{color:var(--blue)}
+.code-block{background:var(--navy);border:1px solid var(--border);border-radius:8px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left;max-width:800px;margin:0 auto}
+.code-block .k{color:#c678dd}.code-block .s{color:var(--emerald)}.code-block .c{color:var(--text-mute)}.code-block .f{color:var(--blue)}
 
-/* Features grid */
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s}
-.feat-card:hover{border-color:var(--gold)}
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:3rem}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s}.feat-card:hover{border-color:var(--gold)}
 .feat-card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.5rem}
 .feat-card-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.4rem}
 .feat-card-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6}
 
-/* Deployment options */
-.deploy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
-@media(max-width:900px){.deploy-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.deploy-grid{grid-template-columns:1fr}}
-.deploy-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;transition:border-color .3s}
-.deploy-card:hover{border-color:var(--gold)}
+/* Deployment */
+.deploy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}@media(max-width:900px){.deploy-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.deploy-grid{grid-template-columns:1fr}}
+.deploy-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;transition:border-color .3s}.deploy-card:hover{border-color:var(--gold)}
 .deploy-card-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.5rem}
 .deploy-card-desc{font-size:.8125rem;color:var(--text-dim);margin-bottom:.75rem}
 .deploy-card-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding-top:.75rem;border-top:1px solid var(--border-soft)}
 
+/* Auth */
+.auth-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;max-width:700px;margin-left:auto;margin-right:auto}
+.auth-row{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem;align-items:center}
+.auth-row:last-child{border-bottom:none}
+.auth-k{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+.auth-v{font-family:var(--font-mono);font-size:.75rem;color:var(--text)}
+.auth-v.gold{color:var(--gold)}
+
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
-.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
-.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
 .footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
-.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
-@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
-.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
-.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
-.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
-@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى · واجهة برمجة</span>
-        <span class="sub">تكامل مؤسسي</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="news.html">الأخبار</a></li>
-      <li><a href="core.html">المحرك</a></li>
-      <li><a href="trade.html">التداول</a></li>
-      <li><a href="api.html" class="active">واجهة برمجة</a></li>
-      <li><a href="enterprise.html">المؤسسات</a></li>
-    </ul>
-    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div>
-  </div>
-</nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · واجهة برمجة</span><span class="sub">طبقة التكامل</span></div></a><ul class="nav-links"><li><a href="news.html">الأخبار</a></li><li><a href="core.html">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html" class="active">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tagline">طبقة التكامل المؤسسي</div>
-      <h1 class="hero-h1">دمج الاستخبارات المالية في أنظمتك</h1>
-      <p class="hero-sub">واجهة REST · Webhooks · Streaming · SDK · Python · JavaScript · Go. كل طبقات رؤى الاستخباراتية متاحة برمجياً.</p>
-      <div class="hero-cta">
-        <a href="#explorer" class="btn btn-primary">مستكشف الواجهة</a>
-        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
+<div class="hero-tagline">طبقة التكامل المؤسسي</div>
+<h1 class="hero-h1">دمج الاستخبارات المالية<br>في أنظمتك</h1>
+<p class="hero-sub">واجهة REST تفاعلية · Webhooks · Streaming · SDK · Python · JavaScript · Go. كل طبقات رؤى الاستخباراتية متاحة برمجياً — مع دليل لكل استجابة.</p>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#explorer" class="btn btn-primary">مستكشف الواجهة</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
+</div></div></section>
 
-<!-- API EXPLORER -->
-<section class="section reveal" id="explorer">
-  <div class="container">
-    <span class="section-tag">مستكشف الواجهة — تفاعلي</span>
-    <h2 class="section-h">جرّب المسارات مباشرة</h2>
-    <p class="section-lead">8 مسارات أساسية تغطي المصادر والحقائق والأدلة والمجلس الذكي والإشارات والتنفيذ والمحفظة.</p>
+<!-- API EXPLORER — interactive -->
+<section class="section reveal" id="explorer"><div class="container">
+<span class="section-tag">مستكشف الواجهة — تفاعلي</span>
+<h2 class="section-h">جرّب المسارات مباشرة</h2>
+<p class="section-lead">8 مسارات أساسية تغطي المصادر والحقائق والأدلة والمجلس الذكي والإشارات والتنفيذ والمحفظة. اضغط أي مسار لرؤية الاستجابة.</p>
 
-    <div class="api-explorer">
-      <div class="api-endpoints">
-        <div style="font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);padding:.5rem .65rem .75rem">المسارات</div>
-        <div class="api-endpoint active"><span class="api-method GET">GET</span><span class="api-path">/v1/sources</span></div>
-        <div class="api-endpoint"><span class="api-method GET">GET</span><span class="api-path">/v1/facts</span></div>
-        <div class="api-endpoint"><span class="api-method GET">GET</span><span class="api-path">/v1/evidence/:id</span></div>
-        <div class="api-endpoint"><span class="api-method POST">POST</span><span class="api-path">/v1/council/ask</span></div>
-        <div class="api-endpoint"><span class="api-method GET">GET</span><span class="api-path">/v1/signals</span></div>
-        <div class="api-endpoint"><span class="api-method STREAM">STREAM</span><span class="api-path">/v1/stream</span></div>
-        <div class="api-endpoint"><span class="api-method POST">POST</span><span class="api-path">/v1/execute</span></div>
-        <div class="api-endpoint"><span class="api-method GET">GET</span><span class="api-path">/v1/portfolio</span></div>
-      </div>
-
-      <div class="api-response" id="apiResponse"><span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
+<div class="api-explorer">
+<div class="api-eps">
+<div class="api-eps-h">المسارات</div>
+<div class="api-ep active"><span class="api-method GET">GET</span><span class="api-path">/v1/sources</span></div>
+<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/facts</span></div>
+<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/evidence/:id</span></div>
+<div class="api-ep"><span class="api-method POST">POST</span><span class="api-path">/v1/council/ask</span></div>
+<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/signals</span></div>
+<div class="api-ep"><span class="api-method STREAM">STREAM</span><span class="api-path">/v1/stream</span></div>
+<div class="api-ep"><span class="api-method POST">POST</span><span class="api-path">/v1/execute</span></div>
+<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/portfolio</span></div>
+</div>
+<div class="api-resp" id="apiResp"><span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
 {
   <span class="key">"total"</span>: <span class="num">411</span>,
   <span class="key">"sources"</span>: [
@@ -207,32 +146,30 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
   <span class="key">"rate_limit"</span>: <span class="num">1000</span>,
   <span class="key">"remaining"</span>: <span class="num">987</span>
 }</div>
-    </div>
-  </div>
-</section>
+</div>
+</div></section>
 
 <!-- CODE SAMPLES -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">SDK وأمثلة الكود</span>
-    <h2 class="section-h">ادمج رؤى في تطبيقاتك</h2>
-    <p class="section-lead">SDK رسمي لـ Python و JavaScript و Go. مثال واحد يكفي لبدء الاستهلاك.</p>
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">SDK وأمثلة الكود</span>
+<h2 class="section-h">ادمج رؤى في تطبيقاتك</h2>
+<p class="section-lead">SDK رسمي لـ Python و JavaScript و Go. مثال واحد يكفي لبدء الاستهلاك — مع دليل لكل استجابة.</p>
 
-    <div class="code-tabs">
-      <span class="code-tab active" data-lang="python">Python</span>
-      <span class="code-tab" data-lang="javascript">JavaScript</span>
-      <span class="code-tab" data-lang="curl">cURL</span>
-    </div>
+<div class="code-tabs">
+<span class="code-tab active" data-lang="python">Python</span>
+<span class="code-tab" data-lang="javascript">JavaScript</span>
+<span class="code-tab" data-lang="curl">cURL</span>
+</div>
 
-    <div class="code-block" id="codeBlock"><span class="c"># Install</span>
+<div class="code-block" id="codeBlock"><span class="c"># تثبيت</span>
 <span class="k">pip install</span> rouaa-sdk
 
-<span class="c"># Initialize</span>
+<span class="c"># تهيئة</span>
 <span class="k">from</span> rouaa <span class="k">import</span> Rouaa
 
 client = <span class="f">Rouaa</span>(api_key=<span class="s">"rk_live_..."</span>)
 
-<span class="c"># Get latest signals</span>
+<span class="c"># الحصول على أحدث الإشارات</span>
 signals = client.signals.<span class="f">list</span>(
     pair=<span class="s">"EUR/USD"</span>,
     min_confidence=<span class="num">0.7</span>
@@ -240,142 +177,70 @@ signals = client.signals.<span class="f">list</span>(
 
 <span class="k">for</span> signal <span class="k">in</span> signals:
     <span class="f">print</span>(signal.pair, signal.direction, signal.confidence)
-    <span class="c"># Each signal has full evidence chain</span>
+    <span class="c"># كل إشارة لها سلسلة أدلة كاملة</span>
     <span class="k">for</span> evidence <span class="k">in</span> signal.evidence:
         <span class="f">print</span>(<span class="s">f"  ← {evidence.source} · {evidence.document}"</span>)</div>
-  </div>
-</section>
+</div></section>
+
+<!-- AUTH -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">المصادقة والحدود</span>
+<h2 class="section-h">مصادقة مؤسسية</h2>
+<p class="section-lead">كل طلب يتطلب مفتاح API. الحدود تختلف حسب الخطة. المؤسسي: حدود أعلى + دعم مخصص + SDK access كامل.</p>
+
+<div class="auth-panel">
+<div class="auth-row"><span class="auth-k">المصادقة</span><span class="auth-v">Bearer Token · OAuth2</span></div>
+<div class="auth-row"><span class="auth-k">الحد المؤسسي</span><span class="auth-v gold">10,000 طلب/ساعة</span></div>
+<div class="auth-row"><span class="auth-k">الحد القياسي</span><span class="auth-v">1,000 طلب/ساعة</span></div>
+<div class="auth-row"><span class="auth-k">التشفير</span><span class="auth-v">TLS 1.3</span></div>
+<div class="auth-row"><span class="auth-k">الاستجابة</span><span class="auth-v gold">&lt; 100مللي</span></div>
+<div class="auth-row"><span class="auth-k">التنسيق</span><span class="auth-v">JSON · Streaming (SSE/WebSocket)</span></div>
+</div>
+</div></section>
 
 <!-- FEATURES -->
-<section class="section reveal">
-  <div class="container">
-    <span class="section-tag">ميزات التكامل</span>
-    <h2 class="section-h">طبقات تكامل متعددة</h2>
-    <p class="section-lead">REST للطلبات التقليدية · Streaming للبيانات الحية · Webhooks للأحداث · SDK لكل لغة.</p>
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">ميزات التكامل</span>
+<h2 class="section-h">طبقات تكامل متعددة</h2>
+<p class="section-lead">REST للطلبات التقليدية · Streaming للبيانات الحية · Webhooks للأحداث · SDK لكل لغة.</p>
 
-    <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-card-num">01</div>
-        <div class="feat-card-name">واجهة REST</div>
-        <div class="feat-card-desc">وصول كامل لكل طبقات رؤى — المصادر، الحقائق، الأدلة، المجلس، الإشارات، التنفيذ، المحفظة.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-card-num">02</div>
-        <div class="feat-card-name">بث مباشر</div>
-        <div class="feat-card-desc">بث مباشر للإشارات والأحداث — WebSocket · SSE. زمن استجابة أقل من 100مللي.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-card-num">03</div>
-        <div class="feat-card-name">Webhooks</div>
-        <div class="feat-card-desc">تنبيهات فورية عند الأحداث الحرجة — الفيدرالي، CPI، الوظائف. تكامل مع Slack، البريد، SMS.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-card-num">04</div>
-        <div class="feat-card-name">SDK بايثون</div>
-        <div class="feat-card-desc">pip install rouaa-sdk · مكتبة كاملة · دعم async · type hints.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-card-num">05</div>
-        <div class="feat-card-name">SDK جافا سكريبت</div>
-        <div class="feat-card-desc">npm install @rouaa/sdk · Node.js + المتصفح · TypeScript native.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-card-num">06</div>
-        <div class="feat-card-name">SDK Go</div>
-        <div class="feat-card-desc">go get github.com/rouaa/rouaa-go · للأعباء العالية · concurrent native.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="feat-grid">
+<div class="feat-card"><div class="feat-card-num">01</div><div class="feat-card-name">واجهة REST</div><div class="feat-card-desc">وصول كامل لكل طبقات رؤى — المصادر، الحقائق، الأدلة، المجلس، الإشارات، التنفيذ، المحفظة.</div></div>
+<div class="feat-card"><div class="feat-card-num">02</div><div class="feat-card-name">بث مباشر</div><div class="feat-card-desc">بث مباشر للإشارات والأحداث — WebSocket · SSE. زمن استجابة أقل من 100مللي.</div></div>
+<div class="feat-card"><div class="feat-card-num">03</div><div class="feat-card-name">Webhooks</div><div class="feat-card-desc">تنبيهات فورية عند الأحداث الحرجة — الفيدرالي، التضخم، الوظائف. تكامل مع Slack، البريد، SMS.</div></div>
+<div class="feat-card"><div class="feat-card-num">04</div><div class="feat-card-name">SDK بايثون</div><div class="feat-card-desc">pip install rouaa-sdk · مكتبة كاملة · دعم async · type hints.</div></div>
+<div class="feat-card"><div class="feat-card-num">05</div><div class="feat-card-name">SDK جافا سكريبت</div><div class="feat-card-desc">npm install @rouaa/sdk · Node.js + المتصفح · TypeScript native.</div></div>
+<div class="feat-card"><div class="feat-card-num">06</div><div class="feat-card-name">SDK Go</div><div class="feat-card-desc">go get github.com/rouaa/rouaa-go · للأعباء العالية · concurrent native.</div></div>
+</div>
+</div></section>
 
 <!-- DEPLOYMENT -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">النشر المؤسسي</span>
-    <h2 class="section-h">أربعة خيارات نشر</h2>
-    <p class="section-lead">من السحابة العامة إلى البنية التحتية الخاصة. رؤى تعمل أينما تحتاجها.</p>
+<section class="section reveal"><div class="container">
+<span class="section-tag">النشر المؤسسي</span>
+<h2 class="section-h">أربعة خيارات نشر</h2>
+<p class="section-lead">من السحابة العامة إلى البنية التحتية الخاصة. رؤى تعمل أينما تحتاجها.</p>
 
-    <div class="deploy-grid">
-      <div class="deploy-card">
-        <div class="deploy-card-name">سحابة</div>
-        <div class="deploy-card-desc">سحابة رؤى المُدارة · أسرع بدء · صفر بنية تحتية</div>
-        <div class="deploy-card-stat">ضمان 99.9%</div>
-      </div>
-      <div class="deploy-card">
-        <div class="deploy-card-name">سحابة خاصة</div>
-        <div class="deploy-card-desc">سحابة خاصة بك · AWS / Azure / GCP · تحكم كامل بالشبكة</div>
-        <div class="deploy-card-stat">عزل VPC</div>
-      </div>
-      <div class="deploy-card">
-        <div class="deploy-card-name">على الموقع</div>
-        <div class="deploy-card-desc">على بنيتك التحتية · أعلى مستوى سيطرة · للقطاعات التنظيمية</div>
-        <div class="deploy-card-stat">جاهز للعزل الكامل</div>
-      </div>
-      <div class="deploy-card">
-        <div class="deploy-card-name">هجين</div>
-        <div class="deploy-card-desc">مزيج سحابي + على الموقع · للمتطلبات المختلطة</div>
-        <div class="deploy-card-stat">طوبولوجيا مخصصة</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="deploy-grid">
+<div class="deploy-card"><div class="deploy-card-name">سحابة</div><div class="deploy-card-desc">سحابة رؤى المُدارة · أسرع بدء · صفر بنية تحتية</div><div class="deploy-card-stat">ضمان 99.9%</div></div>
+<div class="deploy-card"><div class="deploy-card-name">سحابة خاصة</div><div class="deploy-card-desc">سحابة خاصة بك · AWS / Azure / GCP · تحكم كامل بالشبكة</div><div class="deploy-card-stat">عزل VPC</div></div>
+<div class="deploy-card"><div class="deploy-card-name">على الموقع</div><div class="deploy-card-desc">على بنيتك التحتية · أعلى مستوى سيطرة · للقطاعات التنظيمية</div><div class="deploy-card-stat">جاهز للعزل الكامل</div></div>
+<div class="deploy-card"><div class="deploy-card-name">هجين</div><div class="deploy-card-desc">مزيج سحابي + على الموقع · للمتطلبات المختلطة</div><div class="deploy-card-stat">طوبولوجيا مخصصة</div></div>
+</div>
+</div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal">
-  <div class="container">
-    <span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
-    <h2>احصل على مفاتيح واجهة برمجة مؤسسية</h2>
-    <p>اطلب وصولاً للحصول على حدود معدل أعلى، وصول SDK، ودعم مؤسسي مخصص.</p>
-    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a>
-  </div>
-</section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>احصل على مفاتيح واجهة برمجة مؤسسية</h2><p>اطلب وصولاً للحصول على حدود معدل أعلى، وصول SDK كامل، ودعم مؤسسي مخصص.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="name">رؤى · ROUAA</div>
-      <div class="tagline">طبقة التكامل المؤسسي — كل طبقات رؤى متاحة برمجياً.</div>
-      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
-    </div>
-    <div class="footer-col">
-      <h4>المنصة</h4>
-      <ul>
-        <li><a href="news.html">رؤى الأخبار</a></li>
-        <li><a href="core.html">رؤى المحرك</a></li>
-        <li><a href="trade.html">رؤى التداول</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>المؤسسات</h4>
-      <ul>
-        <li><a href="api.html">واجهة برمجة REST</a></li>
-        <li><a href="enterprise.html">الأمان</a></li>
-        <li><a href="index.html#cta">اطلب وصولاً</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>الشركة</h4>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="#">من نحن</a></li>
-        <li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
-    <span>contact@rouaa.ai · @rouaa_ai</span>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">طبقة التكامل المؤسسي — كل طبقات رؤى متاحة برمجياً.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة REST</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai · @rouaa_ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // API Explorer
-const responses = {
-  0: `<span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
+const responses={
+0:`<span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
 {
   <span class="key">"total"</span>: <span class="num">411</span>,
   <span class="key">"sources"</span>: [
@@ -383,120 +248,122 @@ const responses = {
     { <span class="key">"id"</span>: <span class="str">"ecb"</span>, <span class="key">"name"</span>: <span class="str">"European Central Bank"</span>, <span class="key">"trust"</span>: <span class="str">"A+"</span> }
   ]
 }`,
-  1: `<span class="cmt">// GET /v1/facts — الحقائق المستخرجة</span>
+1:`<span class="cmt">// GET /v1/facts — الحقائق المستخرجة</span>
 {
   <span class="key">"total"</span>: <span class="num">1247</span>,
   <span class="key">"facts"</span>: [
     { <span class="key">"id"</span>: <span class="str">"fed_rate_2026_07"</span>, <span class="key">"value"</span>: <span class="str">"5.50%"</span>, <span class="key">"confidence"</span>: <span class="num">0.99</span> }
   ]
 }`,
-  2: `<span class="cmt">// GET /v1/evidence/:id</span>
+2:`<span class="cmt">// GET /v1/evidence/:id — دليل موثّق</span>
 {
   <span class="key">"id"</span>: <span class="str">"ev_fed_hold_2026"</span>,
   <span class="key">"claim"</span>: <span class="str">"Fed holds rate at 5.50%"</span>,
   <span class="key">"source"</span>: { <span class="key">"url"</span>: <span class="str">"federalreserve.gov"</span> },
-  <span class="key">"trust"</span>: <span class="str">"A+"</span>
+  <span class="key">"trust"</span>: <span class="str">"A+"</span>,
+  <span class="key">"evidence_chain"</span>: <span class="num">5</span>
 }`,
-  3: `<span class="cmt">// POST /v1/council/ask</span>
+3:`<span class="cmt">// POST /v1/council/ask — اسأل المجلس الذكي</span>
 {
   <span class="key">"question"</span>: <span class="str">"Impact of Fed hold on EUR/USD?"</span>,
   <span class="key">"council"</span>: {
     <span class="key">"consensus"</span>: <span class="str">"BULLISH USD"</span>,
     <span class="key">"confidence"</span>: <span class="num">0.87</span>,
-    <span class="key">"votes"</span>: <span class="num">8</span>
+    <span class="key">"votes"</span>: <span class="num">8</span>,
+    <span class="key">"evidence"</span>: <span class="num">5</span>
   }
 }`,
-  4: `<span class="cmt">// GET /v1/signals</span>
+4:`<span class="cmt">// GET /v1/signals — الإشارات الحية</span>
 {
   <span class="key">"signals"</span>: [
-    { <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>, <span class="key">"direction"</span>: <span class="str">"BUY"</span>, <span class="key">"confidence"</span>: <span class="num">0.87</span> }
+    { <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>, <span class="key">"direction"</span>: <span class="str">"BUY"</span>, <span class="key">"confidence"</span>: <span class="num">0.87</span>, <span class="key">"evidence"</span>: <span class="num">5</span> }
   ]
 }`,
-  5: `<span class="cmt">// STREAM /v1/stream/signals</span>
+5:`<span class="cmt">// STREAM /v1/stream — بث مباشر</span>
 <span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"XAU/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.91</span>}
+<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"XAU/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.91</span>, <span class="key">"evidence"</span>: <span class="num">7</span>}
 
 <span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"BTC/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.68</span>}`,
-  6: `<span class="cmt">// POST /v1/execute</span>
+<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"BTC/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.68</span>, <span class="key">"evidence"</span>: <span class="num">3</span>}`,
+6:`<span class="cmt">// POST /v1/execute — تنفيذ أمر</span>
 {
   <span class="key">"order"</span>: { <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>, <span class="key">"side"</span>: <span class="str">"BUY"</span>, <span class="key">"size"</span>: <span class="num">0.5</span> },
   <span class="key">"checks_passed"</span>: <span class="num">15</span>,
   <span class="key">"executed"</span>: <span class="num">true</span>,
-  <span class="key">"latency_ms"</span>: <span class="num">4.2</span>
+  <span class="key">"latency_ms"</span>: <span class="num">4.2</span>,
+  <span class="key">"audit_id"</span>: <span class="str">"aud_2026_07_24_014"</span>
 }`,
-  7: `<span class="cmt">// GET /v1/portfolio</span>
+7:`<span class="cmt">// GET /v1/portfolio — المحفظة</span>
 {
   <span class="key">"balance"</span>: <span class="num">1247832</span>,
   <span class="key">"pnl_today"</span>: <span class="num">18427</span>,
   <span class="key">"positions"</span>: <span class="num">5</span>,
-  <span class="key">"margin_used"</span>: <span class="num">84200</span>
+  <span class="key">"margin_used"</span>: <span class="num">84200</span>,
+  <span class="key">"risk_score"</span>: <span class="num">42</span>
 }`
 };
-
-const endpoints = document.querySelectorAll('.api-endpoint');
-const resp = document.getElementById('apiResponse');
-endpoints.forEach((ep, idx) => {
-  ep.addEventListener('click', () => {
-    endpoints.forEach(e => e.classList.remove('active'));
-    ep.classList.add('active');
-    resp.innerHTML = responses[idx];
-  });
-});
+const eps=document.querySelectorAll('.api-ep');const resp=document.getElementById('apiResp');
+eps.forEach((ep,idx)=>{ep.addEventListener('click',()=>{eps.forEach(e=>e.classList.remove('active'));ep.classList.add('active');resp.innerHTML=responses[idx]})});
 
 // Code samples
-const codeSamples = {
-  python: `<span class="c"># Install</span>
+const codeSamples={
+python:`<span class="c"># تثبيت</span>
 <span class="k">pip install</span> rouaa-sdk
 
-<span class="c"># Initialize</span>
+<span class="c"># تهيئة</span>
 <span class="k">from</span> rouaa <span class="k">import</span> Rouaa
 
 client = <span class="f">Rouaa</span>(api_key=<span class="s">"rk_live_..."</span>)
 
-<span class="c"># Get latest signals</span>
-signals = client.signals.<span class="f">list</span>(pair=<span class="s">"EUR/USD"</span>, min_confidence=<span class="num">0.7</span>)
+<span class="c"># الحصول على أحدث الإشارات</span>
+signals = client.signals.<span class="f">list</span>(
+    pair=<span class="s">"EUR/USD"</span>,
+    min_confidence=<span class="num">0.7</span>
+)
 
 <span class="k">for</span> signal <span class="k">in</span> signals:
-    <span class="f">print</span>(signal.pair, signal.direction, signal.confidence)`,
-  javascript: `<span class="c">// Install</span>
+    <span class="f">print</span>(signal.pair, signal.direction, signal.confidence)
+    <span class="c"># كل إشارة لها سلسلة أدلة كاملة</span>
+    <span class="k">for</span> evidence <span class="k">in</span> signal.evidence:
+        <span class="f">print</span>(<span class="s">f"  ← {evidence.source} · {evidence.document}"</span>)`,
+javascript:`<span class="c">// تثبيت</span>
 <span class="k">npm install</span> @rouaa/sdk
 
-<span class="c">// Initialize</span>
+<span class="c">// تهيئة</span>
 <span class="k">import</span> { Rouaa } <span class="k">from</span> <span class="s">'@rouaa/sdk'</span>;
 
 <span class="k">const</span> client = <span class="k">new</span> <span class="f">Rouaa</span>({ apiKey: <span class="s">'rk_live_...'</span> });
 
-<span class="c">// Get latest signals</span>
+<span class="c">// الحصول على أحدث الإشارات</span>
 <span class="k">const</span> signals = <span class="k">await</span> client.signals.<span class="f">list</span>({
   pair: <span class="s">'EUR/USD'</span>,
   minConfidence: <span class="num">0.7</span>
 });
 
-signals.<span class="f">forEach</span>(s =&gt; console.<span class="f">log</span>(s.pair, s.direction, s.confidence));`,
-  curl: `<span class="c"># Get sources</span>
+signals.<span class="f">forEach</span>(s =&gt; {
+  console.<span class="f">log</span>(s.pair, s.direction, s.confidence);
+  <span class="c">// كل إشارة لها سلسلة أدلة</span>
+  s.evidence.<span class="f">forEach</span>(e =&gt; console.<span class="f">log</span>(<span class="s">\`  ← \${e.source} · \${e.document}\`</span>));
+});`,
+curl:`<span class="c"># الحصول على المصادر</span>
 <span class="k">curl</span> -X GET https://api.rouaa.ai/v1/sources \\
   -H <span class="s">"Authorization: Bearer rk_live_..."</span> \\
   -H <span class="s">"Content-Type: application/json"</span>
 
-<span class="c"># Response</span>
+<span class="c"># الاستجابة</span>
 {
   <span class="s">"total"</span>: 411,
   <span class="s">"sources"</span>: [
     { <span class="s">"id"</span>: <span class="s">"fed"</span>, <span class="s">"trust"</span>: <span class="s">"A+"</span> }
   ]
-}`
-};
+}
 
-const codeTabs = document.querySelectorAll('.code-tab');
-const codeBlock = document.getElementById('codeBlock');
-codeTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    codeTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    codeBlock.innerHTML = codeSamples[tab.dataset.lang];
-  });
-});
+<span class="c"># بث مباشر للإشارات</span>
+<span class="k">curl</span> -N https://api.rouaa.ai/v1/stream/signals \\
+  -H <span class="s">"Authorization: Bearer rk_live_..."</span>`
+};
+const codeTabs=document.querySelectorAll('.code-tab');const codeBlock=document.getElementById('codeBlock');
+codeTabs.forEach(tab=>{tab.addEventListener('click',()=>{codeTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');codeBlock.innerHTML=codeSamples[tab.dataset.lang]})});
 </script>
 </body>
 </html>

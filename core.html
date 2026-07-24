@@ -4,496 +4,342 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى المحرك — محرّك الاستخبارات</title>
-<meta name="description" content="البنية التحتية الذكية التي تشغّل كل قرار في رؤى.">
+<title>رؤى المحرك — محرّك الاستخبارات المالية</title>
+<meta name="description" content="البنية التحتية الذكية التي تشغّل كل قرار في رؤى. من المصدر الرسمي إلى القرار، 9 طبقات قابلة للتتبع.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
-  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
-  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;
-  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
-  --border-soft:rgba(243,244,246,.06);
-  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
-}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--navy);scroll-behavior:smooth}
-body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-::selection{background:var(--gold);color:var(--navy)}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-a{color:inherit;text-decoration:none;transition:color .2s}
-a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
 .mono{font-family:var(--font-mono);letter-spacing:.04em}
-.container{max-width:1280px;margin:0 auto;padding:0 2rem}
-@media(max-width:768px){.container{padding:0 1.25rem}}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}@media(max-width:768px){.container{padding:0 1.25rem}}
 .section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
-.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
 .section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}.btn-trade:hover{background:var(--gold-dim)}
 
-.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
-.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
-@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
 .nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
 .nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
-.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
-.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
-.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
-.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
-.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
-@media(max-width:1024px){.nav-links{display:none}}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-/* Hero */
-.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
-.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
 .hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
-.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
 
-/* Architecture stack */
-.arch-stack{display:flex;flex-direction:column;align-items:center;max-width:900px;margin:3rem auto 0;gap:.5rem}
-.arch-layer{width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .3s}
+/* Architecture stack — interactive */
+.arch-stack{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:800px;margin-left:auto;margin-right:auto;gap:0}
+.arch-layer{width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .3s;cursor:pointer}
 .arch-layer:hover{border-color:var(--gold)}
-.arch-layer.core{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
+.arch-layer.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
 .arch-layer-num{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);width:32px;flex-shrink:0}
-.arch-layer-name{font-family:var(--font-en);font-weight:700;font-size:1rem;color:var(--text);min-width:240px}
-.arch-layer-name-ar{font-size:.8125rem;color:var(--text-dim)}
-.arch-layer-desc{font-size:.8125rem;color:var(--text-mute);margin-right:auto;text-align:left}
-.arch-arrow{color:var(--gold);opacity:.5;font-size:1rem}
-@media(max-width:768px){.arch-layer{flex-wrap:wrap}.arch-layer-name{min-width:auto}.arch-layer-desc{width:100%;text-align:right}}
-
-/* Module cards */
-.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
-.module-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:border-color .3s}
-.module-card:hover{border-color:var(--gold)}
-.module-card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.75rem}
-.module-card-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.module-card-desc{font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1rem}
-.module-card-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding-top:.75rem;border-top:1px solid var(--border-soft)}
+.arch-layer-body{flex:1}
+.arch-layer-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:.9375rem}
+.arch-layer-name-ar{font-size:.75rem;color:var(--text-mute)}
+.arch-layer-desc{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+.arch-layer-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding:.2rem .5rem;background:var(--surface);border-radius:4px;white-space:nowrap}
+.arch-arrow{color:var(--gold);opacity:.4;font-size:1rem;margin:.2rem 0}
+@media(max-width:768px){.arch-layer{flex-wrap:wrap}.arch-layer-body{width:100%}.arch-layer-stat{width:100%;text-align:center}}
 
 /* Source Registry table */
-.sr-table{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.sr-row{display:grid;grid-template-columns:1fr 1fr 1fr 100px 120px 80px;padding:.75rem 1rem;align-items:center;gap:1rem;border-bottom:1px solid var(--border-soft);font-size:.875rem}
+.sr-table{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sr-row{display:grid;grid-template-columns:1.5fr 1fr .8fr .8fr 1fr .5fr;padding:.75rem 1rem;align-items:center;gap:1rem;border-bottom:1px solid var(--border-soft);font-size:.875rem;transition:background .2s}
+.sr-row:hover{background:rgba(255,255,255,.02)}
 .sr-row.header{background:var(--surface);font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
 .sr-row:last-child{border-bottom:none}
 .sr-health{display:inline-block;padding:2px 8px;border-radius:3px;font-family:var(--font-mono);font-size:.6875rem}
 .sr-health.good{background:rgba(52,211,153,.15);color:var(--emerald)}
 .sr-trust{font-family:var(--font-mono);color:var(--gold);font-weight:600}
-@media(max-width:768px){.sr-row{grid-template-columns:1fr 1fr;font-size:.75rem}.sr-row>div:nth-child(n+3){display:none}}
+.sr-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);display:inline-block;margin-left:.25rem;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:768px){.sr-row{grid-template-columns:1fr 1fr;font-size:.75rem}.sr-row>div:nth-child(n+3){display:none}.sr-row.header>div:nth-child(n+3){display:none}}
 
-/* Document Intelligence */
-.doc-demo{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+/* Document Intelligence demo */
+.doc-demo{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin-left:auto;margin-right:auto}
 @media(max-width:768px){.doc-demo{grid-template-columns:1fr}}
-.doc-input{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
-.doc-input-header{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1rem;border-bottom:1px solid var(--border-soft);margin-bottom:1rem}
-.doc-input-name{font-family:var(--font-en);font-weight:700;color:var(--text)}
-.doc-input-type{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.doc-input-lines{display:flex;flex-direction:column;gap:.4rem}
-.doc-input-line{height:5px;background:var(--border);border-radius:2px}
-.doc-input-highlight{margin:.5rem 0;padding:.5rem;background:var(--gold-dim);border-radius:4px;border:1px solid rgba(200,169,81,.3)}
-.doc-input-highlight-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.25rem}
-.doc-input-highlight-val{font-size:.75rem;color:var(--text);font-weight:600}
-.doc-output{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
-.doc-output-header{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
-.doc-stat{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.875rem}
+.doc-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.doc-panel-h{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+.doc-line{height:5px;background:var(--border);border-radius:2px;margin-bottom:.4rem}
+.doc-highlight{margin:.5rem 0;padding:.6rem;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:6px}
+.doc-highlight-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.2rem}
+.doc-highlight-val{font-size:.75rem;color:var(--text);font-weight:600;line-height:1.5}
+.doc-stat{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem}
 .doc-stat:last-child{border-bottom:none}
-.doc-stat-key{color:var(--text-dim);font-family:var(--font-mono);font-size:.75rem}
-.doc-stat-val{color:var(--gold);font-family:var(--font-mono);font-weight:600}
+.doc-stat-k{color:var(--text-mute);font-family:var(--font-mono);font-size:.75rem}
+.doc-stat-v{color:var(--gold);font-family:var(--font-mono);font-weight:600}
 
-/* Evidence Graph */
-.evidence-graph{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem}
-.eg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-soft)}
-.eg-title{font-family:var(--font-en);font-weight:700;color:var(--text)}
+/* Evidence Graph — interactive */
+.eg-container{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative}
+.eg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-soft);flex-wrap:wrap;gap:1rem}
+.eg-title{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
 .eg-conf{padding:.4rem .8rem;background:var(--gold-dim);border:1px solid var(--gold);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--gold)}
-.eg-flow{display:flex;flex-direction:column;gap:0;align-items:center}
-.eg-node{width:100%;max-width:480px;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center;transition:border-color .3s}
+.eg-flow{display:flex;flex-direction:column;align-items:center;gap:0}
+.eg-node{width:100%;max-width:500px;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:1rem;transition:border-color .3s;cursor:pointer}
 .eg-node:hover{border-color:var(--gold)}
 .eg-node.gold{background:var(--gold-dim);border-color:var(--gold)}
-.eg-node-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
+.eg-node-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);width:24px;flex-shrink:0}
+.eg-node-body{flex:1}
+.eg-node-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.125rem}
 .eg-node.gold .eg-node-lbl{color:var(--gold)}
-.eg-node-val{font-size:.9375rem;font-weight:600;color:var(--text)}
-.eg-connector{width:1px;height:24px;background:var(--gold);opacity:.5;margin:.25rem 0}
-.eg-arrow{color:var(--gold);font-size:1rem;opacity:.6}
+.eg-node-val{font-size:.875rem;color:var(--text);font-weight:600}
+.eg-connector{width:1px;height:20px;background:var(--gold);opacity:.4;margin:.1rem 0}
 
-/* CTA + Footer (shared) */
+/* Knowledge Graph */
+.kg-container{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;justify-content:center;position:relative}
+.kg-container svg{max-width:100%;height:auto}
+.kg-node{cursor:pointer;transition:all .3s}
+.kg-node:hover .kg-circle{fill:var(--gold-dim);stroke:var(--gold)}
+.kg-circle{fill:var(--card);stroke:var(--border);stroke-width:1.5;transition:all .3s}
+.kg-circle.gold{fill:var(--gold-dim);stroke:var(--gold)}
+.kg-circle.active{fill:var(--gold);stroke:var(--gold-bright);stroke-width:2}
+.kg-label{fill:var(--text);font-family:var(--font-en);font-size:10px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.kg-label.gold{fill:var(--gold)}
+.kg-link{stroke:var(--border);stroke-width:1;fill:none;transition:stroke .3s}
+.kg-link.active{stroke:var(--gold);stroke-width:1.5}
+.kg-info{position:absolute;top:1rem;left:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;min-width:200px;max-width:240px;opacity:0;transition:opacity .3s;pointer-events:none}
+.kg-info.visible{opacity:1}
+.kg-info-title{font-family:var(--font-en);font-weight:700;color:var(--gold);font-size:.875rem;margin-bottom:.5rem}
+.kg-info-row{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-bottom:.25rem}.kg-info-row span{color:var(--text)}
+
+/* Processing stats */
+.proc-stats{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+.proc-stat{text-align:center;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:10px;transition:border-color .3s}
+.proc-stat:hover{border-color:var(--gold)}
+.proc-stat-num{font-family:var(--font-mono);font-size:1.75rem;color:var(--gold);font-weight:600;margin-bottom:.25rem}
+.proc-stat-lbl{font-size:.6875rem;color:var(--text-mute)}
+
+/* Relationship diagram */
+.rel-diagram{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
+.rel-box.news{background:var(--card);border:1px solid var(--border)}
+.rel-box.core{background:var(--gold-dim);border:1px solid var(--gold)}
+.rel-box.trade{background:var(--card);border:1px solid var(--border)}
+.rel-box-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.rel-box.core .rel-box-lbl{color:var(--gold)}
+.rel-box-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.rel-box-desc{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.rel-arrow{color:var(--gold);font-size:1.5rem;opacity:.5;margin:.4rem 0}
+
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
 .cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
 .cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
 .footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
-.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
-@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
 .footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
 .footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
 .footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
 .footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
-.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
-@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
-
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى · المحرك</span>
-        <span class="sub">طبقة الذكاء</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="news.html">الأخبار</a></li>
-      <li><a href="core.html" class="active">المحرك</a></li>
-      <li><a href="trade.html">التداول</a></li>
-      <li><a href="api.html">واجهة برمجة</a></li>
-      <li><a href="enterprise.html">المؤسسات</a></li>
-    </ul>
-    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div>
-  </div>
-</nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · المحرك</span><span class="sub">محرّك الاستخبارات</span></div></a><ul class="nav-links"><li><a href="news.html">الأخبار</a></li><li><a href="core.html" class="active">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tagline">محرّك الاستخبارات</div>
-      <h1 class="hero-h1">البنية التحتية الذكية التي تشغّل كل قرار في رؤى</h1>
-      <p class="hero-sub">ليست منتجاً منفصلاً — هي القلب. مثل Neural Engine في Apple أو Infrastructure في AWS، تشغّل كل طبقة أخرى.</p>
-      <div class="hero-cta">
-        <a href="#architecture" class="btn btn-primary">استكشف المعمارية</a>
-        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
+<div class="hero-tagline">محرّك الاستخبارات المالية</div>
+<h1 class="hero-h1">البنية التحتية الذكية التي تشغّل<br>كل قرار في رؤى</h1>
+<p class="hero-sub">ليست منتجاً منفصلاً — هي القلب. مثل Neural Engine في Apple، تشغّل كل طبقة أخرى. 9 طبقات من المصدر إلى القرار، كل واحدة قابلة للتتبع.</p>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
+<a href="#architecture" class="btn btn-primary">استكشف المعمارية</a>
+<a href="news.html" class="btn btn-ghost">رؤى الأخبار</a>
+</div>
+</div></div></section>
 
-<!-- ARCHITECTURE -->
-<section class="section reveal" id="architecture">
-  <div class="container">
-    <span class="section-tag">المعمارية</span>
-    <h2 class="section-h">9 طبقات من المصدر إلى القرار</h2>
-    <p class="section-lead">المعمارية الكاملة — كل طبقة تبني على ما قبلها، وكل طبقة قابلة للتتبع والتدقيق.</p>
+<!-- 1. ARCHITECTURE STACK — 9 interactive layers -->
+<section class="section reveal" id="architecture"><div class="container">
+<span class="section-tag">معمارية المحرك</span>
+<h2 class="section-h">9 طبقات من المصدر إلى القرار</h2>
+<p class="section-lead">كل طبقة تبني على ما قبلها، وكل طبقة قابلة للتتبع والتدقيق. مرّر المؤشر على أي طبقة لرؤية التفاصيل.</p>
 
-    <div class="arch-stack">
-      <div class="arch-layer">
-        <div class="arch-layer-num">01</div>
-        <div>
-          <div class="arch-layer-name">المصادر المالية العالمية</div>
-          <div class="arch-layer-name-ar">Global Financial Sources</div>
-        </div>
-        <div class="arch-layer-desc">الفيدرالي · البنك المركزي الأوروبي · صندوق النقد · مكتب إحصاءات العمل · +404</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">02</div>
-        <div>
-          <div class="arch-layer-name">سجل المصادر</div>
-          <div class="arch-layer-name-ar">Source Registry</div>
-        </div>
-        <div class="arch-layer-desc">فهرسة · تصنيف · موثوقية · تكرار</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">03</div>
-        <div>
-          <div class="arch-layer-name">ذكاء الوثائق</div>
-          <div class="arch-layer-name-ar">Document Intelligence</div>
-        </div>
-        <div class="arch-layer-desc">PDF/HTML/XML ← بيانات مهيكلة</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">04</div>
-        <div>
-          <div class="arch-layer-name">محرّك الحقائق</div>
-          <div class="arch-layer-name-ar">Fact Engine</div>
-        </div>
-        <div class="arch-layer-desc">استخراج NLP · أرقام · كيانات · تواريخ</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">05</div>
-        <div>
-          <div class="arch-layer-name">محرّك الأحداث</div>
-          <div class="arch-layer-name-ar">Event Engine</div>
-        </div>
-        <div class="arch-layer-desc">تصنيف · قرارات الفائدة · إصدارات البيانات</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer core">
-        <div class="arch-layer-num">06</div>
-        <div>
-          <div class="arch-layer-name">مخطط الأدلة</div>
-          <div class="arch-layer-name-ar">Evidence Graph</div>
-        </div>
-        <div class="arch-layer-desc">ربط كل حقيقة بمصدرها · طابع زمني · درجة ثقة</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">07</div>
-        <div>
-          <div class="arch-layer-name">رسم المعرفة</div>
-          <div class="arch-layer-name-ar">Knowledge Graph</div>
-        </div>
-        <div class="arch-layer-desc">عقد وروابط بين الكيانات والأحداث والقرارات</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">08</div>
-        <div>
-          <div class="arch-layer-name">استدلال ذكي</div>
-          <div class="arch-layer-name-ar">AI Reasoning</div>
-        </div>
-        <div class="arch-layer-desc">استنتاج التأثيرات السوقية المحتملة</div>
-      </div>
-      <div class="arch-arrow">↓</div>
-      <div class="arch-layer">
-        <div class="arch-layer-num">09</div>
-        <div>
-          <div class="arch-layer-name">ذكاء القرار</div>
-          <div class="arch-layer-name-ar">Decision Intelligence</div>
-        </div>
-        <div class="arch-layer-desc">توصية موثقة بالأدلة · درجة ثقة · تبرير</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="arch-stack" id="archStack">
+<div class="arch-layer" data-info="المصادر المالية العالمية|فيدرالي · بنك مركزي أوروبي · صندوق النقد · +408|411 مصدر رسمي"><div class="arch-layer-num">01</div><div class="arch-layer-body"><div class="arch-layer-name">المصادر المالية العالمية</div><div class="arch-layer-name-ar">بنوك مركزية · هيئات · وزارات</div></div><div class="arch-layer-stat">411 مصدر</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="سجل المصادر|فهرسة · تصنيف · موثوقية · تكرار|411 مصدر مُفهرس"><div class="arch-layer-num">02</div><div class="arch-layer-body"><div class="arch-layer-name">سجل المصادر</div><div class="arch-layer-name-ar">فهرسة وتصنيف وموثوقية</div></div><div class="arch-layer-stat">مُفهرس بالكامل</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="ذكاء الوثائق|PDF · HTML · XML ← بيانات مهيكلة|10,000+ وثيقة"><div class="arch-layer-num">03</div><div class="arch-layer-body"><div class="arch-layer-name">ذكاء الوثائق</div><div class="arch-layer-name-ar">معالجة PDF و HTML و XML</div></div><div class="arch-layer-stat">10,000+ وثيقة</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="محرّك الحقائق|استخراج NLP · أرقام · كيانات · تواريخ|1,247 حقيقة"><div class="arch-layer-num">04</div><div class="arch-layer-body"><div class="arch-layer-name">محرّك الحقائق</div><div class="arch-layer-name-ar">استخراج بالـ NLP</div></div><div class="arch-layer-stat">1,247 حقيقة</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="محرّك الأحداث|تصنيف · قرارات الفائدة · بيانات الاقتصاد|38 حدثاً"><div class="arch-layer-num">05</div><div class="arch-layer-body"><div class="arch-layer-name">محرّك الأحداث</div><div class="arch-layer-name-ar">تصنيف وربط الأحداث</div></div><div class="arch-layer-stat">38 حدثاً</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer gold" data-info="مخطط الأدلة|ربط كل حقيقة بمصدرها · طابع زمني · ثقة|دليل كامل لكل ادعاء"><div class="arch-layer-num">06</div><div class="arch-layer-body"><div class="arch-layer-name">مخطط الأدلة</div><div class="arch-layer-name-ar">ربط الحقائق بالمصادر</div></div><div class="arch-layer-stat">دليل كامل</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="رسم المعرفة|عقد وروابط بين الكيانات والأحداث|شبكة معرفة حية"><div class="arch-layer-num">07</div><div class="arch-layer-body"><div class="arch-layer-name">رسم المعرفة</div><div class="arch-layer-name-ar">شبكة العلاقات المالية</div></div><div class="arch-layer-stat">شبكة حية</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="الاستدلال|استنتاج التأثيرات السوقية المحتملة|10 أدوار استدلال"><div class="arch-layer-num">08</div><div class="arch-layer-body"><div class="arch-layer-name">الاستدلال</div><div class="arch-layer-name-ar">استنتاج التأثيرات السوقية</div></div><div class="arch-layer-stat">10 أدوار</div></div>
+<div class="arch-arrow">↓</div>
+<div class="arch-layer" data-info="ذكاء القرار|توصية موثقة بالأدلة · درجة ثقة · تبرير|219 تحليلاً"><div class="arch-layer-num">09</div><div class="arch-layer-body"><div class="arch-layer-name">ذكاء القرار</div><div class="arch-layer-name-ar">توصية موثّقة بالأدلة</div></div><div class="arch-layer-stat">219 تحليلاً</div></div>
+</div>
+</div></section>
 
-<!-- SOURCE REGISTRY -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">سجل المصادر</span>
-    <h2 class="section-h">سجل المصادر الرسمية</h2>
-    <p class="section-lead">411 مصدر رسمي · كل مصدر مُفهرس بنوعه، بلده، درجة صحته، آخر تحديث، ومستوى الثقة.</p>
+<!-- 2. SOURCE REGISTRY — live table -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">سجل المصادر</span>
+<h2 class="section-h">411 مصدر رسمي · مراقب 24/7</h2>
+<p class="section-lead">كل مصدر مُفهرس بنوعه وبلده ودرجة صحته وآخر تحديث ومستوى الثقة. النقطة الخضراء تعني: مراقبة نشطة الآن.</p>
 
-    <div class="sr-table">
-      <div class="sr-row header">
-        <div>المصدر</div><div>النوع</div><div>الدولة</div><div>الصحة</div><div>آخر تحديث</div><div>الثقة</div>
-      </div>
-      <div class="sr-row">
-        <div>الفيدرالي</div><div>بنك مركزي</div><div>أمريكا</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">14:32 شرق</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>البنك المركزي الأوروبي</div><div>بنك مركزي</div><div>أوروبا</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">11:00 وسط أوروبا</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>بنك إنجلترا</div><div>بنك مركزي</div><div>بريطانيا</div>
-        <div><span class="sr-health good">99%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">12:00 بريطانيا</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>صندوق النقد الدولي</div><div>مؤسسي</div><div>عالمي</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">يومياً</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>مكتب إحصاءات العمل</div><div>إحصائي</div><div>أمريكا</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 شرق</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>مكتب التحليل الاقتصادي</div><div>إحصائي</div><div>أمريكا</div>
-        <div><span class="sr-health good">99%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 شرق</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>هيئة الأوراق المالية والبورصات</div><div>تنظيمي</div><div>أمريكا</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">مستمر</div>
-        <div class="sr-trust">A+</div>
-      </div>
-      <div class="sr-row">
-        <div>خزانة الولايات المتحدة</div><div>حكومي</div><div>أمريكا</div>
-        <div><span class="sr-health good">100%</span></div>
-        <div class="mono" style="font-size:.75rem;color:var(--text-mute)">16:00 شرق</div>
-        <div class="sr-trust">A+</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="sr-table">
+<div class="sr-row header"><div>المصدر</div><div>النوع</div><div>الدولة</div><div>الصحة</div><div>آخر تحديث</div><div>الثقة</div></div>
+<div class="sr-row"><div>الفيدرالي <span class="sr-dot"></span></div><div>بنك مركزي</div><div>أمريكا</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">14:32 شرق</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>البنك المركزي الأوروبي <span class="sr-dot"></span></div><div>بنك مركزي</div><div>أوروبا</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">11:00 وسط</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>بنك إنجلترا <span class="sr-dot"></span></div><div>بنك مركزي</div><div>بريطانيا</div><div><span class="sr-health good">99%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">12:00 بريطانيا</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>صندوق النقد <span class="sr-dot"></span></div><div>مؤسسي</div><div>عالمي</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">يومياً</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>مكتب إحصاءات العمل <span class="sr-dot"></span></div><div>إحصائي</div><div>أمريكا</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 شرق</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>مكتب التحليل الاقتصادي <span class="sr-dot"></span></div><div>إحصائي</div><div>أمريكا</div><div><span class="sr-health good">99%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">08:30 شرق</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>هيئة الأوراق المالية <span class="sr-dot"></span></div><div>تنظيمي</div><div>أمريكا</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">مستمر</div><div class="sr-trust">A+</div></div>
+<div class="sr-row"><div>خزانة الولايات المتحدة <span class="sr-dot"></span></div><div>حكومي</div><div>أمريكا</div><div><span class="sr-health good">100%</span></div><div class="mono" style="font-size:.75rem;color:var(--text-mute)">16:00 شرق</div><div class="sr-trust">A+</div></div>
+</div>
+</div></section>
 
-<!-- DOCUMENT INTELLIGENCE -->
-<section class="section reveal">
-  <div class="container">
-    <span class="section-tag">ذكاء الوثائق</span>
-    <h2 class="section-h">من PDF إلى معرفة مهيكلة</h2>
-    <p class="section-lead">كل وثيقة رسمية تمرّ بـ pipeline ذكي يستخرج الحقائق والأحداث والكيانات ودرجة الثقة.</p>
+<!-- 3. DOCUMENT INTELLIGENCE — live demo -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">ذكاء الوثائق</span>
+<h2 class="section-h">من PDF إلى معرفة مهيكلة</h2>
+<p class="section-lead">كل وثيقة رسمية تمرّ بمعالجة ذكية تستخرج الحقائق والأحداث والكيانات ودرجة الثقة — في 0.4 ثانية.</p>
 
-    <div class="doc-demo">
-      <div class="doc-input">
-        <div class="doc-input-header">
-          <div class="doc-input-name">بيان الفيدرالي</div>
-          <div class="doc-input-type">PDF · 24 صفحة</div>
-        </div>
-        <div class="doc-input-lines">
-          <div class="doc-input-line" style="width:90%"></div>
-          <div class="doc-input-line" style="width:78%"></div>
-          <div class="doc-input-line" style="width:85%"></div>
-          <div class="doc-input-highlight">
-            <div class="doc-input-highlight-lbl">استخراج رئيسي</div>
-            <div class="doc-input-highlight-val">"قررت اللجنة الإبقاء على النطاق المستهدف لسعر الفائدة الفيدرالية بين 5.25 و5.50 بالمئة."</div>
-          </div>
-          <div class="doc-input-line" style="width:72%"></div>
-          <div class="doc-input-line" style="width:80%"></div>
-          <div class="doc-input-line" style="width:68%"></div>
-        </div>
-      </div>
+<div class="doc-demo">
+<div class="doc-panel">
+<div class="doc-panel-h">← الوثيقة الأصلية</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:.75rem;border-bottom:1px solid var(--border-soft);margin-bottom:1rem">
+<div style="font-family:var(--font-en);font-weight:700;color:var(--text)">بيان الفيدرالي</div>
+<div style="font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)">PDF · 24 صفحة</div>
+</div>
+<div class="doc-line" style="width:90%"></div>
+<div class="doc-line" style="width:78%"></div>
+<div class="doc-line" style="width:85%"></div>
+<div class="doc-highlight"><div class="doc-highlight-lbl">استخراج رئيسي</div><div class="doc-highlight-val">«قررت اللجنة الإبقاء على النطاق المستهدف لسعر الفائدة الفيدرالية بين 5.25 و5.50 بالمئة.»</div></div>
+<div class="doc-line" style="width:72%"></div>
+<div class="doc-line" style="width:80%"></div>
+<div class="doc-line" style="width:68%"></div>
+</div>
 
-      <div class="doc-output">
-        <div class="doc-output-header">← استخبارات مهيكلة</div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">الوثيقة</span>
-          <span class="doc-stat-val">FOMC_2026_07</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">حقائق مستخرجة</span>
-          <span class="doc-stat-val">12</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">أحداث مكتشفة</span>
-          <span class="doc-stat-val">3</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">كيانات محددة</span>
-          <span class="doc-stat-val">18</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">حقيقة رئيسية</span>
-          <span class="doc-stat-val">الفائدة 5.50%</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">الثقة</span>
-          <span class="doc-stat-val">96%</span>
-        </div>
-        <div class="doc-stat">
-          <span class="doc-stat-key">زمن المعالجة</span>
-          <span class="doc-stat-val">0.4ث</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="doc-panel">
+<div class="doc-panel-h">← استخبارات مهيكلة</div>
+<div class="doc-stat"><span class="doc-stat-k">الوثيقة</span><span class="doc-stat-v">FOMC_2026_07</span></div>
+<div class="doc-stat"><span class="doc-stat-k">حقائق مستخرجة</span><span class="doc-stat-v">12</span></div>
+<div class="doc-stat"><span class="doc-stat-k">أحداث مكتشفة</span><span class="doc-stat-v">3</span></div>
+<div class="doc-stat"><span class="doc-stat-k">كيانات محددة</span><span class="doc-stat-v">18</span></div>
+<div class="doc-stat"><span class="doc-stat-k">حقيقة رئيسية</span><span class="doc-stat-v">الفائدة 5.50%</span></div>
+<div class="doc-stat"><span class="doc-stat-k">الثقة</span><span class="doc-stat-v">96%</span></div>
+<div class="doc-stat"><span class="doc-stat-k">زمن المعالجة</span><span class="doc-stat-v">0.4 ثانية</span></div>
+</div>
+</div>
+</div></section>
 
-<!-- EVIDENCE GRAPH -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">مخطط الأدلة — القلب</span>
-    <h2 class="section-h">كل رؤية لها سلسلة إثبات</h2>
-    <p class="section-lead">الشاشة الأهم في رؤى — تتبّع كامل من الرؤية إلى الحقيقة إلى الوثيقة إلى المصدر الرسمي.</p>
+<!-- 4. EVIDENCE GRAPH — interactive chain -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">مخطط الأدلة — القلب</span><h2 class="section-h" style="margin:0 auto 1rem">كل رؤية لها سلسلة إثبات كاملة</h2><p class="section-lead" style="margin:0 auto">الشاشة الأهم في رؤى — تتبّع كامل من الرؤية إلى الحقيقة إلى الوثيقة إلى المصدر الرسمي. كل خطوة موثّقة.</p></div>
 
-    <div class="evidence-graph">
-      <div class="eg-header">
-        <div class="eg-title">رؤية #28492 — "ثبات الفيدرالي يشير إلى قوة الدولار قريباً"</div>
-        <div class="eg-conf">الثقة 87%</div>
-      </div>
+<div class="eg-container">
+<div class="eg-header"><div class="eg-title">رؤية #28492 — «ثبات الفيدرالي يشير إلى قوة الدولار قريباً»</div><div class="eg-conf">الثقة 87%</div></div>
+<div class="eg-flow">
+<div class="eg-node gold"><div class="eg-node-num">01</div><div class="eg-node-body"><div class="eg-node-lbl">الرؤية</div><div class="eg-node-val">ثبات الفيدرالي يشير إلى قوة الدولار قريباً</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">02</div><div class="eg-node-body"><div class="eg-node-lbl">الحقيقة المستخرجة</div><div class="eg-node-val">سعر الفائدة الفيدرالية: 5.25% – 5.50%</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">03</div><div class="eg-node-body"><div class="eg-node-lbl">الوثيقة</div><div class="eg-node-val">بيان FOMC · يوليو 2026 · 24 صفحة</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">04</div><div class="eg-node-body"><div class="eg-node-lbl">المصدر الرسمي</div><div class="eg-node-val">federalreserve.gov · ثقة A+ · استرجاع 14:32:18 شرق</div></div></div>
+</div>
+<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)">
+<span>5 وثائق · 12 حقيقة · 3 أحداث مرتبطة</span>
+<a href="trade.html" style="color:var(--gold)">حلّل في رؤى التداول ←</a>
+</div>
+</div>
+</div></section>
 
-      <div class="eg-flow">
-        <div class="eg-node gold">
-          <div class="eg-node-lbl">الرؤية</div>
-          <div class="eg-node-val">ثبات الفيدرالي يشير إلى قوة الدولار قريباً مقابل العملات الرئيسية</div>
-        </div>
-        <div class="eg-connector"></div>
-        <div class="eg-node">
-          <div class="eg-node-lbl">الحقيقة</div>
-          <div class="eg-node-val">سعر الفائدة الفيدرالية: 5.25% – 5.50%</div>
-        </div>
-        <div class="eg-connector"></div>
-        <div class="eg-node">
-          <div class="eg-node-lbl">الوثيقة</div>
-          <div class="eg-node-val">بيان FOMC · يوليو 2026 · 24 صفحة</div>
-        </div>
-        <div class="eg-connector"></div>
-        <div class="eg-node">
-          <div class="eg-node-lbl">المصدر الرسمي</div>
-          <div class="eg-node-val">federalreserve.gov · ثقة A+ · استرجاع 14:32:18 شرق</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- 5. KNOWLEDGE GRAPH — interactive -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">رسم المعرفة</span><h2 class="section-h" style="margin:0 auto 1rem">شبكة العلاقات المالية</h2><p class="section-lead" style="margin:0 auto">رؤى لا تعرض الأحداث منفصلة — تربطها. مرّر المؤشر على أي عقدة لرؤية المصدر والوثيقة والقيمة.</p></div>
+
+<div class="kg-container">
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" id="kgSvg">
+<line class="kg-link active" x1="300" y1="60" x2="300" y2="140"/>
+<line class="kg-link active" x1="300" y1="140" x2="150" y2="220"/>
+<line class="kg-link active" x1="300" y1="140" x2="300" y2="220"/>
+<line class="kg-link active" x1="300" y1="140" x2="450" y2="220"/>
+<line class="kg-link" x1="150" y1="220" x2="150" y2="320"/>
+<line class="kg-link" x1="300" y1="220" x2="300" y2="320"/>
+<line class="kg-link" x1="450" y1="220" x2="450" y2="320"/>
+<g class="kg-node" data-info="التضخم|مكتب إحصاءات العمل|CPI Release|2.4% سنوياً"><circle class="kg-circle gold" cx="300" cy="60" r="30"/><text class="kg-label gold" x="300" y="60">التضخم</text></g>
+<g class="kg-node" data-info="الفيدرالي|federalreserve.gov|FOMC Statement|الفائدة 5.50%"><circle class="kg-circle" cx="300" cy="140" r="30"/><text class="kg-label" x="300" y="140">الفيدرالي</text></g>
+<g class="kg-node" data-info="سعر الفائدة|الفيدرالي|قرار FOMC|5.25% - 5.50%"><circle class="kg-circle gold" cx="150" cy="220" r="30"/><text class="kg-label gold" x="150" y="220">الفائدة</text></g>
+<g class="kg-node" data-info="الدولار|سوق الصرف|مؤشر DXY|+0.42%"><circle class="kg-circle" cx="300" cy="220" r="30"/><text class="kg-label" x="300" y="220">الدولار</text></g>
+<g class="kg-node" data-info="السندات|خزانة الولايات المتحدة|منحنى العائد|10 سنوات: 4.32%"><circle class="kg-circle" cx="450" cy="220" r="30"/><text class="kg-label" x="450" y="220">السندات</text></g>
+<g class="kg-node" data-info="الأسهم|S&P 500|مؤشر السوق|-0.3%"><circle class="kg-circle" cx="150" cy="320" r="30"/><text class="kg-label" x="150" y="320">الأسهم</text></g>
+<g class="kg-node" data-info="الذهب|COMEX|XAU/USD|2,389"><circle class="kg-circle" cx="300" cy="320" r="30"/><text class="kg-label" x="300" y="320">الذهب</text></g>
+<g class="kg-node" data-info="النفط|WTI Crude|OIL/USD|85.20 دولار"><circle class="kg-circle" cx="450" cy="320" r="30"/><text class="kg-label" x="450" y="320">النفط</text></g>
+</svg>
+<div class="kg-info" id="kgInfo"><div class="kg-info-title" id="kgInfoTitle">—</div><div class="kg-info-row">المصدر: <span id="kgInfoSource">—</span></div><div class="kg-info-row">الوثيقة: <span id="kgInfoDoc">—</span></div><div class="kg-info-row">القيمة: <span id="kgInfoVal">—</span></div></div>
+</div>
+<div style="text-align:center;margin-top:1.5rem;font-family:var(--font-mono);font-size:.875rem;color:var(--text-mute)">التضخم ← الفيدرالي ← (الفائدة · الدولار · السندات) ← (الأسهم · الذهب · النفط)</div>
+</div></section>
+
+<!-- 6. PROCESSING STATS -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">أرقام المعالجة</span><h2 class="section-h" style="margin:0 auto 1rem">المحرك يعمل 24/7</h2></div>
+<div class="proc-stats">
+<div class="proc-stat"><div class="proc-stat-num">411</div><div class="proc-stat-lbl">مصدر رسمي</div></div>
+<div class="proc-stat"><div class="proc-stat-num">10K+</div><div class="proc-stat-lbl">وثيقة مُعالَجة</div></div>
+<div class="proc-stat"><div class="proc-stat-num">1,247</div><div class="proc-stat-lbl">حقيقة مستخرجة</div></div>
+<div class="proc-stat"><div class="proc-stat-num">38</div><div class="proc-stat-lbl">حدث مُصنّف</div></div>
+<div class="proc-stat"><div class="proc-stat-num">219</div><div class="proc-stat-lbl">تحليل منتج</div></div>
+<div class="proc-stat"><div class="proc-stat-num">0.4ث</div><div class="proc-stat-lbl">زمن المعالجة</div></div>
+</div>
+</div></section>
+
+<!-- 7. RELATIONSHIP: News → Core → Trade -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">المنظومة الكاملة</span><h2 class="section-h" style="margin:0 auto 1rem">المحرك قلب المنظومة</h2><p class="section-lead" style="margin:0 auto">الأخبار تخلق المعرفة، المحرك يعالجها، التداول ينفذها. المحرك ليس منتجاً مستقلاً — هو القلب الذي يربط.</p></div>
+
+<div class="rel-diagram">
+<div class="rel-box news"><div class="rel-box-lbl">المدخل المعرفي</div><div class="rel-box-name">رؤى الأخبار</div><div class="rel-box-desc">تخلق الاستخبارات من المصادر الرسمية</div><div style="margin-top:.6rem"><a href="news.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف الأخبار ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box core"><div class="rel-box-lbl">القلب المعالج</div><div class="rel-box-name">رؤى المحرك</div><div class="rel-box-desc">يربط المعرفة بالقرار عبر مخطط الأدلة</div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box trade"><div class="rel-box-lbl">طبقة التنفيذ</div><div class="rel-box-name">رؤى التداول</div><div class="rel-box-desc">يحوّل القرار إلى صفقة مع دليل كامل</div><div style="margin-top:.6rem"><a href="trade.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف التداول ←</a></div></div>
+</div>
+<div style="text-align:center;margin-top:2rem;font-family:var(--font-mono);font-size:.8125rem;color:var(--text-mute)">مصدر رسمي ← حقيقة ← حدث ← فهم ← تأثير ← قرار ← تنفيذ</div>
+</div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal">
-  <div class="container">
-    <span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
-    <h2>المحرك يعمل في الخلفية — وصولك المؤسسي يفتحه</h2>
-    <p>اطّلع على مخطط الأدلة الكامل، سجل المصادر، وذكاء الوثائق مباشرة.</p>
-    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a>
-  </div>
-</section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>المحرك يعمل في الخلفية — وصولك يفتحه</h2><p>اطّلع على مخطط الأدلة الكامل، سجل المصادر، وذكاء الوثائق مباشرة.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="name">رؤى · ROUAA</div>
-      <div class="tagline">استخبارات مالية مبنية على الدليل — البنية التحتية الذكية لكل قرار.</div>
-      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
-    </div>
-    <div class="footer-col">
-      <h4>المنصة</h4>
-      <ul>
-        <li><a href="news.html">رؤى الأخبار</a></li>
-        <li><a href="core.html">رؤى المحرك</a></li>
-        <li><a href="trade.html">رؤى التداول</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>المؤسسات</h4>
-      <ul>
-        <li><a href="api.html">واجهة برمجة REST</a></li>
-        <li><a href="enterprise.html">الأمان</a></li>
-        <li><a href="index.html#cta">اطلب وصولاً</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>الشركة</h4>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="#">من نحن</a></li>
-        <li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
-    <span>contact@rouaa.ai · @rouaa_ai</span>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">محرّك الاستخبارات المالية — البنية التحتية الذكية لكل قرار.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة REST</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai · @rouaa_ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Knowledge Graph interactivity
+(function(){const nodes=document.querySelectorAll('.kg-node');const info=document.getElementById('kgInfo');const title=document.getElementById('kgInfoTitle');const source=document.getElementById('kgInfoSource');const doc=document.getElementById('kgInfoDoc');const val=document.getElementById('kgInfoVal');
+nodes.forEach(node=>{node.addEventListener('mouseenter',()=>{const data=node.dataset.info.split('|');title.textContent=data[0];source.textContent=data[1];doc.textContent=data[2];val.textContent=data[3];info.classList.add('visible');node.querySelector('.kg-circle').classList.add('active')});
+node.addEventListener('mouseleave',()=>{info.classList.remove('visible');node.querySelector('.kg-circle').classList.remove('active')});
+node.addEventListener('click',()=>{const data=node.dataset.info.split('|');title.textContent=data[0];source.textContent=data[1];doc.textContent=data[2];val.textContent=data[3];info.classList.add('visible')})});
+})();
 </script>
 </body>
 </html>
