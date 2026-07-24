@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى الأخبار — منصة الاستخبارات المالية</title>
-<meta name="description" content="تحويل المعلومات المالية الرسمية إلى استخبارات سوقية قابلة للتنفيذ.">
+<title>رؤى — طبقة الاستخبارات المالية</title>
+<meta name="description" content="طبقة الاستخبارات المالية التي تحوّل المعلومات الرسمية إلى معرفة استثمارية.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
   --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
   --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;
   --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
-  --border-soft:rgba(243,244,246,.06);--border-mid:rgba(243,244,246,.12);
+  --border-soft:rgba(243,244,246,.06);
   --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -39,8 +39,10 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}
+.btn-trade:hover{background:var(--gold-dim)}
 
-.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
 @media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
 .nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
@@ -54,121 +56,112 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 @media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
-.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+/* === Hero === */
+.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
 .hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
-.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
 
-/* === Live Intelligence Stream === */
-.live-stream{margin-top:3rem;display:grid;grid-template-columns:1fr;gap:.75rem;max-width:900px;margin-left:auto;margin-right:auto}
-.live-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;display:grid;grid-template-columns:auto 1fr auto auto;gap:1rem;align-items:center;transition:border-color .3s}
-.live-item:hover{border-color:var(--gold)}
-@media(max-width:768px){.live-item{grid-template-columns:1fr;gap:.5rem}}
-.live-time{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);min-width:60px}
-.live-source{font-family:var(--font-en);font-size:.75rem;font-weight:600;color:var(--emerald);padding:2px 8px;background:rgba(52,211,153,.1);border-radius:4px}
-.live-event{font-size:.9375rem;color:var(--text);font-weight:600}
-.live-impact{font-family:var(--font-mono);font-size:.75rem;color:var(--gold)}
-.live-impact.up{color:var(--emerald)}.live-impact.down{color:var(--rose)}
+/* === Intelligence Factory (3 layers) === */
+.factory{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:800px;margin-left:auto;margin-right:auto;gap:0}
+.factory-layer{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .3s}
+.factory-layer:hover{border-color:var(--gold)}
+.factory-layer.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
+.factory-layer-lbl{font-family:var(--font-mono);font-size:.625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.75rem;text-align:center}
+.factory-layer.gold .factory-layer-lbl{color:var(--gold)}
+.factory-items{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.factory-pill{padding:.4rem .8rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim)}
+.factory-layer.gold .factory-pill{background:var(--card);border-color:var(--border)}
+.factory-arrow{color:var(--gold);opacity:.5;font-size:1.5rem;margin:.25rem 0}
 
-/* === Intelligence Pipeline === */
-.pipeline-viz{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:900px;margin-left:auto;margin-right:auto;gap:0}
-.pipe-stage{width:100%;max-width:600px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .3s}
-.pipe-stage:hover{border-color:var(--gold)}
-.pipe-stage.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
-.pipe-num{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);width:32px;flex-shrink:0}
-.pipe-content{flex:1}
-.pipe-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:.9375rem}
-.pipe-desc{font-size:.75rem;color:var(--text-mute);margin-top:.125rem}
-.pipe-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding:.25rem .5rem;background:var(--surface);border-radius:4px}
-.pipe-arrow{color:var(--gold);opacity:.5;font-size:1.25rem;margin:.25rem 0}
+/* === Live Intelligence Room === */
+.live-room{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.live-room-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.live-room-title{display:flex;align-items:center;gap:.75rem}
+.live-room-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.live-room-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
+.live-room-meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.live-room-stages{padding:1.5rem;display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+@media(max-width:768px){.live-room-stages{grid-template-columns:1fr 1fr}}
+.live-stage{padding:1rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;text-align:center;transition:border-color .3s}
+.live-stage.done{border-color:var(--emerald)}
+.live-stage.active{border-color:var(--gold);background:var(--gold-dim)}
+.live-stage-num{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);margin-bottom:.5rem}
+.live-stage.active .live-stage-num{color:var(--gold)}
+.live-stage-name{font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
+.live-stage-val{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+.live-stage.done .live-stage-val{color:var(--emerald)}
+.live-stage.active .live-stage-val{color:var(--gold)}
+.live-room-impact{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:768px){.live-room-impact{grid-template-columns:1fr 1fr}}
+.impact-cell{text-align:center}
+.impact-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
+.impact-val{font-family:var(--font-mono);font-size:.875rem;font-weight:600;color:var(--text)}
+.impact-val.up{color:var(--emerald)}
+.impact-val.down{color:var(--rose)}
+.impact-val.gold{color:var(--gold)}
+.live-room-trade{padding:1rem 1.5rem;background:var(--gold-dim);border-top:1px solid rgba(200,169,81,.2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.live-room-trade-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.live-room-trade-link{font-size:.8125rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:.4rem}
 
-/* === Intelligence Chain Demo === */
-.chain-demo{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.chain-header{padding:1.5rem 2rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.chain-title{font-family:var(--font-en);font-weight:700;font-size:1.125rem;color:var(--text)}
-.chain-meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.chain-flow{padding:2rem;display:flex;flex-direction:column;gap:0;align-items:center}
-.chain-step{width:100%;max-width:560px;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:1rem;transition:border-color .3s}
-.chain-step:hover{border-color:var(--gold)}
-.chain-step.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
-.chain-step-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);width:28px;flex-shrink:0}
-.chain-step-content{flex:1}
-.chain-step-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.125rem}
-.chain-step.gold .chain-step-lbl{color:var(--gold)}
-.chain-step-val{font-size:.875rem;color:var(--text);font-weight:600}
-.chain-connector{width:1px;height:20px;background:var(--gold);opacity:.4;margin:.125rem 0}
-.chain-footer{padding:1rem 2rem;background:var(--surface);border-top:1px solid var(--border);text-align:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+/* === Evidence Viewer === */
+.ev-viewer{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:800px;margin-left:auto;margin-right:auto}
+.ev-viewer-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.ev-viewer-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+.ev-viewer-title{font-size:1.125rem;font-weight:700;color:var(--text)}
+.ev-viewer-body{padding:1.5rem}
+.ev-viewer-section{margin-bottom:1.5rem}
+.ev-viewer-section:last-child{margin-bottom:0}
+.ev-viewer-section-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
+.ev-source-row{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;margin-bottom:.4rem;font-size:.8125rem}
+.ev-source-check{width:18px;height:18px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
+.ev-source-name{font-family:var(--font-en);font-weight:600;color:var(--text)}
+.ev-source-url{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-right:auto}
+.ev-source-date{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+.ev-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+@media(max-width:600px){.ev-stats{grid-template-columns:1fr 1fr}}
+.ev-stat{text-align:center;padding:.75rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px}
+.ev-stat-num{font-family:var(--font-mono);font-size:1.25rem;color:var(--gold);font-weight:600}
+.ev-stat-lbl{font-size:.625rem;color:var(--text-mute);margin-top:.125rem}
+.ev-viewer-footer{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
 
-/* === Research Workspace === */
-.research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:3rem}
-.research-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:border-color .3s}
-.research-card:hover{border-color:var(--gold)}
-.research-card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.75rem}
-.research-card-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.research-card-desc{font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1rem}
-.research-card-meta{display:flex;gap:1rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.research-card-meta span{color:var(--gold)}
+/* === Intelligence Graph === */
+.intel-graph{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;justify-content:center;position:relative}
+.intel-graph svg{max-width:100%;height:auto}
+.ig-node{cursor:pointer;transition:all .3s}
+.ig-node:hover .ig-circle{fill:var(--gold-dim);stroke:var(--gold)}
+.ig-circle{fill:var(--card);stroke:var(--border);stroke-width:1.5;transition:all .3s}
+.ig-circle.gold{fill:var(--gold-dim);stroke:var(--gold)}
+.ig-circle.active{fill:var(--gold);stroke:var(--gold-bright);stroke-width:2}
+.ig-label{fill:var(--text);font-family:var(--font-en);font-size:11px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.ig-label.gold{fill:var(--gold)}
+.ig-link{stroke:var(--border);stroke-width:1;fill:none;transition:stroke .3s}
+.ig-link.active{stroke:var(--gold);stroke-width:1.5}
+.ig-info{position:absolute;top:1rem;left:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;min-width:200px;max-width:240px;opacity:0;transition:opacity .3s;pointer-events:none}
+.ig-info.visible{opacity:1}
+.ig-info-title{font-family:var(--font-en);font-weight:700;color:var(--gold);font-size:.875rem;margin-bottom:.5rem}
+.ig-info-row{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-bottom:.25rem}
+.ig-info-row span{color:var(--text)}
 
-/* === Institutional Research Brief === */
-.brief-card{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:800px;margin-left:auto;margin-right:auto}
-.brief-header{padding:1.5rem 2rem;background:var(--surface);border-bottom:1px solid var(--border)}
-.brief-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
-.brief-title{font-size:1.25rem;font-weight:700;color:var(--text)}
-.brief-body{padding:1.5rem 2rem}
-.brief-row{display:grid;grid-template-columns:160px 1fr;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border-soft);font-size:.875rem}
-.brief-row:last-child{border-bottom:none}
-@media(max-width:600px){.brief-row{grid-template-columns:1fr;gap:.25rem}}
-.brief-row-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;padding-top:.125rem}
-.brief-row-val{color:var(--text)}
-.brief-row-val.gold{color:var(--gold);font-weight:600}
-.brief-row-val .evidence-item{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .5rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:4px;margin:.2rem .25rem 0 0;font-family:var(--font-mono);font-size:.75rem}
-.brief-row-val .evidence-item .check{color:var(--emerald)}
-.brief-footer{padding:1rem 2rem;background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-
-/* === Intelligence Map === */
-.intel-map{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;justify-content:center}
-.intel-map svg{max-width:100%;height:auto}
-.intel-map .node{fill:var(--card);stroke:var(--border);stroke-width:1.5}
-.intel-map .node.gold{fill:var(--gold-dim);stroke:var(--gold)}
-.intel-map .node-label{fill:var(--text);font-family:var(--font-en);font-size:10px;font-weight:600;text-anchor:middle;dominant-baseline:middle}
-.intel-map .node-label.gold{fill:var(--gold)}
-.intel-map .link{stroke:var(--border);stroke-width:1;fill:none}
-.intel-map .link.active{stroke:var(--gold);stroke-width:1.5}
-
-/* === Event Intelligence === */
-.event-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-top:3rem}
-.event-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .3s}
-.event-card:hover{border-color:var(--gold)}
-.event-card-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
-.event-card-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:1rem}
-.event-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem}
-.event-row:last-child{border-bottom:none}
-.event-row-lbl{color:var(--text-mute);font-family:var(--font-mono);font-size:.6875rem}
-.event-row-val{color:var(--text);font-family:var(--font-mono);font-weight:600}
-.event-row-val.up{color:var(--emerald)}
-.event-row-val.down{color:var(--rose)}
-.event-row-val.gold{color:var(--gold)}
-.event-ai{margin-top:.75rem;padding:.75rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;font-size:.75rem;color:var(--gold);font-family:var(--font-mono);line-height:1.5}
-
-/* === Evidence Network === */
-.evidence-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:3rem}
-.ev-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s}
-.ev-card:hover{border-color:var(--gold)}
-.ev-card-claim{font-size:.875rem;color:var(--text);font-weight:600;margin-bottom:.75rem;line-height:1.5}
-.ev-card-source{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);margin-bottom:.5rem}
-.ev-card-source .check{width:16px;height:16px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700;flex-shrink:0}
-.ev-card-meta{display:flex;justify-content:space-between;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.ev-card-meta .conf{color:var(--gold);font-weight:600}
-
-/* === Content Factory === */
-.factory-flow{margin-top:3rem;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
-.factory-stage{padding:.75rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:8px;font-family:var(--font-en);font-size:.875rem;font-weight:600;color:var(--text)}
-.factory-arrow{color:var(--gold);opacity:.6;font-size:1.25rem}
-.factory-outputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem;margin-top:1.5rem}
-.factory-out{padding:.875rem;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;text-align:center;font-size:.8125rem;color:var(--text-dim);font-family:var(--font-mono)}
+/* === Research Terminal === */
+.research-terminal{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.rt-header{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.rt-title{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
+.rt-tabs{display:flex;gap:.25rem}
+.rt-tab{padding:.3rem .6rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);border-radius:4px;cursor:pointer;transition:all .2s}
+.rt-tab.active{background:var(--gold-dim);color:var(--gold)}
+.rt-list{padding:.5rem}
+.rt-item{padding:1rem 1.25rem;border-bottom:1px solid var(--border-soft);display:grid;grid-template-columns:1fr auto auto;gap:1rem;align-items:center;transition:background .2s;cursor:pointer}
+.rt-item:hover{background:rgba(255,255,255,.02)}
+.rt-item:last-child{border-bottom:none}
+@media(max-width:768px){.rt-item{grid-template-columns:1fr;gap:.5rem}}
+.rt-item-topic{font-size:.9375rem;font-weight:600;color:var(--text)}
+.rt-item-meta{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-top:.25rem}
+.rt-item-evidence{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);padding:.2rem .5rem;background:rgba(52,211,153,.1);border-radius:4px;white-space:nowrap}
+.rt-item-conf{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);font-weight:600;min-width:40px;text-align:center}
 
 /* === CTA + Footer === */
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
@@ -185,7 +178,6 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
 .footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
 @media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
-
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
@@ -198,8 +190,8 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
     <a href="index.html" class="nav-brand">
       <div class="nav-brand-logo">R</div>
       <div class="nav-brand-text">
-        <span class="name">رؤى · الأخبار</span>
-        <span class="sub">منصة الاستخبارات المالية</span>
+        <span class="name">رؤى · الاستخبارات</span>
+        <span class="sub">طبقة الاستخبارات المالية</span>
       </div>
     </a>
     <ul class="nav-links">
@@ -213,482 +205,353 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
   </div>
 </nav>
 
-<!-- ============= 1. HERO ============= -->
+<!-- ============= HERO ============= -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-tagline">منصة الاستخبارات المالية</div>
-      <h1 class="hero-h1">تحويل المعلومات المالية الرسمية<br>إلى استخبارات سوقية قابلة للتنفيذ</h1>
-      <p class="hero-sub">ليست موقع أخبار — هي نظام استخبارات مالي. كل رؤية لها مصدر، كل ادعاء له دليل، كل قرار قابل للتفسير.</p>
-      <div class="hero-cta">
-        <a href="#chain" class="btn btn-primary">شاهد سلسلة الاستخبارات</a>
-        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
+      <div class="hero-tagline">رؤى — الاستخبارات المالية</div>
+      <h1 class="hero-h1">طبقة الاستخبارات المالية التي تحوّل<br>المعلومات الرسمية إلى معرفة استثمارية</h1>
+      <p class="hero-sub">ليست منصة أخبار — هي طبقة معرفة مالية فوق العالم المالي الرسمي. الأخبار والتقارير والأبحاث هي المخرجات، لا المنتج.</p>
+
+      <!-- Intelligence Factory: 3 layers -->
+      <div class="factory">
+        <div class="factory-layer">
+          <div class="factory-layer-lbl">طبقة المصادر الرسمية</div>
+          <div class="factory-items">
+            <span class="factory-pill">الفيدرالي</span>
+            <span class="factory-pill">البنك المركزي الأوروبي</span>
+            <span class="factory-pill">صندوق النقد</span>
+            <span class="factory-pill">مكتب إحصاءات العمل</span>
+            <span class="factory-pill">هيئة الأوراق المالية</span>
+            <span class="factory-pill">+406</span>
+          </div>
+        </div>
+        <div class="factory-arrow">↓</div>
+        <div class="factory-layer gold">
+          <div class="factory-layer-lbl">محرّك الاستخبارات</div>
+          <div class="factory-items">
+            <span class="factory-pill">الاستخراج</span>
+            <span class="factory-pill">التصنيف</span>
+            <span class="factory-pill">التحقق</span>
+            <span class="factory-pill">الاستدلال</span>
+            <span class="factory-pill">ربط الأدلة</span>
+          </div>
+        </div>
+        <div class="factory-arrow">↓</div>
+        <div class="factory-layer">
+          <div class="factory-layer-lbl">منتجات المعرفة</div>
+          <div class="factory-items">
+            <span class="factory-pill">أخبار</span>
+            <span class="factory-pill">تقارير</span>
+            <span class="factory-pill">أبحاث</span>
+            <span class="factory-pill">فيديو</span>
+            <span class="factory-pill">واجهة برمجة</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============= 2. LIVE INTELLIGENCE STREAM ============= -->
-<section class="section reveal" id="stream">
+<!-- ============= 1. LIVE INTELLIGENCE ROOM ============= -->
+<section class="section reveal" id="live-room">
   <div class="container">
     <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">تدفّق استخباراتي مباشر</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">أحداث تحدث الآن</h2>
-      <p class="section-lead" style="margin:0 auto">ليست أخباراً تُقرأ — استخبارات تُتخذ بها القرارات. كل حدث مرتبط بمصدره الرسمي.</p>
+      <span class="section-tag" style="justify-content:center">غرفة الاستخبارات الحية</span>
+      <h2 class="section-h" style="margin:0 auto 1rem">حدث مالي واحد · سلسلة معالجة كاملة</h2>
+      <p class="section-lead" style="margin:0 auto">في اللحظة التي يُنشر فيها بيان رسمي، تبدأ رؤى. هذه ليست محاكاة — هذا ما يحدث فعلاً.</p>
     </div>
 
-    <div class="live-stream">
-
-      <div class="live-item">
-        <span class="live-time">قبل 4 دقائق</span>
-        <span class="live-source">الفيدرالي</span>
-        <span class="live-event">قرار الفائدة: ثبات 5.50%</span>
-        <span class="live-impact up">الدولار حيادي</span>
+    <div class="live-room">
+      <div class="live-room-header">
+        <div class="live-room-title">
+          <div class="live-room-dot"></div>
+          <div>
+            <div class="live-room-name">الفيدرالي · بيان FOMC</div>
+            <div class="live-room-meta">24 يوليو 2026 · 14:32 شرق · معالجة في 3.7 ثوانٍ</div>
+          </div>
+        </div>
+        <div class="live-room-meta">ثقة 87% · 5 مصادر · 12 حقيقة</div>
       </div>
 
-      <div class="live-item">
-        <span class="live-time">قبل 12 دقيقة</span>
-        <span class="live-source">البنك المركزي الأوروبي</span>
-        <span class="live-event">تضخم منطقة اليورو: 2.4%</span>
-        <span class="live-impact up">اليورو صاعد</span>
+      <!-- 5 stages -->
+      <div class="live-room-stages">
+        <div class="live-stage done">
+          <div class="live-stage-num">01</div>
+          <div class="live-stage-name">اكتُشف</div>
+          <div class="live-stage-val">✓ 14:32:00</div>
+        </div>
+        <div class="live-stage done">
+          <div class="live-stage-num">02</div>
+          <div class="live-stage-name">استُخرج</div>
+          <div class="live-stage-val">✓ 12 حقيقة</div>
+        </div>
+        <div class="live-stage done">
+          <div class="live-stage-num">03</div>
+          <div class="live-stage-name">تُحقّق</div>
+          <div class="live-stage-val">✓ 5 مصادر</div>
+        </div>
+        <div class="live-stage done">
+          <div class="live-stage-num">04</div>
+          <div class="live-stage-name">نُشر</div>
+          <div class="live-stage-val">✓ 14:32:04</div>
+        </div>
+        <div class="live-stage active">
+          <div class="live-stage-num">05</div>
+          <div class="live-stage-name">الأثر السوقي</div>
+          <div class="live-stage-val">● مباشر</div>
+        </div>
       </div>
 
-      <div class="live-item">
-        <span class="live-time">قبل 38 دقيقة</span>
-        <span class="live-source">مكتب إحصاءات العمل</span>
-        <span class="live-event">الوظائف غير الزراعية: +272 ألف</span>
-        <span class="live-impact down">الأسهم هابطة</span>
+      <!-- Market impact -->
+      <div class="live-room-impact">
+        <div class="impact-cell">
+          <div class="impact-lbl">الدولار</div>
+          <div class="impact-val up">حيادي ← صاعد</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-lbl">السندات</div>
+          <div class="impact-val up">إيجابي</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-lbl">الأسهم</div>
+          <div class="impact-val">مختلط</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-lbl">المخاطرة</div>
+          <div class="impact-val gold">متوسطة</div>
+        </div>
       </div>
 
-      <div class="live-item">
-        <span class="live-time">قبل ساعة</span>
-        <span class="live-source">صندوق النقد</span>
-        <span class="live-event">رفع توقعات نمو الاقتصاد العالمي 3.2%</span>
-        <span class="live-impact up">أسهم صاعدة</span>
+      <!-- Trade integration -->
+      <div class="live-room-trade">
+        <div class="live-room-trade-lbl">استخبارات تداول مرتبطة · إشارة شراء EUR/USD · ثقة 87%</div>
+        <a href="trade.html" class="live-room-trade-link">
+          حلّل في رؤى التداول
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-
-      <div class="live-item">
-        <span class="live-time">قبل ساعتين</span>
-        <span class="live-source">خزانة الولايات المتحدة</span>
-        <span class="live-event">عائد 10 سنوات: 4.32% · فارق 2-10: -42 نقطة</span>
-        <span class="live-impact">إشارة ركود نشطة</span>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============= 3. INTELLIGENCE PIPELINE ============= -->
+<!-- ============= 2. EVIDENCE VIEWER ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">خط أنابيب الاستخبارات</span>
-    <h2 class="section-h">من المصدر إلى الرؤية</h2>
-    <p class="section-lead">ست طبقات معالجة تحوّل الوثيقة الرسمية إلى استخبارات قابلة للتنفيذ — كل طبقة قابلة للتتبع والتدقيق.</p>
-
-    <div class="pipeline-viz">
-      <div class="pipe-stage">
-        <div class="pipe-num">01</div>
-        <div class="pipe-content">
-          <div class="pipe-name">المصادر الرسمية</div>
-          <div class="pipe-desc">بنوك مركزية · هيئات تنظيمية · وزارات مالية · هيئات إحصائية</div>
-        </div>
-        <div class="pipe-stat">411 مصدر</div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-stage">
-        <div class="pipe-num">02</div>
-        <div class="pipe-content">
-          <div class="pipe-name">معالجة الوثائق</div>
-          <div class="pipe-desc">PDF · HTML · XML ← بيانات مهيكلة</div>
-        </div>
-        <div class="pipe-stat">10,000+ وثيقة</div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-stage">
-        <div class="pipe-num">03</div>
-        <div class="pipe-content">
-          <div class="pipe-name">استخراج الحقائق</div>
-          <div class="pipe-desc">NLP · أرقام · كيانات · تواريخ · نسب</div>
-        </div>
-        <div class="pipe-stat">1,247 حقيقة</div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-stage">
-        <div class="pipe-num">04</div>
-        <div class="pipe-content">
-          <div class="pipe-name">تصنيف الأحداث</div>
-          <div class="pipe-desc">قرارات الفائدة · بيانات الاقتصاد الكلي · السياسة النقدية</div>
-        </div>
-        <div class="pipe-stat">38 حدثاً</div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-stage gold">
-        <div class="pipe-num">05</div>
-        <div class="pipe-content">
-          <div class="pipe-name">ربط الأدلة</div>
-          <div class="pipe-desc">كل حقيقة مرتبطة بمصدرها · طابع زمني · درجة ثقة</div>
-        </div>
-        <div class="pipe-stat">دليل كامل</div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-stage">
-        <div class="pipe-num">06</div>
-        <div class="pipe-content">
-          <div class="pipe-name">استخبارات قابلة للتنفيذ</div>
-          <div class="pipe-desc">رؤى مع أثر سوقي · توصيات مع درجة ثقة · تغذية رؤى التداول</div>
-        </div>
-        <div class="pipe-stat">219 تحليلاً</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============= 4. INTELLIGENCE CHAIN DEMO — "حدث مالي واحد. سلسلة استخبارات واحدة." ============= -->
-<section class="section reveal" id="chain">
   <div class="container">
     <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">سلسلة الاستخبارات</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">حدث مالي واحد. سلسلة استخبارات واحدة.</h2>
-      <p class="section-lead" style="margin:0 auto">من نشر الفيدرالي لبيانه حتى تحديث استخبارات السوق — كل خطوة موثّقة، كل نتيجة قابلة للتتبع.</p>
+      <span class="section-tag" style="justify-content:center">عارض الأدلة</span>
+      <h2 class="section-h" style="margin:0 auto 1rem">دليل خلف كل رؤية</h2>
+      <p class="section-lead" style="margin:0 auto">ليست مجرد تحليل — استخبارات موثّقة. اضغط أي رؤية لترى المصدر، الوثيقة، الحقيقة، وسلسلة الإثبات الكاملة.</p>
     </div>
 
-    <div class="chain-demo">
-      <div class="chain-header">
-        <div>
-          <div class="chain-title">حدث مالي واحد · سلسلة استخبارات واحدة</div>
-          <div class="chain-meta">الفيدرالي · بيان FOMC · 24 يوليو 2026 · 14:32 شرق</div>
-        </div>
-        <div class="chain-meta">زمن المعالجة الكلي · <span style="color:var(--gold)">3.7 ثوانٍ</span></div>
+    <div class="ev-viewer">
+      <div class="ev-viewer-header">
+        <div class="ev-viewer-tag">رؤية #28492 · استخبارات موثّقة</div>
+        <div class="ev-viewer-title">«ثبات الفيدرالي يشير إلى قوة الدولار قريباً مقابل العملات الرئيسية»</div>
       </div>
+      <div class="ev-viewer-body">
 
-      <div class="chain-flow">
-
-        <div class="chain-step">
-          <div class="chain-step-num">01</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">المصدر الرسمي</div>
-            <div class="chain-step-val">الفيدرالي يُنشر بيان FOMC</div>
+        <div class="ev-viewer-section">
+          <div class="ev-viewer-section-lbl">مولّد من — مصادر رسمية موثّقة</div>
+          <div class="ev-source-row">
+            <div class="ev-source-check">✓</div>
+            <div class="ev-source-name">الفيدرالي</div>
+            <div class="ev-source-url">federalreserve.gov · بيان FOMC</div>
+            <div class="ev-source-date">24 يوليو</div>
+          </div>
+          <div class="ev-source-row">
+            <div class="ev-source-check">✓</div>
+            <div class="ev-source-name">مكتب إحصاءات العمل</div>
+            <div class="ev-source-url">bls.gov · بيان CPI</div>
+            <div class="ev-source-date">18 يوليو</div>
+          </div>
+          <div class="ev-source-row">
+            <div class="ev-source-check">✓</div>
+            <div class="ev-source-name">خزانة الولايات المتحدة</div>
+            <div class="ev-source-url">treasury.gov · منحنى العائد</div>
+            <div class="ev-source-date">24 يوليو</div>
           </div>
         </div>
-        <div class="chain-connector"></div>
 
-        <div class="chain-step">
-          <div class="chain-step-num">02</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">اكتشاف الحدث</div>
-            <div class="chain-step-val">رؤى تكتشف: قرار سياسة نقدية</div>
+        <div class="ev-viewer-section">
+          <div class="ev-viewer-section-lbl">سلسلة الأدلة</div>
+          <div class="ev-stats">
+            <div class="ev-stat">
+              <div class="ev-stat-num">5</div>
+              <div class="ev-stat-lbl">وثائق رسمية</div>
+            </div>
+            <div class="ev-stat">
+              <div class="ev-stat-num">12</div>
+              <div class="ev-stat-lbl">حقائق مستخرجة</div>
+            </div>
+            <div class="ev-stat">
+              <div class="ev-stat-num">3</div>
+              <div class="ev-stat-lbl">أحداث مرتبطة</div>
+            </div>
+            <div class="ev-stat">
+              <div class="ev-stat-num">87%</div>
+              <div class="ev-stat-lbl">درجة الثقة</div>
+            </div>
           </div>
         </div>
-        <div class="chain-connector"></div>
 
-        <div class="chain-step">
-          <div class="chain-step-num">03</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">استخراج الحقائق</div>
-            <div class="chain-step-val">سعر الفائدة ثابت عند 5.25% – 5.50%</div>
-          </div>
-        </div>
-        <div class="chain-connector"></div>
-
-        <div class="chain-step">
-          <div class="chain-step-num">04</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">ربط الأدلة</div>
-            <div class="chain-step-val">ربط بـ 5 وثائق رسمية · 12 حقيقة · 3 أحداث مرتبطة</div>
-          </div>
-        </div>
-        <div class="chain-connector"></div>
-
-        <div class="chain-step gold">
-          <div class="chain-step-num">05</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">إنشاء التحليل</div>
-            <div class="chain-step-val">ثبات الفيدرالي يشير إلى قوة الدولار قريباً · ثقة 87%</div>
-          </div>
-        </div>
-        <div class="chain-connector"></div>
-
-        <div class="chain-step">
-          <div class="chain-step-num">06</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">تحديث استخبارات السوق</div>
-            <div class="chain-step-val">الدولار: حيادي ← صاعد · السندات: إيجابي · الأسهم: مختلط</div>
-          </div>
-        </div>
-        <div class="chain-connector"></div>
-
-        <div class="chain-step">
-          <div class="chain-step-num">07</div>
-          <div class="chain-step-content">
-            <div class="chain-step-lbl">تغذية رؤى التداول</div>
-            <div class="chain-step-val">إشارة شراء EUR/USD · ثقة 87% · 5 مصادر · قابلة للتنفيذ</div>
+        <div class="ev-viewer-section">
+          <div class="ev-viewer-section-lbl">سلسلة التتبّع</div>
+          <div style="font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim);line-height:1.8;direction:ltr;text-align:left">
+            الرؤية ← الحقيقة (الفائدة 5.50%) ← الوثيقة (FOMC_2026_07) ← المصدر الرسمي (federalreserve.gov) ← الاسترجاع (14:32:18 شرق)
           </div>
         </div>
 
       </div>
-
-      <div class="chain-footer">
-        <span>كل خطوة موثّقة · كل نتيجة قابلة للتتبع · كل قرار قابل للدفاع</span>
+      <div class="ev-viewer-footer">
+        <span>كل ادعاء قابل للتتبّع إلى مصدر رسمي · لا قرارات مظلمة</span>
+        <a href="trade.html" style="color:var(--gold)">حلّل في رؤى التداول ←</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============= 5. RESEARCH WORKSPACE — Institutional Research Brief ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">مساحة الأبحاث</span>
-    <h2 class="section-h">أبحاث بمظهر مؤسسي</h2>
-    <p class="section-lead">ليست مقالات — أبحاث استخباراتية. كل تقرير مدعوم بأدلة رسمية وأثر سوقي وسياق تاريخي.</p>
-
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="research-card-num">01</div>
-        <div class="research-card-name">تقارير اقتصادية</div>
-        <div class="research-card-desc">تقارير معمّقة من المصادر الرسمية — نمو، تضخم، توظيف، تجارة.</div>
-        <div class="research-card-meta"><span>142</span> تقريراً هذا الشهر</div>
-      </div>
-      <div class="research-card">
-        <div class="research-card-num">02</div>
-        <div class="research-card-name">محاور سوقية</div>
-        <div class="research-card-desc">تحليلات thematic — تحوّلات هيكلية، اتجاهات قطاعية، فرص استثمارية.</div>
-        <div class="research-card-meta"><span>87</span> تحليلاً</div>
-      </div>
-      <div class="research-card">
-        <div class="research-card-num">03</div>
-        <div class="research-card-name">استخبارات الدول</div>
-        <div class="research-card-desc">استخبارات اقتصادية لكل دولة — بنوك مركزية، سياسة نقدية، مخاطر سيادية.</div>
-        <div class="research-card-meta"><span>38</span> دولة</div>
-      </div>
-      <div class="research-card">
-        <div class="research-card-num">04</div>
-        <div class="research-card-name">بحث قطاعي</div>
-        <div class="research-card-desc">تكنولوجيا · طاقة · مالية · رعاية صحية. اتجاهات وأثر اقتصادي.</div>
-        <div class="research-card-meta"><span>12</span> قطاعاً</div>
-      </div>
-    </div>
-
-    <!-- Institutional Research Brief -->
-    <div class="brief-card">
-      <div class="brief-header">
-        <div class="brief-tag">مذكرة بحث رؤى · ROUAA Research Brief</div>
-        <div class="brief-title">السياسة النقدية الأمريكية: ثبات الفيدرالي وتأثيره على الدولار</div>
-      </div>
-      <div class="brief-body">
-        <div class="brief-row">
-          <div class="brief-row-lbl">الموضوع</div>
-          <div class="brief-row-val">السياسة النقدية الأمريكية</div>
-        </div>
-        <div class="brief-row">
-          <div class="brief-row-lbl">الأدلة</div>
-          <div class="brief-row-val">
-            <span class="evidence-item"><span class="check">✓</span> 14 وثيقة رسمية</span>
-            <span class="evidence-item"><span class="check">✓</span> 6 أحداث مرتبطة</span>
-          </div>
-        </div>
-        <div class="brief-row">
-          <div class="brief-row-lbl">السياق السوقي</div>
-          <div class="brief-row-val">الدولار · سندات الخزانة · الأسهم الأمريكية</div>
-        </div>
-        <div class="brief-row">
-          <div class="brief-row-lbl">تفسير رؤى</div>
-          <div class="brief-row-val gold">ثبات الفيدرالي + تباطؤ التضخم + قوة التوظيف = قوة الدولار قريباً · تخفيض البنك المركزي الأوروبي مرجّح · تباعد السياسات</div>
-        </div>
-        <div class="brief-row">
-          <div class="brief-row-lbl">الثقة</div>
-          <div class="brief-row-val gold">87%</div>
-        </div>
-      </div>
-      <div class="brief-footer">
-        <span>ROUAA-RB-2026-07-014</span>
-        <span>24 يوليو 2026 · 14:32 شرق</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============= 6. INTELLIGENCE MAP — شبكة علاقات مالية ============= -->
+<!-- ============= 3. INTELLIGENCE GRAPH ============= -->
 <section class="section reveal">
   <div class="container">
     <div style="text-align:center;margin-bottom:2rem">
       <span class="section-tag" style="justify-content:center">خريطة الاستخبارات</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">شبكة العلاقات المالية</h2>
-      <p class="section-lead" style="margin:0 auto">رؤى لا تعرض الأحداث منفصلة — تربطها. هذه الشبكة تميّزها عن أي موقع أخبار.</p>
+      <h2 class="section-h" style="margin:0 auto 1rem">شبكة المعرفة المالية</h2>
+      <p class="section-lead" style="margin:0 auto">رؤى لا تعرض الأحداث منفصلة — تربطها. اضغط أي عقدة لترى المصدر والوثيقة والتأثير.</p>
     </div>
 
-    <div class="intel-map">
-      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
+    <div class="intel-graph">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" id="intelGraph">
         <!-- Links -->
-        <line class="link active" x1="300" y1="60" x2="300" y2="140"/>
-        <line class="link active" x1="300" y1="140" x2="150" y2="220"/>
-        <line class="link active" x1="300" y1="140" x2="450" y2="220"/>
-        <line class="link active" x1="300" y1="140" x2="300" y2="220"/>
-        <line class="link" x1="150" y1="220" x2="150" y2="320"/>
-        <line class="link" x1="450" y1="220" x2="450" y2="320"/>
-        <line class="link" x1="300" y1="220" x2="300" y2="320"/>
-        <line class="link" x1="150" y1="320" x2="300" y2="320"/>
-        <line class="link" x1="450" y1="320" x2="300" y2="320"/>
+        <line class="ig-link active" x1="300" y1="60" x2="300" y2="140"/>
+        <line class="ig-link active" x1="300" y1="140" x2="150" y2="220"/>
+        <line class="ig-link active" x1="300" y1="140" x2="300" y2="220"/>
+        <line class="ig-link active" x1="300" y1="140" x2="450" y2="220"/>
+        <line class="ig-link" x1="150" y1="220" x2="150" y2="320"/>
+        <line class="ig-link" x1="300" y1="220" x2="300" y2="320"/>
+        <line class="ig-link" x1="450" y1="220" x2="450" y2="320"/>
 
         <!-- Nodes -->
-        <circle class="node gold" cx="300" cy="60" r="28"/>
-        <text class="node-label gold" x="300" y="60">التضخم</text>
-
-        <circle class="node" cx="300" cy="140" r="28"/>
-        <text class="node-label" x="300" y="140">الفيدرالي</text>
-
-        <circle class="node gold" cx="150" cy="220" r="28"/>
-        <text class="node-label gold" x="150" y="220">الفائدة</text>
-
-        <circle class="node" cx="300" cy="220" r="28"/>
-        <text class="node-label" x="300" y="220">الدولار</text>
-
-        <circle class="node" cx="450" cy="220" r="28"/>
-        <text class="node-label" x="450" y="220">السندات</text>
-
-        <circle class="node" cx="150" cy="320" r="28"/>
-        <text class="node-label" x="150" y="320">الأسهم</text>
-
-        <circle class="node" cx="300" cy="320" r="28"/>
-        <text class="node-label" x="300" y="320">الذهب</text>
-
-        <circle class="node" cx="450" cy="320" r="28"/>
-        <text class="node-label" x="450" y="320">النفط</text>
+        <g class="ig-node" data-info="التضخم|مكتب إحصاءات العمل|CPI Release|2.4% YoY">
+          <circle class="ig-circle gold" cx="300" cy="60" r="30"/>
+          <text class="ig-label gold" x="300" y="60">التضخم</text>
+        </g>
+        <g class="ig-node" data-info="الفيدرالي|federalreserve.gov|FOMC Statement|Rate 5.50%">
+          <circle class="ig-circle" cx="300" cy="140" r="30"/>
+          <text class="ig-label" x="300" y="140">الفيدرالي</text>
+        </g>
+        <g class="ig-node" data-info="سعر الفائدة|الفيدرالي|FOMC Decision|5.25% - 5.50%">
+          <circle class="ig-circle gold" cx="150" cy="220" r="30"/>
+          <text class="ig-label gold" x="150" y="220">الفائدة</text>
+        </g>
+        <g class="ig-node" data-info="الدولار|سوق الصرف|DXY Index|+0.42%">
+          <circle class="ig-circle" cx="300" cy="220" r="30"/>
+          <text class="ig-label" x="300" y="220">الدولار</text>
+        </g>
+        <g class="ig-node" data-info="السندات|خزانة الولايات المتحدة|Yield Curve|10Y: 4.32%">
+          <circle class="ig-circle" cx="450" cy="220" r="30"/>
+          <text class="ig-label" x="450" y="220">السندات</text>
+        </g>
+        <g class="ig-node" data-info="الأسهم|S&P 500|Market Index|-0.3%">
+          <circle class="ig-circle" cx="150" cy="320" r="30"/>
+          <text class="ig-label" x="150" y="320">الأسهم</text>
+        </g>
+        <g class="ig-node" data-info="الذهب|COMEX|XAU/USD|2,389">
+          <circle class="ig-circle" cx="300" cy="320" r="30"/>
+          <text class="ig-label" x="300" y="320">الذهب</text>
+        </g>
+        <g class="ig-node" data-info="النفط|WTI Crude|OIL/USD|$85.20">
+          <circle class="ig-circle" cx="450" cy="320" r="30"/>
+          <text class="ig-label" x="450" y="320">النفط</text>
+        </g>
       </svg>
+
+      <!-- Info panel -->
+      <div class="ig-info" id="igInfo">
+        <div class="ig-info-title" id="igInfoTitle">—</div>
+        <div class="ig-info-row">المصدر: <span id="igInfoSource">—</span></div>
+        <div class="ig-info-row">الوثيقة: <span id="igInfoDoc">—</span></div>
+        <div class="ig-info-row">القيمة: <span id="igInfoVal">—</span></div>
+      </div>
     </div>
 
-    <div style="text-align:center;margin-top:2rem;font-family:var(--font-mono);font-size:.875rem;color:var(--text-mute)">
+    <div style="text-align:center;margin-top:1.5rem;font-family:var(--font-mono);font-size:.875rem;color:var(--text-mute)">
       التضخم ← الفيدرالي ← (الفائدة · الدولار · السندات) ← (الأسهم · الذهب · النفط)
     </div>
   </div>
 </section>
 
-<!-- ============= 7. EVENT INTELLIGENCE — تقويم معاد تعريفه ============= -->
+<!-- ============= 4. RESEARCH TERMINAL ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
   <div class="container">
     <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">استخبارات الأحداث</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">تقويم يُعيد تعريف نفسه</h2>
-      <p class="section-lead" style="margin:0 auto">ليس تاريخ وحدث وأهمية. كل حدث يحوي: التوقع · النتيجة · الدليل · النمط التاريخي · تفسير رؤى.</p>
+      <span class="section-tag" style="justify-content:center">طرفية الأبحاث</span>
+      <h2 class="section-h" style="margin:0 auto 1rem">أبحاث بمظهر مؤسسي</h2>
+      <p class="section-lead" style="margin:0 auto">ليست مقالات — أبحاث استخباراتية. كل تقرير مدعوم بأدلة رسمية، أحداث مرتبطة، وأثر سوقي.</p>
     </div>
 
-    <div class="event-grid">
-
-      <div class="event-card">
-        <div class="event-card-tag">البنك المركزي · أمريكا</div>
-        <div class="event-card-name">قرار فائدة الفيدرالي</div>
-        <div class="event-row"><span class="event-row-lbl">التوقع</span><span class="event-row-val">5.50%</span></div>
-        <div class="event-row"><span class="event-row-lbl">النتيجة</span><span class="event-row-val">5.50%</span></div>
-        <div class="event-row"><span class="event-row-lbl">الدليل</span><span class="event-row-val">بيان FOMC رسمي</span></div>
-        <div class="event-row"><span class="event-row-lbl">النمط التاريخي</span><span class="event-row-val">الثامن على التوالي</span></div>
-        <div class="event-row"><span class="event-row-lbl">الثقة</span><span class="event-row-val gold">94%</span></div>
-        <div class="event-ai">تفسير رؤى: ثبات · الدولار حيادي قريباً · تمديد سياسة الانتظار</div>
+    <div class="research-terminal">
+      <div class="rt-header">
+        <div class="rt-title">طرفية أبحاث رؤى</div>
+        <div class="rt-tabs">
+          <span class="rt-tab active">الكل</span>
+          <span class="rt-tab">اقتصاد كلي</span>
+          <span class="rt-tab">أسواق</span>
+          <span class="rt-tab">دول</span>
+        </div>
       </div>
 
-      <div class="event-card">
-        <div class="event-card-tag">البنك المركزي · أوروبا</div>
-        <div class="event-card-name">تضخم منطقة اليورو</div>
-        <div class="event-row"><span class="event-row-lbl">التوقع</span><span class="event-row-val">2.5%</span></div>
-        <div class="event-row"><span class="event-row-lbl">النتيجة</span><span class="event-row-val down">2.4%</span></div>
-        <div class="event-row"><span class="event-row-lbl">الدليل</span><span class="event-row-val">بيان HICP رسمي</span></div>
-        <div class="event-row"><span class="event-row-lbl">النمط التاريخي</span><span class="event-row-val">تباطؤ مستمر 3 أشهر</span></div>
-        <div class="event-row"><span class="event-row-lbl">الثقة</span><span class="event-row-val gold">91%</span></div>
-        <div class="event-ai">تفسير رؤى: تباطؤ أسرع · تخفيض البنك المركزي الأوروبي مرجّح · اليورو هابط</div>
+      <div class="rt-list">
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">السياسة النقدية الأمريكية: ثبات الفيدرالي وتأثيره على الدولار</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-014 · 24 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 14 وثيقة · 6 أحداث</div>
+          <div class="rt-item-conf">87%</div>
+        </div>
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">تضخم منطقة اليورو: تباطؤ أسرع من المتوقع</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-013 · 18 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 8 وثائق · 4 أحداث</div>
+          <div class="rt-item-conf">91%</div>
+        </div>
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">سوق التوظيف الأمريكي: تجاوز التوقعات للمرة الرابعة</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-012 · 11 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 6 وثائق · 3 أحداث</div>
+          <div class="rt-item-conf">96%</div>
+        </div>
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">منحنى العائد: إشارة ركود نشطة للشهر الثالث</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-011 · 9 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 5 وثائق · 2 أحداث</div>
+          <div class="rt-item-conf">89%</div>
+        </div>
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">صندوق النقد يرفع توقعات النمو العالمي: أثر على الأسواق الناشئة</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-010 · 5 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 11 وثيقة · 5 أحداث</div>
+          <div class="rt-item-conf">93%</div>
+        </div>
+        <div class="rt-item">
+          <div>
+            <div class="rt-item-topic">بنك إنجلترا: تصويت متقارب يبشر بتخفيض قريب</div>
+            <div class="rt-item-meta">ROUAA-RB-2026-07-009 · 2 يوليو 2026</div>
+          </div>
+          <div class="rt-item-evidence">✓ 7 وثائق · 3 أحداث</div>
+          <div class="rt-item-conf">84%</div>
+        </div>
       </div>
-
-      <div class="event-card">
-        <div class="event-card-tag">إحصائي · أمريكا</div>
-        <div class="event-card-name">الوظائف غير الزراعية</div>
-        <div class="event-row"><span class="event-row-lbl">التوقع</span><span class="event-row-val">185 ألف</span></div>
-        <div class="event-row"><span class="event-row-lbl">النتيجة</span><span class="event-row-val up">272 ألف</span></div>
-        <div class="event-row"><span class="event-row-lbl">الدليل</span><span class="event-row-val">تقرير مكتب إحصاءات العمل</span></div>
-        <div class="event-row"><span class="event-row-lbl">النمط التاريخي</span><span class="event-row-val">تجاوز التوقعات 4 أشهر</span></div>
-        <div class="event-row"><span class="event-row-lbl">الثقة</span><span class="event-row-val gold">96%</span></div>
-        <div class="event-ai">تفسير رؤى: تجاوز قوي · الدولار صاعد · تمديد ثبات الفيدرالي</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============= 8. EVIDENCE NETWORK — دليل لكل رؤية ============= -->
-<section class="section reveal">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="section-tag" style="justify-content:center">شبكة الأدلة</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">دليل خلف كل رؤية</h2>
-      <p class="section-lead" style="margin:0 auto">ليست مجرد تحليل ذكي — استخبارات موثّقة. كل رؤية لها مصدر، وثيقة، حقيقة، دليل، وثقة.</p>
-    </div>
-
-    <div class="evidence-grid">
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"ثبات الفيدرالي يشير إلى قوة الدولار قريباً"</div>
-        <div class="ev-card-source"><span class="check">✓</span> الفيدرالي · federalreserve.gov</div>
-        <div class="ev-card-meta"><span>بيان FOMC</span><span class="conf">ثقة 87%</span></div>
-      </div>
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"تضخم منطقة اليورو يتباطأ إلى 2.4%"</div>
-        <div class="ev-card-source"><span class="check">✓</span> البنك المركزي الأوروبي · ecb.europa.eu</div>
-        <div class="ev-card-meta"><span>بيان HICP</span><span class="conf">ثقة 96%</span></div>
-      </div>
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"الوظائف غير الزراعية تتجاوز التوقعات"</div>
-        <div class="ev-card-source"><span class="check">✓</span> مكتب إحصاءات العمل · bls.gov</div>
-        <div class="ev-card-meta"><span>تقرير التوظيف</span><span class="conf">ثقة 99%</span></div>
-      </div>
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"منحنى العائد يشير إلى إشارة ركود"</div>
-        <div class="ev-card-source"><span class="check">✓</span> خزانة الولايات المتحدة · treasury.gov</div>
-        <div class="ev-card-meta"><span>بيانات منحنى العائد</span><span class="conf">ثقة 98%</span></div>
-      </div>
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"صندوق النقد يرفع توقعات النمو العالمي"</div>
-        <div class="ev-card-source"><span class="check">✓</span> صندوق النقد الدولي · imf.org</div>
-        <div class="ev-card-meta"><span>تقرير التوقعات</span><span class="conf">ثقة 97%</span></div>
-      </div>
-
-      <div class="ev-card">
-        <div class="ev-card-claim">"بنك إنجلترا يُبقي على الفائدة بتصويت متقارب"</div>
-        <div class="ev-card-source"><span class="check">✓</span> بنك إنجلترا · bankofengland.co.uk</div>
-        <div class="ev-card-meta"><span>قرار السياسة النقدية</span><span class="conf">ثقة 89%</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============= 9. CONTENT FACTORY ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">مصنع المحتوى</span>
-    <h2 class="section-h">من الاستخبارات إلى المحتوى</h2>
-    <p class="section-lead">خط إنتاج كامل يحوّل الاستخبارات الموثّقة إلى محتوى متعدد الوسائط بـ 5 لغات.</p>
-
-    <div class="factory-flow">
-      <div class="factory-stage">المصادر الرسمية</div>
-      <span class="factory-arrow">→</span>
-      <div class="factory-stage">وكلاء الجمع</div>
-      <span class="factory-arrow">→</span>
-      <div class="factory-stage">وكلاء التحليل</div>
-      <span class="factory-arrow">→</span>
-      <div class="factory-stage">وكلاء التوليد</div>
-      <span class="factory-arrow">→</span>
-      <div class="factory-stage">النشر</div>
-    </div>
-
-    <div class="factory-outputs">
-      <div class="factory-out">📰 مقالات</div>
-      <div class="factory-out">📄 تقارير</div>
-      <div class="factory-out">🎬 فيديو</div>
-      <div class="factory-out">📊 إنفوجرافيك</div>
-      <div class="factory-out">🎙 بودكاست</div>
-      <div class="factory-out">🌐 5 لغات</div>
     </div>
   </div>
 </section>
@@ -698,7 +561,7 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
   <div class="container">
     <span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
     <h2>اطلب وصولاً مؤسسياً</h2>
-    <p>هذا ليس اشتراكاً تجريبياً — هذا وصول مؤسسي إلى نظام استخبارات مالي ينتج المعرفة.</p>
+    <p>هذا ليس اشتراكاً تجريبياً — هذا وصول مؤسسي إلى طبقة معرفة مالية فوق العالم المالي الرسمي.</p>
     <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a>
   </div>
 </section>
@@ -708,7 +571,7 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="name">رؤى · ROUAA</div>
-      <div class="tagline">استخبارات مالية مبنية على الدليل — من المصدر الرسمي إلى المعرفة الاستثمارية.</div>
+      <div class="tagline">طبقة الاستخبارات المالية — من المصدر الرسمي إلى المعرفة الاستثمارية.</div>
       <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
     </div>
     <div class="footer-col">
@@ -745,6 +608,43 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// === Intelligence Graph interactivity ===
+(function(){
+  const nodes = document.querySelectorAll('.ig-node');
+  const info = document.getElementById('igInfo');
+  const title = document.getElementById('igInfoTitle');
+  const source = document.getElementById('igInfoSource');
+  const doc = document.getElementById('igInfoDoc');
+  const val = document.getElementById('igInfoVal');
+
+  nodes.forEach(node => {
+    node.addEventListener('mouseenter', () => {
+      const data = node.dataset.info.split('|');
+      title.textContent = data[0];
+      source.textContent = data[1];
+      doc.textContent = data[2];
+      val.textContent = data[3];
+      info.classList.add('visible');
+      // highlight node
+      const circle = node.querySelector('.ig-circle');
+      circle.classList.add('active');
+    });
+    node.addEventListener('mouseleave', () => {
+      info.classList.remove('visible');
+      const circle = node.querySelector('.ig-circle');
+      circle.classList.remove('active');
+    });
+    node.addEventListener('click', () => {
+      const data = node.dataset.info.split('|');
+      title.textContent = data[0];
+      source.textContent = data[1];
+      doc.textContent = data[2];
+      val.textContent = data[3];
+      info.classList.add('visible');
+    });
+  });
+})();
 </script>
 </body>
 </html>
