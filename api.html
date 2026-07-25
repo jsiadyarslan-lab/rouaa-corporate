@@ -86,6 +86,37 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 
 /* === Relationship === */
 .rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+
+/* === API Products === */
+.api-products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:1000px;margin:0 auto}
+.api-product{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:all .3s;position:relative}
+.api-product:hover{border-color:var(--gold);transform:translateY(-2px)}
+.api-product.gold{border-color:var(--gold);background:linear-gradient(135deg,var(--gold-dim) 0%,var(--card) 60%)}
+.api-product-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;margin-bottom:.625rem;font-weight:700}
+.api-product-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.api-product-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.05em;margin-bottom:.875rem;text-transform:uppercase}
+.api-product-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6;margin-bottom:1rem}
+.api-product-stats{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.875rem;border-top:1px solid var(--border-soft)}
+.api-product-stats span{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);padding:.25rem .5rem;background:var(--surface);border-radius:3px;letter-spacing:.05em}
+
+/* === Pricing === */
+.pricing-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:1000px;margin:0 auto}
+.pricing-tier{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;transition:all .3s}
+.pricing-tier:hover{border-color:var(--gold)}
+.pricing-tier-h{font-family:var(--font-en);font-size:.9375rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.pricing-tier-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:.875rem}
+.pricing-tier-metric{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);padding:.25rem .625rem;background:var(--gold-dim);border-radius:3px;display:inline-block;letter-spacing:.05em}
+.pricing-note{margin-top:2rem;text-align:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);font-style:italic}
+
+/* === Integration Examples === */
+.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:1000px;margin:0 auto}
+.example{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:all .3s}
+.example:hover{border-color:var(--gold);transform:translateY(-2px)}
+.example-sector{display:inline-block;font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;padding:.25rem .5rem;background:var(--gold-dim);border-radius:3px;margin-bottom:.75rem;font-weight:700}
+.example-h{font-family:var(--font-ar);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.4}
+.example-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6;margin-bottom:.875rem}
+.example-stack{display:flex;flex-wrap:wrap;gap:.3rem;padding-top:.75rem;border-top:1px solid var(--border-soft)}
+.ex-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--emerald);padding:.2rem .5rem;background:rgba(52,211,153,.1);border-radius:3px;letter-spacing:.05em}
 .rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
 .rel-box.api{background:var(--gold-dim);border:1px solid var(--gold)}
 .rel-box.core{background:var(--card);border:1px solid var(--border)}
@@ -211,6 +242,48 @@ insight = client.insights.get(<span class="s">"fomc-2026-07"</span>)
 <span class="c"># اشتراك في بث حي</span>
 <span class="k">for</span> event <span class="k">in</span> client.events.stream():
     <span class="k">print</span>(event.title, event.confidence)</div>
+</div>
+</div></section>
+
+<!-- ============= 4. API PRODUCTS — what you license ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">منتجات API · What you license</span>
+<h2 class="section-h">أربعة منتجات ترخيص · ليست باقة واحدة</h2>
+<p class="section-lead">المؤسسة لا تشتري «API access». تشتري ترخيص منتج محدد — Data، Intelligence، Evidence، أو Reasoning. كل منتج يخدم حالة استخدام مختلفة، وكلها مدعومة بنفس المنظومة.</p>
+
+<div class="api-products">
+<div class="api-product"><div class="api-product-num">01</div><div class="api-product-name">Data API</div><div class="api-product-tag">Sources · Documents · Facts</div><p class="api-product-desc">بيانات خام من 411 مصدر رسمي — أحداث، حقائق، وثائق. للمؤسسات التي تبني تحليلها الخاص.</p><div class="api-product-stats"><span>411 مصدر</span><span>10K+ وثيقة</span><span>1,247 حقيقة</span></div></div>
+<div class="api-product gold"><div class="api-product-num">02</div><div class="api-product-name">Intelligence API</div><div class="api-product-tag">Events · Insights · Knowledge Graph</div><p class="api-product-desc">استخبارات مهيكلة مع درجة ثقة لكل عنصر. للمؤسسات التي تريد جاهزاً للعرض في لوحاتها.</p><div class="api-product-stats"><span>219 تحليلاً</span><span>ثقة موثّقة</span><span>Knowledge Graph</span></div></div>
+<div class="api-product"><div class="api-product-num">03</div><div class="api-product-name">Evidence API</div><div class="api-product-tag">Provenance · Audit · Compliance</div><p class="api-product-desc">سلسلة الأدلة الكاملة لكل حقيقة — من المصدر للوثيقة للفقرة. للمؤسسات المنظّمة التي تحتاج قابلية تدقيق.</p><div class="api-product-stats"><span>دليل كامل</span><span>طابع زمني</span><span>قابل للتصدير</span></div></div>
+<div class="api-product"><div class="api-product-num">04</div><div class="api-product-name">Reasoning API</div><div class="api-product-tag">AI Council · Predictions · Recommendations</div><p class="api-product-desc">استنتاجات وتوصيات من 10 أدوار استدلال. للمؤسسات التي تريد دعماً للقرار، لا بيانات فقط.</p><div class="api-product-stats"><span>10 أدوار</span><span>توصيات موثّقة</span><span>توقعات</span></div></div>
+</div>
+</div></section>
+
+<!-- ============= 5. PRICING MODEL ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">نموذج التسعير · Pricing Model</span><h2 class="section-h" style="margin:0 auto 1rem">تسعير مؤسسي · لا plans ثابتة</h2><p class="section-lead" style="margin:0 auto">رؤى Intelligence APIs لا تُباع كـ «Starter/Pro/Enterprise». تُسعّر حسب الاستهلاك الفعلي — بيانات + استخبارات + أدلة + استدلال. كلما زاد العمق، زادت القيمة.</p></div>
+
+<div class="pricing-tiers">
+<div class="pricing-tier"><div class="pricing-tier-h">Data Volume</div><div class="pricing-tier-desc">عدد الوثائق والحقائق المطلوبة شهرياً</div><div class="pricing-tier-metric">by volume</div></div>
+<div class="pricing-tier"><div class="pricing-tier-h">Intelligence Depth</div><div class="pricing-tier-desc">Data فقط، + Intelligence، + Evidence، + Reasoning</div><div class="pricing-tier-metric">by depth</div></div>
+<div class="pricing-tier"><div class="pricing-tier-h">Delivery Method</div><div class="pricing-tier-desc">REST، Streaming، Webhooks — كل طريقة لها تكلفة</div><div class="pricing-tier-metric">by method</div></div>
+<div class="pricing-tier"><div class="pricing-tier-h">SLA Level</div><div class="pricing-tier-desc">Standard (99.9%)، Pro (99.95%)، Enterprise (99.99%)</div><div class="pricing-tier-metric">by SLA</div></div>
+</div>
+
+<div class="pricing-note">عرض مخصص لكل مؤسسة حسب الاستخدام الفعلي — لا باقات ثابتة، لا مفاجآت.</div>
+</div></section>
+
+<!-- ============= 6. INTEGRATION EXAMPLES ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">أمثلة التكامل · Integration Examples</span>
+<h2 class="section-h">كيف تستخدمها المؤسسات</h2>
+<p class="section-lead">أربعة سيناريوهات حقيقية — كيف تدمج مؤسسات مختلفة رؤى Intelligence APIs في بنيتها. كل سيناريو يوضح منتج API المناسب ونمط الاستهلاك.</p>
+
+<div class="examples">
+<div class="example"><div class="example-sector">BANK</div><div class="example-h">بنك يستخدم Evidence API للامتثال</div><p class="example-desc">كل قرار ائتماني موثّق بسلسلة أدلة كاملة من المصدر للوثيقة للفقرة — قابل للمراجعة التنظيمية في ثوانٍ.</p><div class="example-stack"><span class="ex-tag">Evidence API</span><span class="ex-tag">Webhooks</span><span class="ex-tag">SSO</span></div></div>
+<div class="example"><div class="example-sector">FUND</div><div class="example-h">صندوق تحوط يستخدم Streaming للتوقيت</div><p class="example-desc">بث حي للأحداث مع درجة الثقة — الإشارة تصل قبل منصات الأخبار بثوانٍ، مع Evidence Chain للمراجعة لاحقاً.</p><div class="example-stack"><span class="ex-tag">Intelligence API</span><span class="ex-tag">Streaming</span><span class="ex-tag">SDK</span></div></div>
+<div class="example"><div class="example-sector">BROKER</div><div class="example-h">وسيط يستخدم Data API لقيمة مضافة</div><p class="example-desc">بيانات خام من 411 مصدر تُغذّي لوحات العميل — الوسيط يبني واجهته، رؤى تزود البيانات الموثّقة.</p><div class="example-stack"><span class="ex-tag">Data API</span><span class="ex-tag">REST</span><span class="ex-tag">White Label</span></div></div>
+<div class="example"><div class="example-sector">GOV</div><div class="example-h">جهة حكومية تستخدم Reasoning API للسياسات</div><p class="example-desc">استنتاجات وتوصيات من 10 أدوار استدلال — لتقييم تأثير السياسات الاقتصادية على القطاعات.</p><div class="example-stack"><span class="ex-tag">Reasoning API</span><span class="ex-tag">Reports</span><span class="ex-tag">On-Prem</span></div></div>
 </div>
 </div></section>
 

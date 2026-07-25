@@ -78,6 +78,41 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .security-badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
 .security-badge{padding:.5rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-dim);letter-spacing:.05em}
 
+/* === Deployment === */
+.deploy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:1000px;margin:0 auto}
+.deploy-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:all .3s;position:relative}
+.deploy-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.deploy-card.gold{border-color:var(--gold);background:linear-gradient(135deg,var(--gold-dim) 0%,var(--card) 60%)}
+.deploy-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;margin-bottom:.625rem;font-weight:700}
+.deploy-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.deploy-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.05em;margin-bottom:.875rem;text-transform:uppercase}
+.deploy-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6;margin-bottom:1rem}
+.deploy-stats{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.875rem;border-top:1px solid var(--border-soft)}
+.deploy-stats span{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);padding:.25rem .5rem;background:var(--surface);border-radius:3px;letter-spacing:.05em}
+
+/* === Industries detail === */
+.industries{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:1000px;margin:0 auto}
+.industry{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem;transition:all .3s}
+.industry:hover{border-color:var(--gold);transform:translateY(-2px)}
+.industry-h{display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem}
+.industry-icon{font-size:1.5rem}
+.industry-name{font-family:var(--font-en);font-size:1rem;font-weight:700;color:var(--text)}
+.industry-use{font-size:.8125rem;color:var(--text-dim);line-height:1.6;margin-bottom:1rem}
+.industry-outcome{display:flex;align-items:center;gap:.5rem;padding-top:.875rem;border-top:1px solid var(--border-soft);flex-wrap:wrap}
+.ind-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+.ind-val{font-family:var(--font-ar);font-size:.8125rem;color:var(--gold);font-weight:600}
+
+/* === Procurement === */
+.procure-flow{display:flex;align-items:stretch;justify-content:center;gap:.5rem;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.procure-step{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s}
+.procure-step:hover{border-color:var(--gold)}
+.procure-num{font-family:var(--font-mono);font-size:1.25rem;color:var(--gold);font-weight:700;margin-bottom:.5rem}
+.procure-h{font-family:var(--font-en);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.procure-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-bottom:.75rem}
+.procure-time{font-family:var(--font-mono);font-size:.625rem;color:var(--emerald);padding:.25rem .5rem;background:rgba(52,211,153,.1);border-radius:3px;display:inline-block;letter-spacing:.05em}
+.procure-arrow{display:flex;align-items:center;color:var(--gold);opacity:.4;font-size:1.5rem;font-weight:700}
+@media(max-width:768px){.procure-arrow{transform:rotate(90deg);margin:.5rem 0}.procure-step{min-width:100%}}
+
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
 .cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
 .footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
@@ -200,6 +235,49 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 <span class="security-badge">Audit Trail</span>
 <span class="security-badge">No Custody</span>
 </div>
+</div>
+</div></section>
+
+<!-- ============= 4. DEPLOYMENT MODELS ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">نماذج النشر · Deployment Models</span>
+<h2 class="section-h">أربعة نماذج نشر · اختر ما يناسب مؤسستك</h2>
+<p class="section-lead">المؤسسات تختلف في متطلبات الأمان والسيادة. رؤى تقدّم أربعة نماذج نشر — من SaaS سريع إلى On-Premise كامل للبنوك والحكومات.</p>
+
+<div class="deploy-grid">
+<div class="deploy-card"><div class="deploy-num">01</div><div class="deploy-name">Cloud SaaS</div><div class="deploy-tag">Fastest · Most Affordable</div><p class="deploy-desc">رؤى تستضيف كل شيء — أسرع وقت إطلاق، أقل تكلفة، تحديثات تلقائية. للصناديق والوسطاء.</p><div class="deploy-stats"><span>Setup: أيام</span><span>SLA: 99.9%</span><span>Hosted</span></div></div>
+<div class="deploy-card"><div class="deploy-num">02</div><div class="deploy-name">Private Cloud</div><div class="deploy-tag">Dedicated · Isolated</div><p class="deploy-desc">بنية مخصصة لمؤسستك — عزل كامل، موارد مخصصة، امتثال إقليمي. للبنوك الإقليمية.</p><div class="deploy-stats"><span>Setup: أسابيع</span><span>SLA: 99.95%</span><span>Dedicated</span></div></div>
+<div class="deploy-card gold"><div class="deploy-num">03</div><div class="deploy-name">On-Premise</div><div class="deploy-tag">Maximum Control · Regulated</div><p class="deploy-desc">تثبيت كامل داخل بنيتك — لا بيانات تخرج، سيطرة كاملة. للبنوك المركزية والحكومات.</p><div class="deploy-stats"><span>Setup: أشهر</span><span>SLA: Custom</span><span>On-Prem</span></div></div>
+<div class="deploy-card"><div class="deploy-num">04</div><div class="deploy-name">Hybrid</div><div class="deploy-tag">Flexible · Balanced</div><p class="deploy-desc">مزيج — البيانات الحساسة On-Prem، الاستخبارات Cloud. للمؤسسات المعقدة متعددة القطاعات.</p><div class="deploy-stats"><span>Setup: مخصص</span><span>SLA: Custom</span><span>Mixed</span></div></div>
+</div>
+</div></section>
+
+<!-- ============= 5. INDUSTRIES DETAIL ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">تفاصيل القطاعات · Industry Use Cases</span>
+<h2 class="section-h">ماذا يفعل كل قطاع برؤى</h2>
+<p class="section-lead">ليست مجرد قائمة قطاعات — لكل قطاع حالة استخدام محددة، ناتج قابل للقياس، وميزة تنافسية واضحة.</p>
+
+<div class="industries">
+<div class="industry"><div class="industry-h"><span class="industry-icon">🏦</span><span class="industry-name">Banks</span></div><div class="industry-use">قرارات ائتمان مدعومة بأدلة كاملة — كل قرار قابل للدفاع أمام لجنة المخاطر والمراجع التنظيمي</div><div class="industry-outcome"><span class="ind-lbl">Outcome</span><span class="ind-val">امتنال تنظيمي + سرعة قرار</span></div></div>
+<div class="industry"><div class="industry-h"><span class="industry-icon">📈</span><span class="industry-name">Hedge Funds</span></div><div class="industry-use">إشارات مبكرة قبل منصات الأخبار — بث حي مع درجة ثقة، مع سجل تدقيق قابل للتصدير للمراجعة</div><div class="industry-outcome"><span class="ind-lbl">Outcome</span><span class="ind-val">سرعة + قابلية مراجعة</span></div></div>
+<div class="industry"><div class="industry-h"><span class="industry-icon">💱</span><span class="industry-name">Brokers</span></div><div class="industry-use">قيمة مضافة للعملاء — استخبارات، شارت، تنفيذ — عبر White Label جاهز في أسابيع لا سنوات</div><div class="industry-outcome"><span class="ind-lbl">Outcome</span><span class="ind-val">قيمة العميل + إيراد جديد</span></div></div>
+<div class="industry"><div class="industry-h"><span class="industry-icon">🏛</span><span class="industry-name">Governments</span></div><div class="industry-use">استخبارات اقتصادية لتقييم السياسات — رسم المعرفة + تقارير + Reasoning API، On-Premise</div><div class="industry-outcome"><span class="ind-lbl">Outcome</span><span class="ind-val">قرار سياسي مبني على أدلة</span></div></div>
+</div>
+</div></section>
+
+<!-- ============= 6. PROCUREMENT PROCESS ============= -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">عملية الشراء · Procurement</span><h2 class="section-h" style="margin:0 auto 1rem">كيف تشتري رؤى · 4 خطوات</h2><p class="section-lead" style="margin:0 auto">لا صفحة تسعير. لا نموذج اتصال عام. عملية شراء مؤسسية واضحة — من الاكتشاف إلى التشغيل في أسابيع.</p></div>
+
+<div class="procure-flow">
+<div class="procure-step"><div class="procure-num">01</div><div class="procure-h">Discovery</div><div class="procure-desc">مكالمة فهم الحاجة — القطاع، حالة الاستخدام، المتطلبات التنظيمية</div><div class="procure-time">يوم 1</div></div>
+<div class="procure-arrow">←</div>
+<div class="procure-step"><div class="procure-num">02</div><div class="procure-h">Proposal</div><div class="procure-desc">عرض مخصص — المنتجات، نموذج النشر، التسعير، SLA، الجدول الزمني</div><div class="procure-time">أسبوع 1</div></div>
+<div class="procure-arrow">←</div>
+<div class="procure-step"><div class="procure-num">03</div><div class="procure-h">POC</div><div class="procure-desc">إثبات مفهوم محدود — تجربة حقيقية على بياناتك، مع قياس النتائج</div><div class="procure-time">أسابيع 2-4</div></div>
+<div class="procure-arrow">←</div>
+<div class="procure-step"><div class="procure-num">04</div><div class="procure-h">Deployment</div><div class="procure-desc">تشغيل كامل — تكامل، تدريب، SLA، دعم مخصص مستمر</div><div class="procure-time">أسابيع 4-8</div></div>
 </div>
 </div></section>
 

@@ -82,6 +82,26 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .brand-card.b2 .brand-line:nth-child(3){width:85%}.brand-card.b2 .brand-line:nth-child(4){width:75%}.brand-card.b2 .brand-line:nth-child(5){width:90%}
 .brand-note{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);margin-top:.5rem}
 
+/* === Use Cases === */
+.usecases{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto}
+.usecase{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem 1.75rem;transition:all .3s;position:relative;overflow:hidden}
+.usecase:hover{border-color:var(--gold);transform:translateY(-2px)}
+.usecase.gold{border-color:var(--gold);background:linear-gradient(135deg,var(--gold-dim) 0%,var(--card) 60%)}
+.usecase-sector{display:inline-block;font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.18em;padding:.3rem .625rem;background:var(--gold-dim);border-radius:3px;margin-bottom:1rem;font-weight:700}
+.usecase-h{font-family:var(--font-ar);font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.4}
+.usecase-problem,.usecase-solution{font-size:.8125rem;color:var(--text-dim);line-height:1.6;margin-bottom:.75rem;padding-right:.875rem;border-right:2px solid var(--border)}
+.usecase-solution{border-right-color:var(--gold)}
+.usecase-outcome{display:flex;align-items:center;gap:.5rem;padding:.75rem 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);margin:.875rem 0;flex-wrap:wrap}
+.uo-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+.uo-val{font-family:var(--font-ar);font-size:.8125rem;color:var(--gold);font-weight:600}
+.usecase-stats{display:flex;flex-wrap:wrap;gap:.4rem}
+.usecase-stats span{font-family:var(--font-mono);font-size:.625rem;color:var(--emerald);padding:.25rem .5rem;background:rgba(52,211,153,.1);border-radius:3px;letter-spacing:.05em}
+
+.wl-quote{margin-top:3rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:14px;text-align:center;max-width:700px;margin-left:auto;margin-right:auto;position:relative}
+.wl-quote-mark{font-size:3rem;color:var(--gold);opacity:.4;font-family:serif;line-height:1;margin-bottom:-1rem}
+.wl-quote-text{font-size:1.125rem;color:var(--text);line-height:1.6;font-style:italic;max-width:50ch;margin:0 auto 1rem}
+.wl-quote-attr{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+
 /* === Relationship === */
 .rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
 .rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
@@ -174,6 +194,24 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 <div class="brand-line blue"></div>
 <div class="brand-note">Frontend + APIs + Core</div>
 </div>
+</div>
+</div></section>
+
+<!-- ============= 4. USE CASES — Broker & Fintech ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">حالات الاستخدام · Use Cases</span>
+<h2 class="section-h">لمن صُمم White Label</h2>
+<p class="section-lead">الوسيط والـ Fintech لا يريدان تصميماً. يريدان شراء 5 سنوات بناء — منصة استخبارات مالية كاملة باسم علامتهما، جاهزة للبيع لعملائهما في أسابيع.</p>
+
+<div class="usecases">
+<div class="usecase"><div class="usecase-sector">BROKER</div><div class="usecase-h">وسيط يبيع منصة استخبارات لعملائه</div><p class="usecase-problem">الوسيط يقدم منصة تداول عادية — لا قيمة مضافة، تمايز محدود، هوامش ربح تنخفض.</p><p class="usecase-solution">رؤى White Label يحوّل وسيطه إلى منصة استخبارات — العميل يحصل على News + Trade + Dashboards باسم الوسيط، مدعومة بمحرّكات رؤى.</p><div class="usecase-outcome"><span class="uo-lbl">النتيجة</span><span class="uo-val">تمايز + إيراد جديد + احتفاظ بالعميل</span></div><div class="usecase-stats"><span>Time-to-market: أسابيع</span><span>Brand: العميل</span><span>Engine: رؤى</span></div></div>
+<div class="usecase gold"><div class="usecase-sector">FINTECH</div><div class="usecase-h">Fintech يطلق تطبيق استثمار مدعوم بالاستخبارات</div><p class="usecase-problem">Fintech يبني تطبيق استثمار لكن يحتاج استخبارات موثّقة — بناؤها من الصفر يستغرق سنوات ويكلّف ملايين.</p><p class="usecase-solution">رؤى White Label يوفّر Stack كامل — واجهات + APIs + محرّكات + بنية — جاهز للعلامة التجارية وإطلاق المنتج.</p><div class="usecase-outcome"><span class="uo-lbl">النتيجة</span><span class="uo-val">إطلاق سريع + ميزة تنافسية + قابلية توسّع</span></div><div class="usecase-stats"><span>Time-to-market: أسابيع</span><span>Brand: العميل</span><span>Engine: رؤى</span></div></div>
+</div>
+
+<div class="wl-quote">
+<div class="wl-quote-mark">«</div>
+<p class="wl-quote-text">الوسيط لا يريد تصميماً. يريد شراء 5 سنوات بناء — منصة استخبارات مالية كاملة باسمه، جاهزة للبيع.</p>
+<div class="wl-quote-attr">— White Label Value Proposition</div>
 </div>
 </div></section>
 

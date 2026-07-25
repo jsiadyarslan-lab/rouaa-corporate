@@ -63,10 +63,27 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:all .3s}
 .card:hover{border-color:var(--emerald);transform:translateY(-2px)}
+.card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);letter-spacing:.15em;margin-bottom:.625rem;font-weight:700}
 .card-icon{width:36px;height:36px;background:rgba(52,211,153,.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--emerald);margin-bottom:.875rem}.card-icon svg{width:18px;height:18px}
 .card-name{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text)}.card-name .ar{font-family:var(--font-ar);font-size:1rem;display:block;margin-bottom:.1rem}
 .card-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-top:.4rem}
 .card-stat{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);letter-spacing:.05em}
+
+/* === Architecture table === */
+.arch-table{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.arch-table-h,.arch-table-row{display:grid;grid-template-columns:1.3fr .9fr 2.2fr .9fr;gap:1rem;padding:.75rem 1.25rem;align-items:center}
+.arch-table-h{background:var(--surface);font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border-soft)}
+.arch-table-row{border-bottom:1px solid var(--border-soft);font-size:.8125rem;transition:background .2s}.arch-table-row:hover{background:rgba(52,211,153,.04)}.arch-table-row:last-child{border-bottom:none}
+.atc-1{display:flex;flex-direction:column;gap:.15rem}
+.atc-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:.875rem}
+.atc-ar{font-family:var(--font-ar);font-size:.6875rem;color:var(--text-mute)}
+.atc-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--emerald);padding:.2rem .5rem;background:rgba(52,211,153,.1);border-radius:3px;letter-spacing:.05em;display:inline-block;width:fit-content}
+.atc-3{color:var(--text-dim);line-height:1.5;font-size:.75rem}
+.atc-stage{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.05em}
+.arch-summary{margin-top:1.5rem;padding:1rem 1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.arch-summary-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase}
+.arch-summary-val{font-family:var(--font-en);font-size:.875rem;font-weight:600;color:var(--text)}
+@media(max-width:900px){.arch-table-h,.arch-table-row{grid-template-columns:1fr;gap:.4rem}.arch-table-h{display:none}.atc-1,.atc-2,.atc-3,.atc-4{font-size:.75rem}}
 
 /* === Evidence Chain === */
 .pe-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:680px;margin:0 auto}
@@ -148,18 +165,90 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </div>
 </div></section>
 
-<!-- ============= 3. APPLICATIONS ============= -->
+<!-- ============= 3. TRADING INTELLIGENCE ARCHITECTURE ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">معمارية ذكاء التداول · Trading Intelligence Architecture</span>
+<h2 class="section-h">الأصل التقني الكامل</h2>
+<p class="section-lead">رؤى Trade ليس واجهة فوق APIs وسيط. هي نظام ذكاء قرار كامل — 9 وكلاء ومحركات تعمل خلف الكواليس. كل واحد أداء وظيفة محددة، وكلها موثّقة ومترابطة.</p>
+
+<div class="arch-table">
+<div class="arch-table-h">
+<div class="atc-1">المكوّن</div><div class="atc-2">النوع</div><div class="atc-3">الوظيفة</div><div class="atc-4">المرحلة</div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">AI Council</span><span class="atc-ar">المجلس الذكي</span></div>
+<div class="atc-2"><span class="atc-tag">Decision Engine</span></div>
+<div class="atc-3">10 أدوار استدلال تتشاور قبل كل توصية — محلل ماكرو، ميكرو، فني، سياسي، جيوسياسي</div>
+<div class="atc-4"><span class="atc-stage">02 Reasoning</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Smart Executor</span><span class="atc-ar">المنفّذ الذكي</span></div>
+<div class="atc-2"><span class="atc-tag">Execution</span></div>
+<div class="atc-3">يفحص 15 شرطاً قبل كل أمر — حجم، تعرّض، سيولة، انزلاق، ارتباط</div>
+<div class="atc-4"><span class="atc-stage">05 Execution</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Autonomous Trader</span><span class="atc-ar">التاجر المستقل</span></div>
+<div class="atc-2"><span class="atc-tag">Decision Agent</span></div>
+<div class="atc-3">ينفّذ الاستراتيجية بدون تدخل يدوي — ضمن حدود صارمة يضعها العميل</div>
+<div class="atc-4"><span class="atc-stage">04 Decision</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">EA Bridge</span><span class="atc-ar">جسر EA</span></div>
+<div class="atc-2"><span class="atc-tag">Integration</span></div>
+<div class="atc-3">اتصال مباشر بـ Expert Advisors على MetaTrader — أوامر في ميلي ثانية</div>
+<div class="atc-4"><span class="atc-stage">05 Execution</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Smart Chart</span><span class="atc-ar">الشارت الذكي</span></div>
+<div class="atc-2"><span class="atc-tag">Application</span></div>
+<div class="atc-3">شارت سعر مع علامات أحداث حقيقية — كل علامة مرتبطة بمصدر رسمي</div>
+<div class="atc-4"><span class="atc-stage">01 Information</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Neural Lab</span><span class="atc-ar">المختبر العصبي</span></div>
+<div class="atc-2"><span class="atc-tag">Research</span></div>
+<div class="atc-3">اختبر استراتيجيات على بيانات تاريخية مع نفس طبقة الأدلة المباشرة</div>
+<div class="atc-4"><span class="atc-stage">06 Learning</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Portfolio Intelligence</span><span class="atc-ar">ذكاء المحفظة</span></div>
+<div class="atc-2"><span class="atc-tag">Application</span></div>
+<div class="atc-3">إدارة المراكز مع ربط كل مركز بالاستخبارات التي أنشأته — لا أرقام مجردة</div>
+<div class="atc-4"><span class="atc-stage">03 Risk</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Prediction Market</span><span class="atc-ar">سوق التوقعات</span></div>
+<div class="atc-2"><span class="atc-tag">Decision Engine</span></div>
+<div class="atc-3">احتمالات حية للأحداث المالية الكبرى — مبنية على أدلة، لا على آراء</div>
+<div class="atc-4"><span class="atc-stage">02 Reasoning</span></div>
+</div>
+<div class="arch-table-row">
+<div class="atc-1"><span class="atc-name">Risk Engine</span><span class="atc-ar">محرّك المخاطر</span></div>
+<div class="atc-2"><span class="atc-tag">Decision Engine</span></div>
+<div class="atc-3">يراقب التقلب، التعرّض، الارتباط، السحب — قبل وأثناء وبعد كل صفقة</div>
+<div class="atc-4"><span class="atc-stage">03 Risk</span></div>
+</div>
+</div>
+
+<div class="arch-summary">
+<span class="arch-summary-lbl">المحصلة</span>
+<span class="arch-summary-val">9 مكوّنات · 4 محرّكات قرار · 3 تطبيقات · 2 تكامل — كلها تعمل كنظام واحد</span>
+</div>
+</div></section>
+
+<!-- ============= 4. APPLICATIONS ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<span class="section-tag">التطبيقات · What you use</span>
-<h2 class="section-h">خمسة تطبيقات تنفيذية</h2>
-<p class="section-lead">ما يلمسه العميل مباشرة. كل تطبيق يخدم مرحلة من دورة القرار، لكن جميعها مدعومة بنفس محرّكات القرار.</p>
+<span class="section-tag">واجهات الاستخدام · What you touch</span>
+<h2 class="section-h">خمس واجهات على نفس النظام</h2>
+<p class="section-lead">ما يلمسه العميل مباشرة — الواجهات فوق المعمارية أعلاه. كل واجهة تخدم مرحلة من دورة القرار، لكن جميعها مدعومة بنفس الـ 9 مكوّنات.</p>
 
 <div class="cards">
-<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="card-name"><span class="ar">لوحة القرار</span>Decision Dashboard</div><div class="card-desc">مركز التحكم — المراكز، الإشارات، الأداء، المخاطر في واجهة واحدة.</div><div class="card-stat">3 لوحات · مباشر</div></div>
-<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><div class="card-name"><span class="ar">الشارت الذكي</span>Smart Chart</div><div class="card-desc">شارت سعر مع علامات أحداث حقيقية — كل علامة مرتبطة بمصدر رسمي.</div><div class="card-stat">علامات حية · 6 أطر زمنية</div></div>
-<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div><div class="card-name"><span class="ar">المحفظة</span>Portfolio</div><div class="card-desc">إدارة المراكز مع ربط كل مركز بالاستخبارات التي أنشأته.</div><div class="card-stat">مراكز لا محدودة</div></div>
-<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="card-name"><span class="ar">مساعد التداول</span>Trading Assistant</div><div class="card-desc">اسأل: «لماذا هذا المركز؟» — يجيب بالدليل الكامل.</div><div class="card-stat">دليل لكل جواب</div></div>
-<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6M7 12H1"/></svg></div><div class="card-name"><span class="ar">المختبر العصبي</span>Neural Lab</div><div class="card-desc">اختبر استراتيجيات على بيانات تاريخية مع نفس طبقة الأدلة.</div><div class="card-stat">Backtest · A/B · محاكاة</div></div>
+<div class="card"><div class="card-num">01</div><div class="card-name"><span class="ar">لوحة القرار</span>Decision Dashboard</div><div class="card-desc">مركز التحكم — المراكز، الإشارات، الأداء، المخاطر في واجهة واحدة.</div><div class="card-stat">3 لوحات · مباشر</div></div>
+<div class="card"><div class="card-num">02</div><div class="card-name"><span class="ar">الشارت الذكي</span>Smart Chart</div><div class="card-desc">شارت سعر مع علامات أحداث حقيقية — كل علامة مرتبطة بمصدر رسمي.</div><div class="card-stat">علامات حية · 6 أطر زمنية</div></div>
+<div class="card"><div class="card-num">03</div><div class="card-name"><span class="ar">المحفظة</span>Portfolio Intelligence</div><div class="card-desc">إدارة المراكز مع ربط كل مركز بالاستخبارات التي أنشأته.</div><div class="card-stat">مراكز لا محدودة</div></div>
+<div class="card"><div class="card-num">04</div><div class="card-name"><span class="ar">مساعد التداول</span>Trading Assistant</div><div class="card-desc">اسأل: «لماذا هذا المركز؟» — يجيب بالدليل الكامل من المصدر للصفقة.</div><div class="card-stat">دليل لكل جواب</div></div>
+<div class="card"><div class="card-num">05</div><div class="card-name"><span class="ar">المختبر العصبي</span>Neural Lab</div><div class="card-desc">اختبر استراتيجيات على بيانات تاريخية مع نفس طبقة الأدلة المباشرة.</div><div class="card-stat">Backtest · A/B · محاكاة</div></div>
 </div>
 </div></section>
 
