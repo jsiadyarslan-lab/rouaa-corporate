@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى · ROUAA — حوّل البيانات المالية إلى قرارات موثقة</title>
-<meta name="description" content="منصة استخبارات مالية مؤسسية تربط المصادر الرسمية، التحليل، وتأثير السوق في طبقة قرار واحدة.">
+<title>رؤى · ROUAA — بنية تحتية للاستخبارات المالية الموثقة</title>
+<meta name="description" content="رؤى تحوّل المعلومات المالية غير المنظمة إلى سلسلة أدلة قابلة للتدقيق تدعم القرارات المؤسسية.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="assets/css/design-system.css">
 
 <style>
-/* Home-specific styles only — everything else from design-system.css */
 body { class: motion-marketing; }
 
+/* === Hero === */
 .hero-home {
   position: relative;
   padding: 8rem 0 5rem;
@@ -38,10 +38,10 @@ body { class: motion-marketing; }
   gap: 1.5rem;
 }
 .hero-home-h1 {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.875rem, 4vw, 3rem);
   font-weight: 800;
-  line-height: 1.2;
-  max-width: 20ch;
+  line-height: 1.25;
+  max-width: 22ch;
 }
 .hero-home-h1 .gold { color: var(--gold); }
 .hero-home-sub {
@@ -58,67 +58,148 @@ body { class: motion-marketing; }
   margin-top: 0.5rem;
 }
 
-/* Layer Diagram — simple visual */
-.layer-diagram {
+/* === Evidence Chain (the centerpiece — moved to top) === */
+.evidence-showcase {
+  margin: 4rem auto 0;
+  max-width: 800px;
+}
+.evidence-showcase-h {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.evidence-showcase-h .mono-label {
+  color: var(--gold);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.evidence-showcase-chain {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0;
   flex-wrap: wrap;
-  margin: 3rem auto 0;
-  max-width: 800px;
 }
-.layer-diagram-step {
+.evidence-showcase-step {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.25rem;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  min-width: 180px;
+  border-radius: var(--radius-lg);
+  min-width: 110px;
   transition: border-color var(--transition-slow);
 }
-.layer-diagram-step:hover { border-color: var(--gold); }
-.layer-diagram-step.center {
+.evidence-showcase-step:hover { border-color: var(--gold); }
+.evidence-showcase-step.gold {
   background: var(--gold-dim);
   border-color: var(--gold);
 }
-.layer-diagram-step-icon {
-  font-size: 1.5rem;
+.evidence-showcase-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
   color: var(--gold);
+  letter-spacing: 0.1em;
 }
-.layer-diagram-step-name {
+.evidence-showcase-step-name {
   font-family: var(--font-en);
-  font-size: 1rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: var(--text);
 }
-.layer-diagram-step-desc {
-  font-size: 0.75rem;
+.evidence-showcase-step-ar {
+  font-size: 0.6875rem;
   color: var(--text-mute);
-  text-align: center;
 }
-.layer-diagram-arrow {
+.evidence-showcase-arrow {
   color: var(--gold);
   opacity: 0.4;
-  font-size: 1.5rem;
-  padding: 0 0.5rem;
+  font-size: 1.25rem;
+  padding: 0 0.25rem;
 }
 @media (max-width: 768px) {
-  .layer-diagram { flex-direction: column; }
-  .layer-diagram-arrow { transform: rotate(90deg); padding: 0.5rem 0; }
+  .evidence-showcase-chain { flex-direction: column; }
+  .evidence-showcase-arrow { transform: rotate(90deg); padding: 0.25rem 0; }
 }
 
-/* Problem section */
+/* === Who uses ROUAA === */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) { .who-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .who-grid { grid-template-columns: 1fr; } }
+.who-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  transition: border-color var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+.who-card::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--who-color, var(--gold));
+}
+.who-card:hover { border-color: var(--who-color, var(--gold)); }
+.who-card.c-asset { --who-color: var(--blue); }
+.who-card.c-hedge { --who-color: var(--emerald); }
+.who-card.c-bank { --who-color: var(--gold); }
+.who-card.c-fintech { --who-color: var(--amber); }
+.who-card-icon {
+  font-size: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+.who-card-name {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.who-card-name .ar {
+  font-family: var(--font-ar);
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.125rem;
+}
+.who-card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.who-card-list li {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+.who-card-list li::before {
+  content: '·';
+  color: var(--who-color, var(--gold));
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* === Problem stats === */
 .problem-stat {
   text-align: center;
   padding: 1.5rem;
 }
 .problem-stat-num {
   font-family: var(--font-en);
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 800;
   color: var(--gold);
   line-height: 1;
@@ -129,7 +210,32 @@ body { class: motion-marketing; }
   color: var(--text-dim);
 }
 
-/* Before/After comparison */
+/* === Brief (simplified with evidence link) === */
+.brief-simplified { max-width: 700px; margin: 0 auto; }
+.brief-simplified .consequence-step { padding: 0.875rem 0; }
+.brief-simplified .consequence-step-body { font-size: 0.8125rem; }
+
+/* Evidence badge inside brief */
+.brief-evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(200, 169, 81, 0.3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gold);
+  margin-top: 0.375rem;
+}
+.brief-evidence-badge::before {
+  content: '✓';
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+/* === Before/After === */
 .ba-comparison {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -170,19 +276,42 @@ body { class: motion-marketing; }
 .ba-card.before .ba-card-list li::before { content: '✗'; color: var(--rose); font-weight: 700; flex-shrink: 0; }
 .ba-card.after .ba-card-list li::before { content: '✓'; color: var(--emerald); font-weight: 700; flex-shrink: 0; }
 
-/* Simplified Intelligence Brief (for Home — no Provenance ID, no Verification Chain) */
-.brief-simplified {
-  max-width: 700px;
+/* === Trust grid === */
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 900px;
   margin: 0 auto;
 }
-.brief-simplified .consequence-step {
-  padding: 0.875rem 0;
+@media (max-width: 768px) { .trust-grid { grid-template-columns: 1fr; } }
+.trust-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color var(--transition-slow);
 }
-.brief-simplified .consequence-step-body {
-  font-size: 0.8125rem;
+.trust-item:hover { border-color: var(--gold); }
+.trust-item-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem;
+}
+.trust-item-h {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.375rem;
+}
+.trust-item-desc {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  line-height: 1.5;
 }
 
-/* Product preview cards */
+/* === Products === */
 .product-preview {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -203,98 +332,76 @@ body { class: motion-marketing; }
   color: inherit;
   display: block;
 }
-.product-preview-card:hover {
-  border-color: var(--p-color, var(--gold));
-  transform: translateY(-3px);
-}
-.product-preview-card::before {
-  content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--p-color, var(--gold));
-}
+.product-preview-card:hover { border-color: var(--p-color, var(--gold)); transform: translateY(-3px); }
+.product-preview-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--p-color, var(--gold)); }
 .product-preview-card.p-research { --p-color: var(--blue); }
 .product-preview-card.p-trading { --p-color: var(--emerald); }
 .product-preview-card.p-api { --p-color: var(--gold); }
-.product-preview-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+.product-preview-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.product-preview-name { font-family: var(--font-en); font-size: 1.125rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.product-preview-name .ar { font-family: var(--font-ar); display: block; font-size: 1.25rem; margin-bottom: 0.125rem; }
+.product-preview-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1rem; }
+.product-preview-stat { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--p-color, var(--gold)); letter-spacing: 0.05em; padding-top: 0.75rem; border-top: 1px solid var(--border-soft); }
+
+/* === Engine diagram === */
+.engine-diagram {
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto 0;
 }
-.product-preview-name {
+.engine-core {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2rem;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-xl);
+  margin-bottom: 1.5rem;
+}
+.engine-core-name {
   font-family: var(--font-en);
   font-size: 1.125rem;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.375rem;
-}
-.product-preview-name .ar {
-  font-family: var(--font-ar);
-  display: block;
-  font-size: 1.25rem;
-  margin-bottom: 0.125rem;
-}
-.product-preview-desc {
-  font-size: 0.875rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-.product-preview-stat {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--p-color, var(--gold));
-  letter-spacing: 0.05em;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-soft);
-}
-
-/* Trust signals — numbers, not logos */
-.trust-numbers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-@media (max-width: 768px) { .trust-numbers { grid-template-columns: repeat(2, 1fr); } }
-.trust-number {
-  text-align: center;
-  padding: 1.5rem 1rem;
-}
-.trust-number-val {
-  font-family: var(--font-en);
-  font-size: 2rem;
-  font-weight: 800;
   color: var(--gold);
-  line-height: 1;
-  margin-bottom: 0.375rem;
 }
-.trust-number-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+.engine-products {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.engine-product {
+  padding: 0.5rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.engine-arrow {
+  color: var(--gold);
+  opacity: 0.4;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 0.5rem 0;
 }
 
-/* CTA section */
+/* === CTA === */
 .cta-final {
   text-align: center;
   padding: 5rem 0;
   background: var(--surface);
   border-top: 1px solid var(--border-soft);
 }
-.cta-final h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 1rem;
-}
-.cta-final p {
-  color: var(--text-dim);
-  max-width: 50ch;
-  margin: 0 auto 2rem;
-  font-size: 1.125rem;
-}
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 </style>
 </head>
 <body class="motion-marketing">
@@ -326,119 +433,105 @@ body { class: motion-marketing; }
 
 <main id="main">
 
-  <!-- ============= HERO ============= -->
+  <!-- ============= HERO — institutional pain, not generic AI ============= -->
   <section class="hero-home">
     <div class="hero-home-bg"></div>
     <div class="container">
       <div class="hero-home-content">
-        <div class="mono-label text-gold">منصة استخبارات مالية مؤسسية</div>
+        <div class="mono-label text-gold">بنية تحتية للاستخبارات المالية الموثقة</div>
         <h1 class="hero-home-h1">
-          حوّل آلاف البيانات المالية<br>
-          إلى <span class="gold">قرارات استثمارية موثقة</span><br>
-          خلال دقائق
+          المؤسسات لا تفشل بسبب نقص البيانات.<br>
+          تفشل عندما لا تستطيع <span class="gold">إثبات لماذا اتخذت القرار</span>.
         </h1>
         <p class="hero-home-sub">
-          رؤى تربط المصادر الرسمية، التحليل، وتأثير السوق في طبقة قرار واحدة — مع دليل كامل لكل خطوة.
+          رؤى تحوّل المعلومات المالية غير المنظمة إلى سلسلة أدلة قابلة للتدقيق — تدعم قرارات الاستثمار أمام أي لجنة مخاطر أو مراجع تنظيمي.
         </p>
         <div class="hero-home-cta">
           <a href="#contact" class="btn btn-primary btn-lg">تحدّث مع فريق رؤى</a>
-          <a href="#how" class="btn btn-ghost btn-lg">كيف تعمل؟</a>
+          <a href="#evidence" class="btn btn-ghost btn-lg">شاهد سلسلة الأدلة</a>
         </div>
       </div>
 
-      <!-- Simple Layer Diagram -->
-      <div class="layer-diagram reveal">
-        <div class="layer-diagram-step">
-          <div class="layer-diagram-step-icon">📄</div>
-          <div class="layer-diagram-step-name">مصادر رسمية</div>
-          <div class="layer-diagram-step-desc">بنوك مركزية · هيئات · وزارات</div>
+      <!-- Evidence Chain — the defensive advantage, front and center -->
+      <div class="evidence-showcase reveal" id="evidence">
+        <div class="evidence-showcase-h">
+          <div class="mono-label">سلسلة الأدلة — الميزة الدفاعية لرؤى</div>
         </div>
-        <div class="layer-diagram-arrow">←</div>
-        <div class="layer-diagram-step center">
-          <div class="layer-diagram-step-icon">◆</div>
-          <div class="layer-diagram-step-name">رؤى</div>
-          <div class="layer-diagram-step-desc">طبقة الاستخبارات المالية</div>
+        <div class="evidence-showcase-chain">
+          <div class="evidence-showcase-step">
+            <div class="evidence-showcase-step-num">01</div>
+            <div class="evidence-showcase-step-name">Sources</div>
+            <div class="evidence-showcase-step-ar">مصادر رسمية</div>
+          </div>
+          <div class="evidence-showcase-arrow">←</div>
+          <div class="evidence-showcase-step">
+            <div class="evidence-showcase-step-num">02</div>
+            <div class="evidence-showcase-step-name">Documents</div>
+            <div class="evidence-showcase-step-ar">وثائق</div>
+          </div>
+          <div class="evidence-showcase-arrow">←</div>
+          <div class="evidence-showcase-step">
+            <div class="evidence-showcase-step-num">03</div>
+            <div class="evidence-showcase-step-name">Facts</div>
+            <div class="evidence-showcase-step-ar">حقائق</div>
+          </div>
+          <div class="evidence-showcase-arrow">←</div>
+          <div class="evidence-showcase-step gold">
+            <div class="evidence-showcase-step-num">04</div>
+            <div class="evidence-showcase-step-name">Evidence</div>
+            <div class="evidence-showcase-step-ar">دليل موثّق</div>
+          </div>
+          <div class="evidence-showcase-arrow">←</div>
+          <div class="evidence-showcase-step">
+            <div class="evidence-showcase-step-num">05</div>
+            <div class="evidence-showcase-step-name">Intelligence</div>
+            <div class="evidence-showcase-step-ar">استخبارات</div>
+          </div>
+          <div class="evidence-showcase-arrow">←</div>
+          <div class="evidence-showcase-step">
+            <div class="evidence-showcase-step-num">06</div>
+            <div class="evidence-showcase-step-name">Support</div>
+            <div class="evidence-showcase-step-ar">دعم القرار</div>
+          </div>
         </div>
-        <div class="layer-diagram-arrow">←</div>
-        <div class="layer-diagram-step">
-          <div class="layer-diagram-step-icon">🎯</div>
-          <div class="layer-diagram-step-name">قرار موثّق</div>
-          <div class="layer-diagram-step-desc">قابل للتنفيذ · قابل للدفاع</div>
-        </div>
+        <p class="text-center text-mute small mt-5">ليس «AI يحلل الأخبار». سلسلة إثبات مالية كاملة — من المصدر الرسمي إلى دعم القرار المؤسسي.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============= THE PROBLEM ============= -->
+  <!-- ============= THE PROBLEM (safe numbers, no unverified claims) ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-8">
         <span class="section-tag" style="justify-content: center;">المشكلة</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">مديرو الاستثمار لا يعانون من نقص المعلومات.<br>يعانون من فائضها.</h2>
-        <p class="section-lead" style="margin: 0 auto;">كل يوم، تصدر مئات الوثائق المالية الرسمية. المحللون يقرؤون، يحللون، يختلفون. القرار يتأخر. الثقة تتآكل.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">فائض المعلومات. نقص الأدلة.</h2>
+        <p class="section-lead" style="margin: 0 auto;">عشرات الآلاف من الوثائق المالية تصدر سنوياً. فرق الاستثمار تصفّي وتحلّل ما يهم. لكن عندما تسأل لجنة المخاطر «لماذا اتخذتم هذا القرار؟» — لا يوجد دليل موثّق.</p>
       </div>
 
       <div class="grid-3">
         <div class="problem-stat">
-          <div class="problem-stat-num">+500</div>
-          <div class="problem-stat-desc">وثيقة مالية رسمية يومياً</div>
+          <div class="problem-stat-num">عشرات الآلاف</div>
+          <div class="problem-stat-desc">وثيقة مالية رسمية سنوياً</div>
         </div>
         <div class="problem-stat">
-          <div class="problem-stat-num">+10</div>
-          <div class="problem-stat-desc">ساعات قراءة وتحليل لكل قرار</div>
+          <div class="problem-stat-num">ساعات</div>
+          <div class="problem-stat-desc">تصفية وتحليل لكل قرار</div>
         </div>
         <div class="problem-stat">
-          <div class="problem-stat-num">0</div>
-          <div class="problem-stat-desc">دليل موثّق لمعظم القرارات</div>
+          <div class="problem-stat-num">قليل</div>
+          <div class="problem-stat-desc">ما يمكن الدفاع عنه أمام لجنة المخاطر</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= HOW IT WORKS ============= -->
-  <section class="section reveal" id="how">
-    <div class="container">
-      <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center;">كيف تعمل رؤى</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">من المصدر الرسمي إلى القرار الموثّق</h2>
-        <p class="section-lead" style="margin: 0 auto;">أربع خطوات — لا أكثر. رؤى تأخذ الوثيقة الرسمية، تستخرج الحقائق، تحلّل التأثير، وتنتج قراراً موثّقاً.</p>
-      </div>
-
-      <div class="layer-diagram">
-        <div class="layer-diagram-step">
-          <div class="layer-diagram-step-icon">📄</div>
-          <div class="layer-diagram-step-name">مصدر رسمي</div>
-          <div class="layer-diagram-step-desc">بيان رسمي من بنك مركزي أو هيئة</div>
-        </div>
-        <div class="layer-diagram-arrow">←</div>
-        <div class="layer-diagram-step">
-          <div class="layer-diagram-step-icon">🔍</div>
-          <div class="layer-diagram-step-name">حقائق موثّقة</div>
-          <div class="layer-diagram-step-desc">استخراج آلي مع دليل لكل رقم</div>
-        </div>
-        <div class="layer-diagram-arrow">←</div>
-        <div class="layer-diagram-step">
-          <div class="layer-diagram-step-icon">📊</div>
-          <div class="layer-diagram-step-name">استخبارات السوق</div>
-          <div class="layer-diagram-step-desc">تأثير على الأصول والمحفظة</div>
-        </div>
-        <div class="layer-diagram-arrow">←</div>
-        <div class="layer-diagram-step center">
-          <div class="layer-diagram-step-icon">🎯</div>
-          <div class="layer-diagram-step-name">قرار موثّق</div>
-          <div class="layer-diagram-step-desc">قابل للتنفيذ · قابل للدفاع</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= LIVE EXAMPLE (Intelligence Brief — simplified) ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+  <!-- ============= LIVE EXAMPLE (with evidence badge) ============= -->
+  <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-8">
         <span class="section-tag" style="justify-content: center;">مثال حي</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">من بيان رسمي إلى قرار — في ثوانٍ</h2>
-        <p class="section-lead" style="margin: 0 auto;">هذا ما يحصل عليه مدير الاستثمار عند صدور بيان CPI. لا قراءة. لا انتظار. قرار موثّق.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من بيان رسمي إلى استخبارات مدعومة بأدلة</h2>
+        <p class="section-lead" style="margin: 0 auto;">هذا ما يحصل عليه فريق الاستثمار عند صدور بيان CPI. استخبارات جاهزة لدعم القرار — مع دليل قابل للتصدير.</p>
       </div>
 
       <div class="brief-simplified">
@@ -447,7 +540,7 @@ body { class: motion-marketing; }
             <div>
               <div class="intelligence-brief-title">CPI Inflation Report</div>
               <div class="intelligence-brief-meta mt-2">
-                <span>المصدر: <strong>BLS</strong></span>
+                <span>المصدر: <strong>US Bureau of Labor Statistics</strong></span>
                 <span>الوقت: <strong>08:30 UTC</strong></span>
               </div>
             </div>
@@ -456,9 +549,10 @@ body { class: motion-marketing; }
 
           <div class="consequence-chain">
             <div class="consequence-step evidence">
-              <div class="consequence-step-lbl">الحقيقة</div>
+              <div class="consequence-step-lbl">الحقيقة الموثّقة</div>
               <div class="consequence-step-body">
                 <strong>CPI 3.2% YoY</strong> — أقل من المتوقع (3.4%). التضخم يتباطأ.
+                <div class="brief-evidence-badge">BLS · CPI Release · July 2026 · Page 4</div>
               </div>
             </div>
 
@@ -493,14 +587,14 @@ body { class: motion-marketing; }
             <div class="consequence-step positioning">
               <div class="consequence-step-lbl">المحفظة</div>
               <div class="consequence-step-body">
-                <strong>مراجعة التعرّض للدولار</strong> — المراكز الطويلة مزدحمة (92nd percentile).
+                <strong>مراجعة التعرّض للدولار</strong> — المراكز الطويلة مزدحمة.
               </div>
             </div>
 
             <div class="consequence-step risk">
               <div class="consequence-step-lbl">المخاطرة</div>
               <div class="consequence-step-body">
-                <strong>الفيدرالي قد يؤجّل التخفيض</strong> إذا عاد التضخم للارتفاع. تقليل التعرّض 15%.
+                <strong>الفيدرالي قد يؤجّل التخفيض</strong> إذا عاد التضخم للارتفاع.
               </div>
             </div>
           </div>
@@ -532,7 +626,57 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= BEFORE / AFTER ============= -->
+  <!-- ============= WHO USES ROUAA (new section) ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">مصممة لمن</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من يستخدم رؤى</h2>
+        <p class="section-lead" style="margin: 0 auto;">أربعة أنواع من المؤسسات تستخدم رؤى — كل واحدة بحاجة مختلفة، لكن جميعها تشتري نفس الشيء: استخبارات مدعومة بأدلة.</p>
+      </div>
+
+      <div class="who-grid">
+        <div class="who-card c-asset">
+          <div class="who-card-icon">🏦</div>
+          <div class="who-card-name"><span class="ar">مديرو الأصول</span>Asset Managers</div>
+          <ul class="who-card-list">
+            <li>أبحاث ماكرو موثّقة</li>
+            <li>لجان استثمار مدعومة بأدلة</li>
+            <li>مراجعات محفظة دورية</li>
+          </ul>
+        </div>
+        <div class="who-card c-hedge">
+          <div class="who-card-icon">📈</div>
+          <div class="who-card-name"><span class="ar">صناديق التحوط</span>Hedge Funds</div>
+          <ul class="who-card-list">
+            <li>مراقبة الأحداث اللحظية</li>
+            <li>تحقق الفرضيات بالأدلة</li>
+            <li>سرعة + قابلية مراجعة</li>
+          </ul>
+        </div>
+        <div class="who-card c-bank">
+          <div class="who-card-icon">🏛</div>
+          <div class="who-card-name"><span class="ar">البنوك</span>Banks</div>
+          <ul class="who-card-list">
+            <li>سير عمل الأبحاث</li>
+            <li>استخبارات العملاء</li>
+            <li>امتثال تنظيمي</li>
+          </ul>
+        </div>
+        <div class="who-card c-fintech">
+          <div class="who-card-icon">💻</div>
+          <div class="who-card-name"><span class="ar">منصات فينتك</span>FinTech</div>
+          <ul class="who-card-list">
+            <li>استخبارات مدمجة عبر API</li>
+            <li>لوحات عملاء مدعومة</li>
+            <li>إطلاق سريع</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= BEFORE / AFTER (Decision Support, not Decision Replacement) ============= -->
   <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-8">
@@ -544,54 +688,70 @@ body { class: motion-marketing; }
         <div class="ba-card before">
           <div class="ba-card-h">قبل رؤى</div>
           <ul class="ba-card-list">
-            <li>500+ وثيقة يومياً — قراءة يدوية</li>
-            <li>10 ساعات لكل قرار استثماري</li>
+            <li>آلاف الوثائق — قراءة يدوية</li>
+            <li>ساعات من التصفية والتحليل</li>
             <li>تفسيرات مختلفة لنفس البيان</li>
-            <li>لا دليل موثّق للقرار</li>
+            <li>لا دليل موثّق للاستخبارات</li>
             <li>صعوبة الدفاع أمام لجنة المخاطر</li>
-            <li>قرارات بطيئة في سوق سريع</li>
+            <li>استخبارات بطيئة في سوق سريع</li>
           </ul>
         </div>
         <div class="ba-card after">
           <div class="ba-card-h">مع رؤى</div>
           <ul class="ba-card-list">
-            <li>استخبارات جاهزة من 411 مصدر رسمي</li>
-            <li>قرار موثّق خلال دقائق</li>
+            <li>استخبارات جاهزة من مصادر رسمية</li>
+            <li>مذكرة قرار موثقة خلال دقائق</li>
             <li>استدلال موحّد مدعوم بأدلة</li>
-            <li>دليل كامل لكل قرار — قابل للتصدير</li>
+            <li>دليل كامل قابل للتصدير</li>
             <li>قابل للدفاع أمام أي لجنة</li>
             <li>سرعة المؤسسة + عمق المحلل</li>
           </ul>
         </div>
       </div>
+
+      <p class="text-center text-mute small mt-6">رؤى تنتج <strong class="text-gold">مذكرة قرار موثقة</strong> — لا قراراً آلياً. القرار للإنسان، الدعم من رؤى.</p>
     </div>
   </section>
 
-  <!-- ============= WHY TRUST ============= -->
+  <!-- ============= TRUST (with governance + auditability) ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center;">لماذا تثق المؤسسات برؤى</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كل قرار له دليل. كل دليل له مصدر.</h2>
-        <p class="section-lead" style="margin: 0 auto;">لا نَعِد بالكمال. نَعِد بالشفافية. كل ادعاء قابل للتحقق من مصدره الرسمي الأصلي.</p>
+        <span class="section-tag" style="justify-content: center;">لماذا تثق المؤسسات</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ليست ثقة في AI. ثقة في الأدلة.</h2>
+        <p class="section-lead" style="margin: 0 auto;">لا نَعِد بالكمال. نَعِد بالشفافية. كل ادعاء قابل للتحقق، كل خطأ قابل للكشف، كل قرار قابل للمراجعة.</p>
       </div>
 
-      <div class="trust-numbers">
-        <div class="trust-number">
-          <div class="trust-number-val">411</div>
-          <div class="trust-number-lbl">مصدر رسمي</div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-item-icon">🔗</div>
+          <div class="trust-item-h">Evidence Chain</div>
+          <div class="trust-item-desc">سلسلة أدلة كاملة من المصدر للوثيقة للفقرة للاستخبارات</div>
         </div>
-        <div class="trust-number">
-          <div class="trust-number-val">100%</div>
-          <div class="trust-number-lbl">قابلية التحقق</div>
+        <div class="trust-item">
+          <div class="trust-item-icon">📊</div>
+          <div class="trust-item-h">Source Health Monitoring</div>
+          <div class="trust-item-desc">مراقبة 411 مصدر رسمي 24/7 — صحة، تحديث، موثوقية</div>
         </div>
-        <div class="trust-number">
-          <div class="trust-number-val">&lt;5s</div>
-          <div class="trust-number-lbl">تتبّع الدليل</div>
+        <div class="trust-item">
+          <div class="trust-item-icon">📜</div>
+          <div class="trust-item-h">Document Lineage</div>
+          <div class="trust-item-desc">تتبّع كل رقم لصفحة وفقرة محددة في الوثيقة الأصلية</div>
         </div>
-        <div class="trust-number">
-          <div class="trust-number-val">24/7</div>
-          <div class="trust-number-lbl">مراقبة المصادر</div>
+        <div class="trust-item">
+          <div class="trust-item-icon">👤</div>
+          <div class="trust-item-h">Human Review Controls</div>
+          <div class="trust-item-desc">مراجعة بشرية إلزامية للقرارات عالية التأثير</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">🔍</div>
+          <div class="trust-item-h">Auditability</div>
+          <div class="trust-item-desc">سجل كامل قابل للتصدير — لكل عملية، لكل قرار</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">⚖</div>
+          <div class="trust-item-h">Methodology</div>
+          <div class="trust-item-desc">منهجية شفافة — جودة الدليل، قوة الاستدلال، احتمال السيناريو</div>
         </div>
       </div>
 
@@ -601,35 +761,45 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= PRODUCTS ============= -->
+  <!-- ============= PRODUCTS (Engine + outputs, not 3 SaaS) ============= -->
   <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-8">
         <span class="section-tag" style="justify-content: center;">المنتجات</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">ثلاث طرق لاستخدام رؤى</h2>
-        <p class="section-lead" style="margin: 0 auto;">كل منتج يحل مشكلة مختلفة. كلها مدعومة بنفس المحرك.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">محرك واحد. مخرجات متعددة.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ليس لدينا 3 منتجات منفصلة. لدينا محرك استخبارات واحد يولّد مخرجات مختلفة لاحتياجات مختلفة.</p>
       </div>
 
-      <div class="product-preview">
+      <div class="engine-diagram">
+        <div class="engine-core">
+          <span class="engine-core-name">ROUAA Intelligence Engine</span>
+        </div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-products">
+          <a href="media-technologies.html" class="engine-product" style="border-color: var(--blue); color: var(--blue);">Research Intelligence</a>
+          <a href="trading-technologies.html" class="engine-product" style="border-color: var(--emerald); color: var(--emerald);">Trading Intelligence</a>
+          <a href="developers.html" class="engine-product" style="border-color: var(--gold); color: var(--gold);">Intelligence APIs</a>
+        </div>
+      </div>
+
+      <div class="product-preview mt-8">
         <a href="media-technologies.html" class="product-preview-card p-research">
           <div class="product-preview-icon">📰</div>
           <div class="product-preview-name"><span class="ar">رؤى للأبحاث</span>Research Intelligence</div>
           <p class="product-preview-desc">حوّل البيانات الاقتصادية إلى استخبارات جاهزة. تغذية حية، تقارير موثّقة، تقويم اقتصادي.</p>
-          <div class="product-preview-stat">7 منتجات · للأبحاث والإعلام</div>
+          <div class="product-preview-stat">للأبحاث والإعلام المالي</div>
         </a>
-
         <a href="trading-technologies.html" class="product-preview-card p-trading">
           <div class="product-preview-icon">📊</div>
           <div class="product-preview-name"><span class="ar">رؤى للتداول</span>Trading Intelligence</div>
-          <p class="product-preview-desc">تحليل السوق ودعم القرار. إشارات مدعومة بأدلة، تقييم مخاطر، سجل قابل للمراجعة.</p>
-          <div class="product-preview-stat">9 منتجات · للصناديق والوسطاء</div>
+          <p class="product-preview-desc">دعم قرار التداول. إشارات مدعومة بأدلة، تقييم مخاطر، سجل قابل للمراجعة.</p>
+          <div class="product-preview-stat">للصناديق والوسطاء</div>
         </a>
-
         <a href="developers.html" class="product-preview-card p-api">
           <div class="product-preview-icon">🔌</div>
           <div class="product-preview-name"><span class="ar">رؤى API</span>Intelligence APIs</div>
           <p class="product-preview-desc">ادمج استخبارات رؤى في بنيتك. بيانات + استخبارات + أدلة عبر API واحد.</p>
-          <div class="product-preview-stat">5 طرق تكامل · للمطورين</div>
+          <div class="product-preview-stat">للمطورين والفينتك</div>
         </a>
       </div>
     </div>
@@ -648,47 +818,44 @@ body { class: motion-marketing; }
 </main>
 
 <!-- Footer -->
-<footer class="footer" style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
-  <div class="container">
-    <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
-      <div>
-        <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
-        <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">منصة استخبارات مالية مؤسسية — من المصدر الرسمي إلى القرار الموثّق.</div>
-        <div class="mono-label text-mute">v18 · يوليو 2026</div>
-      </div>
-      <div>
-        <h4 class="mono-label text-mute mb-3">المنتجات</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-          <li><a href="media-technologies.html" class="small text-dim">رؤى للأبحاث</a></li>
-          <li><a href="trading-technologies.html" class="small text-dim">رؤى للتداول</a></li>
-          <li><a href="developers.html" class="small text-dim">رؤى API</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="mono-label text-mute mb-3">الشركة</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-          <li><a href="trust.html" class="small text-dim">مركز الثقة</a></li>
-          <li><a href="enterprise.html" class="small text-dim">المؤسسات</a></li>
-          <li><a href="#contact" class="small text-dim">تواصل</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="mono-label text-mute mb-3">قانوني</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-          <li><a href="#" class="small text-dim">الخصوصية</a></li>
-          <li><a href="#" class="small text-dim">الشروط</a></li>
-        </ul>
-      </div>
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">بنية تحتية للاستخبارات المالية الموثقة — من المصدر الرسمي إلى دعم القرار.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
     </div>
-    <div style="padding-top: 2rem; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute);">
-      <span>© 2026 رؤى · ROUAA</span>
-      <span>contact@rouaa.ai</span>
+    <div>
+      <h4 class="mono-label text-mute mb-3">المنتجات</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">رؤى للأبحاث</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">رؤى للتداول</a></li>
+        <li><a href="developers.html" class="small text-dim">رؤى API</a></li>
+      </ul>
     </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">الشركة</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="trust.html" class="small text-dim">مركز الثقة</a></li>
+        <li><a href="enterprise.html" class="small text-dim">المؤسسات</a></li>
+        <li><a href="#contact" class="small text-dim">تواصل</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">قانوني</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="#" class="small text-dim">الخصوصية</a></li>
+        <li><a href="#" class="small text-dim">الشروط</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
   </div>
 </footer>
 
 <script>
-// Reveal on scroll
 const io = new IntersectionObserver(entries => {
   entries.forEach(x => {
     if (x.isIntersecting) {
