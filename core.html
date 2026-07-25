@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى المحرك — منصة المحركات الموثوقة</title>
+<meta name="description" content="ROUAA Core — منصة هندسية بثمانية محركات: سجل المصادر، محرّك الوثائق، محرّك الحقائق، محرّك الأحداث، مخطط الأدلة، رسم المعرفة، الاستدلال، التدقيق.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
+.mono{font-family:var(--font-mono);letter-spacing:.04em}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}@media(max-width:768px){.container{padding:0 1.25rem}}
+.section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
+.section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}.btn-trade:hover{background:var(--gold-dim)}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
+.nav-cta{flex-shrink:0}
+
+.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+
+/* === Architecture overview (single layer for Core) === */
+.arch{margin-top:3rem;display:flex;flex-direction:column;gap:.5rem;max-width:880px;margin-left:auto;margin-right:auto}
+.arch-layer{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;transition:border-color .3s;position:relative;overflow:hidden}
+.arch-layer:hover{border-color:var(--gold)}
+.arch-layer::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.arch-num{font-family:var(--font-mono);font-size:.875rem;color:var(--gold);font-weight:700;width:36px;flex-shrink:0}
+.arch-body{flex:1}
+.arch-name{font-family:var(--font-en);font-size:1rem;font-weight:700;color:var(--text)}.arch-name .ar{font-family:var(--font-ar);color:var(--text);margin-right:.5rem}
+.arch-desc{font-size:.8125rem;color:var(--text-mute);margin-top:.125rem}
+.arch-count{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding:.25rem .625rem;background:rgba(255,255,255,.03);border-radius:4px;white-space:nowrap}
+@media(max-width:768px){.arch-layer{flex-wrap:wrap}.arch-body{width:100%}.arch-count{width:100%;text-align:center}}
+
+/* === Layer section header === */
+.layer-head{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.layer-num{font-family:var(--font-mono);font-size:2rem;font-weight:700;color:var(--layer-accent);line-height:1}
+.layer-meta{flex:1;min-width:200px}
+.layer-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--layer-accent);letter-spacing:.18em;text-transform:uppercase}
+.layer-name{font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--text);margin-top:.2rem}
+.layer-name .ar{font-family:var(--font-ar);margin-right:.625rem}
+.layer-line{flex-basis:100%;height:1px;background:linear-gradient(90deg,var(--layer-accent),transparent);opacity:.4}
+
+/* === Engine cards === */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s,transform .3s;position:relative}
+.card:hover{border-color:var(--layer-accent);transform:translateY(-2px)}
+.card-icon{width:36px;height:36px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--layer-accent);margin-bottom:.875rem}.card-icon svg{width:18px;height:18px}
+.card-name{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text)}.card-name .ar{font-family:var(--font-ar);font-size:1rem;display:block;margin-bottom:.1rem}
+.card-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-top:.4rem}
+.card-stat{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--layer-accent);letter-spacing:.05em}
+
+.layer-engines{--layer-accent:var(--gold)}
+
+/* === Evidence chain (القلب) === */
+.eg-box{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:680px;margin-left:auto;margin-right:auto}
+.eg-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-soft);flex-wrap:wrap;gap:1rem}
+.eg-title{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
+.eg-conf{padding:.4rem .8rem;background:var(--gold-dim);border:1px solid var(--gold);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--gold)}
+.eg-flow{display:flex;flex-direction:column;align-items:center;gap:0}
+.eg-node{width:100%;max-width:520px;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:1rem;transition:border-color .3s}.eg-node:hover{border-color:var(--gold)}
+.eg-node.gold{background:var(--gold-dim);border-color:var(--gold)}
+.eg-node-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);width:24px;flex-shrink:0}
+.eg-node-body{flex:1}.eg-node-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.125rem}.eg-node.gold .eg-node-lbl{color:var(--gold)}
+.eg-node-val{font-size:.875rem;color:var(--text);font-weight:600}
+.eg-connector{width:1px;height:18px;background:var(--gold);opacity:.4;margin:.1rem 0}
+.eg-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
+
+/* === Knowledge Graph === */
+.kg-box{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;justify-content:center;position:relative}
+.kg-box svg{max-width:100%;height:auto}
+.kg-node{cursor:pointer;transition:all .3s}.kg-node:hover .kg-circle{fill:var(--gold-dim);stroke:var(--gold)}
+.kg-circle{fill:var(--card);stroke:var(--border);stroke-width:1.5;transition:all .3s}.kg-circle.gold{fill:var(--gold-dim);stroke:var(--gold)}.kg-circle.active{fill:var(--gold);stroke:var(--gold-bright);stroke-width:2}
+.kg-label{fill:var(--text);font-family:var(--font-en);font-size:10px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}.kg-label.gold{fill:var(--gold)}
+.kg-link{stroke:var(--border);stroke-width:1;fill:none;transition:stroke .3s}.kg-link.active{stroke:var(--gold);stroke-width:1.5}
+.kg-info{position:absolute;top:1rem;left:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;min-width:200px;max-width:240px;opacity:0;transition:opacity .3s;pointer-events:none}.kg-info.visible{opacity:1}
+.kg-info-title{font-family:var(--font-en);font-weight:700;color:var(--gold);font-size:.875rem;margin-bottom:.5rem}
+.kg-info-row{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);margin-bottom:.25rem}.kg-info-row span{color:var(--text)}
+
+/* === Relationship === */
+.rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
+.rel-box.news{background:var(--card);border:1px solid var(--border)}
+.rel-box.core{background:var(--gold-dim);border:1px solid var(--gold)}
+.rel-box.trade{background:var(--card);border:1px solid var(--border)}
+.rel-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.rel-box.core .rel-lbl{color:var(--gold)}
+.rel-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.rel-desc{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.rel-arrow{color:var(--gold);font-size:1.5rem;opacity:.5;margin:.4rem 0}
+
+.cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · المحرك</span><span class="sub">قلب الثقة</span></div></a><ul class="nav-links"><li><a href="news.html">الأخبار</a></li><li><a href="core.html" class="active">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
+
+<!-- ============= HERO ============= -->
+<section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
+<div class="hero-tagline">منصة رؤى للمحركات</div>
+<h1 class="hero-h1">ثمانية محركات<br>تنتج الثقة المالية</h1>
+<p class="hero-sub">رؤى المحرك منصة هندسية واحدة بطبقة واحدة: ثمانية محركات تعمل معاً لتحويل المصادر الرسمية إلى استخبارات قابلة للدفاع. لا منتجات منفصلة — محركات موصلة.</p>
+<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#architecture" class="btn btn-primary">استكشف المحركات</a><a href="news.html" class="btn btn-ghost">رؤى الأخبار</a></div>
+</div></div></section>
+
+<!-- ============= 1. ARCHITECTURE OVERVIEW ============= -->
+<section class="section reveal" id="architecture" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">بنية المنصة</span><h2 class="section-h" style="margin:0 auto 1rem">طبقة واحدة · ثمانية محركات</h2><p class="section-lead" style="margin:0 auto">المحرك منصة هندسية نقية — لا تطبيقات يستخدمها العميل مباشرة، بل محركات تعمل خلف الكواليس لتغذّي الأخبار والتداول. كل محرك يبني على ما قبله.</p></div>
+
+<div class="arch">
+<div class="arch-layer"><div class="arch-num">01</div><div class="arch-body"><div class="arch-name"><span class="ar">سجل المصادر</span>Source Registry</div><div class="arch-desc">فهرسة 411 مصدر رسمي · بنوك مركزية · هيئات · وزارات</div></div><div class="arch-count">411 مصدر</div></div>
+<div class="arch-layer"><div class="arch-num">02</div><div class="arch-body"><div class="arch-name"><span class="ar">محرّك الوثائق</span>Document Engine</div><div class="arch-desc">PDF ← بيانات مهيكلة · استخراج · تصنيف · فهرسة</div></div><div class="arch-count">10,000+ وثيقة</div></div>
+<div class="arch-layer"><div class="arch-num">03</div><div class="arch-body"><div class="arch-name"><span class="ar">محرّك الحقائق</span>Fact Engine</div><div class="arch-desc">استخراج NLP · أرقام · كيانات · علاقات</div></div><div class="arch-count">1,247 حقيقة</div></div>
+<div class="arch-layer"><div class="arch-num">04</div><div class="arch-body"><div class="arch-name"><span class="ar">محرّك الأحداث</span>Event Engine</div><div class="arch-desc">تصنيف · ربط الأحداث · كشف الأنماط</div></div><div class="arch-count">38 حدثاً يومياً</div></div>
+<div class="arch-layer"><div class="arch-num">05</div><div class="arch-body"><div class="arch-name"><span class="ar">مخطط الأدلة</span>Evidence Graph</div><div class="arch-desc">ربط كل حقيقة بمصدرها · طابع زمني · ثقة</div></div><div class="arch-count">دليل كامل</div></div>
+<div class="arch-layer"><div class="arch-num">06</div><div class="arch-body"><div class="arch-name"><span class="ar">رسم المعرفة</span>Knowledge Graph</div><div class="arch-desc">شبكة العلاقات المالية · تأثيرات متبادلة</div></div><div class="arch-count">شبكة حية</div></div>
+<div class="arch-layer"><div class="arch-num">07</div><div class="arch-body"><div class="arch-name"><span class="ar">الاستدلال</span>AI Reasoning</div><div class="arch-desc">10 أدوار استدلال · استنتاج التأثيرات السوقية</div></div><div class="arch-count">10 أدوار</div></div>
+<div class="arch-layer"><div class="arch-num">08</div><div class="arch-body"><div class="arch-name"><span class="ar">التدقيق</span>Audit</div><div class="arch-desc">سجل كامل · طابع زمني · IP · قابل للمراجعة</div></div><div class="arch-count">قابل للتصدير</div></div>
+</div>
+</div></section>
+
+<!-- ============= 2. THE 8 ENGINES (cards grid) ============= -->
+<section class="section reveal layer-engines"><div class="container">
+<div class="layer-head">
+<div class="layer-num">01</div>
+<div class="layer-meta"><div class="layer-tag">طبقة المحركات · Engines</div><div class="layer-name"><span class="ar">المحركات الثمانية</span>How it works</div></div>
+<div class="layer-line"></div>
+</div>
+<p class="section-lead" style="margin-bottom:2.5rem">ثمانية محركات تعمل كخط أنابيب — كل واحد يسلّم ناتجه للذي يليه. لا تداخل، لا فجوات. الزائر لا يتعامل معها مباشرة، لكنه يرى آثارها في كل خبر وكل صفقة وكل قرار.</p>
+
+<div class="cards">
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="12" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg></div><div class="card-name"><span class="ar">سجل المصادر</span>Source Registry</div><div class="card-desc">فهرسة كاملة لكل مصدر رسمي — بنوعه وبلده ودرجة صحته وآخر تحديث ومستوى الثقة.</div><div class="card-stat">411 مصدر · مراقب 24/7</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="card-name"><span class="ar">محرّك الوثائق</span>Document Engine</div><div class="card-desc">يحوّل PDF والوثائق الرسمية إلى بيانات مهيكلة — استخراج وتصنيف في 0.4 ثانية.</div><div class="card-stat">10,000+ وثيقة · 0.4 ثانية</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="card-name"><span class="ar">محرّك الحقائق</span>Fact Engine</div><div class="card-desc">استخراج NLP للأرقام والكيانات والعلاقات — كل حقيقة موثّقة بصفحة وفقرة.</div><div class="card-stat">1,247 حقيقة مستخرجة</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="card-name"><span class="ar">محرّك الأحداث</span>Event Engine</div><div class="card-desc">تصنيف الأحداث وربطها — كشف الأنماط والعلاقات بين ما يبدو منفصلاً.</div><div class="card-stat">38 حدثاً يومياً · تصنيف آلي</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="card-name"><span class="ar">مخطط الأدلة</span>Evidence Graph</div><div class="card-desc">يربط كل حقيقة بمصدرها الأصلي — صفحة · فقرة · طابع زمني · درجة ثقة.</div><div class="card-stat">دليل كامل لكل ادعاء</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></div><div class="card-name"><span class="ar">رسم المعرفة</span>Knowledge Graph</div><div class="card-desc">شبكة العلاقات المالية — كل حدث مرتبط بمن أثر عليه ومن تأثر به.</div><div class="card-stat">شبكة حية · تفاعلية</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div><div class="card-name"><span class="ar">الاستدلال</span>AI Reasoning</div><div class="card-desc">10 أدوار استدلال تتشاور — محلل ماكرو · ميكرو · فني · سياسي · جيوسياسي.</div><div class="card-stat">10 أدوار · إجماع قبل القرار</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><div class="card-name"><span class="ar">التدقيق</span>Audit</div><div class="card-desc">سجل كامل لكل عملية — طابع زمني بدقة المللي · IP · نتيجة · قابل للتصدير.</div><div class="card-stat">سجل كامل · قابل للدفاع</div></div>
+</div>
+</div></section>
+
+<!-- ============= 3. EVIDENCE CHAIN (القلب) ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">سلسلة الأدلة — القلب</span><h2 class="section-h" style="margin:0 auto 1rem">كل رؤية لها سلسلة إثبات كاملة</h2><p class="section-lead" style="margin:0 auto">هذا ما تنتجه المحركات الثمانية معاً — تتبّع كامل من الرؤية إلى الحقيقة إلى الوثيقة إلى المصدر الرسمي. كل خطوة موثّقة.</p></div>
+
+<div class="eg-box">
+<div class="eg-h"><div class="eg-title">رؤية #28492</div><div class="eg-conf">الثقة 87%</div></div>
+<div class="eg-flow">
+<div class="eg-node gold"><div class="eg-node-num">01</div><div class="eg-node-body"><div class="eg-node-lbl">الرؤية · AI Reasoning</div><div class="eg-node-val">ثبات الفيدرالي يشير إلى قوة الدولار</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">02</div><div class="eg-node-body"><div class="eg-node-lbl">الحقيقة · Fact Engine</div><div class="eg-node-val">سعر الفائدة: 5.25% – 5.50%</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">03</div><div class="eg-node-body"><div class="eg-node-lbl">الوثيقة · Document Engine</div><div class="eg-node-val">بيان FOMC · 24 صفحة</div></div></div>
+<div class="eg-connector"></div>
+<div class="eg-node"><div class="eg-node-num">04</div><div class="eg-node-body"><div class="eg-node-lbl">المصدر · Source Registry</div><div class="eg-node-val">federalreserve.gov · ثقة A+</div></div></div>
+</div>
+<div class="eg-footer">
+<span>5 وثائق · 12 حقيقة · 3 أحداث</span>
+<a href="trade.html" style="color:var(--gold)">حلّل في رؤى التداول ←</a>
+</div>
+</div>
+</div></section>
+
+<!-- ============= 4. KNOWLEDGE GRAPH ============= -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">رسم المعرفة · Knowledge Graph</span><h2 class="section-h" style="margin:0 auto 1rem">شبكة العلاقات المالية</h2><p class="section-lead" style="margin:0 auto">رؤى لا تعرض الأحداث منفصلة — تربطها. مرّر المؤشر على أي عقدة لرؤية المصدر والقيمة.</p></div>
+
+<div class="kg-box">
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" id="kgSvg">
+<line class="kg-link active" x1="300" y1="60" x2="300" y2="140"/>
+<line class="kg-link active" x1="300" y1="140" x2="150" y2="220"/>
+<line class="kg-link active" x1="300" y1="140" x2="300" y2="220"/>
+<line class="kg-link active" x1="300" y1="140" x2="450" y2="220"/>
+<line class="kg-link" x1="150" y1="220" x2="150" y2="320"/>
+<line class="kg-link" x1="300" y1="220" x2="300" y2="320"/>
+<line class="kg-link" x1="450" y1="220" x2="450" y2="320"/>
+<g class="kg-node" data-info="التضخم|مكتب إحصاءات العمل|CPI Release|2.4% سنوياً"><circle class="kg-circle gold" cx="300" cy="60" r="30"/><text class="kg-label gold" x="300" y="60">التضخم</text></g>
+<g class="kg-node" data-info="الفيدرالي|federalreserve.gov|FOMC Statement|الفائدة 5.50%"><circle class="kg-circle" cx="300" cy="140" r="30"/><text class="kg-label" x="300" y="140">الفيدرالي</text></g>
+<g class="kg-node" data-info="سعر الفائدة|الفيدرالي|قرار FOMC|5.25% - 5.50%"><circle class="kg-circle gold" cx="150" cy="220" r="30"/><text class="kg-label gold" x="150" y="220">الفائدة</text></g>
+<g class="kg-node" data-info="الدولار|سوق الصرف|مؤشر DXY|+0.42%"><circle class="kg-circle" cx="300" cy="220" r="30"/><text class="kg-label" x="300" y="220">الدولار</text></g>
+<g class="kg-node" data-info="السندات|خزانة الولايات المتحدة|منحنى العائد|10 سنوات: 4.32%"><circle class="kg-circle" cx="450" cy="220" r="30"/><text class="kg-label" x="450" y="220">السندات</text></g>
+<g class="kg-node" data-info="الأسهم|S&P 500|مؤشر السوق|-0.3%"><circle class="kg-circle" cx="150" cy="320" r="30"/><text class="kg-label" x="150" y="320">الأسهم</text></g>
+<g class="kg-node" data-info="الذهب|COMEX|XAU/USD|2,389"><circle class="kg-circle" cx="300" cy="320" r="30"/><text class="kg-label" x="300" y="320">الذهب</text></g>
+<g class="kg-node" data-info="النفط|WTI Crude|OIL/USD|85.20 دولار"><circle class="kg-circle" cx="450" cy="320" r="30"/><text class="kg-label" x="450" y="320">النفط</text></g>
+</svg>
+<div class="kg-info" id="kgInfo"><div class="kg-info-title" id="kgInfoTitle">—</div><div class="kg-info-row">المصدر: <span id="kgInfoSource">—</span></div><div class="kg-info-row">الوثيقة: <span id="kgInfoDoc">—</span></div><div class="kg-info-row">القيمة: <span id="kgInfoVal">—</span></div></div>
+</div>
+</div></section>
+
+<!-- ============= 5. RELATIONSHIP ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">المنظومة الكاملة</span><h2 class="section-h" style="margin:0 auto 1rem">المحرك قلب الثقة</h2><p class="section-lead" style="margin:0 auto">رؤى أربع منصات، كل واحدة تجيب عن سؤال واحد. المحرك يجيب: كيف تعمل؟</p></div>
+
+<div class="rel">
+<div class="rel-box news"><div class="rel-lbl">كيف أفهم السوق</div><div class="rel-name">رؤى الأخبار</div><div class="rel-desc">منصة استخبارات مالية موثوقة</div><div style="margin-top:.6rem"><a href="news.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box core"><div class="rel-lbl">كيف تعمل</div><div class="rel-name">رؤى المحرك</div><div class="rel-desc">ثمانية محركات تنتج الثقة</div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box trade"><div class="rel-lbl">كيف أتخذ القرار وأنفّذه</div><div class="rel-name">رؤى التداول</div><div class="rel-desc">منصة القرار والتنفيذ المالي</div><div style="margin-top:.6rem"><a href="trade.html" class="btn-trade" style="font-family:var(--font-ar)">استكشف ←</a></div></div>
+</div>
+<div style="text-align:center;margin-top:2rem;font-family:var(--font-mono);font-size:.8125rem;color:var(--text-mute)">رؤى · 4 منصات · كل واحدة تجيب عن سؤال واحد</div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>ثمانية محركات · طبقة واحدة · لا التباس</h2><p>اطلب وصولاً مؤسسياً لتفحص سجل المصادر وذكاء الوثائق ومخطط الأدلة مباشرة. ما ينتج الثقة، كله في مكان واحد.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
+
+<!-- Footer -->
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">منصة المحرك — ثمانية محركات في طبقة واحدة، تنتج الثقة المالية.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصات</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li><li><a href="api.html">رؤى API</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+(function(){const nodes=document.querySelectorAll('.kg-node');const info=document.getElementById('kgInfo');const title=document.getElementById('kgInfoTitle');const source=document.getElementById('kgInfoSource');const doc=document.getElementById('kgInfoDoc');const val=document.getElementById('kgInfoVal');
+nodes.forEach(node=>{node.addEventListener('mouseenter',()=>{const data=node.dataset.info.split('|');title.textContent=data[0];source.textContent=data[1];doc.textContent=data[2];val.textContent=data[3];info.classList.add('visible');node.querySelector('.kg-circle').classList.add('active')});
+node.addEventListener('mouseleave',()=>{info.classList.remove('visible');node.querySelector('.kg-circle').classList.remove('active')});
+node.addEventListener('click',()=>{const data=node.dataset.info.split('|');title.textContent=data[0];source.textContent=data[1];doc.textContent=data[2];val.textContent=data[3];info.classList.add('visible')})});
+})();
+</script>
+</body>
+</html>
