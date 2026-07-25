@@ -4,394 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى المؤسسات — مصمّمة لبيئات مالية حرجة</title>
-<meta name="description" content="ثقة مؤسسية — حوكمة، أمن بيانات، نشر.">
+<title>رؤى Enterprise Solutions — لمن نصمم؟</title>
+<meta name="description" content="رؤى Enterprise Solutions — صفحة واحدة تجمع كل القطاعات: Banks، Hedge Funds، Brokers، Governments. المؤسسة لا تشتري 10 ميزات — تشتري منظومة.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;
-  --gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);
-  --white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;
-  --text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);
-  --border-soft:rgba(243,244,246,.06);
-  --font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
-}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--emerald:#34D399;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--navy);scroll-behavior:smooth}
-body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-::selection{background:var(--gold);color:var(--navy)}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-a{color:inherit;text-decoration:none;transition:color .2s}
-a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none;transition:color .2s}a:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-spacing:-.01em}
 .mono{font-family:var(--font-mono);letter-spacing:.04em}
-.container{max-width:1280px;margin:0 auto;padding:0 2rem}
-@media(max-width:768px){.container{padding:0 1.25rem}}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}@media(max-width:768px){.container{padding:0 1.25rem}}
 .section{padding:clamp(5rem,10vw,8rem) 0;position:relative}
-.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .section-h{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;max-width:24ch}
 .section-lead{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
-.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.80);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
-.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
-@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
-.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
-.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}
-.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}
-.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
-.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}
-.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}
-@media(max-width:1024px){.nav-links{display:none}}
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}.nav-brand-logo{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:18px;color:var(--gold)}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1}.nav-brand-text .name{font-size:1.125rem;font-weight:700;color:var(--text)}.nav-brand-text .sub{font-family:var(--font-en);font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mute)}
+.nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 4rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
-.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
-.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
-.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
-.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+.hero{position:relative;padding:6rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.hero-product-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.5rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-type{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-top:.5rem}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
 
-/* Security architecture stack */
-.sec-stack{display:flex;flex-direction:column;align-items:center;max-width:680px;margin:3rem auto 0;gap:0}
-.sec-layer{width:100%;padding:1rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:border-color .3s}
-.sec-layer:hover{border-color:var(--gold)}
-.sec-layer.gold{background:var(--gold-dim);border-color:var(--gold)}
-.sec-layer-num{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);width:32px;flex-shrink:0}
-.sec-layer-name{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:.9375rem}
-.sec-layer-desc{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.sec-arrow{color:var(--gold);opacity:.5;font-size:1rem;margin:.25rem 0}
+/* === Sectors grid === */
+.sectors{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1000px;margin:2rem auto 0}
+@media(max-width:768px){.sectors{grid-template-columns:1fr}}
+.sector{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem 1.75rem;transition:all .3s;position:relative;overflow:hidden}
+.sector:hover{border-color:var(--gold);transform:translateY(-3px)}
+.sector::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--sector-color,var(--gold))}
+.sector.s-banks{--sector-color:var(--blue)}
+.sector.s-funds{--sector-color:var(--emerald)}
+.sector.s-brokers{--sector-color:var(--gold)}
+.sector.s-gov{--sector-color:var(--text-mute)}
+.sector-icon{width:40px;height:40px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--sector-color);margin-bottom:1rem}.sector-icon svg{width:20px;height:20px}
+.sector-name{font-family:var(--font-en);font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.2rem}.sector-name .ar{font-family:var(--font-ar);margin-right:.5rem}
+.sector-need{font-family:var(--font-mono);font-size:.6875rem;color:var(--sector-color);letter-spacing:.05em;text-transform:uppercase;margin-bottom:1rem}
+.sector-desc{font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem}
+.sector-products{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:1rem;border-top:1px solid var(--border-soft)}
+.sector-products .lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;width:100%;margin-bottom:.3rem}
+.sector-product-tag{padding:.25rem .625rem;background:var(--surface);border:1px solid var(--border);border-radius:4px;font-size:.6875rem;color:var(--text-dim);font-family:var(--font-en)}
 
-/* Three pillars */
-.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
-@media(max-width:900px){.pillars-grid{grid-template-columns:1fr}}
-.pillar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .3s}
-.pillar:hover{border-color:var(--gold)}
-.pillar-name{font-family:var(--font-en);font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.pillar-desc{font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem}
-.pillar-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;padding-top:1rem;border-top:1px solid var(--border-soft)}
-.pillar-list li{font-size:.8125rem;color:var(--text-dim);display:flex;align-items:center;gap:.5rem}
-.pillar-list li::before{content:'✓';color:var(--emerald);font-weight:700}
+/* === What they buy === */
+.buy{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;max-width:1000px;margin-left:auto;margin-right:auto}
+.buy-h{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;text-align:center}
+.buy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem}
+.buy-item{text-align:center;padding:1rem}
+.buy-item-icon{font-size:1.5rem;color:var(--gold);margin-bottom:.5rem}
+.buy-item-h{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text);margin-bottom:.4rem}.buy-item-h .ar{font-family:var(--font-ar);margin-right:.4rem}
+.buy-item-desc{font-size:.75rem;color:var(--text-mute);line-height:1.6}
 
-/* Compliance grid */
-.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
-.comp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center;transition:border-color .3s}
-.comp-card:hover{border-color:var(--gold)}
-.comp-card-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.4rem}
-.comp-card-status{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold)}
-.comp-card-status.done{color:var(--emerald)}
-
-/* Stats */
-.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;margin-top:2rem}
-.stat-cell{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center}
-.stat-num{font-family:var(--font-mono);font-size:2rem;color:var(--gold);font-weight:600;margin-bottom:.25rem}
-.stat-lbl{font-size:.8125rem;color:var(--text-mute)}
+/* === Security strip === */
+.security{margin-top:3rem;padding:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center;max-width:1000px;margin-left:auto;margin-right:auto}
+.security .lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}
+.security h3{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.security p{font-size:.9375rem;color:var(--text-dim);max-width:60ch;margin:0 auto 1.5rem;line-height:1.7}
+.security-badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.security-badge{padding:.5rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-dim);letter-spacing:.05em}
 
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
-.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
-.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
 .footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid var(--border-soft)}
-.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}
-@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
-.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
-.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}
-.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
-.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}
-@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 2rem}@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+.footer-brand .name{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}.footer-brand .tagline{font-size:.9375rem;color:var(--text-dim);max-width:32ch;line-height:1.7;margin-bottom:1rem}.footer-brand .meta{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
+.footer-col h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-mute);margin-bottom:1rem;font-weight:600}.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}.footer-col a{font-size:.8125rem;color:var(--text-dim)}.footer-col a:hover{color:var(--gold)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);max-width:1280px;margin:0 auto;padding:2rem 2rem 0}@media(max-width:768px){.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى · المؤسسات</span>
-        <span class="sub">بنية تحتية حرجة</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="news.html">الأخبار</a></li>
-      <li><a href="core.html">المحرك</a></li>
-      <li><a href="trade.html">التداول</a></li>
-      <li><a href="api.html">واجهة برمجة</a></li>
-      <li><a href="enterprise.html" class="active">المؤسسات</a></li>
-    </ul>
-    <div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div>
-  </div>
-</nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · Enterprise</span><span class="sub">Solutions</span></div></a><ul class="nav-links"><li><a href="index.html">المنصة</a></li><li><a href="news.html">المنتجات</a></li><li><a href="enterprise.html" class="active">الحلول</a></li><li><a href="api.html">API</a></li><li><a href="enterprise.html">المؤسسات</a></li><li><a href="#security">الأمان</a></li></ul><div class="nav-cta"><a href="#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-      <h1 class="hero-h1">كيف يصبح الأمان<br>جزءاً من القرار</h1>
-      <p class="hero-sub">تعاني المؤسسات من فجوة بين البيانات والقرار الموثّق. رؤى تبني طبقة استخبارات مالية كل قرار فيها قابل للتفسير والدفاع أمام أي لجنة استثمار أو تدقيق.</p>
-      <div class="hero-cta">
-        <a href="#architecture" class="btn btn-primary">معمارية الأمان</a>
-        <a href="index.html" class="btn btn-ghost">العودة للرئيسية</a>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ============= HERO ============= -->
+<section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
+<div class="hero-product-num">Layer 4 · Enterprise Solutions</div>
+<h1 class="hero-h1">لمن نصمم؟</h1>
+<div class="hero-type">For Banks · Funds · Brokers · Governments</div>
+<p class="hero-sub">صفحة واحدة تجمع كل القطاعات. المؤسسة لا تشتري 10 ميزات — تشتري: اختصار سنوات من البناء، مصدر موثوق، قدرة تحليل، قدرة تنفيذ، سجل أدلة، تكامل مؤسسي.</p>
+</div></div></section>
 
-<!-- SECURITY ARCHITECTURE -->
-<section class="section reveal" id="architecture">
-  <div class="container">
-    <span class="section-tag">معمارية الأمان</span>
-    <h2 class="section-h">ست طبقات حماية</h2>
-    <p class="section-lead">من المستخدم إلى نواة الاستخبارات المشفّرة — كل طبقة معزولة ومُدقَّقة.</p>
+<!-- ============= 1. THE QUESTION ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;max-width:780px;margin:0 auto">
+<span class="section-tag" style="justify-content:center">السؤال الذي نجيب عنه</span>
+<h2 class="section-h" style="margin:0 auto 1rem">ماذا تشتري المؤسسة؟</h2>
+<p class="section-lead" style="margin:0 auto">لا 10 ميزات. لا 21 منتج. المؤسسة تشتري منظومة جاهزة — مبنية، مدعومة، موثّقة، قابلة للدفاع. رؤى تقدّم هذه المنظومة لأربعة قطاعات، كل واحد بحاجة مختلفة.</p>
+</div>
 
-    <div class="sec-stack">
-      <div class="sec-layer">
-        <div class="sec-layer-num">01</div>
-        <div>
-          <div class="sec-layer-name">المستخدم</div>
-          <div class="sec-layer-desc">مصادقة · 2FA · تسجيل دخول موحد</div>
-        </div>
-        <div class="sec-layer-desc">OAuth2 · JWT</div>
-      </div>
-      <div class="sec-arrow">↓</div>
-      <div class="sec-layer">
-        <div class="sec-layer-num">02</div>
-        <div>
-          <div class="sec-layer-name">المصادقة</div>
-          <div class="sec-layer-desc">تحقق الهوية · MFA</div>
-        </div>
-        <div class="sec-layer-desc">محدود المعدل</div>
-      </div>
-      <div class="sec-arrow">↓</div>
-      <div class="sec-layer">
-        <div class="sec-layer-num">03</div>
-        <div>
-          <div class="sec-layer-name">بوابة الواجهة</div>
-          <div class="sec-layer-desc">توجيه الطلبات · WAF · حماية DDoS</div>
-        </div>
-        <div class="sec-layer-desc">TLS 1.3</div>
-      </div>
-      <div class="sec-arrow">↓</div>
-      <div class="sec-layer">
-        <div class="sec-layer-num">04</div>
-        <div>
-          <div class="sec-layer-name">طبقة العزل</div>
-          <div class="sec-layer-desc">سياق لكل مستخدم · عزل 100%</div>
-        </div>
-        <div class="sec-layer-desc">VPC</div>
-      </div>
-      <div class="sec-arrow">↓</div>
-      <div class="sec-layer gold">
-        <div class="sec-layer-num">05</div>
-        <div>
-          <div class="sec-layer-name">النواة الاستخباراتية المشفّرة</div>
-          <div class="sec-layer-desc">AES-256 أثناء التخزين · مخطط الأدلة · محرّك القرار</div>
-        </div>
-        <div class="sec-layer-desc">مدعوم بـ HSM</div>
-      </div>
-      <div class="sec-arrow">↓</div>
-      <div class="sec-layer">
-        <div class="sec-layer-num">06</div>
-        <div>
-          <div class="sec-layer-name">نظام التدقيق</div>
-          <div class="sec-layer-desc">كل عملية مسجّلة · IP + طابع زمني + متصفح</div>
-        </div>
-        <div class="sec-layer-desc">غير قابل للتعديل</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="buy">
+<div class="buy-h">ماذا تشتري المؤسسة فعلاً</div>
+<div class="buy-grid">
+<div class="buy-item"><div class="buy-item-icon">⏱</div><div class="buy-item-h"><span class="ar">اختصار سنوات</span>Time</div><div class="buy-item-desc">لا تبني محرّكات معرفة من الصفر — تستلمها جاهزة.</div></div>
+<div class="buy-item"><div class="buy-item-icon">✓</div><div class="buy-item-h"><span class="ar">مصدر موثوق</span>Trust</div><div class="buy-item-desc">411 مصدر رسمي · دليل كامل لكل ادعاء · قابل للدفاع.</div></div>
+<div class="buy-item"><div class="buy-item-icon">⚡</div><div class="buy-item-h"><span class="ar">قدرة تحليل</span>Analysis</div><div class="buy-item-desc">10 أدوار استدلال · رسم معرفة · استنتاج التأثيرات.</div></div>
+<div class="buy-item"><div class="buy-item-icon">⚡</div><div class="buy-item-h"><span class="ar">قدرة تنفيذ</span>Execution</div><div class="buy-item-desc">توصية موثّقة → تنفيذ على وسيطك → سجل تدقيق كامل.</div></div>
+<div class="buy-item"><div class="buy-item-icon">📜</div><div class="buy-item-h"><span class="ar">سجل أدلة</span>Audit</div><div class="buy-item-desc">طابع زمني بدقة المللي · قابل للتصدير · قابل للمراجعة.</div></div>
+<div class="buy-item"><div class="buy-item-icon">🔌</div><div class="buy-item-h"><span class="ar">تكامل مؤسسي</span>Integration</div><div class="buy-item-desc">REST · Streaming · SDK · Webhooks · SSO · SOC2 · GDPR.</div></div>
+</div>
+</div>
+</div></section>
 
-<!-- THREE PILLARS -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="container">
-    <span class="section-tag">ثلاث ركائز</span>
-    <h2 class="section-h">حوكمة · أمن بيانات · نشر</h2>
-    <p class="section-lead">ثلاث ركائز أساسية للثقة المؤسسية — تغطي كل ما تحتاجه لجنة المخاطر أو التدقيق.</p>
+<!-- ============= 2. THE 4 SECTORS ============= -->
+<section class="section reveal"><div class="container">
+<div style="text-align:center;margin-bottom:2rem">
+<span class="section-tag" style="justify-content:center">القطاعات الأربعة</span>
+<h2 class="section-h" style="margin:0 auto 1rem">أربعة قطاعات · حاجة مختلفة لكل واحد</h2>
+<p class="section-lead" style="margin:0 auto">لا 4 صفحات منفصلة — صفحة واحدة، 4 قطاعات. كل قطاع يرى حاجته وحله فوراً، مع المنتجات المناسبة له.</p>
+</div>
 
-    <div class="pillars-grid">
+<div class="sectors">
 
-      <div class="pillar">
-        <div class="pillar-name">الحوكمة</div>
-        <div class="pillar-desc">حوكمة كاملة لكل قرار — قابل للدفاع أمام أي لجنة استثمار أو تدقيق.</div>
-        <ul class="pillar-list">
-          <li>سجل التدقيق — سجل كامل لكل عملية</li>
-          <li>المصدر — كل ادعاء مرتبط بمصدره</li>
-          <li>التحكم بالوصول — RBAC + ABAC</li>
-          <li>الصلاحيات — دقيقة لكل مسار</li>
-          <li>مراجعة القرار — كل قرار قابل للمراجعة</li>
-          <li>جاهز للجنة الاستثمار</li>
-        </ul>
-      </div>
+<div class="sector s-banks">
+<div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg></div>
+<div class="sector-name"><span class="ar">البنوك</span>Banks</div>
+<div class="sector-need">الحاجة: قرارات ائتمان واستثمار مدعومة بأدلة</div>
+<p class="sector-desc">البنك يحتاج قرارات يمكن الدفاع عنها أمام لجنة المخاطر والمراجع التنظيمي. رؤى تربط كل قرار بمصدره الرسمي وسلسلة أدلة كاملة.</p>
+<div class="sector-products">
+<span class="lbl">Products</span>
+<span class="sector-product-tag">Intelligence APIs</span>
+<span class="sector-product-tag">White Label</span>
+<span class="sector-product-tag">Trade</span>
+</div>
+</div>
 
-      <div class="pillar">
-        <div class="pillar-name">أمن البيانات</div>
-        <div class="pillar-desc">حماية بمعايير البنوك المركزية — تشفير عسكري + عزل كامل.</div>
-        <ul class="pillar-list">
-          <li>تشفير AES-256 أثناء التخزين</li>
-          <li>TLS 1.3 أثناء النقل</li>
-          <li>عزل 100% لكل مستخدم</li>
-          <li>معالجة آمنة — مدعومة بـ HSM</li>
-          <li>لا حضانة — لا نلمس أموالك</li>
-          <li>تصفير الذاكرة بعد الاستخدام</li>
-        </ul>
-      </div>
+<div class="sector s-funds">
+<div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+<div class="sector-name"><span class="ar">صناديق التحوط</span>Hedge Funds</div>
+<div class="sector-need">الحاجة: سرعة في كشف الفرص + قدرة على المراجعة</div>
+<p class="sector-desc">صندوق التحوط يريد الإشارة قبل الجميع، والقدرة على مراجعة كل صفقة لاحقاً. رؤى تقدّم بثاً حياً مع سجل تدقيق قابل للتصدير.</p>
+<div class="sector-products">
+<span class="lbl">Products</span>
+<span class="sector-product-tag">Trade</span>
+<span class="sector-product-tag">Intelligence APIs</span>
+<span class="sector-product-tag">News</span>
+</div>
+</div>
 
-      <div class="pillar">
-        <div class="pillar-name">النشر</div>
-        <div class="pillar-desc">خيارات نشر مرنة تناسب أي بنية تحتية مؤسسية.</div>
-        <ul class="pillar-list">
-          <li>سحابة — سحابة رؤى المُدارة</li>
-          <li>سحابة خاصة — AWS / Azure / GCP</li>
-          <li>على الموقع — على بنيتك</li>
-          <li>هجين — مزيج مرن</li>
-          <li>العلامة البيضاء — بهويتك التجارية</li>
-          <li>عزل كامل — للقطاعات التنظيمية</li>
-        </ul>
-      </div>
+<div class="sector s-brokers">
+<div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+<div class="sector-name"><span class="ar">الوسطاء</span>Brokers</div>
+<div class="sector-need">الحاجة: قيمة مضافة للعملاء دون بناء محرك</div>
+<p class="sector-desc">الوسيط يريد قدّم قيمة لعملائه — استخبارات، شارت، تنفيذ — دون بناء فريق هندسي. White Label يحلّ هذا في أسابيع.</p>
+<div class="sector-products">
+<span class="lbl">Products</span>
+<span class="sector-product-tag">White Label</span>
+<span class="sector-product-tag">Intelligence APIs</span>
+<span class="sector-product-tag">Trade</span>
+</div>
+</div>
 
-    </div>
-  </div>
-</section>
+<div class="sector s-gov">
+<div class="sector-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<div class="sector-name"><span class="ar">الحكومات</span>Governments</div>
+<div class="sector-need">الحاجة: استخبارات اقتصادية لتقييم السياسات</div>
+<p class="sector-desc">الجهة الحكومية تحتاج استخبارات اقتصادية لتقييم السياسات والقرارات. رؤى تقدّم وصولاً مخصصاً + تقارير + رسم المعرفة الكامل.</p>
+<div class="sector-products">
+<span class="lbl">Products</span>
+<span class="sector-product-tag">Intelligence APIs</span>
+<span class="sector-product-tag">News</span>
+<span class="sector-product-tag">Reports</span>
+</div>
+</div>
 
-<!-- COMPLIANCE -->
-<section class="section reveal">
-  <div class="container">
-    <span class="section-tag">الامتثال</span>
-    <h2 class="section-h">امتثال مؤسسي</h2>
-    <p class="section-lead">جاهز للامتثال التنظيمي العالمي — قيد التطوير المستمر مع شركاء مؤسسيين.</p>
+</div>
+</div></section>
 
-    <div class="comp-grid">
-      <div class="comp-card">
-        <div class="comp-card-name">GDPR</div>
-        <div class="comp-card-status done">● جاهز</div>
-      </div>
-      <div class="comp-card">
-        <div class="comp-card-name">SOC2 النوع الثاني</div>
-        <div class="comp-card-status">○ خارطة طريق الربع الأول 2026</div>
-      </div>
-      <div class="comp-card">
-        <div class="comp-card-name">ISO 27001</div>
-        <div class="comp-card-status">○ خارطة طريق الربع الثاني 2026</div>
-      </div>
-      <div class="comp-card">
-        <div class="comp-card-name">PCI DSS</div>
-        <div class="comp-card-status">○ غير مطلوب (لا حضانة)</div>
-      </div>
-      <div class="comp-card">
-        <div class="comp-card-name">MiFID II</div>
-        <div class="comp-card-status">○ خارطة طريق الربع الثاني 2026</div>
-      </div>
-      <div class="comp-card">
-        <div class="comp-card-name">FINRA</div>
-        <div class="comp-card-status">○ خارطة طريق الربع الثالث 2026</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:3rem">
-      <span class="section-tag" style="justify-content:center">بالأرقام</span>
-      <h2 class="section-h" style="margin:0 auto 1rem">أرقام الثقة</h2>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-cell">
-        <div class="stat-num">15</div>
-        <div class="stat-lbl">فحص أمان قبل التنفيذ</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">100%</div>
-        <div class="stat-lbl">عزل بين الحسابات</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">24/7</div>
-        <div class="stat-lbl">مراقبة أمنية نشطة</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">4.2مللي</div>
-        <div class="stat-lbl">زمن تنفيذ الأوامر</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">0</div>
-        <div class="stat-lbl">حضانة لأموال العملاء</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">AES-256</div>
-        <div class="stat-lbl">تشفير أثناء التخزين</div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ============= 3. SECURITY strip ============= -->
+<section class="section reveal" id="security" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div class="security">
+<div class="lbl">Security &amp; Compliance</div>
+<h3>أمان على مستوى البنوك</h3>
+<p>عزل كامل بين الحسابات · لا حضانة أموال · تشفير end-to-end · سجل تدقيق قابل للتصدير · امتثال كامل — المؤسسة تمر بأي مراجعة تنظيمية.</p>
+<div class="security-badges">
+<span class="security-badge">SOC 2 Type II</span>
+<span class="security-badge">GDPR</span>
+<span class="security-badge">ISO 27001</span>
+<span class="security-badge">SSO / SAML</span>
+<span class="security-badge">Audit Trail</span>
+<span class="security-badge">No Custody</span>
+</div>
+</div>
+</div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal">
-  <div class="container">
-    <span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
-    <h2>جاهز للبنية التحتية لمؤسستك</h2>
-    <p>تواصل معنا لمناقشة متطلبات الأمان والامتثال الخاصة بمؤسستك. مراجعة طلب يدوية.</p>
-    <a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a>
-  </div>
-</section>
+<section class="cta-section reveal" id="cta"><div class="container">
+<span class="section-tag" style="justify-content:center">وصول مؤسسي</span>
+<h2>منظومة جاهزة · لا ميزات</h2>
+<p>اطلب عرضاً مؤسسياً مخصصاً لقطاعك — Banks، Funds، Brokers، Governments. كل واحد يحصل على الحل المناسب لحاجته.</p>
+<a href="mailto:contact@rouaa.ai?subject=طلب عرض مؤسسي" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب عرضاً مؤسسياً</a>
+</div></section>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="name">رؤى · ROUAA</div>
-      <div class="tagline">بنية تحتية مالية حرجة — قابل للدفاع أمام أي لجنة استثمار.</div>
-      <div class="meta">v1.0 · المؤسسي · يوليو 2026</div>
-    </div>
-    <div class="footer-col">
-      <h4>المنصة</h4>
-      <ul>
-        <li><a href="news.html">رؤى الأخبار</a></li>
-        <li><a href="core.html">رؤى المحرك</a></li>
-        <li><a href="trade.html">رؤى التداول</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>المؤسسات</h4>
-      <ul>
-        <li><a href="api.html">واجهة برمجة REST</a></li>
-        <li><a href="enterprise.html">الأمان</a></li>
-        <li><a href="index.html#cta">اطلب وصولاً</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>الشركة</h4>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="#">من نحن</a></li>
-        <li><a href="mailto:contact@rouaa.ai">تواصل</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span>
-    <span>contact@rouaa.ai · @rouaa_ai</span>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">Enterprise Solutions — لمن نصمم؟</div><div class="meta">v18 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنتجات</h4><ul><li><a href="news.html">رؤى News</a></li><li><a href="trade.html">رؤى Trade</a></li><li><a href="api.html">Intelligence APIs</a></li><li><a href="white-label.html">White Label</a></li></ul></div><div class="footer-col"><h4>الحلول</h4><ul><li><a href="enterprise.html">المؤسسات</a></li><li><a href="#security">الأمان</a></li><li><a href="#cta">اطلب عرضاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});

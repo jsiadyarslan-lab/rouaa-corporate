@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى التداول — كيف تتحول المعرفة إلى قرار وتنفيذ</title>
-<meta name="description" content="من الفهم الموثوق إلى التنفيذ القابل للدفاع. كل صفقة لها سبب، كل سبب له دليل.">
+<title>رؤى Trade — Decision & Execution Intelligence Platform</title>
+<meta name="description" content="رؤى Trade منصة قرار وتنفيذ — من المعلومة إلى الاستدلال إلى المخاطرة إلى القرار إلى التنفيذ إلى التعلّم. مدعوم بـ ROUAA Intelligence Core.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--emerald:#34D399;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;--p-color:var(--emerald)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -27,7 +27,6 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}.btn-trade:hover{background:var(--gold-dim)}
 
 .nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
@@ -36,85 +35,65 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+.hero{position:relative;padding:6rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,rgba(52,211,153,.12),transparent 70%);z-index:0}
 .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
-.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
-.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+.hero-product-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);letter-spacing:.18em;text-transform:uppercase}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.5rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-type{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-top:.5rem}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
+.hero-powered{margin-top:1.5rem;padding:.625rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;display:inline-flex;align-items:center;gap:.625rem;flex-wrap:wrap;justify-content:center;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.05em}
+.hero-powered .lbl{color:var(--gold);font-weight:700}
+.hero-powered .item{display:inline-flex;align-items:center;gap:.2rem}
+.hero-powered .item::before{content:'✓';color:var(--emerald);font-size:.75rem}
 
-/* Terminal */
-.terminal{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.t-bar{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border)}
-.t-dot{width:10px;height:10px;border-radius:50%;background:var(--border)}.t-dot.r{background:#FF5F57}.t-dot.y{background:#FEBC2E}.t-dot.g{background:#28C840}
-.t-title{margin:0 auto;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.t-live{display:flex;align-items:center;gap:.3rem;font-family:var(--font-mono);font-size:.625rem;color:var(--emerald)}.t-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* === Decision cycle === */
+.cycle{margin-top:3rem;display:flex;flex-direction:column;gap:.5rem;max-width:880px;margin-left:auto;margin-right:auto}
+.cycle-step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;display:grid;grid-template-columns:32px 1fr auto;gap:1rem;align-items:center;transition:all .3s;position:relative;overflow:hidden}
+.cycle-step:hover{border-color:var(--emerald)}
+.cycle-step::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--emerald)}
+.cycle-num{font-family:var(--font-mono);font-size:.875rem;color:var(--emerald);font-weight:700}
+.cycle-body{flex:1}
+.cycle-name{font-family:var(--font-en);font-size:.9375rem;font-weight:700;color:var(--text)}.cycle-name .ar{font-family:var(--font-ar);margin-right:.5rem}
+.cycle-desc{font-size:.75rem;color:var(--text-mute);margin-top:.125rem}
+.cycle-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);padding:.2rem .5rem;background:var(--surface);border-radius:4px;white-space:nowrap}
+@media(max-width:768px){.cycle-step{grid-template-columns:1fr;gap:.4rem}.cycle-stat{justify-self:start}}
 
-/* WHY panel */
-.why{background:var(--surface);border-bottom:1px solid var(--border);padding:1.25rem 1.5rem}
-.why-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem;flex-wrap:wrap;gap:.5rem}
-.why-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase}
-.why-pair{font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-@media(max-width:768px){.why-grid{grid-template-columns:1fr 1fr;gap:.6rem}}
-.why-col{display:flex;flex-direction:column;gap:.2rem}
-.why-col-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
-.why-col-val{font-size:.875rem;font-weight:600;color:var(--text)}.why-col-val.gold{color:var(--gold)}
+/* === Applications grid === */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:all .3s}
+.card:hover{border-color:var(--emerald);transform:translateY(-2px)}
+.card-icon{width:36px;height:36px;background:rgba(52,211,153,.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--emerald);margin-bottom:.875rem}.card-icon svg{width:18px;height:18px}
+.card-name{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text)}.card-name .ar{font-family:var(--font-ar);font-size:1rem;display:block;margin-bottom:.1rem}
+.card-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-top:.4rem}
+.card-stat{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);letter-spacing:.05em}
 
-/* 3-panel */
-.t-grid{display:grid;grid-template-columns:240px 1fr 280px;gap:1px;background:var(--border)}
-@media(max-width:1024px){.t-grid{grid-template-columns:1fr}}
-.t-panel{background:var(--card);padding:1rem}
-.t-panel-h{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-soft)}
-.t-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem}.t-row:last-child{border-bottom:none}
-.t-row .k{color:var(--text-mute);font-family:var(--font-mono);font-size:.75rem}.t-row .v{color:var(--text);font-family:var(--font-mono);font-weight:600}.t-row .v.up{color:var(--emerald)}.t-row .v.down{color:var(--rose)}.t-row .v.gold{color:var(--gold)}
+/* === Evidence Chain === */
+.pe-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:680px;margin:0 auto}
+.pe-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-soft);flex-wrap:wrap;gap:1rem}
+.pe-title{font-family:var(--font-en);font-weight:700;color:var(--text);font-size:1rem}
+.pe-conf{padding:.4rem .8rem;background:var(--gold-dim);border:1px solid var(--gold);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--gold)}
+.pe-flow{display:flex;flex-direction:column;align-items:center;gap:0}
+.pe-node{width:100%;max-width:520px;padding:.875rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:1rem;transition:border-color .3s}.pe-node:hover{border-color:var(--gold)}
+.pe-node.gold{background:var(--gold-dim);border-color:var(--gold)}
+.pe-node.emerald{background:rgba(52,211,153,.08);border-color:var(--emerald)}
+.pe-node-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);width:24px;flex-shrink:0}.pe-node.emerald .pe-node-num{color:var(--emerald)}
+.pe-node-body{flex:1}.pe-node-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.125rem}.pe-node.gold .pe-node-lbl{color:var(--gold)}.pe-node.emerald .pe-node-lbl{color:var(--emerald)}
+.pe-node-val{font-size:.8125rem;color:var(--text);font-weight:600}
+.pe-connector{width:1px;height:14px;background:var(--gold);opacity:.4;margin:.05rem 0}
+.pe-footer{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
 
-/* Chart */
-.chart{background:var(--navy);padding:1rem;display:flex;flex-direction:column;gap:.5rem}
-.chart-h{display:flex;justify-content:space-between;align-items:baseline}
-.chart-pair{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
-.chart-px{font-family:var(--font-mono);font-size:1.125rem;color:var(--emerald)}
-.chart-svg{width:100%;height:220px;background:var(--card);border:1px solid var(--border-soft);border-radius:6px}
-.chart-svg path{fill:none;stroke:var(--gold);stroke-width:1.5}
-.chart-mark{fill:var(--emerald);opacity:.6}
-.chart-tabs{display:flex;gap:.25rem}.chart-tab{padding:.25rem .5rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);border-radius:3px;cursor:pointer}.chart-tab.active{background:var(--gold-dim);color:var(--gold)}
-
-/* Decision */
-.dec{background:var(--gold-dim);border:1px solid var(--gold);border-radius:8px;padding:1rem;margin-top:.5rem}
-.dec-lbl{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.4rem}
-.dec-signal{font-family:var(--font-en);font-size:1.75rem;font-weight:800;color:var(--emerald);margin-bottom:.4rem}
-.dec-reason{font-size:.8125rem;color:var(--text);margin-bottom:.6rem;line-height:1.5}
-.dec-ev{font-family:var(--font-mono);font-size:.75rem;color:var(--gold);margin-bottom:.6rem}
-.dec-execute{width:100%;padding:.7rem;background:var(--gold);color:var(--navy);border:none;border-radius:6px;font-family:var(--font-ar);font-size:.9375rem;font-weight:700;cursor:pointer;transition:background .2s}.dec-execute:hover{background:var(--gold-bright)}
-
-/* Portfolio */
-.pos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:3rem}
-.pos-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:border-color .3s}.pos-card:hover{border-color:var(--gold)}
-.pos-pair{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.5rem;display:flex;justify-content:space-between;align-items:center}
-.pos-side{font-family:var(--font-mono);font-size:.6875rem;padding:2px 6px;border-radius:3px}.pos-side.long{background:rgba(52,211,153,.15);color:var(--emerald)}.pos-side.short{background:rgba(248,113,113,.15);color:var(--rose)}
-.pos-pl{font-family:var(--font-mono);font-size:1.25rem;font-weight:600;margin-bottom:.5rem}.pos-pl.up{color:var(--emerald)}.pos-pl.down{color:var(--rose)}
-.pos-detail{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);padding:.2rem 0}
-
-/* Risk */
-.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:3rem}
-.risk-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
-.risk-lbl{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.5rem}
-.risk-val{font-family:var(--font-mono);font-size:1.75rem;font-weight:600;color:var(--gold);margin-bottom:.5rem}
-.risk-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6}
-.risk-bar{height:6px;background:var(--border);border-radius:3px;margin-top:.75rem;overflow:hidden}.risk-bar-fill{height:100%;background:var(--gold);border-radius:3px}
-
-/* Audit */
-.audit{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:800px;margin-left:auto;margin-right:auto}
-.audit-h{padding:1rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase}
-.audit-row{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;padding:.7rem 1.5rem;border-bottom:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.75rem;align-items:center}.audit-row:last-child{border-bottom:none}
-.audit-time{color:var(--text-mute);min-width:120px}.audit-msg{color:var(--text)}.audit-ok{color:var(--emerald)}
-@media(max-width:600px){.audit-row{grid-template-columns:1fr;gap:.25rem}}
-
-/* Brokers */
-.brokers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-top:2rem}
-.broker{padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center;transition:border-color .3s}.broker:hover{border-color:var(--gold)}
-.broker-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.25rem}.broker-status{font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald)}
+/* === Relationship === */
+.rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
+.rel-box.news{background:var(--card);border:1px solid var(--border)}
+.rel-box.core{background:var(--card);border:1px solid var(--border)}
+.rel-box.trade{background:rgba(52,211,153,.1);border:1px solid var(--emerald)}
+.rel-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.rel-box.trade .rel-lbl{color:var(--emerald)}
+.rel-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.rel-desc{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.rel-arrow{color:var(--emerald);font-size:1.5rem;opacity:.5;margin:.4rem 0}
 
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
 .cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
@@ -128,151 +107,106 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </head>
 <body>
 
-<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · التداول</span><span class="sub">من الفهم إلى التنفيذ</span></div></a><ul class="nav-links"><li><a href="news.html">الأخبار</a></li><li><a href="core.html">المحرك</a></li><li><a href="trade.html" class="active">التداول</a></li><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · Trade</span><span class="sub">Decision & Execution</span></div></a><ul class="nav-links"><li><a href="index.html">المنصة</a></li><li><a href="news.html">المنتجات</a></li><li><a href="enterprise.html">الحلول</a></li><li><a href="api.html">API</a></li><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
-<!-- HERO -->
+<!-- ============= HERO ============= -->
 <section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
-<div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-<h1 class="hero-h1">كيف تتحول المعرفة<br>إلى قرار وتنفيذ</h1>
-<p class="hero-sub">تعاني المؤسسات من فجوة بين الفهم والتنفيذ. رؤى تربط الاستخبارات الموثّقة بالقرار والصفقة — كل صفقة لها سبب، كل سبب له دليل، كل دليل قابل للتتبع.</p>
-<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#terminal" class="btn btn-primary">استكشف الطرفية</a><a href="news.html" class="btn btn-ghost">رؤى الأخبار</a></div>
+<div class="hero-product-num">Layer 3 · 02 · Intelligence Application</div>
+<h1 class="hero-h1">رؤى Trade</h1>
+<div class="hero-type">Decision &amp; Execution Intelligence Platform</div>
+<p class="hero-sub">ليست منصة تداول. ليست تطبيق شارت. رؤى Trade منصة قرار وتنفيذ — تأخذ الاستخبارات الموثّقة، تمرّرها عبر محرّكات القرار، تحوّلها إلى توصية، تنفّذها على وسيطك، مع دليل كامل في كل خطوة.</p>
+<div class="hero-powered">
+<span class="lbl">Powered by ROUAA Intelligence Core</span>
+<span class="item">AI Council</span>
+<span class="item">Risk Engine</span>
+<span class="item">Evidence Chain</span>
+</div>
 </div></div></section>
 
-<!-- TERMINAL -->
-<section class="section reveal" id="terminal"><div class="container">
-<span class="section-tag">طرفية القرار</span>
-<h2 class="section-h">لوحة تداول مؤسسية</h2>
-<p class="section-lead">ثلاث لوحات متكاملة: استخبارات السوق يساراً · شارت مع علامات أحداث وسطاً · لوحة القرار يميناً. فوقها: لماذا يوجد هذا المركز.</p>
-
-<div class="terminal">
-<div class="t-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><div class="t-title">رؤى · طرفية تنفيذ القرار · مباشر</div><div class="t-live">مباشر</div></div>
-
-<!-- WHY -->
-<div class="why">
-<div class="why-h"><span class="why-lbl">لماذا يوجد هذا المركز</span><span class="why-pair">EUR/USD · شراء · 0.5 لوت</span></div>
-<div class="why-grid">
-<div class="why-col"><div class="why-col-lbl">الدليل</div><div class="why-col-val">ثبات فائدة الفيدرالي</div></div>
-<div class="why-col"><div class="why-col-lbl">الاستدلال</div><div class="why-col-val">قوة الدولار المتوقعة</div></div>
-<div class="why-col"><div class="why-col-lbl">المخاطرة</div><div class="why-col-val gold">متوسطة</div></div>
-<div class="why-col"><div class="why-col-lbl">الثقة</div><div class="why-col-val gold">82%</div></div>
-<div class="why-col"><div class="why-col-lbl">التنفيذ</div><div class="why-col-val">شراء EUR/USD</div></div>
-</div>
-</div>
-
-<!-- 3 panels -->
-<div class="t-grid">
-<div class="t-panel">
-<div class="t-panel-h">استخبارات السوق</div>
-<div class="t-row"><span class="k">الزوج</span><span class="v">EUR/USD</span></div>
-<div class="t-row"><span class="k">السعر</span><span class="v up">1.0847</span></div>
-<div class="t-row"><span class="k">التغيّر</span><span class="v up">+0.42%</span></div>
-<div class="t-row"><span class="k">الفرق</span><span class="v">0.8 نقطة</span></div>
-<div class="t-panel-h" style="margin-top:1rem">سياق ذكي</div>
-<div class="t-row"><span class="k">الإشارة</span><span class="v up">شراء</span></div>
-<div class="t-row"><span class="k">الثقة</span><span class="v gold">87%</span></div>
-<div class="t-row"><span class="k">الدليل</span><span class="v">5 مصادر</span></div>
-<div class="t-panel-h" style="margin-top:1rem">محركات كلية</div>
-<div class="t-row"><span class="k">الفيدرالي</span><span class="v">ثبات 5.50%</span></div>
-<div class="t-row"><span class="k">البنك المركزي الأوروبي</span><span class="v">تخفيض مرجّح</span></div>
-<div class="t-row"><span class="k">التباعد</span><span class="v up">الدولار صاعد</span></div>
-<div class="t-panel-h" style="margin-top:1rem">المخاطرة</div>
-<div class="t-row"><span class="k">التقلب</span><span class="v">14.2%</span></div>
-<div class="t-row"><span class="k">الحد اليومي</span><span class="v">1.8%</span></div>
-<div class="t-row"><span class="k">المستوى</span><span class="v gold">متوسط</span></div>
-</div>
-
-<div class="t-panel" style="padding:0">
-<div class="chart">
-<div class="chart-h"><div><div class="chart-pair">EUR/USD</div><div class="chart-px">1.0847 ↑ +0.42%</div></div><div class="chart-tabs"><span class="chart-tab">1س</span><span class="chart-tab">4س</span><span class="chart-tab active">1ي</span><span class="chart-tab">1أ</span><span class="chart-tab">1ش</span></div></div>
-<svg class="chart-svg" viewBox="0 0 600 220" preserveAspectRatio="none">
-<line x1="0" y1="55" x2="600" y2="55" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
-<line x1="0" y1="110" x2="600" y2="110" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
-<line x1="0" y1="165" x2="600" y2="165" stroke="rgba(243,244,246,0.04)" stroke-width="1"/>
-<path d="M 0,165 L 40,160 L 80,155 L 120,163 L 160,150 L 200,145 L 240,135 L 280,140 L 320,125 L 360,120 L 400,110 L 440,115 L 480,100 L 520,95 L 560,85 L 600,80"/>
-<circle cx="200" cy="145" r="4" class="chart-mark"/><text x="200" y="133" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">الفيدرالي</text>
-<circle cx="360" cy="120" r="4" class="chart-mark"/><text x="360" y="108" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">التضخم</text>
-<circle cx="520" cy="95" r="4" class="chart-mark"/><text x="520" y="83" font-family="JetBrains Mono" font-size="8" fill="#34D399" text-anchor="middle">الوظائف</text>
-</svg>
-<div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);padding:.25rem .5rem"><span>14:32 · ثبات الفيدرالي</span><span>14:35 · تجاوز التضخم</span><span>14:38 · الوظائف قوية</span></div>
-</div>
-</div>
-
-<div class="t-panel">
-<div class="t-panel-h">ذكاء التداول</div>
-<div class="dec">
-<div class="dec-lbl">الإشارة</div><div class="dec-signal">شراء</div>
-<div class="dec-reason">تباعد الفيدرالي/البنك المركزي الأوروبي · قوة الدولار متوقعة · تباطؤ التضخم يدعم ثبات الفائدة</div>
-<div class="dec-ev">5 مصادر رسمية · 8 وثائق · 12 حقيقة</div>
-<div class="dec-lbl" style="margin-top:.6rem">الثقة</div><div style="font-family:var(--font-mono);font-size:1.5rem;color:var(--gold);font-weight:700;margin-bottom:.6rem">87%</div>
-<div class="dec-lbl">المخاطرة</div><div style="font-family:var(--font-mono);font-size:1.125rem;color:var(--text);font-weight:600;margin-bottom:.6rem">متوسطة</div>
-<button class="dec-execute">تنفيذ · 0.5 لوت</button>
-</div>
-<div style="margin-top:.8rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);text-align:center;padding:.4rem">15 فحص مخاطر · زمن التنفيذ 4.2مللي · سجل تدقيق نشط</div>
-</div>
-</div>
-</div>
-</div></section>
-
-<!-- PORTFOLIO -->
+<!-- ============= 1. THE QUESTION ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<span class="section-tag">ذكاء المحفظة</span>
-<h2 class="section-h">كل مركز مرتبط بقراره</h2>
-<p class="section-lead">ليست أرقاماً مجردة — كل مركز له سبب ودليل. الربح/الخسارة، التعرّض، المخاطر في واجهة واحدة.</p>
-<div class="pos-grid">
-<div class="pos-card"><div class="pos-pair">EUR/USD <span class="pos-side long">شراء 0.5</span></div><div class="pos-pl up">+6,234 دولار</div><div class="pos-detail"><span>الدخول</span><span>1.0825</span></div><div class="pos-detail"><span>الحالي</span><span>1.0847</span></div><div class="pos-detail"><span>وقف/هدف</span><span>1.0780 / 1.0900</span></div></div>
-<div class="pos-card"><div class="pos-pair">XAU/USD <span class="pos-side long">شراء 0.3</span></div><div class="pos-pl up">+3,847 دولار</div><div class="pos-detail"><span>الدخول</span><span>2,341</span></div><div class="pos-detail"><span>الحالي</span><span>2,389</span></div><div class="pos-detail"><span>وقف/هدف</span><span>2,320 / 2,420</span></div></div>
-<div class="pos-card"><div class="pos-pair">GBP/JPY <span class="pos-side short">بيع 0.2</span></div><div class="pos-pl down">-1,247 دولار</div><div class="pos-detail"><span>الدخول</span><span>198.45</span></div><div class="pos-detail"><span>الحالي</span><span>198.92</span></div><div class="pos-detail"><span>وقف/هدف</span><span>199.50 / 197.80</span></div></div>
-<div class="pos-card"><div class="pos-pair">BTC/USD <span class="pos-side long">شراء 0.1</span></div><div class="pos-pl up">+2,180 دولار</div><div class="pos-detail"><span>الدخول</span><span>63,420</span></div><div class="pos-detail"><span>الحالي</span><span>65,600</span></div><div class="pos-detail"><span>وقف/هدف</span><span>61,500 / 68,000</span></div></div>
+<div style="text-align:center;max-width:780px;margin:0 auto">
+<span class="section-tag" style="justify-content:center">السؤال الذي يجيب عنه</span>
+<h2 class="section-h" style="margin:0 auto 1rem;color:var(--emerald)">كيف أتخذ القرار وأنفّذه؟</h2>
+<p class="section-lead" style="margin:0 auto">الفجوة بين الفهم والتنفيذ هي سبب خسارة المؤسسات. رؤى Trade يربط الاستخبارات بالقرار، والقرار بالتنفيذ، والتنفيذ بالتعلّم — دورة كاملة، لا صفقة مفردة.</p>
 </div>
 </div></section>
 
-<!-- RISK -->
+<!-- ============= 2. DECISION CYCLE ============= -->
 <section class="section reveal"><div class="container">
-<span class="section-tag">محرّك المخاطر</span>
-<h2 class="section-h">إدارة مخاطر استخباراتية</h2>
-<p class="section-lead">درجة مخاطر المحفظة · التعرّض · السحب · الارتباط — كلها مرتبطة بكل مركز.</p>
-<div class="risk-grid">
-<div class="risk-card"><div class="risk-lbl">درجة مخاطر المحفظة</div><div class="risk-val">42 / 100</div><div class="risk-desc">منخفض-متوسط · التنويع جيد</div><div class="risk-bar"><div class="risk-bar-fill" style="width:42%"></div></div></div>
-<div class="risk-card"><div class="risk-lbl">إجمالي التعرّض</div><div class="risk-val">84,200 دولار</div><div class="risk-desc">6.7% من المحفظة · ضمن الحدود</div><div class="risk-bar"><div class="risk-bar-fill" style="width:6.7%;background:var(--emerald)"></div></div></div>
-<div class="risk-card"><div class="risk-lbl">أقصى سحب (30 يوم)</div><div class="risk-val">-3.2%</div><div class="risk-desc">ضمن الحدود · أقل من المتوقع</div><div class="risk-bar"><div class="risk-bar-fill" style="width:32%;background:var(--emerald)"></div></div></div>
-<div class="risk-card"><div class="risk-lbl">مخاطرة الارتباط</div><div class="risk-val">0.34</div><div class="risk-desc">منخفض · المراكز غير مترابطة</div><div class="risk-bar"><div class="risk-bar-fill" style="width:34%;background:var(--emerald)"></div></div></div>
+<span class="section-tag">دورة القرار · Decision Cycle</span>
+<h2 class="section-h">ست مراحل · لا تنفيذ مفرد</h2>
+<p class="section-lead">رؤى Trade ليست «نفّذ أمر شراء». هي دورة كاملة — من المعلومة إلى التعلّم. كل مرحلة تبني على ما قبلها، وكل مرحلة موثّقة.</p>
+
+<div class="cycle">
+<div class="cycle-step"><div class="cycle-num">01</div><div class="cycle-body"><div class="cycle-name"><span class="ar">المعلومة</span>Information</div><div class="cycle-desc">استخبارات موثّقة من Layer 1 + Layer 2A</div></div><div class="cycle-stat">5 مصادر</div></div>
+<div class="cycle-step"><div class="cycle-num">02</div><div class="cycle-body"><div class="cycle-name"><span class="ar">الاستدلال</span>Reasoning</div><div class="cycle-desc">AI Council يحلل التأثير السوقي المحتمل</div></div><div class="cycle-stat">10 أدوار</div></div>
+<div class="cycle-step"><div class="cycle-num">03</div><div class="cycle-body"><div class="cycle-name"><span class="ar">المخاطرة</span>Risk</div><div class="cycle-desc">تقييم التقلب، التعرّض، الارتباط، السحب</div></div><div class="cycle-stat">15 فحص</div></div>
+<div class="cycle-step"><div class="cycle-num">04</div><div class="cycle-body"><div class="cycle-name"><span class="ar">القرار</span>Decision</div><div class="cycle-desc">توصية موثّقة بالأدلة + درجة ثقة + حدود</div></div><div class="cycle-stat">87% ثقة</div></div>
+<div class="cycle-step"><div class="cycle-num">05</div><div class="cycle-body"><div class="cycle-name"><span class="ar">التنفيذ</span>Execution</div><div class="cycle-desc">أمر على وسيطك مباشرة · سجل تدقيق كامل</div></div><div class="cycle-stat">4.2 مللي</div></div>
+<div class="cycle-step"><div class="cycle-num">06</div><div class="cycle-body"><div class="cycle-name"><span class="ar">التعلّم</span>Learning</div><div class="cycle-desc">تقييم النتيجة · تحديث النماذج · تحسين الدورة</div></div><div class="cycle-stat">loop</div></div>
 </div>
 </div></section>
 
-<!-- AUDIT -->
+<!-- ============= 3. APPLICATIONS ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">سجل التدقيق</span><h2 class="section-h" style="margin:0 auto 1rem">كل خطوة موثّقة</h2><p class="section-lead" style="margin:0 auto">من الإشارة إلى التنفيذ — سجل كامل قابل للتدقيق. كل عملية لها طابع زمني ونتيجة ودليل.</p></div>
-<div class="audit">
-<div class="audit-h">سجل تدقيق · EUR/USD · شراء · 0.5 لوت</div>
-<div class="audit-row"><span class="audit-time">14:32:18.0042</span><span class="audit-msg">أمر شراء EUR/USD · 0.5 لوت</span><span class="audit-ok">✓ نُفّذ</span></div>
-<div class="audit-row"><span class="audit-time">14:32:18.0063</span><span class="audit-msg">سعر التنفيذ: 1.0847 · انزلاق: 0.2 نقطة</span><span class="audit-ok">✓</span></div>
-<div class="audit-row"><span class="audit-time">14:32:18.0089</span><span class="audit-msg">وقف خسارة: 1.0780 · جني أرباح: 1.0900</span><span class="audit-ok">✓</span></div>
-<div class="audit-row"><span class="audit-time">14:32:18.0124</span><span class="audit-msg">الصفقة مؤرّفة · جسر MT5 · جلسة #14</span><span class="audit-ok">✓</span></div>
-<div class="audit-row"><span class="audit-time">14:32:18.0156</span><span class="audit-msg">الدليل مرتبط: بيان FOMC · 5 مصادر · ثقة 87%</span><span class="audit-ok">✓</span></div>
-<div class="audit-row"><span class="audit-time">14:32:18.0189</span><span class="audit-msg">15 فحص أمان اجتاز · زمن التنفيذ 4.2مللي</span><span class="audit-ok">✓</span></div>
+<span class="section-tag">التطبيقات · What you use</span>
+<h2 class="section-h">خمسة تطبيقات تنفيذية</h2>
+<p class="section-lead">ما يلمسه العميل مباشرة. كل تطبيق يخدم مرحلة من دورة القرار، لكن جميعها مدعومة بنفس محرّكات القرار.</p>
+
+<div class="cards">
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="card-name"><span class="ar">لوحة القرار</span>Decision Dashboard</div><div class="card-desc">مركز التحكم — المراكز، الإشارات، الأداء، المخاطر في واجهة واحدة.</div><div class="card-stat">3 لوحات · مباشر</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><div class="card-name"><span class="ar">الشارت الذكي</span>Smart Chart</div><div class="card-desc">شارت سعر مع علامات أحداث حقيقية — كل علامة مرتبطة بمصدر رسمي.</div><div class="card-stat">علامات حية · 6 أطر زمنية</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div><div class="card-name"><span class="ar">المحفظة</span>Portfolio</div><div class="card-desc">إدارة المراكز مع ربط كل مركز بالاستخبارات التي أنشأته.</div><div class="card-stat">مراكز لا محدودة</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="card-name"><span class="ar">مساعد التداول</span>Trading Assistant</div><div class="card-desc">اسأل: «لماذا هذا المركز؟» — يجيب بالدليل الكامل.</div><div class="card-stat">دليل لكل جواب</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6M7 12H1"/></svg></div><div class="card-name"><span class="ar">المختبر العصبي</span>Neural Lab</div><div class="card-desc">اختبر استراتيجيات على بيانات تاريخية مع نفس طبقة الأدلة.</div><div class="card-stat">Backtest · A/B · محاكاة</div></div>
 </div>
-<div style="text-align:center;margin-top:2rem"><a href="core.html" class="btn-trade" style="font-family:var(--font-ar)">عرض الدليل الكامل في رؤى المحرك ←</a></div>
 </div></section>
 
-<!-- BROKERS -->
+<!-- ============= 4. EVIDENCE CHAIN ============= -->
 <section class="section reveal"><div class="container">
-<span class="section-tag">طبقة التنفيذ</span>
-<h2 class="section-h">وسطاء متعددون · لا نلمس أموالك</h2>
-<p class="section-lead">الأمر ← فحص المخاطر ← التأكيد ← التنفيذ ← سجل التدقيق. التنفيذ على وسيطك مباشرة.</p>
-<div class="brokers">
-<div class="broker"><div class="broker-name">MetaTrader 5</div><div class="broker-status">● متصل</div></div>
-<div class="broker"><div class="broker-name">OANDA</div><div class="broker-status">● متصل</div></div>
-<div class="broker"><div class="broker-name">IBKR</div><div class="broker-status">● متصل</div></div>
-<div class="broker"><div class="broker-name">Binance</div><div class="broker-status">● متصل</div></div>
-<div class="broker"><div class="broker-name">Alpaca</div><div class="broker-status">● متصل</div></div>
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">سلسلة الإثبات · Evidence Chain</span><h2 class="section-h" style="margin:0 auto 1rem">كل صفقة لها سلسلة إثبات كاملة</h2><p class="section-lead" style="margin:0 auto">من الصفقة المنفّذة إلى المصدر الرسمي — كل خطوة موثّقة بطابع زمني. هذا ما يجعل كل قرار قابلاً للدفاع.</p></div>
+
+<div class="pe-box">
+<div class="pe-h"><div class="pe-title">مركز #EUR/USD-28492</div><div class="pe-conf">الثقة 87%</div></div>
+<div class="pe-flow">
+<div class="pe-node emerald"><div class="pe-node-num">01</div><div class="pe-node-body"><div class="pe-node-lbl">الصفقة · Execution</div><div class="pe-node-val">شراء EUR/USD · 0.5 لوت · 1.0847</div></div></div>
+<div class="pe-connector"></div>
+<div class="pe-node"><div class="pe-node-num">02</div><div class="pe-node-body"><div class="pe-node-lbl">القرار · Decision</div><div class="pe-node-val">إشارة شراء · ثقة 87% · مخاطرة متوسطة</div></div></div>
+<div class="pe-connector"></div>
+<div class="pe-node"><div class="pe-node-num">03</div><div class="pe-node-body"><div class="pe-node-lbl">الاستدلال · AI Council</div><div class="pe-node-val">تباعد فائدة الفيدرالي/الأوروبي · قوة الدولار</div></div></div>
+<div class="pe-connector"></div>
+<div class="pe-node gold"><div class="pe-node-num">04</div><div class="pe-node-body"><div class="pe-node-lbl">الحقيقة · Evidence Engine</div><div class="pe-node-val">سعر فائدة الفيدرالي: 5.25% – 5.50%</div></div></div>
+<div class="pe-connector"></div>
+<div class="pe-node"><div class="pe-node-num">05</div><div class="pe-node-body"><div class="pe-node-lbl">الوثيقة · Document Intelligence</div><div class="pe-node-val">بيان FOMC · 24 صفحة</div></div></div>
+<div class="pe-connector"></div>
+<div class="pe-node"><div class="pe-node-num">06</div><div class="pe-node-body"><div class="pe-node-lbl">المصدر · Official Sources</div><div class="pe-node-val">federalreserve.gov · ثقة A+</div></div></div>
+</div>
+<div class="pe-footer">
+<span>5 وثائق · 12 حقيقة · 3 أحداث</span>
+<a href="index.html#architecture" style="color:var(--gold)">عرض Architecture ←</a>
+</div>
+</div>
+</div></section>
+
+<!-- ============= 5. RELATIONSHIP ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">المنظومة الكاملة</span><h2 class="section-h" style="margin:0 auto 1rem">رؤى Trade مخرج من النظام</h2><p class="section-lead" style="margin:0 auto">رؤى Trade ليست النظام — هي مخرج منه. النظام هو Intelligence Platform كاملة. Trade أحد التطبيقات التي تستهلكه.</p></div>
+
+<div class="rel">
+<div class="rel-box news"><div class="rel-lbl">Layer 3 · كيف أفهم السوق</div><div class="rel-name">رؤى News</div><div class="rel-desc">Financial Intelligence Application</div><div style="margin-top:.6rem"><a href="news.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box core"><div class="rel-lbl">Layer 0 · ما هي رؤى</div><div class="rel-name">Intelligence Platform</div><div class="rel-desc">المنظومة الكاملة · 5 طبقات</div><div style="margin-top:.6rem"><a href="index.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف المنصة ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box trade"><div class="rel-lbl">Layer 3 · كيف أتخذ القرار</div><div class="rel-name">رؤى Trade</div><div class="rel-desc">Decision &amp; Execution Platform</div></div>
 </div>
 </div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>تداول على وسيطك — الذكاء من رؤى</h2><p>اطلب وصولاً مؤسسياً لتشغيل طبقة تنفيذ القرار على بنيتك.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>دورة قرار كاملة · لا صفقة مفردة</h2><p>اطلب وصولاً مؤسسياً لتجربة رؤى Trade — من المعلومة إلى التعلّم، مع دليل في كل خطوة.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
-<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">من الفهم إلى التنفيذ — كل صفقة لها سبب، كل سبب له دليل.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">رؤى Trade — Decision &amp; Execution Intelligence Platform.</div><div class="meta">v18 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنتجات</h4><ul><li><a href="news.html">رؤى News</a></li><li><a href="trade.html">رؤى Trade</a></li><li><a href="api.html">Intelligence APIs</a></li><li><a href="white-label.html">White Label</a></li></ul></div><div class="footer-col"><h4>الحلول</h4><ul><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});

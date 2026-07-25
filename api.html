@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى واجهة البرمجة — طبقة التكامل المؤسسي</title>
-<meta name="description" content="دمج الاستخبارات المالية في أنظمتك. واجهة REST تفاعلية + Webhooks + Streaming + SDK.">
+<title>رؤى Intelligence APIs — Data & Intelligence Access</title>
+<meta name="description" content="رؤى Intelligence APIs منتج كامل (مثل Bloomberg Data License / Refinitiv APIs) — بيانات واستخبارات من نفس المنظومة، بنفس طبقات الأدلة.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--emerald:#34D399;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;--p-color:var(--gold)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -35,54 +35,66 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
+.hero{position:relative;padding:6rem 0 3rem;overflow:hidden;text-align:center}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
 .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
-.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:22ch}
-.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+.hero-product-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase}
+.hero-h1{font-size:clamp(2rem,4.5vw,3.25rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-type{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;margin-top:.5rem}
+.hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:60ch;line-height:1.7}
+.hero-powered{margin-top:1.5rem;padding:.625rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;display:inline-flex;align-items:center;gap:.625rem;flex-wrap:wrap;justify-content:center;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.05em}
+.hero-powered .lbl{color:var(--gold);font-weight:700}
+.hero-powered .item{display:inline-flex;align-items:center;gap:.2rem}
+.hero-powered .item::before{content:'✓';color:var(--emerald);font-size:.75rem}
 
-/* API Explorer */
-.api-explorer{margin-top:3rem;display:grid;grid-template-columns:340px 1fr;gap:1rem;max-width:1000px;margin-left:auto;margin-right:auto}
-@media(max-width:900px){.api-explorer{grid-template-columns:1fr}}
-.api-eps{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.75rem}
-.api-eps-h{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);padding:.5rem .65rem .75rem}
-.api-ep{display:flex;align-items:center;gap:.6rem;padding:.5rem .65rem;border-radius:6px;cursor:pointer;transition:background .2s;font-family:var(--font-mono);font-size:.75rem;margin-bottom:.2rem}
-.api-ep:hover{background:rgba(255,255,255,.03)}.api-ep.active{background:var(--gold-dim)}
-.api-method{font-size:.625rem;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.05em;min-width:50px;text-align:center}
-.api-method.GET{background:rgba(52,211,153,.15);color:var(--emerald)}.api-method.POST{background:rgba(200,169,81,.15);color:var(--gold)}.api-method.STREAM{background:rgba(96,165,250,.15);color:var(--blue)}
-.api-path{color:var(--text-dim);direction:ltr}
-.api-resp{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left;min-height:340px}
-.api-resp .key{color:var(--gold)}.api-resp .str{color:var(--emerald)}.api-resp .num{color:var(--blue)}.api-resp .cmt{color:var(--text-mute)}
+/* === Comparison to market === */
+.cmp{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;max-width:780px;margin-left:auto;margin-right:auto}
+.cmp-h{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;text-align:center}
+.cmp-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;padding:.625rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem;align-items:center}.cmp-row:last-child{border-bottom:none}
+.cmp-row.head{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
+.cmp-row .lbl{color:var(--text-dim)}
+.cmp-row .val{color:var(--text);font-weight:600;text-align:center}
+.cmp-row .val.gold{color:var(--gold)}
+@media(max-width:768px){.cmp-row{grid-template-columns:1fr;gap:.2rem}.cmp-row.head{display:none}}
 
-/* Code samples */
-.code-tabs{display:flex;gap:.25rem;margin-bottom:.75rem}
-.code-tab{padding:.4rem .875rem;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .2s}
-.code-tab.active{background:var(--gold-dim);color:var(--gold);border-color:var(--gold)}
-.code-block{background:var(--navy);border:1px solid var(--border);border-radius:8px;padding:1.25rem;font-family:var(--font-mono);font-size:.8125rem;line-height:1.7;overflow-x:auto;direction:ltr;text-align:left;max-width:800px;margin:0 auto}
-.code-block .k{color:#c678dd}.code-block .s{color:var(--emerald)}.code-block .c{color:var(--text-mute)}.code-block .f{color:var(--blue)}
+/* === Access methods === */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:all .3s}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card-icon{width:36px;height:36px;background:var(--gold-dim);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:.875rem}.card-icon svg{width:18px;height:18px}
+.card-name{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text)}.card-name .ar{font-family:var(--font-ar);font-size:1rem;display:block;margin-bottom:.1rem}
+.card-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-top:.4rem}
+.card-stat{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.05em}
 
-/* Features */
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:3rem}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s}.feat-card:hover{border-color:var(--gold)}
-.feat-card-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.18em;margin-bottom:.5rem}
-.feat-card-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.4rem}
-.feat-card-desc{font-size:.8125rem;color:var(--text-dim);line-height:1.6}
+/* === API Explorer === */
+.explorer{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:900px;margin-left:auto;margin-right:auto}
+.explorer-h{padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.explorer-method{padding:.2rem .5rem;background:rgba(52,211,153,.15);color:var(--emerald);border-radius:3px;font-family:var(--font-mono);font-size:.625rem;font-weight:700;letter-spacing:.05em}
+.explorer-url{font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim);flex:1;direction:ltr;text-align:left}
+.explorer-tabs{display:flex;gap:.25rem;margin-top:.5rem;width:100%;flex-wrap:wrap}
+.explorer-tab{padding:.3rem .625rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);background:var(--surface);border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all .2s}
+.explorer-tab.active{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+.explorer-body{padding:1rem;font-family:var(--font-mono);font-size:.75rem;line-height:1.7;color:var(--text-dim);direction:ltr;text-align:left;overflow-x:auto}
+.explorer-body .k{color:var(--gold)}.explorer-body .s{color:var(--emerald)}.explorer-body .n{color:var(--blue)}
 
-/* Deployment */
-.deploy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}@media(max-width:900px){.deploy-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.deploy-grid{grid-template-columns:1fr}}
-.deploy-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;transition:border-color .3s}.deploy-card:hover{border-color:var(--gold)}
-.deploy-card-name{font-family:var(--font-en);font-weight:700;color:var(--text);margin-bottom:.5rem}
-.deploy-card-desc{font-size:.8125rem;color:var(--text-dim);margin-bottom:.75rem}
-.deploy-card-stat{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);padding-top:.75rem;border-top:1px solid var(--border-soft)}
+/* === Code sample === */
+.code{margin-top:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:900px;margin-left:auto;margin-right:auto}
+.code-h{padding:.6rem 1rem;background:var(--surface);border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center}
+.code-lang{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.05em}
+.code-body{padding:1rem;font-family:var(--font-mono);font-size:.75rem;line-height:1.7;color:var(--text-dim);direction:ltr;text-align:left;overflow-x:auto}
+.code-body .k{color:var(--gold)}.code-body .s{color:var(--emerald)}.code-body .c{color:var(--text-mute)}
 
-/* Auth */
-.auth-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;max-width:700px;margin-left:auto;margin-right:auto}
-.auth-row{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font-size:.8125rem;align-items:center}
-.auth-row:last-child{border-bottom:none}
-.auth-k{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
-.auth-v{font-family:var(--font-mono);font-size:.75rem;color:var(--text)}
-.auth-v.gold{color:var(--gold)}
+/* === Relationship === */
+.rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
+.rel-box.api{background:var(--gold-dim);border:1px solid var(--gold)}
+.rel-box.core{background:var(--card);border:1px solid var(--border)}
+.rel-box.wl{background:var(--card);border:1px solid var(--border)}
+.rel-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.rel-box.api .rel-lbl{color:var(--gold)}
+.rel-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.rel-desc{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.rel-arrow{color:var(--gold);font-size:1.5rem;opacity:.5;margin:.4rem 0}
 
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
 .cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
@@ -96,274 +108,135 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </head>
 <body>
 
-<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · واجهة برمجة</span><span class="sub">طبقة التكامل</span></div></a><ul class="nav-links"><li><a href="news.html">الأخبار</a></li><li><a href="core.html">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html" class="active">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · Intelligence APIs</span><span class="sub">Platform Access</span></div></a><ul class="nav-links"><li><a href="index.html">المنصة</a></li><li><a href="news.html">المنتجات</a></li><li><a href="enterprise.html">الحلول</a></li><li><a href="api.html" class="active">API</a></li><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
-<!-- HERO -->
+<!-- ============= HERO ============= -->
 <section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
-<div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-<h1 class="hero-h1">كيف تصبح رؤى<br>جزءاً من بنية مؤسستك</h1>
-<p class="hero-sub">تعاني المؤسسات من فجوة بين البيانات والقرار. رؤى توفّر كل طبقات الاستخبارات برمجياً — واجهة REST · Webhooks · Streaming · SDK — مع دليل لكل استجابة.</p>
-<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#explorer" class="btn btn-primary">مستكشف الواجهة</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
+<div class="hero-product-num">Layer 3 · 03 · Platform Access</div>
+<h1 class="hero-h1">رؤى Intelligence APIs</h1>
+<div class="hero-type">Data &amp; Intelligence Access · Like Bloomberg Data License</div>
+<p class="hero-sub">ليست مجرد «APIs». رؤى Intelligence APIs منتج كامل — بيانات واستخبارات من نفس المنظومة، بنفس طبقات الأدلة، عبر خمس طرق تكامل. المؤسسة تبني عليها، لا تربط بها فقط.</p>
+<div class="hero-powered">
+<span class="lbl">Powered by ROUAA Intelligence Core</span>
+<span class="item">Official Sources</span>
+<span class="item">Knowledge Graph</span>
+<span class="item">Evidence Chain</span>
+</div>
 </div></div></section>
 
-<!-- API EXPLORER — interactive -->
-<section class="section reveal" id="explorer"><div class="container">
-<span class="section-tag">مستكشف الواجهة — تفاعلي</span>
-<h2 class="section-h">جرّب المسارات مباشرة</h2>
-<p class="section-lead">8 مسارات أساسية تغطي المصادر والحقائق والأدلة والمجلس الذكي والإشارات والتنفيذ والمحفظة. اضغط أي مسار لرؤية الاستجابة.</p>
-
-<div class="api-explorer">
-<div class="api-eps">
-<div class="api-eps-h">المسارات</div>
-<div class="api-ep active"><span class="api-method GET">GET</span><span class="api-path">/v1/sources</span></div>
-<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/facts</span></div>
-<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/evidence/:id</span></div>
-<div class="api-ep"><span class="api-method POST">POST</span><span class="api-path">/v1/council/ask</span></div>
-<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/signals</span></div>
-<div class="api-ep"><span class="api-method STREAM">STREAM</span><span class="api-path">/v1/stream</span></div>
-<div class="api-ep"><span class="api-method POST">POST</span><span class="api-path">/v1/execute</span></div>
-<div class="api-ep"><span class="api-method GET">GET</span><span class="api-path">/v1/portfolio</span></div>
+<!-- ============= 1. THE QUESTION ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;max-width:780px;margin:0 auto">
+<span class="section-tag" style="justify-content:center">السؤال الذي يجيب عنه</span>
+<h2 class="section-h" style="margin:0 auto 1rem;color:var(--gold)">كيف أدمج استخبارات رؤى في بنيتي؟</h2>
+<p class="section-lead" style="margin:0 auto">المؤسسة لا تريد «واجهة برمجة». تريد ترخيص بيانات واستخبارات — مثل Bloomberg Data License أو Refinitiv APIs. هذا ما تقدمه رؤى Intelligence APIs.</p>
 </div>
-<div class="api-resp" id="apiResp"><span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
-{
-  <span class="key">"total"</span>: <span class="num">411</span>,
-  <span class="key">"sources"</span>: [
-    {
-      <span class="key">"id"</span>: <span class="str">"fed"</span>,
-      <span class="key">"name"</span>: <span class="str">"Federal Reserve"</span>,
-      <span class="key">"type"</span>: <span class="str">"central_bank"</span>,
-      <span class="key">"trust"</span>: <span class="str">"A+"</span>,
-      <span class="key">"url"</span>: <span class="str">"federalreserve.gov"</span>,
-      <span class="key">"last_update"</span>: <span class="str">"2026-07-24T14:32:18Z"</span>
-    },
-    {
-      <span class="key">"id"</span>: <span class="str">"ecb"</span>,
-      <span class="key">"name"</span>: <span class="str">"European Central Bank"</span>,
-      <span class="key">"type"</span>: <span class="str">"central_bank"</span>,
-      <span class="key">"trust"</span>: <span class="str">"A+"</span>
-    }
-  ],
-  <span class="key">"rate_limit"</span>: <span class="num">1000</span>,
-  <span class="key">"remaining"</span>: <span class="num">987</span>
+</div></section>
+
+<!-- ============= 2. WHAT MAKES IT A PRODUCT (not just APIs) ============= -->
+<section class="section reveal"><div class="container">
+<span class="section-tag">لماذا هو منتج · Why it's a product</span>
+<h2 class="section-h">ليس APIs · بل ترخيص استخبارات</h2>
+<p class="section-lead">الفرق بين «APIs» و «Intelligence APIs» هو الفرق بين طريقة اتصال ومنتج كامل. رؤى Intelligence APIs يسلّم البيانات + الاستخبارات + سلسلة الأدلة — لا JSON فقط.</p>
+
+<div class="cmp">
+<div class="cmp-h">مقارنة سريعة</div>
+<div class="cmp-row head"><div class="lbl">الميزة</div><div class="val">APIs عادية</div><div class="val gold">رؤى Intelligence APIs</div></div>
+<div class="cmp-row"><div class="lbl">البيانات الخام</div><div class="val">✓</div><div class="val gold">✓</div></div>
+<div class="cmp-row"><div class="lbl">الاستخبارات الموثّقة</div><div class="val">✗</div><div class="val gold">✓</div></div>
+<div class="cmp-row"><div class="lbl">سلسلة الأدلة لكل حقيقة</div><div class="val">✗</div><div class="val gold">✓</div></div>
+<div class="cmp-row"><div class="lbl">درجة الثقة لكل استخبارات</div><div class="val">✗</div><div class="val gold">✓</div></div>
+<div class="cmp-row"><div class="lbl">رسم المعرفة التفاعلي</div><div class="val">✗</div><div class="val gold">✓</div></div>
+<div class="cmp-row"><div class="lbl">SLA مؤسسي + دعم مخصص</div><div class="val">—</div><div class="val gold">✓</div></div>
+</div>
+</div></section>
+
+<!-- ============= 3. ACCESS METHODS ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<span class="section-tag">طرق الوصول · Access Methods</span>
+<h2 class="section-h">خمس طرق للوصول لنفس البيانات</h2>
+<p class="section-lead">اختر ما يناسب حالتك — استعلام لمرة واحدة؟ REST. أحداث حية؟ Streaming. تكامل كود؟ SDK. تنبيهات؟ Webhooks. أمان مؤسسي؟ SSO. كلها تصل لنفس المنظومة.</p>
+
+<div class="cards">
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="card-name"><span class="ar">REST API</span>REST</div><div class="card-desc">نقاط نهاية HTTP للاستعلام عن أحداث · حقائق · وثائق · مصادر · تحليلات.</div><div class="card-stat">+120 نقطة نهاية · JSON</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div><div class="card-name"><span class="ar">البث الحي</span>Streaming</div><div class="card-desc">WebSocket لأحداث حية — أسعار · أخبار · إشارات · تنبيهات.</div><div class="card-stat">&lt; 50ms · WebSocket</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div><div class="card-name"><span class="ar">مجموعة التطوير</span>SDK</div><div class="card-desc">مكتبات رسمية لـ Python · JavaScript · Go · Java · Rust.</div><div class="card-stat">5 لغات · مكتبات رسمية</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="card-name"><span class="ar">الخطافات</span>Webhooks</div><div class="card-desc">تنبيهات HTTP مفعّلة بالحدث — 14 نوع حدث · إعادة محاولة تلقائية.</div><div class="card-stat">14 نوع حدث · retries</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="card-name"><span class="ar">المصادقة</span>Authentication</div><div class="card-desc">OAuth 2.0 · API Keys · JWT · SSO للمؤسسات — أمان على مستوى البنوك.</div><div class="card-stat">4 طرق · SOC2 · GDPR</div></div>
+</div>
+
+<!-- API Explorer -->
+<div class="explorer">
+<div class="explorer-h">
+<span class="explorer-method">GET</span>
+<span class="explorer-url">api.rouaa.ai/v1/insights/fomc-2026-07</span>
+</div>
+<div class="explorer-tabs">
+<span class="explorer-tab active" data-tab="event">/events</span>
+<span class="explorer-tab" data-tab="fact">/facts</span>
+<span class="explorer-tab" data-tab="source">/sources</span>
+<span class="explorer-tab" data-tab="evidence">/evidence</span>
+<span class="explorer-tab" data-tab="insight">/insights</span>
+</div>
+<div class="explorer-body" id="explorerBody">{
+  <span class="k">"event_id"</span>: <span class="s">"fomc-2026-07"</span>,
+  <span class="k">"title"</span>: <span class="s">"قرار الفيدرالي · يوليو 2026"</span>,
+  <span class="k">"type"</span>: <span class="s">"monetary_policy"</span>,
+  <span class="k">"confidence"</span>: <span class="n">0.96</span>,
+  <span class="k">"source"</span>: {
+    <span class="k">"name"</span>: <span class="s">"Federal Reserve"</span>,
+    <span class="k">"url"</span>: <span class="s">"federalreserve.gov"</span>,
+    <span class="k">"trust"</span>: <span class="s">"A+"</span>
+  },
+  <span class="k">"evidence_chain"</span>: <span class="s">"/v1/evidence/fomc-2026-07"</span>
 }</div>
 </div>
-</div></section>
 
-<!-- CODE SAMPLES -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<span class="section-tag">SDK وأمثلة الكود</span>
-<h2 class="section-h">ادمج رؤى في تطبيقاتك</h2>
-<p class="section-lead">SDK رسمي لـ Python و JavaScript و Go. مثال واحد يكفي لبدء الاستهلاك — مع دليل لكل استجابة.</p>
-
-<div class="code-tabs">
-<span class="code-tab active" data-lang="python">Python</span>
-<span class="code-tab" data-lang="javascript">JavaScript</span>
-<span class="code-tab" data-lang="curl">cURL</span>
-</div>
-
-<div class="code-block" id="codeBlock"><span class="c"># تثبيت</span>
+<!-- Code sample -->
+<div class="code">
+<div class="code-h"><span class="code-lang">python</span></div>
+<div class="code-body"><span class="c"># تثبيت</span>
 <span class="k">pip install</span> rouaa-sdk
 
-<span class="c"># تهيئة</span>
+<span class="c"># استخدام</span>
 <span class="k">from</span> rouaa <span class="k">import</span> Rouaa
 
-client = <span class="f">Rouaa</span>(api_key=<span class="s">"rk_live_..."</span>)
+client = Rouaa(api_key=<span class="s">"rk_live_..."</span>)
 
-<span class="c"># الحصول على أحدث الإشارات</span>
-signals = client.signals.<span class="f">list</span>(
-    pair=<span class="s">"EUR/USD"</span>,
-    min_confidence=<span class="num">0.7</span>
-)
+<span class="c"># جلب آخر استخبارات موثّقة</span>
+insight = client.insights.get(<span class="s">"fomc-2026-07"</span>)
+<span class="k">print</span>(insight.confidence)        <span class="c"># 0.96</span>
+<span class="k">print</span>(insight.evidence_chain)    <span class="c"># [source → document → fact → evidence]</span>
 
-<span class="k">for</span> signal <span class="k">in</span> signals:
-    <span class="f">print</span>(signal.pair, signal.direction, signal.confidence)
-    <span class="c"># كل إشارة لها سلسلة أدلة كاملة</span>
-    <span class="k">for</span> evidence <span class="k">in</span> signal.evidence:
-        <span class="f">print</span>(<span class="s">f"  ← {evidence.source} · {evidence.document}"</span>)</div>
-</div></section>
-
-<!-- AUTH -->
-<section class="section reveal"><div class="container">
-<span class="section-tag">المصادقة والحدود</span>
-<h2 class="section-h">مصادقة مؤسسية</h2>
-<p class="section-lead">كل طلب يتطلب مفتاح API. الحدود تختلف حسب الخطة. المؤسسي: حدود أعلى + دعم مخصص + SDK access كامل.</p>
-
-<div class="auth-panel">
-<div class="auth-row"><span class="auth-k">المصادقة</span><span class="auth-v">Bearer Token · OAuth2</span></div>
-<div class="auth-row"><span class="auth-k">الحد المؤسسي</span><span class="auth-v gold">10,000 طلب/ساعة</span></div>
-<div class="auth-row"><span class="auth-k">الحد القياسي</span><span class="auth-v">1,000 طلب/ساعة</span></div>
-<div class="auth-row"><span class="auth-k">التشفير</span><span class="auth-v">TLS 1.3</span></div>
-<div class="auth-row"><span class="auth-k">الاستجابة</span><span class="auth-v gold">&lt; 100مللي</span></div>
-<div class="auth-row"><span class="auth-k">التنسيق</span><span class="auth-v">JSON · Streaming (SSE/WebSocket)</span></div>
+<span class="c"># اشتراك في بث حي</span>
+<span class="k">for</span> event <span class="k">in</span> client.events.stream():
+    <span class="k">print</span>(event.title, event.confidence)</div>
 </div>
 </div></section>
 
-<!-- FEATURES -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<span class="section-tag">ميزات التكامل</span>
-<h2 class="section-h">طبقات تكامل متعددة</h2>
-<p class="section-lead">REST للطلبات التقليدية · Streaming للبيانات الحية · Webhooks للأحداث · SDK لكل لغة.</p>
-
-<div class="feat-grid">
-<div class="feat-card"><div class="feat-card-num">01</div><div class="feat-card-name">واجهة REST</div><div class="feat-card-desc">وصول كامل لكل طبقات رؤى — المصادر، الحقائق، الأدلة، المجلس، الإشارات، التنفيذ، المحفظة.</div></div>
-<div class="feat-card"><div class="feat-card-num">02</div><div class="feat-card-name">بث مباشر</div><div class="feat-card-desc">بث مباشر للإشارات والأحداث — WebSocket · SSE. زمن استجابة أقل من 100مللي.</div></div>
-<div class="feat-card"><div class="feat-card-num">03</div><div class="feat-card-name">Webhooks</div><div class="feat-card-desc">تنبيهات فورية عند الأحداث الحرجة — الفيدرالي، التضخم، الوظائف. تكامل مع Slack، البريد، SMS.</div></div>
-<div class="feat-card"><div class="feat-card-num">04</div><div class="feat-card-name">SDK بايثون</div><div class="feat-card-desc">pip install rouaa-sdk · مكتبة كاملة · دعم async · type hints.</div></div>
-<div class="feat-card"><div class="feat-card-num">05</div><div class="feat-card-name">SDK جافا سكريبت</div><div class="feat-card-desc">npm install @rouaa/sdk · Node.js + المتصفح · TypeScript native.</div></div>
-<div class="feat-card"><div class="feat-card-num">06</div><div class="feat-card-name">SDK Go</div><div class="feat-card-desc">go get github.com/rouaa/rouaa-go · للأعباء العالية · concurrent native.</div></div>
-</div>
-</div></section>
-
-<!-- DEPLOYMENT -->
+<!-- ============= 4. RELATIONSHIP ============= -->
 <section class="section reveal"><div class="container">
-<span class="section-tag">النشر المؤسسي</span>
-<h2 class="section-h">أربعة خيارات نشر</h2>
-<p class="section-lead">من السحابة العامة إلى البنية التحتية الخاصة. رؤى تعمل أينما تحتاجها.</p>
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">المنظومة الكاملة</span><h2 class="section-h" style="margin:0 auto 1rem">Intelligence APIs مخرج من النظام</h2><p class="section-lead" style="margin:0 auto">رؤى Intelligence APIs ليست النظام — هي مخرج منه. النظام هو Intelligence Platform كاملة. APIs أحد طرق استهلاكه برمجياً.</p></div>
 
-<div class="deploy-grid">
-<div class="deploy-card"><div class="deploy-card-name">سحابة</div><div class="deploy-card-desc">سحابة رؤى المُدارة · أسرع بدء · صفر بنية تحتية</div><div class="deploy-card-stat">ضمان 99.9%</div></div>
-<div class="deploy-card"><div class="deploy-card-name">سحابة خاصة</div><div class="deploy-card-desc">سحابة خاصة بك · AWS / Azure / GCP · تحكم كامل بالشبكة</div><div class="deploy-card-stat">عزل VPC</div></div>
-<div class="deploy-card"><div class="deploy-card-name">على الموقع</div><div class="deploy-card-desc">على بنيتك التحتية · أعلى مستوى سيطرة · للقطاعات التنظيمية</div><div class="deploy-card-stat">جاهز للعزل الكامل</div></div>
-<div class="deploy-card"><div class="deploy-card-name">هجين</div><div class="deploy-card-desc">مزيج سحابي + على الموقع · للمتطلبات المختلطة</div><div class="deploy-card-stat">طوبولوجيا مخصصة</div></div>
+<div class="rel">
+<div class="rel-box.api"><div class="rel-lbl">Layer 3 · كيف أدمج استخبارات رؤى</div><div class="rel-name">رؤى Intelligence APIs</div><div class="rel-desc">Data &amp; Intelligence Access</div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box.core"><div class="rel-lbl">Layer 0 · ما هي رؤى</div><div class="rel-name">Intelligence Platform</div><div class="rel-desc">المنظومة الكاملة · 5 طبقات</div><div style="margin-top:.6rem"><a href="index.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف المنصة ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box.wl"><div class="rel-lbl">Layer 3 · كيف أبيع رؤى بعلامتي</div><div class="rel-name">رؤى White Label</div><div class="rel-desc">Branded Intelligence Platform</div><div style="margin-top:.6rem"><a href="white-label.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف ←</a></div></div>
 </div>
 </div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>احصل على مفاتيح واجهة برمجة مؤسسية</h2><p>اطلب وصولاً للحصول على حدود معدل أعلى، وصول SDK كامل، ودعم مؤسسي مخصص.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>ترخيص استخبارات · لا APIs فقط</h2><p>اطلب مفتاح API لتجربة REST وStreaming وSDK وWebhooks — مع سلسلة الأدلة الكاملة لكل استخبارات.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب مفتاح API</a></div></section>
 
 <!-- Footer -->
-<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">طبقة التكامل المؤسسي — كل طبقات رؤى متاحة برمجياً.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة REST</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai · @rouaa_ai</span></div></footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">رؤى Intelligence APIs — Data &amp; Intelligence Access.</div><div class="meta">v18 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنتجات</h4><ul><li><a href="news.html">رؤى News</a></li><li><a href="trade.html">رؤى Trade</a></li><li><a href="api.html">Intelligence APIs</a></li><li><a href="white-label.html">White Label</a></li></ul></div><div class="footer-col"><h4>الحلول</h4><ul><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// API Explorer
-const responses={
-0:`<span class="cmt">// GET /v1/sources — قائمة المصادر الرسمية</span>
-{
-  <span class="key">"total"</span>: <span class="num">411</span>,
-  <span class="key">"sources"</span>: [
-    { <span class="key">"id"</span>: <span class="str">"fed"</span>, <span class="key">"name"</span>: <span class="str">"Federal Reserve"</span>, <span class="key">"trust"</span>: <span class="str">"A+"</span> },
-    { <span class="key">"id"</span>: <span class="str">"ecb"</span>, <span class="key">"name"</span>: <span class="str">"European Central Bank"</span>, <span class="key">"trust"</span>: <span class="str">"A+"</span> }
-  ]
-}`,
-1:`<span class="cmt">// GET /v1/facts — الحقائق المستخرجة</span>
-{
-  <span class="key">"total"</span>: <span class="num">1247</span>,
-  <span class="key">"facts"</span>: [
-    { <span class="key">"id"</span>: <span class="str">"fed_rate_2026_07"</span>, <span class="key">"value"</span>: <span class="str">"5.50%"</span>, <span class="key">"confidence"</span>: <span class="num">0.99</span> }
-  ]
-}`,
-2:`<span class="cmt">// GET /v1/evidence/:id — دليل موثّق</span>
-{
-  <span class="key">"id"</span>: <span class="str">"ev_fed_hold_2026"</span>,
-  <span class="key">"claim"</span>: <span class="str">"Fed holds rate at 5.50%"</span>,
-  <span class="key">"source"</span>: { <span class="key">"url"</span>: <span class="str">"federalreserve.gov"</span> },
-  <span class="key">"trust"</span>: <span class="str">"A+"</span>,
-  <span class="key">"evidence_chain"</span>: <span class="num">5</span>
-}`,
-3:`<span class="cmt">// POST /v1/council/ask — اسأل المجلس الذكي</span>
-{
-  <span class="key">"question"</span>: <span class="str">"Impact of Fed hold on EUR/USD?"</span>,
-  <span class="key">"council"</span>: {
-    <span class="key">"consensus"</span>: <span class="str">"BULLISH USD"</span>,
-    <span class="key">"confidence"</span>: <span class="num">0.87</span>,
-    <span class="key">"votes"</span>: <span class="num">8</span>,
-    <span class="key">"evidence"</span>: <span class="num">5</span>
-  }
-}`,
-4:`<span class="cmt">// GET /v1/signals — الإشارات الحية</span>
-{
-  <span class="key">"signals"</span>: [
-    { <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>, <span class="key">"direction"</span>: <span class="str">"BUY"</span>, <span class="key">"confidence"</span>: <span class="num">0.87</span>, <span class="key">"evidence"</span>: <span class="num">5</span> }
-  ]
-}`,
-5:`<span class="cmt">// STREAM /v1/stream — بث مباشر</span>
-<span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"XAU/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.91</span>, <span class="key">"evidence"</span>: <span class="num">7</span>}
-
-<span class="cmt">// event: signal</span>
-<span class="key">data</span>: {<span class="key">"pair"</span>: <span class="str">"BTC/USD"</span>, <span class="key">"dir"</span>: <span class="str">"BUY"</span>, <span class="key">"conf"</span>: <span class="num">0.68</span>, <span class="key">"evidence"</span>: <span class="num">3</span>}`,
-6:`<span class="cmt">// POST /v1/execute — تنفيذ أمر</span>
-{
-  <span class="key">"order"</span>: { <span class="key">"pair"</span>: <span class="str">"EUR/USD"</span>, <span class="key">"side"</span>: <span class="str">"BUY"</span>, <span class="key">"size"</span>: <span class="num">0.5</span> },
-  <span class="key">"checks_passed"</span>: <span class="num">15</span>,
-  <span class="key">"executed"</span>: <span class="num">true</span>,
-  <span class="key">"latency_ms"</span>: <span class="num">4.2</span>,
-  <span class="key">"audit_id"</span>: <span class="str">"aud_2026_07_24_014"</span>
-}`,
-7:`<span class="cmt">// GET /v1/portfolio — المحفظة</span>
-{
-  <span class="key">"balance"</span>: <span class="num">1247832</span>,
-  <span class="key">"pnl_today"</span>: <span class="num">18427</span>,
-  <span class="key">"positions"</span>: <span class="num">5</span>,
-  <span class="key">"margin_used"</span>: <span class="num">84200</span>,
-  <span class="key">"risk_score"</span>: <span class="num">42</span>
-}`
-};
-const eps=document.querySelectorAll('.api-ep');const resp=document.getElementById('apiResp');
-eps.forEach((ep,idx)=>{ep.addEventListener('click',()=>{eps.forEach(e=>e.classList.remove('active'));ep.classList.add('active');resp.innerHTML=responses[idx]})});
-
-// Code samples
-const codeSamples={
-python:`<span class="c"># تثبيت</span>
-<span class="k">pip install</span> rouaa-sdk
-
-<span class="c"># تهيئة</span>
-<span class="k">from</span> rouaa <span class="k">import</span> Rouaa
-
-client = <span class="f">Rouaa</span>(api_key=<span class="s">"rk_live_..."</span>)
-
-<span class="c"># الحصول على أحدث الإشارات</span>
-signals = client.signals.<span class="f">list</span>(
-    pair=<span class="s">"EUR/USD"</span>,
-    min_confidence=<span class="num">0.7</span>
-)
-
-<span class="k">for</span> signal <span class="k">in</span> signals:
-    <span class="f">print</span>(signal.pair, signal.direction, signal.confidence)
-    <span class="c"># كل إشارة لها سلسلة أدلة كاملة</span>
-    <span class="k">for</span> evidence <span class="k">in</span> signal.evidence:
-        <span class="f">print</span>(<span class="s">f"  ← {evidence.source} · {evidence.document}"</span>)`,
-javascript:`<span class="c">// تثبيت</span>
-<span class="k">npm install</span> @rouaa/sdk
-
-<span class="c">// تهيئة</span>
-<span class="k">import</span> { Rouaa } <span class="k">from</span> <span class="s">'@rouaa/sdk'</span>;
-
-<span class="k">const</span> client = <span class="k">new</span> <span class="f">Rouaa</span>({ apiKey: <span class="s">'rk_live_...'</span> });
-
-<span class="c">// الحصول على أحدث الإشارات</span>
-<span class="k">const</span> signals = <span class="k">await</span> client.signals.<span class="f">list</span>({
-  pair: <span class="s">'EUR/USD'</span>,
-  minConfidence: <span class="num">0.7</span>
-});
-
-signals.<span class="f">forEach</span>(s =&gt; {
-  console.<span class="f">log</span>(s.pair, s.direction, s.confidence);
-  <span class="c">// كل إشارة لها سلسلة أدلة</span>
-  s.evidence.<span class="f">forEach</span>(e =&gt; console.<span class="f">log</span>(<span class="s">\`  ← \${e.source} · \${e.document}\`</span>));
-});`,
-curl:`<span class="c"># الحصول على المصادر</span>
-<span class="k">curl</span> -X GET https://api.rouaa.ai/v1/sources \\
-  -H <span class="s">"Authorization: Bearer rk_live_..."</span> \\
-  -H <span class="s">"Content-Type: application/json"</span>
-
-<span class="c"># الاستجابة</span>
-{
-  <span class="s">"total"</span>: 411,
-  <span class="s">"sources"</span>: [
-    { <span class="s">"id"</span>: <span class="s">"fed"</span>, <span class="s">"trust"</span>: <span class="s">"A+"</span> }
-  ]
-}
-
-<span class="c"># بث مباشر للإشارات</span>
-<span class="k">curl</span> -N https://api.rouaa.ai/v1/stream/signals \\
-  -H <span class="s">"Authorization: Bearer rk_live_..."</span>`
-};
-const codeTabs=document.querySelectorAll('.code-tab');const codeBlock=document.getElementById('codeBlock');
-codeTabs.forEach(tab=>{tab.addEventListener('click',()=>{codeTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');codeBlock.innerHTML=codeSamples[tab.dataset.lang]})});
+(function(){const tabs={event:'{\n  <span class="k">"event_id"</span>: <span class="s">"fomc-2026-07"</span>,\n  <span class="k">"title"</span>: <span class="s">"قرار الفيدرالي · يوليو 2026"</span>,\n  <span class="k">"type"</span>: <span class="s">"monetary_policy"</span>,\n  <span class="k">"confidence"</span>: <span class="n">0.96</span>,\n  <span class="k">"source"</span>: {<span class="k">"name"</span>: <span class="s">"Federal Reserve"</span>, <span class="k">"trust"</span>: <span class="s">"A+"</span>},\n  <span class="k">"evidence_chain"</span>: <span class="s">"/v1/evidence/fomc-2026-07"</span>\n}',fact:'{\n  <span class="k">"fact_id"</span>: <span class="s">"fed_rate_2026_07"</span>,\n  <span class="k">"value"</span>: <span class="s">"5.25% - 5.50%"</span>,\n  <span class="k">"extracted_from"</span>: {<span class="k">"document"</span>: <span class="s">"FOMC_2026_07.pdf"</span>, <span class="k">"page"</span>: <span class="n">2</span>, <span class="k">"paragraph"</span>: <span class="n">4</span>},\n  <span class="k">"confidence"</span>: <span class="n">0.98</span>\n}',source:'{\n  <span class="k">"source_id"</span>: <span class="s">"federalreserve.gov"</span>,\n  <span class="k">"name"</span>: <span class="s">"Federal Reserve"</span>,\n  <span class="k">"type"</span>: <span class="s">"central_bank"</span>,\n  <span class="k">"country"</span>: <span class="s">"US"</span>,\n  <span class="k">"trust"</span>: <span class="s">"A+"</span>,\n  <span class="k">"monitored"</span>: <span class="n">true</span>\n}',evidence:'{\n  <span class="k">"insight_id"</span>: <span class="s">"28492"</span>,\n  <span class="k">"claim"</span>: <span class="s">"ثبات الفيدرالي يشير إلى قوة الدولار"</span>,\n  <span class="k">"confidence"</span>: <span class="n">0.87</span>,\n  <span class="k">"chain"</span>: [\n    {<span class="k">"step"</span>: <span class="n">1</span>, <span class="k">"type"</span>: <span class="s">"fact"</span>, <span class="k">"value"</span>: <span class="s">"5.25% - 5.50%"</span>},\n    {<span class="k">"step"</span>: <span class="n">2</span>, <span class="k">"type"</span>: <span class="s">"document"</span>, <span class="k">"value"</span>: <span class="s">"FOMC_2026_07.pdf"</span>},\n    {<span class="k">"step"</span>: <span class="n">3</span>, <span class="k">"type"</span>: <span class="s">"source"</span>, <span class="k">"value"</span>: <span class="s">"federalreserve.gov"</span>}\n  ]\n}',insight:'{\n  <span class="k">"insight_id"</span>: <span class="s">"28492"</span>,\n  <span class="k">"title"</span>: <span class="s">"ثبات الفيدرالي يشير إلى قوة الدولار"</span>,\n  <span class="k">"confidence"</span>: <span class="n">0.87</span>,\n  <span class="k">"reasoning"</span>: [<span class="s">"تباعد فائدة الفيدرالي/الأوروبي"</span>, <span class="s">"قوة الدولار المتوقعة"</span>],\n  <span class="k">"evidence_count"</span>: <span class="n">5</span>\n}'};const body=document.getElementById('explorerBody');document.querySelectorAll('.explorer-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.explorer-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');body.innerHTML=tabs[tab.dataset.tab]||tabs.event;});});})();
 </script>
 </body>
 </html>

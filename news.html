@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى الأخبار — كيف نحوّل العالم المالي إلى معرفة</title>
-<meta name="description" content="رؤى تراقب المصادر المالية الرسمية وتحوّلها إلى أحداث مفهومة وتحليلات موثّقة.">
+<title>رؤى News — Financial Intelligence Application</title>
+<meta name="description" content="رؤى News تطبيق استخبارات مالية — تغذية، أبحاث، تقارير، تقويم اقتصادي، استخبارات الأصول والإعلام. مدعوم بـ ROUAA Intelligence Core.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--white:#F3F4F6;--emerald:#34D399;--rose:#EF4444;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+:root{--navy:#05070D;--surface:#0B101D;--card:#111827;--border:#1F293D;--gold:#C8A951;--gold-bright:#D4B566;--gold-dim:rgba(200,169,81,.12);--emerald:#34D399;--blue:#60a5fa;--text:#F3F4F6;--text-dim:rgba(243,244,246,.70);--text-mute:rgba(243,244,246,.42);--text-faint:rgba(243,244,246,.25);--border-soft:rgba(243,244,246,.06);--font-ar:'Cairo',sans-serif;--font-en:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;--p-color:var(--blue)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{background:var(--navy);scroll-behavior:smooth}body{font-family:var(--font-ar);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--gold);color:var(--navy)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -27,7 +27,6 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.25rem;font-family:var(--font-ar);font-size:.875rem;font-weight:600;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:var(--gold-bright)}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn-trade{background:transparent;color:var(--gold);border-color:var(--gold);font-size:.75rem;padding:.4rem .75rem}.btn-trade:hover{background:var(--gold-dim)}
 
 .nav{position:sticky;top:0;z-index:100;background:rgba(5,7,13,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}@media(max-width:768px){.nav-inner{padding:0 1.25rem;height:64px}}
@@ -36,73 +35,53 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 .nav-links{display:flex;gap:.25rem;list-style:none;flex:1;justify-content:center}.nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--text-dim);border-radius:6px;transition:color .2s,background .2s}.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(255,255,255,.03)}@media(max-width:1024px){.nav-links{display:none}}
 .nav-cta{flex-shrink:0}
 
-.hero{position:relative;padding:5rem 0 3rem;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,var(--gold-dim),transparent 70%);z-index:0}
+/* === HERO === */
+.hero{position:relative;padding:6rem 0 3rem;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 40% 30% at 50% 0%,rgba(96,165,250,.15),transparent 70%);z-index:0}
 .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
-.hero-tagline{font-family:var(--font-en);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.hero-h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;line-height:1.15;max-width:20ch}
+.hero-product-num{font-family:var(--font-mono);font-size:.6875rem;color:var(--blue);letter-spacing:.18em;text-transform:uppercase}
+.hero-h1{font-size:clamp(2.25rem,5vw,3.5rem);font-weight:800;line-height:1.15;max-width:22ch}
+.hero-type{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-top:.5rem}
 .hero-sub{font-size:1.125rem;color:var(--text-dim);max-width:55ch;line-height:1.7}
+.hero-powered{margin-top:1.5rem;padding:.625rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;display:inline-flex;align-items:center;gap:.625rem;flex-wrap:wrap;justify-content:center;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.05em}
+.hero-powered .lbl{color:var(--gold);font-weight:700}
+.hero-powered .item{display:inline-flex;align-items:center;gap:.2rem}
+.hero-powered .item::before{content:'✓';color:var(--emerald);font-size:.75rem}
 
-/* Intelligence Moment timeline */
-.im-box{margin-top:3rem;max-width:560px;margin-left:auto;margin-right:auto;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.im-h{padding:1rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);text-align:center}
-.im-h-tag{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
-.im-h-title{font-size:.875rem;color:var(--text);font-weight:600}
-.im-body{padding:1.25rem 1.5rem}
-.im-step{display:grid;grid-template-columns:70px 1fr 24px;gap:.75rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border-soft)}.im-step:last-child{border-bottom:none}
-.im-time{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);text-align:center}
-.im-action{font-size:.8125rem;color:var(--text);font-weight:500}
-.im-step.gold .im-action{color:var(--gold)}
-.im-check{width:20px;height:20px;border-radius:50%;background:var(--emerald);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:.625rem;font-weight:700}
-.im-step.gold .im-check{background:var(--gold)}
-.im-out{margin-top:1rem;padding:.875rem;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:8px;text-align:center}
-.im-out-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem}
-.im-out-val{font-size:.875rem;color:var(--text);font-weight:600}
-.im-avail{margin-top:.75rem;display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute)}
-.im-avail a{color:var(--gold)}
+/* === Apps grid === */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:all .3s}
+.card:hover{border-color:var(--blue);transform:translateY(-2px)}
+.card-icon{width:36px;height:36px;background:rgba(96,165,250,.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:.875rem}.card-icon svg{width:18px;height:18px}
+.card-name{font-family:var(--font-en);font-size:.875rem;font-weight:700;color:var(--text)}.card-name .ar{font-family:var(--font-ar);font-size:1rem;display:block;margin-bottom:.1rem}
+.card-desc{font-size:.75rem;color:var(--text-dim);line-height:1.6;margin-top:.4rem}
+.card-stat{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border-soft);font-family:var(--font-mono);font-size:.6875rem;color:var(--blue);letter-spacing:.05em}
 
-/* Pipeline */
-.pipe{margin-top:3rem;display:flex;flex-direction:column;align-items:center;max-width:500px;margin-left:auto;margin-right:auto;gap:0}
-.pipe-s{width:100%;max-width:380px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.875rem 1.5rem;text-align:center;transition:border-color .3s}.pipe-s:hover{border-color:var(--gold)}
-.pipe-s.gold{background:var(--gold-dim);border-color:rgba(200,169,81,.3)}
-.pipe-s-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.2rem}
-.pipe-s.gold .pipe-s-lbl{color:var(--gold)}
-.pipe-s-name{font-size:.875rem;font-weight:600;color:var(--text)}
-.pipe-a{color:var(--gold);opacity:.4;font-size:1rem;margin:.15rem 0}
+/* === Live feed === */
+.feed{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:900px;margin-left:auto;margin-right:auto}
+.feed-h{padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border-soft);display:flex;align-items:center;justify-content:space-between}
+.feed-h-l{font-family:var(--font-en);font-size:.8125rem;font-weight:700;color:var(--text)}
+.feed-h-r{display:flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--emerald);letter-spacing:.1em}
+.feed-h-r .dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.feed-row{display:grid;grid-template-columns:auto auto 1fr auto;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid var(--border-soft);font-size:.75rem;align-items:center}.feed-row:last-child{border-bottom:none}
+.feed-time{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);white-space:nowrap}
+.feed-src{font-family:var(--font-mono);font-size:.625rem;color:var(--blue);padding:2px 6px;background:rgba(96,165,250,.1);border-radius:3px;letter-spacing:.05em;white-space:nowrap}
+.feed-msg{color:var(--text-dim);line-height:1.5}
+.feed-conf{font-family:var(--font-mono);font-size:.625rem;color:var(--gold);padding:2px 6px;background:var(--gold-dim);border-radius:3px;white-space:nowrap}
+@media(max-width:768px){.feed-row{grid-template-columns:1fr 1fr;gap:.4rem;font-size:.6875rem}.feed-msg{grid-column:1/3;order:3}}
 
-/* Products */
-.rp-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}@media(max-width:900px){.rp-grid{grid-template-columns:1fr}}
-.rp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .3s}.rp-card:hover{border-color:var(--gold)}
-.rp-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
-.rp-h{font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:1rem}
-.rp-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}.rp-list li{font-size:.875rem;color:var(--text-dim);padding-right:1rem;position:relative}.rp-list li::before{content:'←';position:absolute;right:0;color:var(--gold);opacity:.6}
-
-/* Evidence */
-.ev-panel{margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:650px;margin-left:auto;margin-right:auto}
-.ev-h{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
-.ev-tag{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.375rem}
-.ev-title{font-size:1.0625rem;font-weight:700;color:var(--text)}
-.ev-body{padding:1.5rem}
-.ev-row{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font-size:.875rem;align-items:center}.ev-row:last-child{border-bottom:none}
-@media(max-width:600px){.ev-row{grid-template-columns:1fr;gap:.2rem}}
-.ev-k{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
-.ev-v{color:var(--text);font-weight:500}.ev-v.gold{color:var(--gold);font-family:var(--font-mono);font-weight:600}.ev-v .check{color:var(--emerald);margin-left:.25rem}
-.ev-footer{padding:1rem 1.5rem;background:var(--surface);border-top:1px solid var(--border);text-align:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mute)}
-
-/* Trust strip */
-.trust-strip{margin-top:2.5rem;max-width:600px;margin-left:auto;margin-right:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;text-align:center}
-.ts-cell{padding:.75rem .5rem;background:var(--card);border:1px solid var(--border);border-radius:8px}
-.ts-check{color:var(--emerald);font-size:.875rem;margin-bottom:.2rem}
-.ts-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase}
-
-/* Trade connection */
-.tc-box{margin-top:3rem;max-width:550px;margin-left:auto;margin-right:auto;background:var(--gold-dim);border:1px solid rgba(200,169,81,.3);border-radius:12px;padding:1.5rem}
-.tc-title{font-family:var(--font-mono);font-size:.6875rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;text-align:center}
-.tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}@media(max-width:500px){.tc-grid{grid-template-columns:1fr 1fr}}
-.tc-cell{text-align:center;padding:.6rem;background:var(--card);border-radius:6px}
-.tc-cell-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
-.tc-cell-val{font-family:var(--font-mono);font-size:.8125rem;font-weight:600;color:var(--text)}.tc-cell-val.up{color:var(--emerald)}.tc-cell-val.gold{color:var(--gold)}
-.tc-link{text-align:center}
+/* === Relationship === */
+.rel{margin-top:3rem;max-width:600px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:center;gap:0}
+.rel-box{width:100%;max-width:380px;padding:1.25rem;border-radius:12px;text-align:center}
+.rel-box.news{background:rgba(96,165,250,.1);border:1px solid var(--blue)}
+.rel-box.core{background:var(--card);border:1px solid var(--border)}
+.rel-box.trade{background:var(--card);border:1px solid var(--border)}
+.rel-lbl{font-family:var(--font-mono);font-size:.625rem;color:var(--text-mute);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.rel-box.news .rel-lbl{color:var(--blue)}
+.rel-name{font-family:var(--font-en);font-size:1.125rem;font-weight:700;color:var(--text)}
+.rel-desc{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.rel-arrow{color:var(--blue);font-size:1.5rem;opacity:.5;margin:.4rem 0}
 
 .cta-section{text-align:center;padding:5rem 0;background:var(--surface);border-top:1px solid var(--border-soft)}
 .cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}.cta-section p{color:var(--text-dim);max-width:50ch;margin:0 auto 2rem;font-size:1.125rem}
@@ -116,115 +95,75 @@ h1,h2,h3,h4{font-family:var(--font-ar);font-weight:700;line-height:1.2;letter-sp
 </head>
 <body>
 
-<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · الأخبار</span><span class="sub">نافذة المؤسسة</span></div></a><ul class="nav-links"><li><a href="news.html" class="active">الأخبار</a></li><li><a href="core.html">المحرك</a></li><li><a href="trade.html">التداول</a></li><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">المؤسسات</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><div class="nav-brand-logo">R</div><div class="nav-brand-text"><span class="name">رؤى · News</span><span class="sub">Intelligence Application</span></div></a><ul class="nav-links"><li><a href="index.html">المنصة</a></li><li><a href="news.html" class="active">المنتجات</a></li><li><a href="enterprise.html">الحلول</a></li><li><a href="api.html">API</a></li><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li></ul><div class="nav-cta"><a href="index.html#cta" class="btn btn-primary">اطلب وصولاً مؤسسياً</a></div></div></nav>
 
 <!-- ============= HERO ============= -->
 <section class="hero"><div class="hero-bg"></div><div class="container"><div class="hero-content">
-<div class="hero-tagline">كل قرار يبدأ بمعلومة موثوقة</div>
-<h1 class="hero-h1">كيف نحوّل العالم المالي<br>إلى معرفة</h1>
-<p class="hero-sub">رؤى تراقب المصادر المالية الرسمية حول العالم، وتحوّل البيانات والوثائق الاقتصادية إلى أحداث مفهومة وتحليلات موثّقة تساعد المؤسسات على فهم الأسواق.</p>
-<div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center"><a href="#moment" class="btn btn-primary">شاهد لحظة الاستخبارات</a><a href="index.html" class="btn btn-ghost">العودة للرئيسية</a></div>
+<div class="hero-product-num">Layer 3 · 01 · Intelligence Application</div>
+<h1 class="hero-h1">رؤى News</h1>
+<div class="hero-type">Financial Intelligence Application</div>
+<p class="hero-sub">ليست أخباراً. ليست محتوى. رؤى News تطبيق استخبارات مالية — يأخذ البيانات الرسمية من 411 مصدر، يحوّلها إلى معرفة موثّقة عبر محرّكات المعرفة، ثم يقدّمها كاستخبارات قابلة للاستخدام في القرار.</p>
+<div class="hero-powered">
+<span class="lbl">Powered by ROUAA Intelligence Core</span>
+<span class="item">Official Sources</span>
+<span class="item">Evidence Engine</span>
+<span class="item">AI Reasoning</span>
+</div>
 </div></div></section>
 
-<!-- ============= 1. INTELLIGENCE MOMENT ============= -->
-<section class="section reveal" id="moment"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">لحظة الاستخبارات</span><h2 class="section-h" style="margin:0 auto 1rem">حدث واحد · من النشر إلى المعرفة</h2><p class="section-lead" style="margin:0 auto">قبل رؤى: بيان رسمي يُنشر ويُنسى. بعد رؤى: بيان رسمي يصبح معرفة استثمارية في ثوانٍ.</p></div>
-
-<div class="im-box">
-<div class="im-h"><div class="im-h-tag">الفيدرالي · بيان FOMC · 24 يوليو 2026</div><div class="im-h-title">من النشر إلى المعرفة — في 3.7 ثوانٍ</div></div>
-<div class="im-body">
-<div class="im-step"><span class="im-time">14:32:00</span><span class="im-action">الفيدرالي يُنشر بيان FOMC</span><div class="im-check">✓</div></div>
-<div class="im-step"><span class="im-time">+5 ثوانٍ</span><span class="im-action">رؤى تكتشف الوثيقة</span><div class="im-check">✓</div></div>
-<div class="im-step"><span class="im-time">+20 ثانية</span><span class="im-action">استخراج 12 حقيقة · تصنيف الحدث</span><div class="im-check">✓</div></div>
-<div class="im-step"><span class="im-time">+60 ثانية</span><span class="im-action">ربط الأدلة · توليد السياق السوقي</span><div class="im-check">✓</div></div>
-<div class="im-step gold"><span class="im-time">+2 دقيقة</span><span class="im-action">مذكرة استخبارات متاحة · ثقة 87%</span><div class="im-check">★</div></div>
-<div class="im-out"><div class="im-out-lbl">النتيجة</div><div class="im-out-val">معرفة استثمارية موثّقة — جاهزة للقرار</div></div>
-<div class="im-avail"><span>متاح لـ:</span><a href="api.html">واجهة البرمجة ←</a><a href="trade.html">رؤى التداول ←</a></div>
-</div>
-</div>
-</div></section>
-
-<!-- ============= 2. TRUST STRIP ============= -->
-<section class="section reveal" style="padding-top:3rem;padding-bottom:3rem;background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-<div class="container">
-<div style="text-align:center;margin-bottom:1.5rem"><span class="section-tag" style="justify-content:center">لماذا تثق</span><h2 class="section-h" style="margin:0 auto .5rem;font-size:clamp(1.5rem,2.5vw,2rem)">كل استخبارات لها أصل</h2><p class="section-lead" style="margin:0 auto">الميزة ليست «لدينا ذكاء اصطناعي». الميزة: كل نتيجة يمكن تتبّعها إلى مصدر رسمي.</p></div>
-<div class="trust-strip">
-<div class="ts-cell"><div class="ts-check">✓</div><div class="ts-lbl">مصدر</div></div>
-<div class="ts-cell"><div class="ts-check">✓</div><div class="ts-lbl">وثيقة</div></div>
-<div class="ts-cell"><div class="ts-check">✓</div><div class="ts-lbl">دليل</div></div>
-<div class="ts-cell"><div class="ts-check">✓</div><div class="ts-lbl">استدلال</div></div>
-<div class="ts-cell"><div class="ts-check">✓</div><div class="ts-lbl">طابع زمني</div></div>
-</div>
-</div>
-</section>
-
-<!-- ============= 3. PIPELINE ============= -->
-<section class="section reveal"><div class="container">
-<span class="section-tag">مسار الاستخبارات</span>
-<h2 class="section-h">من المصدر إلى المعرفة</h2>
-<p class="section-lead">ليست معالجة تقنية — قيمة في كل خطوة. كل مرحلة تحوّل البيانات الخام إلى فهم أعمق.</p>
-<div class="pipe">
-<div class="pipe-s"><div class="pipe-s-lbl">01</div><div class="pipe-s-name">مصدر رسمي</div></div>
-<div class="pipe-a">↓</div>
-<div class="pipe-s"><div class="pipe-s-lbl">02</div><div class="pipe-s-name">معلومة موثّقة</div></div>
-<div class="pipe-a">↓</div>
-<div class="pipe-s gold"><div class="pipe-s-lbl">03</div><div class="pipe-s-name">حدث مالي</div></div>
-<div class="pipe-a">↓</div>
-<div class="pipe-s"><div class="pipe-s-lbl">04</div><div class="pipe-s-name">سياق سوقي</div></div>
-<div class="pipe-a">↓</div>
-<div class="pipe-s"><div class="pipe-s-lbl">05</div><div class="pipe-s-name">معرفة استثمارية</div></div>
-</div>
-</div></section>
-
-<!-- ============= 4. PRODUCTS ============= -->
+<!-- ============= 1. THE QUESTION ============= -->
 <section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
-<span class="section-tag">منتجات الاستخبارات</span>
-<h2 class="section-h">ما الذي تتغير به طريقة عملك</h2>
-<p class="section-lead">ليست أخباراً تُقرأ — استخبارات تُتخذ بها القرارات. ثلاث طبقات تغطي احتياجات فرق الاستثمار.</p>
-<div class="rp-grid">
-<div class="rp-card"><div class="rp-tag">استخبارات السوق اليومية</div><div class="rp-h">ما يحدث اليوم</div><ul class="rp-list"><li>استخبارات يومية مباشرة</li><li>أحداث اقتصادية مع الأثر</li><li>مذكرة استخبارات لكل حدث</li></ul></div>
-<div class="rp-card"><div class="rp-tag">أبحاث مؤسسية</div><div class="rp-h">ما يعنيه للأمد البعيد</div><ul class="rp-list"><li>تقارير الاقتصاد الكلي</li><li>استخبارات الدول والقطاعات</li><li>تحليلات استراتيجية موثّقة</li></ul></div>
-<div class="rp-card"><div class="rp-tag">استخبارات إعلامية</div><div class="rp-h">ما يُوزَّع ويُستهلك</div><ul class="rp-list"><li>تقارير بصرية وإنفوجرافيك</li><li>موجزات فيديو</li><li>واجهة برمجة للتكامل</li></ul></div>
+<div style="text-align:center;max-width:780px;margin:0 auto">
+<span class="section-tag" style="justify-content:center">السؤال الذي يجيب عنه</span>
+<h2 class="section-h" style="margin:0 auto 1rem;color:var(--blue)">كيف أفهم السوق؟</h2>
+<p class="section-lead" style="margin:0 auto">المؤسسة لا تحتاج أخباراً أكثر. تحتاج استخبارات موثّقة — تعرف ما حدث، من أين نعرف، ماذا يعني، وكيف يؤثر على القرار. هذا ما يقدمه رؤى News.</p>
 </div>
 </div></section>
 
-<!-- ============= 5. EVIDENCE DETAIL ============= -->
+<!-- ============= 2. THE APPLICATIONS ============= -->
 <section class="section reveal"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">الدليل خلف كل رؤية</span><h2 class="section-h" style="margin:0 auto 1rem">«أثبت لي لماذا قلت ذلك»</h2><p class="section-lead" style="margin:0 auto">المنافسون يمكنهم بناء تحليلات ولوحات. لكن ليس بسهولة إثبات كل ادعاء. رؤى تجيب.</p></div>
-<div class="ev-panel">
-<div class="ev-h"><div class="ev-tag">رؤية #28492 · استخبارات موثّقة</div><div class="ev-title">«ثبات الفيدرالي يشير إلى قوة الدولار قريباً»</div></div>
-<div class="ev-body">
-<div class="ev-row"><span class="ev-k">المصدر</span><span class="ev-v">الفيدرالي<span class="check">✓</span></span></div>
-<div class="ev-row"><span class="ev-k">الوثيقة</span><span class="ev-v">بيان FOMC · 24 صفحة</span></div>
-<div class="ev-row"><span class="ev-k">الحقائق</span><span class="ev-v">12 حقيقة مستخرجة</span></div>
-<div class="ev-row"><span class="ev-k">الأدلة</span><span class="ev-v">5 وثائق مرتبطة</span></div>
-<div class="ev-row"><span class="ev-k">الثقة</span><span class="ev-v gold">87%</span></div>
-<div class="ev-row"><span class="ev-k">التتبّع</span><span class="ev-v">الرؤية ← الحقيقة ← الوثيقة ← المصدر الرسمي</span></div>
+<span class="section-tag">التطبيقات · What you use</span>
+<h2 class="section-h">ستة تطبيقات استخباراتية</h2>
+<p class="section-lead">ما يلمسه العميل مباشرة. ستة تطبيقات فقط — كل واحد يقدم استخبارات مالية بصيغة مختلفة، لكن جميعها مدعومة بنفس محرّكات المعرفة.</p>
+
+<div class="cards">
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div><div class="card-name"><span class="ar">تغذية الاستخبارات</span>Intelligence Feed</div><div class="card-desc">تيار حي للأحداث المالية — كل حدث مرتبط بمصدره ودرجة ثقته.</div><div class="card-stat">مباشر · 411 مصدر</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="card-name"><span class="ar">مركز الأبحاث</span>Research</div><div class="card-desc">بحث عميق عبر كل المصادر المؤرشفة — مع استخراج الحقائق تلقائياً.</div><div class="card-stat">10,000+ وثيقة</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="card-name"><span class="ar">التقارير</span>Reports</div><div class="card-desc">تقارير تحليلية مرفقة بالأدلة — قابلة للتصدير والعرض أمام لجنة استثمار.</div><div class="card-stat">219 تحليلاً مؤرشفاً</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="card-name"><span class="ar">التقويم الاقتصادي</span>Economic Calendar</div><div class="card-desc">أحداث قادمة مع التوقعات والنتائج الفعلية — مرتبطة بالمصدر الرسمي.</div><div class="card-stat">+50 حدثاً أسبوعياً</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="card-name"><span class="ar">استخبارات الأصول</span>Asset Intelligence</div><div class="card-desc">تحليل كل أصل — عملة، سهم، سلعة، سند — مرتبط بالأحداث التي تؤثر عليه.</div><div class="card-stat">+200 أصل مالي</div></div>
+<div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M10 21h4M12 17v4"/></svg></div><div class="card-name"><span class="ar">استخبارات الإعلام</span>Media Intelligence</div><div class="card-desc">فيديو، صوت، إنفوجرافيك — كل ثانية مرتبطة بمصدرها الرسمي.</div><div class="card-stat">مكتبة موثّقة كاملة</div></div>
 </div>
-<div class="ev-footer">كل ادعاء قابل للتتبّع إلى مصدر رسمي · لا قرارات مظلمة</div>
+
+<!-- Live feed demo -->
+<div class="feed">
+<div class="feed-h"><div class="feed-h-l">Intelligence Feed · مباشر</div><div class="feed-h-r"><span class="dot"></span><span>مباشر · 411 مصدر</span></div></div>
+<div class="feed-row"><span class="feed-time">14:32:18</span><span class="feed-src">الفيدرالي</span><span class="feed-msg">ثبات سعر الفائدة بين 5.25% و5.50% — بيان FOMC</span><span class="feed-conf">ثقة 96%</span></div>
+<div class="feed-row"><span class="feed-time">14:35:42</span><span class="feed-src">مكتب إحصاءات العمل</span><span class="feed-msg">CPI السنوي 2.4% — تباطؤ التضخم مؤكد</span><span class="feed-conf">ثقة 94%</span></div>
+<div class="feed-row"><span class="feed-time">14:38:09</span><span class="feed-src">وزارة العمل</span><span class="feed-msg">NFP +256k — توظيف قوي يتجاوز التوقعات</span><span class="feed-conf">ثقة 91%</span></div>
+<div class="feed-row"><span class="feed-time">14:42:33</span><span class="feed-src">البنك المركزي الأوروبي</span><span class="feed-msg">تصريح لاغارد: «المخاطر متوازنة» — إشارة لتخفيض مرجّح</span><span class="feed-conf">ثقة 78%</span></div>
+<div class="feed-row"><span class="feed-time">14:47:51</span><span class="feed-src">خزانة الولايات المتحدة</span><span class="feed-msg">منحنى العائد: 10 سنوات 4.32% — استقرار بعد البيانات</span><span class="feed-conf">ثقة 98%</span></div>
 </div>
 </div></section>
 
-<!-- ============= 6. TRADE CONNECTION ============= -->
-<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft)"><div class="container">
-<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">من الفهم إلى القرار</span><h2 class="section-h" style="margin:0 auto 1rem">الاستخبارات لا تنتهي عند المعرفة</h2><p class="section-lead" style="margin:0 auto">حدث مالي يُكتشف في رؤى الأخبار يصبح سياق تداول في رؤى التداول — طبيعياً، دون إعلان.</p></div>
-<div class="tc-box">
-<div class="tc-title">سياق التداول · حدث FOMC</div>
-<div class="tc-grid">
-<div class="tc-cell"><div class="tc-cell-lbl">الدولار</div><div class="tc-cell-val up">صاعد</div></div>
-<div class="tc-cell"><div class="tc-cell-lbl">الذهب</div><div class="tc-cell-val up">إيجابي</div></div>
-<div class="tc-cell"><div class="tc-cell-lbl">السندات</div><div class="tc-cell-val">مراقبة</div></div>
-<div class="tc-cell"><div class="tc-cell-lbl">المخاطرة</div><div class="tc-cell-val gold">متوسطة</div></div>
-</div>
-<div class="tc-link"><a href="trade.html" class="btn-trade" style="font-family:var(--font-ar)">فتح سياق التداول ←</a></div>
+<!-- ============= 3. RELATIONSHIP ============= -->
+<section class="section reveal" style="background:var(--surface);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)"><div class="container">
+<div style="text-align:center;margin-bottom:2rem"><span class="section-tag" style="justify-content:center">المنظومة الكاملة</span><h2 class="section-h" style="margin:0 auto 1rem">رؤى News مخرج من النظام</h2><p class="section-lead" style="margin:0 auto">رؤى News ليست النظام — هي مخرج منه. النظام هو Intelligence Platform كاملة. News أحد التطبيقات التي تستهلكه.</p></div>
+
+<div class="rel">
+<div class="rel-box news"><div class="rel-lbl">Layer 3 · كيف أفهم السوق</div><div class="rel-name">رؤى News</div><div class="rel-desc">Financial Intelligence Application</div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box core"><div class="rel-lbl">Layer 0 · ما هي رؤى</div><div class="rel-name">Intelligence Platform</div><div class="rel-desc">المنظومة الكاملة · 5 طبقات</div><div style="margin-top:.6rem"><a href="index.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف المنصة ←</a></div></div>
+<div class="rel-arrow">↓</div>
+<div class="rel-box trade"><div class="rel-lbl">Layer 3 · كيف أتخذ القرار</div><div class="rel-name">رؤى Trade</div><div class="rel-desc">Decision &amp; Execution Platform</div><div style="margin-top:.6rem"><a href="trade.html" class="btn-ghost" style="font-family:var(--font-ar);font-size:.75rem;padding:.4rem .75rem;border:1px solid var(--border)">استكشف ←</a></div></div>
 </div>
 </div></section>
 
 <!-- CTA -->
-<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>قبل رؤى: بيانات كثيرة. بعد رؤى: فهم موثّق.</h2><p>نافذة مؤسستك إلى العالم المالي — استخبارات موثّقة، لا مجرد أخبار.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
+<section class="cta-section reveal"><div class="container"><span class="section-tag" style="justify-content:center">وصول مؤسسي</span><h2>استخبارات مالية موثوقة · لا أخبار</h2><p>اطلب وصولاً مؤسسياً لتجربة رؤى News — التغذية، الأبحاث، التقارير، استخبارات الأصول والإعلام.</p><a href="index.html#cta" class="btn btn-primary" style="font-size:1rem;padding:.875rem 1.75rem">اطلب وصولاً مؤسسياً</a></div></section>
 
 <!-- Footer -->
-<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">نافذة المؤسسة إلى العالم المالي — ما حدث، لماذا، من أين نعرف، وما قد يعنيه.</div><div class="meta">v1.0 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنصة</h4><ul><li><a href="news.html">رؤى الأخبار</a></li><li><a href="core.html">رؤى المحرك</a></li><li><a href="trade.html">رؤى التداول</a></li></ul></div><div class="footer-col"><h4>المؤسسات</h4><ul><li><a href="api.html">واجهة برمجة</a></li><li><a href="enterprise.html">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA — جميع الحقوق محفوظة</span><span>contact@rouaa.ai</span></div></footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="name">رؤى · ROUAA</div><div class="tagline">رؤى News — Financial Intelligence Application.</div><div class="meta">v18 · المؤسسي · يوليو 2026</div></div><div class="footer-col"><h4>المنتجات</h4><ul><li><a href="news.html">رؤى News</a></li><li><a href="trade.html">رؤى Trade</a></li><li><a href="api.html">Intelligence APIs</a></li><li><a href="white-label.html">White Label</a></li></ul></div><div class="footer-col"><h4>الحلول</h4><ul><li><a href="enterprise.html">المؤسسات</a></li><li><a href="enterprise.html#security">الأمان</a></li><li><a href="index.html#cta">اطلب وصولاً</a></li></ul></div><div class="footer-col"><h4>الشركة</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="#">من نحن</a></li><li><a href="mailto:contact@rouaa.ai">تواصل</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 رؤى · ROUAA</span><span>contact@rouaa.ai</span></div></footer>
 
 <script>
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}})},{threshold:.1});
