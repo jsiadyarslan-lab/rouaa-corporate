@@ -115,6 +115,15 @@
   --chart-event: var(--gold);
   --chart-volume: rgba(96, 165, 250, 0.3);
 
+  /* --- Data Semantics tokens (color = meaning, not decoration) --- */
+  --fact-color: var(--gold);          /* verified institutional truth */
+  --event-color: var(--blue);         /* detected market event */
+  --prediction-color: var(--gold);    /* AI-generated scenario (dashed) */
+  --risk-color: var(--rose);          /* risk, loss, danger */
+  --source-color: var(--emerald);     /* official source, verified */
+  --uncertainty-color: var(--amber);  /* ambiguity, pending, stale */
+  --intelligence-color: var(--gold);  /* ROUAA intelligence output */
+
   /* --- Accessibility tokens --- */
   --focus-ring: rgba(200, 169, 81, 0.5);
   --focus-ring-offset: 3px;
@@ -1662,6 +1671,341 @@ button {
 .timeline-layer-text strong {
   color: var(--text);
   font-weight: 600;
+}
+
+/* ============================================================
+   8D. INTELLIGENCE BRIEF CARD (the centerpiece)
+   ============================================================ */
+
+/* The card that ties everything together:
+   Evidence → Market Interpretation → Affected Assets → Positioning → Risk
+   This is what a fund manager reads at 08:30 AM. */
+
+.intelligence-brief {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.intelligence-brief::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--fact-color), var(--event-color), var(--intelligence-color));
+}
+
+.intelligence-brief-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.intelligence-brief-title {
+  font-family: var(--font-en);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.intelligence-brief-regime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  background: var(--risk-color);
+  color: var(--navy);
+  border-radius: var(--radius-md);
+  font-family: var(--font-en);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.intelligence-brief-regime.risk-off { background: var(--rose); }
+.intelligence-brief-regime.risk-on { background: var(--emerald); }
+.intelligence-brief-regime.neutral { background: var(--amber); }
+
+.intelligence-brief-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  flex-wrap: wrap;
+}
+.intelligence-brief-meta span strong {
+  color: var(--gold);
+}
+
+/* Consequence Chain — the flow: Evidence → Impact → Positioning → Risk */
+.consequence-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.consequence-step {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  align-items: start;
+}
+.consequence-step:last-child {
+  border-bottom: none;
+}
+.consequence-step-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--step-color, var(--gold));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.consequence-step-lbl::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--step-color, var(--gold));
+}
+.consequence-step.evidence { --step-color: var(--fact-color); }
+.consequence-step.interpretation { --step-color: var(--event-color); }
+.consequence-step.impact { --step-color: var(--intelligence-color); }
+.consequence-step.positioning { --step-color: var(--blue); }
+.consequence-step.risk { --step-color: var(--risk-color); }
+
+.consequence-step-body {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.consequence-step-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Affected Assets grid (within impact step) */
+.affected-assets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.affected-asset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  border-right: 3px solid var(--direction-color, var(--text-mute));
+}
+.affected-asset.up { --direction-color: var(--emerald); }
+.affected-asset.down { --direction-color: var(--rose); }
+.affected-asset.flat { --direction-color: var(--amber); }
+.affected-asset-name {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.affected-asset-direction {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--direction-color);
+  font-weight: 700;
+}
+.affected-asset-direction.up { color: var(--emerald); }
+.affected-asset-direction.down { color: var(--rose); }
+
+/* Brief footer with quality metrics */
+.intelligence-brief-footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+}
+.quality-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.quality-metric-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.quality-metric-val {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--metric-color, var(--emerald));
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.quality-metric-val::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.quality-metric-val.high { color: var(--emerald); }
+.quality-metric-val.medium { color: var(--amber); }
+.quality-metric-val.low { color: var(--rose); }
+.quality-metric-grade {
+  font-family: var(--font-en);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   8E. DECISION SUPPORT LAYER (Intelligence → Support → Execution Optional)
+   ============================================================ */
+
+/* Per user: 'Don't make ROUAA look like Signal Provider.
+   Add layer: Intelligence → Decision Support → Execution Optional.
+   First is institutional, second is retail.' */
+
+.decision-support {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+}
+.decision-support-h {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+.decision-support-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.decision-support-step {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  align-items: center;
+  border-bottom: 1px solid var(--border-soft);
+}
+.decision-support-step:last-child {
+  border-bottom: none;
+}
+.decision-support-num {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--step-color, var(--gold));
+  font-weight: 700;
+}
+.decision-support-step.intelligence { --step-color: var(--fact-color); }
+.decision-support-step.support { --step-color: var(--event-color); }
+.decision-support-step.execution { --step-color: var(--text-mute); }
+.decision-support-step.execution {
+  opacity: 0.6;
+}
+.decision-support-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.decision-support-step-name {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.decision-support-step-desc {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+}
+.decision-support-step-tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--step-color, var(--gold));
+  padding: 0.2rem 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.decision-support-step.execution .decision-support-step-tag {
+  background: transparent;
+  border-style: dashed;
+}
+
+/* ============================================================
+   8F. MOTION DUAL-MODE (Marketing vs Terminal)
+   ============================================================ */
+
+/* Per user: 'Landing pages: lots of motion. Terminal: almost none.
+   Bloomberg doesn't do many animations. Split into two systems.' */
+
+/* Marketing mode (default) — for landing pages, showcase, about */
+.motion-marketing .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+}
+.motion-marketing .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.motion-marketing .evidence-node {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+}
+.motion-marketing .evidence-node.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Terminal mode — for Intelligence Terminal, dashboards, workspaces */
+.motion-terminal .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.motion-terminal .evidence-node {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.motion-terminal .confidence-bar-fill {
+  transition: none;
+}
+.motion-terminal * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.05s !important; /* keep only hover states */
 }
 
 /* ============================================================
