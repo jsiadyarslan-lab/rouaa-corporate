@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>ROUAA · Design System v1.0</title>
+<meta name="description" content="ROUAA UI Foundation — Design System components, tokens, and patterns.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+/* Page-specific styles for design system showcase */
+.showcase-section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.showcase-section:last-child { border-bottom: none; }
+.showcase-h {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.showcase-h::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.token-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+.token-swatch {
+  width: 100%;
+  height: 60px;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+}
+.token-name {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+}
+.token-value {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.demo-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.demo-row:last-child { margin-bottom: 0; }
+.demo-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+.intelligence-demo {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.intelligence-text {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.875rem;
+  line-height: 1.6;
+}
+.intelligence-meta {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Design System v1.0</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#tokens">Tokens</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#data">Data Components</a></li>
+      <li><a href="#states">States</a></li>
+      <li><a href="#motion">Motion</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-ghost btn-sm">العودة للموقع</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="container" style="padding: 3rem 2rem 6rem;">
+
+  <!-- Hero -->
+  <section style="margin-bottom: 4rem;">
+    <div class="section-tag">ROUAA UI Foundation</div>
+    <h1 class="h1" style="margin-bottom: 1rem;">Design System v1.0</h1>
+    <p class="lead">نظام التصميم المؤسسي لرؤى —Tokens، Components، Data Patterns. مبني على Brand System v1.1. كل مكون قابل لإعادة الاستخدام عبر كل صفحات الموقع.</p>
+  </section>
+
+  <!-- 1. Tokens -->
+  <section class="showcase-section" id="tokens">
+    <div class="showcase-h">1. Design Tokens</div>
+
+    <h3 class="h3" style="margin-bottom: 1rem; color: var(--text-dim);">Colors — Primary</h3>
+    <div class="showcase-grid" style="margin-bottom: 2rem;">
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--navy);"></div>
+        <div class="token-name">--navy</div>
+        <div class="token-value">#05070D</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--surface);"></div>
+        <div class="token-name">--surface</div>
+        <div class="token-value">#0B101D</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--card);"></div>
+        <div class="token-name">--card</div>
+        <div class="token-value">#111827</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--border);"></div>
+        <div class="token-name">--border</div>
+        <div class="token-value">#1F293D</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--gold);"></div>
+        <div class="token-name">--gold</div>
+        <div class="token-value">#C8A951</div>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin-bottom: 1rem; color: var(--text-dim);">Colors — Functional</h3>
+    <div class="showcase-grid">
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--emerald);"></div>
+        <div class="token-name">--emerald</div>
+        <div class="token-value">#34D399 (Trading)</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--blue);"></div>
+        <div class="token-name">--blue</div>
+        <div class="token-value">#60a5fa (Media)</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--rose);"></div>
+        <div class="token-name">--rose</div>
+        <div class="token-value">#EF4444 (Errors)</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: var(--amber);"></div>
+        <div class="token-name">--amber</div>
+        <div class="token-value">#F59E0B (Stale)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Typography -->
+  <section class="showcase-section" id="typography">
+    <div class="showcase-h">2. Typography</div>
+
+    <div class="demo-label">H1 — Hero (clamp 2.25-3.75rem)</div>
+    <h1 class="h1" style="margin-bottom: 1.5rem;">رؤى طبقة استخبارات مالية</h1>
+
+    <div class="demo-label">H2 — Section (clamp 2-3rem)</div>
+    <h2 class="h2" style="margin-bottom: 1.5rem;">من المصدر الرسمي إلى القرار الموثّق</h2>
+
+    <div class="demo-label">H3 — Subsection (1.25rem)</div>
+    <h3 class="h3" style="margin-bottom: 1.5rem; color: var(--text);">Evidence Chain</h3>
+
+    <div class="demo-label">Lead (1.125rem, text-dim)</div>
+    <p class="lead" style="margin-bottom: 1.5rem;">كل ادعاء في رؤى قابل للتحقق من مصدره الرسمي الأصلي — في أقل من 5 ثوانٍ.</p>
+
+    <div class="demo-label">Body (1rem)</div>
+    <p style="margin-bottom: 1.5rem; color: var(--text-dim);">هذا نص أساسي بـ Cairo 1rem. يُستخدم للفقرات العادية عبر الموقع.</p>
+
+    <div class="demo-label">Mono Label (0.6875rem)</div>
+    <p class="mono-label" style="color: var(--gold);">LAYER 3 · COMMERCIAL PRODUCTS</p>
+
+    <div class="demo-label">Fonts</div>
+    <div class="demo-row">
+      <span style="font-family: var(--font-ar); font-size: 1.25rem; color: var(--text);">Cairo — العربية</span>
+      <span style="font-family: var(--font-en); font-size: 1.25rem; color: var(--text);">Inter — English</span>
+      <span class="mono" style="font-size: 1.25rem; color: var(--text);">JetBrains Mono — 411</span>
+    </div>
+  </section>
+
+  <!-- 3. Components -->
+  <section class="showcase-section" id="components">
+    <div class="showcase-h">3. Components</div>
+
+    <div class="demo-label">Buttons</div>
+    <div class="demo-row" style="margin-bottom: 2rem;">
+      <button class="btn btn-primary">اطلب وصولاً مؤسسياً</button>
+      <button class="btn btn-ghost">استكشف الكاتالوج</button>
+      <a href="#" class="btn-link">اعرف المزيد ←</a>
+      <button class="btn btn-primary btn-sm">زر صغير</button>
+      <button class="btn btn-primary btn-lg">زر كبير</button>
+    </div>
+
+    <div class="demo-label">Badges</div>
+    <div class="demo-row" style="margin-bottom: 2rem;">
+      <span class="badge">Default</span>
+      <span class="badge badge-gold">Gold</span>
+      <span class="badge badge-emerald">Emerald</span>
+      <span class="badge badge-blue">Blue</span>
+      <span class="badge badge-rose">Rose</span>
+    </div>
+
+    <div class="demo-label">Cards (default)</div>
+    <div class="grid-auto" style="margin-bottom: 2rem;">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-name"><span class="ar">لوحة القرار</span>Decision Dashboard</div>
+        <div class="card-desc">مركز التحكم — المراكز، الإشارات، الأداء، المخاطر في واجهة واحدة.</div>
+        <div class="card-stat">3 لوحات · مباشر</div>
+      </div>
+      <div class="card bl-media card-accent">
+        <div class="card-num">02</div>
+        <div class="card-name"><span class="ar">تغذية الاستخبارات</span>Intelligence Feed</div>
+        <div class="card-desc">تيار حي للأحداث المالية — كل حدث مرتبط بمصدره ودرجة ثقته.</div>
+        <div class="card-stat">مباشر · 411 مصدر</div>
+      </div>
+      <div class="card bl-trading card-accent">
+        <div class="card-num">03</div>
+        <div class="card-name"><span class="ar">الشارت الذكي</span>Smart Chart</div>
+        <div class="card-desc">شارت سعر مع علامات أحداث حقيقية — كل علامة مرتبطة بمصدر رسمي.</div>
+        <div class="card-stat">علامات حية · 6 أطر زمنية</div>
+      </div>
+    </div>
+
+    <div class="demo-label">Section Header Pattern</div>
+    <div style="margin-bottom: 1rem;">
+      <span class="section-tag">Layer 3 · Commercial Products</span>
+      <h2 class="section-h">أربع منتجات · مخرجات من نفس النظام</h2>
+      <p class="section-lead">كل منتج يجيب عن سؤال واحد. كلها مدعومة بنفس الطبقات السفلى.</p>
+    </div>
+  </section>
+
+  <!-- 4. Data Components -->
+  <section class="showcase-section" id="data">
+    <div class="showcase-h">4. Data Components (Trust-specific)</div>
+
+    <div class="demo-label">Intelligence with Trust Badge</div>
+    <div class="intelligence-demo">
+      <div class="intelligence-text">«ثبات الفيدرالي يشير إلى قوة الدولار»</div>
+      <div class="intelligence-meta">
+        <div class="trust-badge">
+          <span class="confidence high">87%</span>
+          <span class="sep">┃</span>
+          <span class="sources">5 sources</span>
+          <span class="sep">┃</span>
+          <span class="view-evidence">عرض الدليل ←</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="intelligence-demo">
+      <div class="intelligence-text">«احتمال ارتفاع الذهب 2% في Q4»</div>
+      <div class="intelligence-meta">
+        <div class="trust-badge">
+          <span class="confidence low">54%</span>
+          <span class="sep">┃</span>
+          <span class="sources">3 sources</span>
+          <span class="sep">┃</span>
+          <span class="view-evidence">عرض الدليل ←</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-label" style="margin-top: 2rem;">Dual Confidence Meter (3 levels)</div>
+    <div class="confidence-meter" style="max-width: 500px;">
+      <div class="confidence-row">
+        <span class="confidence-label">Evidence Confidence</span>
+        <span class="confidence-value" style="color: var(--emerald);">98%</span>
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill high" style="width: 98%;"></div>
+        </div>
+      </div>
+      <div class="confidence-row">
+        <span class="confidence-label">Reasoning Confidence</span>
+        <span class="confidence-value" style="color: var(--emerald);">87%</span>
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill high" style="width: 87%;"></div>
+        </div>
+      </div>
+      <div class="confidence-row">
+        <span class="confidence-label">Market Scenario</span>
+        <span class="confidence-value" style="color: var(--amber);">64%</span>
+        <div class="confidence-bar">
+          <div class="confidence-bar-fill medium" style="width: 64%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-label" style="margin-top: 2rem;">Evidence Chain (Sequential Reveal)</div>
+    <div class="evidence-chain">
+      <div class="evidence-chain-h">
+        <div class="evidence-chain-title">رؤية #28492</div>
+        <span class="badge badge-gold">الثقة 87%</span>
+      </div>
+      <div class="evidence-chain-flow">
+        <div class="evidence-node emerald">
+          <div class="evidence-node-num">01</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">الصفقة · Execution</div>
+            <div class="evidence-node-val">شراء EUR/USD · 0.5 لوت · 1.0847</div>
+          </div>
+        </div>
+        <div class="evidence-connector"></div>
+        <div class="evidence-node">
+          <div class="evidence-node-num">02</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">القرار · Decision</div>
+            <div class="evidence-node-val">إشارة شراء · ثقة 87% · مخاطرة متوسطة</div>
+          </div>
+        </div>
+        <div class="evidence-connector"></div>
+        <div class="evidence-node">
+          <div class="evidence-node-num">03</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">الاستدلال · Reasoning</div>
+            <div class="evidence-node-val">تباعد فائدة الفيدرالي/الأوروبي · قوة الدولار</div>
+          </div>
+        </div>
+        <div class="evidence-connector"></div>
+        <div class="evidence-node gold">
+          <div class="evidence-node-num">04</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">الحقيقة · Evidence</div>
+            <div class="evidence-node-val">سعر فائدة الفيدرالي: 5.25% – 5.50%</div>
+          </div>
+        </div>
+        <div class="evidence-connector"></div>
+        <div class="evidence-node">
+          <div class="evidence-node-num">05</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">الوثيقة · Document</div>
+            <div class="evidence-node-val">بيان FOMC · 24 صفحة</div>
+          </div>
+        </div>
+        <div class="evidence-connector"></div>
+        <div class="evidence-node">
+          <div class="evidence-node-num">06</div>
+          <div class="evidence-node-body">
+            <div class="evidence-node-lbl">المصدر · Source</div>
+            <div class="evidence-node-val">federalreserve.gov · ثقة A+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-label" style="margin-top: 2rem;">Source Registry Row</div>
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+      <div class="source-row header">
+        <div>المصدر</div><div>النوع</div><div>الدولة</div><div>الصحة</div><div>آخر تحديث</div><div>الثقة</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name">الفيدرالي</div>
+        <div class="source-type">بنك مركزي</div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">US</div>
+        <div><span class="source-health">100%</span></div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">14:32 EST</div>
+        <div class="source-trust">A+</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name">البنك المركزي الأوروبي</div>
+        <div class="source-type">بنك مركزي</div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">EU</div>
+        <div><span class="source-health">100%</span></div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">11:00 CET</div>
+        <div class="source-trust">A+</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name">مكتب إحصاءات العمل</div>
+        <div class="source-type">إحصائي</div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">US</div>
+        <div><span class="source-health" style="background: var(--amber-dim); color: var(--amber);">98%</span></div>
+        <div class="mono" style="font-size: 0.75rem; color: var(--text-mute);">08:30 EST</div>
+        <div class="source-trust">A+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Component States -->
+  <section class="showcase-section" id="states">
+    <div class="showcase-h">5. Component States (6 Data States)</div>
+
+    <div class="demo-row" style="margin-bottom: 1rem;">
+      <span class="state state-verified">Verified</span>
+      <span class="state state-loading">Loading</span>
+      <span class="state state-stale">Stale</span>
+      <span class="state state-delayed">Delayed</span>
+      <span class="state state-conflicted">Conflicted</span>
+      <span class="state state-error">Error</span>
+    </div>
+
+    <div class="demo-label" style="margin-top: 2rem;">Source Status Examples</div>
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; line-height: 2;">
+      <div><span class="state state-verified" style="margin-left: 0.5rem;"></span> Source: Federal Reserve · Last: 14:32 EST · Trust A+</div>
+      <div><span class="state state-stale" style="margin-left: 0.5rem;"></span> Source delayed 2h (expected 24h) · Last: 12:32 EST</div>
+      <div><span class="state state-conflicted" style="margin-left: 0.5rem;"></span> Conflict: BLS says 3.2%, BEA says 3.4% · Under review</div>
+      <div><span class="state state-error" style="margin-left: 0.5rem;"></span> Failed to fetch · Retry in 60s</div>
+    </div>
+
+    <div class="demo-label" style="margin-top: 2rem;">Empty State</div>
+    <div class="empty-state" style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+      <div class="empty-state-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </div>
+      <div class="empty-state-text">لا توجد نتائج مطابقة</div>
+      <button class="btn btn-ghost btn-sm">إعادة المحاولة</button>
+    </div>
+  </section>
+
+  <!-- 6. Motion -->
+  <section class="showcase-section" id="motion">
+    <div class="showcase-h">6. Motion</div>
+
+    <div class="demo-label">Reveal on Scroll (try scrolling — this section animates)</div>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">العناصر تبدأ opacity:0 + translateY(20px)، عند دخولها viewport تصبح opacity:1 + translateY(0). المدة 0.8s ease.</p>
+
+    <div class="demo-label" style="margin-top: 2rem;">Sequential Reveal (Evidence Chain steps)</div>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">عند فتح Evidence Chain، الخطوات تظهر تدريجياً — 0.2s بين كل خطوة. اضغط الزر لتجربتها:</p>
+    <button class="btn btn-ghost btn-sm" id="testSequential" style="margin-bottom: 1rem;">تشغيل Sequential Reveal</button>
+
+    <div class="demo-label" style="margin-top: 2rem;">Confidence Meter Fill</div>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">عند ظهور Confidence Score، الـ meter يملأ من 0% للقيمة النهائية في 0.8s. اضغط لإعادة التشغيل:</p>
+    <button class="btn btn-ghost btn-sm" id="testConfidence" style="margin-bottom: 1rem;">تشغيل Confidence Fill</button>
+
+    <div class="demo-label" style="margin-top: 2rem;">Reduced Motion</div>
+    <p style="color: var(--text-dim);">عند تفعيل <code class="mono" style="color: var(--gold);">prefers-reduced-motion: reduce</code> كل التأثيرات تُلغى، البيانات تظهر فوراً.</p>
+  </section>
+
+  <!-- Footer note -->
+  <section style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-soft); text-align: center;">
+    <p class="mono-label" style="color: var(--text-mute);">ROUAA Design System v1.0 · مبني على Brand System v1.1 · يناير 2026</p>
+  </section>
+
+</main>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Test Sequential Reveal
+document.getElementById('testSequential')?.addEventListener('click', () => {
+  const nodes = document.querySelectorAll('.evidence-node');
+  nodes.forEach(n => n.classList.remove('visible'));
+  nodes.forEach((n, i) => {
+    setTimeout(() => n.classList.add('visible'), i * 200);
+  });
+});
+
+// Test Confidence Fill
+document.getElementById('testConfidence')?.addEventListener('click', () => {
+  const fills = document.querySelectorAll('.confidence-bar-fill');
+  fills.forEach(f => {
+    const target = f.style.width;
+    f.style.width = '0%';
+    setTimeout(() => f.style.width = target, 100);
+  });
+});
+
+// Auto-trigger Sequential Reveal on load
+setTimeout(() => {
+  document.querySelectorAll('.evidence-node').forEach((n, i) => {
+    setTimeout(() => n.classList.add('visible'), i * 200 + 500);
+  });
+}, 100);
+</script>
+
+</body>
+</html>
