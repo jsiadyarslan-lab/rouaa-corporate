@@ -123,10 +123,11 @@
       <li><a href="#tokens">Tokens</a></li>
       <li><a href="#typography">Typography</a></li>
       <li><a href="#components">Components</a></li>
-      <li><a href="#data">Data Components</a></li>
-      <li><a href="#evidence-card">Evidence Card</a></li>
-      <li><a href="#knowledge-graph">Knowledge Graph</a></li>
-      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#evidence-card">Evidence</a></li>
+      <li><a href="#evidence-card-enhanced">Provenance</a></li>
+      <li><a href="#trading">Trading</a></li>
+      <li><a href="#timeline-layered">Layered</a></li>
       <li><a href="#states">States</a></li>
       <li><a href="#motion">Motion</a></li>
     </ul>
@@ -629,18 +630,279 @@
     </div>
   </section>
 
+  <!-- 7B. Enhanced Evidence Card (with Provenance + Verification) -->
+  <section class="showcase-section" id="evidence-card-enhanced">
+    <div class="showcase-h">7B. Enhanced Evidence Card (Provenance + Verification)</div>
+
+    <p class="lead mb-6">النسخة المحسّنة من Evidence Card — مع <strong class="text-gold">Provenance ID</strong> و <strong class="text-gold">Verification Chain</strong>. هذا هو Chain of Custody الحقيقي — Bloomberg Terminal + audit trail.</p>
+
+    <div class="grid-2">
+      <div class="evidence-card">
+        <div class="evidence-card-h">
+          <div class="evidence-card-title">CPI Inflation</div>
+          <span class="state state-verified">Verified</span>
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="provenance-id">28492-FED-001</span>
+          <span class="mono-label text-mute">Created 14:32 UTC</span>
+        </div>
+        <div class="evidence-card-value">3.2<span class="unit">% YoY</span></div>
+        <div class="evidence-card-meta">
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Source</span>
+            <span class="evidence-card-meta-v">BLS</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Document</span>
+            <span class="evidence-card-meta-v">CPI Report</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Page</span>
+            <span class="evidence-card-meta-v mono">4</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Last Update</span>
+            <span class="evidence-card-meta-v mono">08:30 EST</span>
+          </div>
+        </div>
+        <div class="verification-chain">
+          <div class="verification-chain-lbl">Verification · 4/4 checks passed</div>
+          <div class="verification-chain-bar">
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment"></div>
+          </div>
+          <div class="verification-chain-checks">
+            <div class="verification-check">Source Adapter</div>
+            <div class="verification-check">Document Hash (sha256)</div>
+            <div class="verification-check">Extraction Engine v3.2.1</div>
+            <div class="verification-check">Cross-source Verification</div>
+          </div>
+        </div>
+        <div class="evidence-card-footer">
+          <span class="evidence-card-confidence">Evidence 98%</span>
+          <span class="evidence-card-link">View Evidence →</span>
+        </div>
+      </div>
+
+      <div class="evidence-card">
+        <div class="evidence-card-h">
+          <div class="evidence-card-title">USD Strength Forecast</div>
+          <span class="state state-predicted">Predicted</span>
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="provenance-id">9183-AI-042</span>
+          <span class="mono-label text-mute">Generated 14:35 UTC</span>
+        </div>
+        <div class="evidence-card-value">+2.0<span class="unit">% (Q4)</span></div>
+        <div class="evidence-card-meta">
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Sources</span>
+            <span class="evidence-card-meta-v">5 sources</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Reasoning</span>
+            <span class="evidence-card-meta-v">Multi-agent</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Scenarios</span>
+            <span class="evidence-card-meta-v mono">3</span>
+          </div>
+          <div class="evidence-card-meta-row">
+            <span class="evidence-card-meta-k">Model</span>
+            <span class="evidence-card-meta-v mono">v1.0</span>
+          </div>
+        </div>
+        <div class="verification-chain">
+          <div class="verification-chain-lbl">Verification · 3/4 checks (1 pending)</div>
+          <div class="verification-chain-bar">
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment"></div>
+            <div class="verification-chain-segment pending"></div>
+          </div>
+          <div class="verification-chain-checks">
+            <div class="verification-check">Source Adapter</div>
+            <div class="verification-check">Document Hash (sha256)</div>
+            <div class="verification-check">Extraction Engine v3.2.1</div>
+            <div class="verification-check pending">Human Review (queued)</div>
+          </div>
+        </div>
+        <div class="evidence-card-footer">
+          <span class="evidence-card-confidence medium">Scenario 64%</span>
+          <span class="evidence-card-link">View Evidence →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7C. Trading Intelligence Components -->
+  <section class="showcase-section" id="trading">
+    <div class="showcase-h">7C. Trading Intelligence Components</div>
+
+    <p class="lead mb-6">رؤى ليست فقط Economic Intelligence. لديها Trading Intelligence Layer — Signal Card، Decision Card، Risk Assessment، Execution. كل قرار تداول موثّق ومحدود بمخاطر.</p>
+
+    <div class="grid-2 mb-6">
+      <!-- Signal Card -->
+      <div class="signal-card buy">
+        <div class="signal-card-h">
+          <div>
+            <div class="signal-card-pair">EUR/USD</div>
+            <span class="mono-label text-mute">14:32 UTC · 0.5 lot</span>
+          </div>
+          <div class="signal-card-action">BUY</div>
+        </div>
+        <div class="signal-card-confidence">
+          <span class="signal-card-conf-label">Confidence</span>
+          <span class="signal-card-conf-value">82%</span>
+          <div class="signal-card-conf-bar">
+            <div class="signal-card-conf-fill" style="width: 82%;"></div>
+          </div>
+        </div>
+        <div class="signal-card-section">
+          <div class="signal-card-section-lbl">Drivers (3)</div>
+          <div class="signal-card-driver">Fed divergence (5.50% vs ECB 4.25%)</div>
+          <div class="signal-card-driver">CPI cooling (3.2% vs 3.4% expected)</div>
+          <div class="signal-card-driver">ECB weakness signaled</div>
+        </div>
+        <div class="signal-card-section">
+          <div class="signal-card-section-lbl">Risk & Limits</div>
+          <div class="signal-card-meta-grid">
+            <div class="signal-card-meta-item">
+              <span class="signal-card-meta-k">Risk Level</span>
+              <span class="signal-card-meta-v risk-medium">Medium</span>
+            </div>
+            <div class="signal-card-meta-item">
+              <span class="signal-card-meta-k">Stop Loss</span>
+              <span class="signal-card-meta-v">1.0750</span>
+            </div>
+            <div class="signal-card-meta-item">
+              <span class="signal-card-meta-k">Take Profit</span>
+              <span class="signal-card-meta-v">1.0900</span>
+            </div>
+            <div class="signal-card-meta-item">
+              <span class="signal-card-meta-k">Max Risk</span>
+              <span class="signal-card-meta-v">1.8%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Card -->
+      <div class="decision-card">
+        <div class="decision-card-h">
+          <span class="decision-card-title">AI Decision Record</span>
+          <span class="decision-card-id">DEC-9183-2026-07-24</span>
+        </div>
+        <div class="decision-card-action">
+          <span class="decision-card-action-lbl">Decision:</span>
+          <span class="decision-card-action-val">BUY EUR/USD</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Why</span>
+          <span class="decision-card-row-v">Fed divergence + CPI cooling + ECB weakness</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Evidence</span>
+          <span class="decision-card-row-v mono">7 facts · 5 sources</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Alternative</span>
+          <span class="decision-card-row-v">SELL probability 18%</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Confidence</span>
+          <span class="decision-card-row-v mono">82% (Reasoning) · 64% (Scenario)</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Created</span>
+          <span class="decision-card-row-v mono">2026-07-24 14:32:18 UTC</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Model</span>
+          <span class="decision-card-row-v mono">ROUAA Analyst v1.0 · 10 roles</span>
+        </div>
+        <div class="decision-card-row">
+          <span class="decision-card-row-k">Disclaimer</span>
+          <span class="decision-card-row-v text-mute small">Past performance ≠ future results. Markets are volatile.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7D. Layered Timeline (Fact → Event → Impact → Trading) -->
+  <section class="showcase-section" id="timeline-layered">
+    <div class="showcase-h">7D. Layered Timeline (Fact → Event → Impact → Trading)</div>
+
+    <p class="lead mb-6">الخط الزمني يعرض <strong class="text-gold">تحوّل المعلومة إلى قرار</strong> — 4 طبقات: Fact → Event → Impact → Trading Context. كل حدث يحكي قصة كاملة.</p>
+
+    <div class="card" style="max-width: 700px;">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">14:32:18 UTC</div>
+          <span class="timeline-source">الفيدرالي</span>
+          <div class="timeline-text mb-2">FOMC Statement Released</div>
+          <div class="timeline-layered">
+            <div class="timeline-layer fact">
+              <span class="timeline-layer-lbl">FACT</span>
+              <span class="timeline-layer-text">Rate unchanged <strong>5.25% - 5.50%</strong></span>
+            </div>
+            <div class="timeline-layer event">
+              <span class="timeline-layer-lbl">EVENT</span>
+              <span class="timeline-layer-text"><strong>Hawkish signal</strong> detected — inflation concerns remain</span>
+            </div>
+            <div class="timeline-layer impact">
+              <span class="timeline-layer-lbl">IMPACT</span>
+              <span class="timeline-layer-text">USD bullish probability <strong>+68%</strong></span>
+            </div>
+            <div class="timeline-layer trading">
+              <span class="timeline-layer-lbl">TRADING</span>
+              <span class="timeline-layer-text">EUR/USD <strong>downside risk</strong> · Gold inverse correlation -0.64</span>
+            </div>
+          </div>
+          <span class="timeline-confidence mt-3">Evidence 96% · Reasoning 87%</span>
+        </div>
+
+        <div class="timeline-item emerald">
+          <div class="timeline-time">14:35:42 UTC</div>
+          <span class="timeline-source">مكتب إحصاءات العمل</span>
+          <div class="timeline-text mb-2">CPI Report Released</div>
+          <div class="timeline-layered">
+            <div class="timeline-layer fact">
+              <span class="timeline-layer-lbl">FACT</span>
+              <span class="timeline-layer-text">CPI <strong>3.2% YoY</strong> (vs 3.4% expected)</span>
+            </div>
+            <div class="timeline-layer event">
+              <span class="timeline-layer-lbl">EVENT</span>
+              <span class="timeline-layer-text"><strong>Cooling inflation</strong> confirmed</span>
+            </div>
+            <div class="timeline-layer impact">
+              <span class="timeline-layer-lbl">IMPACT</span>
+              <span class="timeline-layer-text">Fed rate cut probability <strong>+22%</strong> for Q4</span>
+            </div>
+          </div>
+          <span class="timeline-confidence mt-3">Evidence 94% · Reasoning 82%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. Component States -->
   <section class="showcase-section" id="states">
-    <div class="showcase-h">8. Component States (6 Data States)</div>
+    <div class="showcase-h">8. Component States (7 Data States)</div>
 
-    <div class="demo-row" style="margin-bottom: 1rem;">
+    <div class="demo-row mb-4">
       <span class="state state-verified">Verified</span>
       <span class="state state-loading">Loading</span>
       <span class="state state-stale">Stale</span>
       <span class="state state-delayed">Delayed</span>
       <span class="state state-conflicted">Conflicted</span>
       <span class="state state-error">Error</span>
+      <span class="state state-predicted">Predicted</span>
     </div>
+
+    <p class="text-dim small mb-5">7th state <strong class="text-gold">Predicted</strong> — for AI scenarios, forecasts, and reasoning outputs. Dashed border + hollow dot = «this is a prediction, not a verified fact». Prevents mixing facts with predictions.</p>
 
     <div class="demo-label" style="margin-top: 2rem;">Source Status Examples</div>
     <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; line-height: 2;">
@@ -684,7 +946,7 @@
 
   <!-- Footer note -->
   <section style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-soft); text-align: center;">
-    <p class="mono-label" style="color: var(--text-mute);">ROUAA Design System v1.1 · مبني على Brand System v1.1 · يوليو 2026</p>
+    <p class="mono-label text-mute">ROUAA Design System v1.2 · Product Operating System · يوليو 2026</p>
   </section>
 
 </main>
