@@ -86,6 +86,8 @@
 
 متى تُستخدم: Home sub-hero، Product Pages، Compare Pages
 
+**ملاحظة على wording:** لا نقول «لدينا 411 مصدر». نقول «شبكة مصادر رسمية عالمية قابلة للتوسع — التغطية الحالية: 411 مصدر موثّق». الرقم دقيق، لكن الإطار هو «الشبكة» لا «العدد».
+
 ### الرسالة 3 — القيمة (Value)
 > **«من المصدر الرسمي إلى القرار الموثّق — في ثوانٍ، لا أسابيع.»**
 
@@ -424,11 +426,13 @@ Viewport 3: DIFFERENTIATION
    - (لا Architecture Map هنا — يذهب لـ About)
 
 Viewport 4: 4 BUSINESS LINES PREVIEW
-   - Media Technologies (7 منتجات)
-   - Trading Technologies (9 منتجات)
-   - Platform Access (APIs + White Label)
-   - Professional Services
-   - كل بطاقة: رسالة + عدد المنتجات + "استكشف →"
+   - لا نعرض «24 منتج» للعميل هنا. نعرض 4 مجالات:
+     - Market Intelligence → Media Technologies
+     - Trading Intelligence → Trading Technologies
+     - API Intelligence → Platform Access
+     - Enterprise Solutions → Solutions Bundles
+   - كل بطاقة: رسالة + «استكشف →»
+   - الـ 24 منتج تظهر فقط في Catalog (بعد الدخول)
 
 Viewport 5: INDUSTRIES STRIP
    - "لمن نصمم؟" — 6 قطاعات
