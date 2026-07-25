@@ -31,8 +31,8 @@
 ```
 ┌─────────────────────────────────────────────────┐
 │  KNOWLEDGE (المعرفة)                            │
-│  من نحن + لماذا رؤى + ما الفلسفة                │
-│  Pages: about, trust, careers, blog             │
+│  من نحن + لماذا رؤى + التكنولوجيا + الثقة      │
+│  Pages: about, technology, trust, careers, blog │
 └─────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────┐
@@ -130,7 +130,10 @@ Home · Catalog · Solutions · Media · Trading · Developers · Enterprise · 
 | Developers | Developers | developers.html | Platform Access landing |
 | Enterprise | Industries | industries.html | القطاعات الكبرى |
 | Pricing | Commercial | pricing.html | التسعير (هرم موحّد) |
-| About | Knowledge | about.html | من نحن + Factory |
+| About | Knowledge | about.html | من نحن + الرؤية (صفحة إنسانية) |
+| Technology | Knowledge | technology.html | كيف يعمل النظام تقنياً (Architecture + Factory) |
+| Trust | Knowledge | trust.html | Trust Center — لماذا أصدّق رؤى |
+| Methodology | Knowledge | methodology.html | كيف نختار المصادر ونُقيّم الثقة |
 
 ### 3.3 Nav Behavior
 
@@ -163,6 +166,9 @@ Home · Catalog · Solutions · Media · Trading · Developers · Enterprise · 
 ```
 /                           → index.html
 /about                      → about.html
+/technology                 → technology.html (Architecture + Factory + Layers)
+/methodology                → methodology.html (how sources/facts/confidence work)
+/trust                      → trust.html (Trust Center — 7 principles + Evidence demo)
 /catalog                    → catalog.html
 /solutions                  → solutions.html (landing)
 /solutions/{solution}       → solutions/newsroom.html, etc.

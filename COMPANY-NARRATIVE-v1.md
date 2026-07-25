@@ -192,10 +192,15 @@
 > «حسناً، أنتم طبقة استخبارات. لكن ماذا يعني هذا لي؟»
 
 **ما يريد رؤيته:**
-- 4 خيارات: «أنا من؟» (Developer / Institution / Trader / Media)
-- ينقر على هويته
+- Layer Diagram بسيط: `Official Sources → ROUAA → Decisions`
+- 4 خيارات **مبنية على المشكلة/الهدف** (لا على الهوية):
+  - «أريد أتمتة الأخبار» → Media Technologies
+  - «أريد بناء API» → Developers
+  - «أريد تحسين قرارات التداول» → Trading Technologies
+  - «أريد استبدال Bloomberg» → Solutions (Enterprise)
+- ينقر على هدفه
 
-**الصفحة:** Home (Selector)
+**الصفحة:** Home (Selector + Layer Diagram)
 
 **النتيجة المطلوبة:** ينقر على أحد الخيارات الأربعة
 
@@ -401,9 +406,17 @@ Viewport 1: HERO
    - Sub (رسالة التمايز)
    - 2 CTAs (Catalog + About)
 
-Viewport 2: "WHO ARE YOU?" SELECTOR
-   - 4 cards (Developer / Institution / Trader / Media)
-   - كل بطاقة تذهب لمسار مختلف
+Viewport 2: LAYER DIAGRAM + "WHAT DO YOU WANT?" SELECTOR
+   - Layer Diagram بسيط (يجعل «طبقة استخبارات» مفهومة فوراً):
+     ```
+     Official Sources  →  ROUAA  →  Decisions
+     (411 مصدر رسمي)     (الطبقة)   (قابلة للتنفيذ)
+     ```
+   - 4 خيارات **مبنية على الهدف** (لا على الهوية):
+     - «أريد أتمتة الأخبار» → Media Technologies
+     - «أريد بناء API» → Developers
+     - «أريد تحسين قرارات التداول» → Trading Technologies
+     - «أريد استبدال Bloomberg» → Solutions (Enterprise)
 
 Viewport 3: DIFFERENTIATION
    - "ما الذي يجعل رؤى مختلفة؟"
