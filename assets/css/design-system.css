@@ -101,6 +101,13 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 
+  /* --- Accessibility tokens --- */
+  --focus-ring: rgba(200, 169, 81, 0.5);
+  --focus-ring-offset: 3px;
+  --selection-bg: rgba(200, 169, 81, 0.2);
+  --min-touch-target: 44px;
+  --contrast-min: 4.5; /* WCAG AA for normal text */
+
   /* --- Z-index scale --- */
   --z-base: 1;
   --z-sticky: 100;
@@ -136,8 +143,8 @@ body {
 }
 
 ::selection {
-  background: var(--gold);
-  color: var(--navy);
+  background: var(--selection-bg);
+  color: var(--text);
 }
 
 ::-webkit-scrollbar {
@@ -162,9 +169,11 @@ a {
 }
 
 a:focus-visible,
-button:focus-visible {
-  outline: 1px solid var(--gold);
-  outline-offset: 3px;
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
 }
 
 h1, h2, h3, h4 {
@@ -926,6 +935,293 @@ button {
   color: var(--text-dim);
   margin-bottom: 1rem;
   font-size: 0.9375rem;
+}
+
+/* --- Evidence Card (the "identity button" of ROUAA) --- */
+/* Appears everywhere — every intelligence, every fact, every recommendation */
+.evidence-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: border-color var(--transition-slow);
+  position: relative;
+}
+.evidence-card:hover {
+  border-color: var(--gold);
+}
+.evidence-card-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.evidence-card-title {
+  font-size: 0.875rem;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.evidence-card-value {
+  font-family: var(--font-en);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.evidence-card-value .unit {
+  font-size: 1rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-right: 0.25rem;
+}
+.evidence-card-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0.875rem 0;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  margin: 0.875rem 0;
+}
+.evidence-card-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.evidence-card-meta-k {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.evidence-card-meta-v {
+  font-size: 0.75rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.evidence-card-meta-v.mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gold);
+}
+.evidence-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.evidence-card-confidence {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--emerald);
+}
+.evidence-card-confidence::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.evidence-card-confidence.medium { color: var(--amber); }
+.evidence-card-confidence.low { color: var(--rose); }
+.evidence-card-link {
+  font-family: var(--font-ar);
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+.evidence-card-link:hover {
+  color: var(--gold-bright);
+}
+
+/* --- Knowledge Graph (interactive SVG) --- */
+.kg-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  position: relative;
+}
+.kg-svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+.kg-node {
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+.kg-node:hover .kg-circle {
+  fill: var(--gold-dim);
+  stroke: var(--gold);
+}
+.kg-circle {
+  fill: var(--card);
+  stroke: var(--border);
+  stroke-width: 1.5;
+  transition: all var(--transition-slow);
+}
+.kg-circle.gold {
+  fill: var(--gold-dim);
+  stroke: var(--gold);
+}
+.kg-circle.active {
+  fill: var(--gold);
+  stroke: var(--gold-bright);
+  stroke-width: 2;
+}
+.kg-label {
+  fill: var(--text);
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+.kg-label.gold { fill: var(--gold); }
+.kg-link {
+  stroke: var(--border);
+  stroke-width: 1;
+  fill: none;
+  transition: stroke var(--transition-slow);
+}
+.kg-link.active {
+  stroke: var(--gold);
+  stroke-width: 1.5;
+}
+.kg-info {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  min-width: 200px;
+  max-width: 240px;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+.kg-info.visible {
+  opacity: 1;
+}
+.kg-info-title {
+  font-family: var(--font-en);
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.kg-info-row {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  margin-bottom: 0.25rem;
+}
+.kg-info-row span {
+  color: var(--text);
+}
+
+/* --- Intelligence Timeline (vertical events) --- */
+.timeline {
+  position: relative;
+  padding-right: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+  padding-right: 1.5rem;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  z-index: 1;
+}
+.timeline-item.emerald::before {
+  border-color: var(--emerald);
+}
+.timeline-item.blue::before {
+  border-color: var(--blue);
+}
+.timeline-item.rose::before {
+  border-color: var(--rose);
+}
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+.timeline-source {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--blue);
+  padding: 2px 6px;
+  background: var(--blue-dim);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.375rem;
+}
+.timeline-text {
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 0.375rem;
+}
+.timeline-confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--gold);
+  padding: 2px 6px;
+  background: var(--gold-dim);
+  border-radius: var(--radius-sm);
+}
+
+/* --- Evidence Chain Variants (Corporate vs Trading) --- */
+.evidence-chain.corporate .evidence-node:first-child .evidence-node-lbl::before {
+  content: 'Source · ';
+}
+.evidence-chain.trading .evidence-node:first-child .evidence-node-lbl::before {
+  content: 'Market Event · ';
 }
 
 /* ============================================================
