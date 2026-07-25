@@ -25,11 +25,21 @@
 10. [طريقة عرض البيانات](#10-طريقة-عرض-البيانات)
 11. [Spacing & Layout](#11-spacing--layout)
 12. [Components](#12-components)
-13. [معايير الاعتماد](#13-معايير-الاعتماد)
+13. [Logo Usage](#13-logo-usage)
+14. [Component States](#14-component-states)
+15. [Information Density](#15-information-density)
+16. [Data Motion](#16-data-motion)
+17. [معايير الاعتماد](#17-معايير-الاعتماد)
 
 ---
 
 ## 1. Brand Essence
+
+### Brand Position:
+
+> **رؤى هي البنية التحتية التي تجعل المعلومات المالية الرسمية قابلة للتحقق والتحويل إلى قرارات.**
+
+هذا سطر واحد يبدأ به كل مصمم أو وكيل AI جديد. قبل أن يعرف الألوان أو الخطوط — يعرف المكان.
 
 ### رؤى في جملة بصرية:
 
@@ -613,7 +623,269 @@ Lead paragraph (text-dim)
 
 ---
 
-## 13. معايير الاعتماد
+## 13. Logo Usage
+
+### النسخة الأساسية:
+
+- شعار «R» داخل مربع بحدود ذهبية
+- الخلفية: card (#111827)
+- الحدود: border (#1F293D) بـ radius 8px
+- اللون: gold (#C8A951)
+- الحجم: 36×36px في nav، 48×48px في footer
+
+### الحد الأدنى للحجم:
+
+- 24×24px (لا أصغر — يفقد الوضوح)
+- المسافة الآمنة حول الشعار: نصف ارتفاع الشعار على الأقل (18px لشعار 36px)
+
+### النسخ المسموحة:
+
+| النسخة | الاستخدام | الوصف |
+|--------|--------|------|
+| Primary (مربع + R) | Nav، footer، favicon | الخلفية card + حدود gold |
+| White (R فقط) | على خلفيات داكنة كبيرة | R بـ gold، لا مربع |
+| Mono (R بـ text color) | على خلفيات ذهبية | R بـ navy |
+
+### ممنوعات الشعار:
+
+- ❌ لا تغيير الألوان عشوائياً
+- ❌ لا تدوير أو تشويه
+- ❌ لا إضافة effects (shadow، glow، gradient)
+- ❌ لا وضع الشعار على خلفية فاتحة (إلا Mono version)
+- ❌ لا تصغير أقل من 24×24px
+- ❌ لا اقتطاع أو تعديل نسب المربع
+- ❌ لا إضافة عناصر حول الشعار (إلا clear space)
+
+### المسافة الآمنة (Clear Space):
+
+```
+        ┌─── clear space ───┐
+        │                    │
+        │   ┌────────────┐  │
+        │   │     R      │  │
+        │   └────────────┘  │
+        │                    │
+        └─── clear space ───┘
+
+Clear space = نصف ارتفاع الشعار على كل جانب
+```
+
+---
+
+## 14. Component States
+
+رؤى منتج قائم على البيانات. كل مكوّن عرض بيانات يحتاج **6 حالات** موحّدة:
+
+### The 6 Data States:
+
+| الحالة | المعنى | الأيقونة | اللون | متى تظهر |
+|--------|------|------|------|------|
+| **Verified** ✓ | البيانات مؤكّدة، المصدر يعمل، آخر تحديث ضمن الجدول | ✓ | Emerald | الحالة الطبيعية |
+| **Loading** ◐ | جارٍ التحديث / جلب البيانات | ◐ | Blue (pulsing) | أثناء fetch |
+| **Stale** ⚠ | البيانات قديمة — تأخّر عن الجدول المعلن | ⚠ | Amber | تأخّر 1-2x المتوقع |
+| **Delayed** ⏱ | تأخّر كبير — المصدر متوقّف مؤقتاً | ⏱ | Rose | تأخّر 2x+ المتوقع |
+| **Conflicted** ⚡ | تعارض بين مصدرين — يحتاج مراجعة | ⚡ | Rose | عند كشف تعارض |
+| **Error** ✗ | فشل في الجلب أو الاستخراج | ✗ | Rose (solid) | عند الخطأ |
+
+### Visual Pattern لكل State:
+
+```
+Verified:   ✓ Source: Federal Reserve · Last: 14:32 EST · Trust A+
+Loading:    ◐ Loading source data...
+Stale:      ⚠ Source delayed 2h (expected 24h) · Last: 12:32 EST
+Delayed:    ⏱ Source delayed 6h+ · Last: 08:00 EST · Trust reduced to A
+Conflicted: ⚡ Conflict detected: BLS says 3.2%, BEA says 3.4% · Under review
+Error:      ✗ Failed to fetch · Retry in 60s
+```
+
+### قواعد الـ States:
+
+- ✅ كل عرض بيانات (Source، Fact، Intelligence) يحوي state indicator
+- ✅ State يظهر بجانب timestamp دائماً
+- ✅ State يؤثر على Confidence Score (Stale → -5%، Delayed → -15%، Conflicted → -25%)
+- ✅ Error state يحوي retry mechanism
+- ❌ لا نُخفي حالة البيانات أبداً
+- ❌ لا نعرض بيانات «Verified» دون timestamp
+
+### Empty State Pattern:
+
+عند عدم وجود بيانات (لا نتائج بحث، لا مراكز، لا notifications):
+
+```
+┌────────────────────────────────────┐
+│                                    │
+│         [Icon - outline]           │
+│                                    │
+│    لا توجد نتائج مطابقة             │
+│    جرّب تعديل الفلاتر أو البحث      │
+│                                    │
+│    [زر: إعادة المحاولة]             │
+│                                    │
+└────────────────────────────────────┘
+```
+
+قواعد Empty State:
+- يشرح لماذا فارغ
+- يقترح خطوة تالية
+- يحوي CTA
+- لا نص فقط — icon + نص + زر
+
+---
+
+## 15. Information Density
+
+### المبدأ:
+
+> **رؤى ليست صفحة SaaS عادية بـ Hero ضخم ثم مساحة فارغة ثم 3 كروت.**
+>
+> **رؤى = Luxury + Intelligence Density.**
+>
+> مساحات واسعة نعم — لكن مع معلومات حقيقية، لا وعود تسويقية.
+
+### ما لا نفعله (SaaS Cliché):
+
+```
+❌ Hero ضخم بنص تسويقي فارغ
+❌ مساحة فارغة كبيرة
+❌ 3 كروت بـ "Powerful AI" / "Seamless Integration" / "Enterprise-grade"
+❌ شعارات عملاء بلا context
+```
+
+### ما نفعله (Intelligence Density):
+
+```
+✅ Hero مختصر + Layer Diagram + أرقام حقيقية
+✅ مساحات + معلومات كثيفة معاً
+✅ كروت بـ:
+   - 411 Sources
+   - 5,200 Documents indexed
+   - 24 Intelligence Modules
+   - 97% Evidence Coverage
+   - <5ms Streaming latency
+✅ أرقام محددة قابلة للإثبات، لا صفات
+```
+
+### قاعدة الكثافة:
+
+> **كل قسم يحوي:**
+> - عنوان واضح
+> - فقرة قصيرة (لا أكثر من سطرين)
+> - **بيانات حقيقية / أرقام / قائمة**
+>
+> **لا قسم يحوي عنوان + فقرة فقط.** هناك دائماً بيانات.
+
+### مثال — Trust Signals على Home:
+
+بدلاً من:
+```
+❌ "Trusted by leading financial institutions"
+[Logos of banks - no context]
+```
+
+نعرض:
+```
+✅ 411 مصدر رسمي · مراقب 24/7
+5,200 وثيقة مُفهرسة · 1,247 حقيقة موثّقة
+<5ms Streaming latency · 99.9% uptime
+دليل كامل لكل ادعاء · قابل للتصدير
+```
+
+### Density Scale:
+
+| العنصر | الكثافة |
+|--------|------|
+| Hero | Low (نص واحد قوي) |
+| Section Headers | Low (عنوان + lead) |
+| Product Cards | Medium (5-7 عناصر معلوماتية) |
+| Trust Center | **High** (أرقام + مصادر + states) |
+| Catalog | **High** (24 منتج + فلترة + metadata) |
+| Pricing | High (جداول تفصيلية) |
+| About | Low-Medium (إنساني + بيانات) |
+
+### القاعدة الذهبية:
+
+> **إذا لم يوجد رقم حقيقي في القسم — القسم يحتاج إعادة كتابة.**
+
+---
+
+## 16. Data Motion
+
+### المبدأ:
+
+> **الحركة تخدم الفهم، لا الاستعراض.**
+>
+> منتج رؤى حيّ — لكن الحركة يجب أن تشرح، لا تبهر.
+
+### 3 أنواع من Data Motion مسموحة:
+
+#### 1. Sequential Reveal (للـ Evidence Chain)
+
+عند فتح Evidence Chain، الخطوات تظهر **تدريجياً**، لا دفعة واحدة:
+
+```
+Step 1: Source              ← appears first (0.2s)
+   ↓
+Step 2: Document            ← appears after 0.4s
+   ↓
+Step 3: Page + Paragraph    ← appears after 0.6s
+   ↓
+Step 4: Quote               ← appears after 0.8s
+   ↓
+Step 5: Extracted Fact      ← appears after 1.0s
+   ↓
+Step 6: Evidence Record     ← appears after 1.2s
+   ↓
+Step 7: Intelligence        ← appears after 1.4s
+```
+
+**لماذا؟** المستخدم يرى الرحلة تتكشّف — يفهم التسلسل المنطقي.
+
+**القاعدة:** 0.2s بين كل خطوة، ease-out، لا bounce.
+
+#### 2. Live Update Pulse (للبيانات الحيّة)
+
+عند تحديث بيانات (سعر، حالة مصدر، إشارة جديدة):
+
+```
+[Old value] → fades out (0.2s)
+[New value] → fades in + subtle gold pulse (0.4s)
+```
+
+**القاعدة:** لا blinking مزعج. pulse واحد خفيف، ثم استقرار.
+
+#### 3. Confidence Meter Fill (للـ Confidence Score)
+
+عند ظهور Confidence Score لأول مرة:
+
+```
+[─────────────────] 0%
+       ↓ (animates over 0.8s)
+[────────────░░░░░] 87%
+```
+
+**القاعدة:** يملأ من 0% إلى القيمة النهائية في 0.8s، ease-out. لا count-up للأرقام (محظور) — الـ meter فقط يتحرك.
+
+### ما لا يحدث في Data Motion:
+
+- ❌ لا count-up للأرقام (number ticking) — يبدو عرضياً
+- ❌ لا auto-refresh بدون إشعار (يفاجئ المستخدم)
+- ❌ لا flashing/blinking للتنبيهات (مزعج)
+- ❌ لا spinning loaders بعد 2 ثانية (استخدم skeleton)
+
+### Reduced Motion:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Data Motion: كل التأثيرات تُلغى، البيانات تظهر فوراً */
+  .evidence-step { transition: none; opacity: 1; transform: none; }
+  .confidence-meter { transition: none; }
+  .live-pulse { animation: none; }
+}
+```
+
+---
+
+## 17. معايير الاعتماد
 
 ### Brand Essence:
 - [ ] 3 صفات بصرية مثبّتة (Institutional + Precise + Deep)
@@ -678,6 +950,33 @@ Lead paragraph (text-dim)
 - [ ] Badge pattern
 - [ ] Section header pattern
 - [ ] Navigation pattern
+
+### Logo Usage:
+- [ ] Brand Position معتمدة (سطر واحد)
+- [ ] 3 نسخ شعار (Primary + White + Mono)
+- [ ] حد أدنى للحجم (24×24px)
+- [ ] Clear space موثّق
+- [ ] 7 ممنوعات شعار
+
+### Component States:
+- [ ] 6 data states (Verified / Loading / Stale / Delayed / Conflicted / Error)
+- [ ] كل state له: أيقونة + لون + pattern نصي
+- [ ] State يؤثر على Confidence Score
+- [ ] Empty State pattern (icon + نص + CTA)
+
+### Information Density:
+- [ ] قاعدة الكثافة موثّقة (عنوان + فقرة + بيانات)
+- [ ] Density Scale (Low/Medium/High حسب نوع الصفحة)
+- [ ] مثال Trust Signals (أرقام حقيقية لا شعارات)
+- [ ] قاعدة ذهبية: «لا قسم بلا رقم حقيقي»
+
+### Data Motion:
+- [ ] 3 أنواع مسموحة (Sequential Reveal + Live Pulse + Confidence Fill)
+- [ ] Sequential Reveal: 0.2s بين خطوات Evidence Chain
+- [ ] Live Pulse: pulse واحد خفيف
+- [ ] Confidence Fill: meter فقط، لا count-up
+- [ ] 4 محظورات (count-up، auto-refresh، flashing، spinning >2s)
+- [ ] Reduced motion support
 
 ---
 
