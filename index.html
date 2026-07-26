@@ -106,14 +106,73 @@ body { class: motion-marketing; }
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
+    <a href="index.html" class="nav-brand" aria-label="رؤى · ROUAA — Home">
       <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Financial Intelligence Infrastructure</span></div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Financial Intelligence Infrastructure</span>
+      </div>
     </a>
     <ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="catalog.html">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html">Company</a></li></ul>
     <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html" class="active">Home</a><a href="platform.html">Platform</a><a href="solutions.html">Solutions</a><a href="catalog.html">Products</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <div class="nav-mobile-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
   </div>
 </nav>
+
+<script>
+// Nav mobile toggle — works on every page
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const mobile = document.getElementById('navMobile');
+  if (!toggle || !mobile) return;
+  
+  function setOpen(open) {
+    mobile.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!mobile.classList.contains('open'));
+  });
+  
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!mobile.contains(e.target) && !toggle.contains(e.target)) {
+      setOpen(false);
+    }
+  });
+  
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  
+  // Close on link click inside mobile menu
+  mobile.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+  
+  // Auto-close on resize to desktop
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 1024) setOpen(false);
+    }, 100);
+  });
+})();
+</script>
 
 <main id="main">
 
