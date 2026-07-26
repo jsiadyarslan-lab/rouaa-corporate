@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Trading Intelligence Layer — The Intelligence Layer Inside Trading Platforms</title>
+<meta name="description" content="أضف الذكاء المالي إلى منصة التداول — سياق السوق، تأثير الأحداث، تحليل كلي، إشارات مخاطر. صُممت لتقوية منصتك، لا لمنافستها.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.hero-market {
+  position: relative;
+  padding: 6rem 0 3rem;
+  overflow: hidden;
+  text-align: center;
+}
+.hero-market-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--emerald-dim), transparent 70%);
+  z-index: 0;
+}
+.hero-market-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.hero-market-h1 {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  max-width: 22ch;
+}
+.hero-market-h1 .emerald { color: var(--emerald); }
+.hero-market-sub {
+  font-size: 1.0625rem;
+  color: var(--text-dim);
+  max-width: 60ch;
+  line-height: 1.7;
+}
+.hero-market-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* === Positioning banner === */
+.positioning-banner {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  padding: 1.5rem 2rem;
+  background: var(--card);
+  border: 1px solid var(--emerald);
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+.positioning-banner-h {
+  font-family: var(--font-en);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 0.5rem;
+}
+.positioning-banner-list {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-mute);
+}
+.positioning-banner-list span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.positioning-banner-list span::before {
+  content: '✗';
+  color: var(--rose);
+  font-weight: 700;
+}
+.positioning-banner-only {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-soft);
+  font-family: var(--font-en);
+  font-size: 0.875rem;
+  color: var(--emerald);
+  font-weight: 600;
+}
+
+/* === Before/After === */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) { .workflow-grid { grid-template-columns: 1fr; } }
+.workflow-card {
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+}
+.workflow-card.before { background: var(--surface); }
+.workflow-card.after { background: var(--emerald-dim); border-color: var(--emerald); }
+.workflow-card-h {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.workflow-card.before .workflow-card-h { color: var(--text-mute); }
+.workflow-card.after .workflow-card-h { color: var(--emerald); }
+.workflow-step {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-soft);
+}
+.workflow-step:last-child { border-bottom: none; }
+.workflow-step .num {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-mute);
+  width: 24px;
+  flex-shrink: 0;
+}
+.workflow-card.after .workflow-step .num { color: var(--emerald); }
+
+/* === Outputs === */
+.output-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+}
+.output-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1.25rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--emerald);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-slow);
+}
+.output-type:hover { border-color: var(--emerald); }
+.output-type-icon { font-size: 1.25rem; }
+.output-type-name {
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.output-type-ar {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+}
+.output-type-desc {
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+
+/* === Buyers === */
+.buyer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.buyer-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  transition: border-color var(--transition-slow);
+}
+.buyer-card:hover { border-color: var(--emerald); }
+.buyer-card-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.buyer-card-name {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.375rem;
+}
+.buyer-card-need {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  line-height: 1.5;
+}
+
+/* === Integration === */
+.integration-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.integration-chip {
+  padding: 0.5rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.integration-chip.highlight {
+  border-color: var(--emerald);
+  color: var(--emerald);
+}
+
+/* === CTA === */
+.cta-final {
+  text-align: center;
+  padding: 5rem 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border-soft);
+}
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing bl-trading">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Trading Intelligence Layer</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="media-technologies.html">Media</a></li>
+      <li><a href="trading-technologies.html" class="active">Trading</a></li>
+      <li><a href="developers.html">API</a></li>
+      <li><a href="trust.html">الثقة</a></li>
+      <li><a href="enterprise.html">المؤسسات</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-market">
+    <div class="hero-market-bg"></div>
+    <div class="container">
+      <div class="hero-market-content">
+        <div class="mono-label" style="color: var(--emerald);">02 · Trading Intelligence</div>
+        <h1 class="hero-market-h1">
+          The Intelligence Layer<br>
+          <span class="emerald">Inside Trading Platforms</span>
+        </h1>
+        <p class="hero-market-sub">
+          أضف الذكاء المالي إلى منصة التداول — سياق السوق، تأثير الأحداث، التحليل الكلي، وإشارات المخاطر — دون بناء فريق أبحاث داخلي. صُممت لتقوية منصتك، لا لمنافستها.
+        </p>
+        <div class="hero-market-cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request Trading Briefing</a>
+          <a href="#integration" class="btn btn-ghost btn-lg">See Integration</a>
+        </div>
+      </div>
+
+      <!-- Positioning banner -->
+      <div class="positioning-banner reveal">
+        <div class="positioning-banner-h">Built for Brokers. Not Against Brokers.</div>
+        <div class="positioning-banner-list">
+          <span>لا تنفيذ</span>
+          <span>لا أموال عملاء</span>
+          <span>لا وساطة</span>
+          <span>لا حسابات تداول</span>
+        </div>
+        <div class="positioning-banner-only">فقط: Intelligence Layer فوق منصتك</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE PROBLEM ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Problem</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">البروكر لديه أسعار ورسوم.<br>لكن العميل يسأل: «لماذا؟»</h2>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-card before">
+          <div class="workflow-card-h">Traditional Trading Platform</div>
+          <div class="workflow-step"><span class="num">01</span> أسعار مباشرة</div>
+          <div class="workflow-step"><span class="num">02</span> رسوم بيانية</div>
+          <div class="workflow-step"><span class="num">03</span> أوامر تنفيذ</div>
+          <div class="workflow-step"><span class="num">04</span> أدوات تقنية</div>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
+            <p style="font-size: 0.8125rem; color: var(--text-mute); line-height: 1.6;">لكن العميل يسأل: لماذا تحرك السوق؟ ماذا يعني قرار الفائدة؟ هل هذا الخبر مهم؟ ما مستوى المخاطر؟</p>
+            <p style="font-size: 0.75rem; color: var(--rose); margin-top: 0.5rem;">فيضطر الوسيط إلى: بناء فريق أبحاث · كتابة محتوى يومي · تحليل أحداث · تطوير أدوات AI</p>
+          </div>
+        </div>
+        <div class="workflow-card after">
+          <div class="workflow-card-h">With ROUAA Intelligence Layer</div>
+          <div class="workflow-step"><span class="num">01</span> Official Event detected</div>
+          <div class="workflow-step"><span class="num">02</span> Facts + Evidence extracted</div>
+          <div class="workflow-step"><span class="num">03</span> Market Intelligence generated</div>
+          <div class="workflow-step"><span class="num">04</span> Distributed inside platform</div>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
+            <p style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6;">العميل يرى: سياق السوق · تأثير الحدث · مخاطر التقلب · إجابات فورية — كلها داخل منصتك، بعلامتك.</p>
+            <p style="font-size: 0.75rem; color: var(--emerald); margin-top: 0.5rem;">بدون: فريق أبحاث · بناء AI · صيانة محتوى</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= OUTPUTS ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Trading Intelligence Products</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">حدث سوقي واحد. تجربة تداول كاملة.</h2>
+        <p class="section-lead" style="margin: 0 auto;">Fed Rate Decision → 7 منتجات ذكاء تداولي تظهر داخل منصتك فوراً.</p>
+      </div>
+
+      <div class="output-types">
+        <div class="output-type">
+          <div class="output-type-icon">📊</div>
+          <div class="output-type-name">Market Context</div>
+          <div class="output-type-ar">سياق السوق</div>
+          <div class="output-type-desc">«لماذا تحرك الدولار؟» — إجابة فورية للعميل</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">🌍</div>
+          <div class="output-type-name">Macro Impact</div>
+          <div class="output-type-ar">تأثير كلي</div>
+          <div class="output-type-desc">الأصول الأكثر تأثراً بالحدث</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">⚠</div>
+          <div class="output-type-name">Risk Signals</div>
+          <div class="output-type-ar">إشارات مخاطر</div>
+          <div class="output-type-desc">ارتفاع مخاطر التقلب · تنبيهات استباقية</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">🧠</div>
+          <div class="output-type-name">Decision Support</div>
+          <div class="output-type-ar">دعم القرار</div>
+          <div class="output-type-desc">سياق + استدلال + حدود مخاطر — لا توصيات مباشرة</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">🤖</div>
+          <div class="output-type-name">AI Market Assistant</div>
+          <div class="output-type-ar">مساعد السوق</div>
+          <div class="output-type-desc">إجابات للمستخدم داخل المنصة — بـ 32 لغة</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">🔔</div>
+          <div class="output-type-name">Event Alerts</div>
+          <div class="output-type-ar">تنبيهات أحداث</div>
+          <div class="output-type-desc">تنبيهات ذكية عند أحداث تؤثر على محفظة العميل</div>
+        </div>
+        <div class="output-type">
+          <div class="output-type-icon">🏷</div>
+          <div class="output-type-name">White Label Intel</div>
+          <div class="output-type-ar">ذكاء بعلامتك</div>
+          <div class="output-type-desc">كل المخرجات تظهر باسم الوسيط وعلامته</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-5">كل مخرج يستخدم لغة «Decision Support» — لا «Trading Signals». نحن لا نقول للعميل ماذا يشتري. نساعده يفهم القرار.</p>
+    </div>
+  </section>
+
+  <!-- ============= WHO BUYS ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Who Buys</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من يحتاج هذا</h2>
+      </div>
+
+      <div class="buyer-grid">
+        <div class="buyer-card">
+          <div class="buyer-card-icon">💱</div>
+          <div class="buyer-card-name">Brokers</div>
+          <div class="buyer-card-need">زيادة قيمة العميل + تقليل churn + ذكاء داخل المنصة — دون فريق أبحاث</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">📈</div>
+          <div class="buyer-card-name">Trading Platforms</div>
+          <div class="buyer-card-need">إضافة طبقة ذكاء فوق تجربة التداول — Market Context + AI Assistant</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">🎯</div>
+          <div class="buyer-card-name">Prop Firms</div>
+          <div class="buyer-card-need">تحسين مراقبة المخاطر + سياق السوق للمتداولين</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">💻</div>
+          <div class="buyer-card-name">FinTech Apps</div>
+          <div class="buyer-card-need">ذكاء مالي جاهز — API + Widgets + White Label</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= INTEGRATION ============= -->
+  <section class="section reveal" id="integration">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Integration</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تدمج في منصتك</h2>
+      </div>
+
+      <div class="integration-row">
+        <span class="integration-chip">REST API</span>
+        <span class="integration-chip">Streaming Events</span>
+        <span class="integration-chip">Webhooks</span>
+        <span class="integration-chip">SDK</span>
+        <span class="integration-chip highlight">Platform Components</span>
+        <span class="integration-chip highlight">White Label Terminal</span>
+        <span class="integration-chip">Embedded Widgets</span>
+      </div>
+
+      <p class="text-center text-mute small mt-5">من API خفيف في أسبوع → White Label Terminal في أسابيع → Platform Components في أي منتج تداولي.</p>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>See how ROUAA enhances your trading platform</h2>
+      <p>مكالمة 30 دقيقة — نوضح كيف تضيف طبقة ذكاء فوق منصتك دون بناء فريق أبحاث.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Trading Intelligence Briefing" class="btn btn-primary btn-lg">Request Trading Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Markets</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim" style="color: var(--emerald);">Trading ✓</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Trust</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="trust.html" class="small text-dim">Evidence Chain</a></li>
+        <li><a href="trust.html" class="small text-dim">Source Registry</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="index.html" class="small text-dim">Home</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
