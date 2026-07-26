@@ -130,7 +130,7 @@
         <span class="sub">Company</span>
       </div>
     </a>
-    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="catalog.html">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html" class="active">Company</a></li></ul>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="products-architecture.html">Architecture</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html" class="active">Company</a></li></ul>
     <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
       <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
@@ -138,7 +138,7 @@
     </button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="solutions.html">Solutions</a><a href="catalog.html">Products</a><a href="trust.html">Trust</a><a href="company.html" class="active">Company</a>
+    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="products-architecture.html">Architecture</a><a href="solutions.html">Solutions</a><a href="trust.html">Trust</a><a href="company.html" class="active">Company</a>
     <div class="nav-mobile-cta">
       <a href="#contact" class="btn btn-primary">Request Briefing</a>
     </div>
@@ -146,48 +146,21 @@
 </nav>
 
 <script>
-// Nav mobile toggle — works on every page
 (function() {
   const toggle = document.querySelector('.nav-toggle');
   const mobile = document.getElementById('navMobile');
   if (!toggle || !mobile) return;
-  
   function setOpen(open) {
     mobile.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setOpen(!mobile.classList.contains('open'));
-  });
-  
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!mobile.contains(e.target) && !toggle.contains(e.target)) {
-      setOpen(false);
-    }
-  });
-  
-  // Close on ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
-  });
-  
-  // Close on link click inside mobile menu
-  mobile.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => setOpen(false));
-  });
-  
-  // Auto-close on resize to desktop
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!mobile.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!mobile.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
   let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (window.innerWidth > 1024) setOpen(false);
-    }, 100);
-  });
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (window.innerWidth > 1024) setOpen(false); }, 100); });
 })();
 </script>
 
@@ -543,7 +516,7 @@
     <div>
       <h4 class="mono-label text-mute mb-3">Company</h4>
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-        <li><a href="company.html" class="small text-dim" style="color: var(--gold);">About ✓</a></li>
+        <li><a href="company.html" class="small text-dim">About</a></li>
         <li><a href="#contact" class="small text-dim">Contact</a></li>
       </ul>
     </div>
