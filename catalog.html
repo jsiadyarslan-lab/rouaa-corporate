@@ -490,11 +490,10 @@ function renderProductGrid() {
   filterProducts();
 }
 
-// Render on load - must happen before first filter
-renderProductGrid();
-
-// Initial filter call now works because cards exist
-filterProducts();
+// Ensure products.js is loaded before rendering
+window.addEventListener('load', () => {
+  renderProductGrid();
+});
 </script>
 
 </body>
