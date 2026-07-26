@@ -332,7 +332,7 @@ body { class: motion-marketing; }
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
+<script src="assets/js/products.js" defer></script>
 <script>
 // Reveal on scroll
 const io = new IntersectionObserver(entries => {
@@ -490,10 +490,15 @@ function renderProductGrid() {
   filterProducts();
 }
 
-// Ensure products.js is loaded before rendering
-window.addEventListener('load', () => {
-  renderProductGrid();
-});
+// Poll for ROUAA_PRODUCTS to be available (handles async loading)
+function waitForProducts() {
+  if (typeof ROUAA_PRODUCTS !== 'undefined' && ROUAA_PRODUCTS.length > 0) {
+    renderProductGrid();
+  } else {
+    setTimeout(waitForProducts, 100);
+  }
+}
+waitForProducts();
 </script>
 
 </body>
