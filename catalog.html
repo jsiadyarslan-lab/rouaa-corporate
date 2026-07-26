@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى · Product Catalog — Explore the ROUAA Platform</title>
+<title>رؤى · Intelligence Capabilities — Explore the ROUAA Platform</title>
 <meta name="description" content="كل منتجات رؤى في مكان واحد — فلترة حسب القطاع، الدور، النوع. كل منتج مدعوم بنفس المحرك.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,8 +155,8 @@ body { class: motion-marketing; }
     <div class="container">
       <div class="catalog-hero-content">
         <div class="mono-label text-gold">Product Catalog</div>
-        <h1>Explore the <span class="gold">ROUAA Platform</span></h1>
-        <p>كل منتجات رؤى في مكان واحد — مدعومة بنفس المحرك، بنفس الأدلة، بنفس جودة الثقة. فلترة حسب القطاع، الدور، أو النوع.</p>
+        <h1>Solve Your <span class="gold">Institutional Intelligence Problem</span></h1>
+        <p>حدد مشكلة مؤسستك، واكتشف القدرات التي تحلها — كلها مبنية على نفس البنية التحتية للذكاء المؤسسي.</p>
       </div>
       <div class="catalog-search">
         <span class="catalog-search-icon">🔍</span>
@@ -182,14 +182,14 @@ body { class: motion-marketing; }
     <!-- Filters sidebar -->
     <aside class="catalog-filters">
       <div class="filter-group">
-        <div class="filter-h">Category</div>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Media <span class="filter-count">8</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Trading <span class="filter-count">9</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research <span class="filter-count">6</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk <span class="filter-count">5</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> APIs <span class="filter-count">7</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> AI Agents <span class="filter-count">4</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Components <span class="filter-count">5</span></label>
+        <div class="filter-h">I Need</div>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research Automation <span class="filter-count">6</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk Monitoring <span class="filter-count">5</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Market Intelligence <span class="filter-count">9</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Content Generation <span class="filter-count">8</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Data Integration <span class="filter-count">7</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Decision Support <span class="filter-count">4</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components <span class="filter-count">5</span></label>
       </div>
 
       <div class="filter-group">
@@ -430,13 +430,19 @@ const CATEGORY_INFO = {
 
 function renderProductCard(product) {
   const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
-  const tagline = (product.tagline || '').substring(0, 35);
-  const desc = (product.desc || '').substring(0, 110) + (product.desc.length > 110 ? '...' : '');
+  const desc = (product.desc || '').substring(0, 90) + (product.desc.length > 90 ? '...' : '');
+  const outcome = (product.tagline || '').substring(0, 60);
+  const deployLabel = product.deploy.includes('enterprise') ? 'Enterprise' : 
+                     product.deploy.includes('api') ? 'API' : 'Private Cloud';
   return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}">
-    <div class="product-card-tag">${cat.icon} ${cat.name} · ${product.pricing.replace('from ', '')}</div>
+    <div class="product-card-tag">${cat.icon} ${cat.name}</div>
     <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
     <div class="product-card-desc">${desc}</div>
-    <div class="product-card-foot"><span class="product-card-price">${product.pricing}</span><span class="product-card-link">→</span></div>
+    <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-soft);">
+      <div style="font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Business Outcome</div>
+      <div style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5;">${outcome}</div>
+    </div>
+    <div class="product-card-foot"><span style="color: var(--text-mute); font-size: 0.75rem;">${deployLabel} Deployment</span><span class="product-card-link">→</span></div>
   </a>`;
 }
 
