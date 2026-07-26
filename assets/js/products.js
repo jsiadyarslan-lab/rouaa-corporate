@@ -222,7 +222,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-auto',
     cat: 'trading',
-    nameEn: 'Autonomous Trader',
+    nameEn: 'Execution Intelligence Layer',
     nameAr: 'التاجر المستقل',
     tagline: 'تنفيذ آلي وفق قواعد العميل — لا قرارات رؤى',
     desc: 'محرّك تنفيذ آلي يطبّق قواعد العميل المحددة سلفاً. رؤى لا تقترح، تنفّذ ما قرره العميل — مع سجل كامل.',
@@ -237,7 +237,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-prediction',
     cat: 'trading',
-    nameEn: 'Prediction Market',
+    nameEn: 'Scenario Probability Engine',
     nameAr: 'سوق التنبؤات',
     tagline: 'سيناريوهات مستقبلية — باحتمالاتها',
     desc: 'لكل حدث قادم، يولّد رؤى 3-5 سيناريوهات محتملة مع احتمالاتهم. لا تنبّؤ واحد — احتمالات شفافة.',
