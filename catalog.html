@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Product Catalog — Explore the ROUAA Platform</title>
+<meta name="description" content="كل منتجات رؤى في مكان واحد — فلترة حسب القطاع، الدور، النوع. كل منتج مدعوم بنفس المحرك.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.catalog-hero { position: relative; padding: 5rem 0 2rem; overflow: hidden; text-align: center; }
+.catalog-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 40% 30% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.catalog-hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.catalog-hero h1 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; max-width: 20ch; }
+.catalog-hero h1 .gold { color: var(--gold); }
+.catalog-hero p { font-size: 1.0625rem; color: var(--text-dim); max-width: 55ch; line-height: 1.7; }
+
+/* === Search === */
+.catalog-search { max-width: 500px; margin: 1.5rem auto 0; position: relative; }
+.catalog-search input {
+  width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+  color: var(--text); font-family: var(--font-ar); font-size: 0.875rem;
+  transition: border-color var(--transition-base);
+}
+.catalog-search input:focus { outline: none; border-color: var(--gold); }
+.catalog-search input::placeholder { color: var(--text-mute); }
+.catalog-search-icon { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--text-mute); font-size: 1rem; }
+
+/* === Filters === */
+.catalog-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; max-width: 1280px; margin: 2rem auto; padding: 0 2rem; }
+@media (max-width: 900px) { .catalog-layout { grid-template-columns: 1fr; } }
+
+.catalog-filters { position: sticky; top: 88px; align-self: start; }
+@media (max-width: 900px) { .catalog-filters { position: static; } }
+
+.filter-group { margin-bottom: 1.5rem; }
+.filter-h { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.625rem; padding-bottom: 0.375rem; border-bottom: 1px solid var(--border-soft); }
+.filter-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; cursor: pointer; font-size: 0.8125rem; color: var(--text-dim); transition: color var(--transition-base); }
+.filter-item:hover { color: var(--gold); }
+.filter-item input { accent-color: var(--gold); width: 14px; height: 14px; }
+.filter-count { margin-right: auto; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-faint); }
+
+/* === View tabs === */
+.catalog-tabs { display: flex; gap: 0.375rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.catalog-tab { padding: 0.375rem 0.75rem; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition-base); letter-spacing: 0.05em; text-transform: uppercase; }
+.catalog-tab:hover { color: var(--gold); }
+.catalog-tab.active { color: var(--gold); border-color: var(--gold); background: var(--gold-dim); }
+
+/* === Product grid === */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+
+.product-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 1.25rem; transition: all var(--transition-slow); position: relative; overflow: hidden;
+  text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.product-card:hover { border-color: var(--cat-color, var(--gold)); transform: translateY(-2px); }
+.product-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--cat-color, var(--gold)); }
+
+.product-card.cat-media { --cat-color: var(--blue); }
+.product-card.cat-trading { --cat-color: var(--emerald); }
+.product-card.cat-research { --cat-color: var(--gold); }
+.product-card.cat-risk { --cat-color: var(--rose); }
+.product-card.cat-api { --cat-color: var(--amber); }
+.product-card.cat-agent { --cat-color: var(--blue); }
+.product-card.cat-component { --cat-color: var(--text-mute); }
+
+.product-card-tag { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--cat-color, var(--gold)); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.product-card-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.product-card-name .ar { font-family: var(--font-ar); font-size: 0.9375rem; display: block; margin-bottom: 0.1rem; }
+.product-card-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; flex: 1; }
+.product-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
+.product-card-price { font-family: var(--font-mono); font-size: 0.625rem; color: var(--cat-color, var(--gold)); }
+.product-card-link { font-family: var(--font-en); font-size: 0.625rem; color: var(--text-mute); }
+
+/* === Powered badge === */
+.powered-badge { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem; text-align: center; }
+.powered-badge-text { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+.powered-badge-items { display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+.powered-badge-item { font-family: var(--font-en); font-size: 0.75rem; color: var(--gold); font-weight: 600; display: flex; align-items: center; gap: 0.25rem; }
+.powered-badge-item::before { content: '✓'; color: var(--emerald); font-weight: 700; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 4rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: 0.75rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 1.5rem; font-size: 1rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Product Catalog</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="platform.html">Platform</a></li>
+      <li><a href="catalog.html" class="active">Catalog</a></li>
+      <li><a href="trust.html">الثقة</a></li>
+      <li><a href="enterprise.html">المؤسسات</a></li>
+    </ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="catalog-hero">
+    <div class="catalog-hero-bg"></div>
+    <div class="container">
+      <div class="catalog-hero-content">
+        <div class="mono-label text-gold">Product Catalog</div>
+        <h1>Explore the <span class="gold">ROUAA Platform</span></h1>
+        <p>كل منتجات رؤى في مكان واحد — مدعومة بنفس المحرك، بنفس الأدلة، بنفس جودة الثقة. فلترة حسب القطاع، الدور، أو النوع.</p>
+      </div>
+      <div class="catalog-search">
+        <span class="catalog-search-icon">🔍</span>
+        <input type="text" placeholder="ابحث عن منتج..." id="catalogSearch">
+      </div>
+    </div>
+  </section>
+
+  <!-- Powered badge -->
+  <div class="powered-badge">
+    <div class="powered-badge-text">All products powered by</div>
+    <div class="powered-badge-items">
+      <span class="powered-badge-item">Official Sources</span>
+      <span class="powered-badge-item">Evidence Layer</span>
+      <span class="powered-badge-item">Knowledge Graph</span>
+      <span class="powered-badge-item">Reasoning Engine</span>
+    </div>
+  </div>
+
+  <!-- ============= CATALOG ============= -->
+  <div class="catalog-layout">
+
+    <!-- Filters sidebar -->
+    <aside class="catalog-filters">
+      <div class="filter-group">
+        <div class="filter-h">Category</div>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Media <span class="filter-count">8</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Trading <span class="filter-count">9</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research <span class="filter-count">6</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk <span class="filter-count">5</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> APIs <span class="filter-count">7</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> AI Agents <span class="filter-count">4</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Components <span class="filter-count">5</span></label>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-h">Industry</div>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="banks"> Banks</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="funds"> Hedge Funds</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="brokers"> Brokers</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="media"> Media</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="govt"> Governments</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="fintech"> FinTech</label>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-h">Type</div>
+        <label class="filter-item"><input type="checkbox" class="filter-type" value="api"> API</label>
+        <label class="filter-item"><input type="checkbox" class="filter-type" value="saas"> SaaS</label>
+        <label class="filter-item"><input type="checkbox" class="filter-type" value="whitelabel"> White Label</label>
+        <label class="filter-item"><input type="checkbox" class="filter-type" value="enterprise"> Enterprise</label>
+      </div>
+    </aside>
+
+    <!-- Product grid -->
+    <div>
+      <div class="catalog-tabs">
+        <span class="catalog-tab active" data-view="all">All · 44</span>
+        <span class="catalog-tab" data-view="media">Media</span>
+        <span class="catalog-tab" data-view="trading">Trading</span>
+        <span class="catalog-tab" data-view="research">Research</span>
+        <span class="catalog-tab" data-view="risk">Risk</span>
+        <span class="catalog-tab" data-view="api">APIs</span>
+        <span class="catalog-tab" data-view="agent">AI Agents</span>
+        <span class="catalog-tab" data-view="component">Components</span>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+
+        <!-- MEDIA PRODUCTS (8) -->
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Financial News Engine">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">محرّك الأخبار المالية</span>Financial News Engine</div>
+          <div class="product-card-desc">حوّل الأحداث المالية الرسمية إلى أخبار جاهزة للنشر — متعدد اللغات، موثّقة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="News Agency Agent">
+          <div class="product-card-tag">Media · Agent</div>
+          <div class="product-card-name"><span class="ar">وكيل وكالة الأنباء</span>News Agency Agent</div>
+          <div class="product-card-desc">وكالة أنباء مالية كاملة باسم مؤسستك — إنتاج أصلي، لا نسخ.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Reports Pipeline">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">أنابيب التقارير</span>Reports Pipeline</div>
+          <div class="product-card-desc">تقارير يومية، أسبوعية، قطاعية — كل رقم موثّق بمصدره.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Video Pipeline">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">أنابيب الفيديو</span>Video Pipeline</div>
+          <div class="product-card-desc">سكريبت + صوت + رسوم — فيديو تحليلي في دقائق من حدث رسمي.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $10K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Infographic Pipeline">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">أنابيب الإنفوجرافيك</span>Infographic Pipeline</div>
+          <div class="product-card-desc">تحويل البيانات الرسمية إلى تصورات بصرية — كل رقم موثّق.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $3K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Stock Analysis Pipeline">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">تحليل الأسهم</span>Stock Analysis Pipeline</div>
+          <div class="product-card-desc">تحليل أساسي + فني + SWOT لآلاف الأسهم — إشارات موثّقة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $15K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Geopolitical Pipeline">
+          <div class="product-card-tag">Media · Pipeline</div>
+          <div class="product-card-name"><span class="ar">المحرّك الجيوسياسي</span>Geopolitical Pipeline</div>
+          <div class="product-card-desc">مخاطر الدول والأحداث وتأثيرها على الأسواق — قبل المنافسين.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $10K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-media" data-cat="media" data-name="Media Intelligence Feed">
+          <div class="product-card-tag">Media · Feed</div>
+          <div class="product-card-name"><span class="ar">تغذية الإعلام المالي</span>Media Intelligence Feed</div>
+          <div class="product-card-desc">تيار حي للأحداث — جاهز للنشر في CMS أو تطبيق.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- TRADING PRODUCTS (9) -->
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="AI Council">
+          <div class="product-card-tag">Trading · Engine</div>
+          <div class="product-card-name"><span class="ar">المجلس الذكي</span>AI Council</div>
+          <div class="product-card-desc">10 أدوار استدلال تتشاور قبل كل توصية — إجماع + سيناريوهات.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Smart Executor">
+          <div class="product-card-tag">Trading · Execution</div>
+          <div class="product-card-name"><span class="ar">المنفّذ الذكي</span>Smart Executor</div>
+          <div class="product-card-desc">15 فحص أمان قبل كل أمر — position sizing + risk control.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="LASAA">
+          <div class="product-card-tag">Trading · HFT</div>
+          <div class="product-card-name"><span class="ar">اللاسع</span>LASAA</div>
+          <div class="product-card-desc">تنفيذ عالي التردد <5ms — tick data + microstructure + order imbalance.</div>
+          <div class="product-card-foot"><span class="product-card-price">Enterprise</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Smart Chart Intelligence">
+          <div class="product-card-tag">Trading · Application</div>
+          <div class="product-card-name"><span class="ar">الشارت الذكي</span>Smart Chart Intelligence</div>
+          <div class="product-card-desc">83 أداة + Bayesian + Wyckoff + Elliott + AI Explanation.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $99/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Advanced Scanner">
+          <div class="product-card-tag">Trading · Scanner</div>
+          <div class="product-card-name"><span class="ar">الماسح المتقدم</span>Advanced Scanner</div>
+          <div class="product-card-desc">SmartScore + multi-timeframe + patterns + divergence + volume profile.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $99/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Prediction Markets">
+          <div class="product-card-tag">Trading · Engine</div>
+          <div class="product-card-name"><span class="ar">سوق التوقعات</span>Prediction Markets</div>
+          <div class="product-card-desc">احتمالات حية للأحداث الكبرى — مبنية على أدلة لا آراء.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Portfolio Intelligence">
+          <div class="product-card-tag">Trading · Application</div>
+          <div class="product-card-name"><span class="ar">ذكاء المحفظة</span>Portfolio Intelligence</div>
+          <div class="product-card-desc">كل مركز مرتبط بالاستخبارات التي أنشأته — لا أرقام مجردة.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="AI Trading Assistant">
+          <div class="product-card-tag">Trading · Agent</div>
+          <div class="product-card-name"><span class="ar">مساعد التداول</span>AI Trading Assistant</div>
+          <div class="product-card-desc">اسأل: «لماذا هذا المركز؟» — يجيب بالدليل الكامل. 32 لغة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $49/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-trading" data-cat="trading" data-name="Execution Bridge">
+          <div class="product-card-tag">Trading · Integration</div>
+          <div class="product-card-name"><span class="ar">جسر التنفيذ</span>MT5 Execution Bridge</div>
+          <div class="product-card-desc">اتصال مباشر بـ MetaTrader 5 — أوامر في ميلي ثانية.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- RESEARCH PRODUCTS (6) -->
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Intelligence Feed">
+          <div class="product-card-tag">Research · Feed</div>
+          <div class="product-card-name"><span class="ar">تغذية الاستخبارات</span>Intelligence Feed</div>
+          <div class="product-card-desc">تيار حي للأحداث المالية — كل حدث مرتبط بمصدره ودرجة ثقته.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Research Engine">
+          <div class="product-card-tag">Research · Engine</div>
+          <div class="product-card-name"><span class="ar">محرّك الأبحاث</span>Research Engine</div>
+          <div class="product-card-desc">بحث عبر 10,000+ وثيقة — استخراج حقائق مع ربط كل نتيجة بمصدرها.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Investment Memo">
+          <div class="product-card-tag">Research · Output</div>
+          <div class="product-card-name"><span class="ar">مذكرة استثمارية</span>Investment Memo</div>
+          <div class="product-card-desc">موجز مدعوم بأدلة — قابل للتصدير PDF/DOCX — جاهز للجنة الاستثمار.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Scenario Analysis">
+          <div class="product-card-tag">Research · Analysis</div>
+          <div class="product-card-name"><span class="ar">تحليل سيناريوهات</span>Scenario Analysis</div>
+          <div class="product-card-desc">3 سيناريوهات لكل حدث — مع احتمالات وأدلة. لا تخمين.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Economic Calendar">
+          <div class="product-card-tag">Research · Tool</div>
+          <div class="product-card-name"><span class="ar">التقويم الاقتصادي</span>Economic Calendar</div>
+          <div class="product-card-desc">أحداث قادمة + توقعات + نتائج فعلية — كل رقم مرتبط بمصدره.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $500/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-research" data-cat="research" data-name="Asset Intelligence">
+          <div class="product-card-tag">Research · Intelligence</div>
+          <div class="product-card-name"><span class="ar">ذكاء الأصول</span>Asset Intelligence</div>
+          <div class="product-card-desc">تحليل كل أصل — مرتبط بالأحداث التي تؤثر عليه.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- RISK PRODUCTS (5) -->
+        <a href="#" class="product-card cat-risk" data-cat="risk" data-name="Geopolitical Monitor">
+          <div class="product-card-tag">Risk · Monitor</div>
+          <div class="product-card-name"><span class="ar">مراقبة جيوسياسية</span>Geopolitical Monitor</div>
+          <div class="product-card-desc">عقوبات، حروب، انتخابات — تأثيرها على الأسواق والمحفظة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $10K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-risk" data-cat="risk" data-name="Exposure Mapping">
+          <div class="product-card-tag">Risk · Mapping</div>
+          <div class="product-card-name"><span class="ar">خريطة التعرّض</span>Exposure Mapping</div>
+          <div class="product-card-desc">ربط كل حدث بمحفظتك — ما المعرض للخطر، بأي نسبة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-risk" data-cat="risk" data-name="Risk Alerts">
+          <div class="product-card-tag">Risk · Alerts</div>
+          <div class="product-card-name"><span class="ar">تنبيهات مخاطر</span>Risk Alerts</div>
+          <div class="product-card-desc">تنبيهات استباقية عند أحداث تؤثر على محفظتك.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $3K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-risk" data-cat="risk" data-name="Compliance Memo">
+          <div class="product-card-tag">Risk · Compliance</div>
+          <div class="product-card-name"><span class="ar">مذكرة امتثال</span>Compliance Memo</div>
+          <div class="product-card-desc">سجل كامل قابل للتصدير — للمراجع التنظيمي ولجنة المخاطر.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-risk" data-cat="risk" data-name="Counterparty Screening">
+          <div class="product-card-tag">Risk · Screening</div>
+          <div class="product-card-name"><span class="ar">فحص الأطراف</span>Counterparty Screening</div>
+          <div class="product-card-desc">فحص OFAC، SDN list، وتقييم المخاطر — تلقائياً.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $5K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- API PRODUCTS (7) -->
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Events API">
+          <div class="product-card-tag">API · REST</div>
+          <div class="product-card-name"><span class="ar">واجهة الأحداث</span>Events API</div>
+          <div class="product-card-desc">أحداث مالية رسمية — قرار فائدة، CPI، GDP، أرباح، جيوسياسي.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Facts API">
+          <div class="product-card-tag">API · REST</div>
+          <div class="product-card-name"><span class="ar">واجهة الحقائق</span>Facts API</div>
+          <div class="product-card-desc">حقائق موثقة — كل رقم مرتبط بمصدر وصفحة وفقرة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Intelligence API">
+          <div class="product-card-tag">API · REST</div>
+          <div class="product-card-name"><span class="ar">واجهة الاستخبارات</span>Intelligence API</div>
+          <div class="product-card-desc">تحليل + تأثير + سياق سوقي + تقييم مخاطر — في JSON.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $3K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Knowledge Graph API">
+          <div class="product-card-tag">API · REST</div>
+          <div class="product-card-name"><span class="ar">واجهة رسم المعرفة</span>Knowledge Graph API</div>
+          <div class="product-card-desc">شبكة العلاقات المالية — كيانات، أحداث، تأثيرات مترابطة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Streaming API">
+          <div class="product-card-tag">API · WebSocket</div>
+          <div class="product-card-name"><span class="ar">البث الحي</span>Streaming API</div>
+          <div class="product-card-desc">WebSocket — أسعار + أخبار + إشارات في زمن حقيقي. <50ms.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="SDK">
+          <div class="product-card-tag">API · SDK</div>
+          <div class="product-card-name"><span class="ar">مجموعة التطوير</span>SDK</div>
+          <div class="product-card-desc">مكتبات رسمية — Python · JS · Go · Java · Rust. Type-safe.</div>
+          <div class="product-card-foot"><span class="product-card-price">free with API</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-api" data-cat="api" data-name="Content API">
+          <div class="product-card-tag">API · REST</div>
+          <div class="product-card-name"><span class="ar">واجهة المحتوى</span>Content API</div>
+          <div class="product-card-desc">أخبار + تقارير + فيديو جاهز للنشر — عبر API.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- AI AGENTS (4) -->
+        <a href="#" class="product-card cat-agent" data-cat="agent" data-name="Autonomous Trader">
+          <div class="product-card-tag">Agent · Trading</div>
+          <div class="product-card-name"><span class="ar">التاجر المستقل</span>Autonomous Trader</div>
+          <div class="product-card-desc">دورة كاملة: تحليل → قرار → تنفيذ → تعلّم. ضمن حدود صارمة.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-agent" data-cat="agent" data-name="Publishing Agent">
+          <div class="product-card-tag">Agent · Media</div>
+          <div class="product-card-name"><span class="ar">وكيل النشر</span>Publishing Agent</div>
+          <div class="product-card-desc">يقرر ما يُنشر ومتى — يصوغ العناوين، يختار الصيغة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $3K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-agent" data-cat="agent" data-name="Research Assistant">
+          <div class="product-card-tag">Agent · Research</div>
+          <div class="product-card-name"><span class="ar">مساعد الأبحاث</span>Research Assistant</div>
+          <div class="product-card-desc">يبحث، يلخّص، يربط الأدلة — يجيب بالدليل لا بالرأي.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-agent" data-cat="agent" data-name="Market Copilot">
+          <div class="product-card-tag">Agent · Copilot</div>
+          <div class="product-card-name"><span class="ar">مساعد السوق</span>Market Copilot</div>
+          <div class="product-card-desc">مساعد ذكي داخل منصتك — يجيب على أسئلة العملاء بالدليل.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $2K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+        <!-- COMPONENTS (5) -->
+        <a href="#" class="product-card cat-component" data-cat="component" data-name="White Label Platform">
+          <div class="product-card-tag">Component · Platform</div>
+          <div class="product-card-name"><span class="ar">العلامة البيضاء</span>White Label</div>
+          <div class="product-card-desc">منصة كاملة باسمك — واجهات + APIs + محرّكات + بنية.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $25K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-component" data-cat="component" data-name="Embedded Widgets">
+          <div class="product-card-tag">Component · Widget</div>
+          <div class="product-card-name"><span class="ar">Widgets قابلة للتضمين</span>Embedded Widgets</div>
+          <div class="product-card-desc">بطاقات استخبارات، شارت، تغذية — تضمّنها في أي منتج.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $1K/mo</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-component" data-cat="component" data-name="Evidence Chain Explorer">
+          <div class="product-card-tag">Component · Trust</div>
+          <div class="product-card-name"><span class="ar">مستكشف الأدلة</span>Evidence Chain Explorer</div>
+          <div class="product-card-desc">أداة تفاعلية — تتبّع أي استخبارات من المصدر للقرار.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-component" data-cat="component" data-name="Source Registry">
+          <div class="product-card-tag">Component · Registry</div>
+          <div class="product-card-name"><span class="ar">سجل المصادر</span>Source Registry</div>
+          <div class="product-card-desc">411 مصدر قابل للبحث — نوع، بلد، صحة، ثقة.</div>
+          <div class="product-card-foot"><span class="product-card-price">included</span><span class="product-card-link">→</span></div>
+        </a>
+        <a href="#" class="product-card cat-component" data-cat="component" data-name="Neural Lab">
+          <div class="product-card-tag">Component · Research</div>
+          <div class="product-card-name"><span class="ar">المختبر العصبي</span>Neural Lab</div>
+          <div class="product-card-desc">اختبر استراتيجيات على بيانات تاريخية مع نفس طبقة الأدلة.</div>
+          <div class="product-card-foot"><span class="product-card-price">from $500/mo</span><span class="product-card-link">→</span></div>
+        </a>
+
+      </div>
+
+      <p class="text-center text-mute small mt-6" id="resultCount">عرض 44 منتج · جميع الفئات</p>
+    </div>
+
+  </div>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which products fit your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك في اختيار المنتجات المناسبة لاحتياجك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Product Catalog Inquiry" class="btn btn-primary btn-lg">Request Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="catalog.html" class="small text-dim" style="color: var(--gold);">Catalog ✓</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="index.html" class="small text-dim">Home</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Catalog filtering
+const cards = document.querySelectorAll('.product-card');
+const tabs = document.querySelectorAll('.catalog-tab');
+const search = document.getElementById('catalogSearch');
+const resultCount = document.getElementById('resultCount');
+const catCheckboxes = document.querySelectorAll('.filter-cat');
+
+function filterProducts() {
+  const activeCats = Array.from(catCheckboxes).filter(c => c.checked).map(c => c.value);
+  const searchTerm = (search?.value || '').toLowerCase();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const cat = card.dataset.cat || '';
+    const name = (card.dataset.name || '').toLowerCase();
+    const text = card.innerText.toLowerCase();
+    const catMatch = activeCats.includes(cat);
+    const searchMatch = !searchTerm || name.includes(searchTerm) || text.includes(searchTerm);
+    
+    if (catMatch && searchMatch) {
+      card.style.display = '';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  resultCount.textContent = `عرض ${visible} منتج · ${activeCats.length > 1 ? 'متعدد الفئات' : activeCats[0] || 'all'}`;
+}
+
+// Tab click — filter by category
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const view = tab.dataset.view;
+    
+    if (view === 'all') {
+      catCheckboxes.forEach(c => c.checked = true);
+    } else {
+      catCheckboxes.forEach(c => c.checked = (c.value === view));
+    }
+    filterProducts();
+  });
+});
+
+// Checkbox change
+catCheckboxes.forEach(c => c.addEventListener('change', () => {
+  tabs.forEach(t => t.classList.remove('active'));
+  document.querySelector('.catalog-tab[data-view="all"]').classList.add('active');
+  filterProducts();
+}));
+
+// Search
+search?.addEventListener('input', filterProducts);
+</script>
+
+</body>
+</html>
