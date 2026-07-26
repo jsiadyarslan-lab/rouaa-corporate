@@ -52,42 +52,41 @@ body { class: motion-marketing; }
 .outputs-defense-text { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--gold); line-height: 1.5; }
 .outputs-defense-text .ar { font-family: var(--font-ar); display: block; font-size: 0.8125rem; color: var(--text-dim); font-weight: 500; margin-top: 0.25rem; }
 
-/* === Intelligence Products (NEW — between Markets and Platform Status) === */
-.products-section { max-width: 1200px; margin: 0 auto; }
-.products-track { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; margin-top: 2rem; }
-@media (max-width: 900px) { .products-track { grid-template-columns: 1fr; } }
-.products-nav { display: flex; flex-direction: column; gap: 0.25rem; position: sticky; top: 88px; align-self: start; }
-@media (max-width: 900px) { .products-nav { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 0.5rem; } }
-.products-nav-item { padding: 0.75rem 1rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--p-color, var(--gold)); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-base); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); text-align: right; white-space: nowrap; }
-.products-nav-item:hover { color: var(--text); border-color: var(--p-color, var(--gold)); }
-.products-nav-item.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
-.products-nav-item .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); font-weight: 400; margin-bottom: 0.125rem; }
-.products-nav-item.active .ar { color: var(--gold); }
-.products-nav-item.p-media { --p-color: var(--blue); }
-.products-nav-item.p-trading { --p-color: var(--emerald); }
-.products-nav-item.p-research { --p-color: var(--gold); }
-.products-nav-item.p-risk { --p-color: var(--rose); }
-.products-nav-item.p-dev { --p-color: var(--amber); }
+/* === Intelligence Products (strength map — all markets visible) === */
+.products-manifesto { max-width: 800px; margin: 0 auto 2.5rem; text-align: center; padding: 2rem 1.5rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-xl); position: relative; }
+.products-manifesto::before, .products-manifesto::after { content: '"'; position: absolute; font-family: serif; font-size: 3rem; color: var(--gold); opacity: 0.3; line-height: 1; }
+.products-manifesto::before { top: -8px; right: 16px; }
+.products-manifesto::after { bottom: -28px; left: 16px; transform: rotate(180deg); }
+.products-manifesto-en { font-family: var(--font-en); font-size: 1.25rem; font-weight: 800; color: var(--gold); line-height: 1.3; margin-bottom: 0.25rem; }
+.products-manifesto-ar { font-family: var(--font-ar); font-size: 1.125rem; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 1rem; }
+.products-manifesto-sub { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; }
 
-.products-pane { display: none; }
-.products-pane.active { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.strength-map { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; max-width: 1280px; margin: 0 auto; }
+@media (max-width: 1100px) { .strength-map { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .strength-map { grid-template-columns: 1fr; } }
 
-.product-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 0.75rem; border-right: 3px solid var(--pb-color, var(--gold)); transition: border-color var(--transition-slow); }
-.product-block:hover { border-color: var(--pb-color, var(--gold)); }
-.product-block-head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-.product-block-name { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); }
-.product-block-name .ar { font-family: var(--font-ar); font-size: 0.9375rem; color: var(--text-dim); margin-left: 0.5rem; font-weight: 500; }
-.product-block-tag { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--pb-color, var(--gold)); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); }
-.product-block-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.75rem; }
-.product-block-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.375rem; }
-.product-block-item { font-size: 0.75rem; color: var(--text-dim); padding: 0.25rem 0; padding-right: 0.875rem; position: relative; line-height: 1.5; }
-.product-block-item::before { content: '◇'; position: absolute; right: 0; color: var(--pb-color, var(--gold)); font-size: 0.625rem; top: 0.4rem; }
-.product-block-item strong { color: var(--text); font-family: var(--font-en); font-size: 0.75rem; }
+.strength-col { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.25rem 1rem; transition: all var(--transition-slow); position: relative; overflow: hidden; }
+.strength-col:hover { border-color: var(--s-color, var(--gold)); transform: translateY(-2px); }
+.strength-col::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: var(--s-color, var(--gold)); }
+.strength-col.s-media { --s-color: var(--blue); }
+.strength-col.s-trading { --s-color: var(--emerald); }
+.strength-col.s-research { --s-color: var(--gold); }
+.strength-col.s-risk { --s-color: var(--rose); }
+.strength-col.s-dev { --s-color: var(--amber); }
 
-.products-cta { text-align: center; margin-top: 1.5rem; padding: 1.25rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-md); }
-.products-cta-text { font-size: 0.875rem; color: var(--text-dim); margin-bottom: 0.5rem; }
-.products-cta-link { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--gold); text-decoration: none; }
+.strength-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.875rem; padding-bottom: 0.625rem; border-bottom: 1px solid var(--border-soft); }
+.strength-icon { font-size: 1.25rem; }
+.strength-name { flex: 1; font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+.strength-name .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); margin-top: 0.125rem; font-weight: 500; }
+.strength-count { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--s-color); padding: 0.2rem 0.4rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; letter-spacing: 0.05em; }
+
+.strength-list { display: flex; flex-direction: column; gap: 0.25rem; }
+.strength-item { display: block; padding: 0.4375rem 0.5rem; font-family: var(--font-en); font-size: 0.75rem; font-weight: 500; color: var(--text-dim); text-decoration: none; border-radius: var(--radius-sm); transition: all var(--transition-base); border-right: 2px solid transparent; line-height: 1.3; }
+.strength-item:hover { color: var(--s-color); background: rgba(255,255,255,0.03); border-right-color: var(--s-color); transform: translateX(-2px); }
+
+.products-cta { text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-md); }
+.products-cta-text { font-size: 0.9375rem; color: var(--text); margin-bottom: 0.625rem; font-weight: 500; }
+.products-cta-link { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--gold); text-decoration: none; }
 .products-cta-link:hover { text-decoration: underline; }
 
 /* === Five Markets === */
@@ -349,234 +348,126 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= 5. INTELLIGENCE PRODUCTS (NEW — what to buy) ============= -->
+  <!-- ============= 5. INTELLIGENCE PRODUCTS (strength map — all markets visible) ============= -->
   <section class="section reveal" id="products">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Intelligence Products</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">ماذا تحصل عليه من رؤى؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">رؤى ليست متجر أدوات. كل وحدة تجارية تستهلك من نفس المحرك — وكل منتج داخلها يحمل نفس سلسلة الإثبات. اختر سوقك، استكشف وحداته.</p>
       </div>
 
-      <div class="products-section">
-        <div class="products-track">
-          <div class="products-nav">
-            <button class="products-nav-item p-media active" data-pane="media"><span class="ar">إعلام مالي</span>Media</button>
-            <button class="products-nav-item p-trading" data-pane="trading"><span class="ar">تداول</span>Trading</button>
-            <button class="products-nav-item p-research" data-pane="research"><span class="ar">أبحاث</span>Research</button>
-            <button class="products-nav-item p-risk" data-pane="risk"><span class="ar">مخاطر</span>Risk</button>
-            <button class="products-nav-item p-dev" data-pane="dev"><span class="ar">مطورين</span>Developer</button>
+      <!-- Strategic statement (visually strong) -->
+      <div class="products-manifesto">
+        <div class="products-manifesto-en">ROUAA is not a collection of financial tools.</div>
+        <div class="products-manifesto-ar">رؤى ليست مجموعة أدوات مالية.</div>
+        <div class="products-manifesto-sub">It is an intelligence infrastructure that generates multiple intelligence products.<br>إنها بنية تحتية ذكاء تُولّد منتجات ذكاء متعددة — من نفس المصدر، بنفس سلسلة الإثبات.</div>
+      </div>
+
+      <!-- Strength Map: all 5 markets visible at once -->
+      <div class="strength-map">
+        <!-- MEDIA -->
+        <div class="strength-col s-media">
+          <div class="strength-head">
+            <div class="strength-icon">📰</div>
+            <div class="strength-name">Media Intelligence<span class="ar">إعلام مالي ذكي</span></div>
+            <div class="strength-count">8 products</div>
           </div>
-
-          <div>
-            <!-- MEDIA PANE -->
-            <div class="products-pane active" id="pane-media">
-              <div class="product-block" style="--pb-color: var(--blue);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Financial News Engine<span class="ar">· محرّك الأخبار المالية</span></div>
-                  <span class="product-block-tag">Pipeline</span>
-                </div>
-                <div class="product-block-desc">تحويل البيانات الرسمية إلى محتوى جاهز للنشر — في دقائق، بـ 6 لغات، موثّق بالكامل.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>News Articles</strong> — أخبار جاهزة للنشر</div>
-                  <div class="product-block-item"><strong>Summaries</strong> — ملخصات الأحداث</div>
-                  <div class="product-block-item"><strong>Multi-language</strong> — 6 لغات فورية</div>
-                  <div class="product-block-item"><strong>Social Content</strong> — محتوى اجتماعي</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--blue);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Video Intelligence Engine<span class="ar">· محرّك فيديو ذكي</span></div>
-                  <span class="product-block-tag">Pipeline</span>
-                </div>
-                <div class="product-block-desc">من حدث مالي إلى فيديو تحليلي كامل — سكريبت، تعليق صوتي، رسوم متحركة، في دقائق.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Video Script</strong> — سكريبت احترافي</div>
-                  <div class="product-block-item"><strong>Anchor Brief</strong> — موجز للمذيع</div>
-                  <div class="product-block-item"><strong>Talking Points</strong> — نقاط النقاش</div>
-                  <div class="product-block-item"><strong>Voice-over</strong> — صوت آلي أو بشري</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--blue);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Infographic & Reports Pipeline<span class="ar">· أنابيب الإنفوجرافيك والتقارير</span></div>
-                  <span class="product-block-tag">Pipeline</span>
-                </div>
-                <div class="product-block-desc">إنفوجرافيك + تقارير دورية — كل رقم موثّق بمصدره، كل تصميم جاهز للنشر.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Daily Infographics</strong> — إنفوجرافيك يومي</div>
-                  <div class="product-block-item"><strong>Sector Reports</strong> — تقارير قطاعية</div>
-                  <div class="product-block-item"><strong>Weekly Digests</strong> — مختصرات أسبوعية</div>
-                  <div class="product-block-item"><strong>Audio Intelligence</strong> — بودكاست يومي</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- TRADING PANE -->
-            <div class="products-pane" id="pane-trading">
-              <div class="product-block" style="--pb-color: var(--emerald);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Market Context Engine<span class="ar">· محرّك سياق السوق</span></div>
-                  <span class="product-block-tag">Decision Support</span>
-                </div>
-                <div class="product-block-desc">يفسر «لماذا تحرك السوق؟» — يربط الحدث الاقتصادي بالأصل المالي بالسيناريوهات.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Economic Event</strong> — الحدث الاقتصادي</div>
-                  <div class="product-block-item"><strong>Financial Asset</strong> — الأصل المالي</div>
-                  <div class="product-block-item"><strong>Impact Scenarios</strong> — سيناريوهات التأثير</div>
-                  <div class="product-block-item"><strong>Evidence Trail</strong> — سلسلة الدليل</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--emerald);">
-                <div class="product-block-head">
-                  <div class="product-block-name">AI Analysis Terminal<span class="ar">· طرفية تحليل ذكية</span></div>
-                  <span class="product-block-tag">Workspace</span>
-                </div>
-                <div class="product-block-desc">منصة تحليل متكاملة داخل منصة البروكر — تجمع الشارت، المؤشرات، السياق الكلي، والأخبار المؤثرة.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Chart Analysis</strong> — تحليل الشارت</div>
-                  <div class="product-block-item"><strong>Indicators</strong> — المؤشرات الفنية</div>
-                  <div class="product-block-item"><strong>Macro Context</strong> — السياق الكلي</div>
-                  <div class="product-block-item"><strong>News Impact</strong> — الأخبار المؤثرة</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--emerald);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Signal Intelligence System<span class="ar">· نظام ذكاء الإشارات</span></div>
-                  <span class="product-block-tag">Decision Support</span>
-                </div>
-                <div class="product-block-desc">مجلس نماذج يتشاور قبل كل إشارة — لا نموذج واحد يقرر. تقييم جودة، إدارة مخاطر، حد أقصى 85%.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Model Council</strong> — مجلس النماذج</div>
-                  <div class="product-block-item"><strong>Signal Quality</strong> — تقييم الجودة</div>
-                  <div class="product-block-item"><strong>Risk Management</strong> — إدارة المخاطر</div>
-                  <div class="product-block-item"><strong>Confidence Cap</strong> — حد أقصى 85%</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- RESEARCH PANE -->
-            <div class="products-pane" id="pane-research">
-              <div class="product-block" style="--pb-color: var(--gold);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Macro Intelligence<span class="ar">· ذكاء ماكرو</span></div>
-                  <span class="product-block-tag">Research</span>
-                </div>
-                <div class="product-block-desc">تقارير اقتصادية عميقة، سيناريوهات، تأثير القرارات — كل رقم موثّق، كل استنتاج مدعوم.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Economic Reports</strong> — تقارير اقتصادية</div>
-                  <div class="product-block-item"><strong>Scenarios</strong> — سيناريوهات مستقبلية</div>
-                  <div class="product-block-item"><strong>Decision Impact</strong> — تأثير القرارات</div>
-                  <div class="product-block-item"><strong>Central Bank Watch</strong> — مراقبة البنوك</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--gold);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Equity Intelligence<span class="ar">· ذكاء الأسهم</span></div>
-                  <span class="product-block-tag">Research</span>
-                </div>
-                <div class="product-block-desc">تحليل الشركات، الأحداث الجارية، المخاطر القابلة للتتبع — مذكرة قرار جاهزة للجنة في دقائق.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Company Analysis</strong> — تحليل الشركات</div>
-                  <div class="product-block-item"><strong>Live Events</strong> — الأحداث الجارية</div>
-                  <div class="product-block-item"><strong>Risk Mapping</strong> — رسم المخاطر</div>
-                  <div class="product-block-item"><strong>Committee Memo</strong> — مذكرة لجنة</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--gold);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Sector & Strategy Intelligence<span class="ar">· ذكاء القطاعات والاستراتيجية</span></div>
-                  <span class="product-block-tag">Research</span>
-                </div>
-                <div class="product-block-desc">مقارنات قطاعية، فحص استثماري، قوائم مراقبة ذكية — بمعايير موضوعية موثّقة لا آراء محللين.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Sector Comparison</strong> — مقارنات قطاعية</div>
-                  <div class="product-block-item"><strong>Investment Screener</strong> — فحص استثماري</div>
-                  <div class="product-block-item"><strong>Smart Watchlist</strong> — قائمة مراقبة ذكية</div>
-                  <div class="product-block-item"><strong>Deep Dive Reports</strong> — تقارير تعمّق</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- RISK PANE -->
-            <div class="products-pane" id="pane-risk">
-              <div class="product-block" style="--pb-color: var(--rose);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Geopolitical Risk Engine<span class="ar">· محرّك المخاطر الجيوسياسية</span></div>
-                  <span class="product-block-tag">Monitoring</span>
-                </div>
-                <div class="product-block-desc">أحداث سياسية، تأثير اقتصادي، تعرّض الأصول — من حدث عالمي إلى تقييم التعرّض في دقائق.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Political Events</strong> — أحداث سياسية</div>
-                  <div class="product-block-item"><strong>Economic Impact</strong> — التأثير الاقتصادي</div>
-                  <div class="product-block-item"><strong>Asset Exposure</strong> — تعرّض الأصول</div>
-                  <div class="product-block-item"><strong>Action Memo</strong> — مذكرة إجراء</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--rose);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Exposure & Scenario Engine<span class="ar">· محرّك التعرّض والسيناريوهات</span></div>
-                  <span class="product-block-tag">Analysis</span>
-                </div>
-                <div class="product-block-desc">تحليل تعرّض المحفظة، 3 سيناريوهات لكل حدث، توصيات إجراء موثّقة — القرار النهائي لك.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Portfolio Exposure</strong> — تعرّض المحفظة</div>
-                  <div class="product-block-item"><strong>3 Scenarios</strong> — 3 سيناريوهات</div>
-                  <div class="product-block-item"><strong>Action Recommendations</strong> — توصيات إجراء</div>
-                  <div class="product-block-item"><strong>Compliance Audit</strong> — تدقيق الامتثال</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- DEV PANE -->
-            <div class="products-pane" id="pane-dev">
-              <div class="product-block" style="--pb-color: var(--amber);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Intelligence APIs<span class="ar">· واجهات الاستخبارات</span></div>
-                  <span class="product-block-tag">API</span>
-                </div>
-                <div class="product-block-desc">أربع واجهات. ذكاء واحد. كل استجابة تحمل دليلها — لا أرقام بلا سياق.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Events API</strong> — كل الأحداث الموثّقة</div>
-                  <div class="product-block-item"><strong>Facts API</strong> — استعلام عن أي حقيقة</div>
-                  <div class="product-block-item"><strong>Evidence API</strong> — سلسلة الدليل كاملة</div>
-                  <div class="product-block-item"><strong>Intelligence API</strong> — استخبارات جاهزة</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--amber);">
-                <div class="product-block-head">
-                  <div class="product-block-name">Streaming & SDK<span class="ar">· البث وحزمة SDK</span></div>
-                  <span class="product-block-tag">Integration</span>
-                </div>
-                <div class="product-block-desc">بث لحظي عبر WebSocket، SDK رسمية بـ 4 لغات — ابنِ منتجك فوق ذكاء موثّق في أسابيع.</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>WebSocket Stream</strong> — بث لحظي</div>
-                  <div class="product-block-item"><strong>Python SDK</strong> — حزمة بايثون</div>
-                  <div class="product-block-item"><strong>JavaScript SDK</strong> — حزمة JS</div>
-                  <div class="product-block-item"><strong>Webhooks</strong> — تنبيهات فورية</div>
-                </div>
-              </div>
-              <div class="product-block" style="--pb-color: var(--amber);">
-                <div class="product-block-head">
-                  <div class="product-block-name">AI Agents & Components<span class="ar">· الوكلاء والمكونات</span></div>
-                  <span class="product-block-tag">Platform</span>
-                </div>
-                <div class="product-block-desc">وكلاء متخصصون (ماكرو، قطاعي، مخاطر، مدقق حقائق) + مكونات قابلة للتركيب (Knowledge Graph، Evidence Store).</div>
-                <div class="product-block-list">
-                  <div class="product-block-item"><strong>Macro Analyst Agent</strong> — وكيل ماكرو</div>
-                  <div class="product-block-item"><strong>Risk Officer Agent</strong> — وكيل مخاطر</div>
-                  <div class="product-block-item"><strong>Knowledge Graph API</strong> — رسم المعرفة</div>
-                  <div class="product-block-item"><strong>Evidence Store</strong> — مخزن الأدلة</div>
-                </div>
-              </div>
-            </div>
+          <div class="strength-list">
+            <a href="product.html?id=med-news-engine" class="strength-item">Financial News Engine</a>
+            <a href="product.html?id=med-agency" class="strength-item">News Agency Agent</a>
+            <a href="product.html?id=med-reports" class="strength-item">Reports Pipeline</a>
+            <a href="product.html?id=med-video" class="strength-item">Video Pipeline</a>
+            <a href="product.html?id=med-infographic" class="strength-item">Infographic Pipeline</a>
+            <a href="product.html?id=med-audio" class="strength-item">Audio Intelligence</a>
+            <a href="product.html?id=med-calendar" class="strength-item">Economic Calendar</a>
+            <a href="product.html?id=med-pulse" class="strength-item">Daily Pulse</a>
           </div>
         </div>
 
-        <div class="products-cta">
-          <div class="products-cta-text">44 منتج عبر 7 فئات — كلها تستهلك من نفس المحرك، كلها تحمل نفس سلسلة الإثبات.</div>
-          <a href="products-architecture.html" class="products-cta-link">استكشف Products Architecture ←</a>
+        <!-- TRADING -->
+        <div class="strength-col s-trading">
+          <div class="strength-head">
+            <div class="strength-icon">📈</div>
+            <div class="strength-name">Trading Intelligence<span class="ar">ذكاء التداول</span></div>
+            <div class="strength-count">9 products</div>
+          </div>
+          <div class="strength-list">
+            <a href="product.html?id=trd-dashboard" class="strength-item">Market Context Engine</a>
+            <a href="product.html?id=trd-chart" class="strength-item">AI Chart Intelligence</a>
+            <a href="product.html?id=trd-portfolio" class="strength-item">Portfolio Intelligence</a>
+            <a href="product.html?id=trd-assistant" class="strength-item">Trading Assistant</a>
+            <a href="product.html?id=trd-ai-council" class="strength-item">Signal Intelligence Council</a>
+            <a href="product.html?id=trd-lab" class="strength-item">Neural Trading Lab</a>
+            <a href="product.html?id=trd-auto" class="strength-item">Execution Intelligence Layer</a>
+            <a href="product.html?id=trd-prediction" class="strength-item">Prediction Market</a>
+            <a href="product.html?id=trd-content" class="strength-item">Content Agent</a>
+          </div>
         </div>
+
+        <!-- RESEARCH -->
+        <div class="strength-col s-research">
+          <div class="strength-head">
+            <div class="strength-icon">📊</div>
+            <div class="strength-name">Research Intelligence<span class="ar">أبحاث استثمارية</span></div>
+            <div class="strength-count">6 products</div>
+          </div>
+          <div class="strength-list">
+            <a href="product.html?id=res-brief" class="strength-item">Macro Research Engine</a>
+            <a href="product.html?id=res-deepdive" class="strength-item">Equity Intelligence Engine</a>
+            <a href="product.html?id=res-committee" class="strength-item">Investment Committee Briefs</a>
+            <a href="product.html?id=res-comparison" class="strength-item">Sector Comparison</a>
+            <a href="product.html?id=res-screening" class="strength-item">Investment Screener</a>
+            <a href="product.html?id=res-watchlist" class="strength-item">Smart Watchlist</a>
+          </div>
+        </div>
+
+        <!-- RISK -->
+        <div class="strength-col s-risk">
+          <div class="strength-head">
+            <div class="strength-icon">⚠</div>
+            <div class="strength-name">Risk Intelligence<span class="ar">ذكاء المخاطر</span></div>
+            <div class="strength-count">5 products</div>
+          </div>
+          <div class="strength-list">
+            <a href="product.html?id=risk-monitor" class="strength-item">Geopolitical Risk Engine</a>
+            <a href="product.html?id=risk-exposure" class="strength-item">Exposure Engine</a>
+            <a href="product.html?id=risk-scenario" class="strength-item">Scenario Engine</a>
+            <a href="product.html?id=risk-action" class="strength-item">Action Recommendations</a>
+            <a href="product.html?id=risk-compliance" class="strength-item">Compliance Audit</a>
+          </div>
+        </div>
+
+        <!-- DEVELOPER -->
+        <div class="strength-col s-dev">
+          <div class="strength-head">
+            <div class="strength-icon">🔌</div>
+            <div class="strength-name">Developer Intelligence<span class="ar">منصة المطورين</span></div>
+            <div class="strength-count">16 products</div>
+          </div>
+          <div class="strength-list">
+            <a href="product.html?id=api-events" class="strength-item">Events API</a>
+            <a href="product.html?id=api-facts" class="strength-item">Facts API</a>
+            <a href="product.html?id=api-evidence" class="strength-item">Evidence API</a>
+            <a href="product.html?id=api-insights" class="strength-item">Intelligence API</a>
+            <a href="product.html?id=api-streaming" class="strength-item">Streaming API</a>
+            <a href="product.html?id=api-sdk" class="strength-item">Official SDK</a>
+            <a href="product.html?id=cmp-graph" class="strength-item">Knowledge Graph API</a>
+            <a href="product.html?id=cmp-evidence-store" class="strength-item">Evidence Store</a>
+            <a href="product.html?id=agt-macro" class="strength-item">Macro Analyst Agent</a>
+            <a href="product.html?id=agt-sector" class="strength-item">Sector Analyst Agent</a>
+            <a href="product.html?id=agt-risk" class="strength-item">Risk Officer Agent</a>
+            <a href="product.html?id=agt-fact-checker" class="strength-item">Fact Checker Agent</a>
+            <a href="product.html?id=cmp-source-registry" class="strength-item">Source Registry API</a>
+            <a href="product.html?id=cmp-reasoning-engine" class="strength-item">Reasoning Engine API</a>
+            <a href="product.html?id=cmp-audit-trail" class="strength-item">Audit Trail API</a>
+            <a href="product.html?id=api-sources" class="strength-item">Sources API</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-cta">
+        <div class="products-cta-text">44 منتج · 5 أسواق · محرك واحد · سلسلة إثبات واحدة. ليست متجر أدوات — بل خريطة قوة.</div>
+        <a href="products-architecture.html" class="products-cta-link">استكشف Products Architecture ←</a>
       </div>
     </div>
   </section>
@@ -598,8 +489,8 @@ body { class: motion-marketing; }
         </div>
         <div class="pow-item">
           <div class="pow-val">10K+</div>
-          <div class="pow-lbl">Documents Indexed<span class="ar">وثائق مُفهرَسة</span></div>
-          <div class="pow-sub">24/7 ingestion</div>
+          <div class="pow-lbl">Official Financial Documents<span class="ar">وثائق مالية رسمية</span></div>
+          <div class="pow-sub">Indexed → structured intelligence</div>
         </div>
         <div class="pow-item">
           <div class="pow-val">1,247</div>
@@ -658,8 +549,8 @@ body { class: motion-marketing; }
         <div class="why-card">
           <div class="why-num">06</div>
           <div class="why-h"><span class="ar">بديل عن البناء الداخلي</span>Not Build Internally</div>
-          <div class="why-desc">بناء هذه الطبقات السبع داخلياً: 2-3 سنوات · فريق 30+ · ملايين دولار. رؤى جاهزة الآن.</div>
-          <div class="why-proof">Years → weeks</div>
+          <div class="why-desc">بناء هذه البنية داخلياً يتطلب: Source infrastructure · Document intelligence · Evidence systems · Knowledge graph · Reasoning models · Distribution infrastructure. رؤى توفّر الـ intelligence stack كاملاً.</div>
+          <div class="why-proof">Complete intelligence stack, ready</div>
         </div>
       </div>
     </div>
@@ -740,17 +631,6 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// Intelligence Products — pane switching
-document.querySelectorAll('.products-nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.products-nav-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll('.products-pane').forEach(p => p.classList.remove('active'));
-    item.classList.add('active');
-    const pane = document.getElementById('pane-' + item.dataset.pane);
-    if (pane) pane.classList.add('active');
-  });
-});
 </script>
 
 </body>
