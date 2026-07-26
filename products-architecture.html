@@ -42,6 +42,17 @@ body { class: motion-marketing; }
 .arch-root-h .ar { font-family: var(--font-ar); display: block; font-size: 1rem; color: var(--text-dim); margin-top: 0.25rem; }
 .arch-root-sub { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; }
 
+/* === Tree visual: Engine → 5 lines → 44 products === */
+.tree-visual { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; }
+.tree-connector { color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0; }
+.tree-lines { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+@media (max-width: 600px) { .tree-lines { grid-template-columns: repeat(3, 1fr); } }
+.tree-line { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.75rem 0.5rem; background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--tl-color, var(--gold)); border-radius: var(--radius-md); }
+.tree-line-icon { font-size: 1.25rem; }
+.tree-line-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 700; color: var(--text); }
+.tree-line-count { font-family: var(--font-mono); font-size: 0.625rem; color: var(--tl-color, var(--gold)); font-weight: 700; }
+.tree-products { display: inline-block; padding: 0.625rem 1.25rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--gold); }
+
 .arch-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
 .arch-branch { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.25rem; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
 .arch-branch:hover { border-color: var(--b-color, var(--gold)); }
@@ -216,6 +227,20 @@ body { class: motion-marketing; }
             <span class="ar">محرّك رؤى للذكاء المالي</span>
           </div>
           <div class="arch-root-sub">7 LAYERS · SOURCES → DISTRIBUTION</div>
+        </div>
+
+        <!-- Tree visual: Engine → 5 lines → 44 products -->
+        <div class="tree-visual">
+          <div class="tree-connector">↓</div>
+          <div class="tree-lines">
+            <div class="tree-line" style="--tl-color: var(--blue);"><span class="tree-line-icon">📰</span><span class="tree-line-name">Media</span><span class="tree-line-count">8</span></div>
+            <div class="tree-line" style="--tl-color: var(--emerald);"><span class="tree-line-icon">📈</span><span class="tree-line-name">Trading</span><span class="tree-line-count">9</span></div>
+            <div class="tree-line" style="--tl-color: var(--gold);"><span class="tree-line-icon">📊</span><span class="tree-line-name">Research</span><span class="tree-line-count">6</span></div>
+            <div class="tree-line" style="--tl-color: var(--rose);"><span class="tree-line-icon">⚠</span><span class="tree-line-name">Risk</span><span class="tree-line-count">5</span></div>
+            <div class="tree-line" style="--tl-color: var(--amber);"><span class="tree-line-icon">🔌</span><span class="tree-line-name">Developer</span><span class="tree-line-count">16</span></div>
+          </div>
+          <div class="tree-connector">↓</div>
+          <div class="tree-products">44 Intelligence Products · Same Evidence Chain</div>
         </div>
 
         <div class="arch-branches">
