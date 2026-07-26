@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى · ROUAA — One Intelligence Engine. Multiple Financial Products.</title>
-<meta name="description" content="رؤى بنية تحتية استخبارات مالية — محرك واحد يغذي: الإعلام المالي، أبحاث الاستثمار، ذكاء التداول، تحليل المخاطر، وواجهات API.">
+<title>رؤى · ROUAA — Financial Intelligence Infrastructure</title>
+<meta name="description" content="The Intelligence Layer Behind Financial Media, Trading Platforms, and Institutional Decisions.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,285 +16,30 @@
 <style>
 body { class: motion-marketing; }
 
-/* === HERO === */
-.hero-home {
-  position: relative;
-  padding: 6rem 0 3rem;
-  overflow: hidden;
-  text-align: center;
-}
-.hero-home-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%);
-  z-index: 0;
-}
-.hero-home-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-.hero-home-h1 {
-  font-size: clamp(1.875rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  max-width: 22ch;
-}
+/* === Hero === */
+.hero-home { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-home-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-home-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-home-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
 .hero-home-h1 .gold { color: var(--gold); }
-.hero-home-sub {
-  font-size: 1.0625rem;
-  color: var(--text-dim);
-  max-width: 58ch;
-  line-height: 1.7;
-}
-.hero-home-cta {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
+.hero-home-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-home-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
 
-/* === Core Engine Diagram — the centerpiece === */
-.engine-diagram {
-  max-width: 900px;
-  margin: 3rem auto 0;
-  text-align: center;
-}
-.engine-core-box {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem 3rem;
-  background: var(--gold-dim);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius-xl);
-  margin-bottom: 0;
-}
-.engine-core-name {
-  font-family: var(--font-en);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-.engine-core-desc {
-  font-size: 0.75rem;
-  color: var(--text-mute);
-}
-.engine-fanout {
-  position: relative;
-  height: 40px;
-  margin: 0;
-}
-.engine-fanout svg {
-  width: 100%;
-  height: 100%;
-}
-.engine-channels {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-@media (max-width: 1024px) { .engine-channels { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 600px) { .engine-channels { grid-template-columns: repeat(2, 1fr); } }
-.engine-channel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 1rem 0.75rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition-slow);
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-}
-.engine-channel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 12px;
-  background: var(--ch-color, var(--gold));
-  border-radius: 0 0 2px 2px;
-}
-.engine-channel:hover { border-color: var(--ch-color, var(--gold)); }
-.engine-channel.c-media { --ch-color: var(--blue); }
-.engine-channel.c-research { --ch-color: var(--gold); }
-.engine-channel.c-trading { --ch-color: var(--emerald); }
-.engine-channel.c-risk { --ch-color: var(--rose); }
-.engine-channel.c-api { --ch-color: var(--amber); }
-.engine-channel-icon { font-size: 1.25rem; }
-.engine-channel-name {
-  font-family: var(--font-en);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text);
-  text-align: center;
-}
-.engine-channel-ar {
-  font-size: 0.6875rem;
-  color: var(--text-mute);
-  text-align: center;
-}
+/* === Intelligence Engine visual === */
+.engine-visual { max-width: 500px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 0; }
+.engine-step { display: flex; align-items: center; gap: 1rem; padding: 0.625rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.25rem; transition: border-color var(--transition-slow); }
+.engine-step:hover { border-color: var(--gold); }
+.engine-step-num { font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); width: 24px; font-weight: 700; }
+.engine-step-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text); }
+.engine-step-ar { font-size: 0.6875rem; color: var(--text-mute); margin-right: auto; }
+.engine-arrow { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.625rem; margin: 0.1rem 0; }
 
-/* === Channel detail cards === */
-.channel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.channel-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 1.75rem 1.5rem;
-  transition: border-color var(--transition-slow);
-  position: relative;
-  overflow: hidden;
-}
-.channel-card::before {
-  content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--ch-color, var(--gold));
-}
-.channel-card:hover { border-color: var(--ch-color, var(--gold)); }
-.channel-card.c-media { --ch-color: var(--blue); }
-.channel-card.c-research { --ch-color: var(--gold); }
-.channel-card.c-trading { --ch-color: var(--emerald); }
-.channel-card.c-risk { --ch-color: var(--rose); }
-.channel-card.c-api { --ch-color: var(--amber); }
-.channel-card-tag {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--ch-color, var(--gold));
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.channel-card-h {
-  font-family: var(--font-en);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-.channel-card-h .ar {
-  font-family: var(--font-ar);
-  display: block;
-  font-size: 1.25rem;
-  margin-bottom: 0.125rem;
-}
-.channel-card-tagline {
-  font-size: 0.875rem;
-  color: var(--ch-color, var(--gold));
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  font-family: var(--font-en);
-}
-.channel-card-buyers {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--text-mute);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-.channel-card-buyer-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.75rem;
-}
-.channel-card-buyer {
-  padding: 0.15rem 0.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-sm);
-  font-size: 0.6875rem;
-  color: var(--text-dim);
-}
-.channel-card-desc {
-  font-size: 0.8125rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-}
-.channel-card-link {
-  font-family: var(--font-en);
-  font-size: 0.75rem;
-  color: var(--ch-color, var(--gold));
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* === One Event → Multiple Outputs === */
-.outputs-demo {
-  max-width: 800px;
-  margin: 2rem auto 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-}
-.outputs-demo-h {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.outputs-demo-event {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: var(--gold-dim);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius-md);
-  font-family: var(--font-en);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-.outputs-demo-arrow {
-  text-align: center;
-  color: var(--gold);
-  opacity: 0.4;
-  font-size: 1.25rem;
-  margin: 0.5rem 0;
-}
-.outputs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.625rem;
-}
-.output-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.75rem 0.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  border-top: 2px solid var(--out-color, var(--text-mute));
-}
+/* === One Event Multiple Outputs === */
+.outputs-demo { max-width: 700px; margin: 2rem auto 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; }
+.outputs-event { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; }
+.outputs-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0; }
+.outputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.5rem; }
+.output-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.75rem 0.5rem; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-md); border-top: 2px solid var(--out-color, var(--text-mute)); }
 .output-item.o-news { --out-color: var(--blue); }
 .output-item.o-research { --out-color: var(--gold); }
 .output-item.o-trading { --out-color: var(--emerald); }
@@ -302,63 +47,51 @@ body { class: motion-marketing; }
 .output-item.o-media { --out-color: var(--amber); }
 .output-item.o-api { --out-color: var(--text-mute); }
 .output-icon { font-size: 1rem; }
-.output-name {
-  font-family: var(--font-en);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--text);
-  text-align: center;
-}
-.output-channel {
-  font-family: var(--font-mono);
-  font-size: 0.5625rem;
-  color: var(--out-color, var(--text-mute));
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
+.output-name { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text); text-align: center; }
 
-/* === Proof of Work === */
-.pow-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
+/* === Five Markets === */
+.markets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.market-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.75rem 1.5rem; transition: all var(--transition-slow); position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+.market-card:hover { border-color: var(--m-color, var(--gold)); transform: translateY(-3px); }
+.market-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--m-color, var(--gold)); }
+.market-card.m-media { --m-color: var(--blue); }
+.market-card.m-research { --m-color: var(--gold); }
+.market-card.m-trading { --m-color: var(--emerald); }
+.market-card.m-risk { --m-color: var(--rose); }
+.market-card.m-dev { --m-color: var(--amber); }
+.market-icon { font-size: 1.5rem; margin-bottom: 0.625rem; }
+.market-name { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.market-name .ar { font-family: var(--font-ar); display: block; font-size: 1.0625rem; margin-bottom: 0.125rem; }
+.market-tagline { font-size: 0.8125rem; color: var(--m-color, var(--gold)); font-weight: 600; margin-bottom: 0.625rem; font-family: var(--font-en); }
+.market-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
+/* === Platform Status === */
+.pow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; }
 @media (max-width: 768px) { .pow-grid { grid-template-columns: repeat(2, 1fr); } }
-.pow-item {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition-slow);
-}
+.pow-item { text-align: center; padding: 1.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: border-color var(--transition-slow); }
 .pow-item:hover { border-color: var(--gold); }
-.pow-val {
-  font-family: var(--font-en);
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 0.375rem;
-}
-.pow-lbl {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  color: var(--text-mute);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
+.pow-val { font-family: var(--font-en); font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 0.375rem; }
+.pow-lbl { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; }
+
+/* === Why ROUAA === */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 1000px; margin: 0 auto; }
+@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+.why-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.75rem 1.5rem; position: relative; overflow: hidden; transition: border-color var(--transition-slow); }
+.why-card:hover { border-color: var(--gold); }
+.why-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
+.why-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.5rem; font-weight: 700; }
+.why-h { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.why-h .ar { font-family: var(--font-ar); display: block; font-size: 1.0625rem; margin-bottom: 0.125rem; }
+.why-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.625rem; }
+.why-proof { font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
+
+/* === Trust Entry === */
+.trust-entry { text-align: center; max-width: 600px; margin: 0 auto; }
+.trust-entry h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; }
+.trust-entry p { color: var(--text-dim); font-size: 1.0625rem; margin-bottom: 1.5rem; line-height: 1.7; }
 
 /* === CTA === */
-.cta-final {
-  text-align: center;
-  padding: 5rem 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border-soft);
-}
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
 .cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
 .cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
 
@@ -375,21 +108,16 @@ body { class: motion-marketing; }
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
       <div class="nav-brand-logo">R</div>
-      <div class="nav-brand-text">
-        <span class="name">رؤى · ROUAA</span>
-        <span class="sub">Financial Intelligence</span>
-      </div>
+      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Financial Intelligence Infrastructure</span></div>
     </a>
-    <ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="catalog.html">Catalog</a></li><li><a href="media-technologies.html">Media</a></li><li><a href="trading-technologies.html">Trading</a></li><li><a href="enterprise.html">Research</a></li><li><a href="risk-intelligence.html">Risk</a></li><li><a href="developers.html">API</a></li><li><a href="trust.html">Trust</a></li></ul>
-    <div class="nav-cta">
-      <a href="#contact" class="btn btn-primary">Request Briefing</a>
-    </div>
+    <ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="catalog.html">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html">Company</a></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
   </div>
 </nav>
 
 <main id="main">
 
-  <!-- ============= HERO ============= -->
+  <!-- ============= 1. HERO ============= -->
   <section class="hero-home">
     <div class="hero-home-bg"></div>
     <div class="container">
@@ -397,391 +125,177 @@ body { class: motion-marketing; }
         <div class="mono-label text-gold">Financial Intelligence Infrastructure</div>
         <h1 class="hero-home-h1">
           The Intelligence Layer Behind<br>
-          <span class="gold">Financial Media, Trading Platforms, and Institutional Decisions.</span>
+          <span class="gold">Financial Media, Trading Platforms,<br>and Institutional Decisions.</span>
         </h1>
         <p class="hero-home-sub">
-          المؤسسات المالية تنفق ملايين لجمع ومعالجة وتحليل المعلومات. رؤى تحوّل الأحداث المالية الرسمية إلى منتجات ذكاء موزّعة — دون بناء منظومة البيانات والتحليل والتوزيع داخلياً.
+          رؤى تحوّل البيانات المالية الرسمية إلى ذكاء مالي موثّق يمكن توزيعه داخل الإعلام، منصات التداول، المؤسسات، والتطبيقات المالية.
         </p>
         <div class="hero-home-cta">
           <a href="#contact" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
-          <a href="#engine" class="btn btn-ghost btn-lg">See How It Works</a>
-        </div>
-      </div>
-
-      <!-- Core Engine Diagram -->
-      <div class="engine-diagram reveal" id="engine">
-        <div class="engine-core-box">
-          <div class="engine-core-name">ROUAA Intelligence Engine</div>
-          <div class="engine-core-desc">Financial Knowledge Graph · Evidence Layer · Document Intelligence</div>
-        </div>
-        <div class="engine-fanout">
-          <svg viewBox="0 0 900 40" preserveAspectRatio="none">
-            <line x1="450" y1="0" x2="90" y2="40" stroke="#C8A951" stroke-width="1" opacity="0.3"/>
-            <line x1="450" y1="0" x2="270" y2="40" stroke="#C8A951" stroke-width="1" opacity="0.3"/>
-            <line x1="450" y1="0" x2="450" y2="40" stroke="#C8A951" stroke-width="1" opacity="0.3"/>
-            <line x1="450" y1="0" x2="630" y2="40" stroke="#C8A951" stroke-width="1" opacity="0.3"/>
-            <line x1="450" y1="0" x2="810" y2="40" stroke="#C8A951" stroke-width="1" opacity="0.3"/>
-          </svg>
-        </div>
-        <div class="engine-channels">
-          <a href="#media" class="engine-channel c-media">
-            <div class="engine-channel-icon">📰</div>
-            <div class="engine-channel-name">Financial Media</div>
-            <div class="engine-channel-ar">إعلام مالي</div>
-          </a>
-          <a href="#research" class="engine-channel c-research">
-            <div class="engine-channel-icon">📊</div>
-            <div class="engine-channel-name">Investment Intel</div>
-            <div class="engine-channel-ar">أبحاث استثمار</div>
-          </a>
-          <a href="#trading" class="engine-channel c-trading">
-            <div class="engine-channel-icon">📈</div>
-            <div class="engine-channel-name">Trading Ecosystem</div>
-            <div class="engine-channel-ar">ذكاء تداول</div>
-          </a>
-          <a href="#risk" class="engine-channel c-risk">
-            <div class="engine-channel-icon">⚠</div>
-            <div class="engine-channel-name">Risk & Enterprise</div>
-            <div class="engine-channel-ar">تحليل مخاطر</div>
-          </a>
-          <a href="#api" class="engine-channel c-api">
-            <div class="engine-channel-icon">🔌</div>
-            <div class="engine-channel-name">Developer Platform</div>
-            <div class="engine-channel-ar">واجهات برمجة</div>
-          </a>
+          <a href="platform.html" class="btn btn-ghost btn-lg">Explore Platform</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= ONE EVENT → MULTIPLE OUTPUTS ============= -->
+  <!-- ============= 2. INTELLIGENCE ENGINE ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Intelligence Engine</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تعمل رؤى؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">سبع طبقات من المصدر الرسمي إلى الذكاء الموزّع. هذه هي البنية التي تنتج كل منتجات رؤى.</p>
+      </div>
+
+      <div class="engine-visual">
+        <div class="engine-step"><span class="engine-step-num">01</span><span class="engine-step-name">Official Sources</span><span class="engine-step-ar">مصادر رسمية</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">02</span><span class="engine-step-name">Document Intelligence</span><span class="engine-step-ar">ذكاء الوثائق</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">03</span><span class="engine-step-name">Fact Extraction</span><span class="engine-step-ar">استخراج الحقائق</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">04</span><span class="engine-step-name">Evidence Layer</span><span class="engine-step-ar">طبقة الأدلة</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">05</span><span class="engine-step-name">Knowledge Graph</span><span class="engine-step-ar">رسم المعرفة</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">06</span><span class="engine-step-name">Reasoning Engine</span><span class="engine-step-ar">محرّك الاستدلال</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">07</span><span class="engine-step-name">Distribution Layer</span><span class="engine-step-ar">طبقة التوزيع</span></div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="platform.html" class="btn-link">Explore the Platform Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 3. ONE EVENT → MULTIPLE OUTPUTS ============= -->
+  <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">One Event. Multiple Outputs.</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">حدث واحد. عشرات المخرجات.</h2>
-        <p class="section-lead" style="margin: 0 auto;">عند صدور بيان رسمي، رؤى تنتج مخرجات مختلفة لكل قناة — من نفس المحرك، بنفس الدليل.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا المنظومة مختلفة؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">نحن لا نبني أدوات منفصلة. نحن نملك محركاً واحداً ينتج منتجات متعددة من نفس الحدث.</p>
       </div>
 
       <div class="outputs-demo">
-        <div class="outputs-demo-h">
-          <div class="outputs-demo-event">📄 Fed FOMC Statement · July 2026</div>
+        <div style="text-align: center;">
+          <div class="outputs-event">📄 Fed FOMC Statement · July 2026</div>
         </div>
-        <div class="outputs-demo-arrow">↓</div>
+        <div class="outputs-arrow">↓</div>
         <div class="outputs-grid">
-          <div class="output-item o-news">
-            <div class="output-icon">📰</div>
-            <div class="output-name">Breaking News</div>
-            <div class="output-channel">Media</div>
-          </div>
-          <div class="output-item o-research">
-            <div class="output-icon">📑</div>
-            <div class="output-name">Research Brief</div>
-            <div class="output-channel">Research</div>
-          </div>
-          <div class="output-item o-trading">
-            <div class="output-icon">📊</div>
-            <div class="output-name">Trading Signal</div>
-            <div class="output-channel">Trading</div>
-          </div>
-          <div class="output-item o-risk">
-            <div class="output-icon">⚠</div>
-            <div class="output-name">Risk Memo</div>
-            <div class="output-channel">Risk</div>
-          </div>
-          <div class="output-item o-media">
-            <div class="output-icon">🎬</div>
-            <div class="output-name">Video Script</div>
-            <div class="output-channel">Media</div>
-          </div>
-          <div class="output-item o-api">
-            <div class="output-icon">🔌</div>
-            <div class="output-name">API Response</div>
-            <div class="output-channel">API</div>
-          </div>
+          <div class="output-item o-news"><div class="output-icon">📰</div><div class="output-name">News Article</div></div>
+          <div class="output-item o-research"><div class="output-icon">📑</div><div class="output-name">Research Brief</div></div>
+          <div class="output-item o-trading"><div class="output-icon">📊</div><div class="output-name">Trading Context</div></div>
+          <div class="output-item o-risk"><div class="output-icon">⚠</div><div class="output-name">Risk Memo</div></div>
+          <div class="output-item o-media"><div class="output-icon">🎬</div><div class="output-name">Video Script</div></div>
+          <div class="output-item o-api"><div class="output-icon">🔌</div><div class="output-name">API Response</div></div>
         </div>
-        <p class="text-center text-mute small mt-5">يصل لنقاط اتصال متعددة: مواقع إخبارية، منصات تداول، لوحات مؤسسية، وتطبيقات FinTech.</p>
+        <p class="text-center text-mute small mt-5">حدث واحد → ذكاء واحد → توزيع عبر قنوات متعددة. كل مخرج مدعوم بنفس سلسلة الأدلة.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============= DISTRIBUTION LAYER (the real moat) ============= -->
-  <section class="section reveal">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Distribution Layer</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">توليد مرة واحدة. توزيع عبر آلاف نقاط الاتصال.</h2>
-        <p class="section-lead" style="margin: 0 auto;">القيمة ليست فقط إنتاج الذكاء. القيمة: نفس الذكاء يصل لموقع إخباري، ومنصة تداول، وصندوق استثمار، وتطبيق FinTech — في نفس الوقت، بنفس الدليل.</p>
-      </div>
-
-      <div style="max-width: 800px; margin: 2rem auto 0; text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-xl); margin-bottom: 1rem;">
-          <span style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--gold);">Intelligence Engine</span>
-          <span style="font-size: 0.75rem; color: var(--text-mute);">generates once</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
-        <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1rem;">
-          <span style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text);">Distribution Layer</span>
-          <span style="font-size: 0.6875rem; color: var(--text-mute);">delivers everywhere</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
-        <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--blue);">News Sites</span>
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--emerald);">Trading Platforms</span>
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold);">Fund Dashboards</span>
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--rose);">Risk Systems</span>
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--amber);">FinTech Apps</span>
-          <span style="padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute);">+ thousands more</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= 5 CHANNELS ============= -->
-  <section class="section reveal">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Five Channels</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">خمسة أسواق ذكاء مالي</h2>
-        <p class="section-lead" style="margin: 0 auto;">كل قناة تخاطب مشترياً مختلفاً بحاجة مختلفة. لكن جميعها تستهلك من نفس المحرك.</p>
-      </div>
-
-      <div class="channel-grid">
-        <!-- Media Intelligence -->
-        <div class="channel-card c-media" id="media">
-          <div class="channel-card-tag">01 · Media</div>
-          <div class="channel-card-h"><span class="ar">إعلام مالي ذكي</span>Financial Media</div>
-          <div class="channel-card-tagline">Power your financial newsroom</div>
-          <div class="channel-card-buyers">Buyers</div>
-          <div class="channel-card-buyer-list">
-            <span class="channel-card-buyer">News Networks</span>
-            <span class="channel-card-buyer">Financial Sites</span>
-            <span class="channel-card-buyer">TV Channels</span>
-            <span class="channel-card-buyer">Publishers</span>
-          </div>
-          <p class="channel-card-desc">Breaking article · Market explainer · Analyst video script · Social cards · Daily newsletter · TV segment briefing · Infographic — بـ 6 لغات، من نفس المصدر الموثّق.</p>
-          <a href="media-technologies.html" class="channel-card-link">Explore Media Pipeline →</a>
-        </div>
-
-        <!-- Research Intelligence -->
-        <div class="channel-card c-research" id="research">
-          <div class="channel-card-tag">02 · Research</div>
-          <div class="channel-card-h"><span class="ar">أبحاث استثمارية</span>Investment Research</div>
-          <div class="channel-card-tagline">Accelerate institutional research</div>
-          <div class="channel-card-buyers">Buyers</div>
-          <div class="channel-card-buyer-list">
-            <span class="channel-card-buyer">Asset Managers</span>
-            <span class="channel-card-buyer">Hedge Funds</span>
-            <span class="channel-card-buyer">Investment Committees</span>
-          </div>
-          <p class="channel-card-desc">موجز مدعوم بأدلة خلال دقائق، تحليل ماكرو، سيناريوهات، مذكرة قرار قابلة للتصدير أمام اللجنة.</p>
-          <a href="media-technologies.html" class="channel-card-link">Explore Research Pipeline →</a>
-        </div>
-
-        <!-- Trading Intelligence -->
-        <div class="channel-card c-trading" id="trading">
-          <div class="channel-card-tag">03 · Trading</div>
-          <div class="channel-card-h"><span class="ar">ذكاء التداول</span>Trading Intelligence</div>
-          <div class="channel-card-tagline">Deliver AI-powered market intelligence</div>
-          <div class="channel-card-buyers">Buyers</div>
-          <div class="channel-card-buyer-list">
-            <span class="channel-card-buyer">Brokers</span>
-            <span class="channel-card-buyer">Prop Firms</span>
-            <span class="channel-card-buyer">Trading Platforms</span>
-          </div>
-          <p class="channel-card-desc">Market Intelligence · Macro Context · Event Impact · Risk Signals · Decision Support · White Label — طبقة تزيد قيمة منصة الوسيط، لا منافس يبيع إشارات.</p>
-          <a href="trading-technologies.html" class="channel-card-link">Explore Trading Pipeline →</a>
-        </div>
-
-        <!-- Risk Intelligence -->
-        <div class="channel-card c-risk" id="risk">
-          <div class="channel-card-tag">04 · Risk</div>
-          <div class="channel-card-h"><span class="ar">تحليل المخاطر</span>Risk Intelligence</div>
-          <div class="channel-card-tagline">Monitor geopolitical and market exposure</div>
-          <div class="channel-card-buyers">Buyers</div>
-          <div class="channel-card-buyer-list">
-            <span class="channel-card-buyer">Banks</span>
-            <span class="channel-card-buyer">Sovereign Funds</span>
-            <span class="channel-card-buyer">Multinationals</span>
-          </div>
-          <p class="channel-card-desc">أحداث جيوسياسية → تأثير اقتصادي → تقييم مخاطر. عقوبات، حروب، انتخابات — تأثيرها على المحفظة.</p>
-          <a href="enterprise.html" class="channel-card-link">Explore Risk Pipeline →</a>
-        </div>
-
-        <!-- API Infrastructure -->
-        <div class="channel-card c-api" id="api">
-          <div class="channel-card-tag">05 · API</div>
-          <div class="channel-card-h"><span class="ar">بنية API</span>API Infrastructure</div>
-          <div class="channel-card-tagline">Embed financial intelligence into your platform</div>
-          <div class="channel-card-buyers">Buyers</div>
-          <div class="channel-card-buyer-list">
-            <span class="channel-card-buyer">FinTech</span>
-            <span class="channel-card-buyer">Developers</span>
-            <span class="channel-card-buyer">Data Teams</span>
-          </div>
-          <p class="channel-card-desc">بيانات + تحليل + أدلة عبر API واحد. REST، Streaming، SDK، Sandbox، Documentation — منصة يمكن البناء فوقها، لا مجرد خدمة.</p>
-          <a href="developers.html" class="channel-card-link">Explore API Pipeline →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= PROOF OF WORK (with context) ============= -->
+  <!-- ============= 4. FIVE INTELLIGENCE MARKETS ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Five Intelligence Markets</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">أين تستخدم؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">خمسة أسواق. خمسة مشترين. كلها تستهلك من نفس المحرك.</p>
+      </div>
+
+      <div class="markets-grid">
+        <a href="media-technologies.html" class="market-card m-media">
+          <div class="market-icon">📰</div>
+          <div class="market-name"><span class="ar">إعلام مالي ذكي</span>Media Intelligence</div>
+          <div class="market-tagline">Power your financial newsroom</div>
+          <div class="market-desc">للشبكات الإعلامية والمواقع الاقتصادية والقنوات.</div>
+        </a>
+        <a href="enterprise.html" class="market-card m-research">
+          <div class="market-icon">📊</div>
+          <div class="market-name"><span class="ar">أبحاث استثمارية</span>Investment Intelligence</div>
+          <div class="market-tagline">Accelerate institutional research</div>
+          <div class="market-desc">لصناديق الاستثمار ومديري الأصول ولجان الاستثمار.</div>
+        </a>
+        <a href="trading-technologies.html" class="market-card m-trading">
+          <div class="market-icon">📈</div>
+          <div class="market-name"><span class="ar">ذكاء التداول</span>Trading Intelligence</div>
+          <div class="market-tagline">Add intelligence to your platform</div>
+          <div class="market-desc">للبروكرات والمنصات وشركات التداول.</div>
+        </a>
+        <a href="risk-intelligence.html" class="market-card m-risk">
+          <div class="market-icon">⚠</div>
+          <div class="market-name"><span class="ar">تحليل المخاطر</span>Risk Intelligence</div>
+          <div class="market-tagline">Monitor geopolitical and market exposure</div>
+          <div class="market-desc">للبنوك والمؤسسات وصناديق السيادة.</div>
+        </a>
+        <a href="developers.html" class="market-card m-dev">
+          <div class="market-icon">🔌</div>
+          <div class="market-name"><span class="ar">منصة المطورين</span>Developer Platform</div>
+          <div class="market-tagline">Build on verified intelligence</div>
+          <div class="market-desc">لشركات التقنية المالية والمطورين.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 5. PLATFORM STATUS ============= -->
+  <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Platform Status</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">حالة المنصة</h2>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">دليل البناء الحالي</h2>
       </div>
 
       <div class="pow-grid">
-        <div class="pow-item">
-          <div class="pow-val">411</div>
-          <div class="pow-lbl">Official Sources<br>Monitored 24/7</div>
-        </div>
-        <div class="pow-item">
-          <div class="pow-val">10,000+</div>
-          <div class="pow-lbl">Documents Indexed<br>Across Official Sources</div>
-        </div>
-        <div class="pow-item">
-          <div class="pow-val">1,247</div>
-          <div class="pow-lbl">Verified Facts<br>With Evidence Chain</div>
-        </div>
-        <div class="pow-item">
-          <div class="pow-val">219</div>
-          <div class="pow-lbl">Validated Intelligence Briefs<br>Generated in Pipeline</div>
-        </div>
+        <div class="pow-item"><div class="pow-val">411</div><div class="pow-lbl">Official Sources<br>Connected</div></div>
+        <div class="pow-item"><div class="pow-val">10,000+</div><div class="pow-lbl">Documents Indexed<br>Across Sources</div></div>
+        <div class="pow-item"><div class="pow-val">1,247</div><div class="pow-lbl">Verified Facts<br>With Evidence Chain</div></div>
+        <div class="pow-item"><div class="pow-val">219</div><div class="pow-lbl">Validated Briefs<br>Generated in Pipeline</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============= WHY ROUAA (vs Bloomberg / Reuters / Build-Internal) ============= -->
-  <section class="section reveal">
+  <!-- ============= 6. WHY ROUAA ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Why ROUAA</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا تبني المؤسسات مع رؤى</h2>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا لا تبنيه داخلياً؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">بناء هذه الطبقات السبع داخلياً يحتاج: 2-3 سنوات · فريق 30+ · ملايين دولار. رؤى جاهزة الآن.</p>
       </div>
 
-      <div class="advantage-grid">
-        <div class="advantage-card">
-          <div class="advantage-num">01</div>
-          <div class="advantage-h"><span class="ar">معمارية الإثبات الأصيلة</span>Evidence-Native Architecture</div>
-          <p class="advantage-desc">كل قرار يمكن الدفاع عنه — لأن كل معلومة تعود إلى أصلها الرسمي.</p>
-          <div class="advantage-proof">Not information access — intelligence generation & distribution</div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <div class="why-h"><span class="ar">معمارية الإثبات الأصيلة</span>Evidence-Native</div>
+          <div class="why-desc">كل معلومة مرتبطة بمصدرها الرسمي — صفحة، فقرة، طابع زمني. كل قرار قابل للدفاع.</div>
+          <div class="why-proof">Every fact → origin</div>
         </div>
-        <div class="advantage-card">
-          <div class="advantage-num">02</div>
-          <div class="advantage-h"><span class="ar">توليد متعدد القنوات</span>Multi-Channel Intelligence</div>
-          <p class="advantage-desc">حدث واحد → عشرات المخرجات: أخبار، أبحاث، إشارات، مخاطر، فيديو، API. بناء هذا داخلياً يحتاج فريقاً من 30+ مهندساً ومحللاً.</p>
-          <div class="advantage-proof">One event → 10+ outputs</div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <div class="why-h"><span class="ar">توليد الذكاء</span>Intelligence Generation</div>
+          <div class="why-desc">لا نقدّم بيانات فقط. نقدّم معنى وتحليل واستدلال — من الحقيقة إلى التأثير إلى القرار.</div>
+          <div class="why-proof">Data → meaning → decision</div>
         </div>
-        <div class="advantage-card">
-          <div class="advantage-num">03</div>
-          <div class="advantage-h"><span class="ar">شبكة المصادر الرسمية</span>Official-Source Network</div>
-          <p class="advantage-desc">411 مؤسسة رسمية — يبدأ الذكاء من المصادر الرسمية والوثائق الأولية، مع إمكانية دمج مصادر إضافية حسب احتياج المؤسسة.</p>
-          <div class="advantage-proof">411 institutions · no commercial news</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= THE FLYWHEEL (why ROUAA scales) ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">The Flywheel</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا تزداد رؤى قوة مع الوقت</h2>
-        <p class="section-lead" style="margin: 0 auto;">ليست مجرد ميزة — هذه قصة الشركة. كل مصدر جديد، كل وثيقة، كل مستخدم يجعل المحرك أعمق وأوسع.</p>
-      </div>
-
-      <div style="max-width: 600px; margin: 2rem auto 0; display: flex; flex-direction: column; align-items: center; gap: 0;">
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">01</span>
-          <span style="font-size: 0.875rem; color: var(--text);">More Official Sources</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.3rem 0;">↓</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">02</span>
-          <span style="font-size: 0.875rem; color: var(--text);">Deeper Knowledge Graph</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.3rem 0;">↓</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">03</span>
-          <span style="font-size: 0.875rem; color: var(--text);">More Intelligence Products</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.3rem 0;">↓</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">04</span>
-          <span style="font-size: 0.875rem; color: var(--text);">More Distribution Partners</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.3rem 0;">↓</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">05</span>
-          <span style="font-size: 0.875rem; color: var(--text);">More Market Coverage</span>
-        </div>
-        <div style="color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.3rem 0;">↓</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-md); min-width: 280px;">
-          <span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700;">06</span>
-          <span style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">Better Intelligence → loops back to 01</span>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <div class="why-h"><span class="ar">توزيع متعدد القنوات</span>Multi-Channel Distribution</div>
+          <div class="why-desc">ذكاء واحد يصل لقنوات متعددة — إعلام، تداول، أبحاث، مخاطر، API — في نفس الوقت.</div>
+          <div class="why-proof">Generate once → distribute everywhere</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= INTEGRATION MODEL ============= -->
+  <!-- ============= 7. TRUST ENTRY ============= -->
   <section class="section reveal">
     <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Integration Model</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تدمج رؤى في بنيتك</h2>
-        <p class="section-lead" style="margin: 0 auto;">ست طرق دمج — من API خفيف إلى White Label كامل. ابدأ في أي مستوى، وتوسّع عند الحاجة.</p>
-      </div>
-
-      <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🔌</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">REST API</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">نقاط نهاية HTTP</div>
-        </div>
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">⚡</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Streaming</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">WebSocket &lt;50ms</div>
-        </div>
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">📡</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Webhooks</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">تنبيهات بالحدث</div>
-        </div>
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">📦</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">SDK</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">5 لغات</div>
-        </div>
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🖥</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">White Label</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">منصة كاملة بعلامتك</div>
-        </div>
-        <div style="padding: 1.25rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🧩</div>
-          <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Embedded</div>
-          <div style="font-size: 0.6875rem; color: var(--text-mute);">Widgets قابلة للتضمين</div>
-        </div>
-      </div>
-
-      <p class="text-center text-mute small mt-5">من API خفيف في أسبوع → White Label كامل في أسابيع → Embedded Intelligence في أي منتج.</p>
-    </div>
-  </section>
-
-  <!-- ============= TRUST (concise — behind link) ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered">
+      <div class="trust-entry">
         <span class="section-tag" style="justify-content: center;">Trust Architecture</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كل مخرج مدعوم بنفس الأدلة.</h2>
-        <p class="section-lead" style="margin: 0 auto; margin-bottom: 2rem;">سواء كان خبراً، أو بحثاً، أو إشارة تداول، أو تقييم مخاطر — كل مخرج من رؤى يمرّ بنفس سلسلة الأدلة. من المصدر الرسمي إلى الحقيقة إلى التحليل.</p>
+        <h2>كل قرار له دليل.<br>كل دليل له مصدر.</h2>
+        <p>سواء كان خبراً، أو بحثاً، أو سياق تداول، أو تقييم مخاطر — كل مخرج من رؤى يمرّ بنفس سلسلة الأدلة. من المصدر الرسمي إلى الحقيقة إلى التحليل.</p>
         <a href="trust.html" class="btn btn-ghost">Explore Trust Architecture ←</a>
       </div>
     </div>
@@ -791,7 +305,7 @@ body { class: motion-marketing; }
   <section class="cta-final reveal" id="contact">
     <div class="container">
       <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>Which channel fits your institution?</h2>
+      <h2>Which market fits your institution?</h2>
       <p>مكالمة 30 دقيقة — نوضح أي قناة من رؤى تناسب حاجة مؤسستك.</p>
       <a href="mailto:contact@rouaa.ai?subject=Request Institutional Briefing" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
     </div>
@@ -804,33 +318,32 @@ body { class: motion-marketing; }
   <div class="footer-grid">
     <div>
       <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
-      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Powering Financial Media, Markets, and Institutions.</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">The Intelligence Layer Behind Financial Media, Trading Platforms, and Institutional Decisions.</div>
       <div class="mono-label text-mute">v18 · يوليو 2026</div>
     </div>
     <div>
-      <h4 class="mono-label text-mute mb-3">Channels</h4>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
-        <li><a href="media-technologies.html" class="small text-dim">Research</a></li>
-        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
-        <li><a href="enterprise.html" class="small text-dim">Risk</a></li>
-        <li><a href="developers.html" class="small text-dim">API</a></li>
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="catalog.html" class="small text-dim">Products</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
       </ul>
     </div>
     <div>
-      <h4 class="mono-label text-mute mb-3">Trust</h4>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-        <li><a href="trust.html" class="small text-dim">Evidence Chain</a></li>
-        <li><a href="trust.html" class="small text-dim">Source Registry</a></li>
-        <li><a href="trust.html" class="small text-dim">Trust Architecture</a></li>
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
       </ul>
     </div>
     <div>
       <h4 class="mono-label text-mute mb-3">Company</h4>
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
         <li><a href="#contact" class="small text-dim">Contact</a></li>
-        <li><a href="#" class="small text-dim">Privacy</a></li>
-        <li><a href="#" class="small text-dim">Terms</a></li>
       </ul>
     </div>
   </div>
