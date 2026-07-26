@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Solutions — Five Markets. One Engine.</title>
+<meta name="description" content="خمسة أسواق ذكاء مالي. كل سوق يحل مشكلة محددة لمشتر محدد. كلها تستهلك من نفس المحرك.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+/* === Hero === */
+.hero-sol { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-sol-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-sol-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-sol-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
+.hero-sol-h1 .gold { color: var(--gold); }
+.hero-sol-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-sol-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === The Hub Logic === */
+.hub-logic { max-width: 900px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 60px 1fr 60px 1fr; align-items: center; gap: 0.5rem; }
+@media (max-width: 768px) { .hub-logic { grid-template-columns: 1fr; } }
+.hub-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; }
+.hub-block.center { background: var(--gold-dim); border-color: var(--gold); }
+.hub-block-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.hub-block-val { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.hub-block-val.ar { font-family: var(--font-ar); }
+.hub-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.5rem; }
+
+/* === Solution Cards === */
+.solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1280px; margin: 0 auto; }
+.solution-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem 1.75rem; transition: all var(--transition-slow); position: relative; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+.solution-card:hover { border-color: var(--s-color, var(--gold)); transform: translateY(-4px); }
+.solution-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; background: var(--s-color, var(--gold)); }
+.solution-card.s-media { --s-color: var(--blue); }
+.solution-card.s-research { --s-color: var(--gold); }
+.solution-card.s-trading { --s-color: var(--emerald); }
+.solution-card.s-risk { --s-color: var(--rose); }
+.solution-card.s-dev { --s-color: var(--amber); }
+
+.sol-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--s-color, var(--gold)); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.75rem; }
+.sol-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.sol-name { font-family: var(--font-en); font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem; }
+.sol-name-ar { font-family: var(--font-ar); font-size: 1.0625rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+.sol-tagline { font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--s-color); margin-bottom: 1rem; line-height: 1.4; }
+.sol-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
+
+.sol-buyer { padding-top: 1rem; border-top: 1px solid var(--border-soft); }
+.sol-buyer-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.sol-buyer-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+.sol-buyer-tag { padding: 0.25rem 0.625rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.6875rem; color: var(--text-dim); }
+.sol-cta { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; }
+.sol-cta-text { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--s-color); }
+.sol-cta-arrow { color: var(--s-color); font-size: 1.25rem; }
+
+/* === Comparison table === */
+.compare-wrap { max-width: 1200px; margin: 0 auto; overflow-x: auto; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.compare-table th { text-align: right; padding: 1rem 0.875rem; background: var(--surface); border-bottom: 1px solid var(--gold); font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
+.compare-table td { padding: 0.875rem; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+.compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+.compare-market { font-family: var(--font-en); font-weight: 700; color: var(--text); font-size: 0.875rem; }
+.compare-market .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.125rem; }
+.compare-pain { color: var(--text-dim); font-size: 0.75rem; line-height: 1.5; }
+.compare-buyer { color: var(--text); font-size: 0.75rem; font-family: var(--font-en); }
+.compare-products { color: var(--gold); font-size: 0.6875rem; font-family: var(--font-mono); }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Financial Intelligence Infrastructure</span></div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html" class="active">Solutions</a></li><li><a href="catalog.html">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html">Company</a></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-sol">
+    <div class="hero-sol-bg"></div>
+    <div class="container">
+      <div class="hero-sol-content">
+        <div class="mono-label text-gold">Solutions</div>
+        <h1 class="hero-sol-h1">
+          Five Markets.<br>
+          <span class="gold">One Intelligence Engine.</span>
+        </h1>
+        <p class="hero-sol-sub">
+          خمسة أسواق ذكاء مالي. كل سوق يحل مشكلة محددة لمشتر محدد. كلها تستهلك من نفس المحرك — وكل مخرج يحمل نفس سلسلة الأدلة.
+        </p>
+        <div class="hero-sol-cta">
+          <a href="#markets" class="btn btn-primary btn-lg">Explore the Five Markets</a>
+          <a href="platform.html" class="btn btn-ghost btn-lg">How the Engine Works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= HUB LOGIC ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف نفكر في الأسواق؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">نحن لا نبيع منتجات. نحن نبيع ذكاءً موثّقاً — يصل إلى كل سوق باللغة التي يفهمها.</p>
+      </div>
+
+      <div class="hub-logic">
+        <div class="hub-block">
+          <div class="hub-block-h">One Engine</div>
+          <div class="hub-block-val ar">محرّك ذكاء واحد</div>
+          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">7 طبقات · يولّد ذكاءً موثّقاً</div>
+        </div>
+        <div class="hub-arrow">←</div>
+        <div class="hub-block center">
+          <div class="hub-block-h">One Evidence Chain</div>
+          <div class="hub-block-val ar">سلسلة أدلة واحدة</div>
+          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">كل مخرج يحمل نفس الدليل</div>
+        </div>
+        <div class="hub-arrow">→</div>
+        <div class="hub-block">
+          <div class="hub-block-h">Five Markets</div>
+          <div class="hub-block-val ar">خمسة أسواق</div>
+          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">كل سوق بلغة مشتريه</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FIVE MARKETS ============= -->
+  <section class="section reveal" id="markets">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Five Intelligence Markets</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">اختر سوقك</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل بطاقة تمثل سوقاً كاملاً — مع المشتر، الألم، والحل. اضغط للدخول إلى الصفحة المخصصة.</p>
+      </div>
+
+      <div class="solutions-grid">
+        <a href="media-technologies.html" class="solution-card s-media">
+          <div class="sol-num">01 · Media</div>
+          <div class="sol-icon">📰</div>
+          <div class="sol-name">Media Intelligence</div>
+          <div class="sol-name-ar">إعلام مالي ذكي</div>
+          <div class="sol-tagline">Power your financial newsroom with verified intelligence.</div>
+          <div class="sol-desc">للشبكات الإعلامية والمواقع الاقتصادية والقنوات — حوّل الخبر إلى ذكاء موثّق بدلاً من نسخ وكالات الأنباء.</div>
+          <div class="sol-buyer">
+            <div class="sol-buyer-h">Built for</div>
+            <div class="sol-buyer-tags">
+              <span class="sol-buyer-tag">Editor-in-Chief</span>
+              <span class="sol-buyer-tag">News Director</span>
+              <span class="sol-buyer-tag">Media CTO</span>
+            </div>
+          </div>
+          <div class="sol-cta">
+            <span class="sol-cta-text">Explore Media</span>
+            <span class="sol-cta-arrow">←</span>
+          </div>
+        </a>
+
+        <a href="enterprise.html" class="solution-card s-research">
+          <div class="sol-num">02 · Research</div>
+          <div class="sol-icon">📊</div>
+          <div class="sol-name">Investment Intelligence</div>
+          <div class="sol-name-ar">أبحاث استثمارية</div>
+          <div class="sol-tagline">Investment committee prep in minutes, not days.</div>
+          <div class="sol-desc">لصناديق الاستثمار ومديري الأصول ولجان الاستثمار — مذكرات قرار مدعومة بأدلة كاملة، جاهزة للجنة.</div>
+          <div class="sol-buyer">
+            <div class="sol-buyer-h">Built for</div>
+            <div class="sol-buyer-tags">
+              <span class="sol-buyer-tag">CIO</span>
+              <span class="sol-buyer-tag">Head of Research</span>
+              <span class="sol-buyer-tag">Portfolio Manager</span>
+            </div>
+          </div>
+          <div class="sol-cta">
+            <span class="sol-cta-text">Explore Research</span>
+            <span class="sol-cta-arrow">←</span>
+          </div>
+        </a>
+
+        <a href="trading-technologies.html" class="solution-card s-trading">
+          <div class="sol-num">03 · Trading</div>
+          <div class="sol-icon">📈</div>
+          <div class="sol-name">Trading Intelligence</div>
+          <div class="sol-name-ar">ذكاء التداول</div>
+          <div class="sol-tagline">Built for brokers. Not against brokers.</div>
+          <div class="sol-desc">للبروكرات والمنصات وشركات التداول — أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة، واحتفظ بعميلك أطول.</div>
+          <div class="sol-buyer">
+            <div class="sol-buyer-h">Built for</div>
+            <div class="sol-buyer-tags">
+              <span class="sol-buyer-tag">Broker CEO</span>
+              <span class="sol-buyer-tag">Head of Product</span>
+              <span class="sol-buyer-tag">Retention Lead</span>
+            </div>
+          </div>
+          <div class="sol-cta">
+            <span class="sol-cta-text">Explore Trading</span>
+            <span class="sol-cta-arrow">←</span>
+          </div>
+        </a>
+
+        <a href="risk-intelligence.html" class="solution-card s-risk">
+          <div class="sol-num">04 · Risk</div>
+          <div class="sol-icon">⚠</div>
+          <div class="sol-name">Risk Intelligence</div>
+          <div class="sol-name-ar">تحليل المخاطر</div>
+          <div class="sol-tagline">From global event to portfolio action in minutes.</div>
+          <div class="sol-desc">للبنوك والمؤسسات وصناديق السيادة — من حدث عالمي إلى تقييم التعرض إلى إجراء محفظة في دقائق.</div>
+          <div class="sol-buyer">
+            <div class="sol-buyer-h">Built for</div>
+            <div class="sol-buyer-tags">
+              <span class="sol-buyer-tag">CRO</span>
+              <span class="sol-buyer-tag">Risk Committee</span>
+              <span class="sol-buyer-tag">Treasury Head</span>
+            </div>
+          </div>
+          <div class="sol-cta">
+            <span class="sol-cta-text">Explore Risk</span>
+            <span class="sol-cta-arrow">←</span>
+          </div>
+        </a>
+
+        <a href="developers.html" class="solution-card s-dev">
+          <div class="sol-num">05 · Developer</div>
+          <div class="sol-icon">🔌</div>
+          <div class="sol-name">Developer Platform</div>
+          <div class="sol-name-ar">منصة المطورين</div>
+          <div class="sol-tagline">Build financial products on top of verified intelligence.</div>
+          <div class="sol-desc">لشركات التقنية المالية والمطورين — واجهات REST وStreaming وSDK وWebhooks، كل استجابة تحمل دليلها.</div>
+          <div class="sol-buyer">
+            <div class="sol-buyer-h">Built for</div>
+            <div class="sol-buyer-tags">
+              <span class="sol-buyer-tag">CTO</span>
+              <span class="sol-buyer-tag">Head of Engineering</span>
+              <span class="sol-buyer-tag">Fintech Founder</span>
+            </div>
+          </div>
+          <div class="sol-cta">
+            <span class="sol-cta-text">Explore Developer</span>
+            <span class="sol-cta-arrow">←</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= COMPARISON ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Side by Side</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">قارن الأسواق الخمسة</h2>
+        <p class="section-lead" style="margin: 0 auto;">نفس المحرك · سلاسل أدلة واحدة · لغة مختلفة لكل مشتر.</p>
+      </div>
+
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Market</th>
+              <th>The Pain</th>
+              <th>The Buyer</th>
+              <th>Products</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="compare-market"><span class="ar">إعلام مالي</span>Media</div></td>
+              <td class="compare-pain">سرعة دون دقة · نسخ الوكالات · لا تميّز</td>
+              <td class="compare-buyer">Media networks</td>
+              <td class="compare-products">8 products</td>
+              <td class="compare-pain">خبر موثّق في دقائق</td>
+            </tr>
+            <tr>
+              <td><div class="compare-market"><span class="ar">أبحاث</span>Research</div></td>
+              <td class="compare-pain">مذكرات لجنة في أيام · قرارات بلا أدلة</td>
+              <td class="compare-buyer">Asset managers</td>
+              <td class="compare-products">6 products</td>
+              <td class="compare-pain">مذكرة قرار جاهزة في دقائق</td>
+            </tr>
+            <tr>
+              <td><div class="compare-market"><span class="ar">تداول</span>Trading</div></td>
+              <td class="compare-pain">عميل يسأل «لماذا» · لا إجابة · يرحل</td>
+              <td class="compare-buyer">Brokers</td>
+              <td class="compare-products">9 products</td>
+              <td class="compare-pain">سياق خلف كل صفقة</td>
+            </tr>
+            <tr>
+              <td><div class="compare-market"><span class="ar">مخاطر</span>Risk</div></td>
+              <td class="compare-pain">حدث عالمي · لا تقييم تعرّض · تأخير ساعات</td>
+              <td class="compare-buyer">Banks · Sovereign funds</td>
+              <td class="compare-products">5 products</td>
+              <td class="compare-pain">إجراء محفظة في دقائق</td>
+            </tr>
+            <tr>
+              <td><div class="compare-market"><span class="ar">مطورين</span>Developer</div></td>
+              <td class="compare-pain">بناء أنبوب المعلومات لسنوات · ملايين · فريق</td>
+              <td class="compare-buyer">Fintech · Builders</td>
+              <td class="compare-products">7 APIs + 4 agents</td>
+              <td class="compare-pain">منتج كامل في أسابيع</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which market fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك على تحديد أي سوق من رؤى يخدم مؤسستك، وما هي المنتجات التي تناسب احتياجك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Solutions Briefing" class="btn btn-primary btn-lg">Request Solutions Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="catalog.html" class="small text-dim">Products</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

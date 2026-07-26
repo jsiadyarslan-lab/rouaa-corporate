@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Product</title>
+<meta name="description" content="منتجات رؤى — مدعومة بنفس المحرك، بنفس سلسلة الأدلة.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.product-hero { position: relative; padding: 6rem 0 3rem; overflow: hidden; }
+.product-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.product-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+.product-breadcrumb { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+.product-breadcrumb a { color: var(--gold); text-decoration: none; }
+.product-breadcrumb a:hover { text-decoration: underline; }
+.product-hero h1 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
+.product-hero h1 .ar { font-family: var(--font-ar); display: block; font-size: 1.5rem; color: var(--text-dim); margin-bottom: 0.25rem; }
+.product-hero .tagline { font-family: var(--font-en); font-size: 1.125rem; color: var(--gold); font-weight: 600; margin-bottom: 1rem; line-height: 1.4; }
+.product-hero .desc { font-size: 1rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 1.5rem; max-width: 65ch; }
+.product-hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.product-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.product-meta-item { text-align: center; }
+.product-meta-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.product-meta-v { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+
+/* === Body sections === */
+.product-section { padding: 3rem 0; border-bottom: 1px solid var(--border-soft); }
+.product-section.alt { background: var(--surface); }
+.product-section h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+.product-section h2 .ar { font-family: var(--font-ar); display: block; font-size: 1.25rem; color: var(--text-dim); margin-bottom: 0.25rem; }
+
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.feature-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; transition: border-color var(--transition-slow); }
+.feature-card:hover { border-color: var(--gold); }
+.feature-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.feature-h { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.feature-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
+/* === Evidence chain visual === */
+.evidence-chain { max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; }
+.chain-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px dashed var(--border-soft); align-items: center; }
+.chain-step:last-child { border-bottom: none; }
+.chain-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); font-weight: 700; }
+.chain-body { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
+.chain-body .label { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.125rem; }
+.chain-status { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); padding: 0.25rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid var(--emerald); border-radius: var(--radius-sm); }
+
+/* === Integration === */
+.integration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+.integration-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; border-right: 3px solid var(--gold); }
+.integration-card-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.integration-card-v { font-family: var(--font-en); font-size: 0.875rem; color: var(--text); font-weight: 600; }
+
+/* === Code sample === */
+.code-sample { max-width: 900px; margin: 0 auto; background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; overflow-x: auto; }
+.code-sample .key { color: var(--gold); }
+.code-sample .str { color: var(--emerald); }
+.code-sample .com { color: var(--text-mute); font-style: italic; }
+
+/* === Related products === */
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; max-width: 1100px; margin: 0 auto; }
+.related-card { display: block; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; text-decoration: none; color: inherit; transition: border-color var(--transition-slow); }
+.related-card:hover { border-color: var(--gold); }
+.related-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--text); margin-bottom: 0.125rem; }
+.related-name .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.125rem; }
+.related-desc { font-size: 0.6875rem; color: var(--text-dim); line-height: 1.4; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Loading === */
+.loading { text-align: center; padding: 8rem 2rem; color: var(--text-mute); font-family: var(--font-mono); }
+.loading::after { content: '...'; animation: dots 1.5s infinite; }
+@keyframes dots { 0%,20% { content: '.'; } 40% { content: '..'; } 60%,100% { content: '...'; } }
+
+/* === Not found === */
+.not-found { text-align: center; padding: 8rem 2rem; max-width: 600px; margin: 0 auto; }
+.not-found h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+.not-found p { color: var(--text-dim); font-size: 1.125rem; margin-bottom: 2rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Financial Intelligence Infrastructure</span></div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="catalog.html" class="active">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html">Company</a></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+  </div>
+</nav>
+
+<main id="main">
+  <div id="productContent" class="loading">
+    Loading product
+  </div>
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="catalog.html" class="small text-dim">Products</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script src="assets/js/products.js"></script>
+<script>
+// === Product Template Engine ===
+// Reads ?id=xxx from URL, renders product page dynamically from ROUAA_PRODUCTS data
+
+const CATEGORY_INFO = {
+  media: { name: 'Media', nameAr: 'إعلام مالي', color: 'blue', icon: '📰', url: 'media-technologies.html' },
+  trading: { name: 'Trading', nameAr: 'تداول', color: 'emerald', icon: '📈', url: 'trading-technologies.html' },
+  research: { name: 'Research', nameAr: 'أبحاث', color: 'gold', icon: '📊', url: 'enterprise.html' },
+  risk: { name: 'Risk', nameAr: 'مخاطر', color: 'rose', icon: '⚠', url: 'risk-intelligence.html' },
+  api: { name: 'API', nameAr: 'واجهات', color: 'amber', icon: '🔌', url: 'developers.html' },
+  agent: { name: 'AI Agent', nameAr: 'وكيل ذكي', color: 'blue', icon: '🤖', url: 'developers.html' },
+  component: { name: 'Component', nameAr: 'مكوّن', color: 'mute', icon: '🧩', url: 'platform.html' },
+};
+
+const ROLE_LABELS = {
+  cio: 'CIO',
+  cro: 'CRO',
+  cto: 'CTO',
+  editor: 'Editor-in-Chief',
+  broker: 'Broker CEO',
+  head: 'Head of Research',
+  treasury: 'Treasury Head',
+  founder: 'Fintech Founder',
+};
+
+const INDUSTRY_LABELS = {
+  banks: 'Banks',
+  funds: 'Hedge Funds',
+  brokers: 'Brokers',
+  media: 'Media',
+  govt: 'Governments',
+  fintech: 'FinTech',
+};
+
+const DEPLOY_LABELS = {
+  api: 'API',
+  saas: 'SaaS',
+  whitelabel: 'White Label',
+  enterprise: 'Enterprise',
+};
+
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function renderNotFound() {
+  const el = document.getElementById('productContent');
+  el.className = 'not-found';
+  el.innerHTML = `
+    <h1>404</h1>
+    <p>المنتج غير موجود — تحقّق من الرابط أو تصفّح <a href="catalog.html" style="color: var(--gold);">الكatalog الكامل</a>.</p>
+    <a href="catalog.html" class="btn btn-primary btn-lg">Browse All Products</a>
+  `;
+}
+
+function renderProduct(product) {
+  const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
+  const roles = product.roles.map(r => ROLE_LABELS[r] || r).join(' · ');
+  const industries = product.industries.map(i => INDUSTRY_LABELS[i] || i).join(' · ');
+  const deploys = product.deploy.map(d => DEPLOY_LABELS[d] || d).join(' · ');
+
+  // Get 3 related products (same category, different id)
+  const related = ROUAA_PRODUCTS
+    .filter(p => p.cat === product.cat && p.id !== product.id)
+    .slice(0, 3);
+
+  // If less than 3 from same category, fill with other categories
+  if (related.length < 3) {
+    const others = ROUAA_PRODUCTS
+      .filter(p => p.cat !== product.cat && p.id !== product.id)
+      .slice(0, 3 - related.length);
+    related.push(...others);
+  }
+
+  const relatedHTML = related.map(p => `
+    <a href="product.html?id=${p.id}" class="related-card">
+      <div class="related-name"><span class="ar">${p.nameAr}</span>${p.nameEn}</div>
+      <div class="related-desc">${p.tagline}</div>
+    </a>
+  `).join('');
+
+  const featuresHTML = product.features.map((f, i) => {
+    const icons = ['⚡', '🎯', '🔄', '📦', '🛡', '🔍'];
+    return `
+      <div class="feature-card">
+        <div class="feature-icon">${icons[i % icons.length]}</div>
+        <div class="feature-h">${f}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.title = `رؤى · ${product.nameEn} — ${product.tagline}`;
+
+  const el = document.getElementById('productContent');
+  el.className = '';
+  el.innerHTML = `
+    <!-- ============= HERO ============= -->
+    <section class="product-hero">
+      <div class="product-hero-bg"></div>
+      <div class="product-hero-content">
+        <div class="product-breadcrumb">
+          <a href="catalog.html">Products</a> · <a href="${cat.url}">${cat.name}</a> · <span style="color: var(--gold);">${product.id}</span>
+        </div>
+        <div class="mono-label text-gold">${cat.icon} ${cat.name} · ${cat.nameAr}</div>
+        <h1>
+          <span class="ar">${product.nameAr}</span>
+          ${product.nameEn}
+        </h1>
+        <div class="tagline">${product.tagline}</div>
+        <p class="desc">${product.desc}</p>
+        <div class="product-hero-cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request Briefing</a>
+          <a href="${cat.url}" class="btn btn-ghost btn-lg">Explore ${cat.name} Solution</a>
+        </div>
+
+        <div class="product-meta">
+          <div class="product-meta-item"><div class="product-meta-h">Category</div><div class="product-meta-v">${cat.name}</div></div>
+          <div class="product-meta-item"><div class="product-meta-h">Pricing</div><div class="product-meta-v">${product.pricing}</div></div>
+          <div class="product-meta-item"><div class="product-meta-h">Deployment</div><div class="product-meta-v">${deploys}</div></div>
+          <div class="product-meta-item"><div class="product-meta-h">Buyer Role</div><div class="product-meta-v" style="font-size: 0.75rem;">${roles}</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= EVIDENCE CHAIN ============= -->
+    <section class="product-section alt">
+      <div class="container">
+        <h2><span class="ar">سلسلة الدليل</span>Evidence Chain — How This Product Stays Trustworthy</h2>
+        <p style="color: var(--text-dim); max-width: 65ch; margin-bottom: 2rem; line-height: 1.7;">
+          كل مخرج من ${product.nameEn} يمرّ بنفس سلسلة الدليل — من المصدر الرسمي إلى الحقيقة الموثّقة. هذا ما يجعله قابلاً للدفاع.
+        </p>
+
+        <div class="evidence-chain">
+          <div class="chain-step">
+            <div class="chain-num">01</div>
+            <div class="chain-body"><span class="label">Source</span>Official source detected via Source Registry (T1/T2/T3 tier)</div>
+            <div class="chain-status">VERIFIED</div>
+          </div>
+          <div class="chain-step">
+            <div class="chain-num">02</div>
+            <div class="chain-body"><span class="label">Document</span>Indexed by Document Intelligence — page, paragraph, table</div>
+            <div class="chain-status">INDEXED</div>
+          </div>
+          <div class="chain-step">
+            <div class="chain-num">03</div>
+            <div class="chain-body"><span class="label">Fact</span>Extracted by Fact Engine — value, unit, type, confidence</div>
+            <div class="chain-status">EXTRACTED</div>
+          </div>
+          <div class="chain-step">
+            <div class="chain-num">04</div>
+            <div class="chain-body"><span class="label">Evidence</span>Linked to source — every fact traceable in ≤5 seconds</div>
+            <div class="chain-status">LINKED</div>
+          </div>
+          <div class="chain-step">
+            <div class="chain-num">05</div>
+            <div class="chain-body"><span class="label">Reasoning</span>10 agents review — quorum ≥7 required to ship</div>
+            <div class="chain-status">PEER-REVIEWED</div>
+          </div>
+          <div class="chain-step">
+            <div class="chain-num">06</div>
+            <div class="chain-body"><span class="label">Output</span>Distributed to ${product.nameEn} — evidence chain attached</div>
+            <div class="chain-status">DISTRIBUTED</div>
+          </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-mute); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
+          ${product.evidence}
+        </p>
+      </div>
+    </section>
+
+    <!-- ============= FEATURES ============= -->
+    <section class="product-section">
+      <div class="container">
+        <h2><span class="ar">الميزات الرئيسية</span>Key Features</h2>
+        <div class="feature-grid">
+          ${featuresHTML}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= INTEGRATION ============= -->
+    <section class="product-section alt">
+      <div class="container">
+        <h2><span class="ar">التكامل</span>Integration</h2>
+        <p style="color: var(--text-dim); max-width: 65ch; margin-bottom: 2rem; line-height: 1.7;">
+          ${product.nameEn} يتكامل مع أنظمتك عبر:
+        </p>
+        <div class="integration-grid">
+          <div class="integration-card">
+            <div class="integration-card-h">Integration Methods</div>
+            <div class="integration-card-v">${product.integration}</div>
+          </div>
+          <div class="integration-card">
+            <div class="integration-card-h">Deployment</div>
+            <div class="integration-card-v">${deploys}</div>
+          </div>
+          <div class="integration-card">
+            <div class="integration-card-h">For Industries</div>
+            <div class="integration-card-v">${industries}</div>
+          </div>
+          <div class="integration-card">
+            <div class="integration-card-h">For Roles</div>
+            <div class="integration-card-v" style="font-size: 0.75rem;">${roles}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= RELATED PRODUCTS ============= -->
+    <section class="product-section">
+      <div class="container">
+        <h2><span class="ar">منتجات ذات صلة</span>Related Products</h2>
+        <div class="related-grid">
+          ${relatedHTML}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= CTA ============= -->
+    <section class="cta-final" id="contact">
+      <div class="container">
+        <span class="section-tag" style="justify-content: center;">Next Step</span>
+        <h2>Ready to deploy ${product.nameEn}?</h2>
+        <p>مكالمة 30 دقيقة — نوضح كيف يندمج ${product.nameAr} في مؤسستك، ونريك سلسلة الأدلة حيّة.</p>
+        <a href="mailto:contact@rouaa.ai?subject=Product Briefing: ${product.nameEn}" class="btn btn-primary btn-lg">Request Product Briefing</a>
+        <div style="margin-top: 1.5rem;">
+          <a href="catalog.html" class="btn-link">← Browse all 44 products</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// === Boot — render product on page load ===
+(function boot() {
+  const id = getQueryParam('id');
+  if (!id) {
+    renderNotFound();
+    return;
+  }
+  const product = ROUAA_PRODUCTS.find(p => p.id === id);
+  if (!product) {
+    renderNotFound();
+    return;
+  }
+  renderProduct(product);
+
+  // Scroll reveal observer
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(x => {
+      if (x.isIntersecting) {
+        x.target.classList.add('visible');
+        io.unobserve(x.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>

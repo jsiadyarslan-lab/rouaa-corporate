@@ -87,6 +87,73 @@ body { class: motion-marketing; }
 .deploy-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
 .deploy-desc { font-size: 0.6875rem; color: var(--text-dim); line-height: 1.5; }
 
+/* === Architecture Visualization — Follow One Event === */
+.viz-wrap { max-width: 1100px; margin: 0 auto; }
+.viz-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.viz-tab { padding: 0.625rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); cursor: pointer; transition: all var(--transition-slow); }
+.viz-tab:hover { border-color: var(--gold); color: var(--text); }
+.viz-tab.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+.viz-flow { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; }
+@media (max-width: 768px) { .viz-flow { grid-template-columns: 1fr; } }
+
+.viz-source { display: flex; flex-direction: column; gap: 0.75rem; }
+.viz-source-label { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+.viz-source-doc { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; transition: border-color var(--transition-slow); }
+.viz-source-doc:hover { border-color: var(--gold); }
+.viz-source-type { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.viz-source-title { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; }
+.viz-source-meta { font-size: 0.6875rem; color: var(--text-mute); line-height: 1.4; }
+
+.viz-layers { display: flex; flex-direction: column; gap: 0.25rem; }
+.viz-layer { display: grid; grid-template-columns: 32px 1fr 1fr 110px; gap: 0.75rem; padding: 0.625rem 0.875rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); align-items: center; transition: all var(--transition-slow); position: relative; overflow: hidden; }
+.viz-layer:hover { border-color: var(--gold); transform: translateX(-4px); }
+.viz-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--l-color, var(--gold)); }
+.viz-layer.l1 { --l-color: var(--emerald); }
+.viz-layer.l2 { --l-color: var(--blue); }
+.viz-layer.l3 { --l-color: var(--blue); }
+.viz-layer.l4 { --l-color: var(--gold); }
+.viz-layer.l5 { --l-color: var(--gold); }
+.viz-layer.l6 { --l-color: var(--amber); }
+.viz-layer.l7 { --l-color: var(--gold); }
+
+.viz-layer-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--l-color); font-weight: 700; }
+.viz-layer-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 700; color: var(--text); }
+.viz-layer-name .ar { font-family: var(--font-ar); font-size: 0.625rem; color: var(--text-mute); display: block; }
+.viz-layer-transform { font-size: 0.6875rem; color: var(--text-dim); line-height: 1.4; }
+.viz-layer-transform strong { color: var(--l-color); font-family: var(--font-en); font-size: 0.6875rem; }
+.viz-layer-output { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--l-color); padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.viz-connector { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.5rem; margin: 0; }
+
+.viz-outputs { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); }
+.viz-outputs-h { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+.viz-outputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
+.viz-output { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); border-right: 2px solid var(--o-color); }
+.viz-output.o-news { --o-color: var(--blue); }
+.viz-output.o-research { --o-color: var(--gold); }
+.viz-output.o-trading { --o-color: var(--emerald); }
+.viz-output.o-risk { --o-color: var(--rose); }
+.viz-output.o-media { --o-color: var(--amber); }
+.viz-output.o-api { --o-color: var(--text-mute); }
+.viz-output-icon { font-size: 0.875rem; }
+.viz-output-text { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text); }
+.viz-output-text .ar { font-family: var(--font-ar); display: block; font-size: 0.625rem; color: var(--text-mute); }
+
+/* === Evidence Trace Demo === */
+.trace-demo { max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; }
+.trace-head { padding: 1rem 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.trace-title { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.trace-title .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); }
+.trace-badge { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); padding: 0.25rem 0.5rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-sm); }
+.trace-steps { padding: 1rem 1.5rem; }
+.trace-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed var(--border-soft); align-items: center; }
+.trace-step:last-child { border-bottom: none; }
+.trace-step-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700; }
+.trace-step-body { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+.trace-step-body strong { color: var(--text); font-family: var(--font-en); font-size: 0.75rem; }
+.trace-step-time { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); white-space: nowrap; }
+
 /* === CTA === */
 .cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
 .cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
@@ -257,6 +324,105 @@ body { class: motion-marketing; }
     </div>
   </section>
 
+  <!-- ============= ARCHITECTURE VISUALIZATION — FOLLOW ONE EVENT ============= -->
+  <section class="section reveal" id="viz">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Architecture Visualization</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">تابع حدثاً عبر الطبقات السبع</h2>
+        <p class="section-lead" style="margin: 0 auto;">اختر حدثاً — وشاهد كيف يتحوّل من وثيقة رسمية خام إلى ذكاء مالي موزّع عبر القنوات.</p>
+      </div>
+
+      <div class="viz-wrap">
+        <div class="viz-tabs">
+          <button class="viz-tab active" data-event="fed">📄 Fed FOMC Statement</button>
+          <button class="viz-tab" data-event="earnings">📈 Saudi Aramco Q2 Earnings</button>
+          <button class="viz-tab" data-event="geopolitical">⚠ Geopolitical Event</button>
+        </div>
+
+        <div class="viz-flow">
+          <div class="viz-source">
+            <div class="viz-source-label">Source Document</div>
+            <div class="viz-source-doc">
+              <div class="viz-source-type" id="vizType">Official Statement</div>
+              <div class="viz-source-title" id="vizTitle">Federal Reserve FOMC Statement · July 2026</div>
+              <div class="viz-source-meta" id="vizMeta">Federal Reserve · 14:00 EST · 847 words · PDF</div>
+            </div>
+            <div class="viz-source-label" style="margin-top: 0.5rem;">Input State</div>
+            <div style="font-size: 0.6875rem; color: var(--text-mute); line-height: 1.5; padding: 0.5rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-sm);">وثيقة PDF خام · نص غير مهيكلة · بدون سياق · بدون روابط</div>
+          </div>
+
+          <div>
+            <div class="viz-layers" id="vizLayers">
+              <!-- Layers injected by JS -->
+            </div>
+
+            <div class="viz-outputs">
+              <div class="viz-outputs-h">↓ Generated Outputs · Same Evidence Chain</div>
+              <div class="viz-outputs-grid">
+                <div class="viz-output o-news"><span class="viz-output-icon">📰</span><span class="viz-output-text"><span class="ar">خبر إخباري</span>News Article</span></div>
+                <div class="viz-output o-research"><span class="viz-output-icon">📑</span><span class="viz-output-text"><span class="ar">مذكرة بحث</span>Research Brief</span></div>
+                <div class="viz-output o-trading"><span class="viz-output-icon">📊</span><span class="viz-output-text"><span class="ar">سياق تداول</span>Trading Context</span></div>
+                <div class="viz-output o-risk"><span class="viz-output-icon">⚠</span><span class="viz-output-text"><span class="ar">مذكرة مخاطر</span>Risk Memo</span></div>
+                <div class="viz-output o-media"><span class="viz-output-icon">🎬</span><span class="viz-output-text"><span class="ar">سكربت</span>Video Script</span></div>
+                <div class="viz-output o-api"><span class="viz-output-icon">🔌</span><span class="viz-output-text"><span class="ar">API</span>API Response</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-mute small mt-5">كل مخرج يحمل نفس سلسلة الأدلة — من المصدر الرسمي إلى الحقيقة إلى التحليل. هذا هو جوهر رؤى: حدث واحد، ذكاء واحد، توزيع متعدد.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= EVIDENCE TRACE DEMO ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Evidence Trace</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من قرار إلى مصدر في 5 ثوانٍ</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل معلومة في رؤى قابلة للتتبع. اختر أي قرار، اضغط على «الدليل»، تجد نفسك في صفحة المصدر الأصلي.</p>
+      </div>
+
+      <div class="trace-demo">
+        <div class="trace-head">
+          <div class="trace-title">
+            <span class="ar">مذكرة قرار استثماري</span>
+            Investment Decision Memo · Aramco Overweight
+          </div>
+          <span class="trace-badge">EVIDENCE TRACE · 4 STEPS · 4.2s</span>
+        </div>
+        <div class="trace-steps">
+          <div class="trace-step">
+            <div class="trace-step-num">01</div>
+            <div class="trace-step-body"><strong>Investment Thesis</strong> · توصية: زيادة الوزن في أرامكو السعودية، هدف 38.5 ريال، أفق 12 شهراً.</div>
+            <div class="trace-step-time">T+0.0s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">02</div>
+            <div class="trace-step-body"><strong>Verified Fact</strong> · أرامكو تجاوزت توقعات الإيرادات بـ 4.2% في الربع الثاني 2026 (118 مليار ريال).</div>
+            <div class="trace-step-time">T+1.1s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">03</div>
+            <div class="trace-step-body"><strong>Source Document</strong> · Saudi Aramco Q2 2026 Earnings Release · صحفة 4، فقرة 3، جدول الإيرادات.</div>
+            <div class="trace-step-time">T+2.8s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">04</div>
+            <div class="trace-step-body"><strong>Official Origin</strong> · تقرير مالي ربع سنوي مودع لدى تداول السعودية · مُصدَّق رقمياً · 14 أغسطس 2026.</div>
+            <div class="trace-step-time">T+4.2s</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="trust.html" class="btn-link">Explore the Trust Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============= ONE PLATFORM → MULTIPLE BUSINESS LINES ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
@@ -408,6 +574,79 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// === Architecture Visualization — event switching ===
+const EVENTS = {
+  fed: {
+    type: 'Official Statement',
+    title: 'Federal Reserve FOMC Statement · July 2026',
+    meta: 'Federal Reserve · 14:00 EST · 847 words · PDF',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'اكتشاف الوثيقة في موقع الاحتياطي الفيدرالي بعد <strong>14 ثانية</strong> من النشر', output: 'Raw PDF' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'استخراج <strong>23 رقماً</strong> · 8 فقرات قرار · 4 جداول', output: 'Structured Doc' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>14 حقيقة</strong> موثقة — معدل الفائدة، التضخم، النمو', output: '14 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل حقيقة مرتبطة بصفحة وفقرة في الوثيقة الأصلية', output: '14 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط الحقائق بـ <strong>89 شركة</strong> و<strong>23 صناعة</strong> متأثرة', output: '89 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء يتشاورون: تأثير الدولار، الأسهم، السندات، النفط، الذهب', output: '7 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> مختلفة بنفس سلسلة الأدلة', output: '6 Outputs' }
+    ]
+  },
+  earnings: {
+    type: 'Earnings Release',
+    title: 'Saudi Aramco Q2 2026 Earnings Release',
+    meta: 'Tadawul · 07:00 AST · 1,247 words · PDF + XLSX',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'مراقبة تداول السعودية · اكتشاف بعد <strong>3 ثوانٍ</strong> من الإيداع', output: 'Raw Filing' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'استخراج <strong>47 رقماً</strong> مالياً · 3 قوائم · 12 ملاحظة', output: 'Financial Model' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>23 حقيقة</strong> — إيرادات، أرباح، توزيعات، توقعات', output: '23 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل رقم مرتبط بصفحة وفقرة وجدول في التقرير', output: '23 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط أرامكو بـ <strong>14 شركة</strong> في سلسلة التوريد و<strong>7 صناعات</strong>', output: '21 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء: تأثير البترورياض، سابك، البنوك، التأمين، الصناديق', output: '5 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> — خبر، بحث، سياق تداول، مخاطر، فيديو، API', output: '6 Outputs' }
+    ]
+  },
+  geopolitical: {
+    type: 'Geopolitical Alert',
+    title: 'Red Sea Shipping Disruption Alert · August 2026',
+    meta: 'IMF · WTO · Lloyd\'s · 3 sources · 11:42 UTC',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'مراقبة <strong>3 مصادر</strong> رسمية + 7 وكالات + 14 ميناء', output: '3 Source Events' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'توحيد التقارير · استخراج <strong>9 حقائق</strong> جغرافية وزمنية', output: 'Unified Brief' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>9 حقائق</strong> — تكاليف الشحن، المدة، البدائل', output: '9 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل حقيقة مرتبطة بتقرير IMF أو WTO أو Lloyd\'s', output: '9 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط بـ <strong>47 شركة شحن</strong> و<strong>23 سلسلة توريد</strong>', output: '70 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء: تأثير النفط، الكيماويات، التجزئة، اللوجستيات', output: '4 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> — تنبيه مخاطر، بحث، خبر، API', output: '6 Outputs' }
+    ]
+  }
+};
+
+function renderViz(key) {
+  const e = EVENTS[key];
+  document.getElementById('vizType').textContent = e.type;
+  document.getElementById('vizTitle').textContent = e.title;
+  document.getElementById('vizMeta').textContent = e.meta;
+  const layersEl = document.getElementById('vizLayers');
+  layersEl.innerHTML = e.layers.map((l, i) => {
+    const html = `<div class="viz-layer l${i+1}">
+      <div class="viz-layer-num">${l.num}</div>
+      <div class="viz-layer-name">${l.name}<span class="ar">${l.ar}</span></div>
+      <div class="viz-layer-transform">${l.transform}</div>
+      <div class="viz-layer-output">${l.output}</div>
+    </div>`;
+    return html + (i < e.layers.length - 1 ? '<div class="viz-connector">↓</div>' : '');
+  }).join('');
+}
+
+document.querySelectorAll('.viz-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderViz(tab.dataset.event);
+  });
+});
+
+renderViz('fed');
 </script>
 
 </body>
