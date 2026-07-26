@@ -334,7 +334,7 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // === Catalog Filtering — 4 dimensions: Category + Industry + Role + Deployment ===
-const cards = document.querySelectorAll('.product-card');
+let cards = document.querySelectorAll('.product-card');
 const tabs = document.querySelectorAll('.catalog-tab');
 const search = document.getElementById('catalogSearch');
 const resultCount = document.getElementById('resultCount');
@@ -466,7 +466,7 @@ function renderProductGrid() {
   const grid = document.getElementById('productGrid');
   if (!grid || typeof ROUAA_PRODUCTS === 'undefined') return;
   grid.innerHTML = ROUAA_PRODUCTS.map(renderProductCard).join('');
-  // Re-bind cards variable
+  // Re-bind cards variable (must use let, not const)
   cards = document.querySelectorAll('.product-card');
   // Re-apply filter
   filterProducts();
