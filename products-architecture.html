@@ -58,6 +58,18 @@ body { class: motion-marketing; }
 .arch-branch-name .ar { font-family: var(--font-ar); display: block; font-size: 0.8125rem; color: var(--text-dim); }
 .arch-branch-count { margin-right: auto; font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); }
 
+/* === Suite-based layout (Capability, not Engine list) === */
+.arch-suite-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.875rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-soft); }
+.arch-capabilities { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-capability { display: block; padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); text-decoration: none; transition: all var(--transition-base); }
+.arch-capability:hover { border-color: var(--b-color); transform: translateX(-2px); background: rgba(255,255,255,0.03); }
+.arch-cap-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.arch-cap-ar { font-family: var(--font-ar); font-size: 0.6875rem; color: var(--text-mute); margin-top: 0.125rem; }
+.arch-suite-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
+.arch-suite-count { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color); letter-spacing: 0.05em; }
+.arch-suite-link { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--b-color); text-decoration: none; }
+.arch-suite-link:hover { text-decoration: underline; }
+
 .arch-products-list { display: flex; flex-direction: column; gap: 0.375rem; }
 .arch-product-row { padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.5rem; transition: all var(--transition-base); text-decoration: none; color: inherit; }
 .arch-product-row:hover { border-color: var(--b-color); transform: translateX(-2px); }
@@ -192,9 +204,9 @@ body { class: motion-marketing; }
   <section class="section reveal" id="architecture">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Architecture Tree</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">شجرة المنتجات</h2>
-        <p class="section-lead" style="margin: 0 auto;">من المحرك إلى 5 خطوط أعمال إلى 44 منتج — كل واحد مرتبط بمصدره.</p>
+        <span class="section-tag" style="justify-content: center;">Intelligence Suites</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">خمس حزم استخبارية · خمس قدرات</h2>
+        <p class="section-lead" style="margin: 0 auto;">المؤسسات لا تشتري Engines — تشتري Capabilities. كل حزمة تجمع منتجات متعددة تحت قدرة واحدة قابلة للشراء، مدعومة بنفس المحرك.</p>
       </div>
 
       <div class="arch-tree">
@@ -208,22 +220,38 @@ body { class: motion-marketing; }
 
         <div class="arch-branches">
 
-          <!-- MEDIA BRANCH -->
+          <!-- MEDIA SUITE — Capability-based, not Engine list -->
           <div class="arch-branch b-media">
             <div class="arch-branch-h">
               <div class="arch-branch-icon">📰</div>
-              <div class="arch-branch-name">Media Intelligence<span class="ar">إعلام مالي</span></div>
-              <div class="arch-branch-count">8 products</div>
+              <div class="arch-branch-name">Media Intelligence Suite<span class="ar">حزمة ذكاء الإعلام المالي</span></div>
             </div>
-            <div class="arch-products-list">
-              <a href="product.html?id=med-news-engine" class="arch-product-row"><div class="arch-product-name">Financial News Engine<span class="ar">محرّك الأخبار</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-agency" class="arch-product-row"><div class="arch-product-name">News Agency Agent<span class="ar">وكيل الأنباء</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-reports" class="arch-product-row"><div class="arch-product-name">Reports Pipeline<span class="ar">أنابيب التقارير</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-video" class="arch-product-row"><div class="arch-product-name">Video Pipeline<span class="ar">أنابيب الفيديو</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-infographic" class="arch-product-row"><div class="arch-product-name">Infographic Pipeline<span class="ar">الإنفوجرافيك</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-audio" class="arch-product-row"><div class="arch-product-name">Audio Intelligence<span class="ar">الذكاء الصوتي</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-calendar" class="arch-product-row"><div class="arch-product-name">Economic Calendar<span class="ar">التقويم الاقتصادي</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=med-pulse" class="arch-product-row"><div class="arch-product-name">Daily Pulse<span class="ar">النشرة اليومية</span></div><span class="arch-product-arrow">→</span></a>
+            <div class="arch-suite-desc">حوّل غرفة أخبار تقليدية إلى محرّك محتوى موثّق — أخبار، فيديو، إنفوجرافيك، نشرة يومية، بـ 6 لغات، في دقائق.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=med-news-engine" class="arch-capability">
+                <div class="arch-cap-name">Real-time News Generation</div>
+                <div class="arch-cap-ar">توليد الأخبار لحظياً</div>
+              </a>
+              <a href="product.html?id=med-video" class="arch-capability">
+                <div class="arch-cap-name">Video Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الفيديو</div>
+              </a>
+              <a href="product.html?id=med-infographic" class="arch-capability">
+                <div class="arch-cap-name">Visual Intelligence</div>
+                <div class="arch-cap-ar">الذكاء البصري</div>
+              </a>
+              <a href="product.html?id=med-pulse" class="arch-capability">
+                <div class="arch-cap-name">Daily Market Pulse</div>
+                <div class="arch-cap-ar">النشرة اليومية</div>
+              </a>
+              <a href="product.html?id=med-calendar" class="arch-capability">
+                <div class="arch-cap-name">Economic Calendar Intelligence</div>
+                <div class="arch-cap-ar">تقويم اقتصادي ذكي</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">8 products · 6 languages</span>
+              <a href="catalog.html?cat=media" class="arch-suite-link">Full list →</a>
             </div>
             <div class="arch-powered">
               <span class="arch-powered-h">Powered by:</span>
@@ -233,23 +261,38 @@ body { class: motion-marketing; }
             </div>
           </div>
 
-          <!-- TRADING BRANCH -->
+          <!-- TRADING SUITE — institutional framing, NOT bot/signals -->
           <div class="arch-branch b-trading">
             <div class="arch-branch-h">
               <div class="arch-branch-icon">📈</div>
-              <div class="arch-branch-name">Trading Intelligence<span class="ar">ذكاء التداول</span></div>
-              <div class="arch-branch-count">9 products</div>
+              <div class="arch-branch-name">Trading Intelligence Suite<span class="ar">حزمة ذكاء التداول المؤسسي</span></div>
             </div>
-            <div class="arch-products-list">
-              <a href="product.html?id=trd-dashboard" class="arch-product-row"><div class="arch-product-name">Trading Dashboard<span class="ar">لوحة التداول</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-chart" class="arch-product-row"><div class="arch-product-name">Smart Chart Annotations<span class="ar">الرسوم الذكية</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-portfolio" class="arch-product-row"><div class="arch-product-name">Portfolio Intelligence<span class="ar">ذكاء المحفظة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-assistant" class="arch-product-row"><div class="arch-product-name">Trading Assistant<span class="ar">مساعد التداول</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-lab" class="arch-product-row"><div class="arch-product-name">Neural Trading Lab<span class="ar">مختبر التداول</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-ai-council" class="arch-product-row"><div class="arch-product-name">AI Trading Council<span class="ar">مجلس التداول</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-auto" class="arch-product-row"><div class="arch-product-name">Execution Intelligence Layer<span class="ar">طبقة ذكاء التنفيذ</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-prediction" class="arch-product-row"><div class="arch-product-name">Prediction Market<span class="ar">سوق التنبؤات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=trd-content" class="arch-product-row"><div class="arch-product-name">Content Agent<span class="ar">وكيل المحتوى</span></div><span class="arch-product-arrow">→</span></a>
+            <div class="arch-suite-desc">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — سياق سوق، تحليل شارت ذكي، مساعد بلغة طبيعية. للبروكرات الذين يحتفظون بالعملاء.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=trd-dashboard" class="arch-capability">
+                <div class="arch-cap-name">Market Context Engine</div>
+                <div class="arch-cap-ar">محرّك سياق السوق</div>
+              </a>
+              <a href="product.html?id=trd-chart" class="arch-capability">
+                <div class="arch-cap-name">AI Chart Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الشارت</div>
+              </a>
+              <a href="product.html?id=trd-portfolio" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Intelligence</div>
+                <div class="arch-cap-ar">ذكاء المحفظة</div>
+              </a>
+              <a href="product.html?id=trd-assistant" class="arch-capability">
+                <div class="arch-cap-name">Trading Assistant</div>
+                <div class="arch-cap-ar">مساعد التداول</div>
+              </a>
+              <a href="product.html?id=trd-ai-council" class="arch-capability">
+                <div class="arch-cap-name">Signal Intelligence Council</div>
+                <div class="arch-cap-ar">مجلس ذكاء الإشارات</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">9 products · Decision Support (not signals)</span>
+              <a href="catalog.html?cat=trading" class="arch-suite-link">Full list →</a>
             </div>
             <div class="arch-powered">
               <span class="arch-powered-h">Powered by:</span>
@@ -260,20 +303,38 @@ body { class: motion-marketing; }
             </div>
           </div>
 
-          <!-- RESEARCH BRANCH -->
+          <!-- RESEARCH SUITE -->
           <div class="arch-branch b-research">
             <div class="arch-branch-h">
               <div class="arch-branch-icon">📊</div>
-              <div class="arch-branch-name">Research Intelligence<span class="ar">أبحاث استثمارية</span></div>
-              <div class="arch-branch-count">6 products</div>
+              <div class="arch-branch-name">Research Intelligence Suite<span class="ar">حزمة الأبحاث الاستثمارية</span></div>
             </div>
-            <div class="arch-products-list">
-              <a href="product.html?id=res-brief" class="arch-product-row"><div class="arch-product-name">Intelligence Brief Generator<span class="ar">مولّد المذكرات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=res-committee" class="arch-product-row"><div class="arch-product-name">Committee Prep Engine<span class="ar">تحضير اللجنة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=res-comparison" class="arch-product-row"><div class="arch-product-name">Sector Comparison<span class="ar">مقارنة القطاعات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=res-deepdive" class="arch-product-row"><div class="arch-product-name">Deep Dive Reports<span class="ar">تقارير التعمّق</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=res-watchlist" class="arch-product-row"><div class="arch-product-name">Smart Watchlist<span class="ar">قائمة المراقبة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=res-screening" class="arch-product-row"><div class="arch-product-name">Investment Screener<span class="ar">ماسح الاستثمار</span></div><span class="arch-product-arrow">→</span></a>
+            <div class="arch-suite-desc">مذكرة قرار جاهزة للجنة في دقائق — أبحاث ماكرو، ذكاء أسهم، مقارنات قطاعية، قوائم مراقبة ذكية. كل رقم موثّق بمصدره.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=res-brief" class="arch-capability">
+                <div class="arch-cap-name">Macro Research</div>
+                <div class="arch-cap-ar">أبحاث الماكرو</div>
+              </a>
+              <a href="product.html?id=res-deepdive" class="arch-capability">
+                <div class="arch-cap-name">Equity Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الأسهم</div>
+              </a>
+              <a href="product.html?id=res-committee" class="arch-capability">
+                <div class="arch-cap-name">Investment Committee Briefs</div>
+                <div class="arch-cap-ar">مذكرات اللجنة</div>
+              </a>
+              <a href="product.html?id=res-comparison" class="arch-capability">
+                <div class="arch-cap-name">Sector & Strategy Intelligence</div>
+                <div class="arch-cap-ar">ذكاء القطاعات</div>
+              </a>
+              <a href="product.html?id=res-screening" class="arch-capability">
+                <div class="arch-cap-name">Investment Screening</div>
+                <div class="arch-cap-ar">فحص استثماري</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">6 products · Committee-ready</span>
+              <a href="catalog.html?cat=research" class="arch-suite-link">Full list →</a>
             </div>
             <div class="arch-powered">
               <span class="arch-powered-h">Powered by:</span>
@@ -283,19 +344,38 @@ body { class: motion-marketing; }
             </div>
           </div>
 
-          <!-- RISK BRANCH -->
+          <!-- RISK SUITE -->
           <div class="arch-branch b-risk">
             <div class="arch-branch-h">
               <div class="arch-branch-icon">⚠</div>
-              <div class="arch-branch-name">Risk Intelligence<span class="ar">ذكاء المخاطر</span></div>
-              <div class="arch-branch-count">5 products</div>
+              <div class="arch-branch-name">Risk Intelligence Suite<span class="ar">حزمة ذكاء المخاطر</span></div>
             </div>
-            <div class="arch-products-list">
-              <a href="product.html?id=risk-monitor" class="arch-product-row"><div class="arch-product-name">Risk Event Monitor<span class="ar">مراقب المخاطر</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=risk-exposure" class="arch-product-row"><div class="arch-product-name">Exposure Analysis<span class="ar">تحليل التعرّض</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=risk-scenario" class="arch-product-row"><div class="arch-product-name">Scenario Engine<span class="ar">محرّك السيناريوهات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=risk-action" class="arch-product-row"><div class="arch-product-name">Action Recommendations<span class="ar">توصيات الإجراء</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=risk-compliance" class="arch-product-row"><div class="arch-product-name">Compliance Audit<span class="ar">تدقيق الامتثال</span></div><span class="arch-product-arrow">→</span></a>
+            <div class="arch-suite-desc">من حدث عالمي إلى إجراء محفظة في دقائق — مراقبة جيوسياسية، تحليل تعرّض، سيناريوهات، توصيات إجراء موثّقة، سجل امتثال كامل.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=risk-monitor" class="arch-capability">
+                <div class="arch-cap-name">Geopolitical Risk Monitoring</div>
+                <div class="arch-cap-ar">مراقبة المخاطر الجيوسياسية</div>
+              </a>
+              <a href="product.html?id=risk-exposure" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Exposure Analysis</div>
+                <div class="arch-cap-ar">تحليل تعرّض المحفظة</div>
+              </a>
+              <a href="product.html?id=risk-scenario" class="arch-capability">
+                <div class="arch-cap-name">Scenario Intelligence</div>
+                <div class="arch-cap-ar">ذكاء السيناريوهات</div>
+              </a>
+              <a href="product.html?id=risk-action" class="arch-capability">
+                <div class="arch-cap-name">Action Recommendations</div>
+                <div class="arch-cap-ar">توصيات الإجراء</div>
+              </a>
+              <a href="product.html?id=risk-compliance" class="arch-capability">
+                <div class="arch-cap-name">Compliance & Audit Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الامتثال والتدقيق</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">5 products · Regulator-ready</span>
+              <a href="catalog.html?cat=risk" class="arch-suite-link">Full list →</a>
             </div>
             <div class="arch-powered">
               <span class="arch-powered-h">Powered by:</span>
@@ -306,30 +386,38 @@ body { class: motion-marketing; }
             </div>
           </div>
 
-          <!-- DEV BRANCH -->
+          <!-- DEVELOPER SUITE -->
           <div class="arch-branch b-dev">
             <div class="arch-branch-h">
               <div class="arch-branch-icon">🔌</div>
-              <div class="arch-branch-name">Developer Platform<span class="ar">منصة المطورين</span></div>
-              <div class="arch-branch-count">16 products</div>
+              <div class="arch-branch-name">Developer Intelligence Suite<span class="ar">حزمة المطورين</span></div>
             </div>
-            <div class="arch-products-list">
-              <a href="product.html?id=api-events" class="arch-product-row"><div class="arch-product-name">Events API<span class="ar">واجهة الأحداث</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-facts" class="arch-product-row"><div class="arch-product-name">Facts API<span class="ar">واجهة الحقائق</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-evidence" class="arch-product-row"><div class="arch-product-name">Evidence API<span class="ar">واجهة الأدلة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-insights" class="arch-product-row"><div class="arch-product-name">Insights API<span class="ar">واجهة الاستخبارات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-streaming" class="arch-product-row"><div class="arch-product-name">Streaming API<span class="ar">واجهة البث</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-sources" class="arch-product-row"><div class="arch-product-name">Sources API<span class="ar">واجهة المصادر</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=api-sdk" class="arch-product-row"><div class="arch-product-name">Official SDK<span class="ar">حزمة SDK</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=agt-macro" class="arch-product-row"><div class="arch-product-name">Macro Analyst Agent<span class="ar">وكيل الماكرو</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=agt-sector" class="arch-product-row"><div class="arch-product-name">Sector Analyst Agent<span class="ar">وكيل القطاعات</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=agt-risk" class="arch-product-row"><div class="arch-product-name">Risk Officer Agent<span class="ar">وكيل المخاطر</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=agt-fact-checker" class="arch-product-row"><div class="arch-product-name">Fact Checker Agent<span class="ar">وكيل تدقيق الحقائق</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=cmp-graph" class="arch-product-row"><div class="arch-product-name">Knowledge Graph API<span class="ar">رسم المعرفة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=cmp-source-registry" class="arch-product-row"><div class="arch-product-name">Source Registry API<span class="ar">سجل المصادر</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=cmp-evidence-store" class="arch-product-row"><div class="arch-product-name">Evidence Store<span class="ar">مخزن الأدلة</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=cmp-reasoning-engine" class="arch-product-row"><div class="arch-product-name">Reasoning Engine API<span class="ar">محرّك الاستدلال</span></div><span class="arch-product-arrow">→</span></a>
-              <a href="product.html?id=cmp-audit-trail" class="arch-product-row"><div class="arch-product-name">Audit Trail API<span class="ar">سجل التدقيق</span></div><span class="arch-product-arrow">→</span></a>
+            <div class="arch-suite-desc">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، بث لحظي، SDK، وكلاء ذكيون، مكونات منصة. كل استجابة تحمل دليلها.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=api-events" class="arch-capability">
+                <div class="arch-cap-name">Intelligence APIs</div>
+                <div class="arch-cap-ar">واجهات الاستخبارات</div>
+              </a>
+              <a href="product.html?id=api-streaming" class="arch-capability">
+                <div class="arch-cap-name">Streaming & Real-time</div>
+                <div class="arch-cap-ar">البث اللحظي</div>
+              </a>
+              <a href="product.html?id=api-sdk" class="arch-capability">
+                <div class="arch-cap-name">Official SDK</div>
+                <div class="arch-cap-ar">حزمة SDK الرسمية</div>
+              </a>
+              <a href="product.html?id=agt-macro" class="arch-capability">
+                <div class="arch-cap-name">AI Agents</div>
+                <div class="arch-cap-ar">الوكلاء الأذكياء</div>
+              </a>
+              <a href="product.html?id=cmp-graph" class="arch-capability">
+                <div class="arch-cap-name">Platform Components</div>
+                <div class="arch-cap-ar">مكونات المنصة</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">16 products · Build in weeks</span>
+              <a href="catalog.html?cat=api" class="arch-suite-link">Full list →</a>
             </div>
             <div class="arch-powered">
               <span class="arch-powered-h">Powered by:</span>

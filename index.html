@@ -89,6 +89,28 @@ body { class: motion-marketing; }
 .products-cta-link { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--gold); text-decoration: none; }
 .products-cta-link:hover { text-decoration: underline; }
 
+/* === Architecture teaser (lighter than strength map) === */
+.arch-teaser { max-width: 900px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: center; gap: 0.5rem; }
+@media (max-width: 768px) { .arch-teaser { grid-template-columns: 1fr; gap: 1rem; } }
+.arch-teaser-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; transition: border-color var(--transition-slow); }
+.arch-teaser-block:hover { border-color: var(--gold); }
+.arch-teaser-block.center { background: var(--gold-dim); border-color: var(--gold); }
+.arch-teaser-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.5rem; font-weight: 700; }
+.arch-teaser-h { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.arch-teaser-ar { font-family: var(--font-ar); font-size: 0.8125rem; color: var(--text-mute); }
+.arch-teaser-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.25rem; }
+
+/* === Enterprise Deployment === */
+.deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+.deploy-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.deploy-card:hover { border-color: var(--gold); }
+.deploy-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); opacity: 0.5; }
+.deploy-icon { font-size: 1.75rem; margin-bottom: 0.625rem; }
+.deploy-name { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.deploy-tagline { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.625rem; }
+.deploy-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.75rem; }
+.deploy-when { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); padding-top: 0.625rem; border-top: 1px solid var(--border-soft); line-height: 1.5; }
+
 /* === Five Markets === */
 .markets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
 .market-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.75rem 1.5rem; transition: all var(--transition-slow); position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
@@ -218,7 +240,7 @@ body { class: motion-marketing; }
 
 <main id="main">
 
-  <!-- ============= 1. HERO ============= -->
+<!-- ============= 1. HERO ============= -->
   <section class="hero-home">
     <div class="hero-home-bg"></div>
     <div class="container">
@@ -239,78 +261,13 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= 2. INTELLIGENCE ENGINE ============= -->
+<!-- ============= 2. WHAT ROUAA PROVIDES ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Intelligence Engine</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تعمل رؤى؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">سبع طبقات من المصدر الرسمي إلى الذكاء الموزّع. هذه هي البنية التي تنتج كل منتجات رؤى.</p>
-      </div>
-
-      <div class="engine-visual">
-        <div class="engine-step"><span class="engine-step-num">01</span><span class="engine-step-name">Official Sources</span><span class="engine-step-ar">مصادر رسمية</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">02</span><span class="engine-step-name">Document Intelligence</span><span class="engine-step-ar">ذكاء الوثائق</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">03</span><span class="engine-step-name">Fact Extraction</span><span class="engine-step-ar">استخراج الحقائق</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">04</span><span class="engine-step-name">Evidence Layer</span><span class="engine-step-ar">طبقة الأدلة</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">05</span><span class="engine-step-name">Knowledge Graph</span><span class="engine-step-ar">رسم المعرفة</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">06</span><span class="engine-step-name">Reasoning Engine</span><span class="engine-step-ar">محرّك الاستدلال</span></div>
-        <div class="engine-arrow">↓</div>
-        <div class="engine-step"><span class="engine-step-num">07</span><span class="engine-step-name">Distribution Layer</span><span class="engine-step-ar">طبقة التوزيع</span></div>
-      </div>
-
-      <div class="text-center mt-6">
-        <a href="platform.html" class="btn-link">Explore the Platform Architecture ←</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= 3. ONE EVENT → MULTIPLE OUTPUTS ============= -->
-  <section class="section reveal">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">One Event. Multiple Outputs.</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا المنظومة مختلفة؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">نحن لا نبني أدوات منفصلة. نحن نملك محركاً واحداً ينتج منتجات متعددة من نفس الحدث.</p>
-      </div>
-
-      <div class="outputs-demo">
-        <div style="text-align: center;">
-          <div class="outputs-event">📄 Fed FOMC Statement · July 2026</div>
-        </div>
-        <div class="outputs-arrow">↓</div>
-        <div class="outputs-grid">
-          <div class="output-item o-news"><div class="output-icon">📰</div><div class="output-name">News Article</div></div>
-          <div class="output-item o-research"><div class="output-icon">📑</div><div class="output-name">Research Brief</div></div>
-          <div class="output-item o-trading"><div class="output-icon">📊</div><div class="output-name">Trading Context</div></div>
-          <div class="output-item o-risk"><div class="output-icon">⚠</div><div class="output-name">Risk Memo</div></div>
-          <div class="output-item o-media"><div class="output-icon">🎬</div><div class="output-name">Video Script</div></div>
-          <div class="output-item o-api"><div class="output-icon">🔌</div><div class="output-name">API Response</div></div>
-        </div>
-        <p class="text-center text-mute small mt-5">حدث واحد → ذكاء واحد → توزيع عبر قنوات متعددة. كل مخرج مدعوم بنفس سلسلة الأدلة.</p>
-
-        <div class="outputs-defense">
-          <div class="outputs-defense-text">
-            Same source. Same fact. Same evidence chain.
-            <span class="ar">نفس المصدر. نفس الحقيقة. نفس سلسلة الإثبات.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= 4. FIVE INTELLIGENCE MARKETS ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Five Intelligence Markets</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">أين تستخدم؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">خمسة أسواق. خمسة مشترين. كلها تستهلك من نفس المحرك.</p>
+        <span class="section-tag" style="justify-content: center;">What ROUAA Provides</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ماذا يضيف رؤى لمؤسستك؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">خمسة خطوط أعمال استخبارية. كل واحد يحل مشكلة محددة لمشترٍ محدد. كلها تستهلك من نفس المحرك — وكل مخرج يحمل نفس سلسلة الإثبات.</p>
       </div>
 
       <div class="markets-grid">
@@ -348,131 +305,108 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= 5. INTELLIGENCE PRODUCTS (strength map — all markets visible) ============= -->
-  <section class="section reveal" id="products">
+<!-- ============= 3. ONE EVENT → MULTIPLE OUTPUTS ============= -->
+  <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Intelligence Products</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">ماذا تحصل عليه من رؤى؟</h2>
+        <span class="section-tag" style="justify-content: center;">One Event. Multiple Outputs.</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا المنظومة مختلفة؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">نحن لا نبني أدوات منفصلة. نحن نملك محركاً واحداً ينتج منتجات متعددة من نفس الحدث.</p>
       </div>
 
-      <!-- Strategic statement (visually strong) -->
-      <div class="products-manifesto">
-        <div class="products-manifesto-en">ROUAA is not a collection of financial tools.</div>
-        <div class="products-manifesto-ar">رؤى ليست مجموعة أدوات مالية.</div>
-        <div class="products-manifesto-sub">It is an intelligence infrastructure that generates multiple intelligence products.<br>إنها بنية تحتية ذكاء تُولّد منتجات ذكاء متعددة — من نفس المصدر، بنفس سلسلة الإثبات.</div>
-      </div>
+      <div class="outputs-demo">
+        <div style="text-align: center;">
+          <div class="outputs-event">📄 Fed FOMC Statement · July 2026</div>
+        </div>
+        <div class="outputs-arrow">↓</div>
+        <div class="outputs-grid">
+          <div class="output-item o-news"><div class="output-icon">📰</div><div class="output-name">News Article</div></div>
+          <div class="output-item o-research"><div class="output-icon">📑</div><div class="output-name">Research Brief</div></div>
+          <div class="output-item o-trading"><div class="output-icon">📊</div><div class="output-name">Trading Context</div></div>
+          <div class="output-item o-risk"><div class="output-icon">⚠</div><div class="output-name">Risk Memo</div></div>
+          <div class="output-item o-media"><div class="output-icon">🎬</div><div class="output-name">Video Script</div></div>
+          <div class="output-item o-api"><div class="output-icon">🔌</div><div class="output-name">API Response</div></div>
+        </div>
+        <p class="text-center text-mute small mt-5">حدث واحد → ذكاء واحد → توزيع عبر قنوات متعددة. كل مخرج مدعوم بنفس سلسلة الأدلة.</p>
 
-      <!-- Strength Map: all 5 markets visible at once -->
-      <div class="strength-map">
-        <!-- MEDIA -->
-        <div class="strength-col s-media">
-          <div class="strength-head">
-            <div class="strength-icon">📰</div>
-            <div class="strength-name">Media Intelligence<span class="ar">إعلام مالي ذكي</span></div>
-            <div class="strength-count">8 products</div>
-          </div>
-          <div class="strength-list">
-            <a href="product.html?id=med-news-engine" class="strength-item">Financial News Engine</a>
-            <a href="product.html?id=med-agency" class="strength-item">News Agency Agent</a>
-            <a href="product.html?id=med-reports" class="strength-item">Reports Pipeline</a>
-            <a href="product.html?id=med-video" class="strength-item">Video Pipeline</a>
-            <a href="product.html?id=med-infographic" class="strength-item">Infographic Pipeline</a>
-            <a href="product.html?id=med-audio" class="strength-item">Audio Intelligence</a>
-            <a href="product.html?id=med-calendar" class="strength-item">Economic Calendar</a>
-            <a href="product.html?id=med-pulse" class="strength-item">Daily Pulse</a>
+        <div class="outputs-defense">
+          <div class="outputs-defense-text">
+            Same source. Same fact. Same evidence chain.
+            <span class="ar">نفس المصدر. نفس الحقيقة. نفس سلسلة الإثبات.</span>
           </div>
         </div>
-
-        <!-- TRADING -->
-        <div class="strength-col s-trading">
-          <div class="strength-head">
-            <div class="strength-icon">📈</div>
-            <div class="strength-name">Trading Intelligence<span class="ar">ذكاء التداول</span></div>
-            <div class="strength-count">9 products</div>
-          </div>
-          <div class="strength-list">
-            <a href="product.html?id=trd-dashboard" class="strength-item">Market Context Engine</a>
-            <a href="product.html?id=trd-chart" class="strength-item">AI Chart Intelligence</a>
-            <a href="product.html?id=trd-portfolio" class="strength-item">Portfolio Intelligence</a>
-            <a href="product.html?id=trd-assistant" class="strength-item">Trading Assistant</a>
-            <a href="product.html?id=trd-ai-council" class="strength-item">Signal Intelligence Council</a>
-            <a href="product.html?id=trd-lab" class="strength-item">Neural Trading Lab</a>
-            <a href="product.html?id=trd-auto" class="strength-item">Execution Intelligence Layer</a>
-            <a href="product.html?id=trd-prediction" class="strength-item">Prediction Market</a>
-            <a href="product.html?id=trd-content" class="strength-item">Content Agent</a>
-          </div>
-        </div>
-
-        <!-- RESEARCH -->
-        <div class="strength-col s-research">
-          <div class="strength-head">
-            <div class="strength-icon">📊</div>
-            <div class="strength-name">Research Intelligence<span class="ar">أبحاث استثمارية</span></div>
-            <div class="strength-count">6 products</div>
-          </div>
-          <div class="strength-list">
-            <a href="product.html?id=res-brief" class="strength-item">Macro Research Engine</a>
-            <a href="product.html?id=res-deepdive" class="strength-item">Equity Intelligence Engine</a>
-            <a href="product.html?id=res-committee" class="strength-item">Investment Committee Briefs</a>
-            <a href="product.html?id=res-comparison" class="strength-item">Sector Comparison</a>
-            <a href="product.html?id=res-screening" class="strength-item">Investment Screener</a>
-            <a href="product.html?id=res-watchlist" class="strength-item">Smart Watchlist</a>
-          </div>
-        </div>
-
-        <!-- RISK -->
-        <div class="strength-col s-risk">
-          <div class="strength-head">
-            <div class="strength-icon">⚠</div>
-            <div class="strength-name">Risk Intelligence<span class="ar">ذكاء المخاطر</span></div>
-            <div class="strength-count">5 products</div>
-          </div>
-          <div class="strength-list">
-            <a href="product.html?id=risk-monitor" class="strength-item">Geopolitical Risk Engine</a>
-            <a href="product.html?id=risk-exposure" class="strength-item">Exposure Engine</a>
-            <a href="product.html?id=risk-scenario" class="strength-item">Scenario Engine</a>
-            <a href="product.html?id=risk-action" class="strength-item">Action Recommendations</a>
-            <a href="product.html?id=risk-compliance" class="strength-item">Compliance Audit</a>
-          </div>
-        </div>
-
-        <!-- DEVELOPER -->
-        <div class="strength-col s-dev">
-          <div class="strength-head">
-            <div class="strength-icon">🔌</div>
-            <div class="strength-name">Developer Intelligence<span class="ar">منصة المطورين</span></div>
-            <div class="strength-count">16 products</div>
-          </div>
-          <div class="strength-list">
-            <a href="product.html?id=api-events" class="strength-item">Events API</a>
-            <a href="product.html?id=api-facts" class="strength-item">Facts API</a>
-            <a href="product.html?id=api-evidence" class="strength-item">Evidence API</a>
-            <a href="product.html?id=api-insights" class="strength-item">Intelligence API</a>
-            <a href="product.html?id=api-streaming" class="strength-item">Streaming API</a>
-            <a href="product.html?id=api-sdk" class="strength-item">Official SDK</a>
-            <a href="product.html?id=cmp-graph" class="strength-item">Knowledge Graph API</a>
-            <a href="product.html?id=cmp-evidence-store" class="strength-item">Evidence Store</a>
-            <a href="product.html?id=agt-macro" class="strength-item">Macro Analyst Agent</a>
-            <a href="product.html?id=agt-sector" class="strength-item">Sector Analyst Agent</a>
-            <a href="product.html?id=agt-risk" class="strength-item">Risk Officer Agent</a>
-            <a href="product.html?id=agt-fact-checker" class="strength-item">Fact Checker Agent</a>
-            <a href="product.html?id=cmp-source-registry" class="strength-item">Source Registry API</a>
-            <a href="product.html?id=cmp-reasoning-engine" class="strength-item">Reasoning Engine API</a>
-            <a href="product.html?id=cmp-audit-trail" class="strength-item">Audit Trail API</a>
-            <a href="product.html?id=api-sources" class="strength-item">Sources API</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="products-cta">
-        <div class="products-cta-text">44 منتج · 5 أسواق · محرك واحد · سلسلة إثبات واحدة. ليست متجر أدوات — بل خريطة قوة.</div>
-        <a href="products-architecture.html" class="products-cta-link">استكشف Products Architecture ←</a>
       </div>
     </div>
   </section>
 
-  <!-- ============= 6. PLATFORM STATUS (institutional) ============= -->
+<!-- ============= 4. INTELLIGENCE ENGINE ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Intelligence Engine</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تعمل رؤى؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">سبع طبقات من المصدر الرسمي إلى الذكاء الموزّع. هذه هي البنية التي تنتج كل منتجات رؤى.</p>
+      </div>
+
+      <div class="engine-visual">
+        <div class="engine-step"><span class="engine-step-num">01</span><span class="engine-step-name">Official Sources</span><span class="engine-step-ar">مصادر رسمية</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">02</span><span class="engine-step-name">Document Intelligence</span><span class="engine-step-ar">ذكاء الوثائق</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">03</span><span class="engine-step-name">Fact Extraction</span><span class="engine-step-ar">استخراج الحقائق</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">04</span><span class="engine-step-name">Evidence Layer</span><span class="engine-step-ar">طبقة الأدلة</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">05</span><span class="engine-step-name">Knowledge Graph</span><span class="engine-step-ar">رسم المعرفة</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">06</span><span class="engine-step-name">Reasoning Engine</span><span class="engine-step-ar">محرّك الاستدلال</span></div>
+        <div class="engine-arrow">↓</div>
+        <div class="engine-step"><span class="engine-step-num">07</span><span class="engine-step-name">Distribution Layer</span><span class="engine-step-ar">طبقة التوزيع</span></div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="platform.html" class="btn-link">Explore the Platform Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============= 5. PRODUCT ARCHITECTURE (teaser — bridge to full architecture) ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Product Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من المحرك إلى ما تشتريه</h2>
+        <p class="section-lead" style="margin: 0 auto;">محرك واحد يولّد 44 منتجاً عبر 5 أسواق. ليست متجر أدوات — بل خريطة قوة موحّدة بنفس سلسلة الإثبات.</p>
+      </div>
+
+      <div class="arch-teaser">
+        <div class="arch-teaser-block">
+          <div class="arch-teaser-num">01</div>
+          <div class="arch-teaser-h">Intelligence Engine</div>
+          <div class="arch-teaser-ar">المحرك · 7 طبقات</div>
+        </div>
+        <div class="arch-teaser-arrow">←</div>
+        <div class="arch-teaser-block center">
+          <div class="arch-teaser-num">02</div>
+          <div class="arch-teaser-h">5 Business Lines</div>
+          <div class="arch-teaser-ar">5 خطوط أعمال · 44 منتج</div>
+        </div>
+        <div class="arch-teaser-arrow">←</div>
+        <div class="arch-teaser-block">
+          <div class="arch-teaser-num">03</div>
+          <div class="arch-teaser-h">Your Purchase</div>
+          <div class="arch-teaser-ar">اختر خطك · اشترك</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="products-architecture.html" class="btn btn-ghost btn-lg">استكشف Product Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
+<!-- ============= 6. PLATFORM STATUS (institutional) ============= -->
   <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-6">
@@ -506,7 +440,7 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= 7. WHY INSTITUTIONS CHOOSE ROUAA ============= -->
+<!-- ============= 7. WHY INSTITUTIONS CHOOSE ROUAA ============= -->
   <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-6">
@@ -556,7 +490,7 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= 8. TRUST ENTRY ============= -->
+<!-- ============= 8. TRUST ENTRY ============= -->
   <section class="section reveal">
     <div class="container">
       <div class="trust-entry">
@@ -565,6 +499,63 @@ body { class: motion-marketing; }
         <p>سواء كان خبراً، أو بحثاً، أو سياق تداول، أو تقييم مخاطر — كل مخرج من رؤى يمرّ بنفس سلسلة الأدلة. من المصدر الرسمي إلى الحقيقة إلى التحليل.</p>
         <a href="trust.html" class="btn btn-ghost">Explore Trust Architecture ←</a>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============= 9. ENTERPRISE DEPLOYMENT ============= -->
+  <section class="section reveal" id="enterprise" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Enterprise Deployment</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تدخل رؤى مؤسستك؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">أربعة خيارات نشر. رؤى تتكيّف مع متطلبات الحوكمة والأمن لديك — لا العكس.</p>
+      </div>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <div class="deploy-icon">☁</div>
+          <div class="deploy-name">Cloud SaaS</div>
+          <div class="deploy-tagline">أسرع بدء</div>
+          <div class="deploy-desc">مستضاف بالكامل · تحديثات تلقائية · لا بنية تحتية مطلوبة. للفرق التي تريد البدء فوراً.</div>
+          <div class="deploy-when">Best for: quick pilots, media companies, fintech startups</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-icon">🔐</div>
+          <div class="deploy-name">Private Cloud</div>
+          <div class="deploy-tagline">بنية معزولة</div>
+          <div class="deploy-desc">بيئة مخصصة · امتثال إقليمي · بيانات منفصلة. للمؤسسات التي تحتاج سيطرة كاملة.</div>
+          <div class="deploy-when">Best for: regional banks, asset managers, sovereign funds</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-icon">🏢</div>
+          <div class="deploy-name">On-Premise</div>
+          <div class="deploy-tagline">سيادة كاملة</div>
+          <div class="deploy-desc">داخل بنيتك الآمنة · لا بيانات تخرج · سيادة بيانات كاملة. للبنوك المركزية والحكومات.</div>
+          <div class="deploy-when">Best for: central banks, regulators, government institutions</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-icon">🔀</div>
+          <div class="deploy-name">Hybrid</div>
+          <div class="deploy-tagline">مزيج حسب الحاجة</div>
+          <div class="deploy-desc">البيانات الحساسة داخلياً · خدمات الذكاء سحابياً · مزيج يحترم حدود الامتثال.</div>
+          <div class="deploy-when">Best for: large institutions with mixed workloads</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="#contact" class="btn-link">ناقش خيار النشر المناسب لمؤسستك ↓</a>
+      </div>
+    </div>
+  </section>
+
+<!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which market fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نوضح أي قناة من رؤى تناسب حاجة مؤسستك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Request Institutional Briefing" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
     </div>
   </section>
 

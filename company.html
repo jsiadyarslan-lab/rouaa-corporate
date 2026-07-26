@@ -22,6 +22,42 @@
 .hero-company-h1 .gold { color: var(--gold); }
 .hero-company-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
 
+/* === Why ROUAA Exists — 3-part narrative === */
+.narrative-block { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border-soft); max-width: 900px; margin: 0 auto; }
+.narrative-block:last-child { border-bottom: none; }
+@media (max-width: 768px) { .narrative-block { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; } }
+.narrative-num { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 800; color: var(--gold); line-height: 1; opacity: 0.4; }
+.narrative-tag { font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; }
+.narrative-h { font-family: var(--font-ar); font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; line-height: 1.4; }
+.narrative-desc { font-size: 0.9375rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1.25rem; }
+
+.narrative-fragments { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.fragment { text-align: center; padding: 0.5rem 0.75rem; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); }
+.fragment-icon { font-size: 1.25rem; margin-bottom: 0.25rem; }
+.fragment-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); }
+.fragment-ar { font-family: var(--font-ar); font-size: 0.625rem; color: var(--text-mute); }
+.fragment-sep { color: var(--text-mute); font-size: 1rem; font-weight: 300; }
+.narrative-conclusion { font-size: 0.8125rem; color: var(--gold); font-style: italic; text-align: center; padding-top: 0.5rem; }
+
+.narrative-transformation { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0.75rem; align-items: stretch; }
+@media (max-width: 600px) { .narrative-transformation { grid-template-columns: 1fr; } }
+.trans-from, .trans-to { padding: 1rem; border-radius: var(--radius-md); }
+.trans-from { background: var(--card); border: 1px solid var(--border); }
+.trans-to { background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); }
+.trans-label { font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.625rem; font-weight: 700; }
+.trans-from .trans-label { color: var(--text-mute); }
+.trans-to .trans-label { color: var(--gold); }
+.trans-items { display: flex; flex-direction: column; gap: 0.375rem; }
+.trans-item { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+.trans-to .trans-item { color: var(--text); }
+.trans-arrow { display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.5rem; opacity: 0.5; }
+@media (max-width: 600px) { .trans-arrow { transform: rotate(90deg); padding: 0.5rem 0; } }
+
+.narrative-vision { text-align: center; padding: 1.5rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-xl); }
+.vision-quote { font-family: var(--font-en); font-size: 1.0625rem; font-weight: 700; color: var(--gold); line-height: 1.5; margin-bottom: 0.5rem; }
+.vision-quote-ar { font-family: var(--font-ar); font-size: 0.9375rem; color: var(--text); margin-bottom: 0.75rem; }
+.vision-sub { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+
 /* === Manifesto === */
 .manifesto { max-width: 700px; margin: 2rem auto; padding: 2.5rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); position: relative; }
 .manifesto::before { content: '"'; position: absolute; top: -10px; right: 24px; font-size: 5rem; color: var(--gold); opacity: 0.3; font-family: serif; line-height: 1; }
@@ -162,15 +198,101 @@
     <div class="hero-company-bg"></div>
     <div class="container">
       <div class="hero-company-content">
-        <div class="mono-label text-gold">Company · رؤى</div>
+        <div class="mono-label text-gold">Why ROUAA Exists</div>
         <h1 class="hero-company-h1">
-          نبني <span class="gold">بنية تحتية</span>،<br>
-          لا منتجاً.
+          المعلومات المالية <span class="gold">مجزّأة</span>.<br>
+          رؤى توحّدها.
         </h1>
         <p class="hero-company-sub">
-          رؤى ليست تطبيقاً تبيعه. ليست أداة تستخدمها. رؤى بنية تحتية ذكاء مالي — مثل الكهرباء، لا تراها، لكن كل منتج مالي يعمل بها.
+          كل مؤسسة مالية تعيد بناء نفس الأنبوب: جمع، معالجة، تحليل، توزيع. رؤى بنت البنية التحتية مرة واحدة — لتصبح الذكاء المالي طبقة أساسية، مثل الكهرباء.
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY ROUAA EXISTS — 3-part narrative ============= -->
+  <section class="section reveal" id="why-exists" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Why ROUAA Exists</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا توجد رؤى أصلاً؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">الفئة جديدة. قبل أن تشرح «ماذا تبيع»، يجب أن تشرح «لماذا توجد». هذه هي القصة الكاملة.</p>
+      </div>
+
+      <!-- Part 1: The Historical Problem -->
+      <div class="narrative-block">
+        <div class="narrative-num">01</div>
+        <div class="narrative-body">
+          <div class="narrative-tag">The Historical Problem</div>
+          <h3 class="narrative-h">المعلومات المالية مجزّأة منذ عقود</h3>
+          <p class="narrative-desc">
+            البيانات الرسمية موجودة في صوامع. الأخبار تُنتج باستقلالية. الأبحاث تُبنى من الصفر. الأسواق تُراقب بشكل منفصل. المخاطر تُقيَّم في عزلة. كل مؤسسة مالية تعيد بناء نفس الأنبوب داخلياً — جمع، معالجة، تحليل، توزيع. النتيجة: سنوات من العمل، ملايين الدولارات، فرق من 30+ شخصاً — لإنتاج ما يجب أن يكون طبقة أساسية مشتركة.
+          </p>
+          <div class="narrative-fragments">
+            <div class="fragment"><div class="fragment-icon">📊</div><div class="fragment-name">Official Data</div><div class="fragment-ar">بيانات رسمية</div></div>
+            <div class="fragment-sep">+</div>
+            <div class="fragment"><div class="fragment-icon">📰</div><div class="fragment-name">News</div><div class="fragment-ar">أخبار</div></div>
+            <div class="fragment-sep">+</div>
+            <div class="fragment"><div class="fragment-icon">📑</div><div class="fragment-name">Research</div><div class="fragment-ar">أبحاث</div></div>
+            <div class="fragment-sep">+</div>
+            <div class="fragment"><div class="fragment-icon">📈</div><div class="fragment-name">Markets</div><div class="fragment-ar">أسواق</div></div>
+            <div class="fragment-sep">+</div>
+            <div class="fragment"><div class="fragment-icon">⚠</div><div class="fragment-name">Risk</div><div class="fragment-ar">مخاطر</div></div>
+          </div>
+          <div class="narrative-conclusion">كل منها يعيش بشكل منفصل. كل مؤسسة تعيد بناء الجسر بينها.</div>
+        </div>
+      </div>
+
+      <!-- Part 2: The Transformation -->
+      <div class="narrative-block">
+        <div class="narrative-num">02</div>
+        <div class="narrative-body">
+          <div class="narrative-tag">The Transformation</div>
+          <h3 class="narrative-h">رؤى توحّدها في بنية تحتية واحدة</h3>
+          <p class="narrative-desc">
+            رؤى لا تضيف طبقة فوق الفوضى. تستبدل الفوضى ببنية تحتية موحّدة: محرك واحد، سلسلة أدلة واحدة، مخرجات متعددة. ما استغرق سنوات يصبح أسابيع. ما كلّف ملايين يصبح جزءاً صغيراً. ما تطلّب 30+ شخصاً يصبح فريقاً يركّز على القرارات — لا على البنية التحتية.
+          </p>
+          <div class="narrative-transformation">
+            <div class="trans-from">
+              <div class="trans-label">Before ROUAA</div>
+              <div class="trans-items">
+                <div class="trans-item">✗ Fragmented sources</div>
+                <div class="trans-item">✗ Rebuilt per institution</div>
+                <div class="trans-item">✗ Years · millions · 30+ team</div>
+                <div class="trans-item">✗ No evidence chain</div>
+              </div>
+            </div>
+            <div class="trans-arrow">←</div>
+            <div class="trans-to">
+              <div class="trans-label">With ROUAA</div>
+              <div class="trans-items">
+                <div class="trans-item">✓ Unified infrastructure</div>
+                <div class="trans-item">✓ Built once, shared by all</div>
+                <div class="trans-item">✓ Weeks · fraction of cost</div>
+                <div class="trans-item">✓ Every fact → origin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3: The Vision -->
+      <div class="narrative-block">
+        <div class="narrative-num">03</div>
+        <div class="narrative-body">
+          <div class="narrative-tag">The Vision</div>
+          <h3 class="narrative-h">طبقة الذكاء المالي للجيل القادم من المؤسسات</h3>
+          <p class="narrative-desc">
+            رؤى لا تبني أداة. لا تبني منصة. تبني بنية تحتية — مثل الكهرباء: غير مرئية، أساسية، في كل مكان. الهدف: أن تصبح رؤى المعيار الإقليمي للذكاء المالي الموثّق. كل إعلام مالي، كل منصة تداول، كل صندوق استثمار، كل بنك، كل فينتك — يستهلك من نفس الطبقة. ليست منافساً لأحد. بنية تحتية للجميع.
+          </p>
+          <div class="narrative-vision">
+            <div class="vision-quote">"The financial intelligence layer for the next generation of institutions."</div>
+            <div class="vision-quote-ar">طبقة الذكاء المالي للجيل القادم من المؤسسات.</div>
+            <div class="vision-sub">Not a tool. Not a platform. An infrastructure.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
