@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Products Architecture — What You Get From the Engine</title>
+<meta name="description" content="رؤى ليست متجر أدوات. كل وحدة تجارية تستهلك من نفس المحرك، وكل منتج يحمل نفس سلسلة الإثبات.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.hero-pa { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-pa-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-pa-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-pa-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
+.hero-pa-h1 .gold { color: var(--gold); }
+.hero-pa-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-pa-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === The Bridge Logic === */
+.bridge-logic { max-width: 1000px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: center; gap: 0.5rem; }
+@media (max-width: 768px) { .bridge-logic { grid-template-columns: 1fr; gap: 1rem; } }
+.bridge-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; }
+.bridge-block.center { background: var(--gold-dim); border-color: var(--gold); }
+.bridge-block-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.bridge-block-val { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.bridge-block-val.ar { font-family: var(--font-ar); display: block; font-size: 0.875rem; color: var(--text-dim); margin-top: 0.25rem; }
+.bridge-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.25rem; }
+
+/* === Architecture Tree === */
+.arch-tree { max-width: 1200px; margin: 2rem auto 0; }
+.arch-root { text-align: center; padding: 1.5rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-xl); margin-bottom: 1.5rem; }
+.arch-root-h { font-family: var(--font-en); font-size: 1.125rem; font-weight: 700; color: var(--gold); }
+.arch-root-h .ar { font-family: var(--font-ar); display: block; font-size: 1rem; color: var(--text-dim); margin-top: 0.25rem; }
+.arch-root-sub { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; }
+
+.arch-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.arch-branch { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.25rem; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.arch-branch:hover { border-color: var(--b-color, var(--gold)); }
+.arch-branch::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 3px; background: var(--b-color, var(--gold)); }
+.arch-branch.b-media { --b-color: var(--blue); }
+.arch-branch.b-trading { --b-color: var(--emerald); }
+.arch-branch.b-research { --b-color: var(--gold); }
+.arch-branch.b-risk { --b-color: var(--rose); }
+.arch-branch.b-dev { --b-color: var(--amber); }
+
+.arch-branch-h { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.arch-branch-icon { font-size: 1.25rem; }
+.arch-branch-name { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); }
+.arch-branch-name .ar { font-family: var(--font-ar); display: block; font-size: 0.8125rem; color: var(--text-dim); }
+.arch-branch-count { margin-right: auto; font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); }
+
+.arch-products-list { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-product-row { padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.5rem; transition: all var(--transition-base); text-decoration: none; color: inherit; }
+.arch-product-row:hover { border-color: var(--b-color); transform: translateX(-2px); }
+.arch-product-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); }
+.arch-product-name .ar { font-family: var(--font-ar); display: block; font-size: 0.6875rem; color: var(--text-mute); margin-top: 0.0625rem; }
+.arch-product-arrow { margin-right: auto; color: var(--b-color); opacity: 0.4; font-size: 0.75rem; }
+
+/* === Buying Logic === */
+.buying-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+.buying-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); }
+.buying-card:hover { border-color: var(--gold); }
+.buying-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.buying-h { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.buying-h .ar { font-family: var(--font-ar); display: block; font-size: 1rem; color: var(--text-dim); margin-bottom: 0.125rem; }
+.buying-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; }
+.buying-example { margin-top: 0.625rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.05em; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="رؤى · ROUAA — Home">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Products Architecture</span>
+      </div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="platform.html">Platform</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="catalog.html" class="active">Products</a></li><li><a href="trust.html">Trust</a></li><li><a href="company.html">Company</a></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="solutions.html">Solutions</a><a href="catalog.html" class="active">Products</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <div class="nav-mobile-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const mobile = document.getElementById('navMobile');
+  if (!toggle || !mobile) return;
+  function setOpen(open) {
+    mobile.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!mobile.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!mobile.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (window.innerWidth > 1024) setOpen(false); }, 100); });
+})();
+</script>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-pa">
+    <div class="hero-pa-bg"></div>
+    <div class="container">
+      <div class="hero-pa-content">
+        <div class="mono-label text-gold">Products Architecture</div>
+        <h1 class="hero-pa-h1">
+          محرك واحد.<br>
+          <span class="gold">44 منتج. 5 أسواق.</span>
+        </h1>
+        <p class="hero-pa-sub">
+          رؤى ليست متجر أدوات. كل وحدة تجارية تستهلك من نفس المحرك، وكل منتج يحمل نفس سلسلة الإثبات. هذه هي البنية التي تنظم كيف تشتري من رؤى.
+        </p>
+        <div class="hero-pa-cta">
+          <a href="#architecture" class="btn btn-primary btn-lg">See the Architecture</a>
+          <a href="catalog.html" class="btn btn-ghost btn-lg">Browse Full Catalog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BRIDGE LOGIC ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من المحرك إلى الشراء</h2>
+        <p class="section-lead" style="margin: 0 auto;">ثلاث طبقات تفصل «البنية التحتية» عن «ما تشتريه». هذا هو المسار الكامل.</p>
+      </div>
+
+      <div class="bridge-logic">
+        <div class="bridge-block">
+          <div class="bridge-block-h">01 · The Engine</div>
+          <div class="bridge-block-val">Intelligence Engine<span class="ar ar">المحرك · 7 طبقات</span></div>
+        </div>
+        <div class="bridge-arrow">←</div>
+        <div class="bridge-block center">
+          <div class="bridge-block-h">02 · Products Architecture</div>
+          <div class="bridge-block-val">5 Business Lines<span class="ar">5 خطوط أعمال · 44 منتج</span></div>
+        </div>
+        <div class="bridge-arrow">←</div>
+        <div class="bridge-block">
+          <div class="bridge-block-h">03 · Your Purchase</div>
+          <div class="bridge-block-val">Pick Your Line<span class="ar">اختر خطك · اشترك</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE TREE ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Architecture Tree</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">شجرة المنتجات</h2>
+        <p class="section-lead" style="margin: 0 auto;">من المحرك إلى 5 خطوط أعمال إلى 44 منتج — كل واحد مرتبط بمصدره.</p>
+      </div>
+
+      <div class="arch-tree">
+        <div class="arch-root">
+          <div class="arch-root-h">
+            ROUAA Intelligence Engine
+            <span class="ar">محرّك رؤى للذكاء المالي</span>
+          </div>
+          <div class="arch-root-sub">7 LAYERS · SOURCES → DISTRIBUTION</div>
+        </div>
+
+        <div class="arch-branches">
+
+          <!-- MEDIA BRANCH -->
+          <div class="arch-branch b-media">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📰</div>
+              <div class="arch-branch-name">Media Intelligence<span class="ar">إعلام مالي</span></div>
+              <div class="arch-branch-count">8 products</div>
+            </div>
+            <div class="arch-products-list">
+              <a href="product.html?id=med-news-engine" class="arch-product-row"><div class="arch-product-name">Financial News Engine<span class="ar">محرّك الأخبار</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-agency" class="arch-product-row"><div class="arch-product-name">News Agency Agent<span class="ar">وكيل الأنباء</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-reports" class="arch-product-row"><div class="arch-product-name">Reports Pipeline<span class="ar">أنابيب التقارير</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-video" class="arch-product-row"><div class="arch-product-name">Video Pipeline<span class="ar">أنابيب الفيديو</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-infographic" class="arch-product-row"><div class="arch-product-name">Infographic Pipeline<span class="ar">الإنفوجرافيك</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-audio" class="arch-product-row"><div class="arch-product-name">Audio Intelligence<span class="ar">الذكاء الصوتي</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-calendar" class="arch-product-row"><div class="arch-product-name">Economic Calendar<span class="ar">التقويم الاقتصادي</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=med-pulse" class="arch-product-row"><div class="arch-product-name">Daily Pulse<span class="ar">النشرة اليومية</span></div><span class="arch-product-arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- TRADING BRANCH -->
+          <div class="arch-branch b-trading">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📈</div>
+              <div class="arch-branch-name">Trading Intelligence<span class="ar">ذكاء التداول</span></div>
+              <div class="arch-branch-count">9 products</div>
+            </div>
+            <div class="arch-products-list">
+              <a href="product.html?id=trd-dashboard" class="arch-product-row"><div class="arch-product-name">Trading Dashboard<span class="ar">لوحة التداول</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-chart" class="arch-product-row"><div class="arch-product-name">Smart Chart Annotations<span class="ar">الرسوم الذكية</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-portfolio" class="arch-product-row"><div class="arch-product-name">Portfolio Intelligence<span class="ar">ذكاء المحفظة</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-assistant" class="arch-product-row"><div class="arch-product-name">Trading Assistant<span class="ar">مساعد التداول</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-lab" class="arch-product-row"><div class="arch-product-name">Neural Trading Lab<span class="ar">مختبر التداول</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-ai-council" class="arch-product-row"><div class="arch-product-name">AI Trading Council<span class="ar">مجلس التداول</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-auto" class="arch-product-row"><div class="arch-product-name">Autonomous Trader<span class="ar">التاجر المستقل</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-prediction" class="arch-product-row"><div class="arch-product-name">Prediction Market<span class="ar">سوق التنبؤات</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=trd-content" class="arch-product-row"><div class="arch-product-name">Content Agent<span class="ar">وكيل المحتوى</span></div><span class="arch-product-arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- RESEARCH BRANCH -->
+          <div class="arch-branch b-research">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📊</div>
+              <div class="arch-branch-name">Research Intelligence<span class="ar">أبحاث استثمارية</span></div>
+              <div class="arch-branch-count">6 products</div>
+            </div>
+            <div class="arch-products-list">
+              <a href="product.html?id=res-brief" class="arch-product-row"><div class="arch-product-name">Intelligence Brief Generator<span class="ar">مولّد المذكرات</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=res-committee" class="arch-product-row"><div class="arch-product-name">Committee Prep Engine<span class="ar">تحضير اللجنة</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=res-comparison" class="arch-product-row"><div class="arch-product-name">Sector Comparison<span class="ar">مقارنة القطاعات</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=res-deepdive" class="arch-product-row"><div class="arch-product-name">Deep Dive Reports<span class="ar">تقارير التعمّق</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=res-watchlist" class="arch-product-row"><div class="arch-product-name">Smart Watchlist<span class="ar">قائمة المراقبة</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=res-screening" class="arch-product-row"><div class="arch-product-name">Investment Screener<span class="ar">ماسح الاستثمار</span></div><span class="arch-product-arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- RISK BRANCH -->
+          <div class="arch-branch b-risk">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">⚠</div>
+              <div class="arch-branch-name">Risk Intelligence<span class="ar">ذكاء المخاطر</span></div>
+              <div class="arch-branch-count">5 products</div>
+            </div>
+            <div class="arch-products-list">
+              <a href="product.html?id=risk-monitor" class="arch-product-row"><div class="arch-product-name">Risk Event Monitor<span class="ar">مراقب المخاطر</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=risk-exposure" class="arch-product-row"><div class="arch-product-name">Exposure Analysis<span class="ar">تحليل التعرّض</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=risk-scenario" class="arch-product-row"><div class="arch-product-name">Scenario Engine<span class="ar">محرّك السيناريوهات</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=risk-action" class="arch-product-row"><div class="arch-product-name">Action Recommendations<span class="ar">توصيات الإجراء</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=risk-compliance" class="arch-product-row"><div class="arch-product-name">Compliance Audit<span class="ar">تدقيق الامتثال</span></div><span class="arch-product-arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- DEV BRANCH -->
+          <div class="arch-branch b-dev">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">🔌</div>
+              <div class="arch-branch-name">Developer Platform<span class="ar">منصة المطورين</span></div>
+              <div class="arch-branch-count">16 products</div>
+            </div>
+            <div class="arch-products-list">
+              <a href="product.html?id=api-events" class="arch-product-row"><div class="arch-product-name">Events API<span class="ar">واجهة الأحداث</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=api-facts" class="arch-product-row"><div class="arch-product-name">Facts API<span class="ar">واجهة الحقائق</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=api-evidence" class="arch-product-row"><div class="arch-product-name">Evidence API<span class="ar">واجهة الأدلة</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=api-insights" class="arch-product-row"><div class="arch-product-name">Insights API<span class="ar">واجهة الاستخبارات</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=api-streaming" class="arch-product-row"><div class="arch-product-name">Streaming API<span class="ar">واجهة البث</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=api-sdk" class="arch-product-row"><div class="arch-product-name">Official SDK<span class="ar">حزمة SDK</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=agt-macro" class="arch-product-row"><div class="arch-product-name">Macro Analyst Agent<span class="ar">وكيل الماكرو</span></div><span class="arch-product-arrow">→</span></a>
+              <a href="product.html?id=cmp-graph" class="arch-product-row"><div class="arch-product-name">Knowledge Graph<span class="ar">رسم المعرفة</span></div><span class="arch-product-arrow">→</span></a>
+            </div>
+            <div style="text-align: center; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-soft);">
+              <a href="catalog.html" style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--amber); text-decoration: none; letter-spacing: 0.05em;">+8 MORE →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BUYING LOGIC ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Buying Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تشتري من رؤى؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">أربعة مسارات شراء. كل مسار يحدّد وحدتك التجارية، نطاق منتجاتك، وطرق دمجها.</p>
+      </div>
+
+      <div class="buying-grid">
+        <div class="buying-card">
+          <div class="buying-num">PATH 01</div>
+          <div class="buying-h"><span class="ar">حل سوقي واحد</span>Single-Market Solution</div>
+          <div class="buying-desc">اختر سوقاً واحداً (إعلام، تداول، أبحاث، مخاطر، أو مطورين) — اشترك في كل منتجاته أو في المهم فقط.</div>
+          <div class="buying-example">e.g., Media Intelligence — 8 products</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 02</div>
+          <div class="buying-h"><span class="ar">حل مخصص</span>Tailored Bundle</div>
+          <div class="buying-desc">اختر منتجات محددة من عدة أسواق. مثلاً: News Engine + Risk Monitor + Events API — حزمة واحدة لحاجة محددة.</div>
+          <div class="buying-example">e.g., News + Risk + Events API</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 03</div>
+          <div class="buying-h"><span class="ar">منصة كاملة</span>Platform License</div>
+          <div class="buying-desc">اشترك في المنصة كاملة — كل المنتجات، كل الأسواق. للبنوك الكبيرة وصناديق السيادة التي تريد حلاً شاملاً.</div>
+          <div class="buying-example">Enterprise · 44 products · all markets</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 04</div>
+          <div class="buying-h"><span class="ar">بناء فوق رؤى</span>Build on ROUAA</div>
+          <div class="buying-desc">خذ APIs + SDK + Components — وابنِ منتجك الخاص فوق ذكاء رؤى الموثّق. للفينتك والمطورين.</div>
+          <div class="buying-example">APIs + SDK + Knowledge Graph</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which path fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك على تحديد مسار الشراء المناسب، ونرسم لك خريطة المنتجات التي تخدم حاجتك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Products Architecture Briefing" class="btn btn-primary btn-lg">Request Architecture Briefing</a>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="catalog.html" class="btn-link">← Browse Full Catalog (44 products)</a>
+        <a href="platform.html" class="btn-link">← How the Engine Works</a>
+        <a href="solutions.html" class="btn-link">← Solutions by Market</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
+        <li><a href="catalog.html" class="small text-dim">Full Catalog</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
