@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Platform — How Official Data Becomes Financial Intelligence</title>
+<meta name="description" content="كيف تتحول وثيقة رسمية إلى ذكاء مالي قابل للتوزيع؟ سبع طبقات من المصدر الرسمي إلى المنتجات.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.hero-platform { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-platform-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-platform-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-platform-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
+.hero-platform-h1 .gold { color: var(--gold); }
+.hero-platform-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-platform-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === Platform Architecture — THE centerpiece === */
+.arch-stack { max-width: 600px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 0; }
+.arch-layer { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.375rem; align-items: center; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.arch-layer:hover { border-color: var(--layer-color, var(--gold)); }
+.arch-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--layer-color, var(--gold)); }
+.arch-layer-num { font-family: var(--font-mono); font-size: 0.875rem; color: var(--layer-color, var(--gold)); font-weight: 700; width: 48px; text-align: center; }
+.arch-layer-body { flex: 1; }
+.arch-layer-name { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); }
+.arch-layer-name .ar { font-family: var(--font-ar); font-size: 0.75rem; color: var(--text-mute); margin-right: 0.5rem; }
+.arch-layer-desc { font-size: 0.6875rem; color: var(--text-dim); margin-top: 0.125rem; }
+.arch-layer-stat { font-family: var(--font-mono); font-size: 0.625rem; color: var(--layer-color, var(--gold)); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; }
+.arch-connector { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.75rem; margin: 0.1rem 0; }
+.arch-layer.l1 { --layer-color: var(--emerald); }
+.arch-layer.l2 { --layer-color: var(--blue); }
+.arch-layer.l3 { --layer-color: var(--blue); }
+.arch-layer.l4 { --layer-color: var(--gold); }
+.arch-layer.l5 { --layer-color: var(--gold); }
+.arch-layer.l6 { --layer-color: var(--amber); }
+.arch-layer.l7 { --layer-color: var(--gold); }
+.arch-layer.products { background: var(--gold-dim); border-color: var(--gold); --layer-color: var(--gold); }
+
+/* Products fan-out under architecture */
+.arch-products { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.arch-product-chip { padding: 0.375rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); text-decoration: none; transition: border-color var(--transition-slow); }
+.arch-product-chip:hover { border-color: var(--gold); color: var(--gold); }
+
+/* === Layer detail cards === */
+.layer-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.layer-detail { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); border-top: 3px solid var(--detail-color, var(--gold)); }
+.layer-detail:hover { border-color: var(--detail-color, var(--gold)); }
+.layer-detail.d1 { --detail-color: var(--emerald); }
+.layer-detail.d2 { --detail-color: var(--blue); }
+.layer-detail.d3 { --detail-color: var(--gold); }
+.layer-detail.d4 { --detail-color: var(--amber); }
+.layer-detail.d5 { --detail-color: var(--gold); }
+.layer-detail-num { font-family: var(--font-mono); font-size: 0.625rem; color: var(--detail-color, var(--gold)); letter-spacing: 0.15em; margin-bottom: 0.5rem; font-weight: 700; }
+.layer-detail-h { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.layer-detail-h .ar { font-family: var(--font-ar); display: block; font-size: 1.0625rem; margin-bottom: 0.125rem; }
+.layer-detail-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.75rem; }
+.layer-detail-cap { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.layer-detail-cap li { font-size: 0.75rem; color: var(--text-mute); display: flex; align-items: flex-start; gap: 0.3rem; }
+.layer-detail-cap li::before { content: '✓'; color: var(--detail-color, var(--gold)); font-weight: 700; flex-shrink: 0; }
+
+/* === Why not build internally === */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+.why-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; text-align: center; transition: border-color var(--transition-slow); }
+.why-card:hover { border-color: var(--gold); }
+.why-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.why-h { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.why-desc { font-size: 0.75rem; color: var(--text-mute); line-height: 1.5; }
+
+/* === Deployment === */
+.deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; max-width: 800px; margin: 0 auto; }
+.deploy-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem 0.875rem; text-align: center; transition: border-color var(--transition-slow); }
+.deploy-card:hover { border-color: var(--gold); }
+.deploy-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.deploy-desc { font-size: 0.625rem; color: var(--text-mute); }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text"><span class="name">رؤى · ROUAA</span><span class="sub">Intelligence Platform</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="platform.html" class="active">Platform</a></li>
+      <li><a href="media-technologies.html">Media</a></li>
+      <li><a href="trading-technologies.html">Trading</a></li>
+      <li><a href="developers.html">API</a></li>
+      <li><a href="trust.html">الثقة</a></li>
+    </ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-platform">
+    <div class="hero-platform-bg"></div>
+    <div class="container">
+      <div class="hero-platform-content">
+        <div class="mono-label text-gold">Intelligence Platform</div>
+        <h1 class="hero-platform-h1">
+          How Official Data Becomes<br>
+          <span class="gold">Financial Intelligence</span>
+        </h1>
+        <p class="hero-platform-sub">
+          سبع طبقات من المصدر الرسمي إلى المنتجات الموزّعة. هذا هو المحرك الذي لا يستطيع المؤسس بناءه داخلياً في سنوات — رؤى تبنيه وتُحسّنه كل يوم.
+        </p>
+        <div class="hero-platform-cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+          <a href="#architecture" class="btn btn-ghost btn-lg">Explore Architecture</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PLATFORM ARCHITECTURE — the centerpiece ============= -->
+  <section class="section reveal" id="architecture" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Platform Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من وثيقة رسمية إلى ذكاء مالي موزّع</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل طبقة تبني على ما قبلها. المنتجات في الأسفل هي آخر 5% — البنية التحتية هي الشركة.</p>
+      </div>
+
+      <div class="arch-stack">
+        <div class="arch-layer l1">
+          <div class="arch-layer-num">01</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">شبكة المصادر</span>Official Source Network</div>
+            <div class="arch-layer-desc">411 مؤسسة رسمية — بنوك مركزية، هيئات تنظيمية، وزارات، بورصات</div>
+          </div>
+          <div class="arch-layer-stat">411 sources</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l2">
+          <div class="arch-layer-num">02</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">ذكاء الوثائق</span>Document Intelligence</div>
+            <div class="arch-layer-desc">PDF ← بيانات مهيكلة · استخراج · تصنيف · فهرسة في 0.4 ثانية</div>
+          </div>
+          <div class="arch-layer-stat">10,000+ docs</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l3">
+          <div class="arch-layer-num">03</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">محرّك الحقائق</span>Fact Engine</div>
+            <div class="arch-layer-desc">استخراج NLP للأرقام والكيانات والعلاقات — كل حقيقة مرتبطة بصفحة وفقرة</div>
+          </div>
+          <div class="arch-layer-stat">1,247 facts</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l4">
+          <div class="arch-layer-num">04</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة الأدلة</span>Evidence Layer</div>
+            <div class="arch-layer-desc">ربط كل حقيقة بمصدرها الأصلي — صفحة، فقرة، طابع زمني، درجة ثقة</div>
+          </div>
+          <div class="arch-layer-stat">every fact → origin</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l5">
+          <div class="arch-layer-num">05</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">رسم المعرفة</span>Knowledge Graph</div>
+            <div class="arch-layer-desc">شبكة العلاقات المالية — كل حدث مرتبط بمن أثّر عليه ومن تأثر به</div>
+          </div>
+          <div class="arch-layer-stat">living graph</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l6">
+          <div class="arch-layer-num">06</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">محرّك الاستدلال</span>Reasoning Engine</div>
+            <div class="arch-layer-desc">استدلال متعدد الوكلاء — 10 أدوار تتشاور قبل كل تحليل وتوصية</div>
+          </div>
+          <div class="arch-layer-stat">10 roles</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l7">
+          <div class="arch-layer-num">07</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة التوزيع</span>Distribution Layer</div>
+            <div class="arch-layer-desc">توليد مرة واحدة، توزيع عبر آلاف نقاط الاتصال — API، Widgets، White Label</div>
+          </div>
+          <div class="arch-layer-stat">generate once → everywhere</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer products">
+          <div class="arch-layer-num">→</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Products · المنتجات</div>
+            <div class="arch-layer-desc">آخر 5% — تطبيقات مختلفة فوق نفس المنصة</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-products">
+        <a href="media-technologies.html" class="arch-product-chip" style="color: var(--blue); border-color: rgba(96,165,250,0.3);">Media</a>
+        <a href="trading-technologies.html" class="arch-product-chip" style="color: var(--emerald); border-color: rgba(52,211,153,0.3);">Trading</a>
+        <a href="enterprise.html" class="arch-product-chip" style="color: var(--gold); border-color: rgba(200,169,81,0.3);">Research</a>
+        <a href="risk-intelligence.html" class="arch-product-chip" style="color: var(--rose); border-color: rgba(239,68,68,0.3);">Risk</a>
+        <a href="developers.html" class="arch-product-chip" style="color: var(--amber); border-color: rgba(245,158,11,0.3);">Developer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= LAYER DETAILS ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Layer Capabilities</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ماذا تفعل كل طبقة</h2>
+      </div>
+
+      <div class="layer-detail-grid">
+        <div class="layer-detail d1">
+          <div class="layer-detail-num">LAYER 01</div>
+          <div class="layer-detail-h"><span class="ar">شبكة المصادر الرسمية</span>Official Source Network</div>
+          <div class="layer-detail-desc">علاقات مباشرة مع 411 مؤسسة رسمية — بنوك مركزية، هيئات تنظيمية، بورصات، وزارات.</div>
+          <ul class="layer-detail-cap">
+            <li>مراقبة 24/7</li>
+            <li>فهرسة وتصنيف</li>
+            <li>درجة موثوقية لكل مصدر</li>
+            <li>تحديث تلقائي</li>
+          </ul>
+        </div>
+        <div class="layer-detail d2">
+          <div class="layer-detail-num">LAYER 02</div>
+          <div class="layer-detail-h"><span class="ar">ذكاء الوثائق</span>Document Intelligence</div>
+          <div class="layer-detail-desc">تحويل PDF والوثائق الرسمية إلى بيانات مهيكلة — استخراج، تصنيف، فهرسة.</div>
+          <ul class="layer-detail-cap">
+            <li>NLP extraction</li>
+            <li>تصنيف تلقائي</li>
+            <li>فهرسة كاملة</li>
+            <li>0.4 ثانية لكل وثيقة</li>
+          </ul>
+        </div>
+        <div class="layer-detail d3">
+          <div class="layer-detail-num">LAYER 03</div>
+          <div class="layer-detail-h"><span class="ar">طبقة الأدلة</span>Evidence Layer</div>
+          <div class="layer-detail-desc">ربط كل حقيقة بمصدرها الأصلي — صفحة، فقرة، طابع زمني، درجة ثقة.</div>
+          <ul class="layer-detail-cap">
+            <li>Provenance كامل</li>
+            <li>تتبّع في <5 ثوانٍ</li>
+            <li>قابل للتصدير</li>
+            <li>جودة الدليل + قوة الاستدلال</li>
+          </ul>
+        </div>
+        <div class="layer-detail d4">
+          <div class="layer-detail-num">LAYER 04</div>
+          <div class="layer-detail-h"><span class="ar">رسم المعرفة</span>Knowledge Graph</div>
+          <div class="layer-detail-desc">شبكة العلاقات المالية — كل حدث مرتبط بمن أثّر عليه ومن تأثر به.</div>
+          <ul class="layer-detail-cap">
+            <li>كيانات مترابطة</li>
+            <li>علاقات سببية</li>
+            <li>تأثيرات متبادلة</li>
+            <li>رسم تفاعلي</li>
+          </ul>
+        </div>
+        <div class="layer-detail d5">
+          <div class="layer-detail-num">LAYER 05</div>
+          <div class="layer-detail-h"><span class="ar">محرّك الاستدلال</span>Reasoning Engine</div>
+          <div class="layer-detail-desc">استدلال متعدد الوكلاء — 10 أدوار تتشاور قبل كل تحليل وتوصية.</div>
+          <ul class="layer-detail-cap">
+            <li>10 أدوار استدلال</li>
+            <li>سيناريوهات بديلة</li>
+            <li>تقييم مخاطر</li>
+            <li>دعم قرار (لا توصيات مباشرة)</li>
+          </ul>
+        </div>
+        <div class="layer-detail d5">
+          <div class="layer-detail-num">LAYER 06</div>
+          <div class="layer-detail-h"><span class="ar">طبقة التوزيع</span>Distribution Layer</div>
+          <div class="layer-detail-desc">توليد مرة واحدة، توزيع عبر آلاف نقاط الاتصال — API، Widgets، White Label.</div>
+          <ul class="layer-detail-cap">
+            <li>REST + Streaming</li>
+            <li>White Label</li>
+            <li>Embedded Widgets</li>
+            <li>SDK (5 لغات)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY NOT BUILD INTERNALLY ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why Not Build Internally</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا لا تبنيه داخلياً؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">بناء هذه الطبقات السبع داخلياً يحتاج: 2-3 سنوات · فريق 30+ مهندساً ومحللاً · ملايين دولار. رؤى جاهزة الآن — وتتحسّن كل يوم.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-h">Build in Weeks</div>
+          <div class="why-desc">ابنِ منتجك فوق المنصة في أسابيع — لا سنوات</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡</div>
+          <div class="why-h">Defensible Decisions</div>
+          <div class="why-desc">كل قرار مدعوم بأدلة — قابل للدفاع أمام أي لجنة</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📦</div>
+          <div class="why-h">Deploy Anywhere</div>
+          <div class="why-desc">سحابي، خاص، أو داخل بنيتك — رؤى تتكيّف معك</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔄</div>
+          <div class="why-h">Continuously Improving</div>
+          <div class="why-desc">كل يوم يزداد الرسم عمقاً — أنت تستفيد من التحسين المستمر</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= DEPLOYMENT ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Deployment</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تُنشر المنصة</h2>
+      </div>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <div class="deploy-name">Cloud SaaS</div>
+          <div class="deploy-desc">أسرع بدء · مستضاف</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Private Cloud</div>
+          <div class="deploy-desc">مخصص · معزول</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">On-Premise</div>
+          <div class="deploy-desc">داخل بنيتك · سيادة كاملة</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Hybrid</div>
+          <div class="deploy-desc">مزيج حسب الحاجة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Explore the platform behind the products</h2>
+      <p>مكالمة 30 دقيقة — نشرح طبقات المنصة وكيف تنتج الذكاء الذي يغذي منتجاتك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Platform Briefing" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim" style="color: var(--gold);">Platform ✓</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="index.html" class="small text-dim">Home</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
