@@ -132,6 +132,27 @@ body { class: motion-marketing; }
 .problem-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--rose); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
 .problem-text { font-size: 0.6875rem; color: var(--text-mute); line-height: 1.4; }
 
+/* === 5 Institutional Solutions === */
+.solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; max-width: 1280px; margin: 0 auto; }
+.solution-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.75rem 1.5rem; transition: all var(--transition-slow); position: relative; overflow: hidden; }
+.solution-card:hover { border-color: var(--s-color, var(--gold)); transform: translateY(-3px); }
+.solution-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--s-color, var(--gold)); }
+.solution-card.s-research { --s-color: var(--gold); }
+.solution-card.s-trading { --s-color: var(--emerald); }
+.solution-card.s-media { --s-color: var(--blue); }
+.solution-card.s-dev { --s-color: var(--amber); }
+.solution-card.s-risk { --s-color: var(--rose); }
+.sol-num { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--s-color); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.sol-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.sol-name { font-family: var(--font-en); font-size: 1.0625rem; font-weight: 800; color: var(--text); line-height: 1.3; }
+.sol-name-ar { font-family: var(--font-ar); font-size: 0.875rem; color: var(--text-mute); margin-bottom: 0.625rem; }
+.sol-for { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.05em; margin-bottom: 0.625rem; line-height: 1.5; }
+.sol-promise { font-size: 0.8125rem; color: var(--s-color); font-weight: 600; line-height: 1.5; margin-bottom: 0.875rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-soft); }
+.sol-capabilities-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.sol-capabilities { display: flex; flex-direction: column; gap: 0.25rem; }
+.sol-capabilities a { font-family: var(--font-en); font-size: 0.75rem; color: var(--text-dim); text-decoration: none; padding: 0.375rem 0.5rem; background: var(--surface); border-radius: var(--radius-sm); border-right: 2px solid var(--s-color); transition: all var(--transition-base); }
+.sol-capabilities a:hover { color: var(--s-color); background: rgba(255,255,255,0.04); }
+
 /* === Powered badge === */
 .powered-badge { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem; text-align: center; }
 .powered-badge-text { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
@@ -209,9 +230,9 @@ body { class: motion-marketing; }
     <div class="catalog-hero-bg"></div>
     <div class="container">
       <div class="catalog-hero-content">
-        <div class="mono-label text-gold">Capability Map</div>
-        <h1>From Official Data to<br><span class="gold">Institutional Decisions</span></h1>
-        <p>قدرات ذكاء مالي مبنية على مصادر رسمية، أدلة قابلة للتحقق، ورسم معرفة مؤسسي. ليست متجر أدوات — بل خريطة قرار لمؤسسة تريد بناء طبقة استخبارات مالية.</p>
+        <div class="mono-label text-gold">Intelligence Infrastructure Map</div>
+        <h1>For Institutions That Cannot Afford<br><span class="gold">Unverified Decisions</span></h1>
+        <p>من البيانات الرسمية إلى القرار المؤسسي — كل حقيقة لها مصدر، كل تحليل له دليل، كل قرار له سجل. ليست متجر أدوات — بل بنية تحتية ذكاء مالي.</p>
       </div>
       <div class="catalog-search">
         <span class="catalog-search-icon">🔍</span>
@@ -260,7 +281,7 @@ body { class: motion-marketing; }
         <div class="why-rouaa-card"><div class="why-rouaa-num">01</div><div class="why-rouaa-h">Official Sources First</div><div class="why-rouaa-ar">المصادر الرسمية أولاً</div><div class="why-rouaa-desc">411 مؤسسة رسمية مراقبة 24/7 — لا وكالات غير موثّقة، لا بيانات غير محقّق منها.</div></div>
         <div class="why-rouaa-card"><div class="why-rouaa-num">02</div><div class="why-rouaa-h">Every Insight Has Evidence</div><div class="why-rouaa-ar">كل استخبارات لها دليل</div><div class="why-rouaa-desc">كل رقم مرتبط بصفحة وفقرة في المصدر الأصلي. كل قرار قابل للدفاع أمام لجنة أو منظّم.</div></div>
         <div class="why-rouaa-card"><div class="why-rouaa-num">03</div><div class="why-rouaa-h">Knowledge Graph Connects Events</div><div class="why-rouaa-ar">رسم المعرفة يربط الأحداث</div><div class="why-rouaa-desc">شبكة علاقات مالية شاملة — كل حدث مرتبط بمن أثّر عليه، كل شركة مرتبطة بقطاعها وسلسلة توريدها.</div></div>
-        <div class="why-rouaa-card"><div class="why-rouaa-num">04</div><div class="why-rouaa-h">AI Reasoning With Audit Trail</div><div class="why-rouaa-ar">استدلال ذكي مع سجل تدقيق</div><div class="why-rouaa-desc">10 وكلاء يتشاورون قبل كل تحليل. كل خطوة مُسجّلة بدقة millisecond. كل قرار قابل لإعادة التشغيل.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">04</div><div class="why-rouaa-h">AI Reasoning With Audit Trail</div><div class="why-rouaa-ar">استدلال ذكي مع سجل تدقيق</div><div class="why-rouaa-desc">Multi-agent reasoning with traceable analysis workflows. كل خطوة مُسجّلة بدقة millisecond. كل قرار قابل لإعادة التشغيل والتحقق.</div></div>
       </div>
     </div>
   </section>
@@ -312,8 +333,111 @@ body { class: motion-marketing; }
     </div>
   </section>
 
+  <!-- ============= INSTITUTIONAL SOLUTIONS ============= -->
+  <section class="section reveal" id="solutions" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">5 Institutional Solutions</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لا تتصفّح 44 قدرة. اختر حلك المؤسسي.</h2>
+        <p class="section-lead" style="margin: 0 auto;">المؤسسات لا تشتري قدرات منفصلة — تشتري حلولاً متكاملة. كل حل يجمع القدرات المناسبة تحت نتيجة محددة، مدعومة بنفس البنية التحتية.</p>
+      </div>
+      <div class="solutions-grid">
+
+        <div class="solution-card s-research">
+          <div class="sol-num">SOLUTION 01</div>
+          <div class="sol-icon">📊</div>
+          <div class="sol-name">Investment Intelligence Platform</div>
+          <div class="sol-name-ar">منصة ذكاء الاستثمار</div>
+          <div class="sol-for">For: Asset Managers · Hedge Funds · Sovereign Funds</div>
+          <div class="sol-promise">اختصر دورة إعداد مذكرة اللجنة من أيام إلى دقائق، مع سلسلة أدلة كاملة.</div>
+          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities">
+            <a href="product.html?id=res-brief">Intelligence Brief Generator</a>
+            <a href="product.html?id=risk-monitor">Risk Event Monitor</a>
+            <a href="product.html?id=risk-exposure">Exposure Analysis</a>
+            <a href="product.html?id=cmp-graph">Knowledge Graph</a>
+            <a href="product.html?id=risk-scenario">Scenario Engine</a>
+          </div>
+        </div>
+
+        <div class="solution-card s-trading">
+          <div class="sol-num">SOLUTION 02</div>
+          <div class="sol-icon">📈</div>
+          <div class="sol-name">Market Intelligence Infrastructure</div>
+          <div class="sol-name-ar">بنية ذكاء السوق</div>
+          <div class="sol-for">For: Brokers · Exchanges · FinTechs</div>
+          <div class="sol-promise">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — واحتفظ بعميلك أطول.</div>
+          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities">
+            <a href="product.html?id=trd-dashboard">Trading Intelligence Dashboard</a>
+            <a href="product.html?id=trd-chart">Smart Chart Intelligence</a>
+            <a href="product.html?id=trd-ai-council">Multi-Agent Market Intelligence System</a>
+            <a href="product.html?id=trd-assistant">Trading Assistant</a>
+          </div>
+        </div>
+
+        <div class="solution-card s-media">
+          <div class="sol-num">SOLUTION 03</div>
+          <div class="sol-icon">📰</div>
+          <div class="sol-name">Financial Media Intelligence</div>
+          <div class="sol-name-ar">ذكاء الإعلام المالي</div>
+          <div class="sol-for">For: Media Companies · Publishers</div>
+          <div class="sol-promise">حوّل غرفة أخبار تقليدية إلى محرّك محتوى موثّق — في دقائق، بـ 6 لغات.</div>
+          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities">
+            <a href="product.html?id=med-agency">News Agency Agent</a>
+            <a href="product.html?id=med-reports">Reports Pipeline</a>
+            <a href="product.html?id=med-video">Video Pipeline</a>
+          </div>
+        </div>
+
+        <div class="solution-card s-dev">
+          <div class="sol-num">SOLUTION 04</div>
+          <div class="sol-icon">🔌</div>
+          <div class="sol-name">Intelligence API Platform</div>
+          <div class="sol-name-ar">منصة واجهات الاستخبارات</div>
+          <div class="sol-for">For: Developers · FinTech Builders</div>
+          <div class="sol-promise">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، SDK، كل استجابة تحمل دليلها.</div>
+          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities">
+            <a href="product.html?id=api-events">Events API</a>
+            <a href="product.html?id=api-facts">Facts API</a>
+            <a href="product.html?id=api-evidence">Evidence API</a>
+            <a href="product.html?id=cmp-graph">Knowledge Graph API</a>
+          </div>
+        </div>
+
+        <div class="solution-card s-risk">
+          <div class="sol-num">SOLUTION 05</div>
+          <div class="sol-icon">🔐</div>
+          <div class="sol-name">Private Intelligence Infrastructure</div>
+          <div class="sol-name-ar">بنية الذكاء الخاصة</div>
+          <div class="sol-for">For: Banks · Governments · Sovereign Institutions</div>
+          <div class="sol-promise">بنية ذكاء كاملة داخل بيئتك — سيادة بيانات، امتثال، سجل تدقيق جاهز للمنظّمين.</div>
+          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities">
+            <a href="product.html?id=cmp-source-registry">Source Registry</a>
+            <a href="product.html?id=cmp-evidence-store">Evidence Store</a>
+            <a href="product.html?id=cmp-reasoning-engine">Reasoning Engine</a>
+            <a href="product.html?id=cmp-audit-trail">Audit Trail</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============= CATALOG ============= -->
-  <div class="catalog-layout">
+  <section class="section reveal" id="all-capabilities">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">All Capabilities</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">استكشف كل القدرات</h2>
+        <p class="section-lead" style="margin: 0 auto;">44 قدرة عبر 7 فئات — كلها مبنية على نفس البنية التحتية للذكاء الموثّق.</p>
+        <button id="revealAllCaps" class="btn btn-ghost mt-4">Explore all 44 capabilities ↓</button>
+      </div>
+
+      <div id="catalogWrapper" style="display: none;">
 
     <!-- Filters sidebar — reordered: What to solve → Who are you → How to deploy -->
     <aside class="catalog-filters">
@@ -369,6 +493,8 @@ body { class: motion-marketing; }
     </div>
 
   </div>
+      </div><!-- /catalogWrapper -->
+  </section>
 
   <!-- ============= CTA ============= -->
   <section class="cta-final reveal" id="contact">
@@ -620,6 +746,22 @@ function renderProductGrid(filterFeatured = false) {
 
 // Render on load
 renderProductGrid();
+
+// === Reveal all capabilities on button click ===
+const revealBtn = document.getElementById('revealAllCaps');
+const catalogWrapper = document.getElementById('catalogWrapper');
+if (revealBtn && catalogWrapper) {
+  revealBtn.addEventListener('click', () => {
+    catalogWrapper.style.display = 'block';
+    revealBtn.style.display = 'none';
+    // Re-render and filter after reveal
+    renderProductGrid();
+    // Smooth scroll to catalog
+    setTimeout(() => {
+      catalogWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  });
+}
 
 // Initial filter call to set counts
 filterProducts();
