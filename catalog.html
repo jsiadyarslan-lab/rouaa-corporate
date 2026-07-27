@@ -124,6 +124,31 @@ body { class: motion-marketing; }
 .stack-fanout-app.f-risk { --f-color: var(--rose); }
 .stack-fanout-app.f-dev { --f-color: var(--amber); }
 
+/* === Stack network (sources branch) === */
+.stack-network { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.stack-sources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-width: 400px; }
+.stack-source { padding: 0.625rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-top: 2px solid var(--emerald); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); text-align: center; }
+.stack-merge { color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.25rem 0; }
+.stack-source-label { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.stack-arrow-big { color: var(--gold); opacity: 0.3; font-size: 1rem; margin: 0.375rem 0; }
+
+/* === Trust badge strip === */
+.trust-badge-strip { text-align: center; max-width: 900px; margin: 0 auto; }
+.trust-badge-h { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.875rem; }
+.trust-badge-items { display: flex; justify-content: center; gap: 0.75rem 1.5rem; flex-wrap: wrap; }
+.trust-badge-item { font-family: var(--font-en); font-size: 0.75rem; color: var(--emerald); font-weight: 600; letter-spacing: 0.02em; }
+
+/* === Moat table === */
+.moat-table-wrap { max-width: 900px; margin: 0 auto; overflow-x: auto; }
+.moat-table { width: 100%; border-collapse: collapse; }
+.moat-table th { text-align: right; padding: 0.875rem; background: var(--card); border-bottom: 2px solid var(--gold); font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.moat-table td { padding: 0.75rem 0.875rem; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+.moat-table tr:hover td { background: rgba(255,255,255,0.02); }
+.moat-layer { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+.moat-yes { font-size: 0.75rem; color: var(--text-mute); font-style: italic; }
+.moat-no { font-size: 0.75rem; color: var(--emerald); font-weight: 700; }
+.moat-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
 /* === How Intelligence Flows === */
 .flow-diagram { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: stretch; }
 .flow-step { display: flex; align-items: center; gap: 1rem; padding: 0.875rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); border-right: 3px solid var(--gold); }
@@ -265,96 +290,22 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- ============= INTELLIGENCE STACK (visual diagram) ============= -->
-  <section class="section reveal" id="stack" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+
+  <!-- ============= TRUST BADGE ============= -->
+  <section class="section reveal" id="trust-badge" style="padding: 2rem 0; background: var(--navy); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
-      <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center;">Intelligence Stack</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">المحرك الحقيقي وراء كل قدرة</h2>
-        <p class="section-lead" style="margin: 0 auto;">الـ 44 قدرة مجرد تطبيقات فوق هذا المحرك. هذه هي البنية التي لا تستطيع مؤسسة أن تعمل بدونه — ليست أداة، بل نظام إنتاج قرار.</p>
-      </div>
-
-      <div class="stack-diagram">
-        <div class="stack-layer l-source">
-          <div class="stack-layer-num">01</div>
-          <div class="stack-layer-name">Official Sources</div>
-          <div class="stack-layer-ar">مصادر رسمية · 411 مؤسسة</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-layer l-doc">
-          <div class="stack-layer-num">02</div>
-          <div class="stack-layer-name">Document Intelligence</div>
-          <div class="stack-layer-ar">ذكاء الوثائق · 10K+ مُفهرَسة</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-layer l-fact">
-          <div class="stack-layer-num">03</div>
-          <div class="stack-layer-name">Facts Layer</div>
-          <div class="stack-layer-ar">طبقة الحقائق · 1,247 موثّقة</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-layer l-evidence">
-          <div class="stack-layer-num">04</div>
-          <div class="stack-layer-name">Evidence Graph</div>
-          <div class="stack-layer-ar">رسم الأدلة · كل حقيقة → مصدر</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-layer l-knowledge">
-          <div class="stack-layer-num">05</div>
-          <div class="stack-layer-name">Knowledge Graph</div>
-          <div class="stack-layer-ar">رسم المعرفة · علاقات مالية</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-layer l-reasoning">
-          <div class="stack-layer-num">06</div>
-          <div class="stack-layer-name">Reasoning Engine</div>
-          <div class="stack-layer-ar">محرّك الاستدلال · multi-agent</div>
-        </div>
-        <div class="stack-arrow">↓</div>
-        <div class="stack-fanout">
-          <div class="stack-fanout-line">┌──────────┬──────────┬──────────┬──────────┬──────────┐</div>
-          <div class="stack-fanout-apps">
-            <div class="stack-fanout-app f-research">Investment<br>Intelligence</div>
-            <div class="stack-fanout-app f-trading">Trading<br>Intelligence</div>
-            <div class="stack-fanout-app f-media">Media<br>Intelligence</div>
-            <div class="stack-fanout-app f-risk">Risk<br>Intelligence</div>
-            <div class="stack-fanout-app f-dev">Developer<br>Platform</div>
-          </div>
+      <div class="trust-badge-strip">
+        <div class="trust-badge-h">Trusted by institutions that need:</div>
+        <div class="trust-badge-items">
+          <span class="trust-badge-item">✓ Decisions backed by evidence</span>
+          <span class="trust-badge-item">✓ Audit-ready intelligence</span>
+          <span class="trust-badge-item">✓ Explainable AI workflows</span>
+          <span class="trust-badge-item">✓ Private deployment</span>
+          <span class="trust-badge-item">✓ Official-source provenance</span>
         </div>
       </div>
-
-      <p class="text-center text-mute small mt-6">محرك واحد → 5 خطوط أعمال → 44 قدرة. كل مخرج يحمل نفس سلسلة الأدلة من المصدر الرسمي إلى القرار.</p>
     </div>
   </section>
-
-  <!-- ============= ARCHITECTURAL FRAMING ============= -->
-  <div class="arch-framing">
-    <div class="arch-framing-block">One Intelligence Infrastructure</div>
-    <div class="arch-framing-arrow">↓</div>
-    <div class="arch-framing-block center">Multiple Institutional Capabilities</div>
-    <div class="arch-framing-arrow">↓</div>
-    <div class="arch-framing-block">Different Deployments</div>
-  </div>
-
-  <!-- Powered badge + Institutional Trust strip -->
-  <div class="powered-badge">
-    <div class="powered-badge-text">All capabilities powered by</div>
-    <div class="powered-badge-items">
-      <span class="powered-badge-item">Official Sources</span>
-      <span class="powered-badge-item">Evidence Layer</span>
-      <span class="powered-badge-item">Knowledge Graph</span>
-      <span class="powered-badge-item">Reasoning Engine</span>
-    </div>
-    <div class="institutional-trust-strip">
-      <div class="institutional-trust-h">Built for institutional environments</div>
-      <div class="institutional-trust-items">
-        <span class="it-item">✓ Audit-ready</span>
-        <span class="it-item">✓ Evidence-backed</span>
-        <span class="it-item">✓ Enterprise deployment</span>
-        <span class="it-item">✓ Private infrastructure options</span>
-      </div>
-    </div>
-  </div>
 
   <!-- ============= WHY ROUAA ============= -->
   <section class="section reveal" id="why-rouaa" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
@@ -371,6 +322,7 @@ body { class: motion-marketing; }
       </div>
     </div>
   </section>
+
 
   <!-- ============= RECOMMENDED PATHS ============= -->
   <section class="section reveal" id="paths">
@@ -419,6 +371,7 @@ body { class: motion-marketing; }
     </div>
   </section>
 
+
   <!-- ============= INSTITUTIONAL SOLUTIONS ============= -->
   <section class="section reveal" id="solutions" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
@@ -436,7 +389,7 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">منصة ذكاء الاستثمار</div>
           <div class="sol-for">For: Asset Managers · Hedge Funds · Sovereign Funds</div>
           <div class="sol-promise">اختصر دورة إعداد مذكرة اللجنة من أيام إلى دقائق، مع سلسلة أدلة كاملة.</div>
-          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities-h">Core Capabilities:</div>
           <div class="sol-capabilities">
             <a href="product.html?id=res-brief">Intelligence Brief Generator</a>
             <a href="product.html?id=risk-monitor">Risk Event Monitor</a>
@@ -453,7 +406,7 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">بنية ذكاء السوق</div>
           <div class="sol-for">For: Brokers · Exchanges · FinTechs</div>
           <div class="sol-promise">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — واحتفظ بعميلك أطول.</div>
-          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities-h">Core Capabilities:</div>
           <div class="sol-capabilities">
             <a href="product.html?id=trd-dashboard">Trading Intelligence Dashboard</a>
             <a href="product.html?id=trd-chart">Smart Chart Intelligence</a>
@@ -469,7 +422,7 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">ذكاء الإعلام المالي</div>
           <div class="sol-for">For: Media Companies · Publishers</div>
           <div class="sol-promise">حوّل غرفة أخبار تقليدية إلى محرّك محتوى موثّق — في دقائق، بـ 6 لغات.</div>
-          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities-h">Core Capabilities:</div>
           <div class="sol-capabilities">
             <a href="product.html?id=med-agency">News Agency Agent</a>
             <a href="product.html?id=med-reports">Reports Pipeline</a>
@@ -484,7 +437,7 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">منصة واجهات الاستخبارات</div>
           <div class="sol-for">For: Developers · FinTech Builders</div>
           <div class="sol-promise">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، SDK، كل استجابة تحمل دليلها.</div>
-          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities-h">Core Capabilities:</div>
           <div class="sol-capabilities">
             <a href="product.html?id=api-events">Events API</a>
             <a href="product.html?id=api-facts">Facts API</a>
@@ -500,7 +453,7 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">بنية الذكاء الخاصة</div>
           <div class="sol-for">For: Banks · Governments · Sovereign Institutions</div>
           <div class="sol-promise">بنية ذكاء كاملة داخل بيئتك — سيادة بيانات، امتثال، سجل تدقيق جاهز للمنظّمين.</div>
-          <div class="sol-capabilities-h">Built on:</div>
+          <div class="sol-capabilities-h">Core Capabilities:</div>
           <div class="sol-capabilities">
             <a href="product.html?id=cmp-source-registry">Source Registry</a>
             <a href="product.html?id=cmp-evidence-store">Evidence Store</a>
@@ -512,6 +465,7 @@ body { class: motion-marketing; }
       </div>
     </div>
   </section>
+
 
   <!-- ============= HOW INTELLIGENCE FLOWS ============= -->
   <section class="section reveal" id="flow">
@@ -564,9 +518,155 @@ body { class: motion-marketing; }
           <div class="flow-event-ar">لجنة الاستثمار تتلقى المذكرة</div>
           <div class="flow-meta">Committee-ready brief · evidence chain attached · 5 minutes total</div>
         </div>
+
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">07</div>
+          <div class="flow-event">Decision recorded</div>
+          <div class="flow-event-ar">القرار مُسجّل</div>
+          <div class="flow-meta">Millisecond timestamp · who · what · why</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">08</div>
+          <div class="flow-event">Audit trail preserved</div>
+          <div class="flow-event-ar">سجل التدقيق محفوظ</div>
+          <div class="flow-meta">Immutable · 7-year retention · regulator-ready</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step final">
+          <div class="flow-num">09</div>
+          <div class="flow-event">Evidence available for future review</div>
+          <div class="flow-event-ar">الأدلة متاحة للمراجعة المستقبلية</div>
+          <div class="flow-meta">Any decision replayable · any fact traceable · any audit answerable</div>
+        </div>
       </div>
 
-      <p class="text-center text-mute small mt-6">من إعلان رسمي إلى مذكرة قرار موثّقة في 5 دقائق — كل خطوة قابلة للتتبع، كل رقم له مصدر، كل قرار له سجل.</p>
+      <p class="text-center text-mute small mt-6">من إعلان رسمي إلى قرار مؤسسي موثّق — والدورة لا تنتهي عند القرار، بل عند حفظه وقابليته للمراجعة. كل قرار له سجل دائم.</p>
+    </div>
+  </section>
+
+
+  <!-- ============= INTELLIGENCE STACK (network diagram) ============= -->
+  <section class="section reveal" id="stack" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Intelligence Stack</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">المحرك الحقيقي وراء كل قدرة</h2>
+        <p class="section-lead" style="margin: 0 auto;">الـ 44 قدرة مجرد تطبيقات فوق هذا المحرك. ليست خط إنتاج خطي — بل شبكة علاقات مالية موثّقة.</p>
+      </div>
+
+      <div class="stack-network">
+        <!-- Layer 1: Sources (3 branches) -->
+        <div class="stack-sources">
+          <div class="stack-source">📄 Documents</div>
+          <div class="stack-source">📊 Market Data</div>
+          <div class="stack-source">📑 Filings</div>
+        </div>
+        <div class="stack-merge">↓</div>
+        <div class="stack-source-label">Official Sources · 411 institutions · T1/T2/T3</div>
+
+        <!-- Layer 2-6: Processing -->
+        <div class="stack-arrow-big">↓</div>
+        <div class="stack-layer l-doc">
+          <div class="stack-layer-num">02</div>
+          <div class="stack-layer-name">Document Intelligence</div>
+          <div class="stack-layer-ar">ذكاء الوثائق · 10K+ مُفهرَسة</div>
+        </div>
+        <div class="stack-arrow-big">↓</div>
+        <div class="stack-layer l-fact">
+          <div class="stack-layer-num">03</div>
+          <div class="stack-layer-name">Facts Layer</div>
+          <div class="stack-layer-ar">طبقة الحقائق · 1,247 موثّقة</div>
+        </div>
+        <div class="stack-arrow-big">↓</div>
+        <div class="stack-layer l-evidence">
+          <div class="stack-layer-num">04</div>
+          <div class="stack-layer-name">Evidence Graph</div>
+          <div class="stack-layer-ar">رسم الأدلة · كل حقيقة → مصدر</div>
+        </div>
+        <div class="stack-arrow-big">↓</div>
+        <div class="stack-layer l-knowledge">
+          <div class="stack-layer-num">05</div>
+          <div class="stack-layer-name">Knowledge Graph</div>
+          <div class="stack-layer-ar">رسم المعرفة · علاقات مالية</div>
+        </div>
+        <div class="stack-arrow-big">↓</div>
+        <div class="stack-layer l-reasoning">
+          <div class="stack-layer-num">06</div>
+          <div class="stack-layer-name">Reasoning Engine</div>
+          <div class="stack-layer-ar">محرّك الاستدلال · multi-agent</div>
+        </div>
+
+        <!-- Fan-out to applications -->
+        <div class="stack-fanout-line">┌──────────┬──────────┬──────────┬──────────┬──────────┐</div>
+        <div class="stack-fanout-apps">
+          <div class="stack-fanout-app f-research">Investment<br>Intelligence</div>
+          <div class="stack-fanout-app f-trading">Trading<br>Intelligence</div>
+          <div class="stack-fanout-app f-media">Media<br>Intelligence</div>
+          <div class="stack-fanout-app f-risk">Risk<br>Intelligence</div>
+          <div class="stack-fanout-app f-dev">Developer<br>Platform</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6">المصادر تتفرّع، ثم تتوحّد في المعرفة، ثم تتفرّع في التطبيقات. كل مخرج يحمل نفس سلسلة الأدلة.</p>
+    </div>
+  </section>
+
+  <!-- ============= WHY THIS INFRASTRUCTURE IS DEFENSIBLE ============= -->
+  <section class="section reveal" id="moat" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Why This Infrastructure Is Defensible</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا يصعب استبدال رؤى؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">السؤال الذي سيطرحه كل CIO: «هل يستطيع منافس نسخ هذا؟» الإجابة في الجدول أدناه — كل طبقة إما سلعة عامة أو خندق دفاعي.</p>
+      </div>
+
+      <div class="moat-table-wrap">
+        <table class="moat-table">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Commodity؟</th>
+              <th>ROUAA Moat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="moat-layer">LLM</td>
+              <td class="moat-yes">نعم — سلعة عامة</td>
+              <td class="moat-desc">يستخدم فقط للاستدلال. لا ميزة تنافسية فيه.</td>
+            </tr>
+            <tr>
+              <td class="moat-layer">Official Sources</td>
+              <td class="moat-no">لا — خندق</td>
+              <td class="moat-desc">Registry عالمي · 411 مؤسسة مراقبة · علاقات وم Contracts</td>
+            </tr>
+            <tr>
+              <td class="moat-layer">Evidence Layer</td>
+              <td class="moat-no">لا — خندق</td>
+              <td class="moat-desc">Provenance كامل · كل حقيقة → صفحة · فقرة · طابع زمني</td>
+            </tr>
+            <tr>
+              <td class="moat-layer">Knowledge Graph</td>
+              <td class="moat-no">لا — خندق</td>
+              <td class="moat-desc">علاقات مالية مؤسسية · شركات · قطاعات · أحداث · بناء سنوات</td>
+            </tr>
+            <tr>
+              <td class="moat-layer">Audit Trail</td>
+              <td class="moat-no">لا — خندق</td>
+              <td class="moat-desc">إعادة تشغيل القرار · millisecond precision · retention 7 سنوات</td>
+            </tr>
+            <tr>
+              <td class="moat-layer">Reasoning Workflows</td>
+              <td class="moat-no">لا — خندق</td>
+              <td class="moat-desc">Multi-agent validation · peer review · consensus mechanism</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-center text-mute small mt-6">LLM سلعة. البنية التحتية تحته هي الأصل. منافس يحتاج: مصادر + أدلة + رسم معرفة + استدلال + سجل تدقيق — سنوات من البناء.</p>
     </div>
   </section>
 
@@ -638,6 +738,7 @@ body { class: motion-marketing; }
   </div>
       </div><!-- /catalogWrapper -->
   </section>
+
 
   <!-- ============= CTA ============= -->
   <section class="cta-final reveal" id="contact">
