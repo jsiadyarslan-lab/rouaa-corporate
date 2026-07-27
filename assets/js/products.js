@@ -207,7 +207,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-ai-council',
     cat: 'trading',
-    nameEn: 'AI Trading Council',
+    nameEn: 'Market Intelligence Council',
     nameAr: 'مجلس التداول الذكي',
     tagline: '10 وكلاء يتشاورون قبل كل توصية',
     desc: 'مجلس من 10 وكلاء ذكيين متخصصين (ماكرو، قطاعي، فني، مخاطر...) يتشاورون قبل كل تحليل — الإجماع فقط يُنشر.',

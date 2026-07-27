@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى · Solutions — Five Markets. One Engine.</title>
-<meta name="description" content="خمسة أسواق ذكاء مالي. كل سوق يحل مشكلة محددة لمشتر محدد. كلها تستهلك من نفس المحرك.">
+<title>رؤى · Solutions — By Institutional Problem</title>
+<meta name="description" content="حلول رؤى منظّمة حسب المشكلة المؤسسية: أتمتة لجنة الاستثمار، طبقة ذكاء البروكر، تحوّل الإعلام المالي، مراقبة المخاطر والامتثال، بنية الفينتك التحتية.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,62 +14,47 @@
 <link rel="stylesheet" href="assets/css/design-system.css">
 
 <style>
+body { class: motion-marketing; }
+
 /* === Hero === */
 .hero-sol { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
 .hero-sol-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
 .hero-sol-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
-.hero-sol-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
+.hero-sol-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
 .hero-sol-h1 .gold { color: var(--gold); }
 .hero-sol-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
 .hero-sol-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
 
-/* === The Hub Logic === */
-.hub-logic { max-width: 900px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 60px 1fr 60px 1fr; align-items: center; gap: 0.5rem; }
-@media (max-width: 768px) { .hub-logic { grid-template-columns: 1fr; } }
-.hub-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; }
-.hub-block.center { background: var(--gold-dim); border-color: var(--gold); }
-.hub-block-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
-.hub-block-val { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
-.hub-block-val.ar { font-family: var(--font-ar); }
-.hub-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.5rem; }
+/* === Solutions by Problem === */
+.solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1280px; margin: 0 auto; }
+.solution-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem 1.75rem; transition: all var(--transition-slow); position: relative; overflow: hidden; }
+.solution-block:hover { border-color: var(--s-color, var(--gold)); transform: translateY(-3px); }
+.solution-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--s-color, var(--gold)); }
+.solution-block.s-research { --s-color: var(--gold); }
+.solution-block.s-broker { --s-color: var(--emerald); }
+.solution-block.s-media { --s-color: var(--blue); }
+.solution-block.s-risk { --s-color: var(--rose); }
+.solution-block.s-dev { --s-color: var(--amber); }
 
-/* === Solution Cards === */
-.solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1280px; margin: 0 auto; }
-.solution-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem 1.75rem; transition: all var(--transition-slow); position: relative; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
-.solution-card:hover { border-color: var(--s-color, var(--gold)); transform: translateY(-4px); }
-.solution-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; background: var(--s-color, var(--gold)); }
-.solution-card.s-media { --s-color: var(--blue); }
-.solution-card.s-research { --s-color: var(--gold); }
-.solution-card.s-trading { --s-color: var(--emerald); }
-.solution-card.s-risk { --s-color: var(--rose); }
-.solution-card.s-dev { --s-color: var(--amber); }
+.sol-num { font-family: var(--font-mono); font-size: 0.625rem; color: var(--s-color); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.sol-icon { font-size: 2rem; margin-bottom: 0.625rem; }
+.sol-name { font-family: var(--font-en); font-size: 1.125rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem; line-height: 1.3; }
+.sol-name-ar { font-family: var(--font-ar); font-size: 1rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+.sol-promise { font-size: 0.875rem; color: var(--s-color); font-weight: 600; line-height: 1.5; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-soft); }
 
-.sol-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--s-color, var(--gold)); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.75rem; }
-.sol-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-.sol-name { font-family: var(--font-en); font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem; }
-.sol-name-ar { font-family: var(--font-ar); font-size: 1.0625rem; color: var(--text-dim); margin-bottom: 0.75rem; }
-.sol-tagline { font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--s-color); margin-bottom: 1rem; line-height: 1.4; }
-.sol-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
+.sol-for-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.sol-for { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5; }
 
-.sol-buyer { padding-top: 1rem; border-top: 1px solid var(--border-soft); }
-.sol-buyer-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
-.sol-buyer-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
-.sol-buyer-tag { padding: 0.25rem 0.625rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.6875rem; color: var(--text-dim); }
-.sol-cta { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; }
-.sol-cta-text { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--s-color); }
-.sol-cta-arrow { color: var(--s-color); font-size: 1.25rem; }
+.sol-products-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.sol-products { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 1rem; }
+.sol-product { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--s-color); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all var(--transition-base); }
+.sol-product:hover { border-color: var(--s-color); transform: translateX(-2px); }
+.sol-product-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); }
+.sol-product-arrow { margin-right: auto; color: var(--s-color); opacity: 0.4; font-size: 0.75rem; }
 
-/* === Comparison table === */
-.compare-wrap { max-width: 1200px; margin: 0 auto; overflow-x: auto; }
-.compare-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
-.compare-table th { text-align: right; padding: 1rem 0.875rem; background: var(--surface); border-bottom: 1px solid var(--gold); font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
-.compare-table td { padding: 0.875rem; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
-.compare-table tr:hover td { background: rgba(255,255,255,0.02); }
-.compare-market { font-family: var(--font-en); font-weight: 700; color: var(--text); font-size: 0.875rem; }
-.compare-market .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.125rem; }
-.compare-pain { color: var(--text-dim); font-size: 0.75rem; line-height: 1.5; }
-.compare-buyer { color: var(--text); font-size: 0.75rem; font-family: var(--font-en); }
-.compare-products { color: var(--gold); font-size: 0.6875rem; font-family: var(--font-mono); }
+.sol-cta { display: flex; gap: 0.5rem; padding-top: 0.875rem; border-top: 1px solid var(--border-soft); }
+.sol-cta-link { flex: 1; text-align: center; padding: 0.5rem 0.75rem; font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--s-color); border: 1px solid var(--s-color); border-radius: var(--radius-sm); text-decoration: none; transition: all var(--transition-base); }
+.sol-cta-link:hover { background: var(--s-color); color: var(--navy); }
 
 /* === CTA === */
 .cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
@@ -91,10 +76,10 @@
       <div class="nav-brand-logo">R</div>
       <div class="nav-brand-text">
         <span class="name">رؤى · ROUAA</span>
-        <span class="sub">Solutions</span>
+        <span class="sub">Solutions by Problem</span>
       </div>
     </a>
-    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="has-dropdown"><a href="platform.html">Platform</a><div class="nav-dropdown"><div class="dropdown-h">Platform</div><a href="platform.html">Platform</a><a href="products-architecture.html">Products Architecture</a><a href="catalog.html">Full Catalog</a></div></li><li class="has-dropdown"><a href="solutions.html" class="active">Solutions</a><div class="nav-dropdown"><div class="dropdown-h">Intelligence Markets</div><a href="media-technologies.html">Media Intelligence</a><a href="trading-technologies.html">Trading Intelligence</a><a href="enterprise.html">Research Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="developers.html">Developer Intelligence</a></div></li><li><a href="trust.html">Trust</a></li><li class="has-dropdown"><a href="company.html">Company</a><div class="nav-dropdown"><div class="dropdown-h">Company</div><a href="company.html">Why ROUAA Exists</a><a href="company.html#manifesto">Manifesto</a><a href="company.html#principles">Principles</a></div></li></ul>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="has-dropdown"><a href="platform.html">Platform</a><div class="nav-dropdown"><div class="dropdown-h">Platform</div><a href="platform.html">Platform</a><a href="products-architecture.html">Products Architecture</a><a href="catalog.html">Capability Map</a></div></li><li class="has-dropdown"><a href="solutions.html" class="active">Solutions</a><div class="nav-dropdown"><div class="dropdown-h">Intelligence Markets</div><a href="media-technologies.html">Media Intelligence</a><a href="trading-technologies.html">Trading Intelligence</a><a href="enterprise.html">Research Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="developers.html">Developer Intelligence</a></div></li><li><a href="trust.html">Trust</a></li><li class="has-dropdown"><a href="company.html">Company</a><div class="nav-dropdown"><div class="dropdown-h">Company</div><a href="company.html">Why ROUAA Exists</a><a href="company.html#manifesto">Manifesto</a><a href="company.html#principles">Principles</a></div></li></ul>
     <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
       <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
@@ -102,7 +87,7 @@
     </button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="products-architecture.html">— Products Architecture</a><a href="catalog.html">— Full Catalog</a><a href="solutions.html" class="active">Solutions</a><a href="media-technologies.html">— Media Intelligence</a><a href="trading-technologies.html">— Trading Intelligence</a><a href="enterprise.html">— Research Intelligence</a><a href="risk-intelligence.html">— Risk Intelligence</a><a href="developers.html">— Developer Intelligence</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="products-architecture.html">— Products Architecture</a><a href="catalog.html">— Capability Map</a><a href="solutions.html" class="active">Solutions</a><a href="media-technologies.html">— Media Intelligence</a><a href="trading-technologies.html">— Trading Intelligence</a><a href="enterprise.html">— Research Intelligence</a><a href="risk-intelligence.html">— Risk Intelligence</a><a href="developers.html">— Developer Intelligence</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
     <div class="nav-mobile-cta">
       <a href="#contact" class="btn btn-primary">Request Briefing</a>
     </div>
@@ -135,229 +120,138 @@
     <div class="hero-sol-bg"></div>
     <div class="container">
       <div class="hero-sol-content">
-        <div class="mono-label text-gold">Solutions</div>
+        <div class="mono-label text-gold">Solutions by Institutional Problem</div>
         <h1 class="hero-sol-h1">
-          Five Markets.<br>
-          <span class="gold">One Intelligence Engine.</span>
+          لا تبحث عن منتج.<br>
+          ابحث عن <span class="gold">حل لمشكلتك</span>.
         </h1>
         <p class="hero-sol-sub">
-          خمسة أسواق ذكاء مالي. كل سوق يحل مشكلة محددة لمشتر محدد. كلها تستهلك من نفس المحرك — وكل مخرج يحمل نفس سلسلة الأدلة.
+          المؤسسات لا تشتري منتجات — تشتري حلولاً لمشاكل محددة. رؤى تنظّم 44 قدرة في 5 حلول مؤسسية، كل واحد يجمع المنتجات المناسبة تحت نتيجة محددة.
         </p>
         <div class="hero-sol-cta">
-          <a href="#markets" class="btn btn-primary btn-lg">Explore the Five Markets</a>
-          <a href="platform.html" class="btn btn-ghost btn-lg">How the Engine Works</a>
+          <a href="#solutions" class="btn btn-primary btn-lg">Explore the 5 Solutions</a>
+          <a href="products-architecture.html" class="btn btn-ghost btn-lg">View Capabilities</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= HUB LOGIC ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+  <!-- ============= 5 SOLUTIONS BY PROBLEM ============= -->
+  <section class="section reveal" id="solutions">
     <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">The Logic</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف نفكر في الأسواق؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">نحن لا نبيع منتجات. نحن نبيع ذكاءً موثّقاً — يصل إلى كل سوق باللغة التي يفهمها.</p>
-      </div>
-
-      <div class="hub-logic">
-        <div class="hub-block">
-          <div class="hub-block-h">One Engine</div>
-          <div class="hub-block-val ar">محرّك ذكاء واحد</div>
-          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">7 طبقات · يولّد ذكاءً موثّقاً</div>
-        </div>
-        <div class="hub-arrow">←</div>
-        <div class="hub-block center">
-          <div class="hub-block-h">One Evidence Chain</div>
-          <div class="hub-block-val ar">سلسلة أدلة واحدة</div>
-          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">كل مخرج يحمل نفس الدليل</div>
-        </div>
-        <div class="hub-arrow">→</div>
-        <div class="hub-block">
-          <div class="hub-block-h">Five Markets</div>
-          <div class="hub-block-val ar">خمسة أسواق</div>
-          <div style="font-size: 0.75rem; color: var(--text-mute); margin-top: 0.5rem;">كل سوق بلغة مشتريه</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= FIVE MARKETS ============= -->
-  <section class="section reveal" id="markets">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Five Intelligence Markets</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">اختر سوقك</h2>
-        <p class="section-lead" style="margin: 0 auto;">كل بطاقة تمثل سوقاً كاملاً — مع المشتر، الألم، والحل. اضغط للدخول إلى الصفحة المخصصة.</p>
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">By Institutional Problem</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">خمسة حلول · خمس مشاكل مؤسسية</h2>
+        <p class="section-lead" style="margin: 0 auto;">اختر المشكلة التي تحلها رؤى لمؤسستك. كل حل يجمع القدرات المناسبة من نفس المحرك.</p>
       </div>
 
       <div class="solutions-grid">
-        <a href="media-technologies.html" class="solution-card s-media">
-          <div class="sol-num">01 · Media</div>
-          <div class="sol-icon">📰</div>
-          <div class="sol-name">Media Intelligence</div>
-          <div class="sol-name-ar">إعلام مالي ذكي</div>
-          <div class="sol-tagline">Power your financial newsroom with verified intelligence.</div>
-          <div class="sol-desc">للشبكات الإعلامية والمواقع الاقتصادية والقنوات — حوّل الخبر إلى ذكاء موثّق بدلاً من نسخ وكالات الأنباء.</div>
-          <div class="sol-buyer">
-            <div class="sol-buyer-h">Built for</div>
-            <div class="sol-buyer-tags">
-              <span class="sol-buyer-tag">Editor-in-Chief</span>
-              <span class="sol-buyer-tag">News Director</span>
-              <span class="sol-buyer-tag">Media CTO</span>
-            </div>
-          </div>
-          <div class="sol-cta">
-            <span class="sol-cta-text">Explore Media</span>
-            <span class="sol-cta-arrow">←</span>
-          </div>
-        </a>
 
-        <a href="enterprise.html" class="solution-card s-research">
-          <div class="sol-num">02 · Research</div>
+        <!-- Solution 1: Investment Committee Automation -->
+        <div class="solution-block s-research">
+          <div class="sol-num">SOLUTION 01</div>
           <div class="sol-icon">📊</div>
-          <div class="sol-name">Investment Intelligence</div>
-          <div class="sol-name-ar">أبحاث استثمارية</div>
-          <div class="sol-tagline">Investment committee prep in minutes, not days.</div>
-          <div class="sol-desc">لصناديق الاستثمار ومديري الأصول ولجان الاستثمار — مذكرات قرار مدعومة بأدلة كاملة، جاهزة للجنة.</div>
-          <div class="sol-buyer">
-            <div class="sol-buyer-h">Built for</div>
-            <div class="sol-buyer-tags">
-              <span class="sol-buyer-tag">CIO</span>
-              <span class="sol-buyer-tag">Head of Research</span>
-              <span class="sol-buyer-tag">Portfolio Manager</span>
-            </div>
+          <div class="sol-name">Investment Committee Automation</div>
+          <div class="sol-name-ar">أتمتة لجنة الاستثمار</div>
+          <div class="sol-promise">اختصر دورة إعداد مذكرة اللجنة من 3-5 أيام إلى دقائق، مع سلسلة إثبات كاملة.</div>
+          <div class="sol-for-h">For</div>
+          <div class="sol-for">صناديق الاستثمار · مديري الأصول · لجان الاستثمار</div>
+          <div class="sol-products-h">Includes</div>
+          <div class="sol-products">
+            <a href="product.html?id=res-brief" class="sol-product"><span class="sol-product-name">Intelligence Brief Generator</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=res-committee" class="sol-product"><span class="sol-product-name">Committee Prep Engine</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=agt-macro" class="sol-product"><span class="sol-product-name">Macro Analyst Agent</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=api-evidence" class="sol-product"><span class="sol-product-name">Evidence API</span><span class="sol-product-arrow">→</span></a>
           </div>
           <div class="sol-cta">
-            <span class="sol-cta-text">Explore Research</span>
-            <span class="sol-cta-arrow">←</span>
+            <a href="enterprise.html" class="sol-cta-link">Explore Research →</a>
           </div>
-        </a>
+        </div>
 
-        <a href="trading-technologies.html" class="solution-card s-trading">
-          <div class="sol-num">03 · Trading</div>
+        <!-- Solution 2: Broker Intelligence Layer -->
+        <div class="solution-block s-broker">
+          <div class="sol-num">SOLUTION 02</div>
           <div class="sol-icon">📈</div>
-          <div class="sol-name">Trading Intelligence</div>
-          <div class="sol-name-ar">ذكاء التداول</div>
-          <div class="sol-tagline">Built for brokers. Not against brokers.</div>
-          <div class="sol-desc">للبروكرات والمنصات وشركات التداول — أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة، واحتفظ بعميلك أطول.</div>
-          <div class="sol-buyer">
-            <div class="sol-buyer-h">Built for</div>
-            <div class="sol-buyer-tags">
-              <span class="sol-buyer-tag">Broker CEO</span>
-              <span class="sol-buyer-tag">Head of Product</span>
-              <span class="sol-buyer-tag">Retention Lead</span>
-            </div>
+          <div class="sol-name">Broker Intelligence Layer</div>
+          <div class="sol-name-ar">طبقة ذكاء البروكر</div>
+          <div class="sol-promise">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — واحتفظ بعميلك أطول.</div>
+          <div class="sol-for-h">For</div>
+          <div class="sol-for">البروكرات · منصات التداول · شركات الوساطة</div>
+          <div class="sol-products-h">Includes</div>
+          <div class="sol-products">
+            <a href="product.html?id=trd-dashboard" class="sol-product"><span class="sol-product-name">Market Context Engine</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=trd-chart" class="sol-product"><span class="sol-product-name">AI Chart Intelligence</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=trd-assistant" class="sol-product"><span class="sol-product-name">Trading Assistant</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=trd-content" class="sol-product"><span class="sol-product-name">Content Agent</span><span class="sol-product-arrow">→</span></a>
           </div>
           <div class="sol-cta">
-            <span class="sol-cta-text">Explore Trading</span>
-            <span class="sol-cta-arrow">←</span>
+            <a href="trading-technologies.html" class="sol-cta-link">Explore Trading →</a>
           </div>
-        </a>
+        </div>
 
-        <a href="risk-intelligence.html" class="solution-card s-risk">
-          <div class="sol-num">04 · Risk</div>
+        <!-- Solution 3: Financial Media Transformation -->
+        <div class="solution-block s-media">
+          <div class="sol-num">SOLUTION 03</div>
+          <div class="sol-icon">📰</div>
+          <div class="sol-name">Financial Media Transformation</div>
+          <div class="sol-name-ar">تحوّل الإعلام المالي</div>
+          <div class="sol-promise">حوّل غرفة أخبار تقليدية إلى محرّك محتوى موثّق — أخبار، فيديو، إنفوجرافيك في دقائق.</div>
+          <div class="sol-for-h">For</div>
+          <div class="sol-for">الشبكات الإعلامية · المواقع الاقتصادية · القنوات المالية</div>
+          <div class="sol-products-h">Includes</div>
+          <div class="sol-products">
+            <a href="product.html?id=med-news-engine" class="sol-product"><span class="sol-product-name">Financial News Engine</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=med-agency" class="sol-product"><span class="sol-product-name">News Agency Agent</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=med-video" class="sol-product"><span class="sol-product-name">Video Pipeline</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=med-pulse" class="sol-product"><span class="sol-product-name">Daily Intelligence Pulse</span><span class="sol-product-arrow">→</span></a>
+          </div>
+          <div class="sol-cta">
+            <a href="media-technologies.html" class="sol-cta-link">Explore Media →</a>
+          </div>
+        </div>
+
+        <!-- Solution 4: Risk Monitoring & Compliance -->
+        <div class="solution-block s-risk">
+          <div class="sol-num">SOLUTION 04</div>
           <div class="sol-icon">⚠</div>
-          <div class="sol-name">Risk Intelligence</div>
-          <div class="sol-name-ar">تحليل المخاطر</div>
-          <div class="sol-tagline">From global event to portfolio action in minutes.</div>
-          <div class="sol-desc">للبنوك والمؤسسات وصناديق السيادة — من حدث عالمي إلى تقييم التعرض إلى إجراء محفظة في دقائق.</div>
-          <div class="sol-buyer">
-            <div class="sol-buyer-h">Built for</div>
-            <div class="sol-buyer-tags">
-              <span class="sol-buyer-tag">CRO</span>
-              <span class="sol-buyer-tag">Risk Committee</span>
-              <span class="sol-buyer-tag">Treasury Head</span>
-            </div>
+          <div class="sol-name">Risk Monitoring & Compliance</div>
+          <div class="sol-name-ar">مراقبة المخاطر والامتثال</div>
+          <div class="sol-promise">من حدث عالمي إلى إجراء محفظة في دقائق — مع سجل امتثال جاهز للمنظّمين.</div>
+          <div class="sol-for-h">For</div>
+          <div class="sol-for">البنوك · مؤسسات الحوكمة · صناديق السيادة · مسؤولي الامتثال</div>
+          <div class="sol-products-h">Includes</div>
+          <div class="sol-products">
+            <a href="product.html?id=risk-monitor" class="sol-product"><span class="sol-product-name">Risk Event Monitor</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=risk-exposure" class="sol-product"><span class="sol-product-name">Exposure Analysis</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=risk-scenario" class="sol-product"><span class="sol-product-name">Scenario Engine</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=risk-compliance" class="sol-product"><span class="sol-product-name">Compliance Audit</span><span class="sol-product-arrow">→</span></a>
           </div>
           <div class="sol-cta">
-            <span class="sol-cta-text">Explore Risk</span>
-            <span class="sol-cta-arrow">←</span>
+            <a href="risk-intelligence.html" class="sol-cta-link">Explore Risk →</a>
           </div>
-        </a>
+        </div>
 
-        <a href="developers.html" class="solution-card s-dev">
-          <div class="sol-num">05 · Developer</div>
+        <!-- Solution 5: Fintech Builder Infrastructure -->
+        <div class="solution-block s-dev">
+          <div class="sol-num">SOLUTION 05</div>
           <div class="sol-icon">🔌</div>
-          <div class="sol-name">Developer Platform</div>
-          <div class="sol-name-ar">منصة المطورين</div>
-          <div class="sol-tagline">Build financial products on top of verified intelligence.</div>
-          <div class="sol-desc">لشركات التقنية المالية والمطورين — واجهات REST وStreaming وSDK وWebhooks، كل استجابة تحمل دليلها.</div>
-          <div class="sol-buyer">
-            <div class="sol-buyer-h">Built for</div>
-            <div class="sol-buyer-tags">
-              <span class="sol-buyer-tag">CTO</span>
-              <span class="sol-buyer-tag">Head of Engineering</span>
-              <span class="sol-buyer-tag">Fintech Founder</span>
-            </div>
+          <div class="sol-name">Fintech Builder Infrastructure</div>
+          <div class="sol-name-ar">بنية الفينتك التحتية</div>
+          <div class="sol-promise">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، SDK، وكلاء، ومكونات قابلة للتركيب.</div>
+          <div class="sol-for-h">For</div>
+          <div class="sol-for">شركات التقنية المالية · المطورون · المؤسسون</div>
+          <div class="sol-products-h">Includes</div>
+          <div class="sol-products">
+            <a href="product.html?id=api-events" class="sol-product"><span class="sol-product-name">Events API</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=api-facts" class="sol-product"><span class="sol-product-name">Facts API</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=api-sdk" class="sol-product"><span class="sol-product-name">Official SDK</span><span class="sol-product-arrow">→</span></a>
+            <a href="product.html?id=cmp-graph" class="sol-product"><span class="sol-product-name">Knowledge Graph API</span><span class="sol-product-arrow">→</span></a>
           </div>
           <div class="sol-cta">
-            <span class="sol-cta-text">Explore Developer</span>
-            <span class="sol-cta-arrow">←</span>
+            <a href="developers.html" class="sol-cta-link">Explore Developer →</a>
           </div>
-        </a>
-      </div>
-    </div>
-  </section>
+        </div>
 
-  <!-- ============= COMPARISON ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Side by Side</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">قارن الأسواق الخمسة</h2>
-        <p class="section-lead" style="margin: 0 auto;">نفس المحرك · سلاسل أدلة واحدة · لغة مختلفة لكل مشتر.</p>
-      </div>
-
-      <div class="compare-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Market</th>
-              <th>The Pain</th>
-              <th>The Buyer</th>
-              <th>Products</th>
-              <th>Output</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="compare-market"><span class="ar">إعلام مالي</span>Media</div></td>
-              <td class="compare-pain">سرعة دون دقة · نسخ الوكالات · لا تميّز</td>
-              <td class="compare-buyer">Media networks</td>
-              <td class="compare-products">8 products</td>
-              <td class="compare-pain">خبر موثّق في دقائق</td>
-            </tr>
-            <tr>
-              <td><div class="compare-market"><span class="ar">أبحاث</span>Research</div></td>
-              <td class="compare-pain">مذكرات لجنة في أيام · قرارات بلا أدلة</td>
-              <td class="compare-buyer">Asset managers</td>
-              <td class="compare-products">6 products</td>
-              <td class="compare-pain">مذكرة قرار جاهزة في دقائق</td>
-            </tr>
-            <tr>
-              <td><div class="compare-market"><span class="ar">تداول</span>Trading</div></td>
-              <td class="compare-pain">عميل يسأل «لماذا» · لا إجابة · يرحل</td>
-              <td class="compare-buyer">Brokers</td>
-              <td class="compare-products">9 products</td>
-              <td class="compare-pain">سياق خلف كل صفقة</td>
-            </tr>
-            <tr>
-              <td><div class="compare-market"><span class="ar">مخاطر</span>Risk</div></td>
-              <td class="compare-pain">حدث عالمي · لا تقييم تعرّض · تأخير ساعات</td>
-              <td class="compare-buyer">Banks · Sovereign funds</td>
-              <td class="compare-products">5 products</td>
-              <td class="compare-pain">إجراء محفظة في دقائق</td>
-            </tr>
-            <tr>
-              <td><div class="compare-market"><span class="ar">مطورين</span>Developer</div></td>
-              <td class="compare-pain">بناء أنبوب المعلومات لسنوات · ملايين · فريق</td>
-              <td class="compare-buyer">Fintech · Builders</td>
-              <td class="compare-products">7 APIs + 4 agents</td>
-              <td class="compare-pain">منتج كامل في أسابيع</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
@@ -366,9 +260,13 @@
   <section class="cta-final reveal" id="contact">
     <div class="container">
       <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>Which market fits your institution?</h2>
-      <p>مكالمة 30 دقيقة — نساعدك على تحديد أي سوق من رؤى يخدم مؤسستك، وما هي المنتجات التي تناسب احتياجك.</p>
+      <h2>Which problem fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك على تحديد أي حل من رؤى يحل مشكلتك، ونرسم لك خريطة القدرات المناسبة.</p>
       <a href="mailto:contact@rouaa.ai?subject=Solutions Briefing" class="btn btn-primary btn-lg">Request Solutions Briefing</a>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="products-architecture.html" class="btn-link">← View All Capabilities</a>
+        <a href="catalog.html" class="btn-link">← Browse Capability Map</a>
+      </div>
     </div>
   </section>
 
@@ -387,7 +285,7 @@
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
         <li><a href="platform.html" class="small text-dim">Platform</a></li>
         <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
-        <li><a href="catalog.html" class="small text-dim">Full Catalog</a></li>
+        <li><a href="catalog.html" class="small text-dim">Capability Map</a></li>
         <li><a href="trust.html" class="small text-dim">Trust</a></li>
       </ul>
     </div>
