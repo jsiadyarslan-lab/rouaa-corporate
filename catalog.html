@@ -750,6 +750,34 @@ if (revealBtn && catalogWrapper) {
 
 // Initial filter call to set counts
 filterProducts();
+
+// === Fix product links for htmlpreview ===
+// htmlpreview doesn't rewrite relative links with query params correctly.
+// Detect if we're on htmlpreview and rewrite product.html links.
+(function() {
+  if (window.location.hostname !== 'htmlpreview.github.io') return;
+  
+  function rewriteLinks() {
+    document.querySelectorAll('a[href^="product.html"], a[href^="./product.html"]').forEach(a => {
+      const href = a.getAttribute('href');
+      // Extract the path and query
+      const match = href.match(/^(?:\.\/)?product\.html(\?id=([^&]+))?/);
+      if (match) {
+        const id = match[2] || '';
+        const newHref = 'https://htmlpreview.github.io/?https://github.com/jsiadyarslan-lab/rouaa-corporate/blob/redesign-v20-architecture/product.html' + (id ? '?id=' + id : '');
+        a.setAttribute('href', newHref);
+        a.setAttribute('target', '_self');
+      }
+    });
+  }
+  
+  // Rewrite on load
+  rewriteLinks();
+  
+  // Re-rewrite after dynamic card generation (with mutation observer)
+  const observer = new MutationObserver(() => rewriteLinks());
+  observer.observe(document.getElementById('productGrid') || document.body, { childList: true, subtree: true });
+})();
 </script>
 
 </body>
