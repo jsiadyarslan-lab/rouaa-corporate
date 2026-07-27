@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>رؤى · Trading Intelligence — The Intelligence Operating Layer for Financial Platforms</title>
-<meta name="description" content="أضف الذكاء المالي إلى منصة التداول — سياق السوق، تأثير الأحداث، تحليل كلي، إشارات مخاطر. صُممت لتقوية منصتك، لا لمنافستها.">
+<title>رؤى · Financial Intelligence Operating Layer — للمنصات والمؤسسات المالية</title>
+<meta name="description" content="Financial Intelligence Operating Layer — طبقة تشغيل ذكاء تُضاف فوق المؤسسات المالية: تداول، استثمار، إدارة أصول، مخاطر، بحث. تضيف ذكاءً، لا تستبدل بنيتك.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +50,28 @@ body { class: motion-marketing; }
   max-width: 60ch;
   line-height: 1.7;
 }
+.hero-pillars {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.hero-pillars span {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  padding: 0.375rem 0.875rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.hero-pillars span.lead {
+  border-color: var(--emerald);
+  color: var(--emerald);
+}
 .hero-market-cta {
   display: flex;
   gap: 0.75rem;
@@ -60,7 +82,7 @@ body { class: motion-marketing; }
 
 /* === Positioning banner === */
 .positioning-banner {
-  max-width: 700px;
+  max-width: 720px;
   margin: 3rem auto 0;
   padding: 1.5rem 2rem;
   background: var(--card);
@@ -78,7 +100,7 @@ body { class: motion-marketing; }
 .positioning-banner-list {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
   font-size: 0.8125rem;
   color: var(--text-mute);
@@ -97,10 +119,11 @@ body { class: motion-marketing; }
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid var(--border-soft);
-  font-family: var(--font-en);
-  font-size: 0.875rem;
+  font-family: var(--font-ar);
+  font-size: 0.9375rem;
   color: var(--emerald);
   font-weight: 600;
+  line-height: 1.6;
 }
 
 /* === Before/After === */
@@ -251,6 +274,289 @@ body { class: motion-marketing; }
 /* === Footer === */
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
 @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+
+/* === Trading Architecture (8 layers) === */
+.trading-arch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.trading-arch-layer {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-right: 3px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-slow);
+}
+.trading-arch-layer:hover { border-color: var(--emerald); }
+.ta-data { border-right-color: var(--text-mute); }
+.ta-evidence { border-right-color: var(--emerald); background: var(--emerald-dim); }
+.ta-core { border-right-color: var(--emerald); }
+.ta-decision { border-right-color: var(--emerald); }
+.ta-risk { border-right-color: var(--rose); }
+.ta-exec { border-right-color: var(--amber); }
+.ta-ux { border-right-color: var(--text-mute); }
+.ta-governance { border-right-color: var(--emerald); background: var(--emerald-dim); }
+.ta-layer-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--emerald);
+  letter-spacing: 0.1em;
+}
+.ta-layer-name {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.ta-layer-ar {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  margin-top: 0.125rem;
+}
+.ta-layer-components {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+  margin-top: 0.375rem;
+  letter-spacing: 0.02em;
+}
+.trading-arch-arrow {
+  text-align: center;
+  color: var(--text-mute);
+  font-size: 0.875rem;
+  margin: -0.125rem 0;
+}
+
+/* === Signal Intelligence Engine flow (new) === */
+.signal-flow {
+  max-width: 720px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+.signal-flow-node {
+  width: 100%;
+  max-width: 520px;
+  padding: 0.875rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  position: relative;
+}
+.signal-flow-node.lead {
+  background: var(--emerald-dim);
+  border-color: var(--emerald);
+}
+.signal-flow-node.lead .sf-name { color: var(--emerald); }
+.signal-flow-node.final {
+  border-color: var(--emerald);
+}
+.sf-name {
+  font-family: var(--font-en);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.sf-ar {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  margin-top: 0.125rem;
+}
+.signal-flow-arrow {
+  color: var(--emerald);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* === AI Decision Council (standalone) === */
+.council-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--emerald-dim);
+  border: 1px solid var(--emerald);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+}
+.council-lead {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+.council-lead-h {
+  font-family: var(--font-en);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 0.5rem;
+}
+.council-lead-q {
+  font-size: 0.9375rem;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+.council-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.council-role {
+  font-family: var(--font-en);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  padding: 0.25rem 0.625rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.council-process {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+}
+.council-step {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.375rem 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+.council-step.critical {
+  border-color: var(--emerald);
+  color: var(--emerald);
+}
+.council-arrow {
+  color: var(--emerald);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* === Intelligence Loop (strategic asset) === */
+.intel-loop-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.intel-loop {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem;
+}
+@media (max-width: 768px) { .intel-loop { grid-template-columns: 1fr 1fr; } }
+.intel-loop-node {
+  padding: 0.875rem 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  position: relative;
+}
+.intel-loop-node.trust {
+  background: var(--emerald-dim);
+  border-color: var(--emerald);
+}
+.intel-loop-node.trust .il-name { color: var(--emerald); }
+.intel-loop-node.feedback {
+  background: var(--surface);
+  border-color: var(--emerald);
+  border-style: dashed;
+}
+.il-num {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+.il-name {
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.il-ar {
+  font-size: 0.625rem;
+  color: var(--text-mute);
+  margin-top: 0.125rem;
+  line-height: 1.4;
+}
+.intel-loop-feedback {
+  margin-top: 1rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--emerald);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.625rem;
+  border: 1px dashed var(--emerald);
+  border-radius: var(--radius-md);
+  background: var(--emerald-dim);
+}
+
+/* === Use Case Impact (Before/After) === */
+.usecase-impact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-soft);
+}
+@media (max-width: 768px) { .usecase-impact { grid-template-columns: 1fr; } }
+.usecase-impact-col h4 {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.625rem;
+}
+.usecase-impact-col.before h4 { color: var(--text-mute); }
+.usecase-impact-col.after h4 { color: var(--emerald); }
+.usecase-impact-item {
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding: 0.375rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.usecase-impact-item:last-child { border-bottom: none; }
+.usecase-impact-col.before .usecase-impact-item::before {
+  content: '✗ ';
+  color: var(--rose);
+  font-weight: 700;
+}
+.usecase-impact-col.after .usecase-impact-item::before {
+  content: '✓ ';
+  color: var(--emerald);
+  font-weight: 700;
+}
 </style>
 </head>
 <body class="motion-marketing bl-trading">
@@ -307,16 +613,22 @@ body { class: motion-marketing; }
     <div class="hero-market-bg"></div>
     <div class="container">
       <div class="hero-market-content">
-        <div class="mono-label" style="color: var(--emerald);">02 · Trading Intelligence Operating Layer</div>
+        <div class="mono-label" style="color: var(--emerald);">02 · Financial Intelligence Operating Layer</div>
         <h1 class="hero-market-h1">
-          Trading Intelligence<br>
-          <span class="emerald">Infrastructure</span>
+          Financial Intelligence<br>
+          <span class="emerald">Operating Layer</span>
         </h1>
         <p class="hero-market-sub">
-          طبقة تشغيل ذكاء مالي تُضاف فوق المؤسسات المالية — تربط الأحداث بالأدلة، الأدلة بالاستدلال، الاستدلال بالقرار، والقرار بالتنفيذ. ليست إضافة لمنصة تداول، بل نظام تشغيل ذكاء يمكنه تغذية منصات التداول والاستثمار وإدارة الأصول والبحث.
+          طبقة تشغيل ذكاء مالي تُضاف فوق المؤسسات المالية — تربط الأحداث بالأدلة، الأدلة بالاستدلال، الاستدلال بالقرار، والقرار بالتنفيذ. مظلة واحدة تغذّي التداول، الاستثمار، إدارة الأصول، المخاطر، والبحث — دون إعادة بناء أنظمتك.
         </p>
+        <div class="hero-pillars">
+          <span class="lead">Trading Intelligence</span>
+          <span>Investment Intelligence</span>
+          <span>Risk Intelligence</span>
+          <span>Research Intelligence</span>
+        </div>
         <div class="hero-market-cta">
-          <a href="#contact" class="btn btn-primary btn-lg">Request Trading Briefing</a>
+          <a href="#contact" class="btn btn-primary btn-lg">Request Briefing</a>
           <a href="#integration" class="btn btn-ghost btn-lg">See Integration</a>
         </div>
       </div>
@@ -325,12 +637,12 @@ body { class: motion-marketing; }
       <div class="positioning-banner reveal">
         <div class="positioning-banner-h">The Intelligence Operating Layer for Financial Institutions</div>
         <div class="positioning-banner-list">
-          <span>تضيف ذكاءً</span>
-          <span>لا تستبدل بنيتك</span>
-          <span>تتكامل مع أنظمتك القائمة</span>
-          <span>تعمل فوق أي بنية مالية</span>
+          <span>إعادة بناء منصتك</span>
+          <span>استبدال بنيتك</span>
+          <span>بناء فريق AI داخلي</span>
+          <span>منافسة وكلائك الحاليين</span>
         </div>
-        <div class="positioning-banner-only">لا تضيف ميزة — تضيف نظام تشغيل ذكاء فوق بنيتك المالية القائمة.</div>
+        <div class="positioning-banner-only">لأن القيمة ليست في إعادة بناء أنظمتك — بل في إضافة طبقة استخبارات فوق استثماراتك الحالية.</div>
       </div>
     </div>
   </section>
@@ -339,13 +651,21 @@ body { class: motion-marketing; }
   <section style="background: var(--navy); padding: 1rem 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div style="display: flex; justify-content: center; gap: 0.375rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase;">
-        <span style="color: var(----emerald); font-weight: 700;">● Problem</span>
+        <span style="color: var(--emerald); font-weight: 700;">● Problem</span>
         <span style="color: var(--text-mute);">→</span>
         <span style="color: var(--text-dim);">Solution</span>
         <span style="color: var(--text-mute);">→</span>
-        <span style="color: var(--text-dim);">Products</span>
+        <span style="color: var(--text-dim);">Evidence-Native</span>
         <span style="color: var(--text-mute);">→</span>
-        <span style="color: var(--text-dim);">Workflow</span>
+        <span style="color: var(--text-dim);">Architecture</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Signal Engine</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">AI Council</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Loop</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Buyers</span>
         <span style="color: var(--text-mute);">→</span>
         <span style="color: var(--text-dim);">Integration</span>
         <span style="color: var(--text-mute);">→</span>
@@ -360,15 +680,16 @@ body { class: motion-marketing; }
   <section class="section reveal" id="problem">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Problem · 03</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">المؤسسات المالية تملك البيانات والتنفيذ — لكنها تفتقد طبقة ذكاء تربط الأحداث بالقرارات</h2>
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Problem · 01</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">المؤسسات المالية تملك البيانات والتنفيذ — لكنها تفتقد قراراً موثوقاً</h2>
+        <p class="section-lead" style="margin: 0 auto;">ليست المشكلة في نقص الذكاء الاصطناعي — كل مؤسسة الآن تسمع AI. المشكلة في القرار: هل يمكن الوثوق به؟ هل يمكن تدقيقه؟ هل يمكن تفسيره؟ من المسؤول بعد شهر؟</p>
       </div>
 
       <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
-        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--emerald); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>لا ذكاء خلف السعر</strong> · العميل يرى الرقم لكن لا يفهم القصة — يخسر، يلوم المنصة، يرحل</div></div>
-        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--emerald); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>منافسة على الميزات</strong> · كل المنصات تقدّم نفس الأسعار والرسوم والرسوم البيانية — لا تميّز ذكاء</div></div>
-        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--emerald); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>لا إشارات موثّقة</strong> · المستخدم يريد أن يعرف ماذا يحدث الآن — لا سياق، لا استدلال، لا أدلة</div></div>
-        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--emerald); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>لا إدارة مخاطر ذكية</strong> · المنصة تعرض الأرقام لكن لا تحلل التعرّض ولا تنبّه استباقياً</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>قرارات بلا دليل</strong> · مئات التقارير والمصادر يومياً، لكن لا توجد سلسلة دليل تربط القرار بمصدره</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>ذكاء بلا ثقة</strong> · نماذج AI تُنتج إشارات، لكن لا أحد يعرف كيف وصلت إليها — ولا يمكن مراجعتها بعد شهر</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>محللون مبعثرون</strong> · عشرات المحللين يراجعون يدوياً — الأخبار منفصلة، المخاطر يدوية، القرارات موزّعة</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>لا تعلّم ذاتي</strong> · كل قرار يبدأ من الصفر — لا توجد ذاكرة مؤسسية، لا تحسين، لا تتبّع أداء</div></div>
       </div>
 
       <div style="text-align: center; margin-top: 2rem;">
@@ -376,149 +697,44 @@ body { class: motion-marketing; }
       </div>
     </div>
   </section>
+
   <!-- ============= ROUAA SOLUTION (bridge) ============= -->
   <section class="section reveal" id="solution" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center; color: var(--emerald);">The ROUAA Solution</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">The ROUAA Transformation، بلغة المؤسسات</h2>
-        <p class="section-lead" style="margin: 0 auto;">رؤى لا تبيعك أداة. تبيعك ذكاءً موثّقاً — كل معلومة مرتبطة بمصدرها الرسمي. هذا ما يغير المعادلة.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Financial Intelligence Operating Layer</h2>
+        <p class="section-lead" style="margin: 0 auto;">رؤى لا تبيعك أداة. تبيعك ذكاءً موثّقاً — طبقة تشغيل فوق بنيتك المالية القائمة، تربط كل قرار بمصدره الرسمي. هذا ما يغير المعادلة.</p>
       </div>
 
       <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
         <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
-          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Evidence-Native</div>
-          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">كل مخرج يحمل سلسلة دليله — من المصدر إلى الحقيقة إلى التحليل</div>
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Operating Layer</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">طبقة تشغيل — لا منتج مستقل. تُضاف فوق أنظمتك المالية القائمة</div>
         </div>
         <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
-          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Multi-Channel</div>
-          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">حدث واحد يولّد مخرجات متعددة — كلها بنفس الدليل</div>
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Multi-Market</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">تداول، استثمار، إدارة أصول، مخاطر، بحث — مظلة واحدة، طبقة واحدة</div>
         </div>
         <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
-          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Trading-Native</div>
-          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">مبني لسير عمل التداول — منصات، وكلاء، أطر زمنية، إدارة صفقات</div>
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Infrastructure</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">ليست SaaS ولا أداة — بنية تحتية للقرار المالي المؤسسي</div>
         </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#evidence" class="btn-link">لماذا تثق به؟ ↓</a>
       </div>
     </div>
   </section>
 
-
-
-
-  <!-- ============= BEFORE / AFTER (Workflow comparison) ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Transformation</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">قبل رؤى وبعدها · منصة التداول</h2>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="workflow-card before">
-          <div class="workflow-card-h">Traditional Trading Platform</div>
-          <div class="workflow-step"><span class="num">01</span> أسعار مباشرة</div>
-          <div class="workflow-step"><span class="num">02</span> رسوم بيانية</div>
-          <div class="workflow-step"><span class="num">03</span> أوامر تنفيذ</div>
-          <div class="workflow-step"><span class="num">04</span> أدوات تقنية</div>
-          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
-            <p style="font-size: 0.8125rem; color: var(--text-mute); line-height: 1.6;">لكن العميل يسأل: لماذا تحرك السوق؟ ماذا يعني قرار الفائدة؟ هل هذا الخبر مهم؟ ما مستوى المخاطر؟</p>
-            <p style="font-size: 0.75rem; color: var(--rose); margin-top: 0.5rem;">فتضطر المؤسسة إلى بناء طبقات داخلية مكلفة: فرق أبحاث · أنظمة تحليل · نماذج AI · مراقبة مخاطر · بنية بيانات</p>
-          </div>
-        </div>
-        <div class="workflow-card after">
-          <div class="workflow-card-h">With ROUAA Trading Intelligence</div>
-          <div class="workflow-step"><span class="num">01</span> Official Event detected</div>
-          <div class="workflow-step"><span class="num">02</span> Facts + Evidence extracted</div>
-          <div class="workflow-step"><span class="num">03</span> Market Intelligence generated</div>
-          <div class="workflow-step"><span class="num">04</span> Distributed inside platform</div>
-          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
-            <p style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6;">العميل يرى: سياق السوق · تأثير الحدث · مخاطر التقلب · إجابات فورية — كلها داخل منصتك، بعلامتك.</p>
-            <p style="font-size: 0.75rem; color: var(--emerald); margin-top: 0.5rem;">بدون: فريق أبحاث · بناء AI · صيانة محتوى</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= TRADING INTELLIGENCE ARCHITECTURE ============= -->
-  <section class="section reveal" id="architecture" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Trading Intelligence Architecture</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">نظام تشغيل — لا قائمة أدوات</h2>
-        <p class="section-lead" style="margin: 0 auto;">ثماني طبقات متكاملة، عقل مركزي واحد. ليست منتجات منفصلة — بل The ROUAA Transformation.</p>
-      </div>
-
-      <div class="trading-arch">
-        <div class="trading-arch-layer ta-data">
-          <div class="ta-layer-num">01</div>
-          <div class="ta-layer-name">Market Intelligence Layer</div>
-          <div class="ta-layer-ar">طبقة استخبارات السوق</div>
-          <div class="ta-layer-components">Official Data · Market Data · Economic Events · Alternative Data</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-evidence">
-          <div class="ta-layer-num">02</div>
-          <div class="ta-layer-name">Evidence & Knowledge Layer</div>
-          <div class="ta-layer-ar">طبقة الأدلة والمعرفة</div>
-          <div class="ta-layer-components">Source Registry · Evidence Graph · Knowledge Graph · Provenance</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-core">
-          <div class="ta-layer-num">03</div>
-          <div class="ta-layer-name">AI Intelligence Core</div>
-          <div class="ta-layer-ar">العقل المركزي</div>
-          <div class="ta-layer-components">AI Council · Multi-Agent Reasoning · Scenario Engine · Scenario Modeling</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-decision">
-          <div class="ta-layer-num">04</div>
-          <div class="ta-layer-name">Decision Intelligence Layer</div>
-          <div class="ta-layer-ar">طبقة ذكاء القرار</div>
-          <div class="ta-layer-components">Signal Opportunities · Market Context · Portfolio Analysis</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-risk">
-          <div class="ta-layer-num">05</div>
-          <div class="ta-layer-name">Risk Intelligence Layer</div>
-          <div class="ta-layer-ar">طبقة ذكاء المخاطر</div>
-          <div class="ta-layer-components">Exposure Assessment · Risk Limits · Volatility Alerts · Portfolio Protection</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-exec">
-          <div class="ta-layer-num">06</div>
-          <div class="ta-layer-name">Execution Orchestration Layer</div>
-          <div class="ta-layer-ar">طبقة ذكاء التنفيذ</div>
-          <div class="ta-layer-components">Strategic Executor · Tactical Executor · Reactive Executor · Broker Connectivity</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-ux">
-          <div class="ta-layer-num">07</div>
-          <div class="ta-layer-name">User Experience Layer</div>
-          <div class="ta-layer-ar">طبقة تجربة المستخدم</div>
-          <div class="ta-layer-components">Intelligent Workspace · AI Assistant · Platform Widgets · White Label</div>
-        </div>
-        <div class="trading-arch-arrow">↕</div>
-        <div class="trading-arch-layer ta-governance">
-          <div class="ta-layer-num">08</div>
-          <div class="ta-layer-name">Learning & Governance Layer</div>
-          <div class="ta-layer-ar">طبقة التعلم والحوكمة</div>
-          <div class="ta-layer-components">Performance Feedback · Strategy Evolution · Decision History · Compliance Logs · Audit Trail</div>
-        </div>
-      </div>
-
-      <p class="text-center text-mute small mt-6">ثماني طبقات تتفاعل مع بعضها — ليست خط إنتاج، بل نظام تشغيل. Evidence وGovernance ليست إضافات — هما سبب الثقة المؤسسية.</p>
-    </div>
-  </section>
-
-
-  <!-- ============= EVIDENCE-NATIVE INTELLIGENCE ============= -->
-  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+  <!-- ============= EVIDENCE-NATIVE INTELLIGENCE (moved UP — trust before architecture) ============= -->
+  <section class="section reveal" id="evidence" style="background: var(--emerald-dim); border-top: 1px solid var(--emerald); border-bottom: 1px solid var(--emerald);">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Evidence-Native Intelligence</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا رؤى مختلفة؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">هناك مئات شركات AI المالية. رؤى مختلفة لأنها لا تقول «اشترِ» — بل تقول «لماذا»، وتُثبت.</p>
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Evidence-Native Intelligence · لماذا تثق به؟</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">الخوف ليس من نقص الذكاء — بل من قرار لا يمكن تدقيقه</h2>
+        <p class="section-lead" style="margin: 0 auto;">هناك مئات شركات AI المالية. رؤى مختلفة لأنها لا تقول «اشترِ» — بل تقول «لماذا»، وتُثبت. كل قرار يحمل سلسلة دليله الكاملة — من المصدر الرسمي إلى الحقيقة إلى التحليل إلى الإشارة.</p>
       </div>
 
       <div class="compare-grid" style="max-width: 800px; margin: 0 auto;">
@@ -545,59 +761,311 @@ body { class: motion-marketing; }
         </div>
       </div>
 
-      <p class="text-center text-mute small mt-6">رؤى لا تتنبأ. تُحلّل، تستدل، توثّق — ثم تترك القرار للمؤسسة. هذا هو الفرق بين أداة AI وبنية ذكاء مؤسسية.</p>
+      <p class="text-center text-mute small mt-6" style="max-width: 70ch; margin: 1.5rem auto 0;">رؤى لا تدّعي اليقين. تُحلّل السيناريوهات، تقيس الاحتمالات، وتوثّق الأدلة — ثم تترك القرار للمؤسسة. هذا هو الفرق بين أداة AI وبنية ذكاء مؤسسية تعرف حدود ثقتها.</p>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#architecture" class="btn-link">كيف بُنيت هذه البنية؟ ↓</a>
+      </div>
     </div>
   </section>
 
-  <!-- ============= OUTPUTS ============= -->
+  <!-- ============= FINANCIAL INTELLIGENCE ARCHITECTURE ============= -->
+  <section class="section reveal" id="architecture" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Financial Intelligence Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">نظام تشغيل — لا قائمة أدوات</h2>
+        <p class="section-lead" style="margin: 0 auto;">ثماني طبقات متكاملة، عقل مركزي واحد. ليست منتجات منفصلة — بل Financial Intelligence Operating Layer واحد فوق بنيتك المالية.</p>
+      </div>
+
+      <div class="trading-arch">
+        <div class="trading-arch-layer ta-data">
+          <div class="ta-layer-num">01</div>
+          <div>
+            <div class="ta-layer-name">Market Intelligence Layer</div>
+            <div class="ta-layer-ar">طبقة استخبارات السوق</div>
+            <div class="ta-layer-components">Official Data · Market Data · Economic Events · Alternative Data</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-evidence">
+          <div class="ta-layer-num">02</div>
+          <div>
+            <div class="ta-layer-name">Evidence & Knowledge Layer</div>
+            <div class="ta-layer-ar">طبقة الأدلة والمعرفة</div>
+            <div class="ta-layer-components">Source Registry · Evidence Graph · Knowledge Graph · Provenance</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-core">
+          <div class="ta-layer-num">03</div>
+          <div>
+            <div class="ta-layer-name">AI Intelligence Core</div>
+            <div class="ta-layer-ar">العقل المركزي</div>
+            <div class="ta-layer-components">AI Council · Multi-Agent Reasoning · Scenario Engine · Scenario Modeling</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-decision">
+          <div class="ta-layer-num">04</div>
+          <div>
+            <div class="ta-layer-name">Decision Intelligence Layer</div>
+            <div class="ta-layer-ar">طبقة ذكاء القرار</div>
+            <div class="ta-layer-components">Signal Opportunities · Market Context · Portfolio Analysis</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-risk">
+          <div class="ta-layer-num">05</div>
+          <div>
+            <div class="ta-layer-name">Risk Intelligence Layer</div>
+            <div class="ta-layer-ar">طبقة ذكاء المخاطر</div>
+            <div class="ta-layer-components">Exposure Assessment · Risk Limits · Volatility Alerts · Portfolio Protection</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-exec">
+          <div class="ta-layer-num">06</div>
+          <div>
+            <div class="ta-layer-name">Execution Orchestration Layer</div>
+            <div class="ta-layer-ar">طبقة ذكاء التنفيذ</div>
+            <div class="ta-layer-components">Strategic Executor · Tactical Executor · Reactive Executor · Broker Connectivity</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-ux">
+          <div class="ta-layer-num">07</div>
+          <div>
+            <div class="ta-layer-name">User Experience Layer</div>
+            <div class="ta-layer-ar">طبقة تجربة المستخدم</div>
+            <div class="ta-layer-components">Intelligent Workspace · AI Assistant · Platform Widgets · White Label</div>
+          </div>
+        </div>
+        <div class="trading-arch-arrow">↕</div>
+        <div class="trading-arch-layer ta-governance">
+          <div class="ta-layer-num">08</div>
+          <div>
+            <div class="ta-layer-name">Learning & Governance Layer</div>
+            <div class="ta-layer-ar">طبقة التعلم والحوكمة</div>
+            <div class="ta-layer-components">Performance Feedback · Strategy Evolution · Decision History · Compliance Logs · Audit Trail</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6">ثماني طبقات تتفاعل مع بعضها — ليست خط إنتاج، بل نظام تشغيل. Evidence وGovernance ليستا إضافات — هما سبب الثقة المؤسسية.</p>
+    </div>
+  </section>
+
+  <!-- ============= SIGNAL INTELLIGENCE ENGINE (NEW standalone — the main product) ============= -->
+  <section class="section reveal" id="signal-engine">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">Signal Intelligence Engine · المنتج الرئيسي</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">منظومة توليد القرار — لا محرّك إشارات</h2>
+        <p class="section-lead" style="margin: 0 auto;">آلاف الأصول تُراقب يومياً عبر الأسواق العالمية. الحدث الرسمي يُكتشف ← يُتحقق ← يُحلّل عبر مجلس نماذج متعدد ← يخرج كقرار موثّق — ليس توصية، بل فرصة مع درجة ثقة، سياق مخاطر، وسلسلة أدلة كاملة.</p>
+      </div>
+
+      <div class="signal-flow">
+        <div class="signal-flow-node lead">
+          <div class="sf-name">Signal Intelligence Engine</div>
+          <div class="sf-ar">آلاف الأصول تُراقب يومياً — اكتشاف الأحداث الرسمية وتأثيرها</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node">
+          <div class="sf-name">AI Decision Council</div>
+          <div class="sf-ar">مجلس استثماري متعدد الأدوار — تحليل مستقل، معارضة داخلية، إجماع</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node">
+          <div class="sf-name">Opportunity Detection</div>
+          <div class="sf-ar">اكتشاف الفرص — ليس توصية، بل فرصة موثّقة</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node">
+          <div class="sf-name">Confidence Score</div>
+          <div class="sf-ar">درجة ثقة محدودة السقف — تعكس حدود اليقين، لا تدّيه</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node">
+          <div class="sf-name">Risk Context</div>
+          <div class="sf-ar">سياق المخاطر مرتبط بالمحفظة — تعرّض، حدود، تقلبات</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node">
+          <div class="sf-name">Evidence Chain</div>
+          <div class="sf-ar">سلسلة أدلة كاملة — من المصدر الرسمي إلى القرار</div>
+        </div>
+        <div class="signal-flow-arrow">↓</div>
+        <div class="signal-flow-node final">
+          <div class="sf-name">Decision Record</div>
+          <div class="sf-ar">سجل قرار قابل للتدقيق — مراجعة كاملة بعد شهر أو سنة</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6" style="max-width: 70ch; margin: 1.5rem auto 0;">دون اعتبارها توصية استثمارية مستقلة — القرار النهائي يبقى للمؤسسة. القيمة ليست في الإشارة، بل في سلسلة الأدلة خلفها.</p>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#council" class="btn-link">كيف يضمن المجلس جودة القرار؟ ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= AI DECISION COUNCIL (standalone — pulled out of Outputs) ============= -->
+  <section class="section reveal" id="council" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">AI Decision Council · حوكمة القرار</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">القيمة ليست عدد النماذج — بل حوكمة القرار</h2>
+        <p class="section-lead" style="margin: 0 auto;">لا أحد في Goldman Sachs يسأل «كم نموذج LLM لديكم؟» — يسألون: كيف تتخذون القرار؟ كيف تمنعون الخطأ؟ هل يمكن مراجعة القرار بعد شهر؟ هل يوجد Audit؟ رؤى تجيب بمنظومة حوكمة قرار كاملة.</p>
+      </div>
+
+      <div class="council-wrap">
+        <div class="council-lead">
+          <div class="council-lead-h">قبل ظهور أي قرار، يمر التحليل عبر مجلس استثماري ذكي</div>
+          <div class="council-lead-q">عشرة أدوار مستقلة، معارضة داخلية، تقييم مخاطر، وسجل قرار قابل للتدقيق. القيمة ليست عدد النماذج — بل حوكمة القرار.</div>
+        </div>
+
+        <div class="council-roles">
+          <span class="council-role">Macro Analyst</span>
+          <span class="council-role">Technical Analyst</span>
+          <span class="council-role">Quant Model</span>
+          <span class="council-role">Risk Manager</span>
+          <span class="council-role">News Intelligence</span>
+          <span class="council-role">Sentiment</span>
+          <span class="council-role">Pattern Recognition</span>
+          <span class="council-role">Portfolio</span>
+          <span class="council-role">Execution</span>
+          <span class="council-role">Critic</span>
+        </div>
+
+        <div class="council-process">
+          <div class="council-step">Independent Analysis</div>
+          <div class="council-arrow">↓</div>
+          <div class="council-step">Bullish Case</div>
+          <div class="council-arrow">↔</div>
+          <div class="council-step">Bearish Challenge</div>
+          <div class="council-arrow">↔</div>
+          <div class="council-step">Risk Assessment</div>
+          <div class="council-arrow">↓</div>
+          <div class="council-step critical">Consensus Engine</div>
+          <div class="council-arrow">↓</div>
+          <div class="council-step">Signal Confidence Score</div>
+          <div class="council-arrow">↓</div>
+          <div class="council-step critical">Decision Record</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6" style="max-width: 70ch; margin: 1.5rem auto 0;">كل دور يكتب تحليله بشكل مستقل. ثم تتقاطع التحليلات في المعارضة الداخلية: السيناريو الإيجابي يُتحدى بالسيناريو السلبي، وكلاهما يُفحص من منظور المخاطر. الإجماع ليس تصويتاً — بل اختبار ضغط فكري.</p>
+    </div>
+  </section>
+
+  <!-- ============= INTELLIGENCE LOOP (NEW strategic asset — the self-reinforcing machine) ============= -->
+  <section class="section reveal" id="loop" style="background: var(--navy); border-top: 1px solid var(--emerald); border-bottom: 1px solid var(--emerald);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Intelligence Loop · الأصل الاستراتيجي</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لا تملك نموذجاً — تملك آلة ذكاء ذاتية التغذية</h2>
+        <p class="section-lead" style="margin: 0 auto;">أكبر ما يميز رؤى عن منتجات AI المالية الأخرى: ليست نموذجاً منفرداً، بل حلقة كاملة — المصدر يغذّي الدليل، الدليل يغذّي المعرفة، المعرفة تغذّي المجلس، المجلس ينتج الإشارات، الإشارات تُفحص بالمخاطر، المخاطر توجّه التنفيذ، والتنفيذ يعود كتعليقات تحسّن المصدر التالي.</p>
+      </div>
+
+      <div class="intel-loop-wrap">
+        <div class="intel-loop">
+          <div class="intel-loop-node trust">
+            <div class="il-num">01</div>
+            <div class="il-name">Source Registry</div>
+            <div class="il-ar">سجل المصادر الرسمية — 411 مصدر</div>
+          </div>
+          <div class="intel-loop-node trust">
+            <div class="il-num">02</div>
+            <div class="il-name">Evidence Layer</div>
+            <div class="il-ar">طبقة الأدلة — كل حقيقة موثّقة بمصدرها</div>
+          </div>
+          <div class="intel-loop-node trust">
+            <div class="il-num">03</div>
+            <div class="il-name">Knowledge Graph</div>
+            <div class="il-ar">رسم المعرفة — ربط الأحداث بالكيانات والعلاقات</div>
+          </div>
+          <div class="intel-loop-node">
+            <div class="il-num">04</div>
+            <div class="il-name">AI Council</div>
+            <div class="il-ar">مجلس القرار — استدلال متعدد الأدوار</div>
+          </div>
+          <div class="intel-loop-node">
+            <div class="il-num">05</div>
+            <div class="il-name">Signals</div>
+            <div class="il-ar">الإشارات — فرص موثّقة بدرجة ثقة</div>
+          </div>
+          <div class="intel-loop-node">
+            <div class="il-num">06</div>
+            <div class="il-name">Risk</div>
+            <div class="il-ar">المخاطر — تعرّض وحدود وتنبيهات</div>
+          </div>
+          <div class="intel-loop-node">
+            <div class="il-num">07</div>
+            <div class="il-name">Execution</div>
+            <div class="il-ar">التنفيذ — عبر بنية الوسيط القائمة</div>
+          </div>
+          <div class="intel-loop-node feedback">
+            <div class="il-num">08</div>
+            <div class="il-name">Feedback Loop</div>
+            <div class="il-ar">التغذية الراجعة — تعلّم مستمر يغذّي المصدر التالي</div>
+          </div>
+        </div>
+
+        <div class="intel-loop-feedback">
+          ↻ حلقة ذكاء ذاتية التغذية — كل قرار يحسّن التالي
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6" style="max-width: 70ch; margin: 1.5rem auto 0;">هذه هي الآلة. حالياً تظهر كطبقات في الـ Architecture، لكنها فعلياً حلقة — Sources و Evidence و Knowledge و Governance ليست ميزات، بل أصول مؤسسية لا يمكن بناؤها داخلياً بسرعة. هذا هو الخندق.</p>
+    </div>
+  </section>
+
+  <!-- ============= BEFORE / AFTER (Workflow comparison) ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center; color: var(--emerald);">The Transformation</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">قبل رؤى وبعدها · المؤسسة المالية</h2>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-card before">
+          <div class="workflow-card-h">Traditional Financial Institution</div>
+          <div class="workflow-step"><span class="num">01</span> أسعار مباشرة</div>
+          <div class="workflow-step"><span class="num">02</span> فرق أبحاث يدوية</div>
+          <div class="workflow-step"><span class="num">03</span> أنظمة AI منفصلة</div>
+          <div class="workflow-step"><span class="num">04</span> مراقبة مخاطر سلبية</div>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
+            <p style="font-size: 0.8125rem; color: var(--text-mute); line-height: 1.6;">العميل والمحلل يسألان: لماذا تحرك السوق؟ ماذا يعني قرار الفائدة؟ هل هذا الخبر مهم؟ ما مستوى المخاطر؟ — وإجابات منفصلة من مصادر منفصلة.</p>
+            <p style="font-size: 0.75rem; color: var(--rose); margin-top: 0.5rem;">النتيجة: قرارات بلا سلسلة دليل، لا يمكن تدقيقها بعد شهر، ولا تعلّم مؤسسي</p>
+          </div>
+        </div>
+        <div class="workflow-card after">
+          <div class="workflow-card-h">With ROUAA Financial Intelligence Operating Layer</div>
+          <div class="workflow-step"><span class="num">01</span> Official Event detected</div>
+          <div class="workflow-step"><span class="num">02</span> Facts + Evidence extracted</div>
+          <div class="workflow-step"><span class="num">03</span> AI Council reaches consensus</div>
+          <div class="workflow-step"><span class="num">04</span> Risk + Exposure assessed</div>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft);">
+            <p style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6;">العميل والمحلل يريان: سياق السوق · تأثير الحدث · مخاطر التقلب · إجابات فورية — كلها داخل منصتك، بعلامتك، وبنفس سلسلة الدليل.</p>
+            <p style="font-size: 0.75rem; color: var(--emerald); margin-top: 0.5rem;">النتيجة: قرارات موثّقة، قابلة للتدقيق، مع تعلّم مستمر يغذّي القرار التالي</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= OUTPUTS (remaining capabilities — Council & Signal Engine removed, they're standalone) ============= -->
   <section class="section reveal">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center; color: var(--emerald);">Trading Intelligence Capabilities</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">The ROUAA Transformation</h2>
-        <p class="section-lead" style="margin: 0 auto;">من اكتشاف الحدث إلى الإشارة إلى التنفيذ والتعلم — كل قرار موثّق، كل خطوة قابلة للتتبع.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">منظومة المخرجات الذكية</h2>
+        <p class="section-lead" style="margin: 0 auto;">بجانب Signal Engine و AI Council — طبقة تشغيل رؤى تشمل بيئة التداول، إدارة المخاطر، التنفيذ الذكي، والمساعد. كل مخرج يحمل نفس سلسلة الأدلة.</p>
       </div>
 
       <div class="output-types">
-        <div class="output-type output-type-featured">
-          <div class="output-type-icon">🧠</div>
-          <div class="output-type-name">AI Decision Council</div>
-          <div class="output-type-ar">مجلس القرار الذكي — حوكمة القرار</div>
-          <div class="output-type-desc">قبل ظهور أي قرار، يمر التحليل عبر مجلس استثماري ذكي — أدوار مستقلة، معارضة داخلية، تقييم مخاطر، وسجل قرار قابل للتدقيق. القيمة ليست عدد النماذج، بل حوكمة القرار.</div>
-          <div class="council-roles">
-            <span class="council-role">Macro Analyst</span>
-            <span class="council-role">Technical Analyst</span>
-            <span class="council-role">Quant Model</span>
-            <span class="council-role">Risk Manager</span>
-            <span class="council-role">News Intelligence</span>
-            <span class="council-role">Sentiment</span>
-            <span class="council-role">Pattern Recognition</span>
-            <span class="council-role">Portfolio</span>
-            <span class="council-role">Execution</span>
-            <span class="council-role">Critic</span>
-          </div>
-          <div class="council-process">
-            <div class="council-step">Independent Analysis</div>
-            <div class="council-arrow">↓</div>
-            <div class="council-step">Bullish Case</div>
-            <div class="council-arrow">↔</div>
-            <div class="council-step">Bearish Challenge</div>
-            <div class="council-arrow">↔</div>
-            <div class="council-step">Risk Assessment</div>
-            <div class="council-arrow">↓</div>
-            <div class="council-step">Consensus Engine</div>
-            <div class="council-arrow">↓</div>
-            <div class="council-step">Signal Confidence Score</div>
-            <div class="council-arrow">↓</div>
-            <div class="council-step">Decision Record</div>
-          </div>
-        </div>
-        <div class="output-type">
-          <div class="output-type-icon">📊</div>
-          <div class="output-type-name">AI Signal Intelligence Engine</div>
-          <div class="output-type-ar">محرّك الإشارات الذكي — منتج رئيسي</div>
-          <div class="output-type-desc">كل يوم، يحلل المحرك آلاف الأصول ويولد فرصاً مدروسة تمر عبر مجلس نماذج متعدد — مع درجة ثقة، أسباب، سياق مخاطر، وسلسلة أدلة كاملة. ليس توصية — بل قرار موثّق قابل للمراجعة.</div>
-        </div>
         <div class="output-type">
           <div class="output-type-icon">📈</div>
           <div class="output-type-name">Intelligent Trading Workspace</div>
@@ -663,7 +1131,7 @@ body { class: motion-marketing; }
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center; color: var(--emerald);">Who Buys</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">من يحتاج هذا</h2>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من يحتاج طبقة الذكاء هذه</h2>
       </div>
 
       <div class="buyer-grid">
@@ -711,7 +1179,8 @@ body { class: motion-marketing; }
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center; color: var(--emerald);">Integration</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تدمج في منصتك</h2>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">تضيف ذكاءً، لا تستبدل بنيتك</h2>
+        <p class="section-lead" style="margin: 0 auto;">لأن القيمة ليست في إعادة بناء أنظمتك — بل في إضافة طبقة استخبارات فوق استثماراتك الحالية.ROUAA تعمل فوق أي بنية مالية قائمة.</p>
       </div>
 
       <div class="integration-row">
@@ -727,6 +1196,7 @@ body { class: motion-marketing; }
       <p class="text-center text-mute small mt-5">من تكامل API بسيط إلى منظومة ذكاء تداول متكاملة فوق بنيتك الحالية.</p>
     </div>
   </section>
+
   <!-- ============= USE CASE ============= -->
   <section class="section reveal" id="usecase" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
@@ -738,32 +1208,26 @@ body { class: motion-marketing; }
       <div style="max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; border-right: 4px solid var(--emerald);">
         <div style="font-size: 1rem; color: var(--text); line-height: 1.8; margin-bottom: 1.5rem;">مؤسسة إدارة أصول كانت تعتمد على محللين يراجعون مئات الأصول يدوياً — الأخبار منفصلة، المخاطر يدوية، القرارات بلا سلسلة أدلة. مع رؤى: <strong>آلاف الأصول</strong> تُراقب آلياً ← <strong>الأحداث تُكتشف وتُتحقق</strong> عبر Evidence Layer ← <strong>AI Decision Council</strong> يتناقش ويصدر إجماعاً ← <strong>Signal Engine</strong> يولد فرصاً مع درجة ثقة ← <strong>Risk Engine</strong> يربط التعرّض بالمحفظة ← كل قرار <strong>محفوظ مع دليل وتفسير وسجل تدقيق كامل</strong>.</div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border-soft);">
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
-            <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text-mute);">أدوات منفصلة</div>
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); margin-top: 0.25rem;">↓</div>
-            <div style="font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--emerald);">طبقة ذكاء واحدة</div>
+        <div class="usecase-impact">
+          <div class="usecase-impact-col before">
+            <h4>Before · الوضع الحالي</h4>
+            <div class="usecase-impact-item">آلاف التقارير والمصادر يومياً، موزّعة على فرق متعددة</div>
+            <div class="usecase-impact-item">عشرات المحللين يراجعون يدوياً، كل واحد بمنهجية مختلفة</div>
+            <div class="usecase-impact-item">قرارات موزّعة بلا سلسلة دليل موحّدة</div>
+            <div class="usecase-impact-item">لا يمكن تدقيق قرار بعد شهر — المصادر ضاعت</div>
+            <div class="usecase-impact-item">لا تعلّم مؤسسي — كل قرار يبدأ من الصفر</div>
           </div>
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
-            <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text-mute);">قرارات بلا تفسير</div>
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); margin-top: 0.25rem;">↓</div>
-            <div style="font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--emerald);">إشارات موحّدة + تفسير</div>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
-            <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text-mute);">اعتماد يدوي</div>
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); margin-top: 0.25rem;">↓</div>
-            <div style="font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--emerald);">مراقبة مخاطر مستمرة</div>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
-            <div style="font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text-mute);">لا تعلّم</div>
-            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--emerald); margin-top: 0.25rem;">↓</div>
-            <div style="font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--emerald);">تحسين مستمر</div>
+          <div class="usecase-impact-col after">
+            <h4>After · مع رؤى</h4>
+            <div class="usecase-impact-item">مراقبة موحّدة — كل المصادر في سجل واحد</div>
+            <div class="usecase-impact-item">بحث أسرع — الأدلة مرتبطة بالفعل بالقرار</div>
+            <div class="usecase-impact-item">قرارات قابلة للتدقيق — سلسلة دليل كاملة محفوظة</div>
+            <div class="usecase-impact-item">مراجعة كاملة بعد شهر أو سنة — كل قرار له Audit Trail</div>
+            <div class="usecase-impact-item">تعلّم مستمر — كل قرار يحسّن التالي عبر Feedback Loop</div>
           </div>
         </div>
+
+        <p style="font-size: 0.75rem; color: var(--text-mute); margin-top: 1.25rem; text-align: center; line-height: 1.6;">لا نَدّعي أرقاماً مثل «رفع العائد 40%» — المؤسسات لا تصدّقها. ما نَعِد به: قرار موثّق، قابل للتدقيق، يتعلّم. هذا هو الفرق الذي يهمّ CIO و Risk Committee.</p>
       </div>
     </div>
   </section>
@@ -774,9 +1238,9 @@ body { class: motion-marketing; }
   <section class="cta-final reveal" id="contact">
     <div class="container">
       <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>See how ROUAA adds institutional intelligence to your financial platform</h2>
-      <p>مكالمة 30 دقيقة — نوضح كيف تضيف طبقة ذكاء مؤسسية إلى منصتك المالية الحالية.</p>
-      <a href="mailto:contact@rouaa.ai?subject=Trading Intelligence Briefing" class="btn btn-primary btn-lg">Request Trading Briefing</a>
+      <h2>See how ROUAA adds an intelligence operating layer to your financial institution</h2>
+      <p>مكالمة 30 دقيقة — نوضح كيف تضيف طبقة ذكاء مؤسسية فوق منصتك المالية الحالية، دون إعادة بناء أنظمتك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Financial Intelligence Briefing" class="btn btn-primary btn-lg">Request Briefing</a>
     </div>
   </section>
 
@@ -787,8 +1251,8 @@ body { class: motion-marketing; }
   <div class="footer-grid">
     <div>
       <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
-      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
-      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Operating Layer.</div>
+      <div class="mono-label text-mute">v19 · يوليو 2026</div>
     </div>
     <div>
       <h4 class="mono-label text-mute mb-3">Solutions</h4>
