@@ -229,6 +229,34 @@ body { class: motion-marketing; }
 /* === Stack: decision objects layer === */
 .stack-layer.l-decision { --l-color: var(--amber); }
 
+/* === Before/After comparison === */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+@media (max-width: 768px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-col { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.75rem 1.5rem; }
+.compare-before { border-top: 3px solid var(--rose); }
+.compare-after { border-top: 3px solid var(--emerald); background: rgba(52,211,153,0.03); }
+.compare-h { font-family: var(--font-en); font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 0.125rem; }
+.compare-before .compare-h { color: var(--rose); }
+.compare-after .compare-h { color: var(--emerald); }
+.compare-h-ar { font-family: var(--font-ar); font-size: 0.8125rem; color: var(--text-mute); margin-bottom: 1rem; }
+.compare-steps { display: flex; flex-direction: column; gap: 0; }
+.compare-step { display: flex; align-items: center; gap: 0.5rem; padding: 0.4375rem 0; font-size: 0.8125rem; color: var(--text-dim); }
+.compare-before .compare-step { color: var(--text-mute); }
+.compare-after .compare-step { color: var(--text); }
+.compare-step-num { font-family: var(--font-mono); font-size: 0.5625rem; font-weight: 700; min-width: 20px; }
+.compare-before .compare-step-num { color: var(--rose); opacity: 0.5; }
+.compare-after .compare-step-num { color: var(--emerald); }
+.compare-step-end { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-soft); font-weight: 600; }
+.compare-before .compare-step-end { color: var(--rose); }
+.compare-after .compare-step-end { color: var(--emerald); }
+.compare-arrow { text-align: center; color: var(--text-mute); opacity: 0.2; font-size: 0.625rem; }
+.compare-summary { max-width: 700px; margin: 2rem auto 0; padding: 1.25rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-xl); text-align: center; }
+.compare-summary-text { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--gold); line-height: 1.6; }
+
+/* === Glance outcome-first === */
+.glance-stat .glance-lbl { font-size: 0.6875rem; line-height: 1.4; min-height: 2.5em; }
+.glance-stat .glance-sub { font-size: 0.5rem; line-height: 1.4; margin-top: 0.25rem; }
+
 /* === Trust badge strip === */
 .trust-badge-strip { text-align: center; max-width: 900px; margin: 0 auto; }
 .trust-badge-h { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.875rem; }
@@ -419,18 +447,81 @@ body { class: motion-marketing; }
   </section>
 
 
+  <!-- ============= THE INSTITUTIONAL PROBLEM WE SOLVE ============= -->
+  <section class="section reveal" id="problem">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">The Institutional Problem We Solve</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">المشكلة التي نحلّها</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل مؤسسة مالية تعيش نفس الألم. ليست مشكلة تقنية — مشكلة سير عمل. هذا ما يتغيّر.</p>
+      </div>
+
+      <div class="compare-grid">
+        <!-- Traditional -->
+        <div class="compare-col compare-before">
+          <div class="compare-h">Traditional Financial Workflow</div>
+          <div class="compare-h-ar">سير العمل التقليدي</div>
+          <div class="compare-steps">
+            <div class="compare-step"><span class="compare-step-num">01</span> إصدار رسمي</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">02</span> محلل يقرأ PDF</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">03</span> ينسخ الأرقام يدوياً</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">04</span> يكتب مذكرة</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">05</span> مدير يراجع</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">06</span> لجنة تناقش</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">07</span> قرار</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step compare-step-end"><span class="compare-step-num">✗</span> أسابيع لاحقاً: لا أحد يعرف لماذا</div>
+          </div>
+        </div>
+
+        <!-- ROUAA -->
+        <div class="compare-col compare-after">
+          <div class="compare-h">ROUAA Workflow</div>
+          <div class="compare-h-ar">سير عمل رؤى</div>
+          <div class="compare-steps">
+            <div class="compare-step"><span class="compare-step-num">01</span> إصدار رسمي</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">02</span> استيعاب موثّق آلياً</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">03</span> استخراج الحقائق</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">04</span> ربط بالأدلة</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">05</span> رسم المعرفة</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">06</span> استدلال متعدد الوكلاء</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step"><span class="compare-step-num">07</span> مذكرة لجنة جاهزة</div>
+            <div class="compare-arrow">↓</div>
+            <div class="compare-step compare-step-end"><span class="compare-step-num">✓</span> سجل تدقيق دائم — كل قرار قابل لإعادة التشغيل</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-summary">
+        <div class="compare-summary-text">الفرق ليس في السرعة. الفرق في: كل قرار له دليل، كل دليل له مصدر، كل سجل محفوظ للأبد.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============= PLATFORM AT A GLANCE ============= -->
   <section class="section reveal" id="glance" style="padding: 2.5rem 0; border-bottom: 1px solid var(--border-soft);">
     <div class="container">
-      <div class="glance-h">Platform at a Glance</div>
-      <div class="glance-ar">المنصة لمحة</div>
+      <div class="glance-h">What Changes for Your Institution</div>
+      <div class="glance-ar">ما الذي سيتغير في مؤسستك</div>
       <div class="glance-grid">
-        <div class="glance-stat glance-hero"><div class="glance-val">411</div><div class="glance-lbl">Official Sources</div><div class="glance-sub">Central banks · regulators · exchanges</div></div>
-        <div class="glance-stat"><div class="glance-val">10K+</div><div class="glance-lbl">Indexed Documents</div><div class="glance-sub">24/7 ingestion</div></div>
-        <div class="glance-stat"><div class="glance-val">1,247</div><div class="glance-lbl">Verified Facts</div><div class="glance-sub">Each → origin</div></div>
-        <div class="glance-stat"><div class="glance-val">6</div><div class="glance-lbl">Supported Languages</div><div class="glance-sub">Arabic · English · +4</div></div>
-        <div class="glance-stat"><div class="glance-val">7</div><div class="glance-lbl">Engine Layers</div><div class="glance-sub">Sources → Distribution</div></div>
-        <div class="glance-stat"><div class="glance-val">24/7</div><div class="glance-lbl">Monitoring</div><div class="glance-sub">Never sleeps</div></div>
+        <div class="glance-stat glance-hero"><div class="glance-val">411</div><div class="glance-lbl">No analyst tracks regulators manually anymore</div><div class="glance-sub">Powered by 411 monitored sources · central banks · regulators · exchanges</div></div>
+        <div class="glance-stat"><div class="glance-val">10K+</div><div class="glance-lbl">Documents processed, not read by humans</div><div class="glance-sub">24/7 automated ingestion · no backlog</div></div>
+        <div class="glance-stat"><div class="glance-val">1,247</div><div class="glance-lbl">Facts with permanent provenance</div><div class="glance-sub">Every fact → page · paragraph · timestamp</div></div>
+        <div class="glance-stat"><div class="glance-val">6</div><div class="glance-lbl">Languages, one intelligence engine</div><div class="glance-sub">Arabic · English · +4 · no translation team needed</div></div>
+        <div class="glance-stat"><div class="glance-val">7</div><div class="glance-lbl">Layers from source to decision</div><div class="glance-sub">Sources → Evidence → Reasoning → Decision</div></div>
+        <div class="glance-stat"><div class="glance-val">24/7</div><div class="glance-lbl">Monitoring that never sleeps</div><div class="glance-sub">Your team rests. The platform doesn't.</div></div>
       </div>
     </div>
   </section>
@@ -513,57 +604,6 @@ body { class: motion-marketing; }
   </section>
 
 
-
-  <!-- ============= INSIDE THE PLATFORM ============= -->
-  <section class="section reveal" id="inside" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-8">
-        <span class="section-tag" style="justify-content: center;">Inside the Platform</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تبدو سلسلة الأدلة فعلياً؟</h2>
-        <p class="section-lead" style="margin: 0 auto;">هذا تمثيل لكيفية تدفّق البيانات داخل المنصة — من المصدر الرسمي إلى قرار المؤسسة. لا تجميل، فقط البنية.</p>
-      </div>
-
-      <div class="inside-chain">
-        <div class="inside-node n-source">
-          <div class="inside-node-type">SOURCE</div>
-          <div class="inside-node-val">Federal Reserve</div>
-          <div class="inside-node-meta">federalreserve.gov · T1 tier</div>
-        </div>
-        <div class="inside-connector">↓</div>
-        <div class="inside-node n-doc">
-          <div class="inside-node-type">DOCUMENT</div>
-          <div class="inside-node-val">FOMC Statement · PDF</div>
-          <div class="inside-node-meta">847 words · indexed · OCR</div>
-        </div>
-        <div class="inside-connector">↓</div>
-        <div class="inside-node n-fact">
-          <div class="inside-node-type">FACT</div>
-          <div class="inside-node-val">Rate maintained at 5.25-5.50%</div>
-          <div class="inside-node-meta">page 1 · paragraph 3 · numeric</div>
-        </div>
-        <div class="inside-connector">↓</div>
-        <div class="inside-node n-evidence">
-          <div class="inside-node-type">EVIDENCE</div>
-          <div class="inside-node-val">EV-2026-FOMC-014</div>
-          <div class="inside-node-meta">immutable · timestamp · source URL</div>
-        </div>
-        <div class="inside-connector">↓</div>
-        <div class="inside-node n-knowledge">
-          <div class="inside-node-type">KNOWLEDGE GRAPH</div>
-          <div class="inside-node-val">89 companies · 23 sectors</div>
-          <div class="inside-node-meta">connected · queryable · living</div>
-        </div>
-        <div class="inside-connector">↓</div>
-        <div class="inside-node n-output">
-          <div class="inside-node-type">DECISION OBJECT</div>
-          <div class="inside-node-val">Committee Memo · Evidence Package</div>
-          <div class="inside-node-meta">auditable · replayable · defensible</div>
-        </div>
-      </div>
-
-      <p class="text-center text-mute small mt-6">كل عقدة في هذه السلسلة قابلة للتتبع. كل رقم له صفحة. كل قرار له سجل. هذه ليست ميزة — هذه هي المنصة.</p>
-    </div>
-  </section>
 
   <!-- ============= RECOMMENDED PATHS ============= -->
   <section class="section reveal" id="paths">
