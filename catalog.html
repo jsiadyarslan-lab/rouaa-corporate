@@ -61,7 +61,7 @@ body { class: motion-marketing; }
 
 .product-card {
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 1.25rem; transition: all var(--transition-slow); position: relative; overflow: hidden;
+  padding: 1.125rem; transition: all var(--transition-slow); position: relative; overflow: hidden;
   text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.5rem;
 }
 .product-card:hover { border-color: var(--cat-color, var(--gold)); transform: translateY(-2px); }
@@ -75,29 +75,23 @@ body { class: motion-marketing; }
 .product-card.cat-agent { --cat-color: var(--blue); }
 .product-card.cat-component { --cat-color: var(--text-mute); }
 
+.product-card-head { display: flex; justify-content: space-between; align-items: center; }
 .product-card-tag { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--cat-color, var(--gold)); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
-.product-card-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
-.product-card-name .ar { font-family: var(--font-ar); font-size: 0.9375rem; display: block; margin-bottom: 0.1rem; }
+.product-card-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.product-card-name .ar { font-family: var(--font-ar); font-size: 0.875rem; color: var(--text-dim); display: block; margin-bottom: 0.125rem; font-weight: 500; }
 .product-card-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; flex: 1; }
-.product-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
-.product-card-price { font-family: var(--font-mono); font-size: 0.625rem; color: var(--cat-color, var(--gold)); }
-.product-card-link { font-family: var(--font-en); font-size: 0.625rem; color: var(--text-mute); }
+.product-card-outcome { padding: 0.5rem 0.625rem; background: var(--surface); border-radius: var(--radius-sm); border-right: 2px solid var(--cat-color, var(--gold)); }
+.outcome-text { font-size: 0.75rem; color: var(--text); font-weight: 600; line-height: 1.4; }
+.product-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; border-top: 1px solid var(--border-soft); }
+.product-card-link { font-family: var(--font-en); font-size: 0.75rem; color: var(--text-mute); }
 .product-card-explore { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); letter-spacing: 0.02em; }
 
-/* === Business Outcome === */
-.product-card-outcome { margin-top: 0.625rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
-.outcome-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
-.outcome-text { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
-
-/* === Deployment badges === */
-.product-card-deploy { margin-top: 0.5rem; }
-.deploy-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+/* === Deployment badges (compact) === */
 .deploy-badges { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.deploy-badge { font-family: var(--font-mono); font-size: 0.5rem; color: var(--cat-color, var(--gold)); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
-.deploy-badge::before { content: '✓ '; color: var(--emerald); }
+.deploy-badge { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
 
-/* === Featured badge === */
-.featured-badge { display: inline-block; margin-right: 0.375rem; font-family: var(--font-mono); font-size: 0.5rem; color: var(--gold); padding: 0.125rem 0.375rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
+/* === Featured badge (compact) === */
+.featured-badge { font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); }
 
 /* === Architectural framing === */
 .arch-framing { max-width: 800px; margin: 1.5rem auto; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
@@ -126,11 +120,6 @@ body { class: motion-marketing; }
 .path-items { display: flex; flex-direction: column; gap: 0.25rem; }
 .path-item { font-family: var(--font-en); font-size: 0.75rem; color: var(--text-dim); text-decoration: none; padding: 0.375rem 0.5rem; background: var(--surface); border-radius: var(--radius-sm); border-right: 2px solid var(--p-color); transition: all var(--transition-base); }
 .path-item:hover { color: var(--p-color); background: rgba(255,255,255,0.04); }
-
-/* === Problem field in cards === */
-.product-card-problem { margin-top: 0.5rem; padding: 0.5rem; background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.15); border-radius: var(--radius-sm); }
-.problem-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--rose); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
-.problem-text { font-size: 0.6875rem; color: var(--text-mute); line-height: 1.4; }
 
 /* === 5 Institutional Solutions === */
 .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; max-width: 1280px; margin: 0 auto; }
@@ -437,7 +426,7 @@ body { class: motion-marketing; }
         <button id="revealAllCaps" class="btn btn-ghost mt-4">Explore all 44 capabilities ↓</button>
       </div>
 
-      <div id="catalogWrapper" style="display: none;">
+      <div id="catalogWrapper" class="catalog-layout" style="display: none;">
 
     <!-- Filters sidebar — reordered: What to solve → Who are you → How to deploy -->
     <aside class="catalog-filters">
@@ -702,34 +691,30 @@ const CATEGORY_PROBLEMS = {
 
 function renderProductCard(product) {
   const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
-  const desc = (product.desc || '').substring(0, 90) + (product.desc.length > 90 ? '...' : '');
-  const outcome = (product.tagline || '').substring(0, 60);
-  const problem = CATEGORY_PROBLEMS[product.cat] || '';
+  const desc = (product.desc || '').substring(0, 100) + (product.desc.length > 100 ? '...' : '');
+  const outcome = (product.tagline || '').substring(0, 70);
   const deploys = product.deploy || [];
   const deployBadges = [
     { key: 'api', label: 'API' },
     { key: 'saas', label: 'SaaS' },
-    { key: 'whitelabel', label: 'White Label' },
-    { key: 'enterprise', label: 'Enterprise' },
+    { key: 'whitelabel', label: 'WL' },
+    { key: 'enterprise', label: 'Ent' },
   ].filter(d => deploys.includes(d.key)).map(d => `<span class="deploy-badge">${d.label}</span>`).join('');
-  const featuredBadge = FEATURED_IDS.has(product.id) ? '<span class="featured-badge">★ Featured</span>' : '';
+  const featuredBadge = FEATURED_IDS.has(product.id) ? '<span class="featured-badge">★</span>' : '';
   return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}" data-featured="${FEATURED_IDS.has(product.id)}">
-    <div class="product-card-tag">${cat.icon} ${cat.name}${featuredBadge}</div>
-    <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
-    <div class="product-card-problem">
-      <div class="problem-h">Problem</div>
-      <div class="problem-text">${problem}</div>
+    <div class="product-card-head">
+      <div class="product-card-tag">${cat.icon} ${cat.name}</div>
+      ${featuredBadge}
     </div>
+    <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
     <div class="product-card-desc">${desc}</div>
     <div class="product-card-outcome">
-      <div class="outcome-h">Outcome</div>
       <div class="outcome-text">${outcome}</div>
     </div>
-    <div class="product-card-deploy">
-      <div class="deploy-h">Deployment</div>
+    <div class="product-card-foot">
       <div class="deploy-badges">${deployBadges}</div>
+      <span class="product-card-link">→</span>
     </div>
-    <div class="product-card-foot"><span class="product-card-explore">Explore capability</span><span class="product-card-link">→</span></div>
   </a>`;
 }
 
