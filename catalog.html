@@ -99,6 +99,41 @@ body { class: motion-marketing; }
 .arch-framing-block.center { background: var(--gold-dim); border-color: rgba(200,169,81,0.3); color: var(--gold); }
 .arch-framing-arrow { color: var(--gold); opacity: 0.3; font-size: 0.75rem; }
 
+/* === Intelligence Stack diagram === */
+.stack-diagram { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.stack-layer { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); border-right: 3px solid var(--l-color, var(--gold)); min-width: 320px; transition: all var(--transition-slow); }
+.stack-layer:hover { border-color: var(--l-color, var(--gold)); transform: translateX(-4px); }
+.stack-layer.l-source { --l-color: var(--emerald); }
+.stack-layer.l-doc { --l-color: var(--blue); }
+.stack-layer.l-fact { --l-color: var(--blue); }
+.stack-layer.l-evidence { --l-color: var(--gold); }
+.stack-layer.l-knowledge { --l-color: var(--gold); }
+.stack-layer.l-reasoning { --l-color: var(--amber); }
+.stack-layer-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--l-color); font-weight: 700; width: 24px; }
+.stack-layer-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.stack-layer-ar { font-family: var(--font-ar); font-size: 0.6875rem; color: var(--text-mute); margin-right: auto; }
+.stack-arrow { color: var(--gold); opacity: 0.3; font-size: 0.75rem; margin: 0.25rem 0; }
+.stack-fanout { margin-top: 0.5rem; text-align: center; }
+.stack-fanout-line { color: var(--gold); opacity: 0.3; font-family: var(--font-mono); font-size: 0.625rem; margin-bottom: 0.5rem; }
+.stack-fanout-apps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; max-width: 600px; }
+@media (max-width: 600px) { .stack-fanout-apps { grid-template-columns: repeat(2, 1fr); } }
+.stack-fanout-app { padding: 0.625rem 0.5rem; background: var(--card); border: 1px solid var(--border); border-top: 2px solid var(--f-color, var(--gold)); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.625rem; font-weight: 700; color: var(--text); text-align: center; line-height: 1.3; }
+.stack-fanout-app.f-research { --f-color: var(--gold); }
+.stack-fanout-app.f-trading { --f-color: var(--emerald); }
+.stack-fanout-app.f-media { --f-color: var(--blue); }
+.stack-fanout-app.f-risk { --f-color: var(--rose); }
+.stack-fanout-app.f-dev { --f-color: var(--amber); }
+
+/* === How Intelligence Flows === */
+.flow-diagram { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: stretch; }
+.flow-step { display: flex; align-items: center; gap: 1rem; padding: 0.875rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); border-right: 3px solid var(--gold); }
+.flow-step.final { background: var(--gold-dim); border-color: var(--gold); border-right-color: var(--gold); }
+.flow-num { font-family: var(--font-mono); font-size: 0.875rem; color: var(--gold); font-weight: 700; width: 32px; }
+.flow-event { font-family: var(--font-en); font-size: 0.875rem; font-weight: 600; color: var(--text); }
+.flow-event-ar { font-family: var(--font-ar); font-size: 0.75rem; color: var(--text-mute); margin: 0 0.75rem 0 auto; }
+.flow-meta { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); margin-right: auto; }
+.flow-arrow { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.75rem; margin: 0.25rem 0; }
+
 /* === Why ROUAA === */
 .why-rouaa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
 .why-rouaa-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; border-top: 2px solid var(--gold); }
@@ -227,6 +262,68 @@ body { class: motion-marketing; }
         <span class="catalog-search-icon">🔍</span>
         <input type="text" placeholder="ابحث عن قدرة أو مشكلة أو حالة استخدام..." id="catalogSearch">
       </div>
+    </div>
+  </section>
+
+  <!-- ============= INTELLIGENCE STACK (visual diagram) ============= -->
+  <section class="section reveal" id="stack" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Intelligence Stack</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">المحرك الحقيقي وراء كل قدرة</h2>
+        <p class="section-lead" style="margin: 0 auto;">الـ 44 قدرة مجرد تطبيقات فوق هذا المحرك. هذه هي البنية التي لا تستطيع مؤسسة أن تعمل بدونه — ليست أداة، بل نظام إنتاج قرار.</p>
+      </div>
+
+      <div class="stack-diagram">
+        <div class="stack-layer l-source">
+          <div class="stack-layer-num">01</div>
+          <div class="stack-layer-name">Official Sources</div>
+          <div class="stack-layer-ar">مصادر رسمية · 411 مؤسسة</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-layer l-doc">
+          <div class="stack-layer-num">02</div>
+          <div class="stack-layer-name">Document Intelligence</div>
+          <div class="stack-layer-ar">ذكاء الوثائق · 10K+ مُفهرَسة</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-layer l-fact">
+          <div class="stack-layer-num">03</div>
+          <div class="stack-layer-name">Facts Layer</div>
+          <div class="stack-layer-ar">طبقة الحقائق · 1,247 موثّقة</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-layer l-evidence">
+          <div class="stack-layer-num">04</div>
+          <div class="stack-layer-name">Evidence Graph</div>
+          <div class="stack-layer-ar">رسم الأدلة · كل حقيقة → مصدر</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-layer l-knowledge">
+          <div class="stack-layer-num">05</div>
+          <div class="stack-layer-name">Knowledge Graph</div>
+          <div class="stack-layer-ar">رسم المعرفة · علاقات مالية</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-layer l-reasoning">
+          <div class="stack-layer-num">06</div>
+          <div class="stack-layer-name">Reasoning Engine</div>
+          <div class="stack-layer-ar">محرّك الاستدلال · multi-agent</div>
+        </div>
+        <div class="stack-arrow">↓</div>
+        <div class="stack-fanout">
+          <div class="stack-fanout-line">┌──────────┬──────────┬──────────┬──────────┬──────────┐</div>
+          <div class="stack-fanout-apps">
+            <div class="stack-fanout-app f-research">Investment<br>Intelligence</div>
+            <div class="stack-fanout-app f-trading">Trading<br>Intelligence</div>
+            <div class="stack-fanout-app f-media">Media<br>Intelligence</div>
+            <div class="stack-fanout-app f-risk">Risk<br>Intelligence</div>
+            <div class="stack-fanout-app f-dev">Developer<br>Platform</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6">محرك واحد → 5 خطوط أعمال → 44 قدرة. كل مخرج يحمل نفس سلسلة الأدلة من المصدر الرسمي إلى القرار.</p>
     </div>
   </section>
 
@@ -413,6 +510,63 @@ body { class: motion-marketing; }
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- ============= HOW INTELLIGENCE FLOWS ============= -->
+  <section class="section reveal" id="flow">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">How Intelligence Flows</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من الحدث إلى القرار — في دقائق</h2>
+        <p class="section-lead" style="margin: 0 auto;">هذا هو الفرق بين رؤى وأي أداة AI. ليست إجابة سريعة — بل سلسلة قرار كاملة موثّقة من المصدر إلى اللجنة.</p>
+      </div>
+
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-event">Fed announces rate decision</div>
+          <div class="flow-event-ar">الفيدرالي يعلن قرار الفائدة</div>
+          <div class="flow-meta">Source detected · 14 seconds</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-event">Source verified</div>
+          <div class="flow-event-ar">المصدر موثّق</div>
+          <div class="flow-meta">Federal Reserve · T1 tier · official statement</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-event">Facts extracted</div>
+          <div class="flow-event-ar">الحقائق مستخرجة</div>
+          <div class="flow-meta">14 verified facts · rate · inflation · growth</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-event">Evidence attached</div>
+          <div class="flow-event-ar">الأدلة مرفقة</div>
+          <div class="flow-meta">Each fact → page · paragraph · timestamp</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <div class="flow-event">Impact mapped</div>
+          <div class="flow-event-ar">التأثير مرسوم</div>
+          <div class="flow-meta">89 companies · 23 sectors · Knowledge Graph</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step final">
+          <div class="flow-num">06</div>
+          <div class="flow-event">Investment committee receives briefing</div>
+          <div class="flow-event-ar">لجنة الاستثمار تتلقى المذكرة</div>
+          <div class="flow-meta">Committee-ready brief · evidence chain attached · 5 minutes total</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6">من إعلان رسمي إلى مذكرة قرار موثّقة في 5 دقائق — كل خطوة قابلة للتتبع، كل رقم له مصدر، كل قرار له سجل.</p>
     </div>
   </section>
 
