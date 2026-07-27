@@ -265,6 +265,23 @@ body { class: motion-marketing; }
 .media-infra-cta { text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-soft); }
 .media-infra-cta-text { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.08em; margin-bottom: 0.75rem; }
 
+
+/* === Catalog summary === */
+.catalog-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+.catalog-cat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1rem; text-decoration: none; color: inherit; transition: all var(--transition-slow); border-top: 3px solid var(--cc-color, var(--gold)); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.25rem; }
+.catalog-cat-card:hover { border-color: var(--cc-color, var(--gold)); transform: translateY(-2px); }
+.catalog-cat-card.c-media { --cc-color: var(--blue); }
+.catalog-cat-card.c-trading { --cc-color: var(--emerald); }
+.catalog-cat-card.c-research { --cc-color: var(--gold); }
+.catalog-cat-card.c-risk { --cc-color: var(--rose); }
+.catalog-cat-card.c-dev { --cc-color: var(--amber); }
+.catalog-cat-card.c-agent { --cc-color: var(--blue); }
+.catalog-cat-card.c-component { --cc-color: var(--text-mute); }
+.catalog-cat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.catalog-cat-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.catalog-cat-count { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--cc-color); font-weight: 700; letter-spacing: 0.05em; }
+.catalog-cat-desc { font-size: 0.625rem; color: var(--text-mute); line-height: 1.5; margin-top: 0.25rem; }
+
 /* === Before/After comparison === */
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
 
@@ -584,6 +601,30 @@ body { class: motion-marketing; }
       <div class="compare-summary">
         <div class="compare-summary-text">الفرق ليس في السرعة. الفرق في: كل قرار له دليل، كل دليل له مصدر، كل سجل محفوظ للأبد.</div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============= INSTITUTIONAL ASSETS ============= -->
+  <section class="section reveal" id="assets" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Institutional Assets</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ما الذي تشتريه فعلاً؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">لا تشتري تطبيقات. تطبيقات أي فريق يستطيع بناءها. تشتري أصولاً تراكمية لا يستطيع منافس نسخها — وهذه هي الشركة الحقيقية.</p>
+      </div>
+      <div style="margin-top: 2rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; text-align: center; margin-bottom: 1rem;">What You Actually Buy: Institutional Assets</div>
+        <div class="assets-grid">
+        <div class="asset-card">
+          <div class="asset-icon">📡</div>
+          <div class="asset-name">Source Registry</div>
+          <div class="asset-ar">سجل المصادر</div>
+          <div class="asset-desc">411 مؤسسة رسمية مسجّلة ومراقبة. علاقات مصادر وبنية مراقبة لا تُبنى في يوم.</div>
+          <div class="asset-tag">Cannot be copied in months</div>
+        </div>
+        <p class="text-center text-mute small mt-6">هذه هي الشركة. التطبيقات مجرد واجهات فوق هذه الأصول. منافس يحتاج سنوات لبنائها — وأنت تحصل عليها جاهزة.</p>
+      </div>
+    </div>
     </div>
   </section>
 
@@ -1028,19 +1069,7 @@ body { class: motion-marketing; }
       </div>
 
       <p class="text-center text-mute small mt-6">نماذج اللغة تتحسّن كل عام. ميزتك التنافسية يجب ألا تعتمد عليها — بل على بنية البيانات الموثّقة، وسلسلة الإثبات، والمعرفة القطاعية، والحوكمة المؤسسية.</p>
-      <div style="margin-top: 2rem;">
-        <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; text-align: center; margin-bottom: 1rem;">What You Actually Buy: Institutional Assets</div>
-        <div class="assets-grid">
-        <div class="asset-card">
-          <div class="asset-icon">📡</div>
-          <div class="asset-name">Source Registry</div>
-          <div class="asset-ar">سجل المصادر</div>
-          <div class="asset-desc">411 مؤسسة رسمية مسجّلة ومراقبة. علاقات مصادر وبنية مراقبة لا تُبنى في يوم.</div>
-          <div class="asset-tag">Cannot be copied in months</div>
-        </div>
-        <p class="text-center text-mute small mt-6">هذه هي الشركة. التطبيقات مجرد واجهات فوق هذه الأصول. منافس يحتاج سنوات لبنائها — وأنت تحصل عليها جاهزة.</p>
-      </div>
-    </div>
+      
       </div>
 </section>
 
@@ -1095,73 +1124,64 @@ body { class: motion-marketing; }
 
 
 
-  <!-- ============= CATALOG ============= -->
-  <section class="section reveal" id="all-modules">
+    <!-- ============= CATALOG ============= -->
+  <section class="section reveal" id="catalog">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Platform Modules</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">استكشف وحدات المنصة</h2>
-        <p class="section-lead" style="margin: 0 auto;">وحدات المنصة عبر 7 فئات — كلها مبنية على نفس البنية التحتية للذكاء الموثّق.</p>
-        <button id="revealAllCaps" class="btn btn-ghost mt-4">Browse Institutional Capabilities ↓</button>
+        <span class="section-tag" style="justify-content: center;">Intelligence Catalog</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">استكشف الكتالوج الكامل</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل الوحدات مبنية على نفس البنية التحتية. تصفّح حسب الفئة.</p>
       </div>
 
-      <div id="catalogWrapper" class="catalog-layout" style="display: none;">
-
-    <!-- Filters sidebar — reordered: What to solve → Who are you → How to deploy -->
-    <aside class="catalog-filters">
-      <div class="filter-group">
-        <div class="filter-h">What do you need to solve?</div>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Automate Research <span class="filter-count">→ 6 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Monitor Risk <span class="filter-count">→ 5 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Generate Intelligence <span class="filter-count">→ 8 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Improve Trading Decisions <span class="filter-count">→ 9 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Build Data Products <span class="filter-count">→ 7 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Support Decisions <span class="filter-count">→ 4 modules</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components <span class="filter-count">→ 5 modules</span></label>
+      <div class="catalog-summary-grid">
+        <a href="catalog.html?cat=media" class="catalog-cat-card c-media">
+          <div class="catalog-cat-icon">📰</div>
+          <div class="catalog-cat-name">Media Intelligence</div>
+          <div class="catalog-cat-count">8 Modules</div>
+          <div class="catalog-cat-desc">News Engine · Video · Audio · Reports · Infographics</div>
+        </a>
+        <a href="catalog.html?cat=trading" class="catalog-cat-card c-trading">
+          <div class="catalog-cat-icon">📈</div>
+          <div class="catalog-cat-name">Market Intelligence</div>
+          <div class="catalog-cat-count">9 Modules</div>
+          <div class="catalog-cat-desc">Market Context · Smart Chart · Portfolio · Assistant</div>
+        </a>
+        <a href="catalog.html?cat=research" class="catalog-cat-card c-research">
+          <div class="catalog-cat-icon">📊</div>
+          <div class="catalog-cat-name">Research Intelligence</div>
+          <div class="catalog-cat-count">6 Modules</div>
+          <div class="catalog-cat-desc">Brief Generator · Committee Prep · Deep Dive · Screening</div>
+        </a>
+        <a href="catalog.html?cat=risk" class="catalog-cat-card c-risk">
+          <div class="catalog-cat-icon">⚠</div>
+          <div class="catalog-cat-name">Risk Intelligence</div>
+          <div class="catalog-cat-count">5 Modules</div>
+          <div class="catalog-cat-desc">Risk Monitor · Exposure · Scenario · Action · Compliance</div>
+        </a>
+        <a href="catalog.html?cat=api" class="catalog-cat-card c-dev">
+          <div class="catalog-cat-icon">🔌</div>
+          <div class="catalog-cat-name">Developer Platform</div>
+          <div class="catalog-cat-count">7 APIs</div>
+          <div class="catalog-cat-desc">Events · Facts · Evidence · Insights · Streaming · SDK · Sources</div>
+        </a>
+        <a href="catalog.html?cat=agent" class="catalog-cat-card c-agent">
+          <div class="catalog-cat-icon">🤖</div>
+          <div class="catalog-cat-name">Intelligence Agents</div>
+          <div class="catalog-cat-count">4 Agents</div>
+          <div class="catalog-cat-desc">Macro · Sector · Risk · Fact Verification</div>
+        </a>
+        <a href="catalog.html?cat=component" class="catalog-cat-card c-component">
+          <div class="catalog-cat-icon">🧩</div>
+          <div class="catalog-cat-name">Platform Components</div>
+          <div class="catalog-cat-count">5 Components</div>
+          <div class="catalog-cat-desc">Knowledge Graph · Source Registry · Evidence Store · Reasoning · Audit</div>
+        </a>
       </div>
 
-      <div class="filter-group">
-        <div class="filter-h">Who are you?</div>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="funds"> Asset Manager</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="banks"> Bank</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="brokers"> Broker</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="media"> Media Company</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="govt"> Government / Sovereign</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="fintech"> Fintech Builder</label>
+      <div class="text-center mt-6">
+        <a href="catalog.html" class="btn btn-primary btn-lg">Browse Full Catalog →</a>
       </div>
-
-      <div class="filter-group">
-        <div class="filter-h">How do you deploy?</div>
-        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="api" checked> API</label>
-        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="saas" checked> SaaS</label>
-        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="whitelabel" checked> White Label</label>
-        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="enterprise" checked> Enterprise / Private Cloud</label>
-      </div>
-    </aside>
-
-    <!-- Product grid -->
-    <div>
-      <div class="catalog-tabs">
-        <span class="catalog-tab active" data-view="all">All </span>
-        <span class="catalog-tab" data-view="featured">Featured · 15</span>
-        <span class="catalog-tab" data-view="media">Media</span>
-        <span class="catalog-tab" data-view="trading">Trading</span>
-        <span class="catalog-tab" data-view="research">Research</span>
-        <span class="catalog-tab" data-view="risk">Risk</span>
-        <span class="catalog-tab" data-view="api">APIs</span>
-        <span class="catalog-tab" data-view="agent">Intelligence Agents</span>
-        <span class="catalog-tab" data-view="component">Components</span>
-      </div>
-
-      <div class="product-grid" id="productGrid">
-        <!-- Populated dynamically by assets/js/products.js -->
-      </div>
-
-      <p class="text-center text-mute small mt-6" id="resultCount">عرض وحدات المنصة · جميع الفئات</p>
     </div>
-
-  </div>
-      </div><!-- /catalogWrapper -->
   </section>
 
 
@@ -1535,22 +1555,6 @@ function renderProductGrid(filterFeatured = false) {
 
 // Render on load
 renderProductGrid();
-
-// === Reveal all modules on button click ===
-const revealBtn = document.getElementById('revealAllCaps');
-const catalogWrapper = document.getElementById('catalogWrapper');
-if (revealBtn && catalogWrapper) {
-  revealBtn.addEventListener('click', () => {
-    catalogWrapper.style.display = 'grid';
-    revealBtn.style.display = 'none';
-    // Re-render and filter after reveal
-    renderProductGrid();
-    // Smooth scroll to catalog
-    setTimeout(() => {
-      catalogWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  });
-}
 
 // Initial filter call to set counts
 filterProducts();
