@@ -126,7 +126,8 @@ body { class: motion-marketing; }
 
 /* === Stack network (sources branch) === */
 .stack-network { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-.stack-sources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-width: 400px; }
+.stack-sources { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.375rem; max-width: 500px; }
+@media (max-width: 600px) { .stack-sources { grid-template-columns: repeat(2, 1fr); } }
 .stack-source { padding: 0.625rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-top: 2px solid var(--emerald); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); text-align: center; }
 .stack-merge { color: var(--gold); opacity: 0.4; font-size: 1rem; margin: 0.25rem 0; }
 .stack-source-label { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
@@ -160,6 +161,39 @@ body { class: motion-marketing; }
 .next-ar { font-family: var(--font-ar); font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.375rem; }
 .next-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; margin-top: 0.25rem; }
 .next-arrow { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.75rem; margin: 0.25rem 0; }
+
+/* === Next operating model ending === */
+.next-operating-model { max-width: 600px; margin: 2rem auto 0; padding: 1.5rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-xl); text-align: center; }
+.next-om-text { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--gold); line-height: 1.5; margin-bottom: 0.375rem; }
+.next-om-ar { font-family: var(--font-ar); font-size: 0.875rem; color: var(--text); margin-bottom: 0.625rem; }
+.next-om-sub { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.08em; }
+
+/* === Recommended Paths: business outcomes === */
+.path-outcomes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.path-outcome { padding: 0.625rem; background: var(--surface); border-radius: var(--radius-sm); border-right: 2px solid var(--p-color); }
+.path-outcome-h { font-family: var(--font-en); font-size: 0.75rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.path-outcome-modules { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); line-height: 1.5; letter-spacing: 0.02em; }
+
+/* === Solutions: deployment metadata === */
+.sol-meta { margin: 0.5rem 0 0.625rem; padding: 0.625rem; background: var(--surface); border-radius: var(--radius-sm); }
+.sol-meta-row { display: flex; justify-content: space-between; padding: 0.25rem 0; border-bottom: 1px dashed var(--border-soft); }
+.sol-meta-row:last-child { border-bottom: none; }
+.sol-meta-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.08em; text-transform: uppercase; }
+.sol-meta-v { font-family: var(--font-en); font-size: 0.625rem; color: var(--text); font-weight: 600; }
+
+/* === Daily Operations === */
+.daily-ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+.daily-ops-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; border-top: 3px solid var(--d-color, var(--gold)); }
+.daily-ops-card.d-research { --d-color: var(--gold); }
+.daily-ops-card.d-risk { --d-color: var(--rose); }
+.daily-ops-card.d-trading { --d-color: var(--emerald); }
+.daily-ops-card.d-media { --d-color: var(--blue); }
+.daily-ops-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.daily-ops-scene { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); }
+.daily-ops-ar { font-family: var(--font-ar); font-size: 0.8125rem; color: var(--text-mute); margin-bottom: 0.5rem; }
+.daily-ops-time { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--d-color); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); display: inline-block; }
+.daily-ops-action { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.625rem; }
+.daily-ops-modules { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); padding-top: 0.5rem; border-top: 1px solid var(--border-soft); line-height: 1.5; }
 
 /* === Trust badge strip === */
 .trust-badge-strip { text-align: center; max-width: 900px; margin: 0 auto; }
@@ -333,6 +367,7 @@ body { class: motion-marketing; }
   </section>
 
 
+
   <!-- ============= TRUST BADGE ============= -->
   <section class="section reveal" id="trust-badge" style="padding: 2rem 0; background: var(--navy); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
@@ -349,34 +384,19 @@ body { class: motion-marketing; }
     </div>
   </section>
 
+
   <!-- ============= PLATFORM AT A GLANCE ============= -->
   <section class="section reveal" id="glance" style="padding: 2.5rem 0; border-bottom: 1px solid var(--border-soft);">
     <div class="container">
       <div class="glance-h">Platform at a Glance</div>
       <div class="glance-ar">المنصة لمحة</div>
       <div class="glance-grid">
-        <div class="glance-stat"><div class="glance-val">411</div><div class="glance-lbl">Official Institutions</div><div class="glance-sub">Continuously monitored</div></div>
+        <div class="glance-stat"><div class="glance-val">411</div><div class="glance-lbl">Official Sources</div><div class="glance-sub">Central banks · regulators · exchanges</div></div>
         <div class="glance-stat"><div class="glance-val">10K+</div><div class="glance-lbl">Indexed Documents</div><div class="glance-sub">24/7 ingestion</div></div>
         <div class="glance-stat"><div class="glance-val">1,247</div><div class="glance-lbl">Verified Facts</div><div class="glance-sub">Each → origin</div></div>
         <div class="glance-stat"><div class="glance-val">6</div><div class="glance-lbl">Supported Languages</div><div class="glance-sub">Arabic · English · +4</div></div>
         <div class="glance-stat"><div class="glance-val">7</div><div class="glance-lbl">Engine Layers</div><div class="glance-sub">Sources → Distribution</div></div>
         <div class="glance-stat"><div class="glance-val">24/7</div><div class="glance-lbl">Monitoring</div><div class="glance-sub">Never sleeps</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= WHY ROUAA ============= -->
-  <section class="section reveal" id="why-rouaa" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Why Institutions Choose ROUAA</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا تختار المؤسسات رؤى؟</h2>
-      </div>
-      <div class="why-rouaa-grid">
-        <div class="why-rouaa-card"><div class="why-rouaa-num">01</div><div class="why-rouaa-h">Official Sources First</div><div class="why-rouaa-ar">المصادر الرسمية أولاً</div><div class="why-rouaa-desc">411 مؤسسة رسمية مراقبة 24/7 — لا وكالات غير موثّقة، لا بيانات غير محقّق منها.</div></div>
-        <div class="why-rouaa-card"><div class="why-rouaa-num">02</div><div class="why-rouaa-h">Every Insight Has Evidence</div><div class="why-rouaa-ar">كل استخبارات لها دليل</div><div class="why-rouaa-desc">كل رقم مرتبط بصفحة وفقرة في المصدر الأصلي. كل قرار قابل للدفاع أمام لجنة أو منظّم.</div></div>
-        <div class="why-rouaa-card"><div class="why-rouaa-num">03</div><div class="why-rouaa-h">Knowledge Graph Connects Events</div><div class="why-rouaa-ar">رسم المعرفة يربط الأحداث</div><div class="why-rouaa-desc">شبكة علاقات مالية شاملة — كل حدث مرتبط بمن أثّر عليه، كل شركة مرتبطة بقطاعها وسلسلة توريدها.</div></div>
-        <div class="why-rouaa-card"><div class="why-rouaa-num">04</div><div class="why-rouaa-h">AI Reasoning With Audit Trail</div><div class="why-rouaa-ar">استدلال ذكي مع سجل تدقيق</div><div class="why-rouaa-desc">Multi-agent reasoning with traceable analysis workflows. كل خطوة مُسجّلة بدقة millisecond. كل قرار قابل لإعادة التشغيل والتحقق.</div></div>
       </div>
     </div>
   </section>
@@ -388,12 +408,13 @@ body { class: motion-marketing; }
       <div class="section-centered mb-8">
         <span class="section-tag" style="justify-content: center;">Evidence in Practice</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">لا نقول إننا موثوقون — نريك النظام يعمل</h2>
+        <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.5rem;">Illustrative Workflow · Representative Example</div>
         <p class="section-lead" style="margin: 0 auto;">مثال تمثيلي لكيفية تحوّل حدث رسمي إلى قرار مؤسسي موثّق. الأرقام توضيحية — البنية والسلسلة حقيقية. كل خطوة قابلة للتتبع، كل رقم له مصدر.</p>
       </div>
 
       <div class="evidence-demo">
         <div class="evidence-head">
-          <div class="evidence-source">📄 Federal Reserve · FOMC Statement · July 2026</div>
+          <div class="evidence-source">📄 Example: Federal Reserve · FOMC Statement</div>
           <div class="evidence-badge">ILLUSTRATIVE WORKFLOW · 7 STEPS</div>
         </div>
         <div class="evidence-steps">
@@ -440,53 +461,98 @@ body { class: motion-marketing; }
     </div>
   </section>
 
+
+  <!-- ============= WHY ROUAA ============= -->
+  <section class="section reveal" id="why-rouaa" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why Institutions Choose ROUAA</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا تختار المؤسسات رؤى؟</h2>
+      </div>
+      <div class="why-rouaa-grid">
+        <div class="why-rouaa-card"><div class="why-rouaa-num">01</div><div class="why-rouaa-h">Official Sources First</div><div class="why-rouaa-ar">المصادر الرسمية أولاً</div><div class="why-rouaa-desc">411 مؤسسة رسمية مراقبة 24/7 — لا وكالات غير موثّقة، لا بيانات غير محقّق منها.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">02</div><div class="why-rouaa-h">Every Insight Has Evidence</div><div class="why-rouaa-ar">كل استخبارات لها دليل</div><div class="why-rouaa-desc">كل رقم مرتبط بصفحة وفقرة في المصدر الأصلي. كل قرار قابل للدفاع أمام لجنة أو منظّم.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">03</div><div class="why-rouaa-h">Knowledge Graph Connects Events</div><div class="why-rouaa-ar">رسم المعرفة يربط الأحداث</div><div class="why-rouaa-desc">شبكة علاقات مالية شاملة — كل حدث مرتبط بمن أثّر عليه، كل شركة مرتبطة بقطاعها وسلسلة توريدها.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">04</div><div class="why-rouaa-h">AI Reasoning With Audit Trail</div><div class="why-rouaa-ar">استدلال ذكي مع سجل تدقيق</div><div class="why-rouaa-desc">Multi-agent reasoning with traceable analysis workflows. كل خطوة مُسجّلة بدقة millisecond. كل قرار قابل لإعادة التشغيل والتحقق.</div></div>
+      </div>
+    </div>
+  </section>
+
+
+
   <!-- ============= RECOMMENDED PATHS ============= -->
   <section class="section reveal" id="paths">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Recommended Paths</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">اختر نموذج التشغيل الخاص بك</h2>
-        <p class="section-lead" style="margin: 0 auto;">لا تتصفّح 44 وحدة. اختر نموذج تشغيلك، وابدأ بالوحدات التي تناسب مؤسستك.</p>
+        <p class="section-lead" style="margin: 0 auto;">المؤسسات تشتري نتائج، لا وحدات. اختر نموذج تشغيلك، وابدأ بالأهداف التي تحققها رؤى.</p>
       </div>
       <div class="paths-grid">
+
         <div class="path-card p-research">
           <div class="path-icon">📊</div>
           <div class="path-name">Investment Management</div>
           <div class="path-ar">إدارة الاستثمار</div>
-          <div class="path-h">Start with:</div>
-          <div class="path-items">
-            <a href="product.html?id=res-brief" class="path-item">✓ Intelligence Brief Generator</a>
-            <a href="product.html?id=risk-monitor" class="path-item">✓ Risk Event Monitor</a>
-            <a href="product.html?id=risk-exposure" class="path-item">✓ Exposure Analysis</a>
-            <a href="product.html?id=cmp-graph" class="path-item">✓ Knowledge Graph</a>
+          <div class="path-outcomes">
+            <div class="path-outcome">
+              <div class="path-outcome-h">Accelerate Research</div>
+              <div class="path-outcome-modules">Brief Generator · Committee Prep · Macro Agent</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Defend Decisions</div>
+              <div class="path-outcome-modules">Evidence API · Audit Trail · Knowledge Graph</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Monitor Risk</div>
+              <div class="path-outcome-modules">Risk Monitor · Exposure Analysis · Scenario Engine</div>
+            </div>
           </div>
         </div>
+
         <div class="path-card p-trading">
           <div class="path-icon">📈</div>
           <div class="path-name">Brokerage</div>
           <div class="path-ar">وساطة</div>
-          <div class="path-h">Start with:</div>
-          <div class="path-items">
-            <a href="product.html?id=trd-dashboard" class="path-item">✓ Trading Intelligence Dashboard</a>
-            <a href="product.html?id=trd-chart" class="path-item">✓ Smart Chart Intelligence</a>
-            <a href="product.html?id=trd-assistant" class="path-item">✓ Trading Assistant</a>
+          <div class="path-outcomes">
+            <div class="path-outcome">
+              <div class="path-outcome-h">Acquire Clients</div>
+              <div class="path-outcome-modules">Market Context · Smart Chart · Trading Assistant</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Retain Clients</div>
+              <div class="path-outcome-modules">Portfolio Intelligence · Content Agent · Daily Pulse</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Ensure Compliance</div>
+              <div class="path-outcome-modules">Audit Trail · Evidence Chain · Fact Verification</div>
+            </div>
           </div>
         </div>
+
         <div class="path-card p-media">
           <div class="path-icon">📰</div>
           <div class="path-name">Financial Publishing</div>
           <div class="path-ar">نشر مالي</div>
-          <div class="path-h">Start with:</div>
-          <div class="path-items">
-            <a href="product.html?id=med-agency" class="path-item">✓ News Agency Agent</a>
-            <a href="product.html?id=med-reports" class="path-item">✓ Reports Pipeline</a>
-            <a href="product.html?id=med-video" class="path-item">✓ Video Pipeline</a>
+          <div class="path-outcomes">
+            <div class="path-outcome">
+              <div class="path-outcome-h">Publish Faster</div>
+              <div class="path-outcome-modules">News Engine · News Agency Agent · Economic Calendar</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Differentiate Content</div>
+              <div class="path-outcome-modules">Video Pipeline · Infographic Pipeline · Audio Intelligence</div>
+            </div>
+            <div class="path-outcome">
+              <div class="path-outcome-h">Build Trust</div>
+              <div class="path-outcome-modules">Evidence Chain · Source Registry · Daily Pulse</div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
-
 
   <!-- ============= INSTITUTIONAL SOLUTIONS ============= -->
   <section class="section reveal" id="solutions" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
@@ -505,6 +571,12 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">منصة ذكاء الاستثمار</div>
           <div class="sol-for">For: Asset Managers · Hedge Funds · Sovereign Funds</div>
           <div class="sol-promise">اختصر دورة إعداد مذكرة اللجنة من أيام إلى دقائق، مع سلسلة أدلة كاملة.</div>
+          <div class="sol-meta">
+            <div class="sol-meta-row"><span class="sol-meta-h">Primary Buyer</span><span class="sol-meta-v">Head of Research</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Deployment</span><span class="sol-meta-v">4 weeks</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Typical Users</span><span class="sol-meta-v">120 analysts</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Integrations</span><span class="sol-meta-v">Bloomberg · Snowflake · Teams</span></div>
+          </div>
           <div class="sol-modules-h">Core Modules:</div>
           <div class="sol-modules">
             <a href="product.html?id=res-brief">Intelligence Brief Generator</a>
@@ -522,6 +594,12 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">بنية ذكاء السوق</div>
           <div class="sol-for">For: Brokers · Exchanges · FinTechs</div>
           <div class="sol-promise">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — واحتفظ بعميلك أطول.</div>
+          <div class="sol-meta">
+            <div class="sol-meta-row"><span class="sol-meta-h">Primary Buyer</span><span class="sol-meta-v">Head of Product</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Deployment</span><span class="sol-meta-v">3 weeks</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Typical Users</span><span class="sol-meta-v">80,000 clients</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Integrations</span><span class="sol-meta-v">MT5 · TradingView · CRM</span></div>
+          </div>
           <div class="sol-modules-h">Core Modules:</div>
           <div class="sol-modules">
             <a href="product.html?id=trd-dashboard">Trading Intelligence Dashboard</a>
@@ -538,6 +616,12 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">ذكاء الإعلام المالي</div>
           <div class="sol-for">For: Media Companies · Publishers</div>
           <div class="sol-promise">حوّل غرفة أخبار تقليدية إلى محرّك محتوى موثّق — في دقائق، بـ 6 لغات.</div>
+          <div class="sol-meta">
+            <div class="sol-meta-row"><span class="sol-meta-h">Primary Buyer</span><span class="sol-meta-v">Editor-in-Chief</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Deployment</span><span class="sol-meta-v">2 weeks</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Typical Users</span><span class="sol-meta-v">12 editors</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Integrations</span><span class="sol-meta-v">CMS · WordPress · YouTube</span></div>
+          </div>
           <div class="sol-modules-h">Core Modules:</div>
           <div class="sol-modules">
             <a href="product.html?id=med-agency">News Agency Agent</a>
@@ -553,6 +637,12 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">منصة واجهات الاستخبارات</div>
           <div class="sol-for">For: Developers · FinTech Builders</div>
           <div class="sol-promise">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، SDK، كل استجابة تحمل دليلها.</div>
+          <div class="sol-meta">
+            <div class="sol-meta-row"><span class="sol-meta-h">Primary Buyer</span><span class="sol-meta-v">CTO</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Deployment</span><span class="sol-meta-v">1 week</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Typical Users</span><span class="sol-meta-v">Development team</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Integrations</span><span class="sol-meta-v">REST · WebSocket · Python · JS</span></div>
+          </div>
           <div class="sol-modules-h">Core Modules:</div>
           <div class="sol-modules">
             <a href="product.html?id=api-events">Events API</a>
@@ -569,6 +659,12 @@ body { class: motion-marketing; }
           <div class="sol-name-ar">بنية الذكاء الخاصة</div>
           <div class="sol-for">For: Banks · Governments · Sovereign Institutions</div>
           <div class="sol-promise">بنية ذكاء كاملة داخل بيئتك — سيادة بيانات، امتثال، سجل تدقيق جاهز للمنظّمين.</div>
+          <div class="sol-meta">
+            <div class="sol-meta-row"><span class="sol-meta-h">Primary Buyer</span><span class="sol-meta-v">CRO · CIO</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Deployment</span><span class="sol-meta-v">6 weeks</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Typical Users</span><span class="sol-meta-v">Institution-wide</span></div>
+            <div class="sol-meta-row"><span class="sol-meta-h">Integrations</span><span class="sol-meta-v">On-premise · Private cloud</span></div>
+          </div>
           <div class="sol-modules-h">Core Modules:</div>
           <div class="sol-modules">
             <a href="product.html?id=cmp-source-registry">Source Registry</a>
@@ -581,6 +677,7 @@ body { class: motion-marketing; }
       </div>
     </div>
   </section>
+
 
 
 
@@ -597,8 +694,10 @@ body { class: motion-marketing; }
         <!-- Layer 1: Sources (3 branches) -->
         <div class="stack-sources">
           <div class="stack-source">📄 Documents</div>
-          <div class="stack-source">📊 Market Data</div>
           <div class="stack-source">📑 Filings</div>
+          <div class="stack-source">📊 Market Feeds</div>
+          <div class="stack-source">📈 Statistics</div>
+          <div class="stack-source">⚖ Regulatory Releases</div>
         </div>
         <div class="stack-merge">↓</div>
         <div class="stack-source-label">Official Sources · 411 institutions · T1/T2/T3</div>
@@ -658,6 +757,7 @@ body { class: motion-marketing; }
       <p class="text-center text-mute small mt-6">المصادر تتفرّع، ثم تتوحّد في المعرفة، ثم تتفرّع في التطبيقات. كل مخرج يحمل نفس سلسلة الأدلة.</p>
     </div>
   </section>
+
 
   <!-- ============= WHY THIS INFRASTRUCTURE IS DEFENSIBLE ============= -->
   <section class="section reveal" id="moat" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
@@ -720,6 +820,57 @@ body { class: motion-marketing; }
       <p class="text-center text-mute small mt-6">نماذج اللغة الكبيرة متاحة للجميع. التمايز طويل الأمد يأتي من بنية بيانات موثّقة، وسلسلة إثبات، ومعرفة قطاعية، وحوكمة مؤسسية — سنوات من البناء لا يمكن نسخها.</p>
     </div>
   </section>
+
+
+  <!-- ============= ROUAA IN DAILY OPERATIONS ============= -->
+  <section class="section reveal" id="daily-ops">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">ROUAA in Daily Operations</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تصبح رؤى جزءاً من عملك اليومي؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">ليست بنية نظرية — هذه سيناريوهات حقيقية لاستخدام رؤى داخل بيئات مؤسسية مختلفة، كل يوم.</p>
+      </div>
+
+      <div class="daily-ops-grid">
+        <div class="daily-ops-card d-research">
+          <div class="daily-ops-icon">📊</div>
+          <div class="daily-ops-scene">Investment Committee</div>
+          <div class="daily-ops-ar">لجنة الاستثمار</div>
+          <div class="daily-ops-time">Before the meeting</div>
+          <div class="daily-ops-action">مذكرة قرار جاهزة قبل الاجتماع — مع سلسلة أدلة كاملة، سيناريوهات، وتوصية محدودة بـ 85%.</div>
+          <div class="daily-ops-modules">Brief Generator · Committee Prep · Evidence API</div>
+        </div>
+        <div class="daily-ops-card d-risk">
+          <div class="daily-ops-icon">⚠</div>
+          <div class="daily-ops-scene">Risk Desk</div>
+          <div class="daily-ops-ar">مكتب المخاطر</div>
+          <div class="daily-ops-time">When markets move</div>
+          <div class="daily-ops-action">تنبيه مخاطر مرتبط بتعرّض المحفظة — من حدث عالمي إلى إجراء محتمل في دقائق، مع سجل امتثال.</div>
+          <div class="daily-ops-modules">Risk Monitor · Exposure Analysis · Scenario Engine</div>
+        </div>
+        <div class="daily-ops-card d-trading">
+          <div class="daily-ops-icon">📈</div>
+          <div class="daily-ops-scene">Trading Platform</div>
+          <div class="daily-ops-ar">منصة التداول</div>
+          <div class="daily-ops-time">Inside the chart</div>
+          <div class="daily-ops-action">تفسير حركة السوق داخل الرسم البياني — «لماذا تحرّك هذا السهم؟» يجيب رؤى بالدليل، داخل منصة البروكر.</div>
+          <div class="daily-ops-modules">Market Context · Smart Chart · Trading Assistant</div>
+        </div>
+        <div class="daily-ops-card d-media">
+          <div class="daily-ops-icon">📰</div>
+          <div class="daily-ops-scene">Financial Newsroom</div>
+          <div class="daily-ops-ar">غرفة الأخبار المالية</div>
+          <div class="daily-ops-time">When news breaks</div>
+          <div class="daily-ops-action">خبر منشور مع سلسلة أدلة — من بيان رسمي إلى محتوى جاهز للنشر في دقائق، بـ 6 لغات، موثّق بالكامل.</div>
+          <div class="daily-ops-modules">News Engine · Video Pipeline · Daily Pulse</div>
+        </div>
+      </div>
+
+      <p class="text-center text-mute small mt-6">ليست بنية على ورق — هذه منصة تُستخدم يومياً داخل لجان الاستثمار، مكاتب المخاطر، منصات التداول، وغرف الأخبار.</p>
+    </div>
+  </section>
+
+
 
   <!-- ============= CATALOG ============= -->
   <section class="section reveal" id="all-modules">
@@ -791,6 +942,7 @@ body { class: motion-marketing; }
   </section>
 
 
+
   <!-- ============= WHAT HAPPENS NEXT ============= -->
   <section class="section reveal" id="next-steps" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
@@ -851,9 +1003,14 @@ body { class: motion-marketing; }
         </div>
       </div>
 
-      <p class="text-center text-mute small mt-6">من القرار إلى الإنتاج في 4 أسابيع — ثم نمو مستمر. ليست مشروعاً لمرة واحدة، بل بنية تحتية تتطور مع مؤسستك.</p>
+      <div class="next-operating-model">
+        <div class="next-om-text">After production, ROUAA becomes part of your institutional operating model.</div>
+        <div class="next-om-ar">بعد الإنتاج، تصبح رؤى جزءاً من نموذج التشغيل المؤسسي لديك.</div>
+        <div class="next-om-sub">New sources · New workflows · New departments · Same infrastructure</div>
+      </div>
     </div>
   </section>
+
 
   <!-- ============= CTA ============= -->
   <section class="cta-final reveal" id="contact">
@@ -864,6 +1021,295 @@ body { class: motion-marketing; }
       <a href="mailto:contact@rouaa.ai?subject=Design Intelligence Stack" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
     </div>
   </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
+        <li><a href="catalog.html" class="small text-dim">Platform Modules</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script src="assets/js/products.js"></script>
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// === Catalog Filtering — 3 dimensions: Category + Industry + Deployment ===
+let cards = document.querySelectorAll('.product-card');
+const tabs = document.querySelectorAll('.catalog-tab');
+const search = document.getElementById('catalogSearch');
+const resultCount = document.getElementById('resultCount');
+
+const catCheckboxes = document.querySelectorAll('.filter-cat');
+const indCheckboxes = document.querySelectorAll('.filter-ind');
+const deployCheckboxes = document.querySelectorAll('.filter-deploy');
+
+function getChecked(checkboxes) {
+  return Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
+}
+
+function intersect(arr1, arr2) {
+  // Returns true if any item in arr1 is in arr2
+  return arr1.some(v => arr2.includes(v));
+}
+
+function filterProducts() {
+  const activeCats = getChecked(catCheckboxes);
+  const activeInds = getChecked(indCheckboxes);
+  const activeDeploys = getChecked(deployCheckboxes);
+  const searchTerm = (search?.value || '').toLowerCase();
+
+  let visible = 0;
+  const catCounts = {};
+
+  cards.forEach(card => {
+    const cat = card.dataset.cat || '';
+    const inds = (card.dataset.ind || '').split(' ');
+    const roles = (card.dataset.role || '').split(' ');
+    const deploys = (card.dataset.deploy || '').split(' ');
+    const name = (card.dataset.name || '').toLowerCase();
+    const text = card.innerText.toLowerCase();
+
+    const catMatch = activeCats.includes(cat);
+    const indMatch = activeInds.length === 0 || intersect(inds, activeInds);
+    const deployMatch = activeDeploys.length === 0 || intersect(deploys, activeDeploys);
+    const searchMatch = !searchTerm || name.includes(searchTerm) || text.includes(searchTerm);
+
+    if (catMatch && indMatch && deployMatch && searchMatch) {
+      card.style.display = '';
+      visible++;
+      catCounts[cat] = (catCounts[cat] || 0) + 1;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  let label = 'all';
+  if (activeCats.length === 1) label = activeCats[0];
+  else if (activeCats.length > 1 && activeCats.length < 7) label = `${activeCats.length} categories`;
+  
+  const indLabel = activeInds.length > 0 ? ` · ${activeInds.length} industries` : '';
+  
+  resultCount.textContent = `عرض ${visible} وحدة · ${label}${indLabel}`;
+
+  tabs.forEach(tab => {
+    const view = tab.dataset.view;
+    if (view === 'all') {
+      tab.textContent = `All · ${visible}`;
+    } else if (view === 'featured') {
+      tab.textContent = `Featured`;
+    } else {
+      tab.textContent = view.charAt(0).toUpperCase() + view.slice(1);
+    }
+  });
+}
+
+// Tab click — filter by category (resets Industry/Role/Deploy)
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const view = tab.dataset.view;
+
+    if (view === 'featured') {
+      renderProductGrid(true);
+      return;
+    }
+    if (view === 'all') {
+      catCheckboxes.forEach(c => c.checked = true);
+      renderProductGrid(false);
+    } else {
+      catCheckboxes.forEach(c => c.checked = (c.value === view));
+      renderProductGrid(false);
+    }
+  });
+});
+
+// All checkbox changes — reset tabs to "all" view
+function resetTabs() {
+  tabs.forEach(t => t.classList.remove('active'));
+  document.querySelector('.catalog-tab[data-view="all"]')?.classList.add('active');
+}
+
+[...catCheckboxes, ...indCheckboxes, ...deployCheckboxes].forEach(c => {
+  c.addEventListener('change', () => {
+    resetTabs();
+    filterProducts();
+  });
+});
+
+// Search
+search?.addEventListener('input', filterProducts);
+
+// === Render product cards dynamically from ROUAA_PRODUCTS data ===
+const CATEGORY_INFO = {
+  media: { name: 'Media', nameAr: 'إعلام مالي', color: 'blue', icon: '📰' },
+  trading: { name: 'Trading', nameAr: 'تداول', color: 'emerald', icon: '📈' },
+  research: { name: 'Research', nameAr: 'أبحاث', color: 'gold', icon: '📊' },
+  risk: { name: 'Risk', nameAr: 'مخاطر', color: 'rose', icon: '⚠' },
+  api: { name: 'API', nameAr: 'واجهة', color: 'amber', icon: '🔌' },
+  agent: { name: 'Intelligence Agent', nameAr: 'وكيل استخبارات', color: 'blue', icon: '🤖' },
+  component: { name: 'Component', nameAr: 'مكوّن', color: 'mute', icon: '🧩' },
+};
+
+// Featured modules — 15 selected across all categories
+const FEATURED_IDS = new Set([
+  'med-news-engine', 'med-video', 'med-pulse',
+  'trd-dashboard', 'trd-chart', 'trd-ai-council',
+  'res-brief', 'res-committee', 'res-deepdive',
+  'risk-monitor', 'risk-exposure', 'risk-scenario',
+  'api-events', 'api-facts', 'cmp-graph',
+]);
+
+// Problem text per category — what problem does this capability solve?
+const CATEGORY_PROBLEMS = {
+  media: 'المؤسسات الإعلامية تعتمد على وكالات خارجية للأخبار المالية.',
+  trading: 'البروكرات يقدمون أسعاراً لكن العملاء يريدون فهم «لماذا».',
+  research: 'مذكرات اللجنة تستغرق أيام، والقرارات بلا سلسلة أدلة.',
+  risk: 'الأحداث العالمية تقع قبل أن تكتشف المؤسسة تعرّضها.',
+  api: 'فرق المنتجات المالية تبني الأنبوب لسنوات بدلاً من بناء المنتج.',
+  agent: 'التحليلات تُنتج بلا مراجعة أقران أو تدقيق حقائق.',
+  component: 'البنية التحتية للذكاء تُعاد بناؤها في كل مؤسسة.',
+};
+
+function renderProductCard(product) {
+  const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
+  const desc = (product.desc || '').substring(0, 100) + (product.desc.length > 100 ? '...' : '');
+  const outcome = (product.tagline || '').substring(0, 70);
+  const deploys = product.deploy || [];
+  const deployBadges = [
+    { key: 'api', label: 'API' },
+    { key: 'saas', label: 'SaaS' },
+    { key: 'whitelabel', label: 'WL' },
+    { key: 'enterprise', label: 'Ent' },
+  ].filter(d => deploys.includes(d.key)).map(d => `<span class="deploy-badge">${d.label}</span>`).join('');
+  const featuredBadge = FEATURED_IDS.has(product.id) ? '<span class="featured-badge">★</span>' : '';
+  return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}" data-featured="${FEATURED_IDS.has(product.id)}">
+    <div class="product-card-head">
+      <div class="product-card-tag">${cat.icon} ${cat.name}</div>
+      ${featuredBadge}
+    </div>
+    <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
+    <div class="product-card-desc">${desc}</div>
+    <div class="product-card-outcome">
+      <div class="outcome-text">${outcome}</div>
+    </div>
+    <div class="product-card-foot">
+      <div class="deploy-badges">${deployBadges}</div>
+      <span class="product-card-link">→</span>
+    </div>
+  </a>`;
+}
+
+function renderProductGrid(filterFeatured = false) {
+  const grid = document.getElementById('productGrid');
+  if (!grid || typeof ROUAA_PRODUCTS === 'undefined') return;
+  const products = filterFeatured 
+    ? ROUAA_PRODUCTS.filter(p => FEATURED_IDS.has(p.id))
+    : ROUAA_PRODUCTS;
+  grid.innerHTML = products.map(renderProductCard).join('');
+  cards = document.querySelectorAll('.product-card');
+  filterProducts();
+}
+
+// Render on load
+renderProductGrid();
+
+// === Reveal all modules on button click ===
+const revealBtn = document.getElementById('revealAllCaps');
+const catalogWrapper = document.getElementById('catalogWrapper');
+if (revealBtn && catalogWrapper) {
+  revealBtn.addEventListener('click', () => {
+    catalogWrapper.style.display = 'grid';
+    revealBtn.style.display = 'none';
+    // Re-render and filter after reveal
+    renderProductGrid();
+    // Smooth scroll to catalog
+    setTimeout(() => {
+      catalogWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  });
+}
+
+// Initial filter call to set counts
+filterProducts();
+
+// === Fix product links for htmlpreview ===
+// htmlpreview doesn't rewrite relative links with query params correctly.
+// Detect if we're on htmlpreview and rewrite product.html links.
+(function() {
+  if (window.location.hostname !== 'htmlpreview.github.io') return;
+  
+  function rewriteLinks() {
+    document.querySelectorAll('a[href^="product.html"], a[href^="./product.html"]').forEach(a => {
+      const href = a.getAttribute('href');
+      // Extract the path and query
+      const match = href.match(/^(?:\.\/)?product\.html(\?id=([^&]+))?/);
+      if (match) {
+        const id = match[2] || '';
+        const newHref = 'https://htmlpreview.github.io/?https://github.com/jsiadyarslan-lab/rouaa-corporate/blob/redesign-v20-architecture/product.html' + (id ? '?id=' + id : '');
+        a.setAttribute('href', newHref);
+        a.setAttribute('target', '_self');
+      }
+    });
+  }
+  
+  // Rewrite on load
+  rewriteLinks();
+  
+  // Re-rewrite after dynamic card generation (with mutation observer)
+  const observer = new MutationObserver(() => rewriteLinks());
+  observer.observe(document.getElementById('productGrid') || document.body, { childList: true, subtree: true });
+})();
+</script>
+
+</body>
+</html>
+
 
 </main>
 
