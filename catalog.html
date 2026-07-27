@@ -1214,7 +1214,41 @@ body { class: motion-marketing; }
       </div>
 
       <div class="text-center mt-6">
-        <a href="catalog.html" class="btn btn-primary btn-lg">Browse Full Catalog →</a>
+        <button id="showFullCatalog" class="btn btn-primary btn-lg">Browse Full Catalog ↓</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FULL CATALOG (hidden, revealed on click) ============= -->
+  <section class="section reveal" id="full-catalog" style="display: none;">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Full Catalog</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كل الوحدات</h2>
+        <p class="section-lead" style="margin: 0 auto;">استخدم الفلاتر للعثور على ما يناسب مؤسستك.</p>
+      </div>
+
+      <div class="catalog-layout">
+        <aside class="catalog-filters">
+          <div class="filter-group">
+            <div class="filter-h">What do you need to solve?</div>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Media Intelligence</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Market Intelligence</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research Intelligence</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk Intelligence</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Developer Platform</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Intelligence Agents</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-h">Search</div>
+            <input type="text" id="catalogSearch" placeholder="ابحث..." style="width: 100%; padding: 0.5rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.8125rem;">
+          </div>
+        </aside>
+        <div>
+          <div class="product-grid" id="productGrid"></div>
+          <p class="text-center text-mute small mt-6" id="resultCount">عرض الوحدات · جميع الفئات</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1590,6 +1624,20 @@ function renderProductGrid(filterFeatured = false) {
 
 // Render on load
 renderProductGrid();
+
+// === Show full catalog on button click ===
+const showBtn = document.getElementById('showFullCatalog');
+const fullCatalog = document.getElementById('full-catalog');
+if (showBtn && fullCatalog) {
+  showBtn.addEventListener('click', () => {
+    fullCatalog.style.display = 'block';
+    showBtn.style.display = 'none';
+    renderProductGrid();
+    setTimeout(() => {
+      fullCatalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  });
+}
 
 // Initial filter call to set counts
 filterProducts();
