@@ -82,6 +82,22 @@ body { class: motion-marketing; }
 .product-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
 .product-card-price { font-family: var(--font-mono); font-size: 0.625rem; color: var(--cat-color, var(--gold)); }
 .product-card-link { font-family: var(--font-en); font-size: 0.625rem; color: var(--text-mute); }
+.product-card-explore { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); letter-spacing: 0.02em; }
+
+/* === Business Outcome === */
+.product-card-outcome { margin-top: 0.625rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
+.outcome-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.outcome-text { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
+/* === Deployment badges === */
+.product-card-deploy { margin-top: 0.5rem; }
+.deploy-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.deploy-badges { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.deploy-badge { font-family: var(--font-mono); font-size: 0.5rem; color: var(--cat-color, var(--gold)); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
+.deploy-badge::before { content: '✓ '; color: var(--emerald); }
+
+/* === Featured badge === */
+.featured-badge { display: inline-block; margin-right: 0.375rem; font-family: var(--font-mono); font-size: 0.5rem; color: var(--gold); padding: 0.125rem 0.375rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
 
 /* === Powered badge === */
 .powered-badge { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem; text-align: center; }
@@ -89,6 +105,12 @@ body { class: motion-marketing; }
 .powered-badge-items { display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
 .powered-badge-item { font-family: var(--font-en); font-size: 0.75rem; color: var(--gold); font-weight: 600; display: flex; align-items: center; gap: 0.25rem; }
 .powered-badge-item::before { content: '✓'; color: var(--emerald); font-weight: 700; }
+
+/* === Institutional trust strip === */
+.institutional-trust-strip { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-soft); }
+.institutional-trust-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.institutional-trust-items { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.it-item { font-family: var(--font-en); font-size: 0.6875rem; color: var(--emerald); font-weight: 600; letter-spacing: 0.02em; }
 
 /* === CTA === */
 .cta-final { text-align: center; padding: 4rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
@@ -154,9 +176,9 @@ body { class: motion-marketing; }
     <div class="catalog-hero-bg"></div>
     <div class="container">
       <div class="catalog-hero-content">
-        <div class="mono-label text-gold">Product Catalog</div>
-        <h1>Solve Your <span class="gold">Institutional Intelligence Problem</span></h1>
-        <p>حدد مشكلة مؤسستك، واكتشف القدرات التي تحلها — كلها مبنية على نفس البنية التحتية للذكاء المؤسسي.</p>
+        <div class="mono-label text-gold">Capability Map</div>
+        <h1>Activate <span class="gold">Institutional Intelligence Capabilities</span></h1>
+        <p>فعّل قدرات الذكاء المؤسسي التي تحتاجها — كلها مبنية على نفس البنية التحتية للذكاء الموثّق.</p>
       </div>
       <div class="catalog-search">
         <span class="catalog-search-icon">🔍</span>
@@ -165,7 +187,7 @@ body { class: motion-marketing; }
     </div>
   </section>
 
-  <!-- Powered badge -->
+  <!-- Powered badge + Institutional Trust strip -->
   <div class="powered-badge">
     <div class="powered-badge-text">All products powered by</div>
     <div class="powered-badge-items">
@@ -173,6 +195,15 @@ body { class: motion-marketing; }
       <span class="powered-badge-item">Evidence Layer</span>
       <span class="powered-badge-item">Knowledge Graph</span>
       <span class="powered-badge-item">Reasoning Engine</span>
+    </div>
+    <div class="institutional-trust-strip">
+      <div class="institutional-trust-h">Built for institutional environments</div>
+      <div class="institutional-trust-items">
+        <span class="it-item">✓ Audit-ready</span>
+        <span class="it-item">✓ Evidence-backed</span>
+        <span class="it-item">✓ Enterprise deployment</span>
+        <span class="it-item">✓ Private infrastructure options</span>
+      </div>
     </div>
   </div>
 
@@ -182,13 +213,13 @@ body { class: motion-marketing; }
     <!-- Filters sidebar -->
     <aside class="catalog-filters">
       <div class="filter-group">
-        <div class="filter-h">I Need</div>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research Automation <span class="filter-count">6</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk Monitoring <span class="filter-count">5</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Market Intelligence <span class="filter-count">9</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Content Generation <span class="filter-count">8</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Data Integration <span class="filter-count">7</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Decision Support <span class="filter-count">4</span></label>
+        <div class="filter-h">Business Need</div>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Automate Research <span class="filter-count">6</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Monitor Risk <span class="filter-count">5</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Understand Markets <span class="filter-count">9</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Generate Intelligence <span class="filter-count">8</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Integrate Data <span class="filter-count">7</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Support Decisions <span class="filter-count">4</span></label>
         <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components <span class="filter-count">5</span></label>
       </div>
 
@@ -227,12 +258,13 @@ body { class: motion-marketing; }
     <div>
       <div class="catalog-tabs">
         <span class="catalog-tab active" data-view="all">All · 44</span>
+        <span class="catalog-tab" data-view="featured">Featured · 15</span>
         <span class="catalog-tab" data-view="media">Media</span>
         <span class="catalog-tab" data-view="trading">Trading</span>
         <span class="catalog-tab" data-view="research">Research</span>
         <span class="catalog-tab" data-view="risk">Risk</span>
         <span class="catalog-tab" data-view="api">APIs</span>
-        <span class="catalog-tab" data-view="agent">AI Agents</span>
+        <span class="catalog-tab" data-view="agent">Intelligence Agents</span>
         <span class="catalog-tab" data-view="component">Components</span>
       </div>
 
@@ -249,9 +281,9 @@ body { class: motion-marketing; }
   <section class="cta-final reveal" id="contact">
     <div class="container">
       <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>Which products fit your institution?</h2>
-      <p>مكالمة 30 دقيقة — نساعدك في اختيار المنتجات المناسبة لاحتياجك.</p>
-      <a href="mailto:contact@rouaa.ai?subject=Product Catalog Inquiry" class="btn btn-primary btn-lg">Request Briefing</a>
+      <h2>Which intelligence capability fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك في اختيار القدرات المناسبة لاحتياج مؤسستك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Capability Map Inquiry" class="btn btn-primary btn-lg">Request Briefing</a>
     </div>
   </section>
 
@@ -392,12 +424,17 @@ tabs.forEach(tab => {
     tab.classList.add('active');
     const view = tab.dataset.view;
 
+    if (view === 'featured') {
+      renderProductGrid(true);
+      return;
+    }
     if (view === 'all') {
       catCheckboxes.forEach(c => c.checked = true);
+      renderProductGrid(false);
     } else {
       catCheckboxes.forEach(c => c.checked = (c.value === view));
+      renderProductGrid(false);
     }
-    filterProducts();
   });
 });
 
@@ -424,35 +461,56 @@ const CATEGORY_INFO = {
   research: { name: 'Research', nameAr: 'أبحاث', color: 'gold', icon: '📊' },
   risk: { name: 'Risk', nameAr: 'مخاطر', color: 'rose', icon: '⚠' },
   api: { name: 'API', nameAr: 'واجهة', color: 'amber', icon: '🔌' },
-  agent: { name: 'AI Agent', nameAr: 'وكيل ذكي', color: 'blue', icon: '🤖' },
+  agent: { name: 'Intelligence Agent', nameAr: 'وكيل استخبارات', color: 'blue', icon: '🤖' },
   component: { name: 'Component', nameAr: 'مكوّن', color: 'mute', icon: '🧩' },
 };
+
+// Featured capabilities — 15 selected across all categories
+const FEATURED_IDS = new Set([
+  'med-news-engine', 'med-video', 'med-pulse',
+  'trd-dashboard', 'trd-chart', 'trd-ai-council',
+  'res-brief', 'res-committee', 'res-deepdive',
+  'risk-monitor', 'risk-exposure', 'risk-scenario',
+  'api-events', 'api-facts', 'cmp-graph',
+]);
 
 function renderProductCard(product) {
   const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
   const desc = (product.desc || '').substring(0, 90) + (product.desc.length > 90 ? '...' : '');
   const outcome = (product.tagline || '').substring(0, 60);
-  const deployLabel = product.deploy.includes('enterprise') ? 'Enterprise' : 
-                     product.deploy.includes('api') ? 'API' : 'Private Cloud';
-  return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}">
-    <div class="product-card-tag">${cat.icon} ${cat.name}</div>
+  // Build deployment badges
+  const deploys = product.deploy || [];
+  const deployBadges = [
+    { key: 'api', label: 'API' },
+    { key: 'saas', label: 'SaaS' },
+    { key: 'whitelabel', label: 'White Label' },
+    { key: 'enterprise', label: 'Enterprise' },
+  ].filter(d => deploys.includes(d.key)).map(d => `<span class="deploy-badge">${d.label}</span>`).join('');
+  const featuredBadge = FEATURED_IDS.has(product.id) ? '<span class="featured-badge">★ Featured</span>' : '';
+  return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}" data-featured="${FEATURED_IDS.has(product.id)}">
+    <div class="product-card-tag">${cat.icon} ${cat.name}${featuredBadge}</div>
     <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
     <div class="product-card-desc">${desc}</div>
-    <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-soft);">
-      <div style="font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Business Outcome</div>
-      <div style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5;">${outcome}</div>
+    <div class="product-card-outcome">
+      <div class="outcome-h">Business Outcome</div>
+      <div class="outcome-text">${outcome}</div>
     </div>
-    <div class="product-card-foot"><span style="color: var(--text-mute); font-size: 0.75rem;">${deployLabel} Deployment</span><span class="product-card-link">→</span></div>
+    <div class="product-card-deploy">
+      <div class="deploy-h">Deployment</div>
+      <div class="deploy-badges">${deployBadges}</div>
+    </div>
+    <div class="product-card-foot"><span class="product-card-explore">Explore capability</span><span class="product-card-link">→</span></div>
   </a>`;
 }
 
-function renderProductGrid() {
+function renderProductGrid(filterFeatured = false) {
   const grid = document.getElementById('productGrid');
   if (!grid || typeof ROUAA_PRODUCTS === 'undefined') return;
-  grid.innerHTML = ROUAA_PRODUCTS.map(renderProductCard).join('');
-  // Re-bind cards variable
+  const products = filterFeatured 
+    ? ROUAA_PRODUCTS.filter(p => FEATURED_IDS.has(p.id))
+    : ROUAA_PRODUCTS;
+  grid.innerHTML = products.map(renderProductCard).join('');
   cards = document.querySelectorAll('.product-card');
-  // Re-apply filter
   filterProducts();
 }
 

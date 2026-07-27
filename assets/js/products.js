@@ -222,10 +222,10 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-auto',
     cat: 'trading',
-    nameEn: 'Execution Intelligence Layer',
-    nameAr: 'التاجر المستقل',
-    tagline: 'تنفيذ آلي وفق قواعد العميل — لا قرارات رؤى',
-    desc: 'محرّك تنفيذ آلي يطبّق قواعد العميل المحددة سلفاً. رؤى لا تقترح، تنفّذ ما قرره العميل — مع سجل كامل.',
+    nameEn: 'Trading Workflow Automation',
+    nameAr: 'أتمتة سير عمل التداول',
+    tagline: 'أتمتة سير عمل تداول محدّد مسبقاً مع سجل تدقيق كامل',
+    desc: 'محرّك أتمتة سير العمل يطبّق قواعد العميل المحددة سلفاً. رؤى لا تقترح صفقات، تنفّذ ما قرره العميل — مع سجل تدقيق كامل قابل للمراجعة.',
     industries: ['brokers', 'funds'],
     roles: ['broker', 'cio'],
     deploy: ['enterprise', 'api'],
@@ -530,7 +530,7 @@ const ROUAA_PRODUCTS = [
     cat: 'api',
     nameEn: 'Official SDK',
     nameAr: 'حزمة SDK الرسمية',
-    tagline: 'Python · JS · Java — جاهزة',
+    tagline: 'Integrate verified intelligence into your products',
     desc: 'حزمة SDK رسمية بلغات متعددة: Python، JavaScript، Java، Go. توثيق كامل، أمثلة، دعم.',
     industries: ['fintech'],
     roles: ['cto', 'founder'],
@@ -541,11 +541,11 @@ const ROUAA_PRODUCTS = [
     integration: 'pip · npm · maven · go get',
   },
 
-  // === AI AGENTS (4) ===
+  // === INTELLIGENCE AGENTS (4) — Specialized AI analysts powered by Evidence Layer + Knowledge Graph + Reasoning Engine ===
   {
     id: 'agt-macro',
     cat: 'agent',
-    nameEn: 'Macro Analyst Agent',
+    nameEn: 'Macro Intelligence Agent',
     nameAr: 'وكيل المحلل الكلي',
     tagline: 'محلل ماكرو يعمل 24/7',
     desc: 'وكيل ذكي متخصص في الاقتصاد الكلي: أسعار الفائدة، التضخم، النمو، البطالة. يحلل، يكتب، يتنبّه.',
@@ -560,7 +560,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'agt-sector',
     cat: 'agent',
-    nameEn: 'Sector Analyst Agent',
+    nameEn: 'Sector Intelligence Agent',
     nameAr: 'وكيل المحلل القطاعي',
     tagline: 'محلل قطاعي لكل قطاع',
     desc: 'وكيل متخصص في قطاع محدد: الطاقة، البنوك، التقنية، العقارات. يعرف شركاته، معاييره، مؤشراته.',
@@ -575,7 +575,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'agt-risk',
     cat: 'agent',
-    nameEn: 'Risk Officer Agent',
+    nameEn: 'Risk Intelligence Agent',
     nameAr: 'وكيل مسؤول المخاطر',
     tagline: 'مسؤول مخاطر يعمل 24/7',
     desc: 'وكيل يحلل المخاطر بشكل مستمر: ما الجيوسياسي، ما السوقي، ما التشغيلي. يتنبّه قبل وقوع المشكلة.',
@@ -590,7 +590,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'agt-fact-checker',
     cat: 'agent',
-    nameEn: 'Fact Checker Agent',
+    nameEn: 'Fact Verification Agent',
     nameAr: 'وكيل مدقق الحقائق',
     tagline: 'مدقق حقائق يعمل قبل النشر',
     desc: 'وكيل يراجع كل تحليل قبل النشر: هل كل رقم صحيح؟ هل كل مصدر موثّق؟ هل كل استنتاج متماسك؟',
