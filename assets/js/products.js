@@ -192,7 +192,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-lab',
     cat: 'trading',
-    nameEn: 'Neural Trading Lab',
+    nameEn: 'Investment Strategy Intelligence Lab',
     nameAr: 'مختبر التداول العصبي',
     tagline: 'اختبر استراتيجياتك على أحداث موثّقة',
     desc: 'مختبر backtesting يحاكي استراتيجية العميل على أحداث تاريخية موثّقة — ليس فقط أسعار تاريخية، بل سياق كامل.',
@@ -207,7 +207,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-ai-council',
     cat: 'trading',
-    nameEn: 'Market Intelligence Council',
+    nameEn: 'Multi-Agent Market Intelligence System',
     nameAr: 'مجلس التداول الذكي',
     tagline: '10 وكلاء يتشاورون قبل كل توصية',
     desc: 'مجلس من 10 وكلاء ذكيين متخصصين (ماكرو، قطاعي، فني، مخاطر...) يتشاورون قبل كل تحليل — الإجماع فقط يُنشر.',
@@ -237,7 +237,7 @@ const ROUAA_PRODUCTS = [
   {
     id: 'trd-prediction',
     cat: 'trading',
-    nameEn: 'Scenario Probability Engine',
+    nameEn: 'Scenario Intelligence Engine',
     nameAr: 'سوق التنبؤات',
     tagline: 'سيناريوهات مستقبلية — باحتمالاتها',
     desc: 'لكل حدث قادم، يولّد رؤى 3-5 سيناريوهات محتملة مع احتمالاتهم. لا تنبّؤ واحد — احتمالات شفافة.',

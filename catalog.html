@@ -99,6 +99,39 @@ body { class: motion-marketing; }
 /* === Featured badge === */
 .featured-badge { display: inline-block; margin-right: 0.375rem; font-family: var(--font-mono); font-size: 0.5rem; color: var(--gold); padding: 0.125rem 0.375rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
 
+/* === Architectural framing === */
+.arch-framing { max-width: 800px; margin: 1.5rem auto; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+.arch-framing-block { padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); }
+.arch-framing-block.center { background: var(--gold-dim); border-color: rgba(200,169,81,0.3); color: var(--gold); }
+.arch-framing-arrow { color: var(--gold); opacity: 0.3; font-size: 0.75rem; }
+
+/* === Why ROUAA === */
+.why-rouaa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+.why-rouaa-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; border-top: 2px solid var(--gold); }
+.why-rouaa-num { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.why-rouaa-h { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.125rem; }
+.why-rouaa-ar { font-family: var(--font-ar); font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.5rem; }
+.why-rouaa-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
+/* === Recommended Paths === */
+.paths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.path-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; border-top: 3px solid var(--p-color, var(--gold)); }
+.path-card.p-research { --p-color: var(--gold); }
+.path-card.p-trading { --p-color: var(--emerald); }
+.path-card.p-media { --p-color: var(--blue); }
+.path-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.path-name { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); }
+.path-ar { font-family: var(--font-ar); font-size: 0.8125rem; color: var(--text-mute); margin-bottom: 0.75rem; }
+.path-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.path-items { display: flex; flex-direction: column; gap: 0.25rem; }
+.path-item { font-family: var(--font-en); font-size: 0.75rem; color: var(--text-dim); text-decoration: none; padding: 0.375rem 0.5rem; background: var(--surface); border-radius: var(--radius-sm); border-right: 2px solid var(--p-color); transition: all var(--transition-base); }
+.path-item:hover { color: var(--p-color); background: rgba(255,255,255,0.04); }
+
+/* === Problem field in cards === */
+.product-card-problem { margin-top: 0.5rem; padding: 0.5rem; background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.15); border-radius: var(--radius-sm); }
+.problem-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--rose); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.problem-text { font-size: 0.6875rem; color: var(--text-mute); line-height: 1.4; }
+
 /* === Powered badge === */
 .powered-badge { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem; text-align: center; }
 .powered-badge-text { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
@@ -177,19 +210,28 @@ body { class: motion-marketing; }
     <div class="container">
       <div class="catalog-hero-content">
         <div class="mono-label text-gold">Capability Map</div>
-        <h1>Activate <span class="gold">Institutional Intelligence Capabilities</span></h1>
-        <p>فعّل قدرات الذكاء المؤسسي التي تحتاجها — كلها مبنية على نفس البنية التحتية للذكاء الموثّق.</p>
+        <h1>From Official Data to<br><span class="gold">Institutional Decisions</span></h1>
+        <p>قدرات ذكاء مالي مبنية على مصادر رسمية، أدلة قابلة للتحقق، ورسم معرفة مؤسسي. ليست متجر أدوات — بل خريطة قرار لمؤسسة تريد بناء طبقة استخبارات مالية.</p>
       </div>
       <div class="catalog-search">
         <span class="catalog-search-icon">🔍</span>
-        <input type="text" placeholder="ابحث عن منتج..." id="catalogSearch">
+        <input type="text" placeholder="ابحث عن قدرة أو مشكلة أو حالة استخدام..." id="catalogSearch">
       </div>
     </div>
   </section>
 
+  <!-- ============= ARCHITECTURAL FRAMING ============= -->
+  <div class="arch-framing">
+    <div class="arch-framing-block">One Intelligence Infrastructure</div>
+    <div class="arch-framing-arrow">↓</div>
+    <div class="arch-framing-block center">Multiple Institutional Capabilities</div>
+    <div class="arch-framing-arrow">↓</div>
+    <div class="arch-framing-block">Different Deployments</div>
+  </div>
+
   <!-- Powered badge + Institutional Trust strip -->
   <div class="powered-badge">
-    <div class="powered-badge-text">All products powered by</div>
+    <div class="powered-badge-text">All capabilities powered by</div>
     <div class="powered-badge-items">
       <span class="powered-badge-item">Official Sources</span>
       <span class="powered-badge-item">Evidence Layer</span>
@@ -207,50 +249,101 @@ body { class: motion-marketing; }
     </div>
   </div>
 
+  <!-- ============= WHY ROUAA ============= -->
+  <section class="section reveal" id="why-rouaa" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why Institutions Choose ROUAA</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا تختار المؤسسات رؤى؟</h2>
+      </div>
+      <div class="why-rouaa-grid">
+        <div class="why-rouaa-card"><div class="why-rouaa-num">01</div><div class="why-rouaa-h">Official Sources First</div><div class="why-rouaa-ar">المصادر الرسمية أولاً</div><div class="why-rouaa-desc">411 مؤسسة رسمية مراقبة 24/7 — لا وكالات غير موثّقة، لا بيانات غير محقّق منها.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">02</div><div class="why-rouaa-h">Every Insight Has Evidence</div><div class="why-rouaa-ar">كل استخبارات لها دليل</div><div class="why-rouaa-desc">كل رقم مرتبط بصفحة وفقرة في المصدر الأصلي. كل قرار قابل للدفاع أمام لجنة أو منظّم.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">03</div><div class="why-rouaa-h">Knowledge Graph Connects Events</div><div class="why-rouaa-ar">رسم المعرفة يربط الأحداث</div><div class="why-rouaa-desc">شبكة علاقات مالية شاملة — كل حدث مرتبط بمن أثّر عليه، كل شركة مرتبطة بقطاعها وسلسلة توريدها.</div></div>
+        <div class="why-rouaa-card"><div class="why-rouaa-num">04</div><div class="why-rouaa-h">AI Reasoning With Audit Trail</div><div class="why-rouaa-ar">استدلال ذكي مع سجل تدقيق</div><div class="why-rouaa-desc">10 وكلاء يتشاورون قبل كل تحليل. كل خطوة مُسجّلة بدقة millisecond. كل قرار قابل لإعادة التشغيل.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= RECOMMENDED PATHS ============= -->
+  <section class="section reveal" id="paths">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Recommended Paths</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ابدأ من هنا — حسب نوع مؤسستك</h2>
+        <p class="section-lead" style="margin: 0 auto;">لا تتصفّح 44 قدرة. اختر مسارك، وابدأ بالقدرات التي تناسب مؤسستك.</p>
+      </div>
+      <div class="paths-grid">
+        <div class="path-card p-research">
+          <div class="path-icon">📊</div>
+          <div class="path-name">Investment Firm</div>
+          <div class="path-ar">شركة استثمار</div>
+          <div class="path-h">Start with:</div>
+          <div class="path-items">
+            <a href="product.html?id=res-brief" class="path-item">✓ Intelligence Brief Generator</a>
+            <a href="product.html?id=risk-monitor" class="path-item">✓ Risk Event Monitor</a>
+            <a href="product.html?id=risk-exposure" class="path-item">✓ Exposure Analysis</a>
+            <a href="product.html?id=cmp-graph" class="path-item">✓ Knowledge Graph</a>
+          </div>
+        </div>
+        <div class="path-card p-trading">
+          <div class="path-icon">📈</div>
+          <div class="path-name">Broker</div>
+          <div class="path-ar">وسيط تداول</div>
+          <div class="path-h">Start with:</div>
+          <div class="path-items">
+            <a href="product.html?id=trd-dashboard" class="path-item">✓ Trading Intelligence Dashboard</a>
+            <a href="product.html?id=trd-chart" class="path-item">✓ Smart Chart Intelligence</a>
+            <a href="product.html?id=trd-assistant" class="path-item">✓ Trading Assistant</a>
+          </div>
+        </div>
+        <div class="path-card p-media">
+          <div class="path-icon">📰</div>
+          <div class="path-name">Financial Media</div>
+          <div class="path-ar">إعلام مالي</div>
+          <div class="path-h">Start with:</div>
+          <div class="path-items">
+            <a href="product.html?id=med-agency" class="path-item">✓ News Agency Agent</a>
+            <a href="product.html?id=med-reports" class="path-item">✓ Reports Pipeline</a>
+            <a href="product.html?id=med-video" class="path-item">✓ Video Pipeline</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============= CATALOG ============= -->
   <div class="catalog-layout">
 
-    <!-- Filters sidebar -->
+    <!-- Filters sidebar — reordered: What to solve → Who are you → How to deploy -->
     <aside class="catalog-filters">
       <div class="filter-group">
-        <div class="filter-h">Business Need</div>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Automate Research <span class="filter-count">6</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Monitor Risk <span class="filter-count">5</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Understand Markets <span class="filter-count">9</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Generate Intelligence <span class="filter-count">8</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Integrate Data <span class="filter-count">7</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Support Decisions <span class="filter-count">4</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components <span class="filter-count">5</span></label>
+        <div class="filter-h">What do you need to solve?</div>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Automate Research <span class="filter-count">→ 6 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Monitor Risk <span class="filter-count">→ 5 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Generate Intelligence <span class="filter-count">→ 8 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Improve Trading Decisions <span class="filter-count">→ 9 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Build Data Products <span class="filter-count">→ 7 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Support Decisions <span class="filter-count">→ 4 capabilities</span></label>
+        <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components <span class="filter-count">→ 5 capabilities</span></label>
       </div>
 
       <div class="filter-group">
-        <div class="filter-h">Industry</div>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="banks"> Banks</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="funds"> Hedge Funds</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="brokers"> Brokers</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="media"> Media</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="govt"> Governments</label>
-        <label class="filter-item"><input type="checkbox" class="filter-ind" value="fintech"> FinTech</label>
+        <div class="filter-h">Who are you?</div>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="funds"> Asset Manager</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="banks"> Bank</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="brokers"> Broker</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="media"> Media Company</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="govt"> Government / Sovereign</label>
+        <label class="filter-item"><input type="checkbox" class="filter-ind" value="fintech"> Fintech Builder</label>
       </div>
 
       <div class="filter-group">
-        <div class="filter-h">Role · Buyer</div>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="cio" checked> CIO <span class="filter-count">6</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="cro" checked> CRO <span class="filter-count">5</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="cto" checked> CTO <span class="filter-count">11</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="editor" checked> Editor-in-Chief <span class="filter-count">8</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="broker" checked> Broker CEO <span class="filter-count">9</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="head" checked> Head of Research <span class="filter-count">6</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="treasury" checked> Treasury Head <span class="filter-count">5</span></label>
-        <label class="filter-item"><input type="checkbox" class="filter-role" value="founder" checked> Fintech Founder <span class="filter-count">7</span></label>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-h">Deployment</div>
+        <div class="filter-h">How do you deploy?</div>
         <label class="filter-item"><input type="checkbox" class="filter-deploy" value="api" checked> API</label>
         <label class="filter-item"><input type="checkbox" class="filter-deploy" value="saas" checked> SaaS</label>
         <label class="filter-item"><input type="checkbox" class="filter-deploy" value="whitelabel" checked> White Label</label>
-        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="enterprise" checked> Enterprise</label>
+        <label class="filter-item"><input type="checkbox" class="filter-deploy" value="enterprise" checked> Enterprise / Private Cloud</label>
       </div>
     </aside>
 
@@ -272,7 +365,7 @@ body { class: motion-marketing; }
         <!-- Populated dynamically by assets/js/products.js -->
       </div>
 
-      <p class="text-center text-mute small mt-6" id="resultCount">عرض 44 منتج · جميع الفئات</p>
+      <p class="text-center text-mute small mt-6" id="resultCount">عرض 44 قدرة · جميع الفئات</p>
     </div>
 
   </div>
@@ -280,10 +373,10 @@ body { class: motion-marketing; }
   <!-- ============= CTA ============= -->
   <section class="cta-final reveal" id="contact">
     <div class="container">
-      <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>Which intelligence capability fits your institution?</h2>
-      <p>مكالمة 30 دقيقة — نساعدك في اختيار القدرات المناسبة لاحتياج مؤسستك.</p>
-      <a href="mailto:contact@rouaa.ai?subject=Capability Map Inquiry" class="btn btn-primary btn-lg">Request Briefing</a>
+      <span class="section-tag" style="justify-content: center;">Design Your Intelligence Stack</span>
+      <h2>صمّم طبقة الذكاء المالي لمؤسستك</h2>
+      <p>مكالمة 30 دقيقة — نحدد معك القدرات المناسبة، مسار النشر، وخطوات البدء. لا عرض مبيعات — خريطة قرار.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Design Intelligence Stack" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
     </div>
   </section>
 
@@ -302,7 +395,7 @@ body { class: motion-marketing; }
       <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
         <li><a href="platform.html" class="small text-dim">Platform</a></li>
         <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
-        <li><a href="catalog.html" class="small text-dim">Full Catalog</a></li>
+        <li><a href="catalog.html" class="small text-dim">Capability Map</a></li>
         <li><a href="trust.html" class="small text-dim">Trust</a></li>
       </ul>
     </div>
@@ -351,7 +444,6 @@ const resultCount = document.getElementById('resultCount');
 
 const catCheckboxes = document.querySelectorAll('.filter-cat');
 const indCheckboxes = document.querySelectorAll('.filter-ind');
-const roleCheckboxes = document.querySelectorAll('.filter-role');
 const deployCheckboxes = document.querySelectorAll('.filter-deploy');
 
 function getChecked(checkboxes) {
@@ -366,7 +458,6 @@ function intersect(arr1, arr2) {
 function filterProducts() {
   const activeCats = getChecked(catCheckboxes);
   const activeInds = getChecked(indCheckboxes);
-  const activeRoles = getChecked(roleCheckboxes);
   const activeDeploys = getChecked(deployCheckboxes);
   const searchTerm = (search?.value || '').toLowerCase();
 
@@ -383,11 +474,10 @@ function filterProducts() {
 
     const catMatch = activeCats.includes(cat);
     const indMatch = activeInds.length === 0 || intersect(inds, activeInds);
-    const roleMatch = activeRoles.length === 0 || intersect(roles, activeRoles);
     const deployMatch = activeDeploys.length === 0 || intersect(deploys, activeDeploys);
     const searchMatch = !searchTerm || name.includes(searchTerm) || text.includes(searchTerm);
 
-    if (catMatch && indMatch && roleMatch && deployMatch && searchMatch) {
+    if (catMatch && indMatch && deployMatch && searchMatch) {
       card.style.display = '';
       visible++;
       catCounts[cat] = (catCounts[cat] || 0) + 1;
@@ -396,21 +486,20 @@ function filterProducts() {
     }
   });
 
-  // Build result count label
   let label = 'all';
   if (activeCats.length === 1) label = activeCats[0];
   else if (activeCats.length > 1 && activeCats.length < 7) label = `${activeCats.length} categories`;
   
   const indLabel = activeInds.length > 0 ? ` · ${activeInds.length} industries` : '';
-  const roleLabel = activeRoles.length > 0 && activeRoles.length < 8 ? ` · ${activeRoles.length} roles` : '';
   
-  resultCount.textContent = `عرض ${visible} منتج · ${label}${indLabel}${roleLabel}`;
+  resultCount.textContent = `عرض ${visible} قدرة · ${label}${indLabel}`;
 
-  // Update tab counts based on visible cards
   tabs.forEach(tab => {
     const view = tab.dataset.view;
     if (view === 'all') {
       tab.textContent = `All · ${visible}`;
+    } else if (view === 'featured') {
+      tab.textContent = `Featured`;
     } else {
       tab.textContent = view.charAt(0).toUpperCase() + view.slice(1);
     }
@@ -444,7 +533,7 @@ function resetTabs() {
   document.querySelector('.catalog-tab[data-view="all"]')?.classList.add('active');
 }
 
-[...catCheckboxes, ...indCheckboxes, ...roleCheckboxes, ...deployCheckboxes].forEach(c => {
+[...catCheckboxes, ...indCheckboxes, ...deployCheckboxes].forEach(c => {
   c.addEventListener('change', () => {
     resetTabs();
     filterProducts();
@@ -474,11 +563,22 @@ const FEATURED_IDS = new Set([
   'api-events', 'api-facts', 'cmp-graph',
 ]);
 
+// Problem text per category — what problem does this capability solve?
+const CATEGORY_PROBLEMS = {
+  media: 'المؤسسات الإعلامية تعتمد على وكالات خارجية للأخبار المالية.',
+  trading: 'البروكرات يقدمون أسعاراً لكن العملاء يريدون فهم «لماذا».',
+  research: 'مذكرات اللجنة تستغرق أيام، والقرارات بلا سلسلة أدلة.',
+  risk: 'الأحداث العالمية تقع قبل أن تكتشف المؤسسة تعرّضها.',
+  api: 'فرق المنتجات المالية تبني الأنبوب لسنوات بدلاً من بناء المنتج.',
+  agent: 'التحليلات تُنتج بلا مراجعة أقران أو تدقيق حقائق.',
+  component: 'البنية التحتية للذكاء تُعاد بناؤها في كل مؤسسة.',
+};
+
 function renderProductCard(product) {
   const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
   const desc = (product.desc || '').substring(0, 90) + (product.desc.length > 90 ? '...' : '');
   const outcome = (product.tagline || '').substring(0, 60);
-  // Build deployment badges
+  const problem = CATEGORY_PROBLEMS[product.cat] || '';
   const deploys = product.deploy || [];
   const deployBadges = [
     { key: 'api', label: 'API' },
@@ -490,9 +590,13 @@ function renderProductCard(product) {
   return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}" data-featured="${FEATURED_IDS.has(product.id)}">
     <div class="product-card-tag">${cat.icon} ${cat.name}${featuredBadge}</div>
     <div class="product-card-name"><span class="ar">${product.nameAr}</span>${product.nameEn}</div>
+    <div class="product-card-problem">
+      <div class="problem-h">Problem</div>
+      <div class="problem-text">${problem}</div>
+    </div>
     <div class="product-card-desc">${desc}</div>
     <div class="product-card-outcome">
-      <div class="outcome-h">Business Outcome</div>
+      <div class="outcome-h">Outcome</div>
       <div class="outcome-text">${outcome}</div>
     </div>
     <div class="product-card-deploy">
