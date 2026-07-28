@@ -61,7 +61,8 @@
 | **27** | [API-CONTRACT-MODEL-v1](28-API-CONTRACT-MODEL-v1.md) | كيف يصبح ذكاء رؤى خدمة مؤسسية قابلة للاستهلاك والدمج داخل أنظمة العملاء؟ | ✅ معتمد |
 | **28** | [DATA-MODEL-v1](29-DATA-MODEL-v1.md) | كيف تُمثَّل وتُخزَّن وتُدار Objects داخل بنية بيانات مؤسسية قابلة للتوسع؟ | ✅ معتمد |
 | **29** | [SEARCH-MODEL-v1](30-SEARCH-MODEL-v1.md) | كيف تصل المؤسسة للمعرفة الصحيحة في السياق الصحيح مع الأدلة الصحيحة في اللحظة المناسبة؟ | ✅ معتمد |
-| **30** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **30** | [AI-ASSISTANT-MODEL-v1](31-AI-ASSISTANT-MODEL-v1.md) | كيف يتحول محرك الذكاء الداخلي إلى مساعد مؤسسي يفهم الأسئلة ويحلل الأدلة ويبني قرارات قابلة للدفاع؟ | ✅ معتمد |
+| **31** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -129,7 +130,8 @@
 | HOW CONSUMES — كيف تُستهلك؟ | 27 | API Contract + 10 API Domains (Intelligence/Evidence/Knowledge/Reasoning/Decision/Event/Workflow/Object/Search/Streaming) + Webhook Model + Authentication + Authorization + Versioning + Developer Experience + API Products |
 | HOW STORES — كيف تُخزَّن؟ | 28 | Data Model + Object-Centric + Provenance Native + Temporal Intelligence + Graph+Structured Hybrid + 13 Object Schemas + Multi-Tenant Isolation + Versioning + Quality Model + Hybrid Storage Architecture |
 | HOW RETRIEVES — كيف يُسترجع؟ | 29 | Search Model + 6 Retrieval Layers (Keyword/Semantic/Entity/Graph/Evidence/Decision) + Query Understanding + 5 Intent Types + Evidence-First Retrieval + Temporal Search + Institutional Memory + User-Aware + Intelligence Card Output |
-| HOW NARRATED — كيف تُروى؟ | 30 | Outcome-first site narrative |
+| HOW INTERACTS — كيف يتفاعل؟ | 30 | AI Assistant + 5 Assistant Types (Research/Investment/Risk/Compliance/Media) + Multi-Agent Council (6 agents) + Retrieval-Augmented Intelligence + 4 Reasoning Modes + 3-Memory Model + Decision Preparation Workflow + Response Object |
+| HOW NARRATED — كيف تُروى؟ | 31 | Outcome-first site narrative |
 
 ---
 
@@ -229,6 +231,7 @@ docs/
     ├── 28-API-CONTRACT-MODEL-v1.md       ← كيف تُستهلك
     ├── 29-DATA-MODEL-v1.md               ← كيف تُخزَّن
     ├── 30-SEARCH-MODEL-v1.md             ← كيف يُسترجع
+    ├── 31-AI-ASSISTANT-MODEL-v1.md       ← كيف يتفاعل
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -286,15 +289,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **30/30 وثيقة تأسيسية معتمدة**
+- ✅ **31/31 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search معتمدة (docs 25-30)
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant معتمدة (docs 25-31)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** AI-ASSISTANT-MODEL-v1 (كيف يتفاعل الإنسان مع المعرفة ويحوّلها إلى تحليل وقرار عبر مساعد مؤسسي)
+- 📝 **الوثيقة التالية المقترحة:** AI-AGENT-MODEL-v1 (الطبقة التنفيذية خلف المساعد: Agents + Roles + Tools + Orchestration + Communication + Evaluation + Governance)
 
 ---
 
