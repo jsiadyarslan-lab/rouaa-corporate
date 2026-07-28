@@ -44,7 +44,8 @@
 | **10** | [ENTERPRISE-TRUST-MODEL-v1](10-ENTERPRISE-TRUST-MODEL-v1.md) | لماذا تثق المؤسسة بأن رؤى يمكن أن تصبح جزءًا من قرارها؟ | ✅ معتمد |
 | **11** | [ENTERPRISE-ARCHITECTURE-MODEL-v1](11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md) | كيف تُبنى رؤى كنظام مؤسسي متكامل؟ | ✅ معتمد |
 | **12** | [DATA-GOVERNANCE-MODEL-v1](12-DATA-GOVERNANCE-MODEL-v1.md) | كيف تُحوكَم البيانات والمعرفة والأدلة عبر دورة حياتها؟ | ✅ معتمد |
-| **13** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **13** | [KNOWLEDGE-GRAPH-MODEL-v1](14-KNOWLEDGE-GRAPH-MODEL-v1.md) | كيف تتحول البيانات إلى شبكة معرفة مؤسسية تفهم العلاقات؟ | ✅ معتمد |
+| **14** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -89,7 +90,8 @@
 | WHY TRUSTED — لماذا تُوثق؟ | 10 | 6-layer Trust Model + Evidence Network |
 | HOW BUILT — كيف تُبنى؟ | 11 | 7-layer Architecture + API-first |
 | HOW GOVERNED — كيف تُحوكَم؟ | 12 | Data Governance + Lineage + Quality |
-| HOW NARRATED — كيف تُروى؟ | 13 | Outcome-first site narrative |
+| HOW KNOWS — كيف تفهم؟ | 13 | Knowledge Graph + 5 layers (Entity/Event/Fact/Relationship/Decision) |
+| HOW NARRATED — كيف تُروى؟ | 14 | Outcome-first site narrative |
 
 ---
 
@@ -172,6 +174,7 @@ docs/
     ├── 10-ENTERPRISE-TRUST-MODEL-v1.md   ← لماذا تُوثق
     ├── 11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md    ← كيف تُبنى
     ├── 12-DATA-GOVERNANCE-MODEL-v1.md    ← كيف تُحوكَم
+    ├── 14-KNOWLEDGE-GRAPH-MODEL-v1.md    ← كيف تفهم العلاقات
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -229,9 +232,9 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **13/13 وثيقة تأسيسية معتمدة**
+- ✅ **14/14 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-GRAPH-MODEL-v1 (توسيع معرفة المعمارية)
+- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-ONTOLOGY-MODEL-v1 (تحديد قاموس العالم المالي الذي يبني عليه Knowledge Graph)
 
 ---
 
