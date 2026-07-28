@@ -45,7 +45,8 @@
 | **11** | [ENTERPRISE-ARCHITECTURE-MODEL-v1](11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md) | كيف تُبنى رؤى كنظام مؤسسي متكامل؟ | ✅ معتمد |
 | **12** | [DATA-GOVERNANCE-MODEL-v1](12-DATA-GOVERNANCE-MODEL-v1.md) | كيف تُحوكَم البيانات والمعرفة والأدلة عبر دورة حياتها؟ | ✅ معتمد |
 | **13** | [KNOWLEDGE-GRAPH-MODEL-v1](14-KNOWLEDGE-GRAPH-MODEL-v1.md) | كيف تتحول البيانات إلى شبكة معرفة مؤسسية تفهم العلاقات؟ | ✅ معتمد |
-| **14** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **14** | [KNOWLEDGE-ONTOLOGY-MODEL-v1](15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) | ما القواعد التي تحدد معنى الكيانات والعلاقات والأحداث؟ | ✅ معتمد |
+| **15** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -91,7 +92,8 @@
 | HOW BUILT — كيف تُبنى؟ | 11 | 7-layer Architecture + API-first |
 | HOW GOVERNED — كيف تُحوكَم؟ | 12 | Data Governance + Lineage + Quality |
 | HOW KNOWS — كيف تفهم؟ | 13 | Knowledge Graph + 5 layers (Entity/Event/Fact/Relationship/Decision) |
-| HOW NARRATED — كيف تُروى؟ | 14 | Outcome-first site narrative |
+| HOW MEANS — كيف تُعرّف؟ | 14 | Financial Ontology + 7 layers (Entity/Market/Event/Fact/Relationship/Decision/Evidence) |
+| HOW NARRATED — كيف تُروى؟ | 15 | Outcome-first site narrative |
 
 ---
 
@@ -175,6 +177,7 @@ docs/
     ├── 11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md    ← كيف تُبنى
     ├── 12-DATA-GOVERNANCE-MODEL-v1.md    ← كيف تُحوكَم
     ├── 14-KNOWLEDGE-GRAPH-MODEL-v1.md    ← كيف تفهم العلاقات
+    ├── 15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md ← كيف تُعرّف المعنى
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -232,9 +235,9 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **14/14 وثيقة تأسيسية معتمدة**
+- ✅ **15/15 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-ONTOLOGY-MODEL-v1 (تحديد قاموس العالم المالي الذي يبني عليه Knowledge Graph)
+- 📝 **الوثيقة التالية المقترحة:** ENTITY-RESOLUTION-MODEL-v1 (حل الكيانات المتعددة الأسماء — "Apple Inc" = "AAPL" = "Apple")
 
 ---
 
