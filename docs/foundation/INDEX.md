@@ -49,7 +49,8 @@
 | **15** | [ENTITY-RESOLUTION-MODEL-v1](16-ENTITY-RESOLUTION-MODEL-v1.md) | كيف يعرف رؤى أن الأسماء المختلفة تشير لنفس الكيان الحقيقي؟ | ✅ معتمد |
 | **16** | [RELATIONSHIP-MODEL-v1](17-RELATIONSHIP-MODEL-v1.md) | كيف تُعرَّف العلاقات بين الكيانات وتُحوكَم عبر الزمن؟ | ✅ معتمد |
 | **17** | [KNOWLEDGE-INGESTION-MODEL-v1](18-KNOWLEDGE-INGESTION-MODEL-v1.md) | كيف تتحول الوثائق الرسمية إلى معرفة مؤسسية موثقة داخل رؤى؟ | ✅ معتمد |
-| **18** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **18** | [REASONING-MODEL-v1](19-REASONING-MODEL-v1.md) | كيف تتحول المعرفة إلى استنتاجات مؤسسية قابلة للتفسير والدفاع والتدقيق؟ | ✅ معتمد |
+| **19** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -99,7 +100,8 @@
 | HOW IDENTIFIES — كيف يُعرّف؟ | 15 | Entity Resolution + Canonical Identity + Identifiers + Aliases + Temporal Identity |
 | HOW RELATES — كيف ترتبط؟ | 16 | Relationship Object + 7 categories + Causal vs Descriptive + Lifecycle + Evidence |
 | HOW ACQUIRES — كيف تُكتسب؟ | 17 | Knowledge Ingestion + 3 layers (Acquisition/Validation/Normalization) + Extraction Pipeline + Continuous |
-| HOW NARRATED — كيف تُروى؟ | 18 | Outcome-first site narrative |
+| HOW REASONS — كيف يستدل؟ | 18 | Reasoning Engine + 6 layers (Evidence/Fact/Relationship/Context/Hypothesis/Decision) + 10 reasoning types + AI Council |
+| HOW NARRATED — كيف تُروى؟ | 19 | Outcome-first site narrative |
 
 ---
 
@@ -187,6 +189,7 @@ docs/
     ├── 16-ENTITY-RESOLUTION-MODEL-v1.md  ← كيف يُعرّف الكيان
     ├── 17-RELATIONSHIP-MODEL-v1.md       ← كيف ترتبط الكيانات
     ├── 18-KNOWLEDGE-INGESTION-MODEL-v1.md ← كيف تُكتسب المعرفة
+    ├── 19-REASONING-MODEL-v1.md          ← كيف يستدل النظام
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -244,9 +247,10 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **18/18 وثيقة تأسيسية معتمدة**
+- ✅ **19/19 وثيقة تأسيسية معتمدة**
+- 🏁 **سلسلة "محرك المعرفة" مكتملة** — تبدأ بعدها مرحلة Decision Intelligence (إنتاج القرارات، الحوكمة، سير العمل المؤسسي)
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** REASONING-MODEL-v1 (أول طبقة تحوّل المعرفة إلى ذكاء قرار مؤسسي — جوهر القيمة التي تبيعها رؤى)
+- 📝 **الوثيقة التالية المقترحة:** INTELLIGENCE-OBJECT-LIFECYCLE-MODEL-v1 (دورة حياة Intelligence Objects منذ إنشائها حتى أرشفتها) أو DECISION-GRAPH-MODEL-v1 (كيف تتحول المعرفة المستدل عليها إلى قرارات مؤسسية مترابطة)
 
 ---
 
