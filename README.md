@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 19 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 20 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -32,6 +32,7 @@
 | كيف ترتبط الكيانات؟ | [17-RELATIONSHIP-MODEL](docs/foundation/17-RELATIONSHIP-MODEL-v1.md) |
 | كيف تُكتسب المعرفة؟ | [18-KNOWLEDGE-INGESTION-MODEL](docs/foundation/18-KNOWLEDGE-INGESTION-MODEL-v1.md) |
 | كيف يستدل النظام؟ | [19-REASONING-MODEL](docs/foundation/19-REASONING-MODEL-v1.md) |
+| ⭐ كيف يقرر؟ | [20-DECISION-MODEL](docs/foundation/20-DECISION-MODEL-v1.md) (الوثيقة المركزية) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -45,7 +46,8 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **19/19 وثيقة تأسيسية معتمدة**
+- ✅ **20/20 وثيقة تأسيسية معتمدة**
+- ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`

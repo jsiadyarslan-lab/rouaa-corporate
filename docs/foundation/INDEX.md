@@ -50,7 +50,8 @@
 | **16** | [RELATIONSHIP-MODEL-v1](17-RELATIONSHIP-MODEL-v1.md) | كيف تُعرَّف العلاقات بين الكيانات وتُحوكَم عبر الزمن؟ | ✅ معتمد |
 | **17** | [KNOWLEDGE-INGESTION-MODEL-v1](18-KNOWLEDGE-INGESTION-MODEL-v1.md) | كيف تتحول الوثائق الرسمية إلى معرفة مؤسسية موثقة داخل رؤى؟ | ✅ معتمد |
 | **18** | [REASONING-MODEL-v1](19-REASONING-MODEL-v1.md) | كيف تتحول المعرفة إلى استنتاجات مؤسسية قابلة للتفسير والدفاع والتدقيق؟ | ✅ معتمد |
-| **19** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **19** | [DECISION-MODEL-v1](20-DECISION-MODEL-v1.md) | كيف يُنتج رؤى قراراً مؤسسياً موثّقًا قابلًا للتنفيذ والدفاع وإعادة البناء؟ | ✅ معتمد ⭐ |
+| **20** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -59,6 +60,12 @@
 > **ROUAA is an institutional decision intelligence platform that transforms verified financial information into faster, explainable, and auditable decisions.**
 
 > **رؤى هي منصة ذكاء قرار مؤسسي تحوّل المعلومات المالية الموثقة إلى قرارات أسرع، قابلة للتفسير، وجاهزة للتدقيق.**
+
+### ⭐ الوثيقة المركزية
+
+> **[DECISION-MODEL-v1](20-DECISION-MODEL-v1.md)** هي الأصل التجاري الحقيقي للمنصة.
+> المؤسسة لا تشتري Fact / Event / Graph / Report — تشتري **قدرة إنتاج قرار مؤسسي يمكن الوثوق به وتنفيذه والدفاع عنه وإعادة بنائه**.
+> Decision Object هو أعلى كائن معرفي في ROUAA، وكل الطبقات السابقة (Evidence / Knowledge / Reasoning) موجودة لخدمته.
 
 ---
 
@@ -101,7 +108,8 @@
 | HOW RELATES — كيف ترتبط؟ | 16 | Relationship Object + 7 categories + Causal vs Descriptive + Lifecycle + Evidence |
 | HOW ACQUIRES — كيف تُكتسب؟ | 17 | Knowledge Ingestion + 3 layers (Acquisition/Validation/Normalization) + Extraction Pipeline + Continuous |
 | HOW REASONS — كيف يستدل؟ | 18 | Reasoning Engine + 6 layers (Evidence/Fact/Relationship/Context/Hypothesis/Decision) + 10 reasoning types + AI Council |
-| HOW NARRATED — كيف تُروى؟ | 19 | Outcome-first site narrative |
+| HOW DECIDES — كيف يقرر؟ | 19 | Decision Object (26 components) + 8 Decision Types + 11-stage Lifecycle + Multi-scenario + Internal Challenge + Execution Plan + Success Measurement |
+| HOW NARRATED — كيف تُروى؟ | 20 | Outcome-first site narrative |
 
 ---
 
@@ -190,6 +198,7 @@ docs/
     ├── 17-RELATIONSHIP-MODEL-v1.md       ← كيف ترتبط الكيانات
     ├── 18-KNOWLEDGE-INGESTION-MODEL-v1.md ← كيف تُكتسب المعرفة
     ├── 19-REASONING-MODEL-v1.md          ← كيف يستدل النظام
+    ├── 20-DECISION-MODEL-v1.md           ← ⭐ كيف يقرر (الوثيقة المركزية)
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -247,10 +256,11 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **19/19 وثيقة تأسيسية معتمدة**
+- ✅ **20/20 وثيقة تأسيسية معتمدة**
+- ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** — تبدأ بعدها مرحلة Decision Intelligence (إنتاج القرارات، الحوكمة، سير العمل المؤسسي)
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** INTELLIGENCE-OBJECT-LIFECYCLE-MODEL-v1 (دورة حياة Intelligence Objects منذ إنشائها حتى أرشفتها) أو DECISION-GRAPH-MODEL-v1 (كيف تتحول المعرفة المستدل عليها إلى قرارات مؤسسية مترابطة)
+- 📝 **الوثيقة التالية المقترحة:** INTELLIGENCE-OBJECT-LIFECYCLE-MODEL-v1 (دورة حياة Intelligence Objects منذ إنشائها حتى أرشفتها) أو DECISION-WORKFLOW-MODEL-v1 (سير العمل المؤسسي للقرار) أو DECISION-GOVERNANCE-MODEL-v1 (الحوكمة المؤسسية للقرارات)
 
 ---
 
