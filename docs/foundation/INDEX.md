@@ -56,7 +56,8 @@
 | **22** | [PLATFORM-MODEL-v1](23-PLATFORM-MODEL-v1.md) | كيف تتجمع 22 وثيقة تأسيسية في منصة واحدة متماسكة يراها العميل؟ (مُحسَّن: 6 Layers + ما ليست عليه رؤى + الفكرة المركزية + مقارنة مع الأدوات الحالية) | ✅ معتمد (مُحسَّن) |
 | **23** | [PRODUCT-MODEL-v1](24-PRODUCT-MODEL-v1.md) | ما هي المنتجات التي يشتتريها العميل فوق منصة ROUAA الموحّدة؟ | ✅ معتمد |
 | **24** | [OPERATING-MODEL-v1](25-OPERATING-MODEL-v1.md) | كيف تعمل شركة رؤى يوميًا كمنظومة مؤسسية لإنتاج ذكاء موثوق؟ | ✅ معتمد |
-| **25** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **25** | [INTELLIGENCE-PIPELINE-MODEL-v1](26-INTELLIGENCE-PIPELINE-MODEL-v1.md) | كيف تتحول الحقيقة الخارجية غير المنظمة إلى ذكاء مؤسسي قابل للاستخدام واتخاذ القرار؟ | ✅ معتمد |
+| **26** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -119,7 +120,8 @@
 | HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model + 6 Layers (Evidence Intelligence → Knowledge → Reasoning → Decision → Governance → Workflow) + ما ليست عليه رؤى (5 rejections) + الفكرة المركزية + 4 منتجات + 3 Multi-Tenant Models + مقارنة مع 5 فئات أدوات |
 | HOW SELLS — كيف تُباع كمنتج؟ | 23 | 5 Products (Capital Markets / Research / Information Markets / Risk / API Platform) + Product Composition Formula + Bundling (Single/Multi/Enterprise Suite) + Expansion Path + Lifecycle + White-label + Product KPIs |
 | HOW OPERATES — كيف تشتغل الشركة؟ | 24 | Operating Model + 4 Operational Layers (Strategy/Intelligence/Platform/Enterprise) + 4 Intelligence Teams (Source/Knowledge/Reasoning Quality/Decision) + 3 Governance Boards + Operating Rhythm (Daily/Weekly/Monthly/Quarterly) + 3-stage Team Growth |
-| HOW NARRATED — كيف تُروى؟ | 25 | Outcome-first site narrative |
+| HOW FLOWS — كيف يتدفّق الذكاء؟ | 25 | Intelligence Pipeline + 7 Stages (Source → Document → Evidence → Knowledge → Reasoning → Decision → Enterprise Delivery) + Quality Gates per stage + Human-in-the-loop + Continuous Learning + Pipeline Metrics + ROUAA Intelligence Value Chain |
+| HOW NARRATED — كيف تُروى؟ | 26 | Outcome-first site narrative |
 
 ---
 
@@ -214,6 +216,7 @@ docs/
     ├── 23-PLATFORM-MODEL-v1.md           ← كيف تتوحّد في منصة واحدة
     ├── 24-PRODUCT-MODEL-v1.md            ← كيف تُباع كمنتجات
     ├── 25-OPERATING-MODEL-v1.md          ← كيف تشتغل الشركة يوميًا
+    ├── 26-INTELLIGENCE-PIPELINE-MODEL-v1.md ← كيف يتدفّق الذكاء
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -271,15 +274,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **25/25 وثيقة تأسيسية معتمدة**
+- ✅ **26/26 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🚀 **PHASE 2 — OPERATIONALIZATION بدأت** — Operating Model معتمدة (doc 25)
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating Model + Intelligence Pipeline معتمدة (docs 25-26)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** INTELLIGENCE-PIPELINE-MODEL-v1 (كيف تتحرك الحقيقة من المصدر الخارجي حتى تصبح قرارًا مؤسسيًا داخل رؤى)
+- 📝 **الوثيقة التالية المقترحة:** OBJECT-MODEL-v1 (تعريف الوحدات التي تتحرك داخل الـ Pipeline: Evidence Object / Fact Object / Event Object / Entity Object / Reasoning Object / Decision Object / Workflow Object)
 
 ---
 
