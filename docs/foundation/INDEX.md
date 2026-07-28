@@ -53,7 +53,8 @@
 | **19** | [DECISION-MODEL-v1](20-DECISION-MODEL-v1.md) | كيف يُنتج رؤى قراراً مؤسسياً موثّقًا قابلًا للتنفيذ والدفاع وإعادة البناء؟ (مُحسَّن: Decision Formation Engine + Confidence Model + Contrarian Testing + Decision Memory) | ✅ معتمد ⭐ (مُحسَّن) |
 | **20** | [DECISION-GOVERNANCE-MODEL-v1](21-DECISION-GOVERNANCE-MODEL-v1.md) | كيف نضمن أن القرار المؤسسي منضبط، قابل للتدقيق، ومتوافق مع السياسات والمنظّمين؟ | ✅ معتمد |
 | **21** | [DECISION-WORKFLOW-MODEL-v1](22-DECISION-WORKFLOW-MODEL-v1.md) | كيف ينتقل القرار من اكتشاف معلومة إلى إجراء مؤسسي منظم داخل المؤسسة؟ | ✅ معتمد |
-| **22** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **22** | [PLATFORM-MODEL-v1](23-PLATFORM-MODEL-v1.md) | كيف تتجمع 22 وثيقة تأسيسية في منصة واحدة متماسكة يراها العميل؟ | ✅ معتمد |
+| **23** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -113,7 +114,8 @@
 | HOW DECIDES — كيف يقرر؟ | 19 | Decision Object (16 components) + 4 Decision Types + 8-stage Lifecycle + Decision Formation Engine (4 stages) + Confidence Model (6 factors) + Contrarian Testing + Decision Memory + Quality Score |
 | HOW GOVERNS — كيف يحوكَم؟ | 20 | Decision Governance + 6 Authority Levels + 4 Approval Chain types + Policy Enforcement (4 modes) + Compliance Engine + Audit Recording (immutable + signed) + Reviewability + Exception Handling |
 | HOW OPERATES — كيف يعمل؟ | 21 | Decision Workflow + 8-stage Lifecycle (Detect→Understand→Analyze→Challenge→Approve→Execute→Monitor→Learn) + 5 Workflow Types + 4 Workflow Objects + Human-in-the-Loop + Workflow Intelligence |
-| HOW NARRATED — كيف تُروى؟ | 22 | Outcome-first site narrative |
+| HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model + 7 Layers (L1 Evidence → L7 Delivery) + 22-doc mapping + Internal→External translation + One Platform Many Faces + Tenant Isolation + Platform KPIs |
+| HOW NARRATED — كيف تُروى؟ | 23 | Outcome-first site narrative |
 
 ---
 
@@ -205,6 +207,7 @@ docs/
     ├── 20-DECISION-MODEL-v1.md           ← ⭐ كيف يقرر (الوثيقة المركزية، مُحسَّن)
     ├── 21-DECISION-GOVERNANCE-MODEL-v1.md ← كيف يحوكَم القرار
     ├── 22-DECISION-WORKFLOW-MODEL-v1.md  ← كيف يعمل في المؤسسة
+    ├── 23-PLATFORM-MODEL-v1.md           ← كيف تتوحّد في منصة واحدة
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -262,12 +265,13 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **22/22 وثيقة تأسيسية معتمدة**
+- ✅ **23/23 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
+- 🔗 **مرحلة Platform Consolidation بدأت** — Platform Model معتمدة (doc 23) — يربط 22 وثيقة في منصة واحدة
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** INTEGRATION-MODEL-v1 (كيف تُدخَل رؤى داخل أنظمة المؤسسة وعملياتها الحالية)
+- 📝 **الوثائق التالية المقترحة:** PRODUCT-MODEL-v1 (ماذا يشتتري العميل) → CAPABILITY-CATALOG-v1 → DATA-MODEL-v1 → METRICS-MODEL-v1 → ROADMAP-MODEL-v1 → HTML
 
 ---
 

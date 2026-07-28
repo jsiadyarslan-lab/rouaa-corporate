@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 22 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 23 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -35,6 +35,7 @@
 | ⭐ كيف يقرر؟ | [20-DECISION-MODEL](docs/foundation/20-DECISION-MODEL-v1.md) (الوثيقة المركزية، مُحسَّنة) |
 | كيف يحوكَم القرار؟ | [21-DECISION-GOVERNANCE-MODEL](docs/foundation/21-DECISION-GOVERNANCE-MODEL-v1.md) |
 | كيف يعمل في المؤسسة؟ | [22-DECISION-WORKFLOW-MODEL](docs/foundation/22-DECISION-WORKFLOW-MODEL-v1.md) |
+| كيف تتوحّد في منصة؟ | [23-PLATFORM-MODEL](docs/foundation/23-PLATFORM-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -48,10 +49,11 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **22/22 وثيقة تأسيسية معتمدة**
+- ✅ **23/23 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
+- 🔗 **مرحلة Platform Consolidation بدأت** — Platform Model يربط 22 وثيقة في منصة واحدة
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
