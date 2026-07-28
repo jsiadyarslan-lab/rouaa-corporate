@@ -71,7 +71,8 @@
 | **37** | [INVESTMENT-MODEL-v1](38-INVESTMENT-MODEL-v1.md) | لماذا تستحق رؤى الاستثمار؟ ما مراحل التمويل والتقييم واستخدام رأس المال؟ | ✅ معتمد |
 | **38** | [ROADMAP-MODEL-v1](39-ROADMAP-MODEL-v1.md) | ما الذي يجب بناؤه الآن؟ ما الذي يؤجل؟ وكيف تتحول رؤى من بنية معرفية إلى شركة مؤسسية؟ | ✅ معتمد |
 | **39** | [METRICS-MODEL-v1](40-METRICS-MODEL-v1.md) | ما المؤشرات التي تثبت أن رؤى تبني شركة بنية تحتية للقرار، وليس مجرد منتج برمجي؟ | ✅ معتمد |
-| **40** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **40** | [RISK-MODEL-v1](41-RISK-MODEL-v1.md) | ما الذي يمكن أن يمنع رؤى من أن تصبح بنية تحتية للذكاء المؤسسي؟ وكيف نكتشف المخاطر ونعالجها؟ | ✅ معتمد |
+| **41** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -149,7 +150,8 @@
 | HOW RAISES — كيف تُموَّل؟ | 37 | Investment Model + Thesis + 3 Market Shifts + 4 Funding Stages (Foundation/Seed/Series A/Growth) + Capital Allocation + Investor Metrics + Valuation Framework + 2 Value Scenarios + Exit Logic + 4 Valuation Risks |
 | HOW EXECUTES ROADMAP — كيف تُنفَّذ الخارطة؟ | 38 | Roadmap + 7 Phases (Foundation → Evidence → Knowledge → Decision → Workflow → Scale → Global) + Product Priority Matrix + 36-Month Timeline + Phase Transition Criteria + Moat-per-Phase + 4 Execution Risks |
 | HOW MEASURES — كيف تقيس؟ | 39 | Metrics Model + 5 Layers (Business / Customer Value / Intelligence / Trust / Moat) + North Star (Verified Institutional Decisions Created) + Investor Dashboard + ROUAA Health Score + Metrics Evolution per Phase |
-| HOW NARRATED — كيف تُروى؟ | 40 | Outcome-first site narrative |
+| HOW MANAGES RISK — كيف تدير المخاطر؟ | 40 | Risk Model + 7 Risk Categories (Strategic / Market / Product / Technology / Data / Trust / Operational) + Risk Matrix (P0-P2) + Early Warning Indicators + Risk Governance + Decision Principles (Trust > Speed / Evidence > Feature / Governance > Growth) |
+| HOW NARRATED — كيف تُروى؟ | 41 | Outcome-first site narrative |
 
 ---
 
@@ -259,6 +261,7 @@ docs/
     ├── 38-INVESTMENT-MODEL-v1.md            ← كيف تُموَّل
     ├── 39-ROADMAP-MODEL-v1.md               ← كيف تُنفَّذ الخارطة
     ├── 40-METRICS-MODEL-v1.md               ← كيف تقيس
+    ├── 41-RISK-MODEL-v1.md                  ← كيف تدير المخاطر
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -316,7 +319,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **40/40 وثيقة تأسيسية معتمدة**
+- ✅ **41/41 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -324,7 +327,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** RISK-MODEL-v1 (المخاطر التقنية / السوقية / التنظيمية / التجارية / الاستراتيجية وكيف تتم إدارتها)
+- 📝 **الوثيقة التالية المقترحة:** ORGANIZATION-MODEL-v1 (الفرق المطلوبة + الأدوار + الهيكل التنظيمي + متى يتم تعيين كل وظيفة)
 
 ---
 
