@@ -64,7 +64,8 @@
 | **30** | [AI-ASSISTANT-MODEL-v1](31-AI-ASSISTANT-MODEL-v1.md) | كيف يتحول محرك الذكاء الداخلي إلى مساعد مؤسسي يفهم الأسئلة ويحلل الأدلة ويبني قرارات قابلة للدفاع؟ | ✅ معتمد |
 | **31** | [AI-AGENT-MODEL-v1](32-AI-AGENT-MODEL-v1.md) | كيف تتحول قدرات الذكاء من وظائف منفصلة إلى منظومة Agents متخصصة تعمل معًا لإنتاج قرارات مؤسسية موثوقة؟ | ✅ معتمد |
 | **32** | [AI-ORCHESTRATION-MODEL-v1](33-AI-ORCHESTRATION-MODEL-v1.md) | كيف يُختار الوكيل وتُدار المهام المتوازية وتُحل التعارضات وتُراقب سلسلة التفكير وتُدار التكلفة؟ | ✅ معتمد |
-| **33** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **33** | [MARKET-ENTRY-MODEL-v1](34-MARKET-ENTRY-MODEL-v1.md) | من هو العميل الأول لرؤى؟ لماذا يشتري الآن؟ ما العرض الأول؟ وكيف ننتقل من صفر عملاء إلى أول قاعدة مؤسساتية؟ | ✅ معتمد |
+| **34** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -135,7 +136,8 @@
 | HOW INTERACTS — كيف يتفاعل؟ | 30 | AI Assistant + 5 Assistant Types (Research/Investment/Risk/Compliance/Media) + Multi-Agent Council (6 agents) + Retrieval-Augmented Intelligence + 4 Reasoning Modes + 3-Memory Model + Decision Preparation Workflow + Response Object |
 | HOW EXECUTES — كيف يُنفّذ؟ | 31 | AI Agent Model + 8 Agent Types (Research/Evidence/Market/Risk/Contrarian/Scenario/Compliance/Decision) + Agent Contract + Orchestrator + Communication Protocol + Memory + Tools + Governance + Evaluation + Disagreement Handling |
 | HOW ORCHESTRATES — كيف يُنسّق؟ | 32 | AI Orchestration + Agent Selection + 4 Execution Patterns (Sequential/Parallel/Adversarial/Iterative) + Context Passing + 3-Level Conflict Resolution + Cost Management + Chain of Thought Monitoring + State Management + Timeout/Retry + Synthesis Strategy + Quality Gates + Observability + Enterprise Runtime |
-| HOW NARRATED — كيف تُروى؟ | 33 | Outcome-first site narrative |
+| HOW ENTERS — كيف تدخل السوق؟ | 33 | Market Entry + Beachhead (Institutional Investment) + ICP + Initial Offer (90-day Pilot) + First Use Case (Research Intelligence) + First 10 Customers Strategy + Land-and-Expand + Buying Committee + Objection Handling + 24-Month Path |
+| HOW NARRATED — كيف تُروى؟ | 34 | Outcome-first site narrative |
 
 ---
 
@@ -238,6 +240,7 @@ docs/
     ├── 31-AI-ASSISTANT-MODEL-v1.md       ← كيف يتفاعل
     ├── 32-AI-AGENT-MODEL-v1.md           ← كيف يُنفّذ
     ├── 33-AI-ORCHESTRATION-MODEL-v1.md   ← كيف يُنسّق
+    ├── 34-MARKET-ENTRY-MODEL-v1.md       ← كيف تدخل السوق
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -295,15 +298,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **33/33 وثيقة تأسيسية معتمدة**
+- ✅ **34/34 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant + AI Agent + AI Orchestration معتمدة (docs 25-33)
+- 🏢 **PHASE 6 — MARKET EXECUTION بدأت** — Market Entry Model معتمدة (doc 34)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** MARKET-ENTRY-MODEL-v1 (من سيدفع أول مليون دولار مقابل رؤى، ولماذا؟)
+- 📝 **الوثيقة التالية المقترحة:** COMPETITIVE-MODEL-v1 (من يقارن العميل رؤى به؟ Category map + Competitive matrix + Differentiation)
 
 ---
 
