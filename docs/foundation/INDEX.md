@@ -58,7 +58,8 @@
 | **24** | [OPERATING-MODEL-v1](25-OPERATING-MODEL-v1.md) | كيف تعمل شركة رؤى يوميًا كمنظومة مؤسسية لإنتاج ذكاء موثوق؟ | ✅ معتمد |
 | **25** | [INTELLIGENCE-PIPELINE-MODEL-v1](26-INTELLIGENCE-PIPELINE-MODEL-v1.md) | كيف تتحول الحقيقة الخارجية غير المنظمة إلى ذكاء مؤسسي قابل للاستخدام واتخاذ القرار؟ | ✅ معتمد |
 | **26** | [OBJECT-MODEL-v1](27-OBJECT-MODEL-v1.md) | ما هي الوحدات (Objects) التي تمثل المعرفة، الأدلة، الاستدلال، والقرارات داخل رؤى؟ | ✅ معتمد |
-| **27** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **27** | [API-CONTRACT-MODEL-v1](28-API-CONTRACT-MODEL-v1.md) | كيف يصبح ذكاء رؤى خدمة مؤسسية قابلة للاستهلاك والدمج داخل أنظمة العملاء؟ | ✅ معتمد |
+| **28** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -123,7 +124,8 @@
 | HOW OPERATES — كيف تشتغل الشركة؟ | 24 | Operating Model + 4 Operational Layers (Strategy/Intelligence/Platform/Enterprise) + 4 Intelligence Teams (Source/Knowledge/Reasoning Quality/Decision) + 3 Governance Boards + Operating Rhythm (Daily/Weekly/Monthly/Quarterly) + 3-stage Team Growth |
 | HOW FLOWS — كيف يتدفّق الذكاء؟ | 25 | Intelligence Pipeline + 7 Stages (Source → Document → Evidence → Knowledge → Reasoning → Decision → Enterprise Delivery) + Quality Gates per stage + Human-in-the-loop + Continuous Learning + Pipeline Metrics + ROUAA Intelligence Value Chain |
 | HOW STRUCTURES — كيف تُهيكَل الوحدات؟ | 26 | Object Model + 13 Object Types (Source/Document/Evidence/Fact/Event/Entity/Relationship/Knowledge/Reasoning/Scenario/Decision/Workflow/Outcome) + Lifecycle + Provenance + Identity System + Relationships Graph |
-| HOW NARRATED — كيف تُروى؟ | 27 | Outcome-first site narrative |
+| HOW CONSUMES — كيف تُستهلك؟ | 27 | API Contract + 10 API Domains (Intelligence/Evidence/Knowledge/Reasoning/Decision/Event/Workflow/Object/Search/Streaming) + Webhook Model + Authentication + Authorization + Versioning + Developer Experience + API Products |
+| HOW NARRATED — كيف تُروى؟ | 28 | Outcome-first site narrative |
 
 ---
 
@@ -220,6 +222,7 @@ docs/
     ├── 25-OPERATING-MODEL-v1.md          ← كيف تشتغل الشركة يوميًا
     ├── 26-INTELLIGENCE-PIPELINE-MODEL-v1.md ← كيف يتدفّق الذكاء
     ├── 27-OBJECT-MODEL-v1.md             ← كيف تُهيكَل الوحدات
+    ├── 28-API-CONTRACT-MODEL-v1.md       ← كيف تُستهلك
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -277,15 +280,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **27/27 وثيقة تأسيسية معتمدة**
+- ✅ **28/28 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object Model معتمدة (docs 25-27)
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API Contract معتمدة (docs 25-28)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** API-CONTRACT-MODEL-v1 (كيف تصبح Objects قابلة للاستهلاك من Terminal / Dashboards / Enterprise Systems / Partners / Developers)
+- 📝 **الوثيقة التالية المقترحة:** DATA-MODEL-v1 (كيف تُخزن Objects وتترابط في طبقة البيانات الفعلية)
 
 ---
 

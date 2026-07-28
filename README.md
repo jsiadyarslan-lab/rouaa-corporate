@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 27 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 28 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -40,6 +40,7 @@
 | كيف تشتغل الشركة؟ | [25-OPERATING-MODEL](docs/foundation/25-OPERATING-MODEL-v1.md) |
 | كيف يتدفّق الذكاء؟ | [26-INTELLIGENCE-PIPELINE-MODEL](docs/foundation/26-INTELLIGENCE-PIPELINE-MODEL-v1.md) |
 | كيف تُهيكَل الوحدات؟ | [27-OBJECT-MODEL](docs/foundation/27-OBJECT-MODEL-v1.md) |
+| كيف تُستهلك؟ | [28-API-CONTRACT-MODEL](docs/foundation/28-API-CONTRACT-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -53,13 +54,13 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **27/27 وثيقة تأسيسية معتمدة**
+- ✅ **28/28 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform + Product معتمدة
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل**
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object معتمدة
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API معتمدة
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
