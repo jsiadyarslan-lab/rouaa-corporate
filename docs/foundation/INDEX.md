@@ -68,7 +68,8 @@
 | **34** | [COMPETITIVE-MODEL-v1](35-COMPETITIVE-MODEL-v1.md) | إذا كانت المؤسسة تستخدم Bloomberg أو FactSet أو Palantir أو OpenAI، لماذا تحتاج رؤى؟ وما الفئة التي تملكها رؤى ولا يملكها الآخرون؟ | ✅ معتمد |
 | **35** | [MOAT-MODEL-v1](36-MOAT-MODEL-v1.md) | بعد أن تصبح نماذج AI سلعة، ما الأصل الذي يجعل رؤى غير قابلة للاستبدال؟ | ✅ معتمد |
 | **36** | [GROWTH-MODEL-v1](37-GROWTH-MODEL-v1.md) | كيف تنمو رؤى كشركة Enterprise Intelligence Infrastructure دون الوقوع في فخ SaaS التقليدي؟ | ✅ معتمد |
-| **37** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **37** | [INVESTMENT-MODEL-v1](38-INVESTMENT-MODEL-v1.md) | لماذا تستحق رؤى الاستثمار؟ ما مراحل التمويل والتقييم واستخدام رأس المال؟ | ✅ معتمد |
+| **38** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -143,7 +144,8 @@
 | HOW COMPETES — كيف تتنافس؟ | 34 | Competitive Model + 5 Categories (Financial Info / Enterprise AI / Data Platforms / Operational Intelligence / Research Automation) + Competitive Matrix (8 competitors × 6 dimensions) + Category Creation (Institutional Decision Intelligence Infrastructure) + Positioning Statement + Real Competitor = Decision Fragmentation |
 | HOW DEFENDS — كيف تحمي نفسها؟ | 35 | Moat Model + 7 Layers (Evidence Network / Ontology / Entity Resolution / Relationship Graph / Reasoning / Decision Memory / Feedback Loop) + Compounding Intelligence Asset + 5-Year Moat Evolution + Switching Cost + Workflow Lock-in + Investor Narrative |
 | HOW GROWS — كيف تنمو؟ | 36 | Growth Model + 5 Engines (Category Creation / Enterprise Acquisition / Land & Expand / Intelligence Network Effects / Ecosystem Expansion) + 3-Phase Market Strategy + Land-and-Expand Flywheel + 5 Enterprise KPIs + 5-Year Growth Path + 4 Strategic Risks |
-| HOW NARRATED — كيف تُروى؟ | 37 | Outcome-first site narrative |
+| HOW RAISES — كيف تُموَّل؟ | 37 | Investment Model + Thesis + 3 Market Shifts + 4 Funding Stages (Foundation/Seed/Series A/Growth) + Capital Allocation + Investor Metrics + Valuation Framework + 2 Value Scenarios + Exit Logic + 4 Valuation Risks |
+| HOW NARRATED — كيف تُروى؟ | 38 | Outcome-first site narrative |
 
 ---
 
@@ -250,6 +252,7 @@ docs/
     ├── 35-COMPETITIVE-MODEL-v1.md         ← كيف تتنافس
     ├── 36-MOAT-MODEL-v1.md                ← كيف تحمي نفسها
     ├── 37-GROWTH-MODEL-v1.md               ← كيف تنمو
+    ├── 38-INVESTMENT-MODEL-v1.md            ← كيف تُموَّل
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -307,15 +310,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **37/37 وثيقة تأسيسية معتمدة**
+- ✅ **38/38 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🏢 **PHASE 6 — MARKET EXECUTION جارية** — Market Entry + Competitive + Moat + Growth معتمدة (docs 34-37)
+- 🏢 **PHASE 6 — MARKET EXECUTION جارية** — Market Entry + Competitive + Moat + Growth + Investment معتمدة (docs 34-38)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** INVESTMENT-MODEL-v1 (كيف تُعرض رؤى على المستثمرين؟ مراحل التمويل + التقييم + استخدام رأس المال)
+- 📝 **الوثيقة التالية المقترحة:** METRICS-MODEL-v1 (مؤشرات قياس الشركة: Business + Product + Trust Metrics)
 
 ---
 
