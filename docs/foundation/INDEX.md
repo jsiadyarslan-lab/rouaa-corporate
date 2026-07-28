@@ -46,7 +46,8 @@
 | **12** | [DATA-GOVERNANCE-MODEL-v1](12-DATA-GOVERNANCE-MODEL-v1.md) | كيف تُحوكَم البيانات والمعرفة والأدلة عبر دورة حياتها؟ | ✅ معتمد |
 | **13** | [KNOWLEDGE-GRAPH-MODEL-v1](14-KNOWLEDGE-GRAPH-MODEL-v1.md) | كيف تتحول البيانات إلى شبكة معرفة مؤسسية تفهم العلاقات؟ | ✅ معتمد |
 | **14** | [KNOWLEDGE-ONTOLOGY-MODEL-v1](15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) | ما القواعد التي تحدد معنى الكيانات والعلاقات والأحداث؟ | ✅ معتمد |
-| **15** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **15** | [ENTITY-RESOLUTION-MODEL-v1](16-ENTITY-RESOLUTION-MODEL-v1.md) | كيف يعرف رؤى أن الأسماء المختلفة تشير لنفس الكيان الحقيقي؟ | ✅ معتمد |
+| **16** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -93,7 +94,8 @@
 | HOW GOVERNED — كيف تُحوكَم؟ | 12 | Data Governance + Lineage + Quality |
 | HOW KNOWS — كيف تفهم؟ | 13 | Knowledge Graph + 5 layers (Entity/Event/Fact/Relationship/Decision) |
 | HOW MEANS — كيف تُعرّف؟ | 14 | Financial Ontology + 7 layers (Entity/Market/Event/Fact/Relationship/Decision/Evidence) |
-| HOW NARRATED — كيف تُروى؟ | 15 | Outcome-first site narrative |
+| HOW IDENTIFIES — كيف يُعرّف؟ | 15 | Entity Resolution + Canonical Identity + Identifiers + Aliases + Temporal Identity |
+| HOW NARRATED — كيف تُروى؟ | 16 | Outcome-first site narrative |
 
 ---
 
@@ -178,6 +180,7 @@ docs/
     ├── 12-DATA-GOVERNANCE-MODEL-v1.md    ← كيف تُحوكَم
     ├── 14-KNOWLEDGE-GRAPH-MODEL-v1.md    ← كيف تفهم العلاقات
     ├── 15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md ← كيف تُعرّف المعنى
+    ├── 16-ENTITY-RESOLUTION-MODEL-v1.md  ← كيف يُعرّف الكيان
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -235,9 +238,9 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **15/15 وثيقة تأسيسية معتمدة**
+- ✅ **16/16 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** ENTITY-RESOLUTION-MODEL-v1 (حل الكيانات المتعددة الأسماء — "Apple Inc" = "AAPL" = "Apple")
+- 📝 **الوثيقة التالية المقترحة:** RELATIONSHIP-MODEL-v1 (تعريف أنواع العلاقات وقواعد صلاحيتها وقوتها وتأثيرها)
 
 ---
 
