@@ -47,7 +47,8 @@
 | **13** | [KNOWLEDGE-GRAPH-MODEL-v1](14-KNOWLEDGE-GRAPH-MODEL-v1.md) | كيف تتحول البيانات إلى شبكة معرفة مؤسسية تفهم العلاقات؟ | ✅ معتمد |
 | **14** | [KNOWLEDGE-ONTOLOGY-MODEL-v1](15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) | ما القواعد التي تحدد معنى الكيانات والعلاقات والأحداث؟ | ✅ معتمد |
 | **15** | [ENTITY-RESOLUTION-MODEL-v1](16-ENTITY-RESOLUTION-MODEL-v1.md) | كيف يعرف رؤى أن الأسماء المختلفة تشير لنفس الكيان الحقيقي؟ | ✅ معتمد |
-| **16** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **16** | [RELATIONSHIP-MODEL-v1](17-RELATIONSHIP-MODEL-v1.md) | كيف تُعرَّف العلاقات بين الكيانات وتُحوكَم عبر الزمن؟ | ✅ معتمد |
+| **17** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -95,7 +96,8 @@
 | HOW KNOWS — كيف تفهم؟ | 13 | Knowledge Graph + 5 layers (Entity/Event/Fact/Relationship/Decision) |
 | HOW MEANS — كيف تُعرّف؟ | 14 | Financial Ontology + 7 layers (Entity/Market/Event/Fact/Relationship/Decision/Evidence) |
 | HOW IDENTIFIES — كيف يُعرّف؟ | 15 | Entity Resolution + Canonical Identity + Identifiers + Aliases + Temporal Identity |
-| HOW NARRATED — كيف تُروى؟ | 16 | Outcome-first site narrative |
+| HOW RELATES — كيف ترتبط؟ | 16 | Relationship Object + 7 categories + Causal vs Descriptive + Lifecycle + Evidence |
+| HOW NARRATED — كيف تُروى؟ | 17 | Outcome-first site narrative |
 
 ---
 
@@ -181,6 +183,7 @@ docs/
     ├── 14-KNOWLEDGE-GRAPH-MODEL-v1.md    ← كيف تفهم العلاقات
     ├── 15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md ← كيف تُعرّف المعنى
     ├── 16-ENTITY-RESOLUTION-MODEL-v1.md  ← كيف يُعرّف الكيان
+    ├── 17-RELATIONSHIP-MODEL-v1.md       ← كيف ترتبط الكيانات
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -238,9 +241,9 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **16/16 وثيقة تأسيسية معتمدة**
+- ✅ **17/17 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** RELATIONSHIP-MODEL-v1 (تعريف أنواع العلاقات وقواعد صلاحيتها وقوتها وتأثيرها)
+- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-INGESTION-MODEL-v1 (كيف تُنشأ الكيانات والعلاقات والحقائق من الوثائق الرسمية قبل الاستدلال عليها)
 
 ---
 

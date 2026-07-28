@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 16 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 17 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -29,6 +29,7 @@
 | كيف تفهم العلاقات؟ | [14-KNOWLEDGE-GRAPH-MODEL](docs/foundation/14-KNOWLEDGE-GRAPH-MODEL-v1.md) |
 | كيف تُعرّف المعنى؟ | [15-KNOWLEDGE-ONTOLOGY-MODEL](docs/foundation/15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) |
 | كيف يُعرّف الكيان؟ | [16-ENTITY-RESOLUTION-MODEL](docs/foundation/16-ENTITY-RESOLUTION-MODEL-v1.md) |
+| كيف ترتبط الكيانات؟ | [17-RELATIONSHIP-MODEL](docs/foundation/17-RELATIONSHIP-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -42,7 +43,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **16/16 وثيقة تأسيسية معتمدة**
+- ✅ **17/17 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
