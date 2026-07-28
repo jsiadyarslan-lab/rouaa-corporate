@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 36 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 37 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -49,6 +49,7 @@
 | كيف تدخل السوق؟ | [34-MARKET-ENTRY-MODEL](docs/foundation/34-MARKET-ENTRY-MODEL-v1.md) |
 | كيف تتنافس؟ | [35-COMPETITIVE-MODEL](docs/foundation/35-COMPETITIVE-MODEL-v1.md) |
 | كيف تحمي نفسها؟ | [36-MOAT-MODEL](docs/foundation/36-MOAT-MODEL-v1.md) |
+| كيف تنمو؟ | [37-GROWTH-MODEL](docs/foundation/37-GROWTH-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -62,13 +63,13 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **36/36 وثيقة تأسيسية معتمدة**
+- ✅ **37/37 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform + Product معتمدة
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل**
-- 🏢 **PHASE 6 — MARKET EXECUTION جارية** — Market Entry + Competitive + Moat معتمدة
+- 🏢 **PHASE 6 — MARKET EXECUTION جارية** — Market Entry + Competitive + Moat + Growth معتمدة
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
