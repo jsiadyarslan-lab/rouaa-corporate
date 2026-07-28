@@ -54,7 +54,8 @@
 | **20** | [DECISION-GOVERNANCE-MODEL-v1](21-DECISION-GOVERNANCE-MODEL-v1.md) | كيف نضمن أن القرار المؤسسي منضبط، قابل للتدقيق، ومتوافق مع السياسات والمنظّمين؟ | ✅ معتمد |
 | **21** | [DECISION-WORKFLOW-MODEL-v1](22-DECISION-WORKFLOW-MODEL-v1.md) | كيف ينتقل القرار من اكتشاف معلومة إلى إجراء مؤسسي منظم داخل المؤسسة؟ | ✅ معتمد |
 | **22** | [PLATFORM-MODEL-v1](23-PLATFORM-MODEL-v1.md) | كيف تتجمع 22 وثيقة تأسيسية في منصة واحدة متماسكة يراها العميل؟ (مُحسَّن: 6 Layers + ما ليست عليه رؤى + الفكرة المركزية + مقارنة مع الأدوات الحالية) | ✅ معتمد (مُحسَّن) |
-| **23** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **23** | [PRODUCT-MODEL-v1](24-PRODUCT-MODEL-v1.md) | ما هي المنتجات التي يشتتريها العميل فوق منصة ROUAA الموحّدة؟ | ✅ معتمد |
+| **24** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -115,7 +116,8 @@
 | HOW GOVERNS — كيف يحوكَم؟ | 20 | Decision Governance + 6 Authority Levels + 4 Approval Chain types + Policy Enforcement (4 modes) + Compliance Engine + Audit Recording (immutable + signed) + Reviewability + Exception Handling |
 | HOW OPERATES — كيف يعمل؟ | 21 | Decision Workflow + 8-stage Lifecycle (Detect→Understand→Analyze→Challenge→Approve→Execute→Monitor→Learn) + 5 Workflow Types + 4 Workflow Objects + Human-in-the-Loop + Workflow Intelligence |
 | HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model + 6 Layers (Evidence Intelligence → Knowledge → Reasoning → Decision → Governance → Workflow) + ما ليست عليه رؤى (5 rejections) + الفكرة المركزية + 4 منتجات + 3 Multi-Tenant Models + مقارنة مع 5 فئات أدوات |
-| HOW NARRATED — كيف تُروى؟ | 23 | Outcome-first site narrative |
+| HOW SELLS — كيف تُباع كمنتج؟ | 23 | 5 Products (Capital Markets / Research / Information Markets / Risk / API Platform) + Product Composition Formula + Bundling (Single/Multi/Enterprise Suite) + Expansion Path + Lifecycle + White-label + Product KPIs |
+| HOW NARRATED — كيف تُروى؟ | 24 | Outcome-first site narrative |
 
 ---
 
@@ -208,6 +210,7 @@ docs/
     ├── 21-DECISION-GOVERNANCE-MODEL-v1.md ← كيف يحوكَم القرار
     ├── 22-DECISION-WORKFLOW-MODEL-v1.md  ← كيف يعمل في المؤسسة
     ├── 23-PLATFORM-MODEL-v1.md           ← كيف تتوحّد في منصة واحدة
+    ├── 24-PRODUCT-MODEL-v1.md            ← كيف تُباع كمنتجات
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -265,13 +268,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **23/23 وثيقة تأسيسية معتمدة**
+- ✅ **24/24 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
-- 🔗 **مرحلة Platform Consolidation بدأت** — Platform Model معتمدة (doc 23) — يربط 22 وثيقة في منصة واحدة
-- ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثائق التالية المقترحة:** PRODUCT-MODEL-v1 (ماذا يشتتري العميل) → CAPABILITY-CATALOG-v1 → DATA-MODEL-v1 → METRICS-MODEL-v1 → ROADMAP-MODEL-v1 → HTML
+- 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
+- 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
+- 🚀 **PHASE 2 — OPERATIONALIZATION تبدأ الآن**
+- ⬜ **HTML Implementation قيد الانتظار**
+- 📝 **الوثيقة التالية المقترحة:** OPERATING-MODEL-v1 (كيف تعمل الشركة يوميًا لإنتاج وتشغيل وبيع ودعم المنتجات)
 
 ---
 

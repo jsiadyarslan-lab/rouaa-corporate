@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 23 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 24 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -36,6 +36,7 @@
 | كيف يحوكَم القرار؟ | [21-DECISION-GOVERNANCE-MODEL](docs/foundation/21-DECISION-GOVERNANCE-MODEL-v1.md) |
 | كيف يعمل في المؤسسة؟ | [22-DECISION-WORKFLOW-MODEL](docs/foundation/22-DECISION-WORKFLOW-MODEL-v1.md) |
 | كيف تتوحّد في منصة؟ | [23-PLATFORM-MODEL](docs/foundation/23-PLATFORM-MODEL-v1.md) |
+| كيف تُباع كمنتجات؟ | [24-PRODUCT-MODEL](docs/foundation/24-PRODUCT-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -49,11 +50,13 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **23/23 وثيقة تأسيسية معتمدة**
+- ✅ **24/24 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
-- 🔗 **مرحلة Platform Consolidation بدأت** — Platform Model يربط 22 وثيقة في منصة واحدة
+- 🔗 **مرحلة Platform Consolidation مكتملة** — Platform + Product معتمدة
+- 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل**
+- 🚀 **PHASE 2 — OPERATIONALIZATION تبدأ الآن**
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
