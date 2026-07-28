@@ -48,7 +48,8 @@
 | **14** | [KNOWLEDGE-ONTOLOGY-MODEL-v1](15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) | ما القواعد التي تحدد معنى الكيانات والعلاقات والأحداث؟ | ✅ معتمد |
 | **15** | [ENTITY-RESOLUTION-MODEL-v1](16-ENTITY-RESOLUTION-MODEL-v1.md) | كيف يعرف رؤى أن الأسماء المختلفة تشير لنفس الكيان الحقيقي؟ | ✅ معتمد |
 | **16** | [RELATIONSHIP-MODEL-v1](17-RELATIONSHIP-MODEL-v1.md) | كيف تُعرَّف العلاقات بين الكيانات وتُحوكَم عبر الزمن؟ | ✅ معتمد |
-| **17** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **17** | [KNOWLEDGE-INGESTION-MODEL-v1](18-KNOWLEDGE-INGESTION-MODEL-v1.md) | كيف تتحول الوثائق الرسمية إلى معرفة مؤسسية موثقة داخل رؤى؟ | ✅ معتمد |
+| **18** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -97,7 +98,8 @@
 | HOW MEANS — كيف تُعرّف؟ | 14 | Financial Ontology + 7 layers (Entity/Market/Event/Fact/Relationship/Decision/Evidence) |
 | HOW IDENTIFIES — كيف يُعرّف؟ | 15 | Entity Resolution + Canonical Identity + Identifiers + Aliases + Temporal Identity |
 | HOW RELATES — كيف ترتبط؟ | 16 | Relationship Object + 7 categories + Causal vs Descriptive + Lifecycle + Evidence |
-| HOW NARRATED — كيف تُروى؟ | 17 | Outcome-first site narrative |
+| HOW ACQUIRES — كيف تُكتسب؟ | 17 | Knowledge Ingestion + 3 layers (Acquisition/Validation/Normalization) + Extraction Pipeline + Continuous |
+| HOW NARRATED — كيف تُروى؟ | 18 | Outcome-first site narrative |
 
 ---
 
@@ -184,6 +186,7 @@ docs/
     ├── 15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md ← كيف تُعرّف المعنى
     ├── 16-ENTITY-RESOLUTION-MODEL-v1.md  ← كيف يُعرّف الكيان
     ├── 17-RELATIONSHIP-MODEL-v1.md       ← كيف ترتبط الكيانات
+    ├── 18-KNOWLEDGE-INGESTION-MODEL-v1.md ← كيف تُكتسب المعرفة
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -241,9 +244,9 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **17/17 وثيقة تأسيسية معتمدة**
+- ✅ **18/18 وثيقة تأسيسية معتمدة**
 - ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
-- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-INGESTION-MODEL-v1 (كيف تُنشأ الكيانات والعلاقات والحقائق من الوثائق الرسمية قبل الاستدلال عليها)
+- 📝 **الوثيقة التالية المقترحة:** REASONING-MODEL-v1 (أول طبقة تحوّل المعرفة إلى ذكاء قرار مؤسسي — جوهر القيمة التي تبيعها رؤى)
 
 ---
 
