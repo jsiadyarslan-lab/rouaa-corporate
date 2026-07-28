@@ -1,598 +1,579 @@
 # ROUAA · REASONING-MODEL-v1
 
-## Institutional Reasoning Architecture
-
-> **الطبقة التي تحوّل المعرفة المؤسسية إلى استنتاجات قابلة للتفسير والدفاع والتدقيق.**
+> **الطبقة التي تشرح كيف تتحول المعرفة الموثقة إلى استدلال مؤسسي قابل للتفسير.**
 >
-> ليست "كيف يفكر الـ AI".
-> بل **Institutional Reasoning Architecture**.
+> فوق:
+> KNOWLEDGE-GRAPH-MODEL-v1
+> KNOWLEDGE-ONTOLOGY-MODEL-v1
+> ENTITY-RESOLUTION-MODEL-v1
+> RELATIONSHIP-MODEL-v1
 >
-> لأن الذكاء الاصطناعي ليس الأصل.
-> الأصل هو **قابلية تفسير القرار المؤسسي**.
+> وتحت:
+> DECISION-MODEL-v1
+>
+> يجيب عن سؤال واحد:
+>
+> **كيف تنتقل رؤى من "معرفة ما حدث" إلى "فهم لماذا حدث وما الذي قد يحدث؟"**
 
-**الإصدار:** v1.0
-**الحالة:** Foundational Architecture
-**النطاق:** Institutional Reasoning Engine
-
----
-
-# الهدف
-
-هذه الوثيقة تجيب عن سؤال واحد:
-
-> **كيف تتحول آلاف الحقائق والعلاقات والأحداث إلى استنتاج مؤسسي يمكن الدفاع عنه؟**
-
-وليس:
-
-> كيف يعمل الـ LLM؟
+> **ملاحظة الإصدار:** هذه النسخة المُحسَّنة تحلّ محل النسخة الأصلية (المؤرشفة في `archive/REASONING-MODEL-v1-original-superseeded.md`). تضيف 6 محركات فرعية (Context / Inference / Hypothesis / Scenario / Contradiction / Confidence)، ومجلس Reasoning Council، ونموذج Adversarial Reasoning، و14 مبدأً نهائيًا.
 
 ---
 
-# ما الذي لا تشرحه؟
+# 0. لماذا هذه الوثيقة؟
 
-لا تشرح:
+Knowledge وحدها لا تنتج قرارًا.
 
-* GPT
-* Claude
-* Prompt Engineering
-* Chain of Thought
-* Embeddings
+امتلاك:
 
-كلها تفاصيل تنفيذية.
+- مصادر رسمية
+- بيانات تاريخية
+- كيانات مترابطة
+- علاقات معرفية
+
+يعطي المؤسسة:
+
+> صورة عن الواقع.
+
+لكنه لا يعطيها:
+
+> تفسيرًا للواقع.
+
+المؤسسات لا تحتاج فقط إلى معرفة:
+
+"ارتفع التضخم."
+
+بل تحتاج إلى:
+
+- لماذا ارتفع؟
+- ما العوامل المؤثرة؟
+- هل الحركة مؤقتة أم هيكلية؟
+- ما السيناريوهات المحتملة؟
+- ما المخاطر المرتبطة؟
+- ما درجة الثقة؟
+- ما الأدلة التي تدعم هذا الاستنتاج؟
+
+لهذا توجد طبقة Reasoning.
 
 ---
 
-# ما الذي تشرحه؟
+# 1. تعريف Reasoning في رؤى
 
-المنطق المؤسسي.
+## التعريف الداخلي
 
----
-
-# البنية
+> Reasoning هو النظام الذي يحول Intelligence Objects الموثقة والعلاقات المعرفية إلى استنتاجات، فرضيات، سيناريوهات، وتفسيرات قابلة للتدقيق.
 
 ---
 
-# 1. Reasoning ليس AI
+## التعريف الخارجي
 
-التعريف:
+لا نقول للعميل:
 
-> Reasoning هو عملية بناء استنتاج مؤسسي من حقائق مترابطة مع المحافظة على سلسلة الأدلة كاملة.
+"لدينا Reasoning Engine."
 
-يعنى:
+نقول:
+
+> "رؤى لا تعرض المعلومات فقط، بل تربط الأحداث والعوامل والأدلة لإنتاج فهم قابل للتفسير قبل اتخاذ القرار."
+
+---
+
+# 2. موقع Reasoning داخل منظومة رؤى
 
 ```
-Evidence
-
-↓
-
-Facts
-
-↓
-
-Entities
-
-↓
-
-Relationships
-
-↓
-
-Context
-
-↓
-
-Hypotheses
-
-↓
-
-Counter Arguments
-
-↓
-
-Confidence
-
-↓
-
-Decision
+Evidence Foundation
+        │
+        ▼
+Knowledge Layer
+   Source
+   Document
+   Fact
+   Event
+   Entity
+   Relationship
+        │
+        ▼
+Reasoning Layer
+   Context
+   Inference
+   Hypothesis
+   Scenario
+   Confidence
+   Challenge
+        │
+        ▼
+Decision Layer
+   Recommendation
+   Action
+   Approval
+   Audit
 ```
 
-وليس
+---
+
+# 3. المبادئ الأساسية
+
+## Principle 1 — Evidence Before Reasoning
+
+لا يوجد استنتاج بدون أساس.
+
+كل Reasoning Output يجب أن يرتبط بـ:
+
+- Evidence References
+- Source Authority
+- Timestamp
+- Confidence
+
+---
+
+## Principle 2 — Explainability by Design
+
+الاستنتاج ليس قيمة إذا لم يمكن تفسيره.
+
+كل نتيجة يجب أن تجيب:
 
 ```
-Prompt
-
-↓
-
-LLM
-
-↓
-
-Answer
+What?          لماذا هذا الاستنتاج؟
+Why?           ما الأدلة التي أدت إليه؟
+How?           ما سلسلة التفكير؟
+Confidence?    ما درجة الثقة؟
+Alternative?   ما التفسيرات المنافسة؟
 ```
 
-هذه نقطة جوهرية.
+---
+
+## Principle 3 — Multiple Perspectives
+
+القرار المؤسسي لا يعتمد على زاوية واحدة.
+
+لذلك Reasoning يجب أن ينتج:
+
+```
+Base Case
+Bull Case
+Bear Case
+Risk Case
+```
 
 ---
 
-# 2. مدخلات الاستدلال
+## Principle 4 — Controlled Intelligence
 
-كل عملية تبدأ من:
+رؤى لا تنتج "رأي AI".
 
-Evidence
+بل تنتج:
 
-وليس سؤال المستخدم.
+> استدلالًا مؤسسيًا محكومًا بالأدلة.
 
-المدخلات هى:
+---
 
-Evidence
+# 4. Reasoning Objects
 
+مثل Intelligence Objects، Reasoning ينتج كائنات داخلية.
+
+## Reasoning Object
+
+```
+Reasoning Object
+{
+  id
+  hypothesis
+  supporting_evidence[]
+  conflicting_evidence[]
+  reasoning_path[]
+  confidence_score
+  assumptions[]
+  alternatives[]
+  created_at
+  model_version
+}
+```
+
+---
+
+# 5. مكونات طبقة Reasoning
+
+---
+
+## 5.1 Context Engine
+
+### الوظيفة
+
+وضع الحدث داخل سياقه.
+
+مثال:
+
+الخبر:
+
+"رفع البنك المركزي الفائدة"
+
+ليس كافيًا.
+
+Context Engine يسأل:
+
+- ما مستوى التضخم؟
+- ما موقف الاقتصاد؟
+- هل الأسواق توقعت القرار؟
+- ما القرارات السابقة؟
+
+---
+
+Output:
+
+```
+Event Context:
+  Inflation:            High
+  Growth:               Slowing
+  Market Expectation:   Priced-in
+  Historical Pattern:   Similar to 2022 cycle
+```
+
+---
+
+## 5.2 Inference Engine
+
+### الوظيفة
+
+استخراج العلاقات السببية المحتملة.
+
+مثال:
+
+```
+Interest Rate ↑
+    ↓
+Borrowing Cost ↑
+    ↓
+Corporate Investment ↓
+    ↓
+Growth Pressure ↑
+```
+
+---
+
+## 5.3 Hypothesis Engine
+
+### الوظيفة
+
+إنتاج فرضيات قابلة للاختبار.
+
+مثال:
+
+```
+Hypothesis:
+"ارتفاع التضخم الحالي قد يكون مؤقتًا
+بسبب صدمة الطاقة وليس تغيرًا هيكليًا."
+
+Evidence:
+- Energy prices
+- Historical comparison
+
+Counter Evidence:
+- Wage growth
+
+Confidence:
+72%
+```
+
+---
+
+## 5.4 Scenario Engine
+
+### الوظيفة
+
+تحويل الفهم إلى احتمالات مستقبلية.
+
+```
+Scenario A — Soft Landing
+  Probability: 55%
+  Drivers: Inflation decline, Stable employment
+
+Scenario B — Recession
+  Probability: 25%
+  Drivers: Credit tightening
+```
+
+---
+
+## 5.5 Contradiction Engine
+
+### الوظيفة
+
+اكتشاف التعارضات.
+
+مثال:
+
+مصدر 1:
+"النمو يتباطأ"
+
+مصدر 2:
+"الإنفاق الاستهلاكي قوي"
+
+النظام لا يخفي التعارض.
+
+بل ينتجه:
+
+```
+Contradiction Object
+  Claim A
+  Claim B
+  Conflict Type: Economic Indicator Divergence
+  Resolution Required: Analyst Review
+```
+
+---
+
+## 5.6 Confidence Engine
+
+### الوظيفة
+
+حساب درجة الثقة.
+
+ليست:
+
+AI confidence.
+
+بل:
+
+Evidence confidence.
+
+العوامل:
+
+```
+Source Authority
 *
-
-Facts
-
+Evidence Quantity
 *
-
-Events
-
-*
-
-Knowledge Graph
-
-*
-
-Temporal Context
-
-*
-
-Source Credibility
-
-*
-
-Previous Decisions
-
-*
-
-Domain Rules
-
----
-
-# 3. طبقات الاستدلال
-
-أقترح ست طبقات.
-
----
-
-## Layer 1
-
-Evidence Reasoning
-
-يسأل:
-
-هل الدليل صحيح؟
-
-هل المصدر موثوق؟
-
-هل الدليل حديث؟
-
-هل هناك تعارض؟
-
----
-
-## Layer 2
-
-Fact Reasoning
-
-يبنى الحقائق.
-
-مثال
-
-Federal Reserve
-
-رفع الفائدة
-
-25bps
-
-Date
-
-Region
-
-Currency
-
-Confidence
-
----
-
-## Layer 3
-
-Relationship Reasoning
-
-يربط الحقائق.
-
-مثلاً
-
-رفع الفائدة
-
-↓
-
-عوائد السندات
-
-↓
-
-الدولار
-
-↓
-
-الذهب
-
-↓
-
-الأسهم
-
----
-
-## Layer 4
-
-Context Reasoning
-
-السياق.
-
-مثلاً
-
-رفع الفائدة أثناء ركود
-
-ليس
-
-رفع الفائدة أثناء توسع اقتصادي.
-
----
-
-## Layer 5
-
-Hypothesis Reasoning
-
-يبنى فرضيات.
-
-مثلاً
-
-Bull
-
-Bear
-
-Neutral
-
-Alternative
-
----
-
-## Layer 6
-
-Decision Reasoning
-
-ينتج:
-
-Recommendation
-
-Confidence
-
-Explanation
-
-Evidence Chain
-
-Audit Chain
-
----
-
-# 4. أنواع الاستدلال
-
-ليس نوعاً واحداً.
-
-بل عدة أنواع.
-
----
-
-## Deductive
-
-من القاعدة إلى النتيجة.
-
----
-
-## Inductive
-
-من البيانات إلى النمط.
-
----
-
-## Abductive
-
-أفضل تفسير.
-
----
-
-## Causal
-
-سبب ونتيجة.
-
----
-
-## Temporal
-
-قبل وبعد.
-
----
-
-## Comparative
-
-مقارنة.
-
----
-
-## Counterfactual
-
-ماذا لو؟
-
----
-
-## Probabilistic
-
-احتمالات.
-
----
-
-## Scenario
-
-سيناريوهات.
-
----
-
-## Multi-agent
-
-جدل داخلي.
-
----
-
-# 5. AI Council
-
-هذه الوثيقة تربطه.
-
-بدلاً من
-
-Agent 1
-
-Agent 2
-
-تقول
-
-Reasoning Roles
-
-مثلاً
-
-Macro
-
-Risk
-
-Credit
-
-Portfolio
-
-Compliance
-
-Research
-
-Market Structure
-
-Devil's Advocate
-
-Chair
-
-Recorder
-
-كلهم ينتجون استدلالاً.
-
-وليس إجابة.
-
----
-
-# 6. الاستدلال لا ينتج رأياً
-
-ينتج:
-
-Claim
-
-↓
-
-Supporting Evidence
-
-↓
-
-Opposing Evidence
-
-↓
-
-Reasoning
-
-↓
-
-Confidence
-
-↓
-
-Alternatives
-
-↓
-
-Recommendation
-
----
-
-# 7. الثقة
-
-Confidence
-
-ليست رقم LLM.
-
-بل تحسب من عدة عوامل.
-
-مثلاً
-
-Evidence Quality
-
-Source Trust
-
-Agreement
-
-Conflicts
-
-Coverage
-
-Freshness
-
 Historical Accuracy
+*
+Agreement Level
+*
+Contradictions
+*
+Missing Data
+```
 
 ---
 
-# 8. المعارضة الداخلية
+# 6. Multi-Agent Reasoning Governance
 
-ميزة كبيرة.
+رؤى لا تعتمد على وكيل واحد.
 
-كل Claim يمر عبر
+```
+Reasoning Council
+  Analyst Agent
+  Macro Agent
+  Risk Agent
+  Contrarian Agent
+  Historical Agent
+  Compliance Agent
+        ↓
+  Consensus + Challenge
+```
 
+---
+
+# 7. Adversarial Reasoning
+
+الهدف ليس تأكيد القرار.
+
+بل محاولة كسره.
+
+كل فرضية تمر عبر:
+
+```
+Initial Hypothesis
+    ↓
+Support
+    ↓
 Challenge
-
-وليس Review.
-
-مثلاً
-
-Bull
-
-↓
-
-Bear attacks it
-
-↓
-
-Risk attacks both
-
-↓
-
-Compliance attacks evidence
-
-↓
-
-Chair decides
-
-هذا أفضل من Agent واحد.
+    ↓
+Alternative Explanation
+    ↓
+Final Assessment
+```
 
 ---
 
-# 9. التفسير
+# 8. Reasoning Lifecycle
 
-كل Recommendation يجب أن تجيب:
-
-لماذا؟
-
-بناءً على ماذا؟
-
-ما الأدلة؟
-
-ما الاعتراضات؟
-
-لماذا رُفضت؟
-
-ما السيناريو البديل؟
+```
+Input — Event / Fact / Question
+    ↓
+Context Building
+    ↓
+Evidence Retrieval
+    ↓
+Inference
+    ↓
+Hypothesis Generation
+    ↓
+Scenario Analysis
+    ↓
+Confidence Assessment
+    ↓
+Reasoning Object
+    ↓
+Decision Engine
+```
 
 ---
 
-# 10. الناتج
+# 9. العلاقة مع Knowledge Graph
+
+Knowledge Graph:
+
+يعرف:
+
+"ما يرتبط بماذا"
+
+Reasoning:
+
+يفسر:
+
+"ماذا يعني هذا الارتباط"
+
+مثال:
+
+Knowledge Graph:
+
+```
+Oil Price
+   |
+   |
+Inflation
+   |
+   |
+Central Bank Policy
+```
+
+Reasoning:
+
+```
+Oil increase may pressure inflation,
+which may influence monetary policy decisions.
+
+Confidence: 68%
+Evidence: 5 sources
+```
+
+---
+
+# 10. العلاقة مع Decision Model
+
+Reasoning لا يصدر القرار.
+
+يفصل بين:
+
+```
+Reasoning — "What is likely happening?"
+
+Decision  — "What should institution do?"
+```
+
+---
+
+# 11. استخدامات Reasoning حسب المجال
+
+## Capital Markets
+- Market regime analysis
+- Macro impact analysis
+- Risk scenarios
+- Investment thesis
+
+## Research
+- Report generation
+- Thesis validation
+- Evidence-backed narratives
+
+## Risk
+- Early warning
+- Exposure analysis
+- Stress scenarios
+
+## Media Intelligence
+- Contextual journalism
+- Source-backed explanations
+
+---
+
+# 12. ما الذي يراه العميل؟
+
+لا يرى:
 
 Reasoning Object
 
-وليس مجرد Text.
-
-مثلاً
+يرى:
 
 ```
-Reasoning
+Investment Insight
 
-Claim
+Claim:
+"The probability of rate cuts increased."
 
-Evidence
+Why:
+3 economic indicators changed.
 
-Supporting Facts
+Evidence:
+- Federal Reserve
+- BLS
+- BEA
 
-Contradicting Facts
+Confidence:
+81%
 
-Relationships
-
-Timeline
-
-Alternative Views
-
-Confidence
-
-Recommendation
-
-Risk Score
-
-Audit ID
-
-Object References
+Risks:
+Employment deterioration could reverse this.
 ```
 
 ---
 
-# 11. ما الذى يميز ROUAA؟
+# 13. Strategic Value
 
-ليس لأنه يستخدم LLM.
+Reasoning هو الفرق بين:
 
-بل لأنه يفصل بين:
+## Data Platform
+يعطي معلومات.
 
-```
-Evidence
+## Intelligence Platform
+يعطي تفسيرًا.
 
-Knowledge
-
-Reasoning
-
-Decision
-```
-
-كل طبقة مستقلة.
+## Decision Intelligence Platform
+يعطي أساسًا لقرار قابل للدفاع.
 
 ---
 
-# 12. المبادئ
+# 14. المبادئ النهائية
 
-1. لا يوجد قرار بلا Evidence.
-2. لا يوجد استنتاج بلا Facts.
-3. لا توجد توصية بلا معارضة.
-4. كل استنتاج قابل لإعادة البناء.
-5. كل خطوة لها Audit Trail.
-6. الثقة نتيجة حسابية متعددة العوامل، لا شعور للنموذج.
-7. يمكن استبدال أي نموذج ذكاء اصطناعي دون تغيير منطق الاستدلال.
-8. الاستدلال خدمة مستقلة فوق طبقة المعرفة، وليس خاصية للنموذج اللغوي.
-9. القرار المؤسسي هو المخرج النهائي، وليس النص الذي يولده النموذج.
-10. الهدف هو إنتاج **قرارات قابلة للتفسير والدفاع والتدقيق**، لا مجرد إجابات تبدو ذكية.
+1. لا Reasoning بدون Evidence.
+2. لا Insight بدون Explainability.
+3. لا Prediction بدون Context.
+4. لا Decision بدون Alternatives.
+5. لا Confidence بدون Measurement.
+6. لا AI Opinion داخل المؤسسة.
+7. كل استنتاج يجب أن يكون قابلًا لإعادة البناء.
 
 ---
 
-## ملاحظة استراتيجية
-
-أرى أن هذه الوثيقة ينبغي أن تكون آخر وثيقة في سلسلة "محرك المعرفة"، لأنها تعتمد على ما قبلها:
+# الحالة
 
 ```
-DATA-GOVERNANCE-MODEL
-        ↓
-KNOWLEDGE-GRAPH-MODEL
-        ↓
-ONTOLOGY
-        ↓
-ENTITY-RESOLUTION-MODEL
-        ↓
-RELATIONSHIP-MODEL
-        ↓
-KNOWLEDGE-INGESTION-MODEL
-        ↓
-REASONING-MODEL
+STATUS: FOUNDATION DEFINED
+
+DEPENDS ON:
+- Knowledge Graph
+- Ontology
+- Entity Resolution
+- Relationship Model
+
+ENABLES:
+- Decision Model
+- Decision Governance
+- Decision Workflow
+
+NEXT:
+- DECISION-MODEL-v1.md (مُعتمدة كالوثيقة المركزية)
+- DECISION-WORKFLOW-MODEL-v1 (التالية المقترحة)
+- DECISION-GOVERNANCE-MODEL-v1
 ```
 
-وبعدها تبدأ مرحلة مختلفة تمامًا، وهي طبقة **Decision Intelligence** (إنتاج القرارات، الحوكمة، وسير العمل المؤسسي)، وليس طبقة بناء المعرفة نفسها.
+---
+
+هذه الوثيقة تكمل الفراغ بين **المعرفة** و **القرار**.

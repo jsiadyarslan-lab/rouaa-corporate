@@ -49,7 +49,7 @@
 | **15** | [ENTITY-RESOLUTION-MODEL-v1](16-ENTITY-RESOLUTION-MODEL-v1.md) | كيف يعرف رؤى أن الأسماء المختلفة تشير لنفس الكيان الحقيقي؟ | ✅ معتمد |
 | **16** | [RELATIONSHIP-MODEL-v1](17-RELATIONSHIP-MODEL-v1.md) | كيف تُعرَّف العلاقات بين الكيانات وتُحوكَم عبر الزمن؟ | ✅ معتمد |
 | **17** | [KNOWLEDGE-INGESTION-MODEL-v1](18-KNOWLEDGE-INGESTION-MODEL-v1.md) | كيف تتحول الوثائق الرسمية إلى معرفة مؤسسية موثقة داخل رؤى؟ | ✅ معتمد |
-| **18** | [REASONING-MODEL-v1](19-REASONING-MODEL-v1.md) | كيف تتحول المعرفة إلى استنتاجات مؤسسية قابلة للتفسير والدفاع والتدقيق؟ | ✅ معتمد |
+| **18** | [REASONING-MODEL-v1](19-REASONING-MODEL-v1.md) | كيف تتحول المعرفة الموثقة إلى استدلال مؤسسي قابل للتفسير؟ (محسَّن: 6 محركات فرعية + Reasoning Council + Adversarial Reasoning) | ✅ معتمد (مُحسَّن) |
 | **19** | [DECISION-MODEL-v1](20-DECISION-MODEL-v1.md) | كيف يُنتج رؤى قراراً مؤسسياً موثّقًا قابلًا للتنفيذ والدفاع وإعادة البناء؟ | ✅ معتمد ⭐ |
 | **20** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
@@ -107,7 +107,7 @@
 | HOW IDENTIFIES — كيف يُعرّف؟ | 15 | Entity Resolution + Canonical Identity + Identifiers + Aliases + Temporal Identity |
 | HOW RELATES — كيف ترتبط؟ | 16 | Relationship Object + 7 categories + Causal vs Descriptive + Lifecycle + Evidence |
 | HOW ACQUIRES — كيف تُكتسب؟ | 17 | Knowledge Ingestion + 3 layers (Acquisition/Validation/Normalization) + Extraction Pipeline + Continuous |
-| HOW REASONS — كيف يستدل؟ | 18 | Reasoning Engine + 6 layers (Evidence/Fact/Relationship/Context/Hypothesis/Decision) + 10 reasoning types + AI Council |
+| HOW REASONS — كيف يستدل؟ | 18 | Reasoning Layer (6 engines: Context/Inference/Hypothesis/Scenario/Contradiction/Confidence) + Reasoning Council (6 agents) + Adversarial Reasoning + Reasoning Object |
 | HOW DECIDES — كيف يقرر؟ | 19 | Decision Object (26 components) + 8 Decision Types + 11-stage Lifecycle + Multi-scenario + Internal Challenge + Execution Plan + Success Measurement |
 | HOW NARRATED — كيف تُروى؟ | 20 | Outcome-first site narrative |
 
