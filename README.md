@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 34 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 35 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -47,6 +47,7 @@
 | كيف يُنفّذ؟ | [32-AI-AGENT-MODEL](docs/foundation/32-AI-AGENT-MODEL-v1.md) |
 | كيف يُنسّق؟ | [33-AI-ORCHESTRATION-MODEL](docs/foundation/33-AI-ORCHESTRATION-MODEL-v1.md) |
 | كيف تدخل السوق؟ | [34-MARKET-ENTRY-MODEL](docs/foundation/34-MARKET-ENTRY-MODEL-v1.md) |
+| كيف تتنافس؟ | [35-COMPETITIVE-MODEL](docs/foundation/35-COMPETITIVE-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -60,13 +61,13 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **34/34 وثيقة تأسيسية معتمدة**
+- ✅ **35/35 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform + Product معتمدة
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل**
-- 🏢 **PHASE 6 — MARKET EXECUTION بدأت** — Market Entry Model معتمدة
+- 🏢 **PHASE 6 — MARKET EXECUTION جارية** — Market Entry + Competitive Model معتمدة
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 
