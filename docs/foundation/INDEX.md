@@ -53,7 +53,7 @@
 | **19** | [DECISION-MODEL-v1](20-DECISION-MODEL-v1.md) | كيف يُنتج رؤى قراراً مؤسسياً موثّقًا قابلًا للتنفيذ والدفاع وإعادة البناء؟ (مُحسَّن: Decision Formation Engine + Confidence Model + Contrarian Testing + Decision Memory) | ✅ معتمد ⭐ (مُحسَّن) |
 | **20** | [DECISION-GOVERNANCE-MODEL-v1](21-DECISION-GOVERNANCE-MODEL-v1.md) | كيف نضمن أن القرار المؤسسي منضبط، قابل للتدقيق، ومتوافق مع السياسات والمنظّمين؟ | ✅ معتمد |
 | **21** | [DECISION-WORKFLOW-MODEL-v1](22-DECISION-WORKFLOW-MODEL-v1.md) | كيف ينتقل القرار من اكتشاف معلومة إلى إجراء مؤسسي منظم داخل المؤسسة؟ | ✅ معتمد |
-| **22** | [PLATFORM-MODEL-v1](23-PLATFORM-MODEL-v1.md) | كيف تتجمع 22 وثيقة تأسيسية في منصة واحدة متماسكة يراها العميل؟ | ✅ معتمد |
+| **22** | [PLATFORM-MODEL-v1](23-PLATFORM-MODEL-v1.md) | كيف تتجمع 22 وثيقة تأسيسية في منصة واحدة متماسكة يراها العميل؟ (مُحسَّن: 6 Layers + ما ليست عليه رؤى + الفكرة المركزية + مقارنة مع الأدوات الحالية) | ✅ معتمد (مُحسَّن) |
 | **23** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
@@ -114,7 +114,7 @@
 | HOW DECIDES — كيف يقرر؟ | 19 | Decision Object (16 components) + 4 Decision Types + 8-stage Lifecycle + Decision Formation Engine (4 stages) + Confidence Model (6 factors) + Contrarian Testing + Decision Memory + Quality Score |
 | HOW GOVERNS — كيف يحوكَم؟ | 20 | Decision Governance + 6 Authority Levels + 4 Approval Chain types + Policy Enforcement (4 modes) + Compliance Engine + Audit Recording (immutable + signed) + Reviewability + Exception Handling |
 | HOW OPERATES — كيف يعمل؟ | 21 | Decision Workflow + 8-stage Lifecycle (Detect→Understand→Analyze→Challenge→Approve→Execute→Monitor→Learn) + 5 Workflow Types + 4 Workflow Objects + Human-in-the-Loop + Workflow Intelligence |
-| HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model + 7 Layers (L1 Evidence → L7 Delivery) + 22-doc mapping + Internal→External translation + One Platform Many Faces + Tenant Isolation + Platform KPIs |
+| HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model + 6 Layers (Evidence Intelligence → Knowledge → Reasoning → Decision → Governance → Workflow) + ما ليست عليه رؤى (5 rejections) + الفكرة المركزية + 4 منتجات + 3 Multi-Tenant Models + مقارنة مع 5 فئات أدوات |
 | HOW NARRATED — كيف تُروى؟ | 23 | Outcome-first site narrative |
 
 ---
