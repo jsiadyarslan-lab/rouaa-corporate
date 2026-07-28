@@ -1,0 +1,248 @@
+# ROUAA Foundational Documents
+
+> **المرجع التأسيسي الكامل لمشروع رؤى (ROUAA).**
+> كل قرار تصميمي، تجاري، تقني، أو سردّي يجب أن يُشتق من هذه الوثائق.
+> إن تعارض أي قرار مع هذه الوثائق، فالخطأ في القرار لا في الوثائق.
+
+---
+
+## 📋 ما هذا المجلد؟
+
+هذا المجلد يحتوي على **الوثائق التأسيسية الثلاثة عشر** التي تُعرّف رؤى كمنصة ذكاء قرار مؤسسي. هذه الوثائق ليست وثائق تصميم — هي وثائق تأسيس تحدد:
+
+- **ما هي رؤى** (المعمارية الداخلية)
+- **لماذا تُشترى** (النتائج المؤسسية)
+- **كيف تُرخّص** (النموذج التجاري)
+- **كم تُسعّر** (طبقات التسعير)
+- **من يشتريها** (شرائح العملاء)
+- **كيف تُباع** (حركة البيع)
+- **كيف تُختبر** (رحلة العميل)
+- **كيف تنجح** (نجاح العميل)
+- **كيف تُنفّذ** (التنفيذ المؤسسي)
+- **لماذا تُوثق** (الثقة المؤسسية)
+- **كيف تُبنى** (المعمارية)
+- **كيف تُحوكَم** (حوكمة البيانات)
+- **كيف تُروى** (سرد الموقع)
+
+---
+
+## 🗂️ السلسلة التأسيسية (الترتيب المنطقي للقراءة)
+
+اقرأ الوثائق بهذا الترتيب. كل وثيقة تبني على ما قبلها وتجيب عن سؤال مختلف.
+
+| # | الوثيقة | السؤال الذي تجيب عنه | الحالة |
+|---|---|---|---|
+| **01** | [INTELLIGENCE-MODEL-v4](01-INTELLIGENCE-MODEL-v4.md) | ما الذي تبنيه رؤى داخليًا؟ | ✅ معتمد |
+| **02** | [ROUAA-VALUE-MODEL-v1](02-ROUAA-VALUE-MODEL-v1.md) | كيف تُرخّص رؤى للعملاء؟ | ✅ معتمد |
+| **03** | [ROUAA-OUTCOME-MODEL-v2](03-ROUAA-OUTCOME-MODEL-v2.md) | لماذا تدفع المؤسسات مقابل رؤى؟ | ✅ معتمد |
+| **04** | [PRICING-MODEL-v3](04-PRICING-MODEL-v3.md) | كم تدفع المؤسسة وكيف تُبنى الإيرادات؟ | ✅ معتمد |
+| **05** | [CUSTOMER-SEGMENT-MODEL-v1](05-CUSTOMER-SEGMENT-MODEL-v1.md) | من يشتري رؤى ولماذا؟ | ✅ معتمد |
+| **06** | [SALES-MOTION-MODEL-v1](06-SALES-MOTION-MODEL-v1.md) | كيف تُباع رؤى كبنية تحتية مؤسسية؟ | ✅ معتمد |
+| **07** | [CUSTOMER-JOURNEY-MODEL-v1](07-CUSTOMER-JOURNEY-MODEL-v1.md) | كيف تنتقل المؤسسة من معرفة رؤى إلى اعتمادها؟ | ✅ معتمد |
+| **08** | [CUSTOMER-SUCCESS-MODEL-v1](08-CUSTOMER-SUCCESS-MODEL-v1.md) | كيف نحافظ على القيمة بعد البيع؟ | ✅ معتمد |
+| **09** | [ENTERPRISE-IMPLEMENTATION-MODEL-v1](09-ENTERPRISE-IMPLEMENTATION-MODEL-v1.md) | كيف تُدخل رؤى داخل مؤسسة كبيرة؟ | ✅ معتمد |
+| **10** | [ENTERPRISE-TRUST-MODEL-v1](10-ENTERPRISE-TRUST-MODEL-v1.md) | لماذا تثق المؤسسة بأن رؤى يمكن أن تصبح جزءًا من قرارها؟ | ✅ معتمد |
+| **11** | [ENTERPRISE-ARCHITECTURE-MODEL-v1](11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md) | كيف تُبنى رؤى كنظام مؤسسي متكامل؟ | ✅ معتمد |
+| **12** | [DATA-GOVERNANCE-MODEL-v1](12-DATA-GOVERNANCE-MODEL-v1.md) | كيف تُحوكَم البيانات والمعرفة والأدلة عبر دورة حياتها؟ | ✅ معتمد |
+| **13** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+
+---
+
+## 🎯 التعريف النهائي لرؤى (المُعتمد من كل الوثائق)
+
+> **ROUAA is an institutional decision intelligence platform that transforms verified financial information into faster, explainable, and auditable decisions.**
+
+> **رؤى هي منصة ذكاء قرار مؤسسي تحوّل المعلومات المالية الموثقة إلى قرارات أسرع، قابلة للتفسير، وجاهزة للتدقيق.**
+
+---
+
+## 🏛️ المبادئ المركزية (تظهر في كل وثيقة)
+
+هذه المبادئ غير قابلة للتفاوض. كل قرار تصميمي يجب أن يحترمها:
+
+1. **Outcome First** — رؤى تُعرَّف بما تغيّره (قرارات)، لا بما تنتجه (Objects)
+2. **Evidence Before Intelligence** — لا ذكاء بلا دليل، لا قرار بلا مصدر
+3. **Object-Centric Architecture** — كل شيء قابل للتحويل إلى كائن مؤسسي قابل للتدقيق
+4. **Integration Over Replacement** — رؤى طبقة فوق أنظمة المؤسسة، لا بديل عنها
+5. **Trust Is Product Structure** — الثقة بنية في المنتج، ليست صفحة في الموقع
+6. **One Platform, Many Applications** — منصة واحدة، تطبيقات متعددة (Domains)
+7. **Land and Expand** — دخول صغير، توسّع مؤسسي تدريجي
+8. **Customer Owns Customer Data** — رؤى لا تملك بيانات العميل ولا تستخدمها لتدريب نماذج عامة
+9. **AI Generates, Evidence Validates** — AI يولّد، الأدلة تتحقق
+10. **The Moat Is Accumulated Knowledge** — الخندق هو تراكم المعرفة الموثقة، ليس الـ AI أو الـ UI
+
+---
+
+## 📊 خريطة الأسئلة المؤسسية (إجابات موحَّدة)
+
+| السؤال | الوثيقة | الإجابة المُعتمدة |
+|---|---|---|
+| WHAT — ما هي رؤى؟ | 01 | Decision Intelligence Platform |
+| HOW LICENSED — كيف تُرخّص؟ | 02 | Platform + Domain + Usage |
+| WHY BOUGHT — لماذا تُشترى؟ | 03 | 6 Enterprise Outcomes |
+| HOW PRICED — كم تُسعّر؟ | 04 | 7-layer enterprise contract (£75k–£1M+ ARR) |
+| WHO BUYS — من يشتري؟ | 05 | Asset Managers (beachhead), then Banks/Hedge Funds/Media |
+| HOW SOLD — كيف تُباع؟ | 06 | Enterprise Consultative Sale (NOT PLG) |
+| HOW ADOPTED — كيف تُتبنّى؟ | 07 | 9-stage journey (Discover → Partner) |
+| HOW SUSTAINED — كيف تنجح؟ | 08 | Outcome Ownership + QBR + Health Score |
+| HOW IMPLEMENTED — كيف تُنفّذ؟ | 09 | 8-phase (Align → Expand) |
+| WHY TRUSTED — لماذا تُوثق؟ | 10 | 6-layer Trust Model + Evidence Network |
+| HOW BUILT — كيف تُبنى؟ | 11 | 7-layer Architecture + API-first |
+| HOW GOVERNED — كيف تُحوكَم؟ | 12 | Data Governance + Lineage + Quality |
+| HOW NARRATED — كيف تُروى؟ | 13 | Outcome-first site narrative |
+
+---
+
+## 🎯 الجمهور المستهدف (من الوثيقة 05)
+
+```
+العميل الأول (Beachhead):
+Asset Management Firms — £1B–£50B AUM
+
+العقد الأول المستهدف:
+£250k–£750k ARR
+
+المنتج الأول:
+Investment Decision Intelligence Package
+(Platform Foundation + Capital Markets + Research Intelligence + Analyst Workflow)
+
+التوسّع المتوقع:
+Year 1: Research Team
+Year 2: Portfolio Managers
+Year 3: Risk + Compliance
+Year 4: Enterprise-wide Intelligence Layer
+```
+
+---
+
+## 🚫 ما يجب ألا يظهر في الموقع (من الوثيقة 13)
+
+هذه العناصر **ممنوعة** في الصفحة الرئيسية و Hero:
+
+- ❌ AI Agents
+- ❌ LLM
+- ❌ Knowledge Graph
+- ❌ Intelligence Objects
+- ❌ 411 sources
+- ❌ APIs
+- ❌ "AI Powered"
+- ❌ "Next Generation AI"
+- ❌ "Try Demo" / "Get Started" / "Sign Up" (SaaS-style CTAs)
+
+هذه تظهر فقط في `platform.html` (العمق التقني) و `developers.html` (للمطورين).
+
+---
+
+## ✅ ما يجب أن يظهر في الموقع (من الوثيقة 13)
+
+```
+Hero:
+"Decisions with evidence behind them."
+
+CTA:
+"Request Institutional Briefing"
+
+Site Sequence:
+1. Problem
+2. Promise
+3. Enterprise Outcomes
+4. Decision Intelligence Model
+5. Domain Solutions
+6. Trust Foundation
+7. Request Briefing
+```
+
+---
+
+## 📁 هيكل المجلد
+
+```
+docs/
+└── foundation/
+    ├── INDEX.md                          ← أنت هنا (دليل التنقل)
+    ├── 01-INTELLIGENCE-MODEL-v4.md       ← ما الذي تبنيه رؤى
+    ├── 02-ROUAA-VALUE-MODEL-v1.md        ← كيف تُرخّص
+    ├── 03-ROUAA-OUTCOME-MODEL-v2.md      ← لماذا تُشترى
+    ├── 04-PRICING-MODEL-v3.md            ← كم تُسعّر
+    ├── 05-CUSTOMER-SEGMENT-MODEL-v1.md   ← من يشتري
+    ├── 06-SALES-MOTION-MODEL-v1.md       ← كيف تُباع
+    ├── 07-CUSTOMER-JOURNEY-MODEL-v1.md   ← كيف تُتبنّى
+    ├── 08-CUSTOMER-SUCCESS-MODEL-v1.md   ← كيف تنجح
+    ├── 09-ENTERPRISE-IMPLEMENTATION-MODEL-v1.md  ← كيف تُنفّذ
+    ├── 10-ENTERPRISE-TRUST-MODEL-v1.md   ← لماذا تُوثق
+    ├── 11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md    ← كيف تُبنى
+    ├── 12-DATA-GOVERNANCE-MODEL-v1.md    ← كيف تُحوكَم
+    ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
+    └── archive/                          ← نسخ قديمة (مرجعية فقط)
+        ├── INTELLIGENCE-MODEL-v1-superseeded.md
+        ├── INTELLIGENCE-MODEL-v2-superseeded.md
+        ├── INTELLIGENCE-MODEL-v3-superseeded.md
+        └── OUTCOME-MODEL-v1-superseeded.md
+```
+
+---
+
+## 🔗 كيف تستخدم هذه الوثائق؟
+
+### إذا كنت مصمم HTML:
+- ابدأ بـ **13-SITE-NARRATIVE-v1** (تحدّد ترتيب الصفحات والـ Hero)
+- ثم **03-ROUAA-OUTCOME-MODEL-v2** (تحدّد الـ 6 Outcomes للصفحة الرئيسية)
+- ثم **11-ENTERPRISE-ARCHITECTURE-MODEL-v1** (للـ platform.html فقط)
+- لا تضع أي من العناصر الممنوعة في الصفحة الرئيسية
+
+### إذا كنت في فريق المبيعات:
+- ابدأ بـ **05-CUSTOMER-SEGMENT-MODEL-v1** (من العميل)
+- ثم **06-SALES-MOTION-MODEL-v1** (كيف تبيع)
+- ثم **04-PRICING-MODEL-v3** (كم تُسعّر)
+- ثم **07-CUSTOMER-JOURNEY-MODEL-v1** (مراحل البيع)
+
+### إذا كنت في فريق Customer Success:
+- ابدأ بـ **08-CUSTOMER-SUCCESS-MODEL-v1** (إدارة النجاح)
+- ثم **09-ENTERPRISE-IMPLEMENTATION-MODEL-v1** (التنفيذ)
+- ثم **10-ENTERPRISE-TRUST-MODEL-v1** (بناء الثقة)
+
+### إذا كنت مهندس منصة:
+- ابدأ بـ **11-ENTERPRISE-ARCHITECTURE-MODEL-v1** (المعمارية الكاملة)
+- ثم **12-DATA-GOVERNANCE-MODEL-v1** (حوكمة البيانات)
+- ثم **01-INTELLIGENCE-MODEL-v4** (المعمارية الداخلية للذكاء)
+- ثم **10-ENTERPRISE-TRUST-MODEL-v1** (متطلبات الثقة التقنية)
+
+### إذا كنت كاتب محتوى / سرد:
+- ابدأ بـ **13-SITE-NARRATIVE-v1** (السرد)
+- ثم **03-ROUAA-OUTCOME-MODEL-v2** (الرسائل الرئيسية)
+- ثم **10-ENTERPRISE-TRUST-MODEL-v1** (لغة الثقة)
+
+---
+
+## ⚠️ قاعدة ذهبية
+
+> **أي قرار يتخذ في المشروع (تصميم، تطوير، بيع، تسعير، سرد) يجب أن يستند إلى وثيقة من هذه الوثائق.**
+>
+> **إن لم تجد الوثيقة التي تجيب عن سؤالك، فالسؤال إما:**
+> 1. **لم يُحسم بعد** — ارفعه للنقاش
+> 2. **يحتاج وثيقة جديدة** — اكتبها بنفس نمط هذه الوثائق
+> 3. **ينتمي لمستوى تنفيذي** — اشتقه من الوثيقة الأقرب主题ًا
+
+**لا تبتكر قرارات تأسيسية خارج هذه الوثائق.**
+
+---
+
+## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
+
+- ✅ **13/13 وثيقة تأسيسية معتمدة**
+- ⬜ **HTML Implementation قيد الانتظار** — يبدأ بعد اعتماد كامل
+- 📝 **الوثيقة التالية المقترحة:** KNOWLEDGE-GRAPH-MODEL-v1 (توسيع معرفة المعمارية)
+
+---
+
+## 🏷️ معلومات المستودع
+
+- **Repository:** [jsiadyarslan-lab/rouaa-corporate](https://github.com/jsiadyarslan-lab/rouaa-corporate)
+- **Branch:** `redesign-v20-architecture`
+- **Foundation Documents Path:** `/docs/foundation/`
+- **Latest Commit:** التحديث بعد اعتماد DATA-GOVERNANCE-MODEL-v1 وإعادة الهيكلة
+
+---
+
+*هذا المجلد هو المرجع الواحد الموحَّد لكل من يعمل على مشروع رؤى.*
+*إن اختلفت المصادر، فهذا المجلد هو الحقيقة.*
