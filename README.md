@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 32 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 33 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -45,6 +45,7 @@
 | كيف يُسترجع؟ | [30-SEARCH-MODEL](docs/foundation/30-SEARCH-MODEL-v1.md) |
 | كيف يتفاعل؟ | [31-AI-ASSISTANT-MODEL](docs/foundation/31-AI-ASSISTANT-MODEL-v1.md) |
 | كيف يُنفّذ؟ | [32-AI-AGENT-MODEL](docs/foundation/32-AI-AGENT-MODEL-v1.md) |
+| كيف يُنسّق؟ | [33-AI-ORCHESTRATION-MODEL](docs/foundation/33-AI-ORCHESTRATION-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -58,13 +59,13 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **32/32 وثيقة تأسيسية معتمدة**
+- ✅ **33/33 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform + Product معتمدة
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل**
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant + AI Agent معتمدة
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant + AI Agent + AI Orchestration معتمدة
 - ⬜ **HTML Implementation قيد الانتظار**
 - 🌿 **Branch:** `redesign-v20-architecture`
 

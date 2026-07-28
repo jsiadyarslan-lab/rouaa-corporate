@@ -63,7 +63,8 @@
 | **29** | [SEARCH-MODEL-v1](30-SEARCH-MODEL-v1.md) | كيف تصل المؤسسة للمعرفة الصحيحة في السياق الصحيح مع الأدلة الصحيحة في اللحظة المناسبة؟ | ✅ معتمد |
 | **30** | [AI-ASSISTANT-MODEL-v1](31-AI-ASSISTANT-MODEL-v1.md) | كيف يتحول محرك الذكاء الداخلي إلى مساعد مؤسسي يفهم الأسئلة ويحلل الأدلة ويبني قرارات قابلة للدفاع؟ | ✅ معتمد |
 | **31** | [AI-AGENT-MODEL-v1](32-AI-AGENT-MODEL-v1.md) | كيف تتحول قدرات الذكاء من وظائف منفصلة إلى منظومة Agents متخصصة تعمل معًا لإنتاج قرارات مؤسسية موثوقة؟ | ✅ معتمد |
-| **32** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **32** | [AI-ORCHESTRATION-MODEL-v1](33-AI-ORCHESTRATION-MODEL-v1.md) | كيف يُختار الوكيل وتُدار المهام المتوازية وتُحل التعارضات وتُراقب سلسلة التفكير وتُدار التكلفة؟ | ✅ معتمد |
+| **33** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -133,7 +134,8 @@
 | HOW RETRIEVES — كيف يُسترجع؟ | 29 | Search Model + 6 Retrieval Layers (Keyword/Semantic/Entity/Graph/Evidence/Decision) + Query Understanding + 5 Intent Types + Evidence-First Retrieval + Temporal Search + Institutional Memory + User-Aware + Intelligence Card Output |
 | HOW INTERACTS — كيف يتفاعل؟ | 30 | AI Assistant + 5 Assistant Types (Research/Investment/Risk/Compliance/Media) + Multi-Agent Council (6 agents) + Retrieval-Augmented Intelligence + 4 Reasoning Modes + 3-Memory Model + Decision Preparation Workflow + Response Object |
 | HOW EXECUTES — كيف يُنفّذ؟ | 31 | AI Agent Model + 8 Agent Types (Research/Evidence/Market/Risk/Contrarian/Scenario/Compliance/Decision) + Agent Contract + Orchestrator + Communication Protocol + Memory + Tools + Governance + Evaluation + Disagreement Handling |
-| HOW NARRATED — كيف تُروى؟ | 32 | Outcome-first site narrative |
+| HOW ORCHESTRATES — كيف يُنسّق؟ | 32 | AI Orchestration + Agent Selection + 4 Execution Patterns (Sequential/Parallel/Adversarial/Iterative) + Context Passing + 3-Level Conflict Resolution + Cost Management + Chain of Thought Monitoring + State Management + Timeout/Retry + Synthesis Strategy + Quality Gates + Observability + Enterprise Runtime |
+| HOW NARRATED — كيف تُروى؟ | 33 | Outcome-first site narrative |
 
 ---
 
@@ -235,6 +237,7 @@ docs/
     ├── 30-SEARCH-MODEL-v1.md             ← كيف يُسترجع
     ├── 31-AI-ASSISTANT-MODEL-v1.md       ← كيف يتفاعل
     ├── 32-AI-AGENT-MODEL-v1.md           ← كيف يُنفّذ
+    ├── 33-AI-ORCHESTRATION-MODEL-v1.md   ← كيف يُنسّق
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -292,15 +295,15 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **32/32 وثيقة تأسيسية معتمدة**
+- ✅ **33/33 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant + AI Agent معتمدة (docs 25-32)
+- 🚀 **PHASE 2 — OPERATIONALIZATION جارية** — Operating + Pipeline + Object + API + Data + Search + AI Assistant + AI Agent + AI Orchestration معتمدة (docs 25-33)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** AI-ORCHESTRATION-MODEL-v1 (نظام تشغيل الوكلاء: اختيار + توازي + تعارضات + تكلفة + مراقبة)
+- 📝 **الوثيقة التالية المقترحة:** MARKET-ENTRY-MODEL-v1 (من سيدفع أول مليون دولار مقابل رؤى، ولماذا؟)
 
 ---
 
