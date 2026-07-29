@@ -67,17 +67,18 @@
 | كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUAA-CERTIFICATION-MODEL-v1.md) |
 | كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) |
 | كيف تُبنى المنظومة؟ | [54-ECOSYSTEM-ARCHITECTURE-MODEL](docs/foundation/54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) 🔄 |
+| كيف تُصمّم المنتجات؟ | [55-PRODUCT-PORTFOLIO-MODEL](docs/foundation/55-ROUAA-PRODUCT-PORTFOLIO-MODEL-v1.md) 🔄 |
 | كيف تُنفّذ الموقع؟ | ~~[54-SITE-IMPLEMENTATION-MODEL](docs/foundation/archive/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md)~~ ⚠️ مؤرشفة |
-| كيف تصمّم بصريًا؟ | [55-DESIGN-SYSTEM](docs/foundation/55-ROUAA-DESIGN-SYSTEM-v1.md) ⚠️ قيد المراجعة |
-| كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) |
-| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) |
-| كيف تُهيكَل الصفحات؟ | [58-PAGE-ARCHITECTURE-MODEL](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) |
-| كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) |
-| كيف تظهر في البحث؟ | [60-SEO-STRATEGY-MODEL](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v1.md) |
-| كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) |
-| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) |
-| كيف نبدأ الكود الفعلي؟ | [63-HTML-REACT-IMPLEMENTATION](docs/foundation/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md) |
-| كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
+| كيف تصمّم بصريًا؟ | ~~[55-DESIGN-SYSTEM](docs/foundation/archive/55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md)~~ ⚠️ مؤرشفة — سيُعاد بناؤها |
+| كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) ⚠️ قيد المراجعة |
+| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) ⚠️ قيد المراجعة |
+| كيف تُهيكَل الصفحات؟ | [58-PAGE-ARCHITECTURE-MODEL](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) ⚠️ قيد المراجعة — مستخدم حددها للمراجعة |
+| كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف تظهر في البحث؟ | [60-SEO-STRATEGY-MODEL](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
+| كيف نبدأ الكود الفعلي؟ | [63-HTML-REACT-IMPLEMENTATION](docs/foundation/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md) ⚠️ مؤجل حتى استقرار السرد والمنتجات |
+| كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) ⚠️ سيُعاد بناؤها كخطوة تالية |
 
 ---
 
@@ -101,10 +102,11 @@
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
 - 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
   - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
-  - ⚠️ doc 54 القديم (SITE-IMPLEMENTATION-MODEL-v1) مؤرشف
-  - 📝 doc 55 التالي: PRODUCT-PORTFOLIO-MODEL-v1
-  - 📝 ثم مراجعة: docs 13 + 23 + 24 + 58
-- ⚠️ **الوثائق 55-63 قيد المراجعة** — قد يتم إعادة ترقيمها أو استبدالها
+  - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
+  - ⚠️ docs القديمة (54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
+  - 📝 doc 13 التالي: إعادة بناء SITE-NARRATIVE-v1
+  - 📝 ثم مراجعة: docs 23 + 24 + 58
+- ⚠️ **الوثائق 56-63 قيد المراجعة** — ستعاد كتابتها بناءً على السرد والمنتجات الجديدة
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
