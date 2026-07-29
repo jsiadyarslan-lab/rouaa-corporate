@@ -84,7 +84,8 @@
 | **50** | [STANDARDIZATION-MODEL-v1](51-STANDARDIZATION-MODEL-v1.md) | كيف تصبح رؤى الجهة التي تحدد معايير الذكاء المؤسسي القابل للثقة بدل أن تكون مجرد مزود منصة؟ | ✅ معتمد |
 | **51** | [CERTIFICATION-MODEL-v1](52-ROUAA-CERTIFICATION-MODEL-v1.md) | كيف تتحول منهجية رؤى إلى معيار مهني معتمد يخلق خبراء، مؤسسات، وشبكة اعتماد حول Decision Intelligence؟ | ✅ معتمد |
 | **52** | [RESEARCH-INSTITUTE-MODEL-v1](53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) | كيف تصبح رؤى مؤسسة تنتج المعرفة التي تعتمد عليها السوق، وليس فقط منصة تستخدمها المؤسسات؟ | ✅ معتمد |
-| **53** | [SITE-IMPLEMENTATION-MODEL-v1](54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) | كيف يتحول الإطار الاستراتيجي المكتوب إلى بنية موقع مؤسسي يحقق تحويل زائر المؤسسة إلى طلب Briefing؟ | ✅ معتمد |
+| **53** | [SITE-IMPLEMENTATION-MODEL-v1](54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) | كيف يتحول الإطار الاستراتيجي المكتوب إلى بنية موقع مؤسسي يحقق تحويل زائر المؤسسة إلى طلب Briefing؟ | ⚠️ مؤرشفة (superseeded) — انظر doc 54 الجديد |
+| **54** | [ECOSYSTEM-ARCHITECTURE-MODEL-v1](54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) | ما هي رؤى؟ وما هي الأنظمة التي تتكون منها؟ وكيف ترتبط جميعها ببنية ذكاء واحدة؟ | ✅ معتمد (جديد — طبقة معمارية عليا) |
 | **54** | [DESIGN-SYSTEM-v1](55-ROUAA-DESIGN-SYSTEM-v1.md) | كيف يجب أن تبدو وتشعر رؤى حتى يثق بها مدير استثمار أو مؤسسة مالية قبل أن يتحدث مع فريق المبيعات؟ | ✅ معتمد |
 | **55** | [HOMEPAGE-WIREFRAME-v1](56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) | كيف يجب أن تكون أول تجربة لرؤى حتى يفهم العميل المؤسسي القيمة قبل رؤية المنتج؟ | ✅ معتمد |
 | **56** | [COMPONENT-LIBRARY-v1](57-ROUAA-COMPONENT-LIBRARY-v1.md) | ما هي الوحدات البصرية والتفاعلية التي تجعل تجربة رؤى متسقة وقابلة للتوسع؟ | ✅ معتمد |
@@ -185,7 +186,8 @@
 | HOW STANDARDIZES — كيف تُقيّس؟ | 50 | Standardization Model + 7-Layer Standard (Source / Evidence / Knowledge / Reasoning / Decision / Governance / Audit) + 6-Level Maturity Model (Chaos → Collection → Analytics → Intelligence → Decision Intelligence → Institutional Intelligence) + Individual + Enterprise Certification + 4-Phase Adoption Strategy + Standardization Flywheel |
 | HOW CERTIFIES — كيف تعتمد؟ | 51 | Certification Model + 3 Tracks (Individual / Enterprise / Partner) + 4 Individual Levels (RDIF / RDIP / RDIA / RDIL) + 3 Enterprise Levels (DI Ready / DI Enabled / DI Mature) + 3 Partner Types (Implementation / Technology / Education) + 4-Part Assessment + Credential Verification + 24-Month Renewal + Community & Customer Success Integration + 3 Moats (Category / Talent / Ecosystem) + 3-Phase Launch (Internal Validation → Professional Launch → Industry Recognition) |
 | HOW RESEARCHES — كيف تبحث؟ | 52 | Research Institute + 5 Labs (Decision Intelligence / Financial Knowledge Systems / AI Governance / Institutional Research / Market Intelligence) + Standards & Methodology Office + 4 Asset Types (Annual Reports / Papers / Frameworks / Benchmarks) + 6-Stage Research Methodology (Question → Evidence → Analysis → Framework → Publication → Industry Application) + Knowledge Graph Integration + Research Fellows Program + Institutional Advisory Council + 3-Phase Build (Research Foundation → Research Network → Global Institute) |
-| HOW IMPLEMENTS SITE — كيف تُنفّذ الموقع؟ | 53 | Site Implementation Model + Phase 1 IA (Home / Why ROUAA / Platform / Solutions / Trust / Research / Developers / Company) + Phase 2 Homepage (9 Sections: Hero → Problem → Outcomes → Architecture → Domains → Trust → Audiences → Research → Conversion) + Hero Headline ("Intelligence Infrastructure for Decisions That Cannot Be Wrong") + Visual Hero (Source→Evidence→Knowledge→Reasoning→Decision live map) + Conversion Logic (Request Institutional Briefing, NOT Sign-Up) + Roadmap (Design System → Wireframe → Components → HTML/React) |
+| HOW IMPLEMENTS SITE — كيف تُنفّذ الموقع؟ | 53 | ⚠️ مؤرشفة — SITE-IMPLEMENTATION-MODEL-v1 تم استبدالها بـ ECOSYSTEM-ARCHITECTURE-MODEL-v1 كطبقة معمارية أعلى. المحتوى التنفيذي للموقع سيُعاد بناؤه بعد اعتماد طبقة المنظومة. |
+| HOW ECOSYSTEMS — كيف تُبنى المنظومة؟ | 54 | Ecosystem Architecture + Top-Level Definition (ROUAA = Enterprise Financial Intelligence Ecosystem, NOT news site / trading platform / AI tool) + 2 Major Ecosystems (Financial Intelligence Ecosystem + Trading Intelligence Ecosystem) + 5 Architecture Layers (Data Acquisition / Intelligence / Analysis / Decision / Product Experience) + Financial Intelligence Ecosystem components (Intelligence Engine + News Intelligence Platform + Independent Publishing Agent + Research Intelligence + Media Intelligence + Geopolitical Intelligence) + Trading Intelligence Ecosystem components (Trading Intelligence Engine + Signal Intelligence Pipeline + AI Trading Council + Intelligent Chart Analysis + Advanced Market Scanner + Predictive Markets + Automated Execution Layer) + Ecosystem Relationship (Financial Intelligence → Market Understanding → Trading Intelligence → Execution — trading is ONE application of intelligence, not the only product) + 4 Product Audiences (Investors/Institutions + Traders + Media/Researchers + Developers) + Design Principle (One Intelligence Foundation, Many Institutional Applications — NOT separate products) + Website Positioning (site presents the ecosystem, not just 'an intelligence engine') |
 | HOW DESIGNS — كيف تصمّم بصريًا؟ | 54 | Design System + Visual Category (Institutional Intelligence Infrastructure = Bloomberg + McKinsey + Enterprise Software + Research Institution) + 4 Principles (Trust Before Excitement / Evidence Over Decoration / Calm Intelligence / Institutional Density) + Color System (Deep Institutional Navy / Intelligence Surface / Intelligence Signal accent — single accent only, no neon) + Typography (4-level hierarchy: Display / Heading / Body / Data Text) + 12-col Grid + 8px Spacing Scale (8→128) + 5 Core Components (Intelligence Card / Evidence Block / Architecture Diagram / Outcome Card / Institutional Badge) + Motion (Reveal / Trace / Transition only — no parallax/floating/continuous) + Custom DataViz (Intelligence Maps / Evidence Chains / Knowledge Graph Views / Timeline Intelligence — NOT trading charts) + RTL/LTR + Accessibility + Responsive (Desktop → Tablet → Mobile) + Design Tokens (Colors / Typography / Spacing / Radius / Shadows / Motion / Components) + Tech Stack (React + Next.js + TypeScript + Tailwind + Storybook) |
 | HOW WIREFRAMES — كيف تُخطّط الصفحة الرئيسية؟ | 55 | Homepage Wireframe + 11 Sections (Hero → Institutional Problem → ROUAA Positioning → Outcomes → Intelligence Architecture → Trust Framework → Domains → Use Cases → Research Authority → Security/Governance → Final CTA) + Hero Headline ("Institutional Decision Intelligence Infrastructure") + Hero Visual (vertical Source→Evidence→Knowledge→Reasoning→Decision flow, NOT dashboard/charts/chat) + Above-the-Fold Test (What/For Whom/Why/Action) + 3-Second/1-Min/3-Min Conversion Test + Navigation (Platform/Solutions/Trust/Research/Developers/Company + Request Briefing — NO Pricing in main nav) + Final CTA "Request Institutional Briefing" (NOT "Start Free") + Implementation Bans (no stock photos, no smiling people, no robots, no Web3 effects) |
 | HOW COMPONENTS — كيف تُبنى المكونات؟ | 56 | Component Library + 5 Layers (Foundation / Intelligence / Trust / Enterprise / Research / Conversion) + 5 Foundation Components (Navigation / Hero Container / Section Header / Content Grid / Data Point) + 5 Intelligence Components (Intelligence Flow / Architecture Layer / Intelligence Object Card / Knowledge Graph Preview / Timeline Intelligence) + 5 Trust Components (Evidence Chain / Source Citation / Provenance Badge / Trust Score / Governance Panel) + 5 Enterprise Components (Outcome Card / Solution Module / Capability Matrix / Enterprise Architecture Diagram / Security Overview Card) + 4 Research Components (Research Report Card / Framework Card / Thought Leadership Article Card / Institute Highlight) + 3 Conversion Components (Institutional CTA Block / Briefing Request Form / Enterprise Qualification Flow) + Naming Convention (Rouaa+Category+Component) + 5 Component States (Default/Hover/Expanded/Mobile/Dark) + React Structure (src/components/{foundation,intelligence,trust,enterprise,research,conversion}) + 3-Phase Implementation Priority (Core → Content → Advanced) + Quality Test (must increase Understanding/Trust/Decision) + Build Bans (no Generic Pricing Cards / no SaaS Feature Cards / no AI Chat Widget / no Social Media Sections / no Excessive Animations / no Marketing Counters) |
@@ -318,7 +320,7 @@ docs/
     ├── 51-STANDARDIZATION-MODEL-v1.md           ← كيف تُقيّس
     ├── 52-ROUAA-CERTIFICATION-MODEL-v1.md         ← كيف تُعتمد
     ├── 53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md    ← كيف تبحث
-    ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md    ← كيف تُنفّذ الموقع
+    ├── 54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md ← كيف تُبنى المنظومة (جديد — طبقة معمارية عليا)
     ├── 55-ROUAA-DESIGN-SYSTEM-v1.md               ← كيف تصمّم بصريًا
     ├── 56-ROUAA-HOMEPAGE-WIREFRAME-v1.md           ← كيف تُخطّط الصفحة الرئيسية
     ├── 57-ROUAA-COMPONENT-LIBRARY-v1.md           ← كيف تُبنى المكونات
@@ -330,6 +332,7 @@ docs/
     ├── 63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md      ← كيف نبدأ الكود الفعلي
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
+        ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
         ├── INTELLIGENCE-MODEL-v2-superseeded.md
         ├── INTELLIGENCE-MODEL-v3-superseeded.md
@@ -385,7 +388,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **63/63 وثيقة تأسيسية معتمدة — 🏁 المرحلة التأسيسية مكتملة رسميًا**
+- ✅ **63/63 وثيقة تأسيسية معتمدة — المرحلة التأسيسية الأولى مكتملة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -394,9 +397,13 @@ docs/
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🏗️ **سلسلة Web Platform Execution مكتملة** — 10 وثائق تنفيذية (docs 54-63): Site Implementation + Design System + Homepage Wireframe + Component Library + Page Architecture + Content Architecture + SEO Strategy + Analytics Measurement + Web Implementation Architecture + HTML/React Implementation
-- 🏁 **FOUNDATION PHASE OFFICIALLY CLOSED** — 63 وثيقة: 53 استراتيجية + 10 تنفيذية
-- 🚀 **NEXT PHASE: CODE IMPLEMENTATION** — إنشاء repository فعلي + Next.js 15 + React 19 + TypeScript + Components + صفحات Home/Platform/Trust
+- 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
+  - المستخدم أدرك أن الانتقال من الاستراتيجية (docs 01-53) مباشرة إلى تنفيذ الموقع (docs 54-63) كان مفتقدًا لطبقة تعريف المنظومة الكاملة
+  - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
+  - ⚠️ doc 54 القديم (SITE-IMPLEMENTATION-MODEL-v1) مؤرشف في `archive/`
+  - 📝 doc 55 التالي: PRODUCT-PORTFOLIO-MODEL-v1 — سيعيد تعريف كل منتج فعلي
+  - 📝 ثم مراجعة: docs 13 (SITE-NARRATIVE) + 23 (PLATFORM-MODEL) + 24 (PRODUCT-MODEL) + 58 (PAGE-ARCHITECTURE)
+- ⚠️ **ملاحظة مهمة**: الوثائق 55-63 الحالية (Design System + Homepage Wireframe + Component Library + Page Architecture + Content Architecture + SEO Strategy + Analytics Measurement + Web Implementation Architecture + HTML/React Implementation) **قيد المراجعة** — قد يتم إعادة ترقيمها أو استبدالها بناءً على نتائج إعادة البناء المعماري
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---

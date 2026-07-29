@@ -66,8 +66,9 @@
 | كيف تُقيّس؟ | [51-STANDARDIZATION-MODEL](docs/foundation/51-STANDARDIZATION-MODEL-v1.md) |
 | كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUAA-CERTIFICATION-MODEL-v1.md) |
 | كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) |
-| كيف تُنفّذ الموقع؟ | [54-SITE-IMPLEMENTATION-MODEL](docs/foundation/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) |
-| كيف تصمّم بصريًا؟ | [55-DESIGN-SYSTEM](docs/foundation/55-ROUAA-DESIGN-SYSTEM-v1.md) |
+| كيف تُبنى المنظومة؟ | [54-ECOSYSTEM-ARCHITECTURE-MODEL](docs/foundation/54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) 🔄 |
+| كيف تُنفّذ الموقع؟ | ~~[54-SITE-IMPLEMENTATION-MODEL](docs/foundation/archive/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md)~~ ⚠️ مؤرشفة |
+| كيف تصمّم بصريًا؟ | [55-DESIGN-SYSTEM](docs/foundation/55-ROUAA-DESIGN-SYSTEM-v1.md) ⚠️ قيد المراجعة |
 | كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) |
 | كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) |
 | كيف تُهيكَل الصفحات؟ | [58-PAGE-ARCHITECTURE-MODEL](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) |
@@ -89,7 +90,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **63/63 وثيقة تأسيسية معتمدة — 🏁 المرحلة التأسيسية مكتملة رسميًا**
+- ✅ **63/63 وثيقة تأسيسية معتمدة — المرحلة التأسيسية الأولى مكتملة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
@@ -98,9 +99,12 @@
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🏗️ **سلسلة Web Platform Execution مكتملة** — 10 وثائق تنفيذية (docs 54-63)
-- 🏁 **FOUNDATION PHASE OFFICIALLY CLOSED** — 63 وثيقة: 53 استراتيجية + 10 تنفيذية
-- 🚀 **NEXT PHASE: CODE IMPLEMENTATION** — إنشاء repository فعلي + Next.js 15 + React 19 + TypeScript + Components + صفحات Home/Platform/Trust
+- 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
+  - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
+  - ⚠️ doc 54 القديم (SITE-IMPLEMENTATION-MODEL-v1) مؤرشف
+  - 📝 doc 55 التالي: PRODUCT-PORTFOLIO-MODEL-v1
+  - 📝 ثم مراجعة: docs 13 + 23 + 24 + 58
+- ⚠️ **الوثائق 55-63 قيد المراجعة** — قد يتم إعادة ترقيمها أو استبدالها
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
