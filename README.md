@@ -72,8 +72,8 @@
 | كيف تصمّم بصريًا؟ | ~~[55-DESIGN-SYSTEM](docs/foundation/archive/55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md)~~ ⚠️ مؤرشفة — سيُعاد بناؤها |
 | كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) ⚠️ قيد المراجعة |
 | كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) ⚠️ قيد المراجعة |
-| كيف تُهيكَل الصفحات؟ | [58-PAGE-ARCHITECTURE-MODEL](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) ⚠️ قيد المراجعة — مستخدم حددها للمراجعة |
-| كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف تُهيكَل الصفحات؟ | [58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
+| كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) ⚠️ NEXT — سيُعاد بناؤها كـ v2 |
 | كيف تظهر في البحث؟ | [60-SEO-STRATEGY-MODEL](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v1.md) ⚠️ قيد المراجعة |
 | كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
 | كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
@@ -106,8 +106,9 @@
   - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث
   - ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2 — Enterprise Financial Intelligence Operating Platform مع 6 طبقات
   - ✅ doc 24 v2: ROUAA-PRODUCT-MODEL-v2 — 42 منتج عبر 7 عائلات + 3 نماذج تغليف + 4 مراحل دورة حياة
-  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 24 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
-  - 📝 doc 58 التالي: إعادة بناء PAGE-ARCHITECTURE-MODEL-v2 حول عائلات المنتجات
+  - ✅ doc 58 v2: ROUAA-PAGE-ARCHITECTURE-MODEL-v2 — Institutional Gateway مع 9 صفحات + Solutions بـ 6 عائلات منتجات
+  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 24 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM + 58 v1) مؤرشفة
+  - 📝 doc 59 التالي: إعادة بناء CONTENT-ARCHITECTURE-MODEL-v2
   - 📝 ثم مراجعة: docs 56-63
 - ⚠️ **الوثائق 56-63 قيد المراجعة** — ستعاد كتابتها بناءً على السرد والمنتجات الجديدة
 - 🌿 **Branch:** `redesign-v20-architecture`
