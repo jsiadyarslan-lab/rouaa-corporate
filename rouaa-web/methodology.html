@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Methodology — How We Verify, Score, and Govern Financial Intelligence</title>
+  <meta name="description" content="The ROUAA methodology — source hierarchy, confidence scoring, verification workflow, evidence chain construction, governance rules, and audit trail design. Open for institutional review.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="trading-platform.html" class="nav-link">Trading Intelligence</a>
+        <a href="financial-intelligence.html" class="nav-link">Institutional Intelligence</a>
+        <a href="architecture.html" class="nav-link">Architecture</a>
+        <a href="solutions.html" class="nav-link">Solutions</a>
+        <a href="why-rouaa.html" class="nav-link">Why ROUAA</a>
+        <a href="financial-media.html" class="nav-link">Media</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 24px;">Methodology</span>
+      <h1>
+        How ROUAA verifies, scores,<br>
+        <span class="text-accent">and governs financial intelligence.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        The methodology is the trust layer made explicit. Every claim ROUAA produces — every fact, every event,
+        every analysis — is the output of a defined, publishable, auditable process. This page documents that process.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="principles">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Methodological Principles</span>
+        <h2>Three principles that govern every output.</h2>
+      </div>
+      <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Provenance Is Structural</h4>
+          <p style="font-size: 14px;">Every fact carries its source document, page, paragraph, and extraction confidence — at the moment of extraction. Provenance is not added later; it is the property of the data itself.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Governance Precedes Output</h4>
+          <p style="font-size: 14px;">Validation rules, confidence scoring, and source hierarchy operate <em>before</em> analysis is produced. No intelligence is published that has not passed through governance.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Audit-Ready By Construction</h4>
+          <p style="font-size: 14px;">Every output is reconstructable. From a published analysis back through the evidence chain to the original source document — at any time, on demand, for any auditor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hierarchy">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Source Hierarchy</span>
+        <h2>How sources are tiered.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">Not all sources are equal. ROUAA assigns each monitored source a tier — and that tier determines how facts extracted from it are scored, displayed, and governed.</p>
+      </div>
+      <div style="max-width: 880px; margin: 0 auto;">
+        <div class="comparison-table">
+          <div class="comparison-row header">
+            <div class="comparison-cell col-dimension">Tier</div>
+            <div class="comparison-cell col-traditional">Source Type</div>
+            <div class="comparison-cell col-rouaa">Governance Treatment</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell col-dimension">Tier 1</div>
+            <div class="comparison-cell col-traditional">Official primary sources — central banks, regulators, exchanges, statistical agencies, government bodies</div>
+            <div class="comparison-cell col-rouaa"><strong>Highest confidence.</strong> Facts extracted from Tier 1 sources carry full provenance and require no further verification before publication.</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell col-dimension">Tier 2</div>
+            <div class="comparison-cell col-traditional">Derived official sources — official press releases, official summaries, official statistical bulletins republished by official bodies</div>
+            <div class="comparison-cell col-rouaa"><strong>High confidence.</strong> Facts extracted require provenance to the original Tier 1 source where applicable.</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell col-dimension">Tier 3</div>
+            <div class="comparison-cell col-traditional">Reputable secondary sources — established financial media, established research houses, established data providers</div>
+            <div class="comparison-cell col-rouaa"><strong>Contextual confidence.</strong> Used for context and correlation, never as sole source for a fact that drives a decision.</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell col-dimension">Tier 4</div>
+            <div class="comparison-cell col-traditional">Aggregated feeds, scrapers, unverified outlets, social media</div>
+            <div class="comparison-cell col-rouaa"><strong>Excluded by default.</strong> Tier 4 sources are not monitored by ROUAA. They do not enter the evidence chain.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="confidence">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Confidence Scoring</span>
+        <h2>How every fact receives a confidence score.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">Every fact extracted by ROUAA carries a confidence score — a quantitative expression of how much institutional weight the fact should be given. The score is composed of four factors.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <h4 style="margin-bottom: 8px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Factor 01</h4>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Source Tier</h4>
+          <p style="font-size: 14px;">Tier 1 sources contribute maximum confidence; lower tiers contribute progressively less. Tier 4 contributes nothing.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 8px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Factor 02</h4>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Extraction Confidence</h4>
+          <p style="font-size: 14px;">The model's confidence that the fact was correctly extracted from the document — measured at extraction time and stored.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 8px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Factor 03</h4>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Corroboration</h4>
+          <p style="font-size: 14px;">Whether the fact is corroborated by other Tier 1 or Tier 2 sources. Single-source facts carry lower confidence than corroborated facts.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 8px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Factor 04</h4>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Recency</h4>
+          <p style="font-size: 14px;">How recently the source was published. Recency weighting is domain-aware — different fact types decay at different rates.</p>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top: 32px;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); max-width: 560px; margin: 0 auto;">
+          The composite confidence score is published with the fact — never hidden. Institutions can apply their own thresholds for what confidence level is acceptable for what decision.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verification">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Verification Workflow</span>
+        <h2>From source publication to verified fact.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">The verification workflow is the path a piece of information travels from the moment a source publishes to the moment a verified fact enters the ROUAA knowledge graph.</p>
+      </div>
+      <div style="max-width: 640px; margin: 0 auto;">
+        <div class="how-step">
+          <div class="how-number">01</div>
+          <div class="how-content">
+            <div class="how-title">Source Detection</div>
+            <div class="how-desc">ROUAA monitoring detects that a registered official source has published new content — press release, statistical release, regulatory filing, or announcement.</div>
+          </div>
+        </div>
+        <div class="how-arrow">↓</div>
+        <div class="how-step">
+          <div class="how-number">02</div>
+          <div class="how-content">
+            <div class="how-title">Document Ingestion</div>
+            <div class="how-desc">The document is ingested — extracted, classified, normalized, and stored with full provenance metadata (source URL, publication time, jurisdiction, document type).</div>
+          </div>
+        </div>
+        <div class="how-arrow">↓</div>
+        <div class="how-step">
+          <div class="how-number">03</div>
+          <div class="how-content">
+            <div class="how-title">Fact Extraction</div>
+            <div class="how-desc">Extraction models identify financial facts and events — each fact linked to the document, the page, the paragraph, and stored with extraction confidence.</div>
+          </div>
+        </div>
+        <div class="how-arrow">↓</div>
+        <div class="how-step">
+          <div class="how-number">04</div>
+          <div class="how-content">
+            <div class="how-title">Governance Validation</div>
+            <div class="how-desc">Validation rules check source tier, extraction confidence, corroboration, and recency. Facts that fail validation are flagged for review — never published silently.</div>
+          </div>
+        </div>
+        <div class="how-arrow">↓</div>
+        <div class="how-step">
+          <div class="how-number">05</div>
+          <div class="how-content">
+            <div class="how-title">Knowledge Graph Insertion</div>
+            <div class="how-desc">Verified facts enter the knowledge graph — linked to entities, events, and the broader evidence chain. Now available for intelligence production.</div>
+          </div>
+        </div>
+        <div class="how-arrow">↓</div>
+        <div class="how-step">
+          <div class="how-number">06</div>
+          <div class="how-content">
+            <div class="how-title">Audit Trail Sealed</div>
+            <div class="how-desc">The full chain — source → document → fact → governance → graph — is sealed in the audit trail. Reconstructable on demand for any auditor or committee.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="governance">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Governance Rules</span>
+        <h2>What governance means, structurally.</h2>
+      </div>
+      <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Source Hierarchy Enforcement</h4>
+          <p style="font-size: 14px;">Facts cannot be promoted from a lower tier to a higher tier. A Tier 3 fact is not equivalent to a Tier 1 fact, regardless of how many times it is repeated.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Confidence Threshold</h4>
+          <p style="font-size: 14px;">Facts below a configurable confidence threshold do not enter intelligence production. Institutions can set their own thresholds per workflow.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">AI Input Constraints</h4>
+          <p style="font-size: 14px;">Governed AI operates <em>only</em> on verified facts in the knowledge graph. Unverified data does not reach the intelligence layer.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Reasoning Traceability</h4>
+          <p style="font-size: 14px;">Every AI output carries a reasoning trace — the facts, evidence, and logic the model used. The trace is reconstructable.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Provenance Immutability</h4>
+          <p style="font-size: 14px;">Once sealed, provenance records cannot be modified. Updates create new versions; the original remains accessible for audit.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Audit Trail Completeness</h4>
+          <p style="font-size: 14px;">Every step — from source detection to intelligence publication — is logged. No silent operations. No undocumented transformations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2>Review the methodology with our research team.</h2>
+      <p style="max-width: 640px; margin: 0 auto 32px;">
+        Institutions are invited to review ROUAA methodology papers, attend methodology briefings, and submit feedback through the Research Institute.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Methodology Review</a>
+        <a href="research-institute.html" class="btn btn-secondary">Research Institute</a>
+        <a href="architecture.html" class="btn btn-secondary">View Architecture</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+          <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">
+            ROUAA builds the trust layer between financial data and institutional decisions — for decisions that must be defended.
+          </p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platforms</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="enterprise.html">Enterprise Solutions</a>
+          <a href="enterprise.html">API Platform</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Infrastructure</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="trust-framework.html">The Trust Layer</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Evidence Framework</a>
+          <a href="methodology.html">Governance Model</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Channels</div>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html#solution-02">Investment Firms</a>
+          <a href="solutions.html#solution-05">Banks &amp; Institutions</a>
+          <a href="solutions.html#solution-03">Trading Desks</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Enterprise</div>
+          <a href="enterprise.html">Private Deployment</a>
+          <a href="enterprise.html">White Label</a>
+          <a href="enterprise.html">API Access</a>
+          <a href="enterprise.html">Partnerships</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">© 2026 ROUAA — The Trust Layer Between Financial Data and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
