@@ -74,7 +74,8 @@
 | **40** | [RISK-MODEL-v1](41-RISK-MODEL-v1.md) | ما الذي يمكن أن يمنع رؤى من أن تصبح بنية تحتية للذكاء المؤسسي؟ وكيف نكتشف المخاطر ونعالجها؟ | ✅ معتمد |
 | **41** | [ORGANIZATION-MODEL-v1](42-ORGANIZATION-MODEL-v1.md) | ما نوع المؤسسة البشرية التي تحتاجها رؤى حتى تتحول من منتج إلى بنية تحتية مالية عالمية؟ | ✅ معتمد |
 | **42** | [PARTNERSHIP-MODEL-v1](43-PARTNERSHIP-MODEL-v1.md) | كيف تبني رؤى شبكة شركاء تجعلها أكثر قيمة، وأكثر ثقة، وأصعب استبدالًا؟ | ✅ معتمد |
-| **43** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **43** | [ECOSYSTEM-MODEL-v1](44-ECOSYSTEM-MODEL-v1.md) | كيف تصبح رؤى نقطة التقاء بين البيانات المالية، المؤسسات، المطورين، والمعلومات الاستخباراتية؟ | ✅ معتمد |
+| **44** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -155,7 +156,8 @@
 | HOW MANAGES RISK — كيف تدير المخاطر؟ | 40 | Risk Model + 7 Risk Categories (Strategic / Market / Product / Technology / Data / Trust / Operational) + Risk Matrix (P0-P2) + Early Warning Indicators + Risk Governance + Decision Principles (Trust > Speed / Evidence > Feature / Governance > Growth) |
 | HOW ORGANIZES — كيف تُنظَّم الشركة؟ | 41 | Organization Model + 7 Units (Intelligence / Product / Engineering / Enterprise / Trust / Security / Operations) + 5 Exec Roles (CEO/CTO/CPO/Chief Intelligence Officer/CRO) + 4 Hiring Stages (0-10 / 10-30 / 30-100 / 100+) + 3 Culture Principles (Move Correctly / Evidence for Everything / Build Assets Not Features) |
 | HOW PARTNERS — كيف تشارك؟ | 42 | Partnership Model + 6 Layers (Data / Financial Institution / Technology / Distribution / Research / Ecosystem) + Design Partner Program + Partner Scorecard (5 criteria) + Partnership Flywheel + 5 Partnership Types + Governance Model + 3-Phase Partnership Strategy |
-| HOW NARRATED — كيف تُروى؟ | 43 | Outcome-first site narrative |
+| HOW ECOSYSTEMS — كيف تبني منظومة؟ | 43 | Ecosystem Model + 6 Layers (Source / Institutional / Developer / Solution / Knowledge / Marketplace) + 4-Phase Build (Controlled → Partner → Developer → Intelligence Network) + Ecosystem Flywheel + 4 Moats (Data / Knowledge / Workflow / Network) + Economics + Governance Rules |
+| HOW NARRATED — كيف تُروى؟ | 44 | Outcome-first site narrative |
 
 ---
 
@@ -268,6 +270,7 @@ docs/
     ├── 41-RISK-MODEL-v1.md                  ← كيف تدير المخاطر
     ├── 42-ORGANIZATION-MODEL-v1.md           ← كيف تُنظَّم الشركة
     ├── 43-PARTNERSHIP-MODEL-v1.md            ← كيف تشارك
+    ├── 44-ECOSYSTEM-MODEL-v1.md              ← كيف تبني منظومة
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -325,7 +328,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **43/43 وثيقة تأسيسية معتمدة**
+- ✅ **44/44 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -333,7 +336,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** ECOSYSTEM-MODEL-v1 (كيف تتحول رؤى من منصة إلى منظومة تضم المؤسسات + المطورين + مزودي البيانات + الشركاء حول طبقة ذكاء مشتركة؟)
+- 📝 **الوثيقة التالية المقترحة:** INTERNATIONALIZATION-MODEL-v1 (كيف تنتقل رؤى من منصة إقليمية إلى بنية ذكاء مؤسسي عالمية؟)
 
 ---
 
