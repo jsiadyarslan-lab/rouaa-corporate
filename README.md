@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 61 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 62 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -74,6 +74,7 @@
 | كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) |
 | كيف تظهر في البحث؟ | [60-SEO-STRATEGY-MODEL](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v1.md) |
 | كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) |
+| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -87,7 +88,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **61/61 وثيقة تأسيسية معتمدة**
+- ✅ **62/62 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
@@ -96,8 +97,8 @@
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME + COMPONENT-LIBRARY + PAGE-ARCHITECTURE-MODEL + CONTENT-ARCHITECTURE-MODEL + SEO-STRATEGY-MODEL + ANALYTICS-MEASUREMENT-MODEL معتمدة كأول ثماني وثائق تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Web Implementation Architecture → HTML/React Implementation
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME + COMPONENT-LIBRARY + PAGE-ARCHITECTURE-MODEL + CONTENT-ARCHITECTURE-MODEL + SEO-STRATEGY-MODEL + ANALYTICS-MEASUREMENT-MODEL + WEB-IMPLEMENTATION-ARCHITECTURE معتمدة كأول تسع وثائق تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Deployment Operations Model → HTML/React Implementation
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
