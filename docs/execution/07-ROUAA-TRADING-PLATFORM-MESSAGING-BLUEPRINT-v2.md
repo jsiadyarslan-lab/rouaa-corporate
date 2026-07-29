@@ -63,25 +63,22 @@ Trading Platform
 
 # 2. Hero Section
 
-### Headline
+### Headline (APPROVED — user refined: AI is capability, not identity)
 
 ```
 ROUAA Trading Platform
+
+Intelligent trading decisions
+built on market context, evidence, and control.
 ```
 
-### Sub-headline
+### Supporting line
 
 ```
-AI-powered trading intelligence
-for investors who need more than charts.
+AI-powered intelligence for investors who need more than charts.
 ```
 
-### Value Statement
-
-```
-Markets move on events, not just patterns.
-ROUAA shows you why — and what to do about it.
-```
+> **User note:** AI should not be the first perceptual point. The market is full of 'AI Trading' claims — this puts ROUAA back in the crowded category. Instead: 'Intelligent trading decisions' leads with the outcome, 'built on context, evidence, and control' leads with the differentiator. AI is the method, mentioned second.
 
 ### CTAs
 
@@ -562,20 +559,33 @@ work together with verified intelligence.
 
 ---
 
-# 13. Approval Gate
+# 13. Approval Gate — APPROVED ✅
 
-This blueprint is NOT approved for implementation until:
+All 6 decisions approved by user with refinements:
 
-- [ ] User confirms the Hero headline and sub-headline
-- [ ] User confirms the five capability messages
-- [ ] User confirms the three reasons (Context / Evidence / Control)
-- [ ] User confirms the Technology Layer placement (brief, links to Technology page)
-- [ ] User confirms the TradingView comparison framing
-- [ ] User confirms the 10 forbidden items
+- [x] Hero: APPROVED — AI repositioned as capability not identity. 'Intelligent trading decisions built on market context, evidence, and control.' then 'AI-powered intelligence for investors who need more than charts.'
+- [x] 5 Decision Capabilities: APPROVED — displayed as Decision Capabilities NOT Features. Market Scanner refined: 'Discover relevant market movements and opportunities through multi-dimensional analysis.'
+- [x] Context / Evidence / Control: APPROVED — order locked: Context (why) → Evidence (what) → Control (how). User starts with the decision, not the proof.
+- [x] Technology Layer: APPROVED — brief section, links to Technology page, NO architecture diagrams on this page
+- [x] TradingView Comparison: APPROVED — reframed as integration not attack. Many users will use TradingView alongside ROUAA.
+- [x] 10 forbidden items: APPROVED — especially: no 'AI trading bot' / no 'automatic profits' / no 'predict the market' / no 'guaranteed signals' / no 'replace traders'
 
-Once approved, the next document is:
-1. Financial Intelligence Platform Messaging Blueprint (doc 08)
+## Additional Strategic Lock
 
+ROUAA Trading Platform does NOT sell:
+- ❌ Signals
+- ❌ Predictions
+- ❌ Automation
+
+ROUAA Trading Platform sells:
+- ✅ Better informed financial decisions
+
+In trading: Decision → Execution
+In intelligence: Information → Understanding → Decision
+
+---
+
+**Next document:** Financial Intelligence Platform Messaging Blueprint (doc 08)
 Then HTML/CSS begins for all three pages as a package.
 
 ---
