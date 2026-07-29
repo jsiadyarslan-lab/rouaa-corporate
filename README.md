@@ -36,7 +36,7 @@
 | كيف يحوكَم القرار؟ | [21-DECISION-GOVERNANCE-MODEL](docs/foundation/21-DECISION-GOVERNANCE-MODEL-v1.md) |
 | كيف يعمل في المؤسسة؟ | [22-DECISION-WORKFLOW-MODEL](docs/foundation/22-DECISION-WORKFLOW-MODEL-v1.md) |
 | كيف تتوحّد في منصة؟ | [23-ROUAA-PLATFORM-MODEL-v2](docs/foundation/23-ROUAA-PLATFORM-MODEL-v2.md) ✅ v2 |
-| كيف تُباع كمنتجات؟ | [24-PRODUCT-MODEL](docs/foundation/24-PRODUCT-MODEL-v1.md) ⚠️ قيد المراجعة — سيُعاد بناؤها كـ v2 |
+| كيف تُباع كمنتجات؟ | [24-ROUAA-PRODUCT-MODEL-v2](docs/foundation/24-ROUAA-PRODUCT-MODEL-v2.md) ✅ v2 |
 | كيف تشتغل الشركة؟ | [25-OPERATING-MODEL](docs/foundation/25-OPERATING-MODEL-v1.md) |
 | كيف يتدفّق الذكاء؟ | [26-INTELLIGENCE-PIPELINE-MODEL](docs/foundation/26-INTELLIGENCE-PIPELINE-MODEL-v1.md) |
 | كيف تُهيكَل الوحدات؟ | [27-OBJECT-MODEL](docs/foundation/27-OBJECT-MODEL-v1.md) |
@@ -105,9 +105,10 @@
   - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
   - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث
   - ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2 — Enterprise Financial Intelligence Operating Platform مع 6 طبقات
-  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
-  - 📝 doc 24 التالي: إعادة بناء PRODUCT-MODEL-v2
-  - 📝 ثم مراجعة: doc 58
+  - ✅ doc 24 v2: ROUAA-PRODUCT-MODEL-v2 — 42 منتج عبر 7 عائلات + 3 نماذج تغليف + 4 مراحل دورة حياة
+  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 24 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
+  - 📝 doc 58 التالي: إعادة بناء PAGE-ARCHITECTURE-MODEL-v2 حول عائلات المنتجات
+  - 📝 ثم مراجعة: docs 56-63
 - ⚠️ **الوثائق 56-63 قيد المراجعة** — ستعاد كتابتها بناءً على السرد والمنتجات الجديدة
 - 🌿 **Branch:** `redesign-v20-architecture`
 

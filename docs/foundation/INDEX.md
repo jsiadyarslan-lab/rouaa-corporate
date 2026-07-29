@@ -54,7 +54,7 @@
 | **20** | [DECISION-GOVERNANCE-MODEL-v1](21-DECISION-GOVERNANCE-MODEL-v1.md) | كيف نضمن أن القرار المؤسسي منضبط، قابل للتدقيق، ومتوافق مع السياسات والمنظّمين؟ | ✅ معتمد |
 | **21** | [DECISION-WORKFLOW-MODEL-v1](22-DECISION-WORKFLOW-MODEL-v1.md) | كيف ينتقل القرار من اكتشاف معلومة إلى إجراء مؤسسي منظم داخل المؤسسة؟ | ✅ معتمد |
 | **22** | [ROUAA-PLATFORM-MODEL-v2](23-ROUAA-PLATFORM-MODEL-v2.md) | كيف تتحول ROUAA من مجموعة أدوات إلى منصة ذكاء مؤسسية متكاملة؟ (v2 — إعادة بناء: Enterprise Financial Intelligence Operating Platform + 6 Layers) | ✅ معتمد (v2 — إعادة بناء) |
-| **23** | [PRODUCT-MODEL-v1](24-PRODUCT-MODEL-v1.md) | ما هي المنتجات التي يشتتريها العميل فوق منصة ROUAA الموحّدة؟ | ⚠️ قيد المراجعة — سيُعاد بناؤها كـ v2 |
+| **23** | [ROUAA-PRODUCT-MODEL-v2](24-ROUAA-PRODUCT-MODEL-v2.md) | ما هو المنتج داخل ROUAA، وكيف يتحول من قدرة داخل المنصة إلى عرض تجاري، ولمن يباع، وما الطبقات التي يعتمد عليها؟ (v2 — إعادة بناء: 42 منتج عبر 7 عائلات) | ✅ معتمد (v2 — إعادة بناء) |
 | **24** | [OPERATING-MODEL-v1](25-OPERATING-MODEL-v1.md) | كيف تعمل شركة رؤى يوميًا كمنظومة مؤسسية لإنتاج ذكاء موثوق؟ | ✅ معتمد |
 | **25** | [INTELLIGENCE-PIPELINE-MODEL-v1](26-INTELLIGENCE-PIPELINE-MODEL-v1.md) | كيف تتحول الحقيقة الخارجية غير المنظمة إلى ذكاء مؤسسي قابل للاستخدام واتخاذ القرار؟ | ✅ معتمد |
 | **26** | [OBJECT-MODEL-v1](27-OBJECT-MODEL-v1.md) | ما هي الوحدات (Objects) التي تمثل المعرفة، الأدلة، الاستدلال، والقرارات داخل رؤى؟ | ✅ معتمد |
@@ -90,7 +90,7 @@
 | **55** | [PRODUCT-PORTFOLIO-MODEL-v1](55-ROUAA-PRODUCT-PORTFOLIO-MODEL-v1.md) | ما هي المنتجات الفعلية في ROUAA، لمن تُباع، وما القيمة التي تقدمها، وما علاقتها بالمحركات الداخلية؟ | ✅ معتمد (جديد — كتالوج المنتجات) |
 | **55** | [HOMEPAGE-WIREFRAME-v1](56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) | كيف يجب أن تكون أول تجربة لرؤى حتى يفهم العميل المؤسسي القيمة قبل رؤية المنتج؟ | ⚠️ قيد المراجعة — سيُعاد بناؤها بعد تحديث السرد (doc 13) |
 | **56** | [COMPONENT-LIBRARY-v1](57-ROUAA-COMPONENT-LIBRARY-v1.md) | ما هي الوحدات البصرية والتفاعلية التي تجعل تجربة رؤى متسقة وقابلة للتوسع؟ | ⚠️ قيد المراجعة |
-| **57** | [PAGE-ARCHITECTURE-MODEL-v1](58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) | ما هي صفحات رؤى، ولماذا توجد كل صفحة، وماذا يجب أن يفهم الزائر بعدها؟ | ⚠️ قيد المراجعة — مستخدم حددها للمراجعة |
+| **57** | [PAGE-ARCHITECTURE-MODEL-v1](58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) | ما هي صفحات رؤى، ولماذا توجد كل صفحة، وماذا يجب أن يفهم الزائر بعدها؟ | ⚠️ قيد المراجعة — NEXT لإعادة البناء كـ v2 حول عائلات المنتجات |
 | **58** | [CONTENT-ARCHITECTURE-MODEL-v1](59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) | ماذا يجب أن تقول رؤى، لمن، وفي أي مرحلة من رحلة العميل؟ | ⚠️ قيد المراجعة |
 | **59** | [SEO-STRATEGY-MODEL-v1](60-ROUAA-SEO-STRATEGY-MODEL-v1.md) | كيف تصبح رؤى المرجع الذي يظهر عندما يبحث السوق عن مستقبل القرار المالي المؤسسي؟ | ⚠️ قيد المراجعة |
 | **60** | [ANALYTICS-MEASUREMENT-MODEL-v1](61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) | هل يفهم السوق الفئة، هل يثق الزوار بالمؤسسة، هل يجذب الموقع العملاء المناسبين، هل يتحول الاهتمام إلى فرص مؤسسية، ما الذي يجب تحسينه؟ | ⚠️ قيد المراجعة |
@@ -157,7 +157,7 @@
 | HOW GOVERNS — كيف يحوكَم؟ | 20 | Decision Governance + 6 Authority Levels + 4 Approval Chain types + Policy Enforcement (4 modes) + Compliance Engine + Audit Recording (immutable + signed) + Reviewability + Exception Handling |
 | HOW OPERATES — كيف يعمل؟ | 21 | Decision Workflow + 8-stage Lifecycle (Detect→Understand→Analyze→Challenge→Approve→Execute→Monitor→Learn) + 5 Workflow Types + 4 Workflow Objects + Human-in-the-Loop + Workflow Intelligence |
 | HOW CONSOLIDATES — كيف يتوحّد؟ | 22 | Platform Model v2 + Definition (Enterprise Financial Intelligence Operating Platform — NOT a single tool but Intelligence Foundation + Application Ecosystem) + 6-Layer Architecture (Layer 1 Data Foundation: Official Source Registry + Data Connectors + Market Data / Layer 2 Intelligence Foundation: Document Intelligence Engine + Fact Engine + Event Engine + Evidence System / Layer 3 Knowledge Intelligence: Knowledge Graph + Entity Resolution + Relationship Engine / Layer 4 Reasoning Intelligence: Reasoning Engine + AI Agent Framework with Macro/Sector/Risk/Fact Verification Agents / Layer 5 Decision Intelligence: Decision Models + Scenario Engine + Recommendation Framework + Decision Governance / Layer 6 Application Platforms: 5 platforms — Media Intelligence + Research Intelligence + Risk Intelligence + Trading Intelligence + Developer Platform) + Architecture Stack (Application Layer → Intelligence Layer → Evidence Layer → Data Layer) + Commercial Model (sells capabilities NOT features: Media institutions buy Media Intelligence / Investment firms buy Research+Risk+Decision / Brokers buy Trading Intelligence / Developers buy Intelligence APIs) + Platform-Product Relationship (all products share Same Sources + Same Evidence + Same Knowledge + Same Reasoning, different applications) + Differentiator vs Traditional Stack (Traditional = Data Provider + Analytics Tool + News Provider + Trading Tool; ROUAA = One Intelligence Infrastructure → Many Financial Applications) + Platform Boundaries (NOT a financial broker / NOT funds executor / NOT binding investment advice / NOT human analyst replacement — IS an intelligence layer that helps institutions make better decisions) + Website Positioning (site is NOT the platform but the Institutional Gateway explaining ecosystem + products + value + trust) + Design Rule (every page/product must answer: institutional problem / which platform layer / data dependencies / evidence level / decision supported) |
-| HOW SELLS — كيف تُباع كمنتج؟ | 23 | 5 Products (Capital Markets / Research / Information Markets / Risk / API Platform) + Product Composition Formula + Bundling (Single/Multi/Enterprise Suite) + Expansion Path + Lifecycle + White-label + Product KPIs |
+| HOW SELLS — كيف تُباع كمنتج؟ | 23 | Product Model v2 + Product Unit Definition (Institutional Problem + Intelligence Capability + User Experience + Delivery Model + Business Model — NOT a page/feature/AI model/dashboard) + 7 Product Families with 42 named products: (I) Media Intelligence Products (7): Financial News Engine / News Agency Agent / Reports Pipeline / Video Pipeline / Infographic Pipeline / Audio Intelligence / Daily Intelligence Pulse; (II) Trading Intelligence Products (8): Trading Intelligence Dashboard / Smart Chart Intelligence / Portfolio Intelligence / Trading Assistant / Investment Strategy Intelligence Lab / AI Trading Council (4 agents: Technical/Macro/Risk/Portfolio Analyst) / Trading Workflow Automation (Governed Automation, NOT Autonomous Trading Bot) / Scenario Intelligence Engine; (III) Research Intelligence Products (6): Intelligence Brief Generator / Committee Prep Engine / Sector Comparison / Deep Dive Reports / Smart Watchlist / Investment Screener; (IV) Risk Intelligence Products (5): Risk Event Monitor / Exposure Analysis / Scenario Engine / Action Recommendations / Compliance Audit; (V) Developer Platform Products (7): Events API / Facts API / Sources API / Evidence API / Insights API / Streaming API / Official SDK; (VI) Intelligence Agent Products (4): Macro Intelligence Agent / Sector Intelligence Agent / Risk Intelligence Agent / Fact Verification Agent; (VII) Platform Component Products (5): Knowledge Graph / Source Registry / Evidence Store / Reasoning Engine / Audit Trail + 3 Packaging Models (SaaS / API / White Label) + Product Dependency Model (Sources → Documents → Facts → Events → Knowledge Graph → Reasoning → Product Experience — all products share same foundation) + Differentiator (Traditional = Data Provider + Analytics Tool + News Service + Trading Tool; ROUAA = One Intelligence Foundation → Many Institutional Products) + 4-Stage Product Lifecycle (Internal Capability → Platform Service → Commercial Product → Enterprise Solution) + 6-Question Product Rule (every new product must answer: which decision improved / who is user / data dependencies / evidence level / auditability / how sold) |
 | HOW OPERATES — كيف تشتغل الشركة؟ | 24 | Operating Model + 4 Operational Layers (Strategy/Intelligence/Platform/Enterprise) + 4 Intelligence Teams (Source/Knowledge/Reasoning Quality/Decision) + 3 Governance Boards + Operating Rhythm (Daily/Weekly/Monthly/Quarterly) + 3-stage Team Growth |
 | HOW FLOWS — كيف يتدفّق الذكاء؟ | 25 | Intelligence Pipeline + 7 Stages (Source → Document → Evidence → Knowledge → Reasoning → Decision → Enterprise Delivery) + Quality Gates per stage + Human-in-the-loop + Continuous Learning + Pipeline Metrics + ROUAA Intelligence Value Chain |
 | HOW STRUCTURES — كيف تُهيكَل الوحدات؟ | 26 | Object Model + 13 Object Types (Source/Document/Evidence/Fact/Event/Entity/Relationship/Knowledge/Reasoning/Scenario/Decision/Workflow/Outcome) + Lifecycle + Provenance + Identity System + Relationships Graph |
@@ -302,7 +302,7 @@ docs/
     ├── 21-DECISION-GOVERNANCE-MODEL-v1.md ← كيف يحوكَم القرار
     ├── 22-DECISION-WORKFLOW-MODEL-v1.md  ← كيف يعمل في المؤسسة
     ├── 23-ROUAA-PLATFORM-MODEL-v2.md      ← كيف تتوحّد في منصة واحدة (v2 — إعادة بناء)
-    ├── 24-PRODUCT-MODEL-v1.md            ← كيف تُباع كمنتجات ⚠️ (قيد المراجعة — سيُعاد بناؤها كـ v2)
+    ├── 24-ROUAA-PRODUCT-MODEL-v2.md      ← كيف تُباع كمنتجات (v2 — إعادة بناء: 42 منتج)
     ├── 25-OPERATING-MODEL-v1.md          ← كيف تشتغل الشركة يوميًا
     ├── 26-INTELLIGENCE-PIPELINE-MODEL-v1.md ← كيف يتدفّق الذكاء
     ├── 27-OBJECT-MODEL-v1.md             ← كيف تُهيكَل الوحدات
@@ -346,6 +346,7 @@ docs/
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── 13-SITE-NARRATIVE-v1-original-superseeded.md
         ├── 23-PLATFORM-MODEL-v1-enhanced-superseeded.md
+        ├── 24-PRODUCT-MODEL-v1-original-superseeded.md
         ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md
         ├── 55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md
         ├── DECISION-MODEL-v1-original-superseeded.md
@@ -420,11 +421,12 @@ docs/
   - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
   - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
   - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث
-  - ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2 — تعريف المنصة كـ Enterprise Financial Intelligence Operating Platform مع 6 طبقات معمارية (Data Foundation → Intelligence Foundation → Knowledge Intelligence → Reasoning Intelligence → Decision Intelligence → Application Platforms)
-  - ⚠️ docs القديمة المؤرشفة: 13 v1 + 23 enhanced v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM
-  - 📝 doc 24 التالي: إعادة بناء PRODUCT-MODEL-v2 — يجب أن يربط المنتج بـ Portfolio + Platform Layers + Customer Segments + Revenue Models + Delivery Models
-  - 📝 ثم مراجعة: doc 58 (PAGE-ARCHITECTURE)
-- ⚠️ **ملاحظة مهمة**: الوثائق 56-63 الحالية (Homepage Wireframe + Component Library + Page Architecture + Content Architecture + SEO Strategy + Analytics Measurement + Web Implementation Architecture + HTML/React Implementation) **قيد المراجعة** — ستعاد كتابتها بناءً على السرد المحدّث وكتالوج المنتجات الجديد
+  - ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2 — Enterprise Financial Intelligence Operating Platform مع 6 طبقات
+  - ✅ doc 24 v2: ROUAA-PRODUCT-MODEL-v2 — 42 منتج عبر 7 عائلات استراتيجية + 3 نماذج تغليف (SaaS/API/White Label) + 4 مراحل دورة حياة + 6 أسئلة قاعدة المنتج
+  - ⚠️ docs القديمة المؤرشفة: 13 v1 + 23 enhanced v1 + 24 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM
+  - 📝 doc 58 التالي: إعادة بناء PAGE-ARCHITECTURE-MODEL-v2 — بنية صفحات الموقع يجب أن تُبنى حول **عائلات المنتجات** وليس حول مفهوم "منصة واحدة"
+  - 📝 ثم مراجعة بقية docs 56-63 (Design System + Homepage Wireframe + Component Library + Content Architecture + SEO Strategy + Analytics Measurement + Web Implementation + HTML/React)
+- ⚠️ **ملاحظة مهمة**: الوثائق 56-63 الحالية **قيد المراجعة** — ستعاد كتابتها بناءً على السرد المحدّث وكتالوج المنتجات الجديد
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
