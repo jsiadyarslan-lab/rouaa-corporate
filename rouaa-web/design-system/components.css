@@ -298,3 +298,167 @@
   .cta-buttons { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
 }
+
+/* ============================================================
+   ENTERPRISE COMPONENTS — Catalog, Suites, Stats
+   ============================================================ */
+
+/* ---- Catalog Grid (product families) ---- */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.catalog-family {
+  background: var(--rouaa-surface);
+  border: 1px solid var(--rouaa-surface-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  transition: all var(--transition-base);
+}
+
+.catalog-family:hover {
+  background: var(--rouaa-surface-hover);
+  border-color: var(--rouaa-surface-border-strong);
+}
+
+.catalog-family-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rouaa-surface-border);
+}
+
+.catalog-family-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--rouaa-accent-subtle);
+  border: 1px solid var(--rouaa-accent-border);
+  flex-shrink: 0;
+}
+
+.catalog-family-name {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  color: var(--rouaa-text-primary);
+}
+
+.catalog-products {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.catalog-products li {
+  font-size: var(--text-sm);
+  color: var(--rouaa-text-secondary);
+  padding: var(--space-xs) 0;
+  transition: color var(--transition-fast);
+  cursor: default;
+}
+
+.catalog-products li:hover {
+  color: var(--rouaa-accent);
+}
+
+.catalog-products li::before {
+  content: '—';
+  margin-right: var(--space-sm);
+  color: var(--rouaa-text-muted);
+}
+
+/* ---- Suite Cards ---- */
+.suite-card {
+  background: var(--rouaa-surface);
+  border: 1px solid var(--rouaa-surface-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.suite-card:hover {
+  background: var(--rouaa-surface-hover);
+  border-color: var(--rouaa-accent-border);
+  box-shadow: var(--shadow-md);
+}
+
+.suite-card .suite-name {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  color: var(--rouaa-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.suite-card .suite-desc {
+  font-size: var(--text-sm);
+  color: var(--rouaa-text-muted);
+}
+
+.suite-card .suite-count {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--rouaa-accent-subtle);
+  border: 1px solid var(--rouaa-accent-border);
+  font-size: var(--text-xs);
+  color: var(--rouaa-accent);
+  font-weight: var(--weight-semibold);
+}
+
+/* ---- Stats Bar ---- */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4xl);
+  padding: var(--space-2xl) 0;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--rouaa-accent);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--rouaa-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ---- Section Divider ---- */
+.section-divider {
+  text-align: center;
+  padding: var(--space-2xl) 0;
+}
+
+.section-divider .divider-line {
+  width: 60px;
+  height: 2px;
+  background: var(--rouaa-accent-border);
+  margin: 0 auto;
+}
+
+/* ---- Catalog Responsive ---- */
+@media (max-width: 768px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+  .stats-bar { gap: var(--space-2xl); }
+  .stat-number { font-size: 32px; }
+}
