@@ -89,7 +89,8 @@
 | **55** | [HOMEPAGE-WIREFRAME-v1](56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) | كيف يجب أن تكون أول تجربة لرؤى حتى يفهم العميل المؤسسي القيمة قبل رؤية المنتج؟ | ✅ معتمد |
 | **56** | [COMPONENT-LIBRARY-v1](57-ROUAA-COMPONENT-LIBRARY-v1.md) | ما هي الوحدات البصرية والتفاعلية التي تجعل تجربة رؤى متسقة وقابلة للتوسع؟ | ✅ معتمد |
 | **57** | [PAGE-ARCHITECTURE-MODEL-v1](58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) | ما هي صفحات رؤى، ولماذا توجد كل صفحة، وماذا يجب أن يفهم الزائر بعدها؟ | ✅ معتمد |
-| **58** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **58** | [CONTENT-ARCHITECTURE-MODEL-v1](59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) | ماذا يجب أن تقول رؤى، لمن، وفي أي مرحلة من رحلة العميل؟ | ✅ معتمد |
+| **59** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -185,7 +186,8 @@
 | HOW WIREFRAMES — كيف تُخطّط الصفحة الرئيسية؟ | 55 | Homepage Wireframe + 11 Sections (Hero → Institutional Problem → ROUAA Positioning → Outcomes → Intelligence Architecture → Trust Framework → Domains → Use Cases → Research Authority → Security/Governance → Final CTA) + Hero Headline ("Institutional Decision Intelligence Infrastructure") + Hero Visual (vertical Source→Evidence→Knowledge→Reasoning→Decision flow, NOT dashboard/charts/chat) + Above-the-Fold Test (What/For Whom/Why/Action) + 3-Second/1-Min/3-Min Conversion Test + Navigation (Platform/Solutions/Trust/Research/Developers/Company + Request Briefing — NO Pricing in main nav) + Final CTA "Request Institutional Briefing" (NOT "Start Free") + Implementation Bans (no stock photos, no smiling people, no robots, no Web3 effects) |
 | HOW COMPONENTS — كيف تُبنى المكونات؟ | 56 | Component Library + 5 Layers (Foundation / Intelligence / Trust / Enterprise / Research / Conversion) + 5 Foundation Components (Navigation / Hero Container / Section Header / Content Grid / Data Point) + 5 Intelligence Components (Intelligence Flow / Architecture Layer / Intelligence Object Card / Knowledge Graph Preview / Timeline Intelligence) + 5 Trust Components (Evidence Chain / Source Citation / Provenance Badge / Trust Score / Governance Panel) + 5 Enterprise Components (Outcome Card / Solution Module / Capability Matrix / Enterprise Architecture Diagram / Security Overview Card) + 4 Research Components (Research Report Card / Framework Card / Thought Leadership Article Card / Institute Highlight) + 3 Conversion Components (Institutional CTA Block / Briefing Request Form / Enterprise Qualification Flow) + Naming Convention (Rouaa+Category+Component) + 5 Component States (Default/Hover/Expanded/Mobile/Dark) + React Structure (src/components/{foundation,intelligence,trust,enterprise,research,conversion}) + 3-Phase Implementation Priority (Core → Content → Advanced) + Quality Test (must increase Understanding/Trust/Decision) + Build Bans (no Generic Pricing Cards / no SaaS Feature Cards / no AI Chat Widget / no Social Media Sections / no Excessive Animations / no Marketing Counters) |
 | HOW PAGES — كيف تُهيكَل الصفحات؟ | 57 | Page Architecture + 9 Top-Level Pages (Home / Why ROUAA / Platform / Solutions / Trust / Research / Developers / Company / Request Briefing) + Platform Sub-pages (Intelligence / Knowledge / Reasoning / Decision / Governance Layer) + Solutions Sub-pages (Investment Firms / Asset Managers / Research Organizations / Financial Institutions / Enterprise Teams) + Research Sub-pages (Reports / Frameworks / Institute / Insights / Publications) + Developers Sub-pages (API / Integrations / Documentation / Architecture) + 3 User Journeys (Executive: Home→Outcomes→Trust→Briefing / Technical: Home→Platform→Architecture→Developers→Briefing / Research: Home→Research→Frameworks→Platform→Briefing) + SEO Keywords (Decision Intelligence / Institutional Intelligence / Evidence-Based Decisions / Financial Intelligence Infrastructure / Research Automation / Decision Governance) + Phase 1 (7 pages: Home / Platform / Solutions / Trust / Research / Company / Request Briefing) + Phase 2 (Developers / Security Center / Case Studies / Certification) + 6 Future Pages (Customer Stories / Case Studies / Security Center / Trust Portal / Certification / Partner Network) + Page Quality Test (must increase Understanding/Trust/Purchase-decision) + Bans (no Blog / no Feature Marketplace / no purposeless pages) |
-| HOW NARRATED — كيف تُروى؟ | 58 | Outcome-first site narrative |
+| HOW CONTENT — كيف يُبنى المحتوى؟ | 58 | Content Architecture + Central Message ("ROUAA transforms verified financial information into explainable, traceable, and institution-ready decisions") + 6 Content Pillars (Category Education / Institutional Problems / Intelligence Architecture / Trust & Governance / Enterprise Outcomes / Research Authority) + Homepage 4-Part Narrative (Hero: 'Intelligence Infrastructure for Decisions That Cannot Afford Uncertainty' → Problem Narrative → Category Definition with Data/Information/Intelligence/Decision Intelligence ladder → Value Narrative with Before/After flow) + Platform Layer Messaging (Intelligence/Knowledge/Reasoning/Decision Layer each with question-driven content) + 4 Solution Messages (Investment Firms / Asset Managers / Financial Institutions / Research Organizations) + Trust Content (Evidence Framework Claim→Evidence→Source→Methodology→Context + Data Governance + Security + Auditability) + Research Content (Reports / Frameworks / Institute) + Company Content (Mission / Vision / Principles: Evidence first / Explainability / Institutional trust / Responsible intelligence) + Developer Content + 3-Stage CTA System (Awareness: 'Explore Intelligence Architecture' / Consideration: 'Discover Institutional Capabilities' / Decision: 'Request Institutional Briefing' — NO Start Now / Create Account / Free Trial) + Tone (calm/precise/institutional/confident) + Vocabulary Whitelist (Intelligence Infrastructure / Evidence / Decision / Governance / Provenance) + Vocabulary Blacklist (Magic AI / Revolutionary / Disruptive / Smart Platform) + Arabic Strategy (not translation — institutional reconstruction) + Content Governance Flow (Business Objective → Audience → Message → Evidence → CTA) + Production System (Research Institute → Frameworks → Website → Sales Materials → Customer Education) + Bans (no daily news / no cheap SEO / no generic AI articles / no minor feature updates) + 2-Phase Content Priority (Phase 1: Homepage / Platform / Trust / Solutions / Company / Briefing → Phase 2: Research / Developers / Reports / Frameworks) + Quality Test (must make reader understand problem / trust solution / see new category / want to talk to team) |
+| HOW NARRATED — كيف تُروى؟ | 59 | Outcome-first site narrative |
 
 ---
 
@@ -313,6 +315,7 @@ docs/
     ├── 56-ROUAA-HOMEPAGE-WIREFRAME-v1.md           ← كيف تُخطّط الصفحة الرئيسية
     ├── 57-ROUAA-COMPONENT-LIBRARY-v1.md           ← كيف تُبنى المكونات
     ├── 58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md      ← كيف تُهيكَل الصفحات
+    ├── 59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md   ← كيف يُبنى المحتوى
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -370,7 +373,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **58/58 وثيقة تأسيسية معتمدة**
+- ✅ **59/59 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -379,9 +382,9 @@ docs/
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL (doc 54) + DESIGN-SYSTEM (doc 55) + HOMEPAGE-WIREFRAME (doc 56) + COMPONENT-LIBRARY (doc 57) + PAGE-ARCHITECTURE-MODEL (doc 58) معتمدة كأول خمس وثائق تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Content Architecture Model → HTML/React Implementation
-- 📝 **الوثيقة التالية المقترحة:** 59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1 (تحديد محتوى كل صفحة: العناوين / الرسائل / النصوص الأساسية / الأدلة / الأمثلة / CTA / المحتوى العربي والإنجليزي — قبل كتابة HTML)
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL (doc 54) + DESIGN-SYSTEM (doc 55) + HOMEPAGE-WIREFRAME (doc 56) + COMPONENT-LIBRARY (doc 57) + PAGE-ARCHITECTURE-MODEL (doc 58) + CONTENT-ARCHITECTURE-MODEL (doc 59) معتمدة كأول ست وثائق تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: SEO Strategy Model → HTML/React Implementation
+- 📝 **الوثيقة التالية المقترحة:** 60-ROUAA-SEO-STRATEGY-MODEL-v1 (الكلمات الاستراتيجية / صفحات البحث / Authority Building / Enterprise SEO / Research SEO — المحتوى الذي يبني الفئة وليس مجرد زيارات)
 
 ---
 

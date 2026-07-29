@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 58 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 59 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -71,6 +71,7 @@
 | كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) |
 | كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) |
 | كيف تُهيكَل الصفحات؟ | [58-PAGE-ARCHITECTURE-MODEL](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v1.md) |
+| كيف يُبنى المحتوى؟ | [59-CONTENT-ARCHITECTURE-MODEL](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -84,7 +85,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **58/58 وثيقة تأسيسية معتمدة**
+- ✅ **59/59 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
@@ -93,8 +94,8 @@
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME + COMPONENT-LIBRARY + PAGE-ARCHITECTURE-MODEL معتمدة كأول خمس وثائق تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Content Architecture Model → HTML/React Implementation
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME + COMPONENT-LIBRARY + PAGE-ARCHITECTURE-MODEL + CONTENT-ARCHITECTURE-MODEL معتمدة كأول ست وثائق تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: SEO Strategy Model → HTML/React Implementation
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
