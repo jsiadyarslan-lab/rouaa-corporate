@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 56 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 57 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -69,6 +69,7 @@
 | كيف تُنفّذ الموقع؟ | [54-SITE-IMPLEMENTATION-MODEL](docs/foundation/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) |
 | كيف تصمّم بصريًا؟ | [55-DESIGN-SYSTEM](docs/foundation/55-ROUAA-DESIGN-SYSTEM-v1.md) |
 | كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) |
+| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -82,7 +83,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **56/56 وثيقة تأسيسية معتمدة**
+- ✅ **57/57 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
@@ -91,8 +92,8 @@
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME معتمدة كأول ثلاث وثائق تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Component Library → HTML/React Implementation
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM + HOMEPAGE-WIREFRAME + COMPONENT-LIBRARY معتمدة كأول أربع وثائق تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Page Architecture Model → HTML/React Implementation
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
