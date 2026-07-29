@@ -79,7 +79,8 @@
 | **45** | [BRAND-MODEL-v1](46-BRAND-MODEL-v1.md) | كيف تصبح رؤى علامة مؤسسية يثق بها أصحاب القرارات المالية الكبرى قبل أن يختبروا المنتج؟ | ✅ معتمد |
 | **46** | [CATEGORY-DESIGN-MODEL-v1](47-CATEGORY-DESIGN-MODEL-v1.md) | كيف تنتقل رؤى من شركة تقدم منتجًا إلى شركة تُعرّف فئة سوقية جديدة تصبح مرجعًا لها؟ | ✅ معتمد |
 | **47** | [THOUGHT-LEADERSHIP-MODEL-v1](48-THOUGHT-LEADERSHIP-MODEL-v1.md) | كيف تصبح رؤى المصدر الذي يرجع إليه السوق لفهم وتحسين عملية اتخاذ القرار المالي المؤسسي؟ | ✅ معتمد |
-| **48** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **48** | [COMMUNITY-MODEL-v1](49-COMMUNITY-MODEL-v1.md) | كيف تتحول رؤى من منصة تستخدمها المؤسسات إلى شبكة معرفية تنمو حولها وتزيد من قيمة النظام؟ | ✅ معتمد |
+| **49** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -165,7 +166,8 @@
 | HOW BRANDS — كيف تبني علامتها؟ | 45 | Brand Model + Essence (Confidence) + Promise (Decisions with evidence behind them) + Category (Institutional Decision Intelligence) + 5 Personality Traits (Authoritative/Precise/Intelligent/Reliable/Institutional) + 3-Level Messaging (Corporate/Professional/Technical) + Brand Voice + Trust System + 3-Phase Evolution (Startup→Trusted→Category Leader) |
 | HOW CREATES CATEGORY — كيف تخلق فئة؟ | 46 | Category Design + Definition (Institutional Decision Intelligence) + Problem (Information→Understanding→Decision Gap) + 4-Phase Narrative + Vocabulary System (5 terms) + Educational Strategy + 3-Phase Adoption Curve + Category Enemy (Unverified Decisions) + 3 Design Principles + 3 Category Risks |
 | HOW LEADS THOUGHT — كيف تقود الفكر؟ | 47 | Thought Leadership + 6 Knowledge Pillars (Decision Intelligence / Evidence-Based Finance / Institutional Research / AI Governance / Financial Knowledge Systems / Future of Investment Decisions) + 5 Asset Types (Flagship Reports / Papers / Frameworks / Briefs / Executive Briefings) + Authority Flywheel + 3 Authority Phases + Quality Rule (Claim→Evidence→Methodology→Implication→Decision Relevance) |
-| HOW NARRATED — كيف تُروى؟ | 48 | Outcome-first site narrative |
+| HOW BUILDS COMMUNITY — كيف تبني مجتمعًا؟ | 48 | Community Model + 4 Segments (Institutional / Analyst / Developer / Research) + 4 Layers (Public → Professional → Expert → Institutional Council) + Contribution Economy + 3 Community Rules + Events (Intelligence Sessions + Annual Summit) + Community Flywheel + 3 Build Phases (Expert Foundation → Professional Network → Global Community) |
+| HOW NARRATED — كيف تُروى؟ | 49 | Outcome-first site narrative |
 
 ---
 
@@ -283,6 +285,7 @@ docs/
     ├── 46-BRAND-MODEL-v1.md                 ← كيف تبني علامتها
     ├── 47-CATEGORY-DESIGN-MODEL-v1.md        ← كيف تخلق فئة
     ├── 48-THOUGHT-LEADERSHIP-MODEL-v1.md     ← كيف تقود الفكر
+    ├── 49-COMMUNITY-MODEL-v1.md               ← كيف تبني مجتمعًا
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -340,7 +343,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **48/48 وثيقة تأسيسية معتمدة**
+- ✅ **49/49 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -348,7 +351,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** COMMUNITY-MODEL-v1 (كيف تبني رؤى مجتمعًا مهنيًا حول Decision Intelligence؟)
+- 📝 **الوثيقة التالية المقترحة:** EDUCATION-MODEL-v1 (كيف تبني رؤى برامج تدريب وشهادات وأكاديمية مرتبطة بـ Decision Intelligence؟)
 
 ---
 
