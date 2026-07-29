@@ -85,7 +85,8 @@
 | **51** | [CERTIFICATION-MODEL-v1](52-ROUAA-CERTIFICATION-MODEL-v1.md) | كيف تتحول منهجية رؤى إلى معيار مهني معتمد يخلق خبراء، مؤسسات، وشبكة اعتماد حول Decision Intelligence؟ | ✅ معتمد |
 | **52** | [RESEARCH-INSTITUTE-MODEL-v1](53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) | كيف تصبح رؤى مؤسسة تنتج المعرفة التي تعتمد عليها السوق، وليس فقط منصة تستخدمها المؤسسات؟ | ✅ معتمد |
 | **53** | [SITE-IMPLEMENTATION-MODEL-v1](54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) | كيف يتحول الإطار الاستراتيجي المكتوب إلى بنية موقع مؤسسي يحقق تحويل زائر المؤسسة إلى طلب Briefing؟ | ✅ معتمد |
-| **54** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **54** | [DESIGN-SYSTEM-v1](55-ROUAA-DESIGN-SYSTEM-v1.md) | كيف يجب أن تبدو وتشعر رؤى حتى يثق بها مدير استثمار أو مؤسسة مالية قبل أن يتحدث مع فريق المبيعات؟ | ✅ معتمد |
+| **55** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -177,7 +178,8 @@
 | HOW CERTIFIES — كيف تعتمد؟ | 51 | Certification Model + 3 Tracks (Individual / Enterprise / Partner) + 4 Individual Levels (RDIF / RDIP / RDIA / RDIL) + 3 Enterprise Levels (DI Ready / DI Enabled / DI Mature) + 3 Partner Types (Implementation / Technology / Education) + 4-Part Assessment + Credential Verification + 24-Month Renewal + Community & Customer Success Integration + 3 Moats (Category / Talent / Ecosystem) + 3-Phase Launch (Internal Validation → Professional Launch → Industry Recognition) |
 | HOW RESEARCHES — كيف تبحث؟ | 52 | Research Institute + 5 Labs (Decision Intelligence / Financial Knowledge Systems / AI Governance / Institutional Research / Market Intelligence) + Standards & Methodology Office + 4 Asset Types (Annual Reports / Papers / Frameworks / Benchmarks) + 6-Stage Research Methodology (Question → Evidence → Analysis → Framework → Publication → Industry Application) + Knowledge Graph Integration + Research Fellows Program + Institutional Advisory Council + 3-Phase Build (Research Foundation → Research Network → Global Institute) |
 | HOW IMPLEMENTS SITE — كيف تُنفّذ الموقع؟ | 53 | Site Implementation Model + Phase 1 IA (Home / Why ROUAA / Platform / Solutions / Trust / Research / Developers / Company) + Phase 2 Homepage (9 Sections: Hero → Problem → Outcomes → Architecture → Domains → Trust → Audiences → Research → Conversion) + Hero Headline ("Intelligence Infrastructure for Decisions That Cannot Be Wrong") + Visual Hero (Source→Evidence→Knowledge→Reasoning→Decision live map) + Conversion Logic (Request Institutional Briefing, NOT Sign-Up) + Roadmap (Design System → Wireframe → Components → HTML/React) |
-| HOW NARRATED — كيف تُروى؟ | 54 | Outcome-first site narrative |
+| HOW DESIGNS — كيف تصمّم بصريًا؟ | 54 | Design System + Visual Category (Institutional Intelligence Infrastructure = Bloomberg + McKinsey + Enterprise Software + Research Institution) + 4 Principles (Trust Before Excitement / Evidence Over Decoration / Calm Intelligence / Institutional Density) + Color System (Deep Institutional Navy / Intelligence Surface / Intelligence Signal accent — single accent only, no neon) + Typography (4-level hierarchy: Display / Heading / Body / Data Text) + 12-col Grid + 8px Spacing Scale (8→128) + 5 Core Components (Intelligence Card / Evidence Block / Architecture Diagram / Outcome Card / Institutional Badge) + Motion (Reveal / Trace / Transition only — no parallax/floating/continuous) + Custom DataViz (Intelligence Maps / Evidence Chains / Knowledge Graph Views / Timeline Intelligence — NOT trading charts) + RTL/LTR + Accessibility + Responsive (Desktop → Tablet → Mobile) + Design Tokens (Colors / Typography / Spacing / Radius / Shadows / Motion / Components) + Tech Stack (React + Next.js + TypeScript + Tailwind + Storybook) |
+| HOW NARRATED — كيف تُروى؟ | 55 | Outcome-first site narrative |
 
 ---
 
@@ -301,6 +303,7 @@ docs/
     ├── 52-ROUAA-CERTIFICATION-MODEL-v1.md         ← كيف تُعتمد
     ├── 53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md    ← كيف تبحث
     ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md    ← كيف تُنفّذ الموقع
+    ├── 55-ROUAA-DESIGN-SYSTEM-v1.md               ← كيف تصمّم بصريًا
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -358,7 +361,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **54/54 وثيقة تأسيسية معتمدة**
+- ✅ **55/55 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -367,9 +370,9 @@ docs/
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL معتمد (doc 54) كأول وثيقة تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Design System → Wireframe → Components → HTML/React
-- 📝 **الوثيقة التالية المقترحة:** 55-ROUAA-DESIGN-SYSTEM-v1 (نظام التصميم المؤسسي: الألوان، الطباعة، التباعد، المكونات، الحركات)
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL (doc 54) + DESIGN-SYSTEM (doc 55) معتمدة كأول وثيقتين تنفيذيتين
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Homepage Wireframe → Component Library → HTML/React
+- 📝 **الوثيقة التالية المقترحة:** 56-ROUAA-HOMEPAGE-WIREFRAME-v1 (تحويل نظام التصميم إلى أول صفحة فعلية: ترتيب الأقسام، الرسائل، العناصر البصرية، CTA، رحلة الزائر المؤسسي)
 
 ---
 

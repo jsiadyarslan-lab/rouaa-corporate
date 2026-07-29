@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 54 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 55 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -67,6 +67,7 @@
 | كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUAA-CERTIFICATION-MODEL-v1.md) |
 | كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) |
 | كيف تُنفّذ الموقع؟ | [54-SITE-IMPLEMENTATION-MODEL](docs/foundation/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) |
+| كيف تصمّم بصريًا؟ | [55-DESIGN-SYSTEM](docs/foundation/55-ROUAA-DESIGN-SYSTEM-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -80,7 +81,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **54/54 وثيقة تأسيسية معتمدة**
+- ✅ **55/55 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
@@ -89,8 +90,8 @@
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL معتمد كأول وثيقة تنفيذية
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Design System → Wireframe → Components → HTML/React
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL + DESIGN-SYSTEM معتمدة كأول وثيقتين تنفيذيتين
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Homepage Wireframe → Component Library → HTML/React
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
