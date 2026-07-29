@@ -86,7 +86,8 @@
 | **52** | [RESEARCH-INSTITUTE-MODEL-v1](53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) | كيف تصبح رؤى مؤسسة تنتج المعرفة التي تعتمد عليها السوق، وليس فقط منصة تستخدمها المؤسسات؟ | ✅ معتمد |
 | **53** | [SITE-IMPLEMENTATION-MODEL-v1](54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) | كيف يتحول الإطار الاستراتيجي المكتوب إلى بنية موقع مؤسسي يحقق تحويل زائر المؤسسة إلى طلب Briefing؟ | ✅ معتمد |
 | **54** | [DESIGN-SYSTEM-v1](55-ROUAA-DESIGN-SYSTEM-v1.md) | كيف يجب أن تبدو وتشعر رؤى حتى يثق بها مدير استثمار أو مؤسسة مالية قبل أن يتحدث مع فريق المبيعات؟ | ✅ معتمد |
-| **55** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **55** | [HOMEPAGE-WIREFRAME-v1](56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) | كيف يجب أن تكون أول تجربة لرؤى حتى يفهم العميل المؤسسي القيمة قبل رؤية المنتج؟ | ✅ معتمد |
+| **56** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -179,7 +180,8 @@
 | HOW RESEARCHES — كيف تبحث؟ | 52 | Research Institute + 5 Labs (Decision Intelligence / Financial Knowledge Systems / AI Governance / Institutional Research / Market Intelligence) + Standards & Methodology Office + 4 Asset Types (Annual Reports / Papers / Frameworks / Benchmarks) + 6-Stage Research Methodology (Question → Evidence → Analysis → Framework → Publication → Industry Application) + Knowledge Graph Integration + Research Fellows Program + Institutional Advisory Council + 3-Phase Build (Research Foundation → Research Network → Global Institute) |
 | HOW IMPLEMENTS SITE — كيف تُنفّذ الموقع؟ | 53 | Site Implementation Model + Phase 1 IA (Home / Why ROUAA / Platform / Solutions / Trust / Research / Developers / Company) + Phase 2 Homepage (9 Sections: Hero → Problem → Outcomes → Architecture → Domains → Trust → Audiences → Research → Conversion) + Hero Headline ("Intelligence Infrastructure for Decisions That Cannot Be Wrong") + Visual Hero (Source→Evidence→Knowledge→Reasoning→Decision live map) + Conversion Logic (Request Institutional Briefing, NOT Sign-Up) + Roadmap (Design System → Wireframe → Components → HTML/React) |
 | HOW DESIGNS — كيف تصمّم بصريًا؟ | 54 | Design System + Visual Category (Institutional Intelligence Infrastructure = Bloomberg + McKinsey + Enterprise Software + Research Institution) + 4 Principles (Trust Before Excitement / Evidence Over Decoration / Calm Intelligence / Institutional Density) + Color System (Deep Institutional Navy / Intelligence Surface / Intelligence Signal accent — single accent only, no neon) + Typography (4-level hierarchy: Display / Heading / Body / Data Text) + 12-col Grid + 8px Spacing Scale (8→128) + 5 Core Components (Intelligence Card / Evidence Block / Architecture Diagram / Outcome Card / Institutional Badge) + Motion (Reveal / Trace / Transition only — no parallax/floating/continuous) + Custom DataViz (Intelligence Maps / Evidence Chains / Knowledge Graph Views / Timeline Intelligence — NOT trading charts) + RTL/LTR + Accessibility + Responsive (Desktop → Tablet → Mobile) + Design Tokens (Colors / Typography / Spacing / Radius / Shadows / Motion / Components) + Tech Stack (React + Next.js + TypeScript + Tailwind + Storybook) |
-| HOW NARRATED — كيف تُروى؟ | 55 | Outcome-first site narrative |
+| HOW WIREFRAMES — كيف تُخطّط الصفحة الرئيسية؟ | 55 | Homepage Wireframe + 11 Sections (Hero → Institutional Problem → ROUAA Positioning → Outcomes → Intelligence Architecture → Trust Framework → Domains → Use Cases → Research Authority → Security/Governance → Final CTA) + Hero Headline ("Institutional Decision Intelligence Infrastructure") + Hero Visual (vertical Source→Evidence→Knowledge→Reasoning→Decision flow, NOT dashboard/charts/chat) + Above-the-Fold Test (What/For Whom/Why/Action) + 3-Second/1-Min/3-Min Conversion Test + Navigation (Platform/Solutions/Trust/Research/Developers/Company + Request Briefing — NO Pricing in main nav) + Final CTA "Request Institutional Briefing" (NOT "Start Free") + Implementation Bans (no stock photos, no smiling people, no robots, no Web3 effects) |
+| HOW NARRATED — كيف تُروى؟ | 56 | Outcome-first site narrative |
 
 ---
 
@@ -304,6 +306,7 @@ docs/
     ├── 53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md    ← كيف تبحث
     ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md    ← كيف تُنفّذ الموقع
     ├── 55-ROUAA-DESIGN-SYSTEM-v1.md               ← كيف تصمّم بصريًا
+    ├── 56-ROUAA-HOMEPAGE-WIREFRAME-v1.md           ← كيف تُخطّط الصفحة الرئيسية
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -361,7 +364,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **55/55 وثيقة تأسيسية معتمدة**
+- ✅ **56/56 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -370,9 +373,9 @@ docs/
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL (doc 54) + DESIGN-SYSTEM (doc 55) معتمدة كأول وثيقتين تنفيذيتين
-- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Homepage Wireframe → Component Library → HTML/React
-- 📝 **الوثيقة التالية المقترحة:** 56-ROUAA-HOMEPAGE-WIREFRAME-v1 (تحويل نظام التصميم إلى أول صفحة فعلية: ترتيب الأقسام، الرسائل، العناصر البصرية، CTA، رحلة الزائر المؤسسي)
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL (doc 54) + DESIGN-SYSTEM (doc 55) + HOMEPAGE-WIREFRAME (doc 56) معتمدة كأول ثلاث وثائق تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Component Library → HTML/React Implementation
+- 📝 **الوثيقة التالية المقترحة:** 57-ROUAA-COMPONENT-LIBRARY-v1 (تحويل الـ Wireframe إلى مكتبة مكونات فعلية: Hero / Evidence / Architecture / Outcome Cards / Trust / Research / CTA Components — بحيث يصبح الانتقال إلى React / HTML تنفيذًا مباشرًا)
 
 ---
 
