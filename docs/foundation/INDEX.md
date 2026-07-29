@@ -80,7 +80,8 @@
 | **46** | [CATEGORY-DESIGN-MODEL-v1](47-CATEGORY-DESIGN-MODEL-v1.md) | كيف تنتقل رؤى من شركة تقدم منتجًا إلى شركة تُعرّف فئة سوقية جديدة تصبح مرجعًا لها؟ | ✅ معتمد |
 | **47** | [THOUGHT-LEADERSHIP-MODEL-v1](48-THOUGHT-LEADERSHIP-MODEL-v1.md) | كيف تصبح رؤى المصدر الذي يرجع إليه السوق لفهم وتحسين عملية اتخاذ القرار المالي المؤسسي؟ | ✅ معتمد |
 | **48** | [COMMUNITY-MODEL-v1](49-COMMUNITY-MODEL-v1.md) | كيف تتحول رؤى من منصة تستخدمها المؤسسات إلى شبكة معرفية تنمو حولها وتزيد من قيمة النظام؟ | ✅ معتمد |
-| **49** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **49** | [EDUCATION-MODEL-v1](50-EDUCATION-MODEL-v1.md) | كيف تجعل رؤى السوق والمؤسسات تفهم وتطبق مفهوم ذكاء القرار المؤسسي بحيث يصبح التعليم محرك تبني؟ | ✅ معتمد |
+| **50** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -167,7 +168,8 @@
 | HOW CREATES CATEGORY — كيف تخلق فئة؟ | 46 | Category Design + Definition (Institutional Decision Intelligence) + Problem (Information→Understanding→Decision Gap) + 4-Phase Narrative + Vocabulary System (5 terms) + Educational Strategy + 3-Phase Adoption Curve + Category Enemy (Unverified Decisions) + 3 Design Principles + 3 Category Risks |
 | HOW LEADS THOUGHT — كيف تقود الفكر؟ | 47 | Thought Leadership + 6 Knowledge Pillars (Decision Intelligence / Evidence-Based Finance / Institutional Research / AI Governance / Financial Knowledge Systems / Future of Investment Decisions) + 5 Asset Types (Flagship Reports / Papers / Frameworks / Briefs / Executive Briefings) + Authority Flywheel + 3 Authority Phases + Quality Rule (Claim→Evidence→Methodology→Implication→Decision Relevance) |
 | HOW BUILDS COMMUNITY — كيف تبني مجتمعًا؟ | 48 | Community Model + 4 Segments (Institutional / Analyst / Developer / Research) + 4 Layers (Public → Professional → Expert → Institutional Council) + Contribution Economy + 3 Community Rules + Events (Intelligence Sessions + Annual Summit) + Community Flywheel + 3 Build Phases (Expert Foundation → Professional Network → Global Community) |
-| HOW NARRATED — كيف تُروى؟ | 49 | Outcome-first site narrative |
+| HOW EDUCATES — كيف تعلّم؟ | 49 | Education Model + 5 Layers (Market / Professional / Enterprise Enablement / Certification / Research) + ROUAA Academy (5 Schools) + 3-Level Certification (Foundation / Practitioner / Enterprise Leader) + Content Model (Problem→Concept→Framework→Example→Application→Measurement) + 3 Build Phases (Foundation → Professional → Global Institute) |
+| HOW NARRATED — كيف تُروى؟ | 50 | Outcome-first site narrative |
 
 ---
 
@@ -286,6 +288,7 @@ docs/
     ├── 47-CATEGORY-DESIGN-MODEL-v1.md        ← كيف تخلق فئة
     ├── 48-THOUGHT-LEADERSHIP-MODEL-v1.md     ← كيف تقود الفكر
     ├── 49-COMMUNITY-MODEL-v1.md               ← كيف تبني مجتمعًا
+    ├── 50-EDUCATION-MODEL-v1.md               ← كيف تعلّم
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -343,7 +346,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **49/49 وثيقة تأسيسية معتمدة**
+- ✅ **50/50 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -351,7 +354,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** EDUCATION-MODEL-v1 (كيف تبني رؤى برامج تدريب وشهادات وأكاديمية مرتبطة بـ Decision Intelligence؟)
+- 📝 **الوثيقة التالية المقترحة:** STANDARDIZATION-MODEL-v1 (كيف تجعل رؤى منهجياتها مرجعًا معتمدًا ومعيارًا صناعيًا؟)
 
 ---
 
