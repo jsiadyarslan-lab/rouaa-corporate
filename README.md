@@ -12,7 +12,7 @@
 
 كل الإجابات التأسيسية الأخرى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 64 وثيقة تأسيسية مُعتمدة (00 + 01-63) تجيب عن:
+هناك ستجد 65 وثيقة تأسيسية مُعتمدة (00 + 01-64) تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -80,6 +80,7 @@
 | كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
 | كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
 | كيف تُحزَّم الحلول التجارية؟ | [63-ROUAA-SOLUTION-SUITES-MODEL-v1](docs/foundation/63-ROUAA-SOLUTION-SUITES-MODEL-v1.md) ✅ جديد |
+| كيف نُدير التنفيذ؟ | [64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1](docs/foundation/64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1.md) ✅ جديد |
 | كيف نبدأ الكود الفعلي؟ | ~~[63-HTML-REACT-IMPLEMENTATION](docs/foundation/archive/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1-superseeded.md)~~ ⚠️ مؤرشفة — ستُعاد كتابتها بعد استقرار الأساس |
 | كيف تُروى؟ | [13-ROUAA-SITE-NARRATIVE-v2](docs/foundation/13-ROUAA-SITE-NARRATIVE-v2.md) ✅ v2 |
 
@@ -94,10 +95,10 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **64/64 وثيقة تأسيسية معتمدة — 🏁 المرحلة التوثيقية مكتملة رسميًا**
-- ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة، الـ Operating Blueprint للمشروع كله
-- ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
-- 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00):
+- ✅ **65/65 وثيقة تأسيسية معتمدة — 🏁 المرحلة التوثيقية مكتملة بالكامل**
+- ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
+- ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
+- 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64):
   - doc 54 new: ECOSYSTEM-ARCHITECTURE
   - doc 55 new: PRODUCT-PORTFOLIO
   - doc 13 v2: SITE-NARRATIVE
@@ -107,9 +108,10 @@
   - doc 59 v2: CONTENT-ARCHITECTURE
   - doc 60 v2: SEO-STRATEGY
   - doc 63 new: SOLUTION-SUITES
-  - doc 00: MASTER-BUILD-BLUEPRINT (إغلاق المرحلة)
+  - doc 00: MASTER-BUILD-BLUEPRINT
+  - doc 64: EXECUTION-PROGRAM-MANAGEMENT
 - 📝 **مراجعات متوقعة**: 6 وثائق تجارية (34/35/37/39/40/43) + 5 وثائق تنفيذية (56/57/61/62 + Design System)
-- 🚀 **المرحلة التالية**: Execution Roadmap & Program Management — الجسر بين التوثيق والتنفيذ
+- 🚀 **المرحلة التالية**: استخراج الـ Backlog التنفيذي — Programs → Epics → Features → User Stories → Technical Tasks
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
