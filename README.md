@@ -101,8 +101,8 @@
 - ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
 - ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
 - 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64)
-- 📋 **مرحلة التنفيذ بدأت**: [docs/execution/](docs/execution/INDEX.md) — الـ Backlog الرئيسي مع 7 Programs / 15+ Epics / 60+ Tasks / 6 Releases
-- 🚀 **الخطوة التالية**: Engineering Sprint Plan — تقسيم الـ Backlog إلى Sprint 0 / 1 / 2
+- 📋 **مرحلة التنفيذ بدأت**: [docs/execution/](docs/execution/INDEX.md) — Backlog + Sprint Plan (7 Programs / 16+ Sprints / 6 Releases)
+- 🚀 **الخطوة التالية**: Technical Architecture Implementation Plan — الخدمات البرمجية + قواعد البيانات + APIs + queues + workers + deployment
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---

@@ -27,7 +27,8 @@
 | # | الوثيقة | الدور | الحالة |
 |---|---|---|---|
 | **00** | [**ROUAA-MASTER-EXECUTION-BACKLOG-v1**](00-ROUAA-MASTER-EXECUTION-BACKLOG-v1.md) | **الـ Backlog الرئيسي — 7 Programs / 15+ Epics / 60+ Tasks / 6 Releases** | ✅ نشط |
-| 01 | ROUAA-ENGINEERING-SPRINT-PLAN-v1 | تقسيم الـ Backlog إلى Sprints (Sprint 0 / 1 / 2) مع المهام اليومية والتبعيات | ⬜ التالي |
+| **01** | [**ROUAA-ENGINEERING-SPRINT-PLAN-v1**](01-ROUAA-ENGINEERING-SPRINT-PLAN-v1.md) | **خطة الـ Sprints — 16+ Sprints (أسبوعان لكل Sprint) من Sprint 0 Stabilization إلى Sprint 16+ Enterprise Scale** | ✅ نشط |
+| 02 | ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-v1 | الخدمات البرمجية + قواعد البيانات + APIs + queues + workers + AI services + deployment architecture + تدفق البيانات | ⬜ التالي |
 
 ---
 
@@ -53,14 +54,38 @@ PROGRAM-07  Enterprise Operations
 
 ## 🚀 Release Roadmap
 
-| Release | الهدف | الحالة |
-|---|---|---|
-| Release 0 | Foundation Validation (Sources + Documents + Facts + Events + Evidence) | 🟢 مكتمل أو قريب |
-| Release 1 | Intelligence Platform MVP (Knowledge Graph + Search + APIs + AI Assistant) | ⬜ |
-| Release 2 | Media Intelligence MVP (News Engine + Reports + Publishing) | ⬜ |
-| Release 3 | Research Intelligence MVP (Brief Generator + Deep Reports + Research Workspace) | ⬜ |
-| Release 4 | Trading Intelligence MVP (Smart Charts + Portfolio + Trading Assistant) | ⬜ |
-| Release 5 | Enterprise Platform (Multi-tenancy + Security + Billing + Deployment) | ⬜ |
+| Release | الهدف | Sprints | الحالة |
+|---|---|---|---|
+| Release 0 | Foundation Validation (Sources + Documents + Facts + Events + Evidence) | Sprint 0-2 | 🟢 مكتمل أو قريب |
+| Release 1 | Intelligence Platform MVP (Knowledge Graph + Search + APIs + AI Assistant) | Sprint 3-5 | ⬜ |
+| Release 2 | Media Intelligence MVP (News Engine + Reports + Publishing) | Sprint 6-8 | ⬜ |
+| Release 3 | Research Intelligence MVP (Brief Generator + Deep Reports + Research Workspace) | Sprint 9-11 | ⬜ |
+| Release 4 | Trading Intelligence MVP (Smart Charts + Portfolio + Trading Assistant) | Sprint 12-15 | ⬜ |
+| Release 5 | Enterprise Platform (Multi-tenancy + Security + Billing + Deployment) | Sprint 16+ | ⬜ |
+
+---
+
+## 📅 Sprint Roadmap (from doc 01)
+
+| Sprint | Name | Goal | Output |
+|---|---|---|---|
+| Sprint 0 | Project Stabilization | تثبيت البيئة قبل إضافة ميزات | Repository + CI/CD + Docs sync |
+| Sprint 1 | Data Foundation | تثبيت طبقة البيانات | ROUAA Data Foundation v1 |
+| Sprint 2 | Source Intelligence | تحويل المصادر إلى تدفق إنتاجي | Official Intelligence Supply Chain |
+| Sprint 3 | Document Intelligence | تحويل الوثائق إلى معرفة | Document Intelligence Engine |
+| Sprint 4 | Fact & Event Engine | الوصول إلى أهم طبقة | Document → Fact → Event chain |
+| Sprint 5 | Evidence & Provenance | تثبيت الثقة | Every intelligence item has proof |
+| Sprint 6 | Knowledge Graph MVP | ربط العالم المالي | Financial Knowledge Graph v1 |
+| Sprint 7 | Intelligence API | تحويل المحرك إلى منصة | ROUAA Intelligence API v1 |
+| Sprint 8 | AI Reasoning | إضافة طبقة التفكير | Explainable AI Layer |
+| Sprint 9 | Media Intelligence MVP | أول منتج قابل للعرض | Financial News Engine + Reports + Publishing |
+| Sprint 10 | Corporate Website | إطلاق واجهة المؤسسة | Homepage + Platform + Solutions + Products + Trust |
+| Sprint 11 | Product Catalog | نظام قابل للتصفح | Search + Filters + Categories + Product Pages |
+| Sprint 12 | Research Intelligence MVP |Brief Generator + Deep Reports + Sector + Watchlists | Research Workspace |
+| Sprint 13 | Trading Intelligence Foundation | Market Intelligence + Chart Annotation + Portfolio Context | Trading foundation |
+| Sprint 14 | Trading Application MVP | Dashboard + Smart Charts + AI Assistant + Portfolio | Trading MVP |
+| Sprint 15 | Enterprise Platform | Multi-tenancy + Security + Billing + Deployment | Enterprise ready |
+| Sprint 16+ | Scale & Enterprise Readiness | Security Hardening + Performance + Monitoring + DR + Integrations | Production scale |
 
 ---
 
