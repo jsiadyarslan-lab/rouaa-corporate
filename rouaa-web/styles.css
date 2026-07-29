@@ -1,0 +1,265 @@
+/* ============================================================
+   ROUAA — Page Styles
+   Styles for Navigation, Hero, Footer, and page-specific layouts.
+   Built on top of design-system/tokens + typography + components.
+   ============================================================ */
+
+/* ============ NAVIGATION ============ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rouaa-border);
+  transition: all var(--transition-base);
+}
+
+.navbar.scrolled {
+  background: rgba(10, 14, 23, 0.95);
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: var(--space-xl);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo-text {
+  font-size: 20px;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--rouaa-text-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--rouaa-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--rouaa-text-primary);
+}
+
+.nav-link.active {
+  color: var(--rouaa-accent);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.btn-sm {
+  padding: 8px 20px;
+  font-size: var(--text-xs);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--rouaa-text-primary);
+  border-radius: 1px;
+  transition: all var(--transition-fast);
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 140px 0 80px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-headline {
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-xl);
+}
+
+.hero-subheadline {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--rouaa-text-secondary);
+  margin-bottom: var(--space-2xl);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2xl);
+  margin-top: var(--space-4xl);
+  text-align: left;
+}
+
+.hero-products .product-card {
+  text-decoration: none;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--rouaa-bg-secondary);
+  border-top: 1px solid var(--rouaa-border);
+  padding: var(--space-4xl) 0 var(--space-2xl);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-3xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.footer-brand p {
+  color: var(--rouaa-text-muted);
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-heading {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--rouaa-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-col a {
+  font-size: var(--text-sm);
+  color: var(--rouaa-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-col a:hover {
+  color: var(--rouaa-accent);
+}
+
+.footer-bottom {
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--rouaa-border);
+  text-align: center;
+}
+
+/* ============ PAGE HERO (Trading / Financial Intelligence) ============ */
+.page-hero {
+  padding: 140px 0 64px;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-lg);
+}
+
+.page-hero .hero-subheadline {
+  max-width: 640px;
+  margin: 0 auto var(--space-xl);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 968px) {
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--rouaa-bg-primary);
+    flex-direction: column;
+    padding: var(--space-xl);
+    gap: var(--space-lg);
+    border-bottom: 1px solid var(--rouaa-border);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  .hero-products {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .hero-headline {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-headline {
+    font-size: 32px;
+  }
+}
