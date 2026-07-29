@@ -29,7 +29,8 @@
 | **00** | [**ROUAA-MASTER-EXECUTION-BACKLOG-v1**](00-ROUAA-MASTER-EXECUTION-BACKLOG-v1.md) | **الـ Backlog الرئيسي — 7 Programs / 15+ Epics / 60+ Tasks / 6 Releases** | ✅ نشط |
 | **01** | [**ROUAA-ENGINEERING-SPRINT-PLAN-v1**](01-ROUAA-ENGINEERING-SPRINT-PLAN-v1.md) | **خطة الـ Sprints — 16+ Sprints (أسبوعان لكل Sprint) من Sprint 0 Stabilization إلى Sprint 16+ Enterprise Scale** | ✅ نشط |
 | **02** | [**ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-PLAN-v1**](02-ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-PLAN-v1.md) | **المعمارية التقنية — 8 طبقات + 6 Core Services + Knowledge Graph + AI Architecture + Search + APIs + Storage + Message Queue + Deployment + Observability + Security + Multi-Tenant + MVP** | ✅ نشط |
-| 03 | ROUAA-ENGINEERING-SPECIFICATION-v1 | Stack النهائي + Microservices vs Modular Monolith + Database schema + API contracts + Repository structure + CI/CD + Testing + Coding standards | ⬜ التالي |
+| **03** | [**ROUAA-ENGINEERING-SPECIFICATION-v1**](03-ROUAA-ENGINEERING-SPECIFICATION-v1.md) | **المواصفات الهندسية — Modular Monolith + Event-Driven / NestJS + Python + React / PostgreSQL + pgvector + Redis + BullMQ / Monorepo / 16 NestJS Modules / 7 Core Entities / 7 API Domains / 5 Workers / AI Standards / Testing / CI/CD / Coding Standards / Anti-Patterns** | ✅ نشط |
+| 04 | ROUAA-MVP-BUILD-SPECIFICATION-v1 | ما الذي نبنيه خلال أول 90 يومًا فقط؟ — النسخة الأولى القابلة للعرض + الميزات المؤجلة + ترتيب البناء بموارد محدودة | ⬜ التالي |
 
 ---
 

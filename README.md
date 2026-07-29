@@ -101,8 +101,8 @@
 - ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
 - ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
 - 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64)
-- 📋 **مرحلة التنفيذ بدأت**: [docs/execution/](docs/execution/INDEX.md) — Backlog + Sprint Plan + Technical Architecture (7 Programs / 16+ Sprints / 8-layer architecture / 6 Core Services)
-- 🚀 **الخطوة التالية**: Engineering Specification — Stack النهائي + Microservices vs Monolith + Database schema + API contracts + CI/CD + Testing + Coding standards
+- 📋 **مرحلة التنفيذ بدأت**: [docs/execution/](docs/execution/INDEX.md) — Backlog + Sprint Plan + Technical Architecture + Engineering Spec (7 Programs / 16+ Sprints / Modular Monolith + NestJS + Python + React + PostgreSQL)
+- 🚀 **الخطوة التالية**: MVP Build Specification — ما الذي نبنيه خلال أول 90 يومًا فقط؟
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
