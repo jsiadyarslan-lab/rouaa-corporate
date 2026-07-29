@@ -75,7 +75,8 @@
 | **41** | [ORGANIZATION-MODEL-v1](42-ORGANIZATION-MODEL-v1.md) | ما نوع المؤسسة البشرية التي تحتاجها رؤى حتى تتحول من منتج إلى بنية تحتية مالية عالمية؟ | ✅ معتمد |
 | **42** | [PARTNERSHIP-MODEL-v1](43-PARTNERSHIP-MODEL-v1.md) | كيف تبني رؤى شبكة شركاء تجعلها أكثر قيمة، وأكثر ثقة، وأصعب استبدالًا؟ | ✅ معتمد |
 | **43** | [ECOSYSTEM-MODEL-v1](44-ECOSYSTEM-MODEL-v1.md) | كيف تصبح رؤى نقطة التقاء بين البيانات المالية، المؤسسات، المطورين، والمعلومات الاستخباراتية؟ | ✅ معتمد |
-| **44** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **44** | [INTERNATIONALIZATION-MODEL-v1](45-INTERNATIONALIZATION-MODEL-v1.md) | كيف تصبح رؤى منصة ذكاء قرار مؤسسي عالمية دون فقدان الثقة والجودة والتموضع؟ | ✅ معتمد |
+| **45** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -157,7 +158,8 @@
 | HOW ORGANIZES — كيف تُنظَّم الشركة؟ | 41 | Organization Model + 7 Units (Intelligence / Product / Engineering / Enterprise / Trust / Security / Operations) + 5 Exec Roles (CEO/CTO/CPO/Chief Intelligence Officer/CRO) + 4 Hiring Stages (0-10 / 10-30 / 30-100 / 100+) + 3 Culture Principles (Move Correctly / Evidence for Everything / Build Assets Not Features) |
 | HOW PARTNERS — كيف تشارك؟ | 42 | Partnership Model + 6 Layers (Data / Financial Institution / Technology / Distribution / Research / Ecosystem) + Design Partner Program + Partner Scorecard (5 criteria) + Partnership Flywheel + 5 Partnership Types + Governance Model + 3-Phase Partnership Strategy |
 | HOW ECOSYSTEMS — كيف تبني منظومة؟ | 43 | Ecosystem Model + 6 Layers (Source / Institutional / Developer / Solution / Knowledge / Marketplace) + 4-Phase Build (Controlled → Partner → Developer → Intelligence Network) + Ecosystem Flywheel + 4 Moats (Data / Knowledge / Workflow / Network) + Economics + Governance Rules |
-| HOW NARRATED — كيف تُروى؟ | 44 | Outcome-first site narrative |
+| HOW EXPANDS GLOBALLY — كيف تتوسع عالميًا؟ | 44 | Internationalization Model + Global Core + Local Intelligence + Market Selection (3 Tiers) + 5-Layer Localization (Language/Data/Regulation/Workflow/Culture) + 3-Phase Entry (Discovery → Design Partner → Deployment) + Regional Hubs (MENA/Europe/Asia) + International Flywheel + 4 International Risks |
+| HOW NARRATED — كيف تُروى؟ | 45 | Outcome-first site narrative |
 
 ---
 
@@ -271,6 +273,7 @@ docs/
     ├── 42-ORGANIZATION-MODEL-v1.md           ← كيف تُنظَّم الشركة
     ├── 43-PARTNERSHIP-MODEL-v1.md            ← كيف تشارك
     ├── 44-ECOSYSTEM-MODEL-v1.md              ← كيف تبني منظومة
+    ├── 45-INTERNATIONALIZATION-MODEL-v1.md   ← كيف تتوسع عالميًا
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -328,7 +331,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **44/44 وثيقة تأسيسية معتمدة**
+- ✅ **45/45 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -336,7 +339,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** INTERNATIONALIZATION-MODEL-v1 (كيف تنتقل رؤى من منصة إقليمية إلى بنية ذكاء مؤسسي عالمية؟)
+- 📝 **الوثيقة التالية المقترحة:** BRAND-MODEL-v1 (كيف تُبنى هوية رؤى كعلامة مؤسسية عالمية؟ الرسالة + المكانة + اللغة + الثقة + الانطباع)
 
 ---
 
