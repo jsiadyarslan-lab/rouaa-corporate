@@ -101,31 +101,36 @@ A visitor must understand in 10 seconds:
 3. For whom → Investors, institutions, financial media
 4. Why different → Built on verified intelligence
 
-### Headline (direction)
+### Headline (APPROVED)
 
 ```
 Intelligent Financial Platforms
 Built on Verified Intelligence
 ```
 
-### Sub-headline (direction)
+### Sub-headline (APPROVED — user refined)
 
 ```
-Trade smarter.
-Research faster.
-Understand markets with confidence.
+Trade with context.
+Research with confidence.
+Make decisions backed by evidence.
 ```
 
-### CTAs
+> **User note:** First line defines the category. Second line explains the value. 'Intelligent Financial Platforms' alone could read as generic AI — the sub-headline makes the value concrete.
+
+### CTAs (APPROVED)
 
 ```
-[Trading Platform]    [Financial Intelligence]
+[Explore Trading Platform]    [Explore Financial Intelligence]
 ```
+
+> **User note:** 'Explore' not 'Buy' or 'Start' — the audience is institutional, not retail acquisition.
 
 **NOT:**
 - ❌ "Request Institutional Briefing" as the only CTA
 - ❌ "Explore Intelligence Architecture"
 - ❌ "Explore Platform"
+- ❌ "Buy Now" / "Start Trading" (retail language)
 
 **Why two CTAs:** The visitor immediately sees we have TWO products, not one abstract platform. Each CTA leads to a product page, not a concept page.
 
@@ -387,10 +392,19 @@ Resources:
 - ❌ "Enterprise Financial Intelligence Ecosystem"
 - ❌ Any of the 4 competing identity phrasings
 
-**Footer tagline (final, locked):**
+**Footer (APPROVED — user refined):**
 ```
-Built on verified intelligence.
+ROUAA
+
+Intelligent financial platforms
+built on verified intelligence.
+
+Trading Intelligence
+Financial Intelligence
+Enterprise Solutions
 ```
+
+> **User note:** Footer tagline is not the only message. The footer carries the full positioning: company identity + what we build + the three product lines.
 
 ---
 
@@ -458,19 +472,41 @@ The visitor immediately sees TWO distinct products, not one abstract concept. Th
 
 ---
 
-# 9. Approval Gate
+# 9. Approval Gate — APPROVED ✅
 
-This blueprint is NOT approved for implementation until:
+All 5 decisions approved by user with refinements:
 
-- [ ] User confirms the Hero headline direction
-- [ ] User confirms the two-CTA structure
-- [ ] User confirms the navigation
-- [ ] User confirms "Built on verified intelligence" as footer tagline
-- [ ] User confirms the 10 forbidden items
+- [x] Hero headline: APPROVED — sub-headline refined to 'Trade with context. Research with confidence. Make decisions backed by evidence.'
+- [x] Two-CTA structure: APPROVED — [Explore Trading Platform] + [Explore Financial Intelligence]
+- [x] Navigation: APPROVED — Trading Platform / Financial Intelligence / Solutions / Technology / Trust / Company
+- [x] Footer: APPROVED — refined to include full positioning (company + platforms + tagline)
+- [x] 10 forbidden items: APPROVED — especially 'We don't sell tools, we sell infrastructure' replaced with 'We build financial platforms powered by verified intelligence.'
 
-Once approved, the next documents are:
-1. Trading Platform Messaging Blueprint
-2. Financial Intelligence Platform Messaging Blueprint
+## Additional Strategic Lock (user-approved)
+
+ROUAA company classification:
+
+```
+Financial Technology Company
+
+with two intelligent platforms:
+
+  Trading Platform
+  Financial Intelligence Platform
+```
+
+NOT:
+- ❌ 'AI Company'
+- ❌ 'Trading Company'
+- ❌ 'News Company'
+
+This preserves future space — ROUAA is a FinTech company that builds platforms, not a single-category player.
+
+---
+
+**Next documents:**
+1. Trading Platform Messaging Blueprint (doc 07)
+2. Financial Intelligence Platform Messaging Blueprint (doc 08)
 
 Then HTML/CSS begins.
 
