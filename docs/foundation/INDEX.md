@@ -96,7 +96,7 @@
 | **60** | [ANALYTICS-MEASUREMENT-MODEL-v1](61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) | هل يفهم السوق الفئة، هل يثق الزوار بالمؤسسة، هل يجذب الموقع العملاء المناسبين، هل يتحول الاهتمام إلى فرص مؤسسية، ما الذي يجب تحسينه؟ | ⚠️ قيد المراجعة |
 | **61** | [WEB-IMPLEMENTATION-ARCHITECTURE-v1](62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) | كيف نبني موقع رؤى كمنصة مؤسسية حقيقية وليس كصفحة تسويقية ثابتة؟ | ⚠️ قيد المراجعة |
 | **62** | [HTML-REACT-IMPLEMENTATION-v1](63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md) | كيف نبدأ بناء موقع رؤى فعليًا — Repository + Next.js + Components + Pages؟ | ⚠️ قيد المراجعة — مؤجل حتى استقرار السرد والمنتجات |
-| **63** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ⚠️ قيد المراجعة — سيُعاد بناؤها كخطوة تالية |
+| **63** | [ROUAA-SITE-NARRATIVE-v2](13-ROUAA-SITE-NARRATIVE-v2.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد (v2 — إعادة بناء بعد اعتماد ECOSYSTEM-ARCHITECTURE + PRODUCT-PORTFOLIO) |
 
 ---
 
@@ -199,7 +199,7 @@
 | HOW MEASURES — كيف تُقاس النتائج؟ | 60 | Analytics Measurement + 5 Objectives (Category Awareness / Institutional Engagement / Trust Formation / Enterprise Intent / Revenue Influence) + 6 Analytics Layers (Acquisition / Content / Trust / Engagement / Sales / Executive Intelligence) + Account Quality Tracking (Bank / Asset Manager / Research / Tech) + Knowledge Journey (Category → Platform → Trust → Research → Briefing) + 3 Trust Metrics (Evidence Interaction Rate / Trust Content Completion / Architecture Understanding) + Engagement Score Formula (Content Depth + Trust Interaction + Architecture Exploration + Conversion Intent) + Primary Conversion (Request Institutional Briefing) + 4 Secondary Conversions (Report Download / Subscribe / Contact / API Inquiry) + 5-Stage Enterprise Funnel (Anonymous Visitor → Known Visitor → Engaged Institution → Qualified Opportunity → Enterprise Customer) + Account-Based Analytics + SEO Measurement (Category Ownership / Authority Growth / Search Intent Quality) + 3 Research Metrics (Report Influence / Framework Adoption / Research Authority) + CRM Integration Flow (Website → CRM → Pipeline → Revenue Attribution) + Executive Dashboard (Market Authority / Enterprise Demand / Content Impact / Revenue Influence) + Event Tracking (JSON schema with event/page/visitor_type/intent_score) + 4 Core Event Categories (Navigation / Intelligence / Research / Conversion) + Privacy Governance (Privacy / Consent / Data Minimization — NOT surveillance, understanding) + 4 Tech Layers (Privacy-focused Web Analytics / Product Analytics / CRM / Data Warehouse) + North Star Metric: 'Qualified Institutional Intelligence Engagement' + 4 Supporting Metric Layers (Awareness / Trust / Intent / Business) + 5 Bans (no Likes / no Vanity traffic / no Page Views alone / no Viral content / no Short-term clicks) + 3-Phase Implementation (Phase 1: Core events + SEO + Conversion tracking / Phase 2: Account tracking + CRM + Intent scoring / Phase 3: Full Intelligence Layer Website Data → Knowledge Graph → Market Intelligence) |
 | HOW BUILDS WEB — كيف يُبنى الموقع تقنيًا؟ | 61 | Web Implementation Architecture + Stack (Next.js + TypeScript + Tailwind CSS + Design Tokens + React Component Library + Storybook) + Repository Structure (app/[locale]/ + components/{foundation,intelligence,trust,enterprise,research,conversion}/ + content/{pages,articles,frameworks,reports}/ + design-system/{tokens,typography,themes}/ + analytics/ + integrations/ + lib/) + 4 Application Layers (Presentation / Content / Intelligence / Integration) + Rendering Strategy (Static Generation for Home/Platform/Trust/Solutions + Dynamic Rendering for Reports/Research/Intelligence Data/User-specific) + Headless CMS (Contentful / Sanity / Strapi — Content Editor → CMS → API → Next.js → Website) + 3 Content Models (Page / Research Report / Framework with JSON schemas) + 6-Locale i18n (/en /ar /tr /es /zh /ru — NOT translation but Context + Terminology + Market adaptation) + RTL Architecture (Logical CSS + Direction-aware components + Typography adaptation — NOT mirrored English) + Design Tokens (colors.primary / spacing.section / radius.card / motion.transition) + Core Components (RouaaHero with headline/description/primaryCTA/visual props / RouaaEvidenceChain with claim/source/timestamp/confidence props / RouaaIntelligenceFlow) + Animation via CSS/Framer Motion (Reveal / Flow / Transition — NO Continuous animations or Heavy effects) + ROUAA API Integration (Intelligence / Research / Knowledge / Evidence / Account APIs) + Analytics Implementation (pageEvents / trustEvents / researchEvents / conversionEvents / accountSignals — track() helper) + SEO Layer (Metadata + 4 Structured Data Types: Organization/Article/Dataset/Software + Dynamic /sitemap.xml) + Performance (Core Web Vitals: LCP/CLS/Interaction + Image optimization + Lazy loading + Code splitting + Server components) + Security (Secure headers + CSP + Input validation + Rate limiting + Privacy compliance) + Deployment (Developer → Git → CI/CD → Production Build → Hosting → Monitoring — Vercel/AWS/Cloudflare options) + 3 Environments (Development → Staging → Production — no direct Production deploys) + Monitoring (Technical: Errors/Performance/Availability + Business: Conversion/Engagement/Account Activity) + Future: ROUAA Experience Platform (Website + Research Portal + Developer Portal + Customer Portal + Intelligence Interface) + 5 Build Bans Phase 1 (NO Custom CMS / NO Site Dashboard / NO AI Chat in site / NO Complex animations / NO Personalization Engine) + 3-Phase Implementation (Phase 1: Home/Platform/Solutions/Trust/Company/Briefing → Phase 2: Reports/Frameworks/Institute → Phase 3: Live Intelligence/Knowledge Objects/Evidence APIs) + Final Architecture: User Experience → Component System → Content Infrastructure → Intelligence APIs → Knowledge & Evidence Platform |
 | HOW CODES — كيف نبدأ الكود الفعلي؟ | 62 | HTML/React Implementation + Stack (Next.js 15 + React 19 + TypeScript) + Project Structure (rouaa-web/ with app/{platform,solutions,trust,research,company,briefing}/page.tsx + layout.tsx + components/{navigation,hero,intelligence,trust,enterprise,research}/ + styles/ + content/ + lib/ + public/) + Design Tokens (CSS variables: --rouaa-bg #05070b / --rouaa-surface #0d1117 / --rouaa-border rgba(255,255,255,.08) / --rouaa-text #f4f7fb / --rouaa-muted #94a3b8 / --rouaa-accent #3b82f6 / --space-section 120px / --radius-card 18px) + Global Layout (RootLayout with Navbar + main + Footer) + Homepage 5-Component Stack (Hero → IntelligenceFlow → OutcomeGrid → EvidenceChain → CTA) + Hero Component (eyebrow 'INSTITUTIONAL INTELLIGENCE INFRASTRUCTURE' + headline 'Decisions built on verified intelligence.' + 2 CTAs: Request Briefing + Explore Platform) + IntelligenceFlow Component (5 layers: Verified Sources → Evidence → Knowledge → Reasoning → Decision, each with 01-05 number prefix) + EvidenceChain Component (Claim → Evidence → Official Source → Decision Context vertical flow) + OutcomeGrid Component (3 outcome cards: Investment Research / Asset Management / Financial Institutions — NOT feature cards) + Trust Page (HeroTrust + EvidenceChain + Governance) + SEO Metadata per page (title + description) + 6 Analytics Events (hero_cta_clicked / platform_viewed / evidence_opened / research_downloaded / briefing_started / briefing_completed) + Responsive Architecture (Desktop Information Density → Mobile Decision Flow, NOT mini version) + 4-Sprint Plan (Sprint 1: App Shell + Navbar + Tokens + Homepage + Core Components / Sprint 2: Platform + Trust + Solutions / Sprint 3: Research + Developers + Briefing / Sprint 4: SEO + Analytics + Performance + Deployment) |
-| HOW NARRATED — كيف تُروى؟ | 63 | Outcome-first site narrative |
+| HOW NARRATED — كيف تُروى؟ | 63 | Site Narrative v2 + Identity (Financial Intelligence Infrastructure for Institutional Decisions — NOT news site / trading platform / AI tool / search engine / data provider) + Central Message ('من البيانات المالية الموثوقة إلى القرارات المؤسسية الذكية') + 4 Problems Solved (Information Fragmentation / Weak Verification / Slow Analysis / Market-Decision Gap) + 2-Layer Solution (Layer 1: Intelligence Foundation = Official Source Registry + Document Intelligence + Fact Engine + Event Engine + Evidence System + Knowledge Graph + Reasoning Engine; Layer 2: Intelligence Applications = Media + Research + Risk + Trading + Developer Intelligence) + Site Philosophy (NOT a product marketplace with 44 feature cards — but One Intelligence Foundation + Multiple Institutional Applications) + 4 Audience Tracks (Media Institutions / Asset Managers / Brokers / Developers) + 4-Stage User Journey (Understand → Analyze → Decide → Act) + Per-Page Core Messages (Homepage / Platform / Solutions / Products / Trust) + Repositioning (from 'Verified Financial Intelligence Platform' to 'Enterprise Financial Intelligence Ecosystem powering Media + Research + Risk + Trading + Decision Making') + Golden Rule (visitor must understand within first minute: NOT news / NOT trading only / NOT AI tool / IS the infrastructure that makes financial information usable for decisions) |
 
 ---
 
@@ -243,23 +243,33 @@ Year 4: Enterprise-wide Intelligence Layer
 
 ---
 
-## ✅ ما يجب أن يظهر في الموقع (من الوثيقة 13)
+## ✅ ما يجب أن يظهر في الموقع (من الوثيقة 13 v2)
 
 ```
-Hero:
-"Decisions with evidence behind them."
+Hero (v2 — إعادة بناء):
+"من البيانات المالية الموثوقة إلى القرارات المؤسسية الذكية."
+(الترجمة المؤسسية: "From verified financial data to institutional decisions.")
+
+Identity:
+ROUAA = Financial Intelligence Infrastructure for Institutional Decisions
+(NOT news site / NOT trading platform only / NOT AI tool / NOT search engine / NOT data provider)
+
+Site Journey (4 stages):
+1. Understand — News Intelligence + Market Intelligence + Research
+2. Analyze — Knowledge Graph + Agents + Reports + Scenarios
+3. Decide — Decision Intelligence + Risk Intelligence + Investment Intelligence
+4. Act — Trading Platform + Workflow Automation + APIs
+
+Site Philosophy:
+One Intelligence Foundation + Multiple Institutional Applications
+(NOT a product marketplace with 44 feature cards)
 
 CTA:
 "Request Institutional Briefing"
 
-Site Sequence:
-1. Problem
-2. Promise
-3. Enterprise Outcomes
-4. Decision Intelligence Model
-5. Domain Solutions
-6. Trust Foundation
-7. Request Briefing
+Repositioning:
+From "Verified Financial Intelligence Platform"
+To "Enterprise Financial Intelligence Ecosystem powering Media + Research + Risk + Trading + Decision Making"
 ```
 
 ---
@@ -332,8 +342,9 @@ docs/
     ├── 61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md  ← كيف تُقاس النتائج
     ├── 62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md ← كيف يُبنى الموقع تقنيًا
     ├── 63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md      ← كيف نبدأ الكود الفعلي
-    ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
+    ├── 13-ROUAA-SITE-NARRATIVE-v2.md           ← كيف تُروى (v2 — إعادة بناء)
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
+        ├── 13-SITE-NARRATIVE-v1-original-superseeded.md
         ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md
         ├── 55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -347,7 +358,7 @@ docs/
 ## 🔗 كيف تستخدم هذه الوثائق؟
 
 ### إذا كنت مصمم HTML:
-- ابدأ بـ **13-SITE-NARRATIVE-v1** (تحدّد ترتيب الصفحات والـ Hero)
+- ابدأ بـ **13-ROUAA-SITE-NARRATIVE-v2** (تحدّد ترتيب الصفحات والـ Hero)
 - ثم **03-ROUAA-OUTCOME-MODEL-v2** (تحدّد الـ 6 Outcomes للصفحة الرئيسية)
 - ثم **11-ENTERPRISE-ARCHITECTURE-MODEL-v1** (للـ platform.html فقط)
 - لا تضع أي من العناصر الممنوعة في الصفحة الرئيسية
@@ -370,7 +381,7 @@ docs/
 - ثم **10-ENTERPRISE-TRUST-MODEL-v1** (متطلبات الثقة التقنية)
 
 ### إذا كنت كاتب محتوى / سرد:
-- ابدأ بـ **13-SITE-NARRATIVE-v1** (السرد)
+- ابدأ بـ **13-ROUAA-SITE-NARRATIVE-v2** (السرد)
 - ثم **03-ROUAA-OUTCOME-MODEL-v2** (الرسائل الرئيسية)
 - ثم **10-ENTERPRISE-TRUST-MODEL-v1** (لغة الثقة)
 
@@ -403,11 +414,12 @@ docs/
 - 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
   - المستخدم أدرك أن الانتقال من الاستراتيجية (docs 01-53) مباشرة إلى تنفيذ الموقع (docs 54-63) كان مفتقدًا لطبقة تعريف المنظومة الكاملة
   - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
-  - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ (Media Intelligence / Trading Intelligence / Research Intelligence / Risk Intelligence / Developer Platform / Intelligence Agents) فوق Platform Components مشتركة (Knowledge Graph / Source Registry / Evidence Store / Reasoning Engine / Audit Trail)
-  - ⚠️ doc 54 القديم (SITE-IMPLEMENTATION-MODEL-v1) مؤرشف في `archive/`
-  - ⚠️ doc 55 القديم (DESIGN-SYSTEM-v1) مؤرشف في `archive/` — سيُعاد بناؤه بعد استقرار طبقة المنتجات والسرد
-  - 📝 doc 13 التالي: إعادة بناء SITE-NARRATIVE-v1 — السرد يجب أن ينتقل من "Verified Intelligence Platform" إلى "Intelligence Infrastructure powering Financial Media + Research + Risk + Trading"
-  - 📝 ثم مراجعة: docs 23 (PLATFORM-MODEL) + 24 (PRODUCT-MODEL) + 58 (PAGE-ARCHITECTURE)
+  - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
+  - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث: ROUAA = "Financial Intelligence Infrastructure for Institutional Decisions" (ليست "Verified Intelligence Platform")
+  - ⚠️ doc 13 القديم (SITE-NARRATIVE-v1) مؤرشف في `archive/13-SITE-NARRATIVE-v1-original-superseeded.md`
+  - ⚠️ docs القديمة (54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
+  - 📝 doc 23 التالي: إعادة بناء PLATFORM-MODEL-v2 — تعريف "المنصة" يجب أن يصبح Platform = Ecosystem وليس Intelligence Engine فقط
+  - 📝 ثم مراجعة: docs 24 (PRODUCT-MODEL) + 58 (PAGE-ARCHITECTURE)
 - ⚠️ **ملاحظة مهمة**: الوثائق 56-63 الحالية (Homepage Wireframe + Component Library + Page Architecture + Content Architecture + SEO Strategy + Analytics Measurement + Web Implementation Architecture + HTML/React Implementation) **قيد المراجعة** — ستعاد كتابتها بناءً على السرد المحدّث وكتالوج المنتجات الجديد
 - 🌿 **Branch:** `redesign-v20-architecture`
 

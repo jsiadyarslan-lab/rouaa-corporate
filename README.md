@@ -78,7 +78,7 @@
 | كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
 | كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
 | كيف نبدأ الكود الفعلي؟ | [63-HTML-REACT-IMPLEMENTATION](docs/foundation/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md) ⚠️ مؤجل حتى استقرار السرد والمنتجات |
-| كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) ⚠️ سيُعاد بناؤها كخطوة تالية |
+| كيف تُروى؟ | [13-ROUAA-SITE-NARRATIVE-v2](docs/foundation/13-ROUAA-SITE-NARRATIVE-v2.md) ✅ v2 |
 
 ---
 
@@ -103,9 +103,10 @@
 - 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
   - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
   - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
-  - ⚠️ docs القديمة (54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
-  - 📝 doc 13 التالي: إعادة بناء SITE-NARRATIVE-v1
-  - 📝 ثم مراجعة: docs 23 + 24 + 58
+  - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث
+  - ⚠️ docs القديمة (13 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM) مؤرشفة
+  - 📝 doc 23 التالي: إعادة بناء PLATFORM-MODEL-v2
+  - 📝 ثم مراجعة: docs 24 + 58
 - ⚠️ **الوثائق 56-63 قيد المراجعة** — ستعاد كتابتها بناءً على السرد والمنتجات الجديدة
 - 🌿 **Branch:** `redesign-v20-architecture`
 
