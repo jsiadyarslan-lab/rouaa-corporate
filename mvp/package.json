@@ -1,0 +1,35 @@
+{
+  "name": "rouaa-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ROUAA — Financial Intelligence Infrastructure MVP",
+  "workspaces": [
+    "apps/*",
+    "backend",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:backend": "turbo run dev --filter=@rouaa/backend",
+    "dev:web": "turbo run dev --filter=@rouaa/web",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:migrate": "pnpm --filter @rouaa/backend run migration:run",
+    "db:seed": "pnpm --filter @rouaa/backend run seed",
+    "docker:up": "docker compose --file infrastructure/docker/docker-compose.yml up -d",
+    "docker:down": "docker compose --file infrastructure/docker/docker-compose.yml down",
+    "docker:psql": "docker exec -it rouaa-postgres psql -U rouaa -d rouaa"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.12.0"
+}

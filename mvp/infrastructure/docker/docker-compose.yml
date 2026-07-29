@@ -1,0 +1,58 @@
+# ROUAA MVP — Docker Compose for local development
+# Provides: PostgreSQL (with pgvector) + Redis + Adminer
+# Usage: docker compose up -d
+# Stop:  docker compose down
+# Reset: docker compose down -v   (destroys volumes — dev only!)
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: rouaa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rouaa
+      POSTGRES_PASSWORD: rouaa_dev
+      POSTGRES_DB: rouaa
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+    ports:
+      - '5432:5432'
+    volumes:
+      - rouaa_pgdata:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U rouaa -d rouaa']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: rouaa-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - rouaa_redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  adminer:
+    image: adminer:latest
+    container_name: rouaa-adminer
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+
+volumes:
+  rouaa_pgdata:
+    driver: local
+  rouaa_redisdata:
+    driver: local
