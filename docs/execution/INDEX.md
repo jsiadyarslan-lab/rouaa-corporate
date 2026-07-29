@@ -28,7 +28,8 @@
 |---|---|---|---|
 | **00** | [**ROUAA-MASTER-EXECUTION-BACKLOG-v1**](00-ROUAA-MASTER-EXECUTION-BACKLOG-v1.md) | **الـ Backlog الرئيسي — 7 Programs / 15+ Epics / 60+ Tasks / 6 Releases** | ✅ نشط |
 | **01** | [**ROUAA-ENGINEERING-SPRINT-PLAN-v1**](01-ROUAA-ENGINEERING-SPRINT-PLAN-v1.md) | **خطة الـ Sprints — 16+ Sprints (أسبوعان لكل Sprint) من Sprint 0 Stabilization إلى Sprint 16+ Enterprise Scale** | ✅ نشط |
-| 02 | ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-v1 | الخدمات البرمجية + قواعد البيانات + APIs + queues + workers + AI services + deployment architecture + تدفق البيانات | ⬜ التالي |
+| **02** | [**ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-PLAN-v1**](02-ROUAA-TECHNICAL-ARCHITECTURE-IMPLEMENTATION-PLAN-v1.md) | **المعمارية التقنية — 8 طبقات + 6 Core Services + Knowledge Graph + AI Architecture + Search + APIs + Storage + Message Queue + Deployment + Observability + Security + Multi-Tenant + MVP** | ✅ نشط |
+| 03 | ROUAA-ENGINEERING-SPECIFICATION-v1 | Stack النهائي + Microservices vs Modular Monolith + Database schema + API contracts + Repository structure + CI/CD + Testing + Coding standards | ⬜ التالي |
 
 ---
 
