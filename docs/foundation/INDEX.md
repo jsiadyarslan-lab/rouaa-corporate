@@ -82,7 +82,8 @@
 | **48** | [COMMUNITY-MODEL-v1](49-COMMUNITY-MODEL-v1.md) | كيف تتحول رؤى من منصة تستخدمها المؤسسات إلى شبكة معرفية تنمو حولها وتزيد من قيمة النظام؟ | ✅ معتمد |
 | **49** | [EDUCATION-MODEL-v1](50-EDUCATION-MODEL-v1.md) | كيف تجعل رؤى السوق والمؤسسات تفهم وتطبق مفهوم ذكاء القرار المؤسسي بحيث يصبح التعليم محرك تبني؟ | ✅ معتمد |
 | **50** | [STANDARDIZATION-MODEL-v1](51-STANDARDIZATION-MODEL-v1.md) | كيف تصبح رؤى الجهة التي تحدد معايير الذكاء المؤسسي القابل للثقة بدل أن تكون مجرد مزود منصة؟ | ✅ معتمد |
-| **51** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **51** | [CERTIFICATION-MODEL-v1](52-ROUAA-CERTIFICATION-MODEL-v1.md) | كيف تتحول منهجية رؤى إلى معيار مهني معتمد يخلق خبراء، مؤسسات، وشبكة اعتماد حول Decision Intelligence؟ | ✅ معتمد |
+| **52** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -171,7 +172,8 @@
 | HOW BUILDS COMMUNITY — كيف تبني مجتمعًا؟ | 48 | Community Model + 4 Segments (Institutional / Analyst / Developer / Research) + 4 Layers (Public → Professional → Expert → Institutional Council) + Contribution Economy + 3 Community Rules + Events (Intelligence Sessions + Annual Summit) + Community Flywheel + 3 Build Phases (Expert Foundation → Professional Network → Global Community) |
 | HOW EDUCATES — كيف تعلّم؟ | 49 | Education Model + 5 Layers (Market / Professional / Enterprise Enablement / Certification / Research) + ROUAA Academy (5 Schools) + 3-Level Certification (Foundation / Practitioner / Enterprise Leader) + Content Model (Problem→Concept→Framework→Example→Application→Measurement) + 3 Build Phases (Foundation → Professional → Global Institute) |
 | HOW STANDARDIZES — كيف تُقيّس؟ | 50 | Standardization Model + 7-Layer Standard (Source / Evidence / Knowledge / Reasoning / Decision / Governance / Audit) + 6-Level Maturity Model (Chaos → Collection → Analytics → Intelligence → Decision Intelligence → Institutional Intelligence) + Individual + Enterprise Certification + 4-Phase Adoption Strategy + Standardization Flywheel |
-| HOW NARRATED — كيف تُروى؟ | 51 | Outcome-first site narrative |
+| HOW CERTIFIES — كيف تعتمد؟ | 51 | Certification Model + 3 Tracks (Individual / Enterprise / Partner) + 4 Individual Levels (RDIF / RDIP / RDIA / RDIL) + 3 Enterprise Levels (DI Ready / DI Enabled / DI Mature) + 3 Partner Types (Implementation / Technology / Education) + 4-Part Assessment + Credential Verification + 24-Month Renewal + Community & Customer Success Integration + 3 Moats (Category / Talent / Ecosystem) + 3-Phase Launch (Internal Validation → Professional Launch → Industry Recognition) |
+| HOW NARRATED — كيف تُروى؟ | 52 | Outcome-first site narrative |
 
 ---
 
@@ -292,6 +294,7 @@ docs/
     ├── 49-COMMUNITY-MODEL-v1.md               ← كيف تبني مجتمعًا
     ├── 50-EDUCATION-MODEL-v1.md               ← كيف تعلّم
     ├── 51-STANDARDIZATION-MODEL-v1.md           ← كيف تُقيّس
+    ├── 52-ROUAA-CERTIFICATION-MODEL-v1.md         ← كيف تُعتمد
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -349,15 +352,16 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **51/51 وثيقة تأسيسية معتمدة**
+- ✅ **52/52 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
 - 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
+- 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** CERTIFICATION-MODEL-v1 (كيف تحول المعيار إلى برامج اعتماد رسمية للأفراد والمؤسسات؟)
+- 📝 **الوثيقة التالية المقترحة:** RESEARCH-INSTITUTE-MODEL-v1 (إنشاء ذراع بحثي رسمي لرؤى ينتج المعرفة والمعايير والأبحاث التي تقود مجال Decision Intelligence)
 
 ---
 
