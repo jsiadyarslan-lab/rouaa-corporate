@@ -81,7 +81,8 @@
 | **47** | [THOUGHT-LEADERSHIP-MODEL-v1](48-THOUGHT-LEADERSHIP-MODEL-v1.md) | كيف تصبح رؤى المصدر الذي يرجع إليه السوق لفهم وتحسين عملية اتخاذ القرار المالي المؤسسي؟ | ✅ معتمد |
 | **48** | [COMMUNITY-MODEL-v1](49-COMMUNITY-MODEL-v1.md) | كيف تتحول رؤى من منصة تستخدمها المؤسسات إلى شبكة معرفية تنمو حولها وتزيد من قيمة النظام؟ | ✅ معتمد |
 | **49** | [EDUCATION-MODEL-v1](50-EDUCATION-MODEL-v1.md) | كيف تجعل رؤى السوق والمؤسسات تفهم وتطبق مفهوم ذكاء القرار المؤسسي بحيث يصبح التعليم محرك تبني؟ | ✅ معتمد |
-| **50** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **50** | [STANDARDIZATION-MODEL-v1](51-STANDARDIZATION-MODEL-v1.md) | كيف تصبح رؤى الجهة التي تحدد معايير الذكاء المؤسسي القابل للثقة بدل أن تكون مجرد مزود منصة؟ | ✅ معتمد |
+| **51** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -169,7 +170,8 @@
 | HOW LEADS THOUGHT — كيف تقود الفكر؟ | 47 | Thought Leadership + 6 Knowledge Pillars (Decision Intelligence / Evidence-Based Finance / Institutional Research / AI Governance / Financial Knowledge Systems / Future of Investment Decisions) + 5 Asset Types (Flagship Reports / Papers / Frameworks / Briefs / Executive Briefings) + Authority Flywheel + 3 Authority Phases + Quality Rule (Claim→Evidence→Methodology→Implication→Decision Relevance) |
 | HOW BUILDS COMMUNITY — كيف تبني مجتمعًا؟ | 48 | Community Model + 4 Segments (Institutional / Analyst / Developer / Research) + 4 Layers (Public → Professional → Expert → Institutional Council) + Contribution Economy + 3 Community Rules + Events (Intelligence Sessions + Annual Summit) + Community Flywheel + 3 Build Phases (Expert Foundation → Professional Network → Global Community) |
 | HOW EDUCATES — كيف تعلّم؟ | 49 | Education Model + 5 Layers (Market / Professional / Enterprise Enablement / Certification / Research) + ROUAA Academy (5 Schools) + 3-Level Certification (Foundation / Practitioner / Enterprise Leader) + Content Model (Problem→Concept→Framework→Example→Application→Measurement) + 3 Build Phases (Foundation → Professional → Global Institute) |
-| HOW NARRATED — كيف تُروى؟ | 50 | Outcome-first site narrative |
+| HOW STANDARDIZES — كيف تُقيّس؟ | 50 | Standardization Model + 7-Layer Standard (Source / Evidence / Knowledge / Reasoning / Decision / Governance / Audit) + 6-Level Maturity Model (Chaos → Collection → Analytics → Intelligence → Decision Intelligence → Institutional Intelligence) + Individual + Enterprise Certification + 4-Phase Adoption Strategy + Standardization Flywheel |
+| HOW NARRATED — كيف تُروى؟ | 51 | Outcome-first site narrative |
 
 ---
 
@@ -289,6 +291,7 @@ docs/
     ├── 48-THOUGHT-LEADERSHIP-MODEL-v1.md     ← كيف تقود الفكر
     ├── 49-COMMUNITY-MODEL-v1.md               ← كيف تبني مجتمعًا
     ├── 50-EDUCATION-MODEL-v1.md               ← كيف تعلّم
+    ├── 51-STANDARDIZATION-MODEL-v1.md           ← كيف تُقيّس
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -346,7 +349,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **50/50 وثيقة تأسيسية معتمدة**
+- ✅ **51/51 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -354,7 +357,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** STANDARDIZATION-MODEL-v1 (كيف تجعل رؤى منهجياتها مرجعًا معتمدًا ومعيارًا صناعيًا؟)
+- 📝 **الوثيقة التالية المقترحة:** CERTIFICATION-MODEL-v1 (كيف تحول المعيار إلى برامج اعتماد رسمية للأفراد والمؤسسات؟)
 
 ---
 

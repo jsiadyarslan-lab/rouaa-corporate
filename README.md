@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 50 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 51 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -63,6 +63,7 @@
 | كيف تقود الفكر؟ | [48-THOUGHT-LEADERSHIP-MODEL](docs/foundation/48-THOUGHT-LEADERSHIP-MODEL-v1.md) |
 | كيف تبني مجتمعًا؟ | [49-COMMUNITY-MODEL](docs/foundation/49-COMMUNITY-MODEL-v1.md) |
 | كيف تعلّم؟ | [50-EDUCATION-MODEL](docs/foundation/50-EDUCATION-MODEL-v1.md) |
+| كيف تُقيّس؟ | [51-STANDARDIZATION-MODEL](docs/foundation/51-STANDARDIZATION-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -76,7 +77,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **50/50 وثيقة تأسيسية معتمدة**
+- ✅ **51/51 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
