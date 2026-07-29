@@ -32,6 +32,7 @@
 
 | # | الوثيقة | السؤال الذي تجيب عنه | الحالة |
 |---|---|---|---|
+| **00** | [**ROUAA-MASTER-BUILD-BLUEPRINT-v1**](00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md) | **كيف نبني ROUAA؟ — الـ Operating Blueprint الذي يحول 63 وثيقة إلى برنامج بناء واحد. ابدأ من هنا.** | ✅ **معتمد — نقطة الدخول الوحيدة** |
 | **01** | [INTELLIGENCE-MODEL-v4](01-INTELLIGENCE-MODEL-v4.md) | ما الذي تبنيه رؤى داخليًا؟ | ✅ معتمد |
 | **02** | [ROUAA-VALUE-MODEL-v1](02-ROUAA-VALUE-MODEL-v1.md) | كيف تُرخّص رؤى للعملاء؟ | ✅ معتمد |
 | **03** | [ROUAA-OUTCOME-MODEL-v2](03-ROUAA-OUTCOME-MODEL-v2.md) | لماذا تدفع المؤسسات مقابل رؤى؟ | ✅ معتمد |
@@ -135,6 +136,7 @@
 
 | السؤال | الوثيقة | الإجابة المُعتمدة |
 |---|---|---|
+| **HOW BUILDS — كيف نبني ROUAA؟** | **00** | **Master Build Blueprint + Build Philosophy (build layers not pages) + 5 Build Principles (build once / API First / Evidence First / no standalone products / everything sellable) + Master Architecture (8 layers: Core Infrastructure → Intelligence → AI → Platform → Solution Suites → Products → Applications → Enterprise Interfaces) + 7-Phase Build Order (Phase 0 Foundation ✅ → Phase 1 Core Infrastructure → Phase 2 Intelligence Layer → Phase 3 Platform Services → Phase 4 Solution Suites → Phase 5 Products → Phase 6 Applications) + 7 Parallel Workstreams (Platform / AI / Frontend / Data / UX / Content / Commercial) + Website Build Order (10 steps) + Trading Platform Build Order (6 steps) + News Platform Build Order (8 steps) + 10 Shared Components + 9 Shared Services + 6 Shared AI capabilities + Product Readiness Checklist (11 items) + Definition of Done (6 criteria) + Execution Dependencies (8-layer chain: Infrastructure → Customers) + Monorepo Repository Structure (/apps + /api + /packages + /docs + /deployment) + 5 Success Metric Categories + 6-Question Governance + 5-Level Build Hierarchy (Vision → Ecosystem → Intelligence Foundation → Applications → Customers) + Documentation Map (entry points + strategic + execution + archived) + Unified Vocabulary (identity + hierarchy + 7 suite names + forbidden terms) + 5-Layer Test Framework (design + product + page + content + suite rules) + Phase Status (Phase 0 complete, Phases 1–6 not started)** |
 | WHAT — ما هي رؤى؟ | 01 | Decision Intelligence Platform |
 | HOW LICENSED — كيف تُرخّص؟ | 02 | Platform + Domain + Usage |
 | WHY BOUGHT — لماذا تُشترى؟ | 03 | 6 Enterprise Outcomes |
@@ -280,6 +282,7 @@ To "Enterprise Financial Intelligence Ecosystem powering Media + Research + Risk
 docs/
 └── foundation/
     ├── INDEX.md                          ← أنت هنا (دليل التنقل)
+    ├── 00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md  ← ⭐ ابدأ من هنا — الـ Operating Blueprint للمشروع كله
     ├── 01-INTELLIGENCE-MODEL-v4.md       ← ما الذي تبنيه رؤى
     ├── 02-ROUAA-VALUE-MODEL-v1.md        ← كيف تُرخّص
     ├── 03-ROUAA-OUTCOME-MODEL-v2.md      ← لماذا تُشترى
@@ -411,36 +414,82 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **63/63 وثيقة تأسيسية معتمدة — المرحلة التأسيسية الأولى مكتملة**
-- ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
-- 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
-- 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
-- 🔗 **مرحلة Platform Consolidation مكتملة** — Platform Model + Product Model معتمدة (docs 23-24)
-- 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
-- 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
-- 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
-- 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- 🔄 **PHASE REOPENED — إعادة بناء الطبقة المعمارية العليا**
-  - المستخدم أدرك أن الانتقال من الاستراتيجية (docs 01-53) مباشرة إلى تنفيذ الموقع (docs 54-63) كان مفتقدًا لطبقة تعريف المنظومة الكاملة
-  - ✅ doc 54 الجديد: ECOSYSTEM-ARCHITECTURE-MODEL-v1 — تعرّف ROUAA كـ Enterprise Financial Intelligence Ecosystem
-  - ✅ doc 55 الجديد: PRODUCT-PORTFOLIO-MODEL-v1 — كتالوج 39+ منتج عبر 6 محافظ فوق Platform Components مشتركة
-  - ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2 — السرد المركزي المحدّث
-  - ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2 — Enterprise Financial Intelligence Operating Platform مع 6 طبقات
-  - ✅ doc 24 v2: ROUAA-PRODUCT-MODEL-v2 — 42 منتج عبر 7 عائلات + 3 نماذج تغليف + 4 مراحل دورة حياة
-  - ✅ doc 58 v2: ROUAA-PAGE-ARCHITECTURE-MODEL-v2 — Institutional Gateway مع 9 صفحات علوية + Solutions منظمة بـ 6 عائلات منتجات + Product Detail Template + قاعدة التنفيذ
-  - ✅ doc 59 v2: ROUAA-CONTENT-ARCHITECTURE-MODEL-v2 — 7 أعمدة محتوى + 5-Level Content Hierarchy + Product Content Model + Vocabulary Lists + Content Governance + Content Ownership Model
-  - ✅ doc 60 v2: ROUAA-SEO-STRATEGY-MODEL-v2 — Category Authority Strategy + 5-Layer Search Philosophy + 7 Content Domains + 4 SEO Page Types + Research Strategy + News Strategy + Internal Linking Model + 4-Layer Authority Strategy + Structured Data + Multilingual Strategy + Enterprise Conversion + 4 SEO KPI Categories + Content Production Model + Missing Piece Identification
-  - ✅ doc 63 new: ROUAA-SOLUTION-SUITES-MODEL-v1 — الطبقة المفقودة بين Platform و Products. 7 Solution Suites (Media / Trading / Investment Research / Risk / Developer / AI / Intelligence Infrastructure) + Site Navigation Impact + Sales Motion Impact + Pricing Impact + Implementation Impact + Strategic Rule (Platform = build / Suite = sell / Products = customer sees / Components = engineering uses) + Downstream Impact على 6 وثائق (34 / 35 / 37 / 39 / 40 / 43)
-  - ⚠️ docs القديمة المؤرشفة: 13 v1 + 23 enhanced v1 + 24 v1 + 54 SITE-IMPLEMENTATION + 55 DESIGN-SYSTEM + 58 v1 + 59 v1 + 60 v1 + 63 HTML-REACT-IMPLEMENTATION
-  - 📝 **مراجعة متوقعة لوثائق تجارية بسبب doc 63 الجديدة**: المستخدم أشار إلى أن وثيقة Solution Suites يجب أن تصبح مرجعًا لـ 6 وثائق أخرى:
-    - 34-MARKET-ENTRY (الدخول للأسواق عبر Suites)
-    - 35-COMPETITIVE (المنافسة على مستوى الحلول المتكاملة)
-    - 37-GROWTH (التوسع = بيع Suite إضافية للعميل الحالي)
-    - 39-ROADMAP (خارطة الطريق بحسب Suites)
-    - 40-METRICS (قياس الإيرادات والتبني لكل Suite)
-    - 43-PARTNERSHIP (الشركاء يوزعون Suite كاملة)
-  - 📝 ثم مراجعة بقية docs 56-57 + 61-62 (Design System + Homepage Wireframe + Component Library + Analytics Measurement + Web Implementation)
-- ⚠️ **ملاحظة مهمة**: الوثائق 56-63 الحالية **قيد المراجعة** — ستعاد كتابتها بناءً على السرد المحدّث وكتالوج المنتجات الجديد
+# 🏁 DOCUMENTATION PHASE — OFFICIALLY CLOSED
+
+> **64 وثيقة تأسيسية معتمدة (00 + 01-63) — المرحلة التوثيقية مكتملة رسميًا**
+>
+> **الانتقال الآن إلى مرحلة إدارة التنفيذ (Execution Management)**
+
+---
+
+## ⭐ نقطة الدخول الوحيدة
+
+- ✅ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — الـ Operating Blueprint الذي يحول 63 وثيقة إلى برنامج بناء واحد. أي شخص يدخل المشروع يبدأ من هنا.
+
+---
+
+## 📊 إحصائيات المرحلة التوثيقية
+
+- **64 وثيقة معتمدة** (00 + 01-63)
+- **9 وثائق مُعاد بناؤها** (13 v2 / 23 v2 / 24 v2 / 58 v2 / 59 v2 / 60 v2 + 3 جديدة: 54 / 55 / 63)
+- **16 وثيقة مؤرشفة** في `archive/`
+- **5 وثائق تنفيذية تحتاج v2** (56 Homepage Wireframe / 57 Component Library / 61 Analytics / 62 Web Implementation / Design System — مؤرشفة دون بديل)
+- **6 وثائق تجارية تحتاج مراجعة** ضد doc 63 (34 / 35 / 37 / 39 / 40 / 43)
+
+---
+
+## 🏗️ سلسلة إعادة البناء المعماري (9 وثائق)
+
+- ✅ doc 54 new: ECOSYSTEM-ARCHITECTURE-MODEL-v1
+- ✅ doc 55 new: PRODUCT-PORTFOLIO-MODEL-v1
+- ✅ doc 13 v2: ROUAA-SITE-NARRATIVE-v2
+- ✅ doc 23 v2: ROUAA-PLATFORM-MODEL-v2
+- ✅ doc 24 v2: ROUAA-PRODUCT-MODEL-v2
+- ✅ doc 58 v2: ROUAA-PAGE-ARCHITECTURE-MODEL-v2
+- ✅ doc 59 v2: ROUAA-CONTENT-ARCHITECTURE-MODEL-v2
+- ✅ doc 60 v2: ROUAA-SEO-STRATEGY-MODEL-v2
+- ✅ doc 63 new: ROUAA-SOLUTION-SUITES-MODEL-v1
+- ✅ doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1 (هذه الوثيقة — إغلاق المرحلة)
+
+---
+
+## 📝 المراجعات المتوقعة (مرحلة ما بعد التوثيق)
+
+### وثائق تجارية تحتاج مراجعة ضد doc 63 (Solution Suites):
+- 34-MARKET-ENTRY (الدخول للأسواق عبر Suites)
+- 35-COMPETITIVE (المنافسة على مستوى الحلول المتكاملة)
+- 37-GROWTH (التوسع = بيع Suite إضافية للعميل الحالي)
+- 39-ROADMAP (خارطة الطريق بحسب Suites)
+- 40-METRICS (قياس الإيرادات والتبني لكل Suite)
+- 43-PARTNERSHIP (الشركاء يوزعون Suite كاملة)
+
+### وثائق تنفيذية تحتاج v2:
+- 56-HOMEPAGE-WIREFRAME (إعادة بناء بعد استقرار السرد)
+- 57-COMPONENT-LIBRARY (إعادة بناء بعد استقرار المنتجات)
+- 61-ANALYTICS-MEASUREMENT (إعادة بناء)
+- 62-WEB-IMPLEMENTATION-ARCHITECTURE (إعادة بناء)
+- Design System (مؤرشفة دون بديل — إعادة بناء كاملة)
+
+---
+
+## 🚀 المرحلة التالية: إدارة التنفيذ
+
+الخطوة التالية ليست وثيقة تصف ROUAA، بل وثيقة **تدير بناءها**:
+
+### NEXT: ROUAA Execution Roadmap & Program Management
+
+تتضمن:
+- جميع الـ Phases موسعة إلى Epics
+- كل Epic مكسور إلى Tasks
+- التبعيات بين المهام
+- الأولويات
+- معايير الإنجاز
+- ما يمكن بناؤه بالتوازي وما يجب أن ينتظر
+
+هذا هو الجسر الحقيقي بين التوثيق والتنفيذ.
+
+---
+
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
