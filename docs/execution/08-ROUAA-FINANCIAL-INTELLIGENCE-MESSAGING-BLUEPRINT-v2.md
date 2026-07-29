@@ -68,19 +68,20 @@ Financial Intelligence
 ROUAA Financial Intelligence Platform
 ```
 
-### Sub-headline
+### Sub-headline (APPROVED — user refined: expanded from 'news' to 'information')
 
 ```
 Verified financial intelligence
-for institutions that need more than news.
+for institutions that need more than information.
 ```
 
-### Value Statement
+### Value Statement (APPROVED)
 
 ```
-News tells you what happened.
-ROUAA tells you what it means, why it matters, and where the evidence came from.
+From official sources to trusted insights.
 ```
+
+> **User note:** 'News' alone narrows the category. ROUAA is not just a news alternative — it addresses information overload, verification difficulty, slow analysis, and the gap between data and decisions.
 
 ### CTAs
 
@@ -145,9 +146,10 @@ Financial News Intelligence
 ### Message
 
 ```
-Verified financial news generated from
-official sources, not aggregated from the web.
+Verified financial news built from official sources and institutional data.
 ```
+
+> *Note: do not say 'not aggregated from the web' in the main message — this is a technical detail, not a headline.*
 
 ### What it means (plain language)
 
@@ -635,22 +637,31 @@ Together, they cover the full cycle:
 
 ---
 
-# 15. Approval Gate
+# 15. Approval Gate — APPROVED ✅
 
-This blueprint is NOT approved for implementation until:
+All 8 decisions approved by user with refinements:
 
-- [ ] User confirms the Hero headline and sub-headline
-- [ ] User confirms the five capability messages
-- [ ] User confirms the three reasons (Verification / Speed / Coverage)
-- [ ] User confirms the Technology Layer placement (brief, links to Technology page)
-- [ ] User confirms the Bloomberg/Reuters comparison framing
-- [ ] User confirms the Content Formats section
-- [ ] User confirms the Trading Platform integration section
-- [ ] User confirms the 10 forbidden items
+- [x] Hero: APPROVED — expanded from 'news' to 'information'. 'Verified financial intelligence for institutions that need more than information. From official sources to trusted insights.'
+- [x] 5 Capabilities: APPROVED — messages refined. Evidence Verification displayed as Trust Layer (differentiator), not as a regular capability.
+- [x] Verification / Coverage / Speed: APPROVED — order reordered: Verification (core) → Coverage (breadth) → Speed (secondary)
+- [x] Technology Layer: APPROVED — brief section, links to Technology page, NO architecture diagrams
+- [x] Bloomberg/Reuters: APPROVED — integration not confrontation
+- [x] Content Formats: APPROVED — headline: 'One intelligence source. Multiple institutional outputs.'
+- [x] Trading Integration: APPROVED — 'One intelligence foundation. Two institutional experiences.'
+- [x] 10 forbidden items: APPROVED — especially: no 'News aggregation platform' / no 'AI news generator' / no 'Bloomberg replacement' / no 'Automated journalism tool' / no 'Content factory'
 
-Once approved, HTML/CSS begins for all three pages as a package:
-1. Homepage (doc 06 — approved)
-2. Trading Platform (doc 07 — approved)
-3. Financial Intelligence Platform (doc 08 — this document)
+## Final Messaging State
+
+All 3 messaging blueprints approved:
+- ✅ Homepage Blueprint v2 (doc 06)
+- ✅ Trading Platform Blueprint v2 (doc 07)
+- ✅ Financial Intelligence Blueprint v2 (doc 08)
+
+**NEXT: HTML/CSS begins for all three pages as one package.**
+
+Build rule (user-specified):
+- NOT separate pages — ONE design system
+- Shared: Navigation / Hero pattern / Product section pattern / Trust pattern / CTA pattern / Footer pattern
+- This prevents the fragmentation problem from recurring.
 
 ---

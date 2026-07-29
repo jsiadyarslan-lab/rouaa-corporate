@@ -34,7 +34,7 @@
 | **05** | [**ROUAA-MVP-IMPLEMENTATION-TASKS-v1**](05-ROUAA-MVP-IMPLEMENTATION-TASKS-v1.md) | **مهام التنفيذ — 13 Epics / 40+ Tasks / 11 Sprints / Critical Path (Sources→Documents→Facts→Events→Evidence→AI→Dashboard→Demo) / 5 ميزات مؤجلة / معايير الإكمال** | ✅ نشط |
 | **06** | [**ROUAA-HOMEPAGE-MESSAGING-BLUEPRINT-v2**](06-ROUAA-HOMEPAGE-MESSAGING-BLUEPRINT-v2.md) | **تصحيح التموضع — Products في المقدمة / Verified Intelligence كطبقة تمييز / Hero بمنتجين (Trading + Financial Intelligence) / Navigation مصححة / 10 ممنوعات / 8 مطلوبات / قفل المفردات** | ✅ معتمد |
 | **07** | [**ROUAA-TRADING-PLATFORM-MESSAGING-BLUEPRINT-v2**](07-ROUAA-TRADING-PLATFORM-MESSAGING-BLUEPRINT-v2.md) | **رسائل صفحة التداول — 5 Decision Capabilities (AI Council / Smart Charts / Scanner / Predictive / Executors) + 3 أسباب (Context / Evidence / Control) + مقارنة TradingView + 10 ممنوعات** | ✅ معتمد |
-| **08** | [**ROUAA-FINANCIAL-INTELLIGENCE-MESSAGING-BLUEPRINT-v2**](08-ROUAA-FINANCIAL-INTELLIGENCE-MESSAGING-BLUEPRINT-v2.md) | **رسائل صفحة الذكاء المالي — 5 Capabilities (News Intelligence / Reports / Research / Analysis / Evidence Verification) + 3 أسباب (Verification / Speed / Coverage) + 7 output formats + مقارنة Bloomberg/Reuters + تكامل مع Trading Platform + 10 ممنوعات** | ✅ نشط — ينتظر اعتماد المستخدم |
+| **08** | [**ROUAA-FINANCIAL-INTELLIGENCE-MESSAGING-BLUEPRINT-v2**](08-ROUAA-FINANCIAL-INTELLIGENCE-MESSAGING-BLUEPRINT-v2.md) | **رسائل صفحة الذكاء المالي — 5 Capabilities + Trust Layer + Verification/Coverage/Speed + 7 output formats + Bloomberg/Reuters تكاملي + Trading integration + 10 ممنوعات** | ✅ معتمد |
 
 ---
 
