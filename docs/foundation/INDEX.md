@@ -77,7 +77,8 @@
 | **43** | [ECOSYSTEM-MODEL-v1](44-ECOSYSTEM-MODEL-v1.md) | كيف تصبح رؤى نقطة التقاء بين البيانات المالية، المؤسسات، المطورين، والمعلومات الاستخباراتية؟ | ✅ معتمد |
 | **44** | [INTERNATIONALIZATION-MODEL-v1](45-INTERNATIONALIZATION-MODEL-v1.md) | كيف تصبح رؤى منصة ذكاء قرار مؤسسي عالمية دون فقدان الثقة والجودة والتموضع؟ | ✅ معتمد |
 | **45** | [BRAND-MODEL-v1](46-BRAND-MODEL-v1.md) | كيف تصبح رؤى علامة مؤسسية يثق بها أصحاب القرارات المالية الكبرى قبل أن يختبروا المنتج؟ | ✅ معتمد |
-| **46** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **46** | [CATEGORY-DESIGN-MODEL-v1](47-CATEGORY-DESIGN-MODEL-v1.md) | كيف تنتقل رؤى من شركة تقدم منتجًا إلى شركة تُعرّف فئة سوقية جديدة تصبح مرجعًا لها؟ | ✅ معتمد |
+| **47** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -161,7 +162,8 @@
 | HOW ECOSYSTEMS — كيف تبني منظومة؟ | 43 | Ecosystem Model + 6 Layers (Source / Institutional / Developer / Solution / Knowledge / Marketplace) + 4-Phase Build (Controlled → Partner → Developer → Intelligence Network) + Ecosystem Flywheel + 4 Moats (Data / Knowledge / Workflow / Network) + Economics + Governance Rules |
 | HOW EXPANDS GLOBALLY — كيف تتوسع عالميًا؟ | 44 | Internationalization Model + Global Core + Local Intelligence + Market Selection (3 Tiers) + 5-Layer Localization (Language/Data/Regulation/Workflow/Culture) + 3-Phase Entry (Discovery → Design Partner → Deployment) + Regional Hubs (MENA/Europe/Asia) + International Flywheel + 4 International Risks |
 | HOW BRANDS — كيف تبني علامتها؟ | 45 | Brand Model + Essence (Confidence) + Promise (Decisions with evidence behind them) + Category (Institutional Decision Intelligence) + 5 Personality Traits (Authoritative/Precise/Intelligent/Reliable/Institutional) + 3-Level Messaging (Corporate/Professional/Technical) + Brand Voice + Trust System + 3-Phase Evolution (Startup→Trusted→Category Leader) |
-| HOW NARRATED — كيف تُروى؟ | 46 | Outcome-first site narrative |
+| HOW CREATES CATEGORY — كيف تخلق فئة؟ | 46 | Category Design + Definition (Institutional Decision Intelligence) + Problem (Information→Understanding→Decision Gap) + 4-Phase Narrative + Vocabulary System (5 terms) + Educational Strategy + 3-Phase Adoption Curve + Category Enemy (Unverified Decisions) + 3 Design Principles + 3 Category Risks |
+| HOW NARRATED — كيف تُروى؟ | 47 | Outcome-first site narrative |
 
 ---
 
@@ -277,6 +279,7 @@ docs/
     ├── 44-ECOSYSTEM-MODEL-v1.md              ← كيف تبني منظومة
     ├── 45-INTERNATIONALIZATION-MODEL-v1.md   ← كيف تتوسع عالميًا
     ├── 46-BRAND-MODEL-v1.md                 ← كيف تبني علامتها
+    ├── 47-CATEGORY-DESIGN-MODEL-v1.md        ← كيف تخلق فئة
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -334,7 +337,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **46/46 وثيقة تأسيسية معتمدة**
+- ✅ **47/47 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -342,7 +345,7 @@ docs/
 - 🏆 **PHASE 1 — DEFINITION & ARCHITECTURE مكتمل** (docs 01-24)
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** CATEGORY-DESIGN-MODEL-v1 (كيف تخلق رؤى فئة سوقية جديدة وتجعل Institutional Decision Intelligence فئة معروفة؟)
+- 📝 **الوثيقة التالية المقترحة:** THOUGHT-LEADERSHIP-MODEL-v1 (كيف تبني رؤى سلطة فكرية تجعل السوق يتعلم منها قبل أن يشتري؟)
 
 ---
 

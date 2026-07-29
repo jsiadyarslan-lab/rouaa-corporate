@@ -10,7 +10,7 @@
 
 كل الإجابات التأسيسية حول رؤى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-هناك ستجد 46 وثيقة تأسيسية مُعتمدة تجيب عن:
+هناك ستجد 47 وثيقة تأسيسية مُعتمدة تجيب عن:
 
 | السؤال | الوثيقة |
 |---|---|
@@ -59,6 +59,7 @@
 | كيف تبني منظومة؟ | [44-ECOSYSTEM-MODEL](docs/foundation/44-ECOSYSTEM-MODEL-v1.md) |
 | كيف تتوسع عالميًا؟ | [45-INTERNATIONALIZATION-MODEL](docs/foundation/45-INTERNATIONALIZATION-MODEL-v1.md) |
 | كيف تبني علامتها؟ | [46-BRAND-MODEL](docs/foundation/46-BRAND-MODEL-v1.md) |
+| كيف تخلق فئة؟ | [47-CATEGORY-DESIGN-MODEL](docs/foundation/47-CATEGORY-DESIGN-MODEL-v1.md) |
 | كيف تُروى؟ | [13-SITE-NARRATIVE-MODEL](docs/foundation/13-SITE-NARRATIVE-v1.md) |
 
 ---
@@ -72,7 +73,7 @@
 
 ## 🏗️ حالة المشروع
 
-- ✅ **46/46 وثيقة تأسيسية معتمدة**
+- ✅ **47/47 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة**
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة
