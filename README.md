@@ -77,7 +77,8 @@
 | كيف تظهر في البحث؟ | [60-ROUAA-SEO-STRATEGY-MODEL-v2](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v2.md) ✅ v2 |
 | كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
 | كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
-| كيف نبدأ الكود الفعلي؟ | [63-HTML-REACT-IMPLEMENTATION](docs/foundation/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1.md) ⚠️ مؤجل حتى استقرار السرد والمنتجات |
+| كيف تُحزَّم الحلول التجارية؟ | [63-ROUAA-SOLUTION-SUITES-MODEL-v1](docs/foundation/63-ROUAA-SOLUTION-SUITES-MODEL-v1.md) ✅ جديد |
+| كيف نبدأ الكود الفعلي؟ | ~~[63-HTML-REACT-IMPLEMENTATION](docs/foundation/archive/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1-superseeded.md)~~ ⚠️ مؤرشفة — ستُعاد كتابتها بعد استقرار الأساس |
 | كيف تُروى؟ | [13-ROUAA-SITE-NARRATIVE-v2](docs/foundation/13-ROUAA-SITE-NARRATIVE-v2.md) ✅ v2 |
 
 ---
@@ -109,9 +110,10 @@
   - ✅ doc 58 v2: ROUAA-PAGE-ARCHITECTURE-MODEL-v2 — Institutional Gateway مع 9 صفحات + Solutions بـ 6 عائلات منتجات
   - ✅ doc 59 v2: ROUAA-CONTENT-ARCHITECTURE-MODEL-v2 — 7 أعمدة محتوى + 5-Level Hierarchy + Product Content Model
   - ✅ doc 60 v2: ROUAA-SEO-STRATEGY-MODEL-v2 — Category Authority + 5-Layer Search + 7 Content Domains + 4 SEO Page Types
-  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 24 v1 + 54 + 55 + 58 v1 + 59 v1 + 60 v1) مؤرشفة
-  - 🆕 **مقترح مستخدم**: وثيقة جديدة `63-ROUAA-SOLUTION-SUITES-MODEL-v1` — طبقة Solution Suites بين Platform و Products (لاحظ أن المؤسسات تشتري suites وليس منتجات معزولة) — **يحتاج قرار ترقيم** لأن 63 مستخدم لـ HTML-REACT-IMPLEMENTATION
-  - 📝 ثم مراجعة: docs 56-57 + 61-63
+  - ✅ doc 63 new: ROUAA-SOLUTION-SUITES-MODEL-v1 — الطبقة المفقودة بين Platform و Products (7 Solution Suites)
+  - ⚠️ docs القديمة (13 v1 + 23 enhanced v1 + 24 v1 + 54 + 55 + 58 v1 + 59 v1 + 60 v1 + 63 HTML-REACT) مؤرشفة
+  - 📝 **مراجعة متوقعة**: 6 وثائق تجارية تحتاج مراجعة بسبب doc 63 (34 / 35 / 37 / 39 / 40 / 43)
+  - 📝 ثم مراجعة: docs 56-57 + 61-62
 - ⚠️ **الوثائق 56-63 قيد المراجعة** — ستعاد كتابتها بناءً على السرد والمنتجات الجديدة
 - 🌿 **Branch:** `redesign-v20-architecture`
 
