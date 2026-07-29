@@ -12,6 +12,8 @@
 
 كل الإجابات التأسيسية الأخرى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
+خطة التنفيذ اليومية موجودة في **[docs/execution/](docs/execution/INDEX.md)**.
+
 هناك ستجد 65 وثيقة تأسيسية مُعتمدة (00 + 01-64) تجيب عن:
 
 | السؤال | الوثيقة |
@@ -98,20 +100,9 @@
 - ✅ **65/65 وثيقة تأسيسية معتمدة — 🏁 المرحلة التوثيقية مكتملة بالكامل**
 - ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
 - ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
-- 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64):
-  - doc 54 new: ECOSYSTEM-ARCHITECTURE
-  - doc 55 new: PRODUCT-PORTFOLIO
-  - doc 13 v2: SITE-NARRATIVE
-  - doc 23 v2: PLATFORM-MODEL
-  - doc 24 v2: PRODUCT-MODEL
-  - doc 58 v2: PAGE-ARCHITECTURE
-  - doc 59 v2: CONTENT-ARCHITECTURE
-  - doc 60 v2: SEO-STRATEGY
-  - doc 63 new: SOLUTION-SUITES
-  - doc 00: MASTER-BUILD-BLUEPRINT
-  - doc 64: EXECUTION-PROGRAM-MANAGEMENT
-- 📝 **مراجعات متوقعة**: 6 وثائق تجارية (34/35/37/39/40/43) + 5 وثائق تنفيذية (56/57/61/62 + Design System)
-- 🚀 **المرحلة التالية**: استخراج الـ Backlog التنفيذي — Programs → Epics → Features → User Stories → Technical Tasks
+- 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64)
+- 📋 **مرحلة التنفيذ بدأت**: [docs/execution/](docs/execution/INDEX.md) — الـ Backlog الرئيسي مع 7 Programs / 15+ Epics / 60+ Tasks / 6 Releases
+- 🚀 **الخطوة التالية**: Engineering Sprint Plan — تقسيم الـ Backlog إلى Sprint 0 / 1 / 2
 - 🌿 **Branch:** `redesign-v20-architecture`
 
 ---
