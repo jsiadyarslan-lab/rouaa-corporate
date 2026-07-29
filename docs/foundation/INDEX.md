@@ -84,7 +84,8 @@
 | **50** | [STANDARDIZATION-MODEL-v1](51-STANDARDIZATION-MODEL-v1.md) | كيف تصبح رؤى الجهة التي تحدد معايير الذكاء المؤسسي القابل للثقة بدل أن تكون مجرد مزود منصة؟ | ✅ معتمد |
 | **51** | [CERTIFICATION-MODEL-v1](52-ROUAA-CERTIFICATION-MODEL-v1.md) | كيف تتحول منهجية رؤى إلى معيار مهني معتمد يخلق خبراء، مؤسسات، وشبكة اعتماد حول Decision Intelligence؟ | ✅ معتمد |
 | **52** | [RESEARCH-INSTITUTE-MODEL-v1](53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) | كيف تصبح رؤى مؤسسة تنتج المعرفة التي تعتمد عليها السوق، وليس فقط منصة تستخدمها المؤسسات؟ | ✅ معتمد |
-| **53** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
+| **53** | [SITE-IMPLEMENTATION-MODEL-v1](54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md) | كيف يتحول الإطار الاستراتيجي المكتوب إلى بنية موقع مؤسسي يحقق تحويل زائر المؤسسة إلى طلب Briefing؟ | ✅ معتمد |
+| **54** | [SITE-NARRATIVE-v1](13-SITE-NARRATIVE-v1.md) | كيف يتحول السرد الاستراتيجي إلى تجربة موقع؟ | ✅ معتمد |
 
 ---
 
@@ -175,7 +176,8 @@
 | HOW STANDARDIZES — كيف تُقيّس؟ | 50 | Standardization Model + 7-Layer Standard (Source / Evidence / Knowledge / Reasoning / Decision / Governance / Audit) + 6-Level Maturity Model (Chaos → Collection → Analytics → Intelligence → Decision Intelligence → Institutional Intelligence) + Individual + Enterprise Certification + 4-Phase Adoption Strategy + Standardization Flywheel |
 | HOW CERTIFIES — كيف تعتمد؟ | 51 | Certification Model + 3 Tracks (Individual / Enterprise / Partner) + 4 Individual Levels (RDIF / RDIP / RDIA / RDIL) + 3 Enterprise Levels (DI Ready / DI Enabled / DI Mature) + 3 Partner Types (Implementation / Technology / Education) + 4-Part Assessment + Credential Verification + 24-Month Renewal + Community & Customer Success Integration + 3 Moats (Category / Talent / Ecosystem) + 3-Phase Launch (Internal Validation → Professional Launch → Industry Recognition) |
 | HOW RESEARCHES — كيف تبحث؟ | 52 | Research Institute + 5 Labs (Decision Intelligence / Financial Knowledge Systems / AI Governance / Institutional Research / Market Intelligence) + Standards & Methodology Office + 4 Asset Types (Annual Reports / Papers / Frameworks / Benchmarks) + 6-Stage Research Methodology (Question → Evidence → Analysis → Framework → Publication → Industry Application) + Knowledge Graph Integration + Research Fellows Program + Institutional Advisory Council + 3-Phase Build (Research Foundation → Research Network → Global Institute) |
-| HOW NARRATED — كيف تُروى؟ | 53 | Outcome-first site narrative |
+| HOW IMPLEMENTS SITE — كيف تُنفّذ الموقع؟ | 53 | Site Implementation Model + Phase 1 IA (Home / Why ROUAA / Platform / Solutions / Trust / Research / Developers / Company) + Phase 2 Homepage (9 Sections: Hero → Problem → Outcomes → Architecture → Domains → Trust → Audiences → Research → Conversion) + Hero Headline ("Intelligence Infrastructure for Decisions That Cannot Be Wrong") + Visual Hero (Source→Evidence→Knowledge→Reasoning→Decision live map) + Conversion Logic (Request Institutional Briefing, NOT Sign-Up) + Roadmap (Design System → Wireframe → Components → HTML/React) |
+| HOW NARRATED — كيف تُروى؟ | 54 | Outcome-first site narrative |
 
 ---
 
@@ -298,6 +300,7 @@ docs/
     ├── 51-STANDARDIZATION-MODEL-v1.md           ← كيف تُقيّس
     ├── 52-ROUAA-CERTIFICATION-MODEL-v1.md         ← كيف تُعتمد
     ├── 53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md    ← كيف تبحث
+    ├── 54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1.md    ← كيف تُنفّذ الموقع
     ├── 13-SITE-NARRATIVE-v1.md           ← كيف تُروى
     └── archive/                          ← نسخ قديمة (مرجعية فقط)
         ├── INTELLIGENCE-MODEL-v1-superseeded.md
@@ -355,7 +358,7 @@ docs/
 
 ## 📅 حالة المشروع (آخر تحديث: يوليو 2026)
 
-- ✅ **53/53 وثيقة تأسيسية معتمدة**
+- ✅ **54/54 وثيقة تأسيسية معتمدة**
 - ⭐ **DECISION-MODEL-v1 معتمدة كالوثيقة المركزية** (نسخة محسّنة) — الأصل التجاري الحقيقي للمنصة
 - 🏁 **سلسلة "محرك المعرفة" مكتملة** (docs 12-18)
 - 🎯 **مرحلة Decision Intelligence مكتملة** — Decision + Governance + Workflow معتمدة (docs 20-22)
@@ -364,8 +367,9 @@ docs/
 - 🏢 **PHASE 6 — MARKET EXECUTION مكتملة** — Market Entry + Competitive + Moat + Growth + Investment + Roadmap معتمدة (docs 34-39)
 - 📜 **سلسلة Category Infrastructure مكتملة** — Brand + Category Design + Thought Leadership + Community + Education + Standardization + Certification معتمدة (docs 46-52)
 - 🏛️ **سلسلة Knowledge Authority مكتملة** — Research Institute معتمد (doc 53) — طبقة السيادة المعرفية فوق الفئة والمنصة والمجتمع
-- ⬜ **HTML Implementation قيد الانتظار**
-- 📝 **الوثيقة التالية المقترحة:** مفتوحة — المؤسسة المعرفية لرؤى مكتملة (Platform + Category + Authority). الخطوة المنطقية التالية قد تكون: (أ) بدء HTML Implementation وفق SITE-NARRATIVE، (ب) وثيقة GO-TO-MARKET تنفيذية، أو (ج) وثيقة LEGAL & COMPLIANCE لتنظيم المعهد البحثي والاعتماد.
+- 🔄 **PHASE TRANSITION — الاستراتيجية مكتملة، التنفيذ يبدأ** — SITE-IMPLEMENTATION-MODEL معتمد (doc 54) كأول وثيقة تنفيذية
+- ⬜ **HTML Implementation قيد الانتظار** — المرحلة التالية: Design System → Wireframe → Components → HTML/React
+- 📝 **الوثيقة التالية المقترحة:** 55-ROUAA-DESIGN-SYSTEM-v1 (نظام التصميم المؤسسي: الألوان، الطباعة، التباعد، المكونات، الحركات)
 
 ---
 
