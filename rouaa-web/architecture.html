@@ -75,6 +75,116 @@
     </div>
   </section>
 
+  <!-- ============ SYSTEM ARCHITECTURE MAP ============ -->
+  <section class="section" id="system-map">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">System Architecture Map</span>
+        <h2>The complete system on one page.</h2>
+        <p style="margin: 0 auto; max-width: 640px;">From external sources to institutional users — every layer of the ROUAA system in a single view.</p>
+      </div>
+
+      <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px;">
+
+        <!-- External Sources -->
+        <div style="padding: 16px 24px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">External Sources</div>
+          <div style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;">
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Central Banks</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Regulators</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Exchanges</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Statistical Agencies</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Government Bodies</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">International Orgs</span>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Ingestion Layer -->
+        <div style="padding: 14px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 140px;">Ingestion Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); flex: 1;">Source Adapters (RSS · API · Document Monitoring · Scheduled Polling) → Raw Document Storage</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Processing Layer -->
+        <div style="padding: 14px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 140px;">Processing Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); flex: 1;">Document Intelligence → Fact Extraction → Event Detection → Confidence Scoring</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Knowledge Layer -->
+        <div style="padding: 14px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 140px;">Knowledge Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); flex: 1;">Evidence &amp; Provenance Store → Knowledge Graph (entities · events · relationships) → Audit Trail</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Intelligence Layer (gold) -->
+        <div style="padding: 20px 24px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(200, 169, 81, 0.08), rgba(200, 169, 81, 0.02));">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); min-width: 140px;">Intelligence Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; flex: 1;">Intelligence Governance → Governed AI → Intelligence Products</div>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Validation Rules</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Multi-Agent Reasoning</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Scenario Construction</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Report Generation</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Verification</span>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Application Layer -->
+        <div style="padding: 14px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 140px;">Application Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); flex: 1;">Trading Intelligence · Institutional Intelligence · Media Intelligence · Enterprise Intelligence</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Distribution Layer -->
+        <div style="padding: 14px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 140px;">Distribution Layer</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); flex: 1;">REST APIs · Streaming (WebSocket) · SDKs · Webhooks · White-Label Embeds</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 16px;">↓</div>
+
+        <!-- Institutional Users -->
+        <div style="padding: 16px 24px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Institutional Users</div>
+          <div style="display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;">
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Asset Managers</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Banks</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Trading Desks</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Research Teams</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">Financial Media</span>
+            <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-text-secondary); background: rgba(255,255,255,0.04); border-radius: var(--radius-full);">CIO Offices</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PROCESSING PIPELINE (7 layers) ============ -->
   <section class="section" id="layers">
     <div class="container">
@@ -130,6 +240,14 @@
           <div class="how-content">
             <div class="how-title">Governed AI Intelligence</div>
             <div class="how-desc">Multi-agent reasoning engine: scenario construction, portfolio impact analysis, report generation, verification, and intelligence publishing. AI operates only on governed evidence — never producing analysis from unverified inputs. Each output carries a reasoning trace linking back to the facts and evidence it used.</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Event Analyst</span>
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Macro Analyst</span>
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Company Analyst</span>
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Risk Analyst</span>
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Publisher</span>
+              <span style="padding: 3px 10px; font-size: 11px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">Verifier</span>
+            </div>
           </div>
         </div>
         <div class="how-arrow">↓</div>
@@ -241,6 +359,78 @@
         </div>
         <p style="text-align: center; font-size: 13px; color: var(--rouaa-text-muted); margin-top: 24px; max-width: 560px; margin-left: auto; margin-right: auto;">
           Every output carries the same evidence chain — from official source to fact to analysis. One event, one intelligence layer, multiple distribution channels.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATA FLOW — ONE EVENT END TO END ============ -->
+  <section class="section" id="data-flow">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Data Flow — End to End</span>
+        <h2>One event, from source to portfolio manager.</h2>
+        <p style="margin: 0 auto; max-width: 640px;">The processing pipeline shown as a single data flow — how a Federal Reserve statement becomes an investment brief on a portfolio manager's desk.</p>
+      </div>
+
+      <div style="max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 4px;">
+
+        <div style="padding: 12px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 13px; color: var(--rouaa-text-primary); font-weight: 600;">Federal Reserve publishes FOMC statement</div>
+          <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 2px;">External source · fedreserve.gov · PDF</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Source Adapter detects publication (14 sec after release)</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Document Intelligence extracts 847 words · classifies as monetary policy</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Fact Engine extracts 14 verified facts · confidence 0.97</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Evidence Layer links each fact to page 1, paragraph 3 of the PDF</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Knowledge Graph connects event to 89 related entities (equities, bonds, FX, commodities)</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 12px 20px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(200, 169, 81, 0.06), rgba(200, 169, 81, 0.01)); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-accent); font-weight: 600;">Governed AI: 7 scenarios generated · portfolio impact assessed · reasoning trace recorded</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Investment Brief generated — "Fed holds rates: 3 scenarios for your portfolio"</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 12px; color: var(--rouaa-text-secondary);">API delivers brief + evidence chain to portfolio manager's dashboard</div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-text-muted); font-size: 12px;">↓</div>
+
+        <div style="padding: 12px 20px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 13px; color: var(--rouaa-text-primary); font-weight: 600;">Portfolio Manager reads brief</div>
+          <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 2px;">Clicks any claim → arrives at Fed PDF, page 1, paragraph 3</div>
+        </div>
+
+      </div>
+
+      <div class="text-center" style="margin-top: 32px;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); max-width: 560px; margin: 0 auto;">
+          Total time from Fed publication to portfolio manager's desk: under 90 seconds. Every step logged. Every claim traceable. Every conclusion defensible.
         </p>
       </div>
     </div>
