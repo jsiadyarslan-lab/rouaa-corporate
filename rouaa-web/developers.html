@@ -433,6 +433,49 @@
     </div>
   </section>
 
+  <!-- ============= ENGINEERING ARCHITECTURE ============= -->
+  <section class="section reveal" id="engineering">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Engineering Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">How the system is built.</h2>
+        <p class="section-lead" style="margin: 0 auto;">The patterns and technologies that make the 7-layer architecture production-grade.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-h">Event-Driven Core</div>
+          <div class="why-desc">Source detections, fact extractions, and event detections flow through an event-driven pipeline. Each stage emits events that trigger downstream processing — no polling, no batch delays.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📋</div>
+          <div class="why-h">Queue-Based Processing</div>
+          <div class="why-desc">BullMQ + Redis queues manage ingestion, processing, and intelligence generation workers. Horizontal scaling per layer.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📊</div>
+          <div class="why-h">Streaming + Batch</div>
+          <div class="why-desc">Real-time streaming for event detection and alerts. Batch processing for report generation and deep analysis. Both share the same evidence layer.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔗</div>
+          <div class="why-h">Graph Database</div>
+          <div class="why-desc">PostgreSQL + pgvector for relational and vector storage. Knowledge Graph built on entity-relationship model — queryable across entities, events, facts, and evidence chains.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔌</div>
+          <div class="why-h">API Layer</div>
+          <div class="why-desc">NestJS REST API + WebSocket streaming + SDK layer. OpenAPI 3.1 spec. Rate-limited, authenticated, audited. Every API response carries evidence provenance.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔍</div>
+          <div class="why-h">Search Layer</div>
+          <div class="why-desc">Full-text search across documents, facts, events, and intelligence products. pg_trgm for fuzzy matching. Vector similarity for semantic search across the knowledge graph.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============= CTA ============= -->
   <section class="cta-final reveal">
     <div class="container">
