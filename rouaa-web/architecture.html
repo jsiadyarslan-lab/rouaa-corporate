@@ -585,6 +585,72 @@
     </div>
   </section>
 
+  <!-- ============ TECHNICAL ARCHITECTURE ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Technical Architecture</span>
+        <h2>How the system is built.</h2>
+        <p style="margin: 0 auto; max-width: 640px;">The patterns and technologies that make the 7-layer architecture production-grade.</p>
+      </div>
+      <div class="grid-3" style="max-width: 1040px; margin: 0 auto; gap: 24px;">
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Event-Driven Core</h4>
+          <p style="font-size: 14px;">Source detections, fact extractions, and event detections flow through an event-driven pipeline. Each stage emits events that trigger downstream processing — no polling, no batch delays.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Queue-Based Processing</h4>
+          <p style="font-size: 14px;">BullMQ + Redis queues manage ingestion, processing, and intelligence generation workers. Horizontal scaling per layer — document processing scales independently from reasoning.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Streaming + Batch</h4>
+          <p style="font-size: 14px;">Real-time streaming for event detection and alerts. Batch processing for report generation and deep analysis. Both share the same evidence layer.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Graph Database</h4>
+          <p style="font-size: 14px;">PostgreSQL + pgvector for relational and vector storage. Knowledge Graph built on entity-relationship model — queryable across entities, events, facts, and evidence chains.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">API Layer</h4>
+          <p style="font-size: 14px;">NestJS REST API + WebSocket streaming + SDK layer. OpenAPI 3.1 spec. Rate-limited, authenticated, audited. Every API response carries evidence provenance.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Search Layer</h4>
+          <p style="font-size: 14px;">Full-text search across documents, facts, events, and intelligence products. pg_trgm for fuzzy matching. Vector similarity for semantic search across the knowledge graph.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ARCHITECTURE AT SCALE ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Architecture At Scale</span>
+        <h2>Built for institutional volume.</h2>
+        <p style="margin: 0 auto; max-width: 640px;">The architecture is designed for the scale at which financial institutions actually operate — not demo volumes.</p>
+      </div>
+      <div class="grid-4" style="max-width: 1040px; margin: 0 auto;">
+        <div class="card text-center">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Continuous Monitoring</h4>
+          <p style="font-size: 14px;">411+ official sources monitored 24/7. New publications detected within seconds. No source goes unchecked.</p>
+        </div>
+        <div class="card text-center">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Daily Document Volume</h4>
+          <p style="font-size: 14px;">Thousands of official documents processed daily — PDFs, filings, releases, statistical bulletins. Each one extracted, classified, and evidence-linked.</p>
+        </div>
+        <div class="card text-center">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Multi-Language Support</h4>
+          <p style="font-size: 14px;">Source documents in 6+ languages. Intelligence outputs generated in the language your institution needs. Evidence chains preserved across translations.</p>
+        </div>
+        <div class="card text-center">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 16px;">Private Deployment</h4>
+          <p style="font-size: 14px;">Full architecture deployable inside your infrastructure. Your data, your sources, your audit trails. Built for data sovereignty and regulatory jurisdiction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CTA ============ -->
   <section class="cta-section" id="cta">
     <div class="container">
