@@ -172,6 +172,148 @@
     </div>
   </section>
 
+  <!-- ============ FOLLOW AN EVENT THROUGH THE 7 LAYERS ============ -->
+  <section class="section" id="event-trace">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Architecture Visualization</span>
+        <h2>Follow one event through the 7 layers.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">
+          Pick an event — and watch it transform from a raw official document into distributed financial intelligence.
+          One event, one evidence chain, multiple institutional outputs.
+        </p>
+      </div>
+
+      <!-- Event Tabs -->
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;">
+        <button class="event-tab active" data-event="fed" onclick="switchEvent('fed')">Fed FOMC Statement</button>
+        <button class="event-tab" data-event="earnings" onclick="switchEvent('earnings')">Saudi Aramco Q2 Earnings</button>
+        <button class="event-tab" data-event="geopolitical" onclick="switchEvent('geopolitical')">Geopolitical Event</button>
+      </div>
+
+      <!-- Source Document -->
+      <div style="max-width: 720px; margin: 0 auto 32px; padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 12px;">Source Document</div>
+        <div style="font-size: 12px; color: var(--rouaa-text-muted); margin-bottom: 6px;" id="event-source-type">Official Statement</div>
+        <div style="font-size: 18px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 8px;" id="event-title">Federal Reserve FOMC Statement · July 2026</div>
+        <div style="font-size: 13px; color: var(--rouaa-text-muted);" id="event-meta">Federal Reserve · 14:00 EST · 847 words · PDF</div>
+        <div style="margin-top: 16px; padding: 12px; background: var(--rouaa-bg-primary); border: 1px dashed var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-muted); line-height: 1.6;">
+          <strong style="color: var(--rouaa-text-secondary);">Input state:</strong> Raw PDF · unstructured text · no context · no links
+        </div>
+      </div>
+
+      <!-- Layer Flow -->
+      <div style="max-width: 720px; margin: 0 auto 32px;" id="event-layers">
+        <!-- Layers injected by JS -->
+      </div>
+
+      <!-- Outputs -->
+      <div style="max-width: 720px; margin: 0 auto;">
+        <div style="text-align: center; font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px; letter-spacing: 0.06em; text-transform: uppercase;">
+          ↓ Generated Outputs · Same Evidence Chain
+        </div>
+        <div class="grid-3" style="gap: 12px;">
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">News Article</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Verified · evidence-linked</div>
+          </div>
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">Research Brief</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Committee-ready</div>
+          </div>
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">Trading Context</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Scenario-aware</div>
+          </div>
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">Risk Memo</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Exposure-linked</div>
+          </div>
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">Video Script</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Multi-format</div>
+          </div>
+          <div class="card text-center" style="padding: 16px;">
+            <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">API Response</div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted);">Structured · real-time</div>
+          </div>
+        </div>
+        <p style="text-align: center; font-size: 13px; color: var(--rouaa-text-muted); margin-top: 24px; max-width: 560px; margin-left: auto; margin-right: auto;">
+          Every output carries the same evidence chain — from official source to fact to analysis. One event, one intelligence layer, multiple distribution channels.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DECISION TO SOURCE TRACE ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="decision-trace">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Evidence Trace</span>
+        <h2>From investment decision to original source.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">
+          Every claim in ROUAA is traceable. Pick any decision, click the evidence, and you arrive at the original source document — page, paragraph, timestamp.
+        </p>
+      </div>
+
+      <div style="max-width: 720px; margin: 0 auto; background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-lg); overflow: hidden;">
+        <!-- Header -->
+        <div style="padding: 20px 24px; background: rgba(200, 169, 81, 0.04); border-bottom: 1px solid var(--rouaa-surface-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;">Investment Research Note</div>
+            <div style="font-size: 16px; color: var(--rouaa-text-primary); font-weight: 600;">Saudi Aramco · Overweight · Target 38.5 SAR</div>
+          </div>
+          <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); letter-spacing: 0.06em;">EVIDENCE TRACE · 4 STEPS · 4.2s</span>
+        </div>
+
+        <!-- Steps -->
+        <div style="padding: 0;">
+          <div style="display: flex; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--rouaa-surface-border); align-items: flex-start;">
+            <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent); min-width: 32px;">01</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">Investment Thesis</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Recommendation: Overweight on Saudi Aramco, target 38.5 SAR, 12-month horizon.</div>
+            </div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted); font-family: monospace;">T+0.0s</div>
+          </div>
+
+          <div style="display: flex; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--rouaa-surface-border); align-items: flex-start;">
+            <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent); min-width: 32px;">02</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">Verified Fact</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Aramco exceeded revenue expectations by 4.2% in Q2 2026 (118B SAR).</div>
+            </div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted); font-family: monospace;">T+1.1s</div>
+          </div>
+
+          <div style="display: flex; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--rouaa-surface-border); align-items: flex-start;">
+            <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent); min-width: 32px;">03</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">Source Document</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Saudi Aramco Q2 2026 Earnings Release · Page 4, Paragraph 3, Revenue Table.</div>
+            </div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted); font-family: monospace;">T+2.8s</div>
+          </div>
+
+          <div style="display: flex; gap: 16px; padding: 16px 24px; align-items: flex-start;">
+            <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent); min-width: 32px;">04</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">Official Origin</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Quarterly financial report filed with Saudi Exchange (Tadawul) · digitally certified · 14 August 2026.</div>
+            </div>
+            <div style="font-size: 11px; color: var(--rouaa-text-muted); font-family: monospace;">T+4.2s</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 32px;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); max-width: 560px; margin: 0 auto;">
+          Four steps. 4.2 seconds. From investment thesis to the digitally-certified filing on Tadawul. This is what "defensible" means in practice.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ STATS ============ -->
   <section class="section">
     <div class="container">
@@ -243,7 +385,7 @@
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
-              <div class="footer-mega-grid">
+                  <div class="footer-mega-grid">
         <div class="footer-brand">
           <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
           <p style="font-size: 14px; max-width: 280px;">
@@ -254,8 +396,8 @@
           <div class="footer-heading">Platforms</div>
           <a href="trading-platform.html">Trading Intelligence</a>
           <a href="financial-intelligence.html">Institutional Intelligence</a>
-          <a href="enterprise.html">Enterprise Solutions</a>
-          <a href="enterprise.html">API Platform</a>
+          <a href="products.html">Products</a>
+          <a href="developers.html">Developer Platform</a>
         </div>
         <div class="footer-col">
           <div class="footer-heading">Infrastructure</div>
@@ -276,7 +418,7 @@
           <div class="footer-heading">Enterprise</div>
           <a href="enterprise.html">Private Deployment</a>
           <a href="enterprise.html">White Label</a>
-          <a href="enterprise.html">API Access</a>
+          <a href="developers.html">API Access</a>
           <a href="enterprise.html">Partnerships</a>
         </div>
         <div class="footer-col">
@@ -295,5 +437,113 @@
   </footer>
 
   <script src="main.js"></script>
+  <script>
+    // Event trace visualization — interactive demo
+    // Three sample events showing how the 7-layer architecture transforms
+    // a raw official document into distributed financial intelligence.
+    const EVENTS = {
+      fed: {
+        sourceType: 'Official Statement',
+        title: 'Federal Reserve FOMC Statement · July 2026',
+        meta: 'Federal Reserve · 14:00 EST · 847 words · PDF',
+        layers: [
+          { num: '01', name: 'Source Registry', desc: 'Federal Reserve detected as publishing source · Tier 1 central bank · monitored 24/7' },
+          { num: '02', name: 'Document Intelligence', desc: 'FOMC statement ingested · 847 words extracted · classified as monetary policy decision' },
+          { num: '03', name: 'Facts & Events', desc: 'Fed funds rate range held at 5.25–5.50% · 2 facts extracted · 1 event detected (rate decision)' },
+          { num: '04', name: 'Evidence & Provenance', desc: 'Each fact linked to source PDF · paragraph 3, page 1 · confidence 0.97' },
+          { num: '05', name: 'Intelligence Governance', desc: 'Validated against source tier · corroborated by 3 Tier-1 sources · audit trail sealed' },
+          { num: '06', name: 'Governed AI Intelligence', desc: 'Scenario analysis: 3 scenarios · portfolio impact: equities −0.4% to +0.8% · reasoning trace recorded' },
+          { num: '07', name: 'Institutional Workflows', desc: 'Distributed to: trading desk · research team · media desk · risk committee · API subscribers' },
+        ],
+      },
+      earnings: {
+        sourceType: 'Earnings Release',
+        title: 'Saudi Aramco Q2 2026 Earnings Release',
+        meta: 'Saudi Aramco · 09:00 AST · 1,247 words · PDF + Excel',
+        layers: [
+          { num: '01', name: 'Source Registry', desc: 'Saudi Aramco (Tadawul: 2222) detected as issuer · Tier 1 corporate filing · monitored via Tadawul disclosures' },
+          { num: '02', name: 'Document Intelligence', desc: 'Earnings release ingested · 1,247 words + 14-row revenue table · classified as quarterly earnings' },
+          { num: '03', name: 'Facts & Events', desc: 'Revenue 118B SAR (+4.2% YoY) · net income 42B SAR · 8 facts extracted · 1 earnings event detected' },
+          { num: '04', name: 'Evidence & Provenance', desc: 'Each fact linked to PDF · revenue figure → page 4, paragraph 3, table row 2 · confidence 0.99' },
+          { num: '05', name: 'Intelligence Governance', desc: 'Cross-checked against Tadawul filing · corroborated by Reuters + Bloomberg · audit trail sealed' },
+          { num: '06', name: 'Governed AI Intelligence', desc: 'Scenario analysis: 3 scenarios · fair value estimate 38.5 SAR · reasoning trace: DCF + comparables' },
+          { num: '07', name: 'Institutional Workflows', desc: 'Distributed to: equity research · trading desk · media desk · index teams · API subscribers' },
+        ],
+      },
+      geopolitical: {
+        sourceType: 'Official Communique',
+        title: 'G7 Finance Ministers Joint Statement · August 2026',
+        meta: 'G7 Presidency · 16:00 CET · 2,134 words · PDF',
+        layers: [
+          { num: '01', name: 'Source Registry', desc: 'G7 rotating presidency detected · Tier 1 international body · monitored via official communique channel' },
+          { num: '02', name: 'Document Intelligence', desc: 'Joint statement ingested · 2,134 words · classified as geopolitical / sanctions risk event' },
+          { num: '03', name: 'Facts & Events', desc: '5 policy commitments extracted · 3 sanctions references · 1 geopolitical event detected (G7 alignment)' },
+          { num: '04', name: 'Evidence & Provenance', desc: 'Each fact linked to communique PDF · paragraph-level extraction · confidence 0.94' },
+          { num: '05', name: 'Intelligence Governance', desc: 'Validated against Tier-1 corroboration (Reuters, FT, WSJ) · audit trail sealed' },
+          { num: '06', name: 'Governed AI Intelligence', desc: 'Scenario analysis: 4 scenarios · sectoral impact: energy +1.2% to +2.8% · defense +0.6% to +1.4% · reasoning trace recorded' },
+          { num: '07', name: 'Institutional Workflows', desc: 'Distributed to: risk committee · trading desk · macro research · media desk · API subscribers' },
+        ],
+      },
+    };
+
+    function switchEvent(eventKey) {
+      const event = EVENTS[eventKey];
+      if (!event) return;
+
+      // Update tabs
+      document.querySelectorAll('.event-tab').forEach((tab) => {
+        tab.classList.toggle('active', tab.dataset.event === eventKey);
+      });
+
+      // Update source document
+      document.getElementById('event-source-type').textContent = event.sourceType;
+      document.getElementById('event-title').textContent = event.title;
+      document.getElementById('event-meta').textContent = event.meta;
+
+      // Render layers
+      const layersContainer = document.getElementById('event-layers');
+      layersContainer.innerHTML = event.layers
+        .map(
+          (layer, i) => `
+        <div style="display: flex; gap: 16px; padding: 16px 0; ${
+          i < event.layers.length - 1 ? 'border-bottom: 1px solid var(--rouaa-surface-border);' : ''
+        } align-items: flex-start;">
+          <div style="font-size: 20px; font-weight: 700; color: var(--rouaa-accent); min-width: 40px;">${layer.num}</div>
+          <div style="flex: 1;">
+            <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">${layer.name}</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">${layer.desc}</div>
+          </div>
+        </div>
+      `,
+        )
+        .join('');
+    }
+
+    // Initialize with the Fed event
+    document.addEventListener('DOMContentLoaded', () => switchEvent('fed'));
+  </script>
+  <style>
+    .event-tab {
+      padding: 10px 20px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rouaa-text-secondary);
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .event-tab:hover {
+      color: var(--rouaa-text-primary);
+      border-color: var(--rouaa-surface-border-strong);
+    }
+    .event-tab.active {
+      color: var(--rouaa-accent);
+      background: var(--rouaa-accent-subtle);
+      border-color: var(--rouaa-accent-border);
+    }
+  </style>
 </body>
 </html>
