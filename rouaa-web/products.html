@@ -1211,13 +1211,13 @@
       </div>
 
       <div class="text-center mt-6">
-        <button id="showFullCatalog" class="btn btn-primary btn-lg">Browse Full Catalog ↓</button>
+        <a href="#full-catalog" class="btn btn-primary btn-lg">Browse Full Catalog ↓</a>
       </div>
     </div>
   </section>
 
-  <!-- ============= FULL CATALOG (hidden, revealed on click) ============= -->
-  <section class="section reveal" id="full-catalog" style="display: none;">
+  <!-- ============= FULL CATALOG ============= -->
+  <section class="section reveal" id="full-catalog">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Full Catalog</span>
@@ -1634,20 +1634,6 @@ function renderProductGrid(filterFeatured = false) {
 
 // Render on load
 renderProductGrid();
-
-// === Show full catalog on button click ===
-const showBtn = document.getElementById('showFullCatalog');
-const fullCatalog = document.getElementById('full-catalog');
-if (showBtn && fullCatalog) {
-  showBtn.addEventListener('click', () => {
-    fullCatalog.style.display = 'block';
-    showBtn.style.display = 'none';
-    renderProductGrid();
-    setTimeout(() => {
-      fullCatalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  });
-}
 
 // Initial filter call to set counts
 filterProducts();
