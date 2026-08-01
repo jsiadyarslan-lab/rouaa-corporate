@@ -31,7 +31,7 @@ const ROUAA_PRODUCTS = [
     id: 'med-agency',
     cat: 'media',
     nameEn: 'News Production Agent',
-    tagline: 'An AI-assisted financial production system operating under your organization's editorial workflow',
+    tagline: 'An AI-assisted financial production system operating under your organization\'s editorial workflow',
     desc: 'Not just a writing tool. An intelligent agent that produces original content — not copies from other agencies. It monitors, analyzes, writes, edits, publishes — under your brand.',
     industries: ['media'],
     roles: ['editor'],
