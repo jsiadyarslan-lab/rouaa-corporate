@@ -9,6 +9,25 @@
   <link rel="stylesheet" href="design-system/typography.css">
   <link rel="stylesheet" href="design-system/components.css">
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    @media (max-width: 768px) {
+      #integrates-with > div > div[style*="grid-template-columns: repeat(3, 1fr)"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      #powered-by div[style*="grid-template-columns: repeat(6, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (max-width: 480px) {
+      #powered-by div[style*="grid-template-columns: repeat(6, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -396,14 +415,29 @@
         <h2>ROUAA sits on top of what your newsroom already runs.</h2>
         <p style="margin: 0 auto; max-width: 680px;">You do not replace your CMS or production tools. ROUAA becomes the evidence layer that sits above them — feeding verified intelligence into the systems your newsroom already uses.</p>
       </div>
-      <div style="max-width: 880px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">WordPress</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Adobe CMS</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Internal Archives</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">SharePoint</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Slack</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Microsoft Teams</span>
-        <span style="padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">REST APIs</span>
+            <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+        <div>
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Publishing</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">WordPress</span>
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Adobe CMS</span>
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Internal Archives</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Enterprise Systems</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">SharePoint</span>
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Slack</span>
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Microsoft Teams</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Integration</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">REST APIs</span>
+          </div>
+        </div>
       </div>
       <p style="max-width: 640px; margin: 32px auto 0; font-size: 14px; color: var(--rouaa-text-muted); text-align: center; line-height: var(--leading-relaxed);">ROUAA does not compete with your CMS, production tools, or collaboration platforms. It connects to them — and elevates every output with verified evidence and editorial governance.</p>
     </div>
@@ -458,7 +492,37 @@
     </div>
   </section>
 
-  <!-- ============ 8. CTA ============ -->
+  <!-- ============ POWERED BY ============ -->
+  <section class="section" id="powered-by" style="background: var(--rouaa-bg-primary); padding: 48px 0;">
+    <div class="container">
+      <div style="max-width: 880px; margin: 0 auto; text-align: center;">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px;">Powered by the ROUAA Intelligence Infrastructure</div>
+        <p style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 28px; max-width: 640px; margin-left: auto; margin-right: auto;">Media Intelligence Infrastructure is not a standalone product. It runs on the same intelligence infrastructure that powers every ROUAA product &mdash; six shared assets that ensure every output inherits the same evidence layer, governance controls, and audit readiness.</p>
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;">
+          <a href="source-registry.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Source Registry</div>
+          </a>
+          <a href="trust-framework.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Evidence Graph</div>
+          </a>
+          <a href="architecture.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Knowledge Graph</div>
+          </a>
+          <a href="architecture.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Reasoning Engine</div>
+          </a>
+          <a href="platform.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Workflow Engine</div>
+          </a>
+          <a href="methodology.html" style="padding: 14px 8px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-fast);">
+            <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Governance Layer</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============  <!-- ============ 8. CTA ============ -->
   <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
     <div class="container">
       <span class="eyebrow" style="display: block; margin-bottom: 16px;">Media Intelligence</span>
