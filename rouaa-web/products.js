@@ -902,7 +902,7 @@ const ROUAA_PRODUCTS = [
   // === STOCK ANALYSIS (10) ===
   {
     id: 'stk-insight-video',
-    cat: 'media',
+    cat: 'research',
     type: 'application',
     maturity: 'production',
     buyer: 'Research',
