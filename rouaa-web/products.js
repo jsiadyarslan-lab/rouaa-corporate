@@ -882,9 +882,9 @@ const ROUAA_PRODUCTS = [
   {
     id: 'cmp-audit-trail',
     cat: 'component',
-    nameEn: 'Audit Trail',
+    nameEn: 'Governance & Audit Trail',
     tagline: 'A millisecond log for every operation',
-    desc: 'A millisecond-precision audit log for every operation in the system — searchable, exportable, auditable.',
+    desc: 'Governance controls, audit trail, and decision replay across every operation — searchable, exportable, and ready for regulators on demand.',
     industries: ['fintech', 'banks', 'brokers'],
     roles: ['cto'],
     deploy: ['api', 'enterprise'],
