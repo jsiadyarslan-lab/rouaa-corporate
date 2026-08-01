@@ -1,81 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROUAA Catalog — 44 Intelligence Modules</title>
-<meta name="description" content="Browse all 44 ROUAA intelligence modules across 7 categories. Filter by problem, industry, and deployment type.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Intelligence Capabilities Catalog — 44 Institutional Capabilities on One Infrastructure</title>
+  <meta name="description" content="44 institutional intelligence capabilities built on one governed intelligence infrastructure. Filter by business domain and capability type. Includes maturity, ownership, and module relationships.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .catalog-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2.5rem; align-items: start; }
+    @media (max-width: 900px) { .catalog-layout { grid-template-columns: 1fr; } }
+    .catalog-filters { position: sticky; top: 88px; align-self: start; }
+    @media (max-width: 900px) { .catalog-filters { position: static; } }
+    .filter-group { margin-bottom: 1.5rem; }
+    .filter-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.625rem; padding-bottom: 0.375rem; border-bottom: 1px solid var(--rouaa-border); }
+    .filter-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; cursor: pointer; font-size: 0.8125rem; color: var(--rouaa-text-secondary); transition: color var(--transition-base); }
+    .filter-item:hover { color: var(--rouaa-accent); }
+    .filter-item input { accent-color: var(--rouaa-accent); width: 14px; height: 14px; }
 
-<link rel="stylesheet" href="design-system/tokens.css">
-<link rel="stylesheet" href="design-system/typography.css">
-<link rel="stylesheet" href="design-system/components.css">
-<link rel="stylesheet" href="styles.css">
+    .catalog-tabs { display: flex; gap: 0.375rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .catalog-tab { padding: 0.375rem 0.75rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--rouaa-text-muted); background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition-base); letter-spacing: 0.05em; text-transform: uppercase; }
+    .catalog-tab:hover { color: var(--rouaa-accent); }
+    .catalog-tab.active { color: var(--rouaa-accent); border-color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); }
 
-<style>
-.skip-link { position: absolute; left: 0; top: -100px; padding: 8px 16px; background: var(--rouaa-accent); color: var(--rouaa-bg-primary); text-decoration: none; z-index: 2000; font-size: 14px; font-weight: 600; transition: top 200ms ease; }
-.skip-link:focus { top: 0; }
-.mono-label { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rouaa-text-muted); font-weight: 600; display: inline-block; }
-.text-gold { color: var(--rouaa-accent); }
-.text-mute { color: var(--rouaa-text-muted); }
-.text-dim { color: var(--rouaa-text-secondary); }
-.small { font-size: 13px; }
-.mb-3 { margin-bottom: 12px; }
-.mb-6 { margin-bottom: 32px; }
-.mb-8 { margin-bottom: 48px; }
-.mt-6 { margin-top: 32px; }
-.section-centered { text-align: center; }
-.section-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); }
-.section-h { font-size: clamp(1.875rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--rouaa-text-primary); max-width: 24ch; }
-.section-lead { font-size: 1.0625rem; color: var(--rouaa-text-secondary); max-width: 60ch; line-height: 1.7; }
-.btn-lg { padding: 14px 32px; font-size: 15px; }
-.btn-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 4px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-secondary); text-decoration: none; transition: color var(--transition-base); }
-.btn-link:hover { color: var(--rouaa-accent); }
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; }
-.reveal.visible { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+    .product-card { display: flex; flex-direction: column; gap: 0.625rem; padding: 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-decoration: none; transition: all var(--transition-base); height: 100%; }
+    .product-card:hover { border-color: var(--rouaa-accent-border); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .product-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+    .product-card-tag { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .maturity-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; padding: 0.125rem 0.5rem; border-radius: var(--radius-full); letter-spacing: 0.08em; text-transform: uppercase; }
+    .maturity-production { color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); }
+    .maturity-enterprise { color: var(--rouaa-text-secondary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); }
+    .maturity-preview { color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); }
+    .maturity-early { color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border: 1px dashed var(--rouaa-surface-border); }
+    .product-card-name { font-size: 1rem; font-weight: 600; color: var(--rouaa-text-primary); line-height: 1.3; }
+    .product-card-desc { font-size: 0.8125rem; color: var(--rouaa-text-muted); line-height: 1.5; }
+    .product-card-outcome { padding-top: 0.625rem; border-top: 1px solid var(--rouaa-surface-border); }
+    .outcome-text { font-size: 0.8125rem; color: var(--rouaa-accent); font-weight: 500; }
+    .product-card-foot { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 0.625rem; }
+    .deploy-badges { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+    .deploy-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; padding: 0.125rem 0.5rem; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); }
+    .buyer-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; padding: 0.125rem 0.5rem; color: var(--rouaa-text-secondary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); }
+    .product-card-link { color: var(--rouaa-accent); font-size: 1.125rem; }
 
-.catalog-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; max-width: 1280px; margin: 2rem auto; padding: 0 2rem; }
-@media (max-width: 900px) { .catalog-layout { grid-template-columns: 1fr; } }
-.catalog-filters { position: sticky; top: 88px; align-self: start; }
-@media (max-width: 900px) { .catalog-filters { position: static; } }
-.filter-group { margin-bottom: 1.5rem; }
-.filter-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.625rem; padding-bottom: 0.375rem; border-bottom: 1px solid var(--rouaa-border); }
-.filter-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; cursor: pointer; font-size: 0.8125rem; color: var(--rouaa-text-secondary); transition: color var(--transition-base); }
-.filter-item:hover { color: var(--rouaa-accent); }
-.filter-item input { accent-color: var(--rouaa-accent); width: 14px; height: 14px; }
-
-.catalog-tabs { display: flex; gap: 0.375rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.catalog-tab { padding: 0.375rem 0.75rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--rouaa-text-muted); background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition-base); letter-spacing: 0.05em; text-transform: uppercase; }
-.catalog-tab:hover { color: var(--rouaa-accent); }
-.catalog-tab.active { color: var(--rouaa-accent); border-color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); }
-
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-.product-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg); padding: 1.125rem; transition: all 250ms ease; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.5rem; }
-.product-card:hover { border-color: var(--cat-color, var(--rouaa-accent)); transform: translateY(-2px); }
-.product-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--cat-color, var(--rouaa-accent)); }
-.product-card.cat-media { --cat-color: #3B82F6; }
-.product-card.cat-trading { --cat-color: #10B981; }
-.product-card.cat-research { --cat-color: var(--rouaa-accent); }
-.product-card.cat-risk { --cat-color: #EF4444; }
-.product-card.cat-api { --cat-color: #F59E0B; }
-.product-card.cat-agent { --cat-color: #3B82F6; }
-.product-card.cat-component { --cat-color: var(--rouaa-text-muted); }
-.product-card-head { display: flex; justify-content: space-between; align-items: center; }
-.product-card-tag { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--cat-color, var(--rouaa-accent)); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
-.product-card-name { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); line-height: 1.3; }
-.product-card-desc { font-size: 0.75rem; color: var(--rouaa-text-secondary); line-height: 1.5; flex: 1; }
-.product-card-outcome { padding: 0.5rem 0.625rem; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm); border-right: 2px solid var(--cat-color, var(--rouaa-accent)); }
-.outcome-text { font-size: 0.75rem; color: var(--rouaa-text-primary); font-weight: 600; line-height: 1.4; }
-.product-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; border-top: 1px solid var(--rouaa-border); }
-.product-card-link { font-family: inherit; font-size: 0.75rem; color: var(--rouaa-text-muted); }
-.deploy-badges { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.deploy-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5rem; color: var(--rouaa-text-muted); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
-.featured-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-accent); }
-</style>
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .deployment-card { padding: 1.5rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg); border-left: 4px solid var(--rouaa-accent); }
+    .deployment-card h4 { font-size: 1.125rem; color: var(--rouaa-accent); margin-bottom: 0.75rem; }
+    .deployment-card ul { list-style: none; padding: 0; margin: 0; }
+    .deployment-card li { font-size: 0.875rem; color: var(--rouaa-text-secondary); padding: 0.375rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .deployment-card li::before { content: '✓'; color: var(--rouaa-accent); font-weight: 700; }
+  </style>
 </head>
 <body>
 
-    <!-- ============ NAVIGATION ============ -->
+  <!-- ============ NAVIGATION ============ -->
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
@@ -153,17 +132,66 @@
   <!-- ============ HERO ============ -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow" style="display: block; margin-bottom: 24px;">Intelligence Modules Catalog</span>
+      <a href="products.html" class="back-link">← Back to Products</a>
+      <span class="eyebrow" style="display: block; margin-bottom: 24px;">Intelligence Capabilities Catalog</span>
       <h1>
-        44 Intelligence Modules.<br>
-        <span class="text-accent">One evidence chain.</span>
+        44 Institutional Intelligence Capabilities.<br>
+        <span class="text-accent">Built on one governed intelligence infrastructure.</span>
       </h1>
-      <p class="hero-subheadline" style="max-width: 680px; margin: 24px auto 0;">
-        Every module is powered by the same intelligence infrastructure — Source Registry, Document Intelligence, Evidence Layer, Knowledge Graph, and Governance Controls.
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        Every capability inherits the same Source Registry, Evidence Graph, Knowledge Graph, Reasoning Engine, Workflow Engine, and Governance Controls — not a collection of disconnected SaaS tools.
       </p>
       <div class="hero-ctas" style="margin-top: 32px;">
-        <a href="#catalog" class="btn btn-primary">Browse All Modules</a>
-        <a href="products.html" class="btn btn-secondary">← Back to Products</a>
+        <a href="#catalog" class="btn btn-primary">Explore Capabilities</a>
+        <a href="#deployments" class="btn btn-secondary">View Typical Deployments</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUMMARY STATS ============ -->
+  <section class="section" style="padding: 32px 0; background: var(--rouaa-bg-primary);">
+    <div class="container">
+      <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center;">
+        <div>
+          <div style="font-size: 28px; font-weight: 700; color: var(--rouaa-accent);">44</div>
+          <div style="font-size: 12px; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Capabilities</div>
+        </div>
+        <div>
+          <div style="font-size: 28px; font-weight: 700; color: var(--rouaa-accent);">5</div>
+          <div style="font-size: 12px; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Products</div>
+        </div>
+        <div>
+          <div style="font-size: 28px; font-weight: 700; color: var(--rouaa-accent);">411</div>
+          <div style="font-size: 12px; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Official Sources</div>
+        </div>
+        <div>
+          <div style="font-size: 28px; font-weight: 700; color: var(--rouaa-accent);">6</div>
+          <div style="font-size: 12px; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Shared Infrastructure Layers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW CAPABILITIES FIT TOGETHER ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary); padding: 48px 0;">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">How Capabilities Fit Together</span>
+        <h2>Every capability sits on the same layered infrastructure.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">This is not an app store. It is a catalog of capabilities that all inherit the same evidence, reasoning, and governance — connected through a shared architecture.</p>
+      </div>
+      <div style="max-width: 480px; margin: 0 auto; padding: 28px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-lg); border-left: 4px solid var(--rouaa-accent);">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;">
+          <span style="padding: 10px 20px; background: var(--rouaa-accent-subtle); border-radius: var(--radius-md); border: 1px solid var(--rouaa-accent-border); color: var(--rouaa-accent); text-align: center;">Applications<div style="font-size: 10px; font-weight: 400; color: var(--rouaa-text-muted); margin-top: 2px;">Dashboards · Briefs · Reports · Alerts</div></span>
+          <span style="color: var(--rouaa-accent); font-size: 16px;">↓</span>
+          <span style="padding: 10px 20px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-primary); text-align: center;">Agents<div style="font-size: 10px; font-weight: 400; color: var(--rouaa-text-muted); margin-top: 2px;">Macro · Sector · Risk · Verification</div></span>
+          <span style="color: var(--rouaa-accent); font-size: 16px;">↓</span>
+          <span style="padding: 10px 20px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-primary); text-align: center;">APIs<div style="font-size: 10px; font-weight: 400; color: var(--rouaa-text-muted); margin-top: 2px;">Events · Facts · Evidence · Search · Streaming</div></span>
+          <span style="color: var(--rouaa-accent); font-size: 16px;">↓</span>
+          <span style="padding: 10px 20px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-primary); text-align: center;">Infrastructure<div style="font-size: 10px; font-weight: 400; color: var(--rouaa-text-muted); margin-top: 2px;">Knowledge Graph · Evidence Graph · Reasoning Engine</div></span>
+          <span style="color: var(--rouaa-accent); font-size: 16px;">↓</span>
+          <span style="padding: 10px 20px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-primary); text-align: center;">Official Sources<div style="font-size: 10px; font-weight: 400; color: var(--rouaa-text-muted); margin-top: 2px;">411+ Central Banks · Regulators · Exchanges · Issuers</div></span>
+        </div>
       </div>
     </div>
   </section>
@@ -172,61 +200,161 @@
   <section class="section" id="catalog">
     <div class="container">
       <div class="section-header text-center" style="margin: 0 auto 32px;">
-        <span class="eyebrow">All Modules</span>
-        <h2>Use the filters to find what suits your institution.</h2>
+        <span class="eyebrow">All Capabilities</span>
+        <h2>Filter by business domain or capability type.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">Each capability shows its maturity, primary buyer, and deployment options. Click any card for full details.</p>
       </div>
 
       <div class="catalog-layout">
         <aside class="catalog-filters">
           <div class="filter-group">
-            <div class="filter-h">What do you need to solve?</div>
+            <div class="filter-h">Business Domain</div>
             <label class="filter-item"><input type="checkbox" class="filter-cat" value="media" checked> Media Intelligence</label>
+            <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Investment Intelligence</label>
             <label class="filter-item"><input type="checkbox" class="filter-cat" value="trading" checked> Market Intelligence</label>
-            <label class="filter-item"><input type="checkbox" class="filter-cat" value="research" checked> Research Intelligence</label>
             <label class="filter-item"><input type="checkbox" class="filter-cat" value="risk" checked> Risk Intelligence</label>
             <label class="filter-item"><input type="checkbox" class="filter-cat" value="api" checked> Developer Platform</label>
-            <label class="filter-item"><input type="checkbox" class="filter-cat" value="agent" checked> Intelligence Agents</label>
-            <label class="filter-item"><input type="checkbox" class="filter-cat" value="component" checked> Platform Components</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-h">Capability Type</div>
+            <label class="filter-item"><input type="checkbox" class="filter-type" value="application" checked> Applications</label>
+            <label class="filter-item"><input type="checkbox" class="filter-type" value="agent" checked> Agents</label>
+            <label class="filter-item"><input type="checkbox" class="filter-type" value="api" checked> APIs</label>
+            <label class="filter-item"><input type="checkbox" class="filter-type" value="component" checked> Infrastructure</label>
+          </div>
+          <div class="filter-group">
+            <div class="filter-h">Maturity</div>
+            <label class="filter-item"><input type="checkbox" class="filter-maturity" value="production" checked> Production</label>
+            <label class="filter-item"><input type="checkbox" class="filter-maturity" value="enterprise" checked> Enterprise</label>
+            <label class="filter-item"><input type="checkbox" class="filter-maturity" value="preview" checked> Preview</label>
+            <label class="filter-item"><input type="checkbox" class="filter-maturity" value="early" checked> Early Access</label>
           </div>
           <div class="filter-group">
             <div class="filter-h">Search</div>
-            <input type="text" id="catalogSearch" placeholder="Search..." style="width: 100%; padding: 0.5rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); color: var(--rouaa-text-primary); font-size: 0.8125rem;">
+            <input type="text" id="catalogSearch" placeholder="Search capabilities..." style="width: 100%; padding: 0.5rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); color: var(--rouaa-text-primary); font-size: 0.8125rem;">
           </div>
         </aside>
         <div>
           <div class="catalog-tabs">
             <button class="catalog-tab active" data-view="all">All</button>
-            <button class="catalog-tab" data-view="featured">Featured</button>
+            <button class="catalog-tab" data-view="production">Production</button>
+            <button class="catalog-tab" data-view="enterprise">Enterprise</button>
             <button class="catalog-tab" data-view="media">Media</button>
-            <button class="catalog-tab" data-view="trading">Trading</button>
-            <button class="catalog-tab" data-view="research">Research</button>
+            <button class="catalog-tab" data-view="research">Investment</button>
+            <button class="catalog-tab" data-view="trading">Market</button>
             <button class="catalog-tab" data-view="risk">Risk</button>
-            <button class="catalog-tab" data-view="api">API</button>
+            <button class="catalog-tab" data-view="api">Developer</button>
             <button class="catalog-tab" data-view="agent">Agents</button>
-            <button class="catalog-tab" data-view="component">Components</button>
+            <button class="catalog-tab" data-view="component">Infrastructure</button>
           </div>
           <div class="product-grid" id="productGrid"></div>
-          <p class="text-center text-mute small mt-6" id="resultCount">Showing modules · all categories</p>
+          <p class="text-center text-mute small mt-6" id="resultCount">Showing capabilities · all</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPICAL INSTITUTIONAL DEPLOYMENTS ============ -->
+  <section class="section" id="deployments" style="background: var(--rouaa-bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Typical Institutional Deployments</span>
+        <h2>From 44 capabilities to ready-made institutional solutions.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">Most institutions do not buy 44 capabilities — they buy 5–8 that fit their workflow. These are the most common starting configurations.</p>
+      </div>
+      <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
+        <div class="deployment-card">
+          <h4>Investment Firm</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For asset managers and CIO offices running investment committees.</p>
+          <ul>
+            <li>Committee Prep Engine</li>
+            <li>Intelligence Brief Generator</li>
+            <li>Market Scenario Engine</li>
+            <li>Evidence API</li>
+            <li>Knowledge Graph</li>
+            <li>Deep Dive Reports</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h4>Financial Publisher</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For newsrooms and economic media groups publishing at speed.</p>
+          <ul>
+            <li>Financial Publishing Platform</li>
+            <li>Automated Research Reports</li>
+            <li>Video Pipeline</li>
+            <li>News Production Agent</li>
+            <li>Daily Intelligence Pulse</li>
+            <li>Economic Calendar</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h4>Broker / Trading Desk</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For brokers and trading desks needing event-driven context.</p>
+          <ul>
+            <li>Trading Intelligence Dashboard</li>
+            <li>Smart Chart Annotations</li>
+            <li>Streaming API</li>
+            <li>Events API</li>
+            <li>Trading Assistant</li>
+            <li>Portfolio Intelligence</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h4>Risk &amp; Compliance Team</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For CRO offices and compliance teams in regulated institutions.</p>
+          <ul>
+            <li>Risk Event Monitor</li>
+            <li>Exposure Analysis</li>
+            <li>Risk Scenario Engine</li>
+            <li>Compliance Audit</li>
+            <li>Evidence API</li>
+            <li>Audit Trail</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h4>Fintech / Developer</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For fintechs embedding intelligence into customer-facing products.</p>
+          <ul>
+            <li>Search API</li>
+            <li>Facts API</li>
+            <li>Evidence API</li>
+            <li>Streaming + SDKs</li>
+            <li>Knowledge Graph</li>
+            <li>Official SDK</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h4>Enterprise / Bank</h4>
+          <p style="font-size: 13px; color: var(--rouaa-text-muted); margin-bottom: 16px;">For banks and institutions needing private deployment.</p>
+          <ul>
+            <li>Source Registry (Private)</li>
+            <li>Evidence Store</li>
+            <li>Reasoning Engine</li>
+            <li>Audit Trail</li>
+            <li>Knowledge Graph</li>
+            <li>Workflow Engine</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ CTA ============ -->
-  <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
+  <section class="cta-section" id="cta">
     <div class="container">
-      <h2>Find the modules that fit your institution.</h2>
+      <h2>Find the capabilities that fit your institution.</h2>
       <p style="max-width: 640px; margin: 0 auto 32px;">
-        Request a briefing. We'll walk through your workflow and recommend the right modules.
+        Request a briefing. We'll walk through your workflow and recommend the right capability configuration — not 44 modules, but the 5–8 that match your institution.
       </p>
       <div class="cta-buttons">
         <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
         <a href="products.html" class="btn btn-secondary">← Back to Products</a>
+        <a href="architecture.html" class="btn btn-secondary">View Architecture</a>
       </div>
     </div>
   </section>
 
-    <!-- ============ FOOTER ============ -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-mega-grid">
@@ -285,17 +413,6 @@
 
 <script src="products.js"></script>
 <script>
-// Reveal on scroll
-const io = new IntersectionObserver(entries => {
-  entries.forEach(x => {
-    if (x.isIntersecting) {
-      x.target.classList.add('visible');
-      io.unobserve(x.target);
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
 // === Catalog Filtering ===
 let cards = document.querySelectorAll('.product-card');
 const tabs = document.querySelectorAll('.catalog-tab');
@@ -303,30 +420,34 @@ const search = document.getElementById('catalogSearch');
 const resultCount = document.getElementById('resultCount');
 
 const catCheckboxes = document.querySelectorAll('.filter-cat');
+const typeCheckboxes = document.querySelectorAll('.filter-type');
+const maturityCheckboxes = document.querySelectorAll('.filter-maturity');
 
 function getChecked(checkboxes) {
   return Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
 }
 
-function intersect(arr1, arr2) {
-  return arr1.some(v => arr2.includes(v));
-}
-
 function filterProducts() {
   const activeCats = getChecked(catCheckboxes);
+  const activeTypes = getChecked(typeCheckboxes);
+  const activeMaturities = getChecked(maturityCheckboxes);
   const searchTerm = (search?.value || '').toLowerCase();
 
   let visible = 0;
 
   cards.forEach(card => {
     const cat = card.dataset.cat || '';
+    const type = card.dataset.type || '';
+    const maturity = card.dataset.maturity || 'production';
     const name = (card.dataset.name || '').toLowerCase();
     const text = card.innerText.toLowerCase();
 
     const catMatch = activeCats.includes(cat);
+    const typeMatch = activeTypes.includes(type);
+    const maturityMatch = activeMaturities.includes(maturity);
     const searchMatch = !searchTerm || name.includes(searchTerm) || text.includes(searchTerm);
 
-    if (catMatch && searchMatch) {
+    if (catMatch && typeMatch && maturityMatch && searchMatch) {
       card.style.display = '';
       visible++;
     } else {
@@ -334,42 +455,32 @@ function filterProducts() {
     }
   });
 
-  let label = 'all';
-  if (activeCats.length === 1) label = activeCats[0];
-  else if (activeCats.length > 1 && activeCats.length < 7) label = `${activeCats.length} categories`;
-
-  resultCount.textContent = `Showing ${visible} modules · ${label}`;
-
-  tabs.forEach(tab => {
-    const view = tab.dataset.view;
-    if (view === 'all') {
-      tab.textContent = `All · ${visible}`;
-    } else if (view === 'featured') {
-      tab.textContent = `Featured`;
-    } else {
-      tab.textContent = view.charAt(0).toUpperCase() + view.slice(1);
-    }
-  });
+  resultCount.textContent = `Showing ${visible} capabilities`;
 }
 
-// Tab click — filter by category
+// Tab click — filter by category or maturity
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     const view = tab.dataset.view;
 
-    if (view === 'featured') {
-      renderProductGrid(true);
-      return;
-    }
     if (view === 'all') {
       catCheckboxes.forEach(c => c.checked = true);
-      renderProductGrid(false);
+      typeCheckboxes.forEach(c => c.checked = true);
+      maturityCheckboxes.forEach(c => c.checked = true);
+    } else if (view === 'production' || view === 'enterprise') {
+      // Maturity filter
+      maturityCheckboxes.forEach(c => c.checked = (c.value === view));
+      catCheckboxes.forEach(c => c.checked = true);
+      typeCheckboxes.forEach(c => c.checked = true);
     } else {
+      // Category filter
       catCheckboxes.forEach(c => c.checked = (c.value === view));
-      renderProductGrid(false);
+      typeCheckboxes.forEach(c => c.checked = true);
+      maturityCheckboxes.forEach(c => c.checked = true);
     }
+    filterProducts();
   });
 });
 
@@ -378,7 +489,7 @@ function resetTabs() {
   document.querySelector('.catalog-tab[data-view="all"]')?.classList.add('active');
 }
 
-catCheckboxes.forEach(c => {
+[...catCheckboxes, ...typeCheckboxes, ...maturityCheckboxes].forEach(c => {
   c.addEventListener('change', () => {
     resetTabs();
     filterProducts();
@@ -389,39 +500,61 @@ search?.addEventListener('input', filterProducts);
 
 // === Render product cards from ROUAA_PRODUCTS data ===
 const CATEGORY_INFO = {
-  media: { name: 'Media', color: 'blue', icon: '📰' },
-  trading: { name: 'Trading', color: 'emerald', icon: '📈' },
-  research: { name: 'Research', color: 'gold', icon: '📊' },
-  risk: { name: 'Risk', color: 'rose', icon: '⚠' },
-  api: { name: 'API', color: 'amber', icon: '🔌' },
-  agent: { name: 'Intelligence Agent', color: 'blue', icon: '🤖' },
-  component: { name: 'Component', color: 'mute', icon: '🧩' },
+  media: { name: 'Media Intelligence', icon: '📰' },
+  trading: { name: 'Market Intelligence', icon: '📈' },
+  research: { name: 'Investment Intelligence', icon: '📊' },
+  risk: { name: 'Risk Intelligence', icon: '⚠' },
+  api: { name: 'Developer Platform', icon: '🔌' },
+  agent: { name: 'Intelligence Agent', icon: '🤖' },
+  component: { name: 'Platform Component', icon: '🧩' },
 };
 
-const FEATURED_IDS = new Set([
-  'med-news-engine', 'med-video', 'med-pulse',
-  'trd-dashboard', 'trd-chart', 'trd-ai-council',
-  'res-brief', 'res-committee', 'res-deepdive',
-  'risk-monitor', 'risk-exposure', 'risk-scenario',
-  'api-events', 'api-facts', 'cmp-graph',
-]);
+const TYPE_INFO = {
+  application: 'Application',
+  agent: 'Agent',
+  api: 'API',
+  component: 'Infrastructure',
+};
+
+const MATURITY_INFO = {
+  production: { label: 'Production', class: 'maturity-production' },
+  enterprise: { label: 'Enterprise', class: 'maturity-enterprise' },
+  preview: { label: 'Preview', class: 'maturity-preview' },
+  early: { label: 'Early Access', class: 'maturity-early' },
+};
+
+const DEPLOY_INFO = [
+  { key: 'cloud', label: 'Cloud' },
+  { key: 'private', label: 'Private' },
+  { key: 'whitelabel', label: 'White-label' },
+  { key: 'api', label: 'API' },
+];
+
+// Map old deploy keys to new ones for backwards compatibility
+function normalizeDeploy(deploys) {
+  return deploys.map(d => {
+    if (d === 'saas') return 'cloud';
+    if (d === 'enterprise') return 'private';
+    return d;
+  });
+}
 
 function renderProductCard(product) {
   const cat = CATEGORY_INFO[product.cat] || CATEGORY_INFO.api;
+  const type = product.type || (product.cat === 'agent' ? 'agent' : product.cat === 'component' ? 'component' : product.cat === 'api' ? 'api' : 'application');
+  const maturity = product.maturity || 'production';
+  const matInfo = MATURITY_INFO[maturity] || MATURITY_INFO.production;
   const desc = (product.desc || '').substring(0, 100) + (product.desc.length > 100 ? '...' : '');
   const outcome = (product.tagline || '').substring(0, 70);
-  const deploys = product.deploy || [];
-  const deployBadges = [
-    { key: 'api', label: 'API' },
-    { key: 'saas', label: 'SaaS' },
-    { key: 'whitelabel', label: 'WL' },
-    { key: 'enterprise', label: 'Ent' },
-  ].filter(d => deploys.includes(d.key)).map(d => `<span class="deploy-badge">${d.label}</span>`).join('');
-  const featuredBadge = FEATURED_IDS.has(product.id) ? '<span class="featured-badge">★</span>' : '';
-  return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-name="${product.nameEn}" data-id="${product.id}" data-ind="${product.industries.join(' ')}" data-role="${product.roles.join(' ')}" data-deploy="${product.deploy.join(' ')}" data-featured="${FEATURED_IDS.has(product.id)}">
+  const deploys = normalizeDeploy(product.deploy || []);
+  const deployBadges = DEPLOY_INFO.filter(d => deploys.includes(d.key)).map(d => `<span class="deploy-badge">${d.label}</span>`).join('');
+  const buyer = product.buyer || '';
+  const buyerBadge = buyer ? `<span class="buyer-badge">${buyer}</span>` : '';
+
+  return `<a href="product.html?id=${product.id}" class="product-card cat-${product.cat}" data-cat="${product.cat}" data-type="${type}" data-maturity="${maturity}" data-name="${product.nameEn}" data-id="${product.id}">
     <div class="product-card-head">
       <div class="product-card-tag">${cat.icon} ${cat.name}</div>
-      ${featuredBadge}
+      <span class="maturity-badge ${matInfo.class}">${matInfo.label}</span>
     </div>
     <div class="product-card-name">${product.nameEn}</div>
     <div class="product-card-desc">${desc}</div>
@@ -430,24 +563,21 @@ function renderProductCard(product) {
     </div>
     <div class="product-card-foot">
       <div class="deploy-badges">${deployBadges}</div>
+      ${buyerBadge}
       <span class="product-card-link">→</span>
     </div>
   </a>`;
 }
 
-function renderProductGrid(filterFeatured = false) {
+function renderProductGrid() {
   const grid = document.getElementById('productGrid');
   if (!grid || typeof ROUAA_PRODUCTS === 'undefined') return;
-  const products = filterFeatured
-    ? ROUAA_PRODUCTS.filter(p => FEATURED_IDS.has(p.id))
-    : ROUAA_PRODUCTS;
-  grid.innerHTML = products.map(renderProductCard).join('');
+  grid.innerHTML = ROUAA_PRODUCTS.map(renderProductCard).join('');
   cards = document.querySelectorAll('.product-card');
   filterProducts();
 }
 
 renderProductGrid();
-filterProducts();
 </script>
 
 <script src="main.js"></script>
