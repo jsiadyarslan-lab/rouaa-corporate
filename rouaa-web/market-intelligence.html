@@ -28,6 +28,25 @@
       }
     }
   </style>
+
+  <style>
+    @media (max-width: 968px) {
+      section#\31  > div > div[style*="grid-template-columns: repeat(5, 1fr)"]:first-of-type,
+      .section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -124,36 +143,59 @@
     </div>
   </section>
 
+
+  <!-- ============ POSITIONING ============ -->
+  <section class="section" id="positioning" style="padding: 48px 0;">
+    <div class="container">
+      <div style="max-width: 880px; margin: 0 auto; padding: 32px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-lg); border-left: 4px solid var(--rouaa-accent);">
+        <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 12px;">Market Data vs. Market Intelligence</div>
+            <p style="font-size: 15px; color: var(--rouaa-text-primary); line-height: var(--leading-relaxed); margin-bottom: 16px;"><strong>Market data platforms tell you what happened.</strong> ROUAA explains <em>why</em> it happened, what evidence supports it, how it affects portfolios, and preserves the complete reasoning chain for future review.</p>
+            <p style="font-size: 13px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">ROUAA does not replace Bloomberg, FactSet, or Refinitiv. It sits above them &mdash; consuming their data alongside official sources and producing governance-ready intelligence that your desk, compliance, and audit teams can all trust.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ 2. THE PROBLEM ============ -->
   <section class="section" style="background: var(--rouaa-bg-secondary);">
     <div class="container">
       <div class="section-header text-center" style="margin: 0 auto 48px;">
         <span class="eyebrow">The Market Problem</span>
         <h2>Charts show where price moved.<br>They never show why.</h2>
-        <p style="margin: 0 auto; max-width: 680px;">Trading desks, quant teams, research teams, and brokers operate on market signals that describe movement — but rarely explain the verified events and facts that caused it. Decisions are made on price, not on evidence.</p>
+        <p style="margin: 0 auto; max-width: 680px;">Trading desks, quant teams, research teams, and brokers operate on market signals that describe movement — but rarely explain the verified events and facts that caused it. Market decisions are reviewed long after execution. Without evidence, firms cannot explain why a position was taken, what information justified it, or whether the decision was consistent with policy.</p>
       </div>
-      <div class="grid-4" style="max-width: 1240px; margin: 0 auto;">
+      <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-lg);">
         <div class="card card-accent">
           <h4 style="margin-bottom: 12px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Context Loss</h4>
-          <h3 style="font-size: 20px; margin-bottom: 12px;">Price moves without explanations.</h3>
-          <p style="font-size: 14px;">Trading desks see the move, but cannot reconstruct why it happened — which event, which source, which fact drove the price. Without context intelligence, decisions are made on price alone, not on the verified information that moved it.</p>
-          <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
-            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">ROUAA</div>
-            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Every price move connected to its verified causal event — source, fact, and reasoning path preserved so traders and quants reconstruct the market's reasoning, not just its output.</div>
+          <h3 style="font-size: 18px; margin-bottom: 12px;">Price moves without explanations.</h3>
+          <p style="font-size: 13px;">Trading desks see the move, but cannot reconstruct why it happened — which event, which source, which fact drove the price. Without context intelligence, decisions are made on price alone, not on the verified information that moved it.</p>
+        </div>
         <div class="card card-accent">
           <h4 style="margin-bottom: 12px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Price Without Cause</h4>
-          <h3 style="font-size: 20px; margin-bottom: 12px;">Charts show where price moved not why.</h3>
-          <p style="font-size: 14px;">A chart tells you a security moved 4% in twenty minutes. It does not tell you which earnings release, regulatory filing, or geopolitical event drove the move — or whether the move was information-driven or noise.</p>
+          <h3 style="font-size: 18px; margin-bottom: 12px;">Charts show where, not why.</h3>
+          <p style="font-size: 13px;">A chart tells you a security moved 4% in twenty minutes. It does not tell you which earnings release, regulatory filing, or geopolitical event drove the move — or whether the move was information-driven or noise.</p>
         </div>
         <div class="card card-accent">
           <h4 style="margin-bottom: 12px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Signals Without Context</h4>
-          <h3 style="font-size: 20px; margin-bottom: 12px;">Indicators without event context.</h3>
-          <p style="font-size: 14px;">RSI, MACD, and momentum indicators fire without knowing whether a verified event justifies the signal. Indicators describe state — they do not connect price action to the underlying facts that should govern a trading decision.</p>
+          <h3 style="font-size: 18px; margin-bottom: 12px;">Indicators without event context.</h3>
+          <p style="font-size: 13px;">RSI, MACD, and momentum indicators fire without knowing whether a verified event justifies the signal. Indicators describe state — they do not connect price action to the underlying facts that should govern a trading decision.</p>
         </div>
         <div class="card card-accent">
           <h4 style="margin-bottom: 12px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Decisions Without Proof</h4>
-          <h3 style="font-size: 20px; margin-bottom: 12px;">No evidence chain for trading decisions.</h3>
-          <p style="font-size: 14px;">When a trade is reviewed, the rationale lives in chat messages and trader memory — not in a reconstructable chain linking decision, signal, event, and source. Compliance, risk, and audit are left to rebuild what should never have been lost.</p>
+          <h3 style="font-size: 18px; margin-bottom: 12px;">No evidence chain for trades.</h3>
+          <p style="font-size: 13px;">When a trade is reviewed, the rationale lives in chat messages and trader memory — not in a reconstructable chain linking decision, signal, event, and source. Compliance, risk, and audit are left to rebuild what should never have been lost.</p>
+        </div>
+        <div class="card card-accent">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Decision Accountability</h4>
+          <h3 style="font-size: 18px; margin-bottom: 12px;">Trading decisions cannot be reconstructed.</h3>
+          <p style="font-size: 13px;">When a position is reviewed weeks later, the event, evidence, portfolio exposure, reasoning, and execution context that justified the trade cannot be reconstructed. Governance reviews depend on memory and chat logs, not on a replayable record of what was known at the time.</p>
+          <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">ROUAA</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Every trading decision preserved with complete lineage — event, evidence, portfolio exposure, reasoning, and execution context reconstructable on demand for compliance, risk, and audit.</div>
+          </div>
         </div>
       </div>
         </div>
@@ -189,7 +231,7 @@
         <div class="card card-accent">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 12px;">04 · Scenario Intelligence</div>
           <h3 style="font-size: 18px; margin-bottom: 10px;">Scenarios, not signals.</h3>
-          <p style="font-size: 13px; line-height: var(--leading-relaxed);">Construct defensible trading scenarios from verified events and facts — articulated, comparable, and replayable, with confidence scoring and evidence packages attached to each branch.</p>
+          <p style="font-size: 13px; line-height: var(--leading-relaxed);">Construct defensible trading scenarios from verified events and facts — each branch carries probability, assumptions, supporting evidence, and alternative scenarios. Base, optimistic, and pessimistic paths articulated with confidence scoring and evidence packages attached.</p>
         </div>
       </div>
     </div>
@@ -216,8 +258,8 @@
         <div class="how-step">
           <div class="how-number">02</div>
           <div class="how-content">
-            <div class="how-title">Event Detection</div>
-            <div class="how-desc">Material market events extracted from source documents with full provenance — earnings, guidance, macro releases, regulatory actions, and corporate disclosures identified with page, paragraph, and exact text preserved.</div>
+            <div class="how-title">Verified Event Intelligence</div>
+            <div class="how-desc">Material market events extracted from source documents with full provenance — earnings, guidance, macro releases, regulatory actions, and corporate disclosures identified with page, paragraph, and exact text preserved. Every event carries its evidence anchor from the moment of detection.</div>
           </div>
         </div>
         <div class="how-arrow">↓</div>
@@ -225,7 +267,7 @@
           <div class="how-number">03</div>
           <div class="how-content">
             <div class="how-title">Context Intelligence</div>
-            <div class="how-desc">Events connected to instruments, issuers, sectors, and portfolios through a governed ontology — surfacing relationships between filings, price action, and exposure that a chart alone cannot reveal.</div>
+            <div class="how-desc">Every event is placed into institutional context — issuers, sectors, macro indicators, portfolio exposure, historical precedents, and related disclosures become one connected intelligence view. Relationships between filings, price action, and exposure surface that a chart alone cannot reveal.</div>
           </div>
         </div>
         <div class="how-arrow">↓</div>
@@ -233,7 +275,7 @@
           <div class="how-number">04</div>
           <div class="how-content">
             <div class="how-title">Scenario Analysis</div>
-            <div class="how-desc">Defensible trading scenarios constructed from verified events and facts — branches articulated, comparable, and replayable, with confidence scoring and evidence packages attached to each path.</div>
+            <div class="how-desc">Defensible trading scenarios constructed from verified events and facts — each branch carries explicit probability, stated assumptions, supporting evidence, and alternative scenarios for comparison. Base, optimistic, and pessimistic paths articulated with confidence scoring, replayable for the trading committee record.</div>
           </div>
         </div>
         <div class="how-arrow">↓</div>
@@ -294,16 +336,37 @@
 
         <div style="text-align: center; color: var(--rouaa-accent); font-size: 18px; padding: 4px 0;">↓</div>
 
-        <!-- Step 4: Trading Context Output -->
+        <!-- Step 4: Reasoning -->
+        <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 16px;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); min-width: 96px; padding-top: 4px;">Reasoning</div>
+          <div style="flex: 1;">
+            <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px;">Revenue beat + guidance reaffirmed &rarr; positive signal with moderate confidence</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); padding: 12px 16px; background: var(--rouaa-bg-tertiary); border-left: 2px solid var(--rouaa-accent-border); border-radius: var(--radius-sm);">Reasoning path: 3.2% top-line beat exceeds consensus &middot; Guidance reaffirmed signals management confidence &middot; Capex in line indicates disciplined growth &middot; Sector context: energy peers reporting similar beats &middot; Confidence: Moderate-High. Scenarios generated: base (hold), optimistic (add), pessimistic (reduce on geopolitical risk).</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--rouaa-accent); font-size: 18px; padding: 4px 0;">↓</div>
+
+        <!-- Step 5: Trading Context Output -->
         <div style="display: flex; align-items: flex-start; gap: 20px; padding: 20px; background: linear-gradient(180deg, rgba(200, 169, 81, 0.08), rgba(200, 169, 81, 0.02)); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md);">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); min-width: 96px; padding-top: 4px;">Trading Context</div>
           <div style="flex: 1;">
             <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-accent); margin-bottom: 8px;">Trading Decision Context — Aramco Earnings Surprise</div>
             <div style="font-size: 13px; color: var(--rouaa-text-primary); line-height: var(--leading-relaxed); margin-bottom: 10px;">Aramco reported a 3.2% revenue beat with guidance reaffirmed. Upstream and downstream drivers verified against the source release. Impact assessment, scenario branches, and portfolio exposure links attached — every assertion in this context links to its source, Earnings Release Page 4, Paragraph 2, preserved in the evidence package.</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
               <span style="padding: 4px 12px; font-size: 12px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); font-weight: 600;">Evidence Package Attached</span>
               <span style="padding: 4px 12px; font-size: 12px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); font-weight: 600;">Impact Mapped</span>
               <span style="padding: 4px 12px; font-size: 12px; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); font-weight: 600;">Audit-Ready</span>
+            </div>
+            <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-accent-border);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Generated Outputs</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span style="padding: 6px 12px; font-size: 12px; color: var(--rouaa-text-primary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">Trading Brief</span>
+                <span style="padding: 6px 12px; font-size: 12px; color: var(--rouaa-text-primary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">Risk Alert</span>
+                <span style="padding: 6px 12px; font-size: 12px; color: var(--rouaa-text-primary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">Portfolio Impact</span>
+                <span style="padding: 6px 12px; font-size: 12px; color: var(--rouaa-text-primary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">Strategy Update</span>
+                <span style="padding: 6px 12px; font-size: 12px; color: var(--rouaa-text-primary); background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">API Event</span>
+              </div>
             </div>
           </div>
         </div>
@@ -335,6 +398,100 @@
         <div class="card text-center card-accent">
           <h4 style="margin-bottom: 10px; color: var(--rouaa-accent); font-size: 17px;">Brokers</h4>
           <p style="font-size: 14px;">Client-facing intelligence with auditable provenance — every call, idea, and recommendation backed by verified events and reconstructable evidence chains for compliance and best-execution review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ WHO BUYS ============ -->
+  <section class="section" id="who-buys" style="background: var(--rouaa-bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Who Buys This</span>
+        <h2>Five roles. Five reasons to adopt.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">Market Intelligence Infrastructure is bought by different roles for different reasons. The common thread: every output carries evidence, governance, and audit readiness.</p>
+      </div>
+      <div style="max-width: 880px; margin: 0 auto; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--rouaa-accent-border);">
+              <th style="text-align: left; padding: 16px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted);">Role</th>
+              <th style="text-align: left; padding: 16px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted);">Why They Buy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 16px 20px; font-weight: 600; color: var(--rouaa-accent);">Head of Trading</td>
+              <td style="padding: 16px 20px; color: var(--rouaa-text-secondary);">Event-driven decision context for every position — the &ldquo;why&rdquo; behind every move, delivered at desk speed.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 16px 20px; font-weight: 600; color: var(--rouaa-accent);">Head of Research</td>
+              <td style="padding: 16px 20px; color: var(--rouaa-text-secondary);">Evidence-backed market research — every note, scenario, and recommendation traceable to the official source behind the claim.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 16px 20px; font-weight: 600; color: var(--rouaa-accent);">Portfolio Manager</td>
+              <td style="padding: 16px 20px; color: var(--rouaa-text-secondary);">Portfolio impact intelligence — how every verified event affects holdings, exposures, and positions, before it hits the P&amp;L.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 16px 20px; font-weight: 600; color: var(--rouaa-accent);">Chief Risk Officer</td>
+              <td style="padding: 16px 20px; color: var(--rouaa-text-secondary);">Replayable trading decisions — every position reconstructable with the event, evidence, and reasoning that justified it at the time.</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 20px; font-weight: 600; color: var(--rouaa-accent);">Broker Research Director</td>
+              <td style="padding: 16px 20px; color: var(--rouaa-text-secondary);">Client-ready market intelligence with auditable provenance — every call and idea backed by verified events for compliance and best-execution review.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ BUSINESS OUTCOMES ============ -->
+  <section class="section" id="business-outcomes">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Business Outcomes</span>
+        <h2>What changes when ROUAA enters the trading floor.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">The same workflow &mdash; but every step gains evidence, context, and governance. The result: decisions that can be explained, reviewed, and defended long after execution.</p>
+      </div>
+      <div style="max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+        <div style="padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border-radius: var(--radius-full);">Before</span>
+            <span style="color: var(--rouaa-text-muted); font-size: 18px;">&rarr;</span>
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">After</span>
+          </div>
+          <div style="font-size: 14px; color: var(--rouaa-text-muted); margin-bottom: 8px; text-decoration: line-through;">Manual event monitoring across fragmented sources</div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Continuous event intelligence from 411+ official sources</div>
+        </div>
+        <div style="padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border-radius: var(--radius-full);">Before</span>
+            <span style="color: var(--rouaa-text-muted); font-size: 18px;">&rarr;</span>
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">After</span>
+          </div>
+          <div style="font-size: 14px; color: var(--rouaa-text-muted); margin-bottom: 8px; text-decoration: line-through;">Price without context &mdash; charts show where, not why</div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Event-linked market understanding with full evidence chain</div>
+        </div>
+        <div style="padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border-radius: var(--radius-full);">Before</span>
+            <span style="color: var(--rouaa-text-muted); font-size: 18px;">&rarr;</span>
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">After</span>
+          </div>
+          <div style="font-size: 14px; color: var(--rouaa-text-muted); margin-bottom: 8px; text-decoration: line-through;">Separate systems for data, research, and compliance</div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Unified evidence layer across the entire trading stack</div>
+        </div>
+        <div style="padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); border-radius: var(--radius-full);">Before</span>
+            <span style="color: var(--rouaa-text-muted); font-size: 18px;">&rarr;</span>
+            <span style="padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full);">After</span>
+          </div>
+          <div style="font-size: 14px; color: var(--rouaa-text-muted); margin-bottom: 8px; text-decoration: line-through;">Manual compliance review reconstructed from memory</div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Replayable market decisions with complete evidence lineage</div>
         </div>
       </div>
     </div>
@@ -415,31 +572,68 @@
         <h2>ROUAA sits on top of what your desk already runs.</h2>
         <p style="margin: 0 auto; max-width: 680px;">You do not replace your trading stack. ROUAA becomes the evidence layer that sits above it — feeding governance-ready intelligence into the systems your desk already uses.</p>
       </div>
-            <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
-        <div>
-          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Market Data</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Bloomberg</span>
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">FactSet</span>
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Refinitiv</span>
+            <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+        <div style="padding: 28px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg);">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 20px; text-align: center;">Consumes</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8595;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Market Data</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Bloomberg, FactSet, Refinitiv, exchange feeds</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8595;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Official Sources</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">411+ regulators, exchanges, issuers, statistical agencies</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--rouaa-surface-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8595;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Internal Research</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Analyst notes, models, prior research, OMS positions</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Enterprise Systems</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Internal OMS</span>
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Microsoft Teams</span>
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">Slack</span>
-          </div>
-        </div>
-        <div>
-          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; text-align: center;">Integration</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-            <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-full);">REST APIs</span>
+        <div style="padding: 28px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-lg); border-left: 4px solid var(--rouaa-accent);">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 20px; text-align: center;">Produces</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-accent-subtle); border-radius: var(--radius-md); border: 1px solid var(--rouaa-accent-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8593;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Trading Context</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Event-linked market intelligence with evidence</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-accent-subtle); border-radius: var(--radius-md); border: 1px solid var(--rouaa-accent-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8593;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Evidence Packages</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Source, page, paragraph, confidence — audit-ready</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-accent-subtle); border-radius: var(--radius-md); border: 1px solid var(--rouaa-accent-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8593;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Portfolio Intelligence</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Exposure-mapped impact for every position</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--rouaa-accent-subtle); border-radius: var(--radius-md); border: 1px solid var(--rouaa-accent-border);">
+              <div style="font-size: 20px; color: var(--rouaa-accent);">&#8593;</div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">APIs &amp; Webhooks</div>
+                <div style="font-size: 12px; color: var(--rouaa-text-muted);">Real-time event streaming into your systems</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <p style="max-width: 640px; margin: 32px auto 0; font-size: 14px; color: var(--rouaa-text-muted); text-align: center; line-height: var(--leading-relaxed);">ROUAA does not compete with your market data, OMS, or collaboration tools. It connects to them — and elevates every output with verified evidence and governance controls.</p>
+      <p style="max-width: 640px; margin: 32px auto 0; font-size: 14px; color: var(--rouaa-text-muted); text-align: center; line-height: var(--leading-relaxed);">ROUAA does not compete with your market data, OMS, or collaboration tools. It sits above them — consuming verified inputs and producing governance-ready intelligence that feeds back into your existing stack.</p>
     </div>
   </section>
 
@@ -455,7 +649,7 @@
         <div class="card card-accent">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Deployment 01</div>
           <h3 style="font-size: 20px; margin-bottom: 10px;">Cloud</h3>
-          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">ROUAA-hosted market intelligence infrastructure with full evidence architecture, event detection, and trading context workflows — fastest path to deployment with low-latency access to source monitoring.</p>
+          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Rapid deployment for research and trading intelligence. ROUAA-hosted market intelligence infrastructure with full evidence architecture, event detection, and trading context workflows — fastest path to deployment with low-latency access to source monitoring.</p>
           <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
             <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Ideal For</div>
             <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Research teams, quant teams, and brokers seeking rapid deployment without infrastructure overhead or dedicated capacity commitments.</div>
@@ -464,7 +658,7 @@
         <div class="card card-accent">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Deployment 02</div>
           <h3 style="font-size: 20px; margin-bottom: 10px;">Private Cloud</h3>
-          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Dedicated, isolated ROUAA environment within your cloud tenancy — evidence layer, knowledge graph, and governance controls operated under your security perimeter with full tenant isolation.</p>
+          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Dedicated trading intelligence environment within your cloud tenancy — evidence layer, knowledge graph, and governance controls operated under your security perimeter with full tenant isolation and dedicated capacity.</p>
           <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
             <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Ideal For</div>
             <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Trading desks, brokers, and regulated institutions requiring tenant isolation, dedicated capacity, and cloud-native controls without sacrificing data sovereignty.</div>
@@ -473,7 +667,7 @@
         <div class="card card-accent">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Deployment 03</div>
           <h3 style="font-size: 20px; margin-bottom: 10px;">Hybrid</h3>
-          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Selected intelligence services operate in the managed cloud while sensitive portfolio data and trading decision records remain inside your infrastructure. Data residency without operational compromise.</p>
+          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Low-latency trading with governed evidence. Selected intelligence services operate in the managed cloud while sensitive portfolio data and trading decision records remain inside your infrastructure. Data residency without operational compromise.</p>
           <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
             <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Ideal For</div>
             <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Trading desks and quant teams with split workloads — proprietary strategies on-prem, market intelligence in cloud.</div>
@@ -482,7 +676,7 @@
         <div class="card card-accent">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Deployment 04</div>
           <h3 style="font-size: 20px; margin-bottom: 10px;">On-Premise</h3>
-          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Full ROUAA market intelligence infrastructure deployed inside your data center — complete data sovereignty, evidence provenance, and governance under your direct control, with low-latency local access.</p>
+          <p style="font-size: 13px; line-height: var(--leading-relaxed); margin-bottom: 16px;">Trading intelligence inside regulated environments. Full ROUAA market intelligence infrastructure deployed inside your data center — complete data sovereignty, evidence provenance, and governance under your direct control, with low-latency local access.</p>
           <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
             <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Ideal For</div>
             <div style="font-size: 12px; color: var(--rouaa-text-secondary);">Institutions with strict latency, data residency, or air-gapped trading-floor requirements.</div>
@@ -526,9 +720,9 @@
   <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
     <div class="container">
       <span class="eyebrow" style="display: block; margin-bottom: 16px;">Market Intelligence Infrastructure</span>
-      <h2>Assess your market workflow.</h2>
+      <h2>Assess how your trading desk turns market events into decisions.</h2>
       <p style="max-width: 640px; margin: 0 auto 32px;">
-        Trading desks do not need another data feed. They need an honest assessment of where their decisions lose context — and how evidence architecture closes that gap. Request an institutional market assessment, not a demo.</p>
+        We will identify where context, evidence, and governance are lost in your current workflow &mdash; and show how ROUAA closes those gaps without replacing your existing trading stack. Request an institutional market assessment, not a demo.</p>
       <div style="max-width: 560px; margin: 0 auto 32px; padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
         <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 16px; text-align: center;">Assessment includes</div>
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 13px; color: var(--rouaa-text-secondary);">
