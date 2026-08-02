@@ -1294,7 +1294,7 @@
       <div class="vr-hero-glow"></div>
       <div class="container">
         <div class="vr-hero-content">
-          <span class="eyebrow">ROUAA Institutional Intelligence Design System &middot; v1.0</span>
+          <span class="eyebrow">ROUAA Institutional Intelligence Design System &middot; v1.0 FINAL</span>
           <h1>The unified design, data, and interaction language behind <span class="text-accent">ROUAA intelligence infrastructure</span>.</h1>
           <p class="lead">This is not a style guide. It is the operating language of an intelligence institution &mdash; surfaces that hold data, intelligence objects that carry provenance, evidence patterns that prove every claim, and operational states that reflect how the system actually runs. Every ROUAA interface inherits from here.</p>
           <div class="vr-hero-meta">
@@ -1302,7 +1302,7 @@
             <span class="font-mono" style="color: var(--rouaa-text-primary); font-size: 12px;">VR-001</span>
             <span class="sep"></span>
             <span class="mono-label">SECTIONS</span>
-            <span class="font-mono" style="color: var(--rouaa-text-primary); font-size: 12px;">16</span>
+            <span class="font-mono" style="color: var(--rouaa-text-primary); font-size: 12px;">17</span>
             <span class="sep"></span>
             <span class="mono-label">STATUS</span>
             <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--rouaa-green); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
@@ -1315,7 +1315,20 @@
 
     <hr class="vr-divider">
 
-    <!-- ============ SECTION 1: COLOR SYSTEM ============ -->
+    <!-- ============ FAILURE PHILOSOPHY (strategic statement) ============ -->
+    <section class="vr-section" id="sec-philosophy" style="padding: 80px 0 64px;">
+      <div class="container">
+        <div class="reveal" style="max-width: 760px; margin: 0 auto; text-align: center; padding: 48px 32px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md);">
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 20px;">Foundational Principle</div>
+          <p style="font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; line-height: 1.4; color: var(--rouaa-text-primary); margin: 0 0 20px; letter-spacing: -0.01em;">ROUAA does not optimize for producing more outputs.<br>It optimizes for producing <span style="color: var(--rouaa-accent);">defensible outputs</span>.</p>
+          <p style="font-size: 15px; color: var(--rouaa-text-secondary); line-height: 1.7; margin: 0;">The competition is not speed. The competition is trust. An institution that publishes 50 unverifiable claims has nothing. An institution that publishes 5 claims &mdash; each traceable to a source, each carrying its evidence, each defensible under audit &mdash; has infrastructure. Every design decision in this system serves that principle.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+<!-- ============ SECTION 1: COLOR SYSTEM ============ -->
     <section class="vr-section" id="sec-color">
       <div class="container">
         <div class="vr-section-head reveal">
@@ -1643,11 +1656,195 @@
 
     <hr class="vr-divider">
 
+    <!-- ============ SECTION 03: INTELLIGENCE OBJECT MODEL ============ -->
+    <section class="vr-section alt" id="sec-intel-object">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 03</span>
+          <span class="eyebrow">Intelligence Object Model &middot; The Atomic Unit</span>
+          <h2>What ROUAA actually produces.</h2>
+          <p>The evidence chain proves <em>how</em> a claim is verified. The Intelligence Object is <em>what</em> ROUAA produces &mdash; a typed, reusable, traceable artifact that carries its own provenance, confidence, and consumer list. This is the atomic unit of the entire system: every workflow, every output, every decision starts from or arrives at an Intelligence Object.</p>
+        </div>
+
+        <div class="reveal" style="max-width: 880px; margin: 0 auto;">
+
+          <!-- The canonical Intelligence Object example -->
+          <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md); padding: 0; overflow: hidden;">
+
+            <!-- Object header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--rouaa-bg-tertiary); border-bottom: 1px solid var(--rouaa-surface-border-strong); flex-wrap: wrap; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); padding: 3px 8px; border: 1px solid var(--rouaa-accent-border); background: var(--rouaa-accent-subtle); border-radius: var(--radius-sm);">INTELLIGENCE OBJECT</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">EVT-FOMC-2026-08-001</span>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">
+                <span class="pulse-dot"></span> VERIFIED
+              </span>
+            </div>
+
+            <!-- Object body: 6-field grid -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rouaa-surface-border-strong);">
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Type</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-accent);">Event</div>
+              </div>
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Entity</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Federal Reserve &middot; FOMC</div>
+              </div>
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Fact</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Rate maintained at 5.25&ndash;5.50%</div>
+              </div>
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Evidence</div>
+                <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement &middot; p.1 &sect;2</div>
+              </div>
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Confidence</div>
+                <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">97.4%</div>
+              </div>
+              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Used By</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Research</span>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Trading</span>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Risk</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Object footer: dependency model -->
+            <div style="padding: 14px 24px; background: var(--rouaa-bg-tertiary); border-top: 1px solid var(--rouaa-surface-border-strong); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">
+              <span><span style="color: var(--rouaa-text-muted); font-weight: 700;">DEPENDS ON:</span> <span style="color: var(--rouaa-text-secondary);">Layer 01 (Source Registry), Layer 02 (Document Intelligence), Layer 03 (Fact Engine)</span></span>
+              <span><span style="color: var(--rouaa-text-muted); font-weight: 700;">FEEDS:</span> <span style="color: var(--rouaa-text-secondary);">Layer 06 (Knowledge Graph), Investment Intelligence, Risk Intelligence</span></span>
+            </div>
+          </div>
+
+          <!-- Object anatomy legend -->
+          <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Type</div>
+              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Fact, Event, Entity, Evidence Package, Scenario, or Forecast. The type determines which fields the object carries.</p>
+            </div>
+            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Provenance</div>
+              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Source ID, document locator, page and section. Every object traces back to a verifiable original. No anonymous intelligence.</p>
+            </div>
+            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Confidence</div>
+              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">A defensible score with methodology. Not a vibe. Not a percentage plucked from a model. The method is documented and auditable.</p>
+            </div>
+          </div>
+
+          <!-- Used By tag bar -->
+          <div style="margin-top: 24px; padding: 16px 24px; background: var(--rouaa-bg-tertiary); border: 1px dashed var(--rouaa-border); border-radius: var(--radius-md); text-align: center;">
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted);">REUSABILITY RULE</span>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--rouaa-text-secondary); line-height: 1.6;">One Intelligence Object can be consumed by multiple workflows. The same FOMC Rate Decision object feeds a research brief, a trading signal, and a risk dashboard &mdash; all from one verified source.</p>
+          </div>
+
+          <!-- Object Relationships Model -->
+          <div style="margin-top: 32px;">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rouaa-border);">Object Relationships</div>
+            <p style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: 1.7; margin-bottom: 24px;">An Intelligence Object is not an isolated record. It participates in a typed relationship graph &mdash; events are caused by source documents, supported by facts, influence scenarios, and are consumed by workflows. These relationships are first-class data, not afterthoughts.</p>
+            
+            <div style="background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-md); padding: 28px 32px;">
+              <!-- Vertical relationship chain -->
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
+
+                <!-- Event node -->
+                <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-sm); padding: 12px 24px; min-width: 280px; text-align: center;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Event</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Rate Decision</div>
+                </div>
+
+                <!-- caused by -->
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 2px 8px;">caused by</span>
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                </div>
+
+                <!-- Source Document node -->
+                <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 12px 24px; min-width: 280px; text-align: center;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Source Document</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement &middot; 2026-08</div>
+                </div>
+
+                <!-- supports -->
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 2px 8px;">supports</span>
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                </div>
+
+                <!-- Fact node -->
+                <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 12px 24px; min-width: 280px; text-align: center;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Fact</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Rate maintained 5.25&ndash;5.50%</div>
+                </div>
+
+                <!-- influences -->
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 2px 8px;">influences</span>
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                </div>
+
+                <!-- Scenario node -->
+                <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 12px 24px; min-width: 280px; text-align: center;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Scenario</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Base Case &middot; 60% probability</div>
+                </div>
+
+                <!-- consumed by -->
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 2px 8px;">consumed by</span>
+                  <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+                </div>
+
+                <!-- Workflow node -->
+                <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 12px 24px; min-width: 280px; text-align: center;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Workflow</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Investment Brief &middot; Risk Dashboard</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Relationship types legend -->
+            <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+              <div style="padding: 12px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">caused by</div>
+                <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.5; margin: 0;">Links an event to the source document that triggered it.</p>
+              </div>
+              <div style="padding: 12px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">supports</div>
+                <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.5; margin: 0;">Links a fact to the evidence that verifies it.</p>
+              </div>
+              <div style="padding: 12px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">influences</div>
+                <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.5; margin: 0;">Links an event or fact to the scenarios it affects.</p>
+              </div>
+              <div style="padding: 12px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">
+                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">consumed by</div>
+                <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.5; margin: 0;">Links an object to the workflows that use it.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
     <!-- ============ SECTION 3: BUTTONS ============ -->
     <section class="vr-section" id="sec-buttons">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 03</span>
+          <span class="vr-section-num">Section 04</span>
           <span class="eyebrow">Buttons</span>
           <h2>Interaction primitives.</h2>
           <p>Four button tiers. <strong style="color: var(--rouaa-text-primary);">Primary</strong> = dark surface + gold border + gold text &mdash; the default institutional action. <strong style="color: var(--rouaa-accent);">Commercial CTA</strong> = full gold, used <em>only</em> for commercial contact. Secondary is structural steel. Ghost is for tertiary navigation.</p>
@@ -1741,10 +1938,10 @@
     <section class="vr-section alt" id="sec-surfaces">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 04</span>
+          <span class="vr-section-num">Section 05</span>
           <span class="eyebrow">Institutional Surfaces</span>
           <h2>Solid graphite, hard boundaries.</h2>
-          <p>Not glass. Not translucent. Institutions like Bloomberg, Aladdin, and Palantir Foundry use solid surfaces with hard 1px borders &mdash; layer separation is achieved through background contrast, not blur. Four surface types, each with a specific role.</p>
+          <p>ROUAA surfaces are designed for information density, operational clarity, and long-term institutional use. Depth is created through hierarchy, contrast, and structure &mdash; not decorative effects. Four surface types, each with a specific role.</p>
         </div>
 
         <div class="vr-card-grid reveal-stagger">
@@ -1813,7 +2010,7 @@
     <section class="vr-section" id="sec-badges">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 05</span>
+          <span class="vr-section-num">Section 06</span>
           <span class="eyebrow">Status Badges</span>
           <h2>System state, encoded.</h2>
           <p>Same shape, same size, same padding &mdash; only color and text change. Monospace, uppercase, tracked. Used across consoles, layer cards, and source registries.</p>
@@ -1848,7 +2045,7 @@
     <section class="vr-section alt" id="sec-layer">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 06</span>
+          <span class="vr-section-num">Section 07</span>
           <span class="eyebrow">Architecture Layer Card</span>
           <h2>The atomic unit of the architecture view.</h2>
           <p>Each layer is a self-contained card: gold icon, mono layer number, name, status, and a description that progressively discloses on hover. Default state on the left; hovered (description visible) on the right.</p>
@@ -1896,7 +2093,7 @@
     <section class="vr-section" id="sec-evidence">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 07</span>
+          <span class="vr-section-num">Section 08</span>
           <span class="eyebrow">Evidence Chain Diagram</span>
           <h2>Source to output, verifiable.</h2>
           <p>Six nodes connected by animated dashed lines. The chain extends beyond evidence to the <strong style="color: var(--rouaa-text-primary);">Intelligence Object</strong> &mdash; the reusable, traceable artifact that ROUAA produces. The final node carries the gold accent &mdash; the verified output. Every ROUAA intelligence product traces this chain.</p>
@@ -1978,7 +2175,7 @@
     <section class="vr-section alt" id="sec-console">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 08</span>
+          <span class="vr-section-num">Section 09</span>
           <span class="eyebrow">System Status Console</span>
           <h2>The operational view.</h2>
           <p>Console-style panel with a LIVE indicator, zebra-striped rows, and per-component status. Monospace throughout &mdash; this is data, not marketing.</p>
@@ -2043,7 +2240,7 @@
     <section class="vr-section" id="sec-pipeline">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 09</span>
+          <span class="vr-section-num">Section 10</span>
           <span class="eyebrow">Pipeline Schematic</span>
           <h2>Official Information &rarr; Core &rarr; Intelligence Objects &rarr; Workflows &rarr; Decisions.</h2>
           <p>The pipeline is not "data in, app out." Between the intelligence core and the applications sits the <strong style="color: var(--rouaa-accent);">Intelligence Objects</strong> layer &mdash; the reusable artifacts (facts, events, evidence packages) that multiple workflows consume. This is the value layer of ROUAA.</p>
@@ -2223,7 +2420,7 @@
     <section class="vr-section alt" id="sec-comparison">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 10</span>
+          <span class="vr-section-num">Section 11</span>
           <span class="eyebrow">Comparison Table</span>
           <h2>Without infrastructure. With ROUAA.</h2>
           <p>Two columns, alternating row backgrounds, gold-tinted ROUAA column. Each row is a transformation &mdash; from raw to structured, from disconnected to connected.</p>
@@ -2286,7 +2483,7 @@
     <section class="vr-section" id="sec-metrics">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 11</span>
+          <span class="vr-section-num">Section 12</span>
           <span class="eyebrow">Metric Components</span>
           <h2>Numbers, when they mean something.</h2>
           <p>Operational metrics, not marketing numbers. Each metric reflects what the system actually produces &mdash; sources verified, documents processed, evidence packages assembled, events detected, knowledge entities mapped. Gold numerals, mono labels. Used sparingly.</p>
@@ -2323,7 +2520,7 @@
     <section class="vr-section alt" id="sec-animations">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 12</span>
+          <span class="vr-section-num">Section 13</span>
           <span class="eyebrow">Animation Demos</span>
           <h2>Motion, operational not decorative.</h2>
           <p>Every animation communicates system state. <strong style="color: var(--rouaa-text-primary);">Data movement</strong> is the signature &mdash; particles flowing through the pipeline show the system processing, not just displaying. Scroll reveals cascade. Pulses confirm the system is alive. Hovers acknowledge presence. No bounce. No elastic. No decoration.</p>
@@ -2437,7 +2634,7 @@
     <section class="vr-section" id="sec-rhythm">
       <div class="container">
         <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 13</span>
+          <span class="vr-section-num">Section 14</span>
           <span class="eyebrow">Section Rhythm</span>
           <h2>The page breathes.</h2>
           <p>Backgrounds alternate between primary and secondary navy. Between sections, a 1px gradient line creates visual pause without heavy separation. Not every section is the same height &mdash; the rhythm varies.</p>
@@ -2463,99 +2660,6 @@
               <div class="rhythm-hex">#080B12</div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="vr-divider">
-
-    <!-- ============ SECTION 14: INTELLIGENCE OBJECT MODEL ============ -->
-    <section class="vr-section alt" id="sec-intel-object">
-      <div class="container">
-        <div class="vr-section-head reveal">
-          <span class="vr-section-num">Section 14</span>
-          <span class="eyebrow">Intelligence Object Model</span>
-          <h2>What ROUAA actually produces.</h2>
-          <p>The evidence chain proves <em>how</em> a claim is verified. The Intelligence Object is <em>what</em> ROUAA produces &mdash; a typed, reusable, traceable artifact that carries its own provenance, confidence, and consumer list. This is the component neither Bloomberg nor ChatGPT has.</p>
-        </div>
-
-        <div class="reveal" style="max-width: 880px; margin: 0 auto;">
-
-          <!-- The canonical Intelligence Object example -->
-          <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md); padding: 0; overflow: hidden;">
-
-            <!-- Object header -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--rouaa-bg-tertiary); border-bottom: 1px solid var(--rouaa-surface-border-strong); flex-wrap: wrap; gap: 12px;">
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); padding: 3px 8px; border: 1px solid var(--rouaa-accent-border); background: var(--rouaa-accent-subtle); border-radius: var(--radius-sm);">INTELLIGENCE OBJECT</span>
-                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">EVT-FOMC-2026-08-001</span>
-              </div>
-              <span style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">
-                <span class="pulse-dot"></span> VERIFIED
-              </span>
-            </div>
-
-            <!-- Object body: 6-field grid -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rouaa-surface-border-strong);">
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Type</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-accent);">Event</div>
-              </div>
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Entity</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Federal Reserve &middot; FOMC</div>
-              </div>
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Fact</div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Rate maintained at 5.25&ndash;5.50%</div>
-              </div>
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Evidence</div>
-                <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement &middot; p.1 &sect;2</div>
-              </div>
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Confidence</div>
-                <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">97.4%</div>
-              </div>
-              <div style="background: var(--rouaa-surface); padding: 18px 20px;">
-                <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Used By</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Research</span>
-                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Trading</span>
-                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Risk</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Object footer: dependency model -->
-            <div style="padding: 14px 24px; background: var(--rouaa-bg-tertiary); border-top: 1px solid var(--rouaa-surface-border-strong); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">
-              <span><span style="color: var(--rouaa-text-muted); font-weight: 700;">DEPENDS ON:</span> <span style="color: var(--rouaa-text-secondary);">Layer 01 (Source Registry), Layer 02 (Document Intelligence), Layer 03 (Fact Engine)</span></span>
-              <span><span style="color: var(--rouaa-text-muted); font-weight: 700;">FEEDS:</span> <span style="color: var(--rouaa-text-secondary);">Layer 06 (Knowledge Graph), Investment Intelligence, Risk Intelligence</span></span>
-            </div>
-          </div>
-
-          <!-- Object anatomy legend -->
-          <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
-              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Type</div>
-              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Fact, Event, Entity, Evidence Package, Scenario, or Forecast. The type determines which fields the object carries.</p>
-            </div>
-            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
-              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Provenance</div>
-              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">Source ID, document locator, page and section. Every object traces back to a verifiable original. No anonymous intelligence.</p>
-            </div>
-            <div style="padding: 18px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
-              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Confidence</div>
-              <p style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.6;">A defensible score with methodology. Not a vibe. Not a percentage plucked from a model. The method is documented and auditable.</p>
-            </div>
-          </div>
-
-          <!-- Used By tag bar -->
-          <div style="margin-top: 24px; padding: 16px 24px; background: var(--rouaa-bg-tertiary); border: 1px dashed var(--rouaa-border); border-radius: var(--radius-md); text-align: center;">
-            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted);">REUSABILITY RULE</span>
-            <p style="margin: 8px 0 0; font-size: 14px; color: var(--rouaa-text-secondary); line-height: 1.6;">One Intelligence Object can be consumed by multiple workflows. The same FOMC Rate Decision object feeds a research brief, a trading signal, and a risk dashboard &mdash; all from one verified source.</p>
-          </div>
-
         </div>
       </div>
     </section>
@@ -2805,13 +2909,122 @@
 
     <hr class="vr-divider">
 
+    <!-- ============ SECTION 17: HUMAN OVERSIGHT LAYER ============ -->
+    <section class="vr-section" id="sec-oversight">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 17</span>
+          <span class="eyebrow">Human Oversight Layer</span>
+          <h2>The human is part of the system.</h2>
+          <p>Investment committees and regulators do not trust autonomous AI. ROUAA does not pretend to be autonomous. Every high-stakes intelligence object passes through a documented human oversight chain before publication. The human is not a fallback &mdash; the human is a layer.</p>
+        </div>
+
+        <div class="reveal" style="max-width: 920px; margin: 0 auto;">
+
+          <!-- Oversight pipeline -->
+          <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-md); padding: 40px 32px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
+
+              <!-- Step 1: Automation -->
+              <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 640px;">
+                <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--rouaa-text-muted); min-width: 40px; text-align: right;">01</div>
+                <div style="flex: 1; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Automation</div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">System extracts, classifies, and assembles</div>
+                  <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 6px 0 0;">Source fetched, document parsed, facts extracted, evidence chain assembled, confidence scored. All automated, all logged.</p>
+                </div>
+              </div>
+
+              <!-- Arrow -->
+              <div style="width: 1px; height: 24px; background: var(--rouaa-surface-border-strong); margin: 4px 0;"></div>
+
+              <!-- Step 2: Evidence Validation -->
+              <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 640px;">
+                <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--rouaa-text-muted); min-width: 40px; text-align: right;">02</div>
+                <div style="flex: 1; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Evidence Validation</div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Chain integrity verified</div>
+                  <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 6px 0 0;">Source &rarr; Document &rarr; Fact &rarr; Evidence links confirmed. Locator (page, section) re-checked against original.</p>
+                </div>
+              </div>
+
+              <!-- Arrow -->
+              <div style="width: 1px; height: 24px; background: var(--rouaa-surface-border-strong); margin: 4px 0;"></div>
+
+              <!-- Step 3: Confidence Assessment -->
+              <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 640px;">
+                <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--rouaa-text-muted); min-width: 40px; text-align: right;">03</div>
+                <div style="flex: 1; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Confidence Assessment</div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Score compared to threshold</div>
+                  <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 6px 0 0;">If confidence &ge; 85% and policy allows, object may auto-publish. If below threshold, routed to human review.</p>
+                </div>
+              </div>
+
+              <!-- Arrow -->
+              <div style="width: 1px; height: 24px; background: var(--rouaa-accent); margin: 4px 0;"></div>
+
+              <!-- Step 4: Human Review (highlighted) -->
+              <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 640px;">
+                <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--rouaa-accent); min-width: 40px; text-align: right;">04</div>
+                <div style="flex: 1; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-sm); padding: 16px 20px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent);">Human Review</div>
+                    <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent);">REQUIRED FOR HIGH-STAKES</span>
+                  </div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Analyst signs off, edits, or rejects</div>
+                  <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 6px 0 0;">A named human reviewer examines the object, confirms the evidence, and either approves, amends, or suppresses. The reviewer's identity is recorded in the object's provenance.</p>
+                </div>
+              </div>
+
+              <!-- Arrow -->
+              <div style="width: 1px; height: 24px; background: var(--rouaa-surface-border-strong); margin: 4px 0;"></div>
+
+              <!-- Step 5: Institutional Publication -->
+              <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 640px;">
+                <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--rouaa-text-muted); min-width: 40px; text-align: right;">05</div>
+                <div style="flex: 1; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-green); margin-bottom: 4px;">Institutional Publication</div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Object published, immutable, auditable</div>
+                  <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 6px 0 0;">Once published, the object is versioned and immutable. Every downstream consumer sees the same verified object with the same provenance.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Oversight principles -->
+          <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div style="padding: 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Principle 01</div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 6px;">Named, not anonymous</div>
+              <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 0;">Every human review is attributed to a named analyst. No anonymous approvals. No "the system decided."</p>
+            </div>
+            <div style="padding: 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Principle 02</div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 6px;">Policy-driven, not ad-hoc</div>
+              <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 0;">Which object types require review is defined by institutional policy &mdash; not by the model, not by the analyst, not by the moment.</p>
+            </div>
+            <div style="padding: 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 8px;">Principle 03</div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 6px;">Auditable after the fact</div>
+              <p style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 0;">Three years later, an auditor can reconstruct: who reviewed, when, what they saw, what they decided. The review record is permanent.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
     <!-- ============ CLOSING ============ -->
     <section class="vr-section" style="text-align: center;">
       <div class="container">
         <div class="reveal" style="max-width: 720px; margin: 0 auto;">
-          <span class="eyebrow">End of Design System</span>
+          <span class="eyebrow">Design System v1.0 &middot; Frozen</span>
           <h2 style="font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--rouaa-text-primary); margin: 12px 0 18px;">This is the DNA. Every ROUAA page inherits from here.</span>
-          <p style="font-size: 16px; color: var(--rouaa-text-secondary); line-height: 1.7; margin-bottom: 32px;">When building a new ROUAA interface, return to this system. Verify every surface, intelligence object, evidence pattern, and operational state traces back to a definition here. If it isn't in the system, it isn't ROUAA.</p>
+          <p style="font-size: 16px; color: var(--rouaa-text-secondary); line-height: 1.7; margin-bottom: 32px;">This system is now the fixed reference. Every ROUAA interface &mdash; architecture page, evidence explorer, product experience center, homepage &mdash; will be rebuilt against these definitions. No new sections. No new colors. No new patterns. The work moves from designing the system to applying it.</p>
           <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
             <a href="architecture.html" class="btn btn-primary">View Architecture Page</a>
             <a href="VISUAL-IDENTITY-SYSTEM.md" class="btn btn-secondary">Read Identity Spec</a>
