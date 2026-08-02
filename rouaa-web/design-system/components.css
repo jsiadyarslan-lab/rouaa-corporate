@@ -29,15 +29,15 @@
 
 .btn-primary {
   background: var(--rouaa-accent);
-  color: var(--rouaa-bg-primary);
-  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.2);
+  color: #050810;
+  box-shadow: 0 2px 12px var(--rouaa-glow-accent);
 }
 
 .btn-primary:hover {
   background: var(--rouaa-accent-hover);
-  color: var(--rouaa-bg-primary);
+  color: #050810;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.3);
+  box-shadow: 0 4px 20px var(--rouaa-glow-accent-strong);
 }
 
 .btn-secondary {
@@ -63,19 +63,22 @@
   color: var(--rouaa-accent);
 }
 
-/* ---- Card System ---- */
+/* ---- Card System (glassmorphism enhanced) ---- */
 .card {
   background: var(--rouaa-surface);
-  border: 1px solid var(--rouaa-border);
+  border: 1px solid var(--rouaa-glass-border);
   border-radius: var(--radius-lg);
   padding: var(--space-2xl);
   transition: all var(--transition-base);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .card:hover {
   background: var(--rouaa-surface-hover);
-  border-color: var(--rouaa-border-strong);
-  box-shadow: var(--shadow-md);
+  border-color: var(--rouaa-accent-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--rouaa-glass-border);
+  transform: translateY(-2px);
 }
 
 .card-accent {
