@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Visual Reference — The Visual DNA of Institutional Intelligence</title>
+  <meta name="description" content="The visual DNA reference page for ROUAA — every color, type style, component, and pattern that defines the visual language of institutional financial intelligence infrastructure.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ============================================================
+       ROUAA VISUAL REFERENCE — The Visual DNA Page
+       Single-file reference demonstrating every component, color,
+       typography choice, layout pattern, animation, and visual
+       metaphor that defines ALL future ROUAA pages.
+
+       Built on: design-system/tokens + typography + components
+                 + styles.css (navbar/footer)
+       ============================================================ */
+
+    /* ===== Page wrapper (offset for fixed navbar) ===== */
+    .vr-main { padding-top: 64px; }
+
+    /* ===== Reference Section Layout ===== */
+    .vr-section {
+      padding: 96px 0;
+      position: relative;
+      border-top: 1px solid transparent;
+    }
+    .vr-section.alt {
+      background: var(--rouaa-bg-secondary);
+      border-top: 1px solid var(--rouaa-border);
+    }
+    .vr-section .container { max-width: var(--container-wide); }
+
+    @media (max-width: 768px) {
+      .vr-section { padding: 64px 0; }
+    }
+
+    /* ===== Section Divider (gradient line) ===== */
+    .vr-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--rouaa-border-strong) 50%, transparent 100%);
+      margin: 0;
+      border: none;
+    }
+
+    /* ===== Reference Section Header ===== */
+    .vr-section-head {
+      max-width: 760px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .vr-section-head .vr-section-num {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      padding: 4px 12px;
+      border: 1px solid var(--rouaa-accent-border);
+      background: var(--rouaa-accent-subtle);
+      border-radius: var(--radius-sm);
+      margin-bottom: 18px;
+    }
+    .vr-section-head .eyebrow {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .vr-section-head h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: var(--weight-bold);
+      line-height: 1.15;
+      letter-spacing: var(--tracking-tight);
+      color: var(--rouaa-text-primary);
+      margin-bottom: 14px;
+    }
+    .vr-section-head p {
+      font-size: 16px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .vr-section-head { margin-bottom: 48px; }
+    }
+
+    /* ===== Reference Hero ===== */
+    .vr-hero {
+      position: relative;
+      padding: 144px 0 96px;
+      background: var(--rouaa-bg-primary);
+      overflow: hidden;
+      border-bottom: 1px solid var(--rouaa-border);
+    }
+    @media (max-width: 768px) { .vr-hero { padding: 120px 0 64px; } }
+
+    .vr-hero-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(201, 162, 39, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 162, 39, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black, transparent 80%);
+    }
+    .vr-hero-glow {
+      position: absolute;
+      top: 15%; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.05), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(20px);
+    }
+    .vr-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .vr-hero .eyebrow {
+      display: block;
+      margin-bottom: 24px;
+    }
+    .vr-hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: var(--weight-bold);
+      line-height: 1.1;
+      letter-spacing: var(--tracking-tight);
+      color: var(--rouaa-text-primary);
+      margin: 0 auto 24px;
+      max-width: 18ch;
+    }
+    .vr-hero h1 .text-accent { color: var(--rouaa-accent); }
+    .vr-hero .lead {
+      font-size: 18px;
+      color: var(--rouaa-text-secondary);
+      line-height: 1.7;
+      max-width: 62ch;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) { .vr-hero .lead { font-size: 16px; } }
+
+    .vr-hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 10px 18px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      color: var(--rouaa-text-secondary);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .vr-hero-meta .mono-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+    }
+    .vr-hero-meta .sep {
+      width: 1px;
+      height: 12px;
+      background: var(--rouaa-border-strong);
+    }
+
+    /* ===== Scroll Reveal (reference) ===== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-stagger > * { opacity: 0; transform: translateY(18px); transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1), transform 600ms cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 240ms; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 320ms; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 400ms; }
+    .reveal-stagger.visible > *:nth-child(7) { transition-delay: 480ms; }
+    .reveal-stagger.visible > *:nth-child(8) { transition-delay: 560ms; }
+
+    /* ===== Pulse Dot (reused from arch pages) ===== */
+    .pulse-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--rouaa-green);
+      flex-shrink: 0;
+      animation: pulse-green 2.5s ease-in-out infinite;
+    }
+    .pulse-dot.gold { background: var(--rouaa-accent); animation-name: pulse-gold; }
+    .pulse-dot.blue { background: var(--rouaa-blue); animation-name: pulse-blue; }
+    .pulse-dot.muted { background: var(--rouaa-text-muted); animation-name: pulse-muted; }
+    @keyframes pulse-green {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(32, 168, 120, 0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(32, 168, 120, 0); }
+    }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(201, 162, 39, 0); }
+    }
+    @keyframes pulse-blue {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 144, 217, 0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(74, 144, 217, 0); }
+    }
+    @keyframes pulse-muted {
+      0%, 100% { opacity: 0.7; box-shadow: 0 0 0 0 rgba(148, 158, 175, 0.4); }
+      50% { opacity: 0.4; box-shadow: 0 0 0 5px rgba(148, 158, 175, 0); }
+    }
+
+    /* ===== Status Badge (reusable, consistent shape) ===== */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 9px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .status-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+    .status-badge.op  { color: var(--rouaa-green);  background: rgba(32, 168, 120, 0.10); border-color: rgba(32, 168, 120, 0.20); }
+    .status-badge.ver { color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent-border); }
+    .status-badge.bld { color: var(--rouaa-amber);  background: var(--rouaa-amber-subtle); border-color: rgba(245, 166, 35, 0.20); }
+    .status-badge.sup { color: var(--rouaa-blue);   background: var(--rouaa-blue-subtle);  border-color: rgba(74, 144, 217, 0.20); }
+
+    /* ============================================================
+       SECTION 1: COLOR SYSTEM
+       ============================================================ */
+    .vr-color-group { margin-bottom: 40px; }
+    .vr-color-group:last-child { margin-bottom: 0; }
+    .vr-color-group-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rouaa-border);
+    }
+    .vr-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .vr-swatch {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 250ms ease, transform 250ms ease;
+    }
+    .vr-swatch:hover {
+      border-color: var(--rouaa-surface-border-strong);
+      transform: translateY(-2px);
+    }
+    .vr-swatch-chip {
+      height: 64px;
+      border-bottom: 1px solid var(--rouaa-border);
+      position: relative;
+    }
+    .vr-swatch-body { padding: 12px 14px; }
+    .vr-swatch-name {
+      font-size: 13px;
+      font-weight: var(--weight-semibold);
+      color: var(--rouaa-text-primary);
+      margin-bottom: 4px;
+    }
+    .vr-swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--rouaa-text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       SECTION 2: TYPOGRAPHY
+       ============================================================ */
+    .vr-type-stack {
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .vr-type-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rouaa-border);
+      align-items: baseline;
+    }
+    .vr-type-row:last-child { border-bottom: none; }
+    .vr-type-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      line-height: 1.6;
+    }
+    .vr-type-meta .name { display: block; color: var(--rouaa-accent); margin-bottom: 4px; }
+    .vr-type-sample { color: var(--rouaa-text-primary); }
+    .vr-type-h1 { font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+    .vr-type-h2 { font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+    .vr-type-h3 { font-size: 24px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+    .vr-type-h4 { font-size: 21px; font-weight: 600; line-height: 1.3; }
+    .vr-type-body-lg { font-size: 18px; font-weight: 400; line-height: 1.7; color: var(--rouaa-text-secondary); }
+    .vr-type-body    { font-size: 16px; font-weight: 400; line-height: 1.7; color: var(--rouaa-text-secondary); }
+    .vr-type-body-sm { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--rouaa-text-secondary); }
+    .vr-type-label   { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); }
+    .vr-type-mono-label { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); }
+    .vr-type-mono-data  { font-family: var(--font-mono); font-size: 13px; font-weight: 400; color: var(--rouaa-text-primary); font-variant-numeric: tabular-nums; }
+
+    @media (max-width: 768px) {
+      .vr-type-row { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+      .vr-type-h1 { font-size: 36px; }
+      .vr-type-h2 { font-size: 28px; }
+    }
+
+    /* ============================================================
+       SECTION 3: BUTTONS
+       ============================================================ */
+    .vr-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .vr-btn-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .vr-btn-card-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+    }
+    .vr-btn-states {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .vr-btn-state {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+    }
+    .vr-btn-state .state-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      min-width: 56px;
+    }
+    @media (max-width: 768px) {
+      .vr-btn-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 4: CARDS (glassmorphism)
+       ============================================================ */
+    .vr-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .vr-demo-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 250ms ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+    .vr-demo-card:hover {
+      background: var(--rouaa-surface-hover);
+      border-color: var(--rouaa-accent-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--rouaa-glass-border);
+      transform: translateY(-2px);
+    }
+    .vr-demo-card.accent {
+      border-left: 3px solid var(--rouaa-accent);
+    }
+    .vr-demo-card-icon {
+      width: 32px; height: 32px;
+      color: var(--rouaa-accent);
+      margin-bottom: 16px;
+    }
+    .vr-demo-card-title {
+      font-size: 18px;
+      font-weight: var(--weight-semibold);
+      color: var(--rouaa-text-primary);
+      margin-bottom: 8px;
+    }
+    .vr-demo-card-desc {
+      font-size: 14px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: auto;
+    }
+    .vr-demo-card-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rouaa-border);
+    }
+    @media (max-width: 768px) {
+      .vr-card-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 5: STATUS BADGES
+       ============================================================ */
+    .vr-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      padding: 48px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+    }
+    .vr-badge-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 140px;
+    }
+    .vr-badge-block .label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+    }
+    @media (max-width: 640px) {
+      .vr-badge-row { padding: 24px; gap: 24px; }
+    }
+
+    /* ============================================================
+       SECTION 6: ARCHITECTURE LAYER CARD
+       ============================================================ */
+    .vr-layer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .vr-layer-demo {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 300ms ease;
+      position: relative;
+    }
+    .vr-layer-demo:hover {
+      background: var(--rouaa-surface-hover);
+      border-color: var(--rouaa-accent-border);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .vr-layer-demo-icon {
+      width: 32px; height: 32px;
+      color: var(--rouaa-accent);
+      margin-bottom: 16px;
+    }
+    .vr-layer-demo-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .vr-layer-demo-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+    }
+    .vr-layer-demo-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 8px;
+    }
+    .vr-layer-demo-desc {
+      font-size: 13px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease, opacity 300ms ease, margin 300ms ease;
+    }
+    .vr-layer-demo:hover .vr-layer-demo-desc,
+    .vr-layer-demo.is-hovered .vr-layer-demo-desc {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 8px;
+    }
+    .vr-layer-state-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--rouaa-border);
+    }
+    @media (max-width: 768px) {
+      .vr-layer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 7: EVIDENCE CHAIN DIAGRAM
+       ============================================================ */
+    .vr-evidence-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      overflow-x: auto;
+    }
+    .vr-evidence-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 760px;
+    }
+    .vr-evidence-svg .node-rect {
+      fill: var(--rouaa-bg-tertiary);
+      stroke: var(--rouaa-surface-border-strong);
+      stroke-width: 1;
+      rx: 5;
+      ry: 5;
+    }
+    .vr-evidence-svg .node-rect.final {
+      fill: rgba(201, 162, 39, 0.08);
+      stroke: var(--rouaa-accent);
+      stroke-width: 1.5;
+    }
+    .vr-evidence-svg .node-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      fill: var(--rouaa-text-muted);
+      text-transform: uppercase;
+    }
+    .vr-evidence-svg .node-label.final { fill: var(--rouaa-accent); }
+    .vr-evidence-svg .node-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      fill: var(--rouaa-text-primary);
+    }
+    .vr-evidence-svg .connector {
+      fill: none;
+      stroke: var(--rouaa-surface-border-strong);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
+      animation: dash-flow 1.6s linear infinite;
+    }
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -16; }
+    }
+    .vr-evidence-legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .vr-evidence-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--rouaa-text-muted);
+      letter-spacing: 0.04em;
+    }
+    .vr-evidence-legend-item .swatch {
+      width: 12px; height: 12px;
+      border-radius: 2px;
+      border: 1px solid var(--rouaa-surface-border-strong);
+      background: var(--rouaa-bg-tertiary);
+    }
+    .vr-evidence-legend-item .swatch.final {
+      background: rgba(201, 162, 39, 0.08);
+      border-color: var(--rouaa-accent);
+    }
+
+    /* ============================================================
+       SECTION 8: SYSTEM STATUS CONSOLE
+       ============================================================ */
+    .vr-console {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      font-family: var(--font-mono);
+    }
+    .vr-console-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--rouaa-bg-elevated);
+      border-bottom: 1px solid var(--rouaa-surface-border-strong);
+    }
+    .vr-console-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .vr-console-live {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .vr-console-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .vr-console-table th,
+    .vr-console-table td {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+    .vr-console-table thead th {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--rouaa-surface-border-strong);
+    }
+    .vr-console-table tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.012); }
+    .vr-console-table tbody tr:hover { background: rgba(201, 162, 39, 0.03); }
+    .vr-console-table tbody tr { border-bottom: 1px solid var(--rouaa-border); }
+    .vr-console-table tbody tr:last-child { border-bottom: none; }
+    .vr-console-table td.component {
+      color: var(--rouaa-text-primary);
+      font-weight: 600;
+    }
+    .vr-console-table td.outputs {
+      color: var(--rouaa-text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+    .vr-console-table td.status { text-align: right; }
+
+    /* ============================================================
+       SECTION 9: PIPELINE SCHEMATIC
+       ============================================================ */
+    .vr-pipeline {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .vr-pipe-zone {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .vr-pipe-zone-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .vr-pipe-zone-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-primary);
+    }
+    .vr-pipe-zone-meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+      letter-spacing: 0.04em;
+    }
+    .vr-pipe-zone-meta .count { color: var(--rouaa-accent); font-weight: 700; }
+    .vr-pipe-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .vr-pipe-pill {
+      padding: 7px 13px;
+      background: var(--rouaa-bg-secondary);
+      border: 1px solid var(--rouaa-border);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--rouaa-text-secondary);
+    }
+    .vr-pipe-connector {
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+    }
+    .vr-pipe-connector svg { color: var(--rouaa-accent); opacity: 0.5; }
+    .vr-pipe-core {
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .vr-pipe-core-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      padding: 4px 14px;
+      border: 1px solid var(--rouaa-accent-border);
+      background: var(--rouaa-accent-subtle);
+      border-radius: var(--radius-sm);
+      margin: 0 auto 18px;
+      display: inline-block;
+    }
+    .vr-pipe-core-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 24px;
+    }
+    .vr-pipe-layer-row {
+      display: grid;
+      grid-template-columns: 56px 1fr 140px;
+      gap: 20px;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+    .vr-pipe-layer-row:last-child { margin-bottom: 0; }
+    .vr-pipe-layer-row:hover {
+      border-color: var(--rouaa-surface-border-strong);
+      background: var(--rouaa-surface-hover);
+    }
+    .vr-pipe-layer-num {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--rouaa-accent);
+    }
+    .vr-pipe-layer-body { min-width: 0; }
+    .vr-pipe-layer-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 2px;
+    }
+    .vr-pipe-layer-desc {
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+      line-height: 1.5;
+    }
+    .vr-pipe-layer-status { text-align: right; }
+    @media (max-width: 640px) {
+      .vr-pipe-layer-row {
+        grid-template-columns: 48px 1fr;
+        gap: 12px;
+      }
+      .vr-pipe-layer-status { grid-column: 1 / -1; text-align: left; }
+    }
+
+    /* ============================================================
+       SECTION 10: COMPARISON TABLE
+       ============================================================ */
+    .vr-comparison {
+      max-width: 920px;
+      margin: 0 auto;
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--rouaa-surface);
+    }
+    .vr-cmp-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .vr-cmp-row:last-child { border-bottom: none; }
+    .vr-cmp-row.header {
+      background: var(--rouaa-bg-tertiary);
+    }
+    .vr-cmp-row.header .vr-cmp-cell {
+      padding: 18px 24px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-primary);
+    }
+    .vr-cmp-row.header .vr-cmp-cell.rouaa {
+      color: var(--rouaa-accent);
+      background: var(--rouaa-accent-subtle);
+    }
+    .vr-cmp-cell {
+      padding: 22px 24px;
+      font-size: 14px;
+      line-height: 1.6;
+      border-right: 1px solid var(--rouaa-surface-border);
+    }
+    .vr-cmp-cell:last-child { border-right: none; }
+    .vr-cmp-row:nth-child(even):not(.header) .vr-cmp-cell {
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .vr-cmp-cell.without { color: var(--rouaa-text-secondary); }
+    .vr-cmp-cell.without .ico { color: var(--rouaa-text-muted); margin-right: 8px; display: inline-flex; vertical-align: middle; }
+    .vr-cmp-cell.rouaa {
+      color: var(--rouaa-text-primary);
+      font-weight: 500;
+      background: rgba(201, 162, 39, 0.03);
+    }
+    .vr-cmp-cell.rouaa strong { color: var(--rouaa-accent); font-weight: 600; }
+    .vr-cmp-cell.rouaa .ico { color: var(--rouaa-accent); margin-right: 8px; display: inline-flex; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .vr-cmp-row { grid-template-columns: 1fr; }
+      .vr-cmp-cell { border-right: none; border-bottom: 1px solid var(--rouaa-surface-border); padding: 14px 18px; }
+      .vr-cmp-cell:last-child { border-bottom: none; }
+    }
+
+    /* ============================================================
+       SECTION 11: METRICS
+       ============================================================ */
+    .vr-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .vr-metric {
+      text-align: center;
+      padding: 32px 16px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      transition: border-color 250ms ease, transform 250ms ease;
+    }
+    .vr-metric:hover {
+      border-color: var(--rouaa-accent-border);
+      transform: translateY(-2px);
+    }
+    .vr-metric-number {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--rouaa-accent);
+      line-height: 1;
+      margin-bottom: 12px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+    .vr-metric-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+      .vr-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .vr-metric-number { font-size: 44px; }
+    }
+    @media (max-width: 480px) {
+      .vr-metrics-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 12: ANIMATION DEMOS
+       ============================================================ */
+    .vr-anim-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .vr-anim-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .vr-anim-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .vr-anim-card-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+    }
+    .vr-anim-card-spec {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--rouaa-text-muted);
+      letter-spacing: 0.04em;
+    }
+    .vr-anim-card-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+    }
+    .vr-anim-card-desc {
+      font-size: 13px;
+      color: var(--rouaa-text-secondary);
+      line-height: 1.6;
+    }
+    .vr-anim-stage {
+      background: var(--rouaa-bg-tertiary);
+      border: 1px dashed var(--rouaa-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    /* Hover lift demo */
+    .vr-hover-target {
+      background: var(--rouaa-bg-elevated);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-size: 13px;
+      color: var(--rouaa-text-primary);
+      transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+      cursor: pointer;
+    }
+    .vr-hover-target:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border-color: var(--rouaa-accent-border);
+    }
+    /* Progressive disclosure demo */
+    .vr-disclosure {
+      background: var(--rouaa-bg-elevated);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color 250ms ease;
+    }
+    .vr-disclosure:hover { border-color: var(--rouaa-accent-border); }
+    .vr-disclosure-summary {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vr-disclosure-body {
+      font-size: 12px;
+      color: var(--rouaa-text-secondary);
+      line-height: 1.6;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease, opacity 300ms ease, margin 300ms ease;
+    }
+    .vr-disclosure:hover .vr-disclosure-body {
+      max-height: 60px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+    @media (max-width: 768px) {
+      .vr-anim-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 13: SECTION RHYTHM
+       ============================================================ */
+    .vr-rhythm-stack {
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--rouaa-border);
+    }
+    .vr-rhythm-block {
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .vr-rhythm-block.a { background: var(--rouaa-bg-primary); }
+    .vr-rhythm-block.b { background: var(--rouaa-bg-secondary); }
+    .vr-rhythm-block.c { background: var(--rouaa-bg-primary); }
+    .vr-rhythm-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--rouaa-border-strong) 50%, transparent 100%);
+    }
+    .vr-rhythm-block .rhythm-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-bottom: 12px;
+    }
+    .vr-rhythm-block .rhythm-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 6px;
+    }
+    .vr-rhythm-block .rhythm-hex {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#vr-main" class="skip-link">Skip to content</a>
+
+  <!-- ============ NAVBAR (copied from architecture.html) ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">Products<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a><a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a><a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a><a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a><a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a><a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">Platform<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a><a href="platform.html" class="nav-dropdown-link">Platform Overview</a><a href="source-registry.html" class="nav-dropdown-link">Source Registry</a><a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a><a href="methodology.html" class="nav-dropdown-link">Methodology</a><a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">Solutions<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a><a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a><a href="financial-media.html" class="nav-dropdown-link">Financial Media</a><a href="enterprise.html" class="nav-dropdown-link">Enterprise</a><a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a><a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a><a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">Experience<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a><a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a><a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a><a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">Company<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a><a href="research-institute.html" class="nav-dropdown-link">Research Institute</a><a href="careers.html" class="nav-dropdown-link">Careers</a><a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="visual-reference.html" class="nav-link active">Visual Reference</a>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="vr-main" class="vr-main">
+
+    <!-- ============ REFERENCE HERO ============ -->
+    <section class="vr-hero">
+      <div class="vr-hero-grid"></div>
+      <div class="vr-hero-glow"></div>
+      <div class="container">
+        <div class="vr-hero-content">
+          <span class="eyebrow">ROUAA Visual DNA &middot; v1.0</span>
+          <h1>The visual reference for <span class="text-accent">institutional intelligence</span>.</h1>
+          <p class="lead">This page is the genetic code from which every ROUAA interface will emerge. Every color, type style, component, and pattern is documented here &mdash; the single source of truth for the visual language of financial intelligence infrastructure.</p>
+          <div class="vr-hero-meta">
+            <span class="mono-label">REF</span>
+            <span class="font-mono" style="color: var(--rouaa-text-primary); font-size: 12px;">VR-001</span>
+            <span class="sep"></span>
+            <span class="mono-label">SECTIONS</span>
+            <span class="font-mono" style="color: var(--rouaa-text-primary); font-size: 12px;">13</span>
+            <span class="sep"></span>
+            <span class="mono-label">STATUS</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--rouaa-green); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
+              <span class="pulse-dot"></span> Live
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 1: COLOR SYSTEM ============ -->
+    <section class="vr-section" id="sec-color">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 01</span>
+          <span class="eyebrow">Color System</span>
+          <h2>The institutional palette.</h2>
+          <p>Navy for depth, graphite for surfaces, steel for structure, gold for verification. Never decorative &mdash; every color carries meaning.</p>
+        </div>
+
+        <div class="reveal-stagger">
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Background Layers</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #080B12;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">BG Primary</div>
+                  <div class="vr-swatch-hex">#080B12</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #0B0F18;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">BG Secondary</div>
+                  <div class="vr-swatch-hex">#0B0F18</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #101722;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">BG Tertiary</div>
+                  <div class="vr-swatch-hex">#101722</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #141C28;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">BG Elevated</div>
+                  <div class="vr-swatch-hex">#141C28</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Surface &amp; Borders</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #131B27;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Surface</div>
+                  <div class="vr-swatch-hex">#131B27</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #18222F;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Surface Hover</div>
+                  <div class="vr-swatch-hex">#18222F</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #2A3543;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Border Steel</div>
+                  <div class="vr-swatch-hex">#2A3543</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #38465A;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Border Strong</div>
+                  <div class="vr-swatch-hex">#38465A</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Text Hierarchy</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #F5F7FA;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Primary</div>
+                  <div class="vr-swatch-hex">#F5F7FA</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #C4CCDA;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Secondary</div>
+                  <div class="vr-swatch-hex">#C4CCDA</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #949EAF;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Muted</div>
+                  <div class="vr-swatch-hex">#949EAF</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Institutional Gold &mdash; verified, CTA, hero keyword</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #C9A227;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Accent</div>
+                  <div class="vr-swatch-hex">#C9A227</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #D4B542;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Accent Hover</div>
+                  <div class="vr-swatch-hex">#D4B542</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: rgba(201, 162, 39, 0.06);"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Gold Subtle</div>
+                  <div class="vr-swatch-hex">rgba(201,162,39,0.06)</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: rgba(201, 162, 39, 0.20);"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Gold Border</div>
+                  <div class="vr-swatch-hex">rgba(201,162,39,0.20)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Functional Colors</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #20A878;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Operational Green</div>
+                  <div class="vr-swatch-hex">#20A878</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #E5484D;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Alert Red</div>
+                  <div class="vr-swatch-hex">#E5484D</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #4A90D9;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Info Blue</div>
+                  <div class="vr-swatch-hex">#4A90D9</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: #F5A623;"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Warning Amber</div>
+                  <div class="vr-swatch-hex">#F5A623</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-color-group">
+            <div class="vr-color-group-label">Glassmorphism</div>
+            <div class="vr-swatch-grid">
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Glass Border</div>
+                  <div class="vr-swatch-hex">rgba(255,255,255,0.08)</div>
+                </div>
+              </div>
+              <div class="vr-swatch">
+                <div class="vr-swatch-chip" style="background: rgba(255,255,255,0.025); backdrop-filter: blur(8px);"></div>
+                <div class="vr-swatch-body">
+                  <div class="vr-swatch-name">Glass BG</div>
+                  <div class="vr-swatch-hex">rgba(255,255,255,0.025)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 2: TYPOGRAPHY ============ -->
+    <section class="vr-section alt" id="sec-type">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 02</span>
+          <span class="eyebrow">Typography</span>
+          <h2>The type hierarchy.</h2>
+          <p>Inter for institutional clarity. Monospace for data only. Headlines are white, body is light slate, labels are uppercase tracked. Generous line-height throughout.</p>
+        </div>
+
+        <div class="vr-type-stack reveal">
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Hero H1</span>56px &middot; 700 &middot; 1.1<br>-0.02em tracking</div>
+            <div class="vr-type-sample vr-type-h1">Institutional intelligence, engineered.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">H2</span>40px &middot; 700 &middot; 1.15<br>-0.02em tracking</div>
+            <div class="vr-type-sample vr-type-h2">The infrastructure layer between data and decisions.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">H3</span>24px &middot; 600 &middot; 1.3<br>-0.01em tracking</div>
+            <div class="vr-type-sample vr-type-h3">Seven intelligence layers, governed.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">H4</span>21px &middot; 600 &middot; 1.3</div>
+            <div class="vr-type-sample vr-type-h4">Evidence chain verified.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Body Large</span>18px &middot; 400 &middot; 1.7</div>
+            <div class="vr-type-sample vr-type-body-lg">ROUAA transforms official financial information into structured evidence, connected knowledge, and audit-ready decisions &mdash; for institutions that must defend every conclusion.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Body</span>16px &middot; 400 &middot; 1.7</div>
+            <div class="vr-type-sample vr-type-body">Every output traces back to a verifiable source through a documented evidence chain. The system is operational, auditable, and built for institutions &mdash; not individuals.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Body Small</span>14px &middot; 400 &middot; 1.6</div>
+            <div class="vr-type-sample vr-type-body-sm">Layer 04 monitors for events across the source ecosystem &mdash; rate decisions, filings, statistical releases &mdash; and surfaces what matters.</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Label</span>13px &middot; 600 &middot; 0.08em<br>UPPERCASE &middot; gold</div>
+            <div class="vr-type-sample vr-type-label">Verified &middot; Source Registry</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Mono Label</span>12px &middot; 600 &middot; 0.08em<br>UPPERCASE &middot; mono</div>
+            <div class="vr-type-sample vr-type-mono-label">LAYER 04 &middot; EVENT ENGINE</div>
+          </div>
+
+          <div class="vr-type-row">
+            <div class="vr-type-meta"><span class="name">Mono Data</span>13px &middot; 400 &middot; mono<br>tabular-nums</div>
+            <div class="vr-type-sample vr-type-mono-data">FOMC-2024-09-18 &middot; 5.25&ndash;5.50% &middot; p.1 &sect;2</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 3: BUTTONS ============ -->
+    <section class="vr-section" id="sec-buttons">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 03</span>
+          <span class="eyebrow">Buttons</span>
+          <h2>Interaction primitives.</h2>
+          <p>Three button tiers. Primary is gold with a soft glow &mdash; reserved for the single most important action per view. Secondary is structural. Ghost is for tertiary navigation.</p>
+        </div>
+
+        <div class="vr-btn-grid reveal-stagger">
+
+          <div class="vr-btn-card">
+            <div class="vr-btn-card-label">Primary</div>
+            <div class="vr-btn-states">
+              <div class="vr-btn-state">
+                <span class="state-tag">Default</span>
+                <a href="#" class="btn btn-primary" onclick="return false;">Request Briefing</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Hover</span>
+                <a href="#" class="btn btn-primary" style="background: var(--rouaa-accent-hover); transform: translateY(-2px); box-shadow: 0 4px 20px var(--rouaa-glow-accent-strong);" onclick="return false;">Request Briefing</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Small</span>
+                <a href="#" class="btn btn-primary btn-sm" onclick="return false;">Request Briefing</a>
+              </div>
+            </div>
+            <p class="vr-anim-card-desc" style="margin-top: 8px;">Gold background, dark text, soft glow shadow. Hover lifts 2px and brightens the glow. Reserved for the primary CTA.</p>
+          </div>
+
+          <div class="vr-btn-card">
+            <div class="vr-btn-card-label">Secondary</div>
+            <div class="vr-btn-states">
+              <div class="vr-btn-state">
+                <span class="state-tag">Default</span>
+                <a href="#" class="btn btn-secondary" onclick="return false;">Explore Architecture</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Hover</span>
+                <a href="#" class="btn btn-secondary" style="background: var(--rouaa-bg-elevated); border-color: var(--rouaa-accent-border); transform: translateY(-1px);" onclick="return false;">Explore Architecture</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Small</span>
+                <a href="#" class="btn btn-secondary btn-sm" onclick="return false;">Explore Architecture</a>
+              </div>
+            </div>
+            <p class="vr-anim-card-desc" style="margin-top: 8px;">Surface background with strong border. Hover lifts 1px and tints border gold. Used for secondary actions and navigation.</p>
+          </div>
+
+          <div class="vr-btn-card">
+            <div class="vr-btn-card-label">Ghost</div>
+            <div class="vr-btn-states">
+              <div class="vr-btn-state">
+                <span class="state-tag">Default</span>
+                <a href="#" class="btn btn-ghost" onclick="return false;">Read methodology &rarr;</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Hover</span>
+                <a href="#" class="btn btn-ghost" style="color: var(--rouaa-accent);" onclick="return false;">Read methodology &rarr;</a>
+              </div>
+              <div class="vr-btn-state">
+                <span class="state-tag">Small</span>
+                <a href="#" class="btn btn-ghost" style="padding: 4px 12px; font-size: 12px;" onclick="return false;">Read methodology &rarr;</a>
+              </div>
+            </div>
+            <p class="vr-anim-card-desc" style="margin-top: 8px;">Transparent background, secondary text. Hover shifts text to gold. Used for tertiary links and inline navigation cues.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 4: CARDS ============ -->
+    <section class="vr-section alt" id="sec-cards">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 04</span>
+          <span class="eyebrow">Cards &middot; Glassmorphism</span>
+          <h2>Structured surfaces.</h2>
+          <p>Graphite surface with luminous glass borders, backdrop blur for depth. Hover lifts 2px, brightens border to gold. No glow on cards &mdash; structure speaks for itself.</p>
+        </div>
+
+        <div class="vr-card-grid reveal-stagger">
+
+          <div class="vr-demo-card">
+            <div class="vr-demo-card-title">Standard Card</div>
+            <p class="vr-demo-card-desc">Glassmorphism surface with backdrop blur. Border subtly visible against navy. Lifts on hover, border tints gold. Padding 24&ndash;28px.</p>
+            <div class="vr-demo-card-tag">backdrop-filter: blur(8px)</div>
+          </div>
+
+          <div class="vr-demo-card accent">
+            <div class="vr-demo-card-title">Accent Card</div>
+            <p class="vr-demo-card-desc">Standard card with a 3px gold left border. Used for verified content, primary calls-to-action within a grid, or featured intelligence layers.</p>
+            <div class="vr-demo-card-tag">border-left: 3px solid gold</div>
+          </div>
+
+          <div class="vr-demo-card">
+            <svg class="vr-demo-card-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <ellipse cx="16" cy="7" rx="9" ry="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 7v18c0 1.66 4.03 3 9 3s9-1.34 9-3V7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 16c0 1.66 4.03 3 9 3s9-1.34 9-3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <div class="vr-demo-card-title">Card with Icon</div>
+            <p class="vr-demo-card-desc">32px outline SVG icon, 1.5px stroke, currentColor (gold when in accent context). Represents the layer, source type, or status.</p>
+            <div class="vr-demo-card-tag">SVG &middot; 32px &middot; 1.5px stroke</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 5: STATUS BADGES ============ -->
+    <section class="vr-section" id="sec-badges">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 05</span>
+          <span class="eyebrow">Status Badges</span>
+          <h2>System state, encoded.</h2>
+          <p>Same shape, same size, same padding &mdash; only color and text change. Monospace, uppercase, tracked. Used across consoles, layer cards, and source registries.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="vr-badge-row">
+            <div class="vr-badge-block">
+              <span class="status-badge op"><span class="dot"></span>Operational</span>
+              <span class="label">Green &middot; #20A878</span>
+            </div>
+            <div class="vr-badge-block">
+              <span class="status-badge ver"><span class="dot"></span>Verified</span>
+              <span class="label">Gold &middot; #C9A227</span>
+            </div>
+            <div class="vr-badge-block">
+              <span class="status-badge bld"><span class="dot"></span>Building</span>
+              <span class="label">Amber &middot; #F5A623</span>
+            </div>
+            <div class="vr-badge-block">
+              <span class="status-badge sup"><span class="dot"></span>Supported</span>
+              <span class="label">Blue &middot; #4A90D9</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 6: ARCHITECTURE LAYER CARD ============ -->
+    <section class="vr-section alt" id="sec-layer">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 06</span>
+          <span class="eyebrow">Architecture Layer Card</span>
+          <h2>The atomic unit of the architecture view.</h2>
+          <p>Each layer is a self-contained card: gold icon, mono layer number, name, status, and a description that progressively discloses on hover. Default state on the left; hovered (description visible) on the right.</p>
+        </div>
+
+        <div class="vr-layer-grid reveal-stagger">
+
+          <div class="vr-layer-demo">
+            <svg class="vr-layer-demo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <ellipse cx="16" cy="7" rx="9" ry="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 7v18c0 1.66 4.03 3 9 3s9-1.34 9-3V7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 16c0 1.66 4.03 3 9 3s9-1.34 9-3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <div class="vr-layer-demo-meta">
+              <span class="vr-layer-demo-num">Layer 01</span>
+              <span class="status-badge op"><span class="dot"></span>Operational</span>
+            </div>
+            <div class="vr-layer-demo-name">Source Registry</div>
+            <div class="vr-layer-demo-desc">Description hidden in default state. Hover to reveal progressive disclosure.</div>
+            <div class="vr-layer-state-tag">DEFAULT STATE</div>
+          </div>
+
+          <div class="vr-layer-demo is-hovered">
+            <svg class="vr-layer-demo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <ellipse cx="16" cy="7" rx="9" ry="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 7v18c0 1.66 4.03 3 9 3s9-1.34 9-3V7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 16c0 1.66 4.03 3 9 3s9-1.34 9-3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <div class="vr-layer-demo-meta">
+              <span class="vr-layer-demo-num">Layer 01</span>
+              <span class="status-badge op"><span class="dot"></span>Operational</span>
+            </div>
+            <div class="vr-layer-demo-name">Source Registry</div>
+            <div class="vr-layer-demo-desc">The verified catalog of 411+ official financial sources &mdash; central banks, regulators, statistical agencies, exchanges &mdash; mapped by jurisdiction, type, and update cadence.</div>
+            <div class="vr-layer-state-tag">HOVER STATE &middot; DESC VISIBLE</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 7: EVIDENCE CHAIN DIAGRAM ============ -->
+    <section class="vr-section" id="sec-evidence">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 07</span>
+          <span class="eyebrow">Evidence Chain Diagram</span>
+          <h2>Source to output, verifiable.</h2>
+          <p>Five nodes connected by animated dashed lines. The final node carries the gold accent &mdash; the verified output. Every ROUAA intelligence product traces this chain.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="vr-evidence-wrap">
+            <svg class="vr-evidence-svg" viewBox="0 0 1000 180" role="img" aria-label="Evidence chain: Source, Document, Fact, Evidence, Output">
+              <!-- Connectors (drawn first so nodes overlay) -->
+              <line class="connector" x1="170" y1="90" x2="220" y2="90"/>
+              <line class="connector" x1="370" y1="90" x2="420" y2="90"/>
+              <line class="connector" x1="570" y1="90" x2="620" y2="90"/>
+              <line class="connector" x1="770" y1="90" x2="820" y2="90"/>
+
+              <!-- Node 1: Source -->
+              <g>
+                <rect class="node-rect" x="20" y="50" width="150" height="80"/>
+                <text class="node-label" x="95" y="76" text-anchor="middle">Source</text>
+                <text class="node-value" x="95" y="104" text-anchor="middle">Federal Reserve</text>
+              </g>
+
+              <!-- Node 2: Document -->
+              <g>
+                <rect class="node-rect" x="220" y="50" width="150" height="80"/>
+                <text class="node-label" x="295" y="76" text-anchor="middle">Document</text>
+                <text class="node-value" x="295" y="104" text-anchor="middle">FOMC Statement</text>
+              </g>
+
+              <!-- Node 3: Fact -->
+              <g>
+                <rect class="node-rect" x="420" y="50" width="150" height="80"/>
+                <text class="node-label" x="495" y="76" text-anchor="middle">Fact</text>
+                <text class="node-value" x="495" y="104" text-anchor="middle">Rate 5.25&ndash;5.50%</text>
+              </g>
+
+              <!-- Node 4: Evidence -->
+              <g>
+                <rect class="node-rect" x="620" y="50" width="150" height="80"/>
+                <text class="node-label" x="695" y="76" text-anchor="middle">Evidence</text>
+                <text class="node-value" x="695" y="104" text-anchor="middle">p.1 &sect;2</text>
+              </g>
+
+              <!-- Node 5: Output (final, gold accent) -->
+              <g>
+                <rect class="node-rect final" x="820" y="50" width="160" height="80"/>
+                <text class="node-label final" x="900" y="76" text-anchor="middle">Output</text>
+                <text class="node-value" x="900" y="104" text-anchor="middle">Investment Brief</text>
+              </g>
+
+              <!-- Arrow markers on connectors -->
+              <polygon points="218,86 218,94 226,90" fill="var(--rouaa-surface-border-strong)"/>
+              <polygon points="418,86 418,94 426,90" fill="var(--rouaa-surface-border-strong)"/>
+              <polygon points="618,86 618,94 626,90" fill="var(--rouaa-surface-border-strong)"/>
+              <polygon points="818,86 818,94 826,90" fill="var(--rouaa-accent)"/>
+            </svg>
+
+            <div class="vr-evidence-legend">
+              <span class="vr-evidence-legend-item"><span class="swatch"></span> Source node &middot; bg-tertiary</span>
+              <span class="vr-evidence-legend-item"><span class="swatch final"></span> Final node &middot; verified output</span>
+              <span class="vr-evidence-legend-item"><span style="font-family: var(--font-mono);">&lt;- - -&gt;</span> Animated dashed connector</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 8: SYSTEM STATUS CONSOLE ============ -->
+    <section class="vr-section alt" id="sec-console">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 08</span>
+          <span class="eyebrow">System Status Console</span>
+          <h2>The operational view.</h2>
+          <p>Console-style panel with a LIVE indicator, zebra-striped rows, and per-component status. Monospace throughout &mdash; this is data, not marketing.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="vr-console">
+            <div class="vr-console-header">
+              <span class="vr-console-title">
+                <span class="pulse-dot"></span>
+                ROUAA System Status
+              </span>
+              <span class="vr-console-live">
+                <span class="pulse-dot"></span>
+                Live
+              </span>
+            </div>
+            <table class="vr-console-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Outputs</th>
+                  <th class="status">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="component">Source Registry</td>
+                  <td class="outputs">411+ sources monitored</td>
+                  <td class="status"><span class="status-badge op"><span class="dot"></span>Operational</span></td>
+                </tr>
+                <tr>
+                  <td class="component">Document Pipeline</td>
+                  <td class="outputs">2.4M documents indexed</td>
+                  <td class="status"><span class="status-badge op"><span class="dot"></span>Operational</span></td>
+                </tr>
+                <tr>
+                  <td class="component">Evidence Layer</td>
+                  <td class="outputs">812K evidence chains</td>
+                  <td class="status"><span class="status-badge ver"><span class="dot"></span>Verified</span></td>
+                </tr>
+                <tr>
+                  <td class="component">Event Engine</td>
+                  <td class="outputs">14.2K events detected</td>
+                  <td class="status"><span class="status-badge op"><span class="dot"></span>Operational</span></td>
+                </tr>
+                <tr>
+                  <td class="component">Knowledge Graph</td>
+                  <td class="outputs">1.1M entities mapped</td>
+                  <td class="status"><span class="status-badge bld"><span class="dot"></span>Building</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 9: PIPELINE SCHEMATIC ============ -->
+    <section class="vr-section" id="sec-pipeline">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 09</span>
+          <span class="eyebrow">Pipeline Schematic</span>
+          <h2>Sources &rarr; Core &rarr; Applications.</h2>
+          <p>Vertical flow showing the full ROUAA pipeline. Source types enter the 7-layer intelligence core, which produces the five application surfaces. Status badges communicate layer health.</p>
+        </div>
+
+        <div class="vr-pipeline reveal">
+
+          <!-- Sources Zone -->
+          <div class="vr-pipe-zone">
+            <div class="vr-pipe-zone-header">
+              <span class="vr-pipe-zone-label">Sources</span>
+              <span class="vr-pipe-zone-meta">5 source types &middot; <span class="count">411+</span> sources</span>
+            </div>
+            <div class="vr-pipe-pill-row">
+              <span class="vr-pipe-pill">Central Banks</span>
+              <span class="vr-pipe-pill">Regulators</span>
+              <span class="vr-pipe-pill">Statistical Agencies</span>
+              <span class="vr-pipe-pill">Corporate Filings</span>
+              <span class="vr-pipe-pill">Exchanges</span>
+            </div>
+          </div>
+
+          <!-- Connector -->
+          <div class="vr-pipe-connector">
+            <svg width="24" height="40" viewBox="0 0 24 40" fill="none" aria-hidden="true">
+              <line x1="12" y1="0" x2="12" y2="32" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <path d="M6 28 L12 36 L18 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Core Zone -->
+          <div class="vr-pipe-core">
+            <div style="text-align: center;">
+              <span class="vr-pipe-core-label">ROUAA Intelligence Core</span>
+            </div>
+            <div class="vr-pipe-core-title">7 Layers</div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">01</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Source Registry</div>
+                <div class="vr-pipe-layer-desc">Verified catalog of official financial sources</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge op"><span class="dot"></span>Operational</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">02</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Document Intelligence</div>
+                <div class="vr-pipe-layer-desc">Ingestion, classification, structured extraction</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge op"><span class="dot"></span>Operational</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">03</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Fact Engine</div>
+                <div class="vr-pipe-layer-desc">Atomic, verifiable financial facts</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge ver"><span class="dot"></span>Verified</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">04</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Event Engine</div>
+                <div class="vr-pipe-layer-desc">Material change detection across sources</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge op"><span class="dot"></span>Operational</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">05</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Evidence Layer</div>
+                <div class="vr-pipe-layer-desc">Provenance chains linking outputs to sources</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge ver"><span class="dot"></span>Verified</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">06</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Knowledge Graph</div>
+                <div class="vr-pipe-layer-desc">Connected entities, relationships, taxonomy</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge bld"><span class="dot"></span>Building</span></div>
+            </div>
+
+            <div class="vr-pipe-layer-row">
+              <span class="vr-pipe-layer-num">07</span>
+              <div class="vr-pipe-layer-body">
+                <div class="vr-pipe-layer-name">Governance Layer</div>
+                <div class="vr-pipe-layer-desc">Audit, policy, and review framework</div>
+              </div>
+              <div class="vr-pipe-layer-status"><span class="status-badge sup"><span class="dot"></span>Supported</span></div>
+            </div>
+          </div>
+
+          <!-- Connector -->
+          <div class="vr-pipe-connector">
+            <svg width="24" height="40" viewBox="0 0 24 40" fill="none" aria-hidden="true">
+              <line x1="12" y1="0" x2="12" y2="32" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <path d="M6 28 L12 36 L18 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Applications Zone -->
+          <div class="vr-pipe-zone">
+            <div class="vr-pipe-zone-header">
+              <span class="vr-pipe-zone-label">Applications</span>
+              <span class="vr-pipe-zone-meta">5 application surfaces</span>
+            </div>
+            <div class="vr-pipe-pill-row">
+              <span class="vr-pipe-pill">Investment Intelligence</span>
+              <span class="vr-pipe-pill">Risk Intelligence</span>
+              <span class="vr-pipe-pill">Market Intelligence</span>
+              <span class="vr-pipe-pill">Media Intelligence</span>
+              <span class="vr-pipe-pill">Developer Intelligence</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 10: COMPARISON TABLE ============ -->
+    <section class="vr-section alt" id="sec-comparison">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 10</span>
+          <span class="eyebrow">Comparison Table</span>
+          <h2>Without infrastructure. With ROUAA.</h2>
+          <p>Two columns, alternating row backgrounds, gold-tinted ROUAA column. Each row is a transformation &mdash; from raw to structured, from disconnected to connected.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="vr-comparison">
+            <div class="vr-cmp-row header">
+              <div class="vr-cmp-cell">Without Intelligence Infrastructure</div>
+              <div class="vr-cmp-cell rouaa">With ROUAA</div>
+            </div>
+            <div class="vr-cmp-row">
+              <div class="vr-cmp-cell without">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Raw documents
+              </div>
+              <div class="vr-cmp-cell rouaa">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <strong>Structured evidence</strong>
+              </div>
+            </div>
+            <div class="vr-cmp-row">
+              <div class="vr-cmp-cell without">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Disconnected facts
+              </div>
+              <div class="vr-cmp-cell rouaa">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <strong>Connected knowledge</strong>
+              </div>
+            </div>
+            <div class="vr-cmp-row">
+              <div class="vr-cmp-cell without">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Manual research
+              </div>
+              <div class="vr-cmp-cell rouaa">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <strong>Reusable intelligence</strong>
+              </div>
+            </div>
+            <div class="vr-cmp-row">
+              <div class="vr-cmp-cell without">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Unverifiable outputs
+              </div>
+              <div class="vr-cmp-cell rouaa">
+                <svg class="ico" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <strong>Audit-ready decisions</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 11: METRICS ============ -->
+    <section class="vr-section" id="sec-metrics">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 11</span>
+          <span class="eyebrow">Metric Components</span>
+          <h2>Numbers, when they mean something.</h2>
+          <p>Gold numerals at 56px, muted mono labels below. Centered. Used sparingly &mdash; only for figures that are defensible and current.</p>
+        </div>
+
+        <div class="vr-metrics-grid reveal-stagger">
+          <div class="vr-metric">
+            <div class="vr-metric-number">411+</div>
+            <div class="vr-metric-label">Sources<br>Monitored</div>
+          </div>
+          <div class="vr-metric">
+            <div class="vr-metric-number">7</div>
+            <div class="vr-metric-label">Intelligence<br>Layers</div>
+          </div>
+          <div class="vr-metric">
+            <div class="vr-metric-number">5</div>
+            <div class="vr-metric-label">Application<br>Surfaces</div>
+          </div>
+          <div class="vr-metric">
+            <div class="vr-metric-number">100%</div>
+            <div class="vr-metric-label">Traceable<br>Outputs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 12: ANIMATION DEMOS ============ -->
+    <section class="vr-section alt" id="sec-animations">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 12</span>
+          <span class="eyebrow">Animation Demos</span>
+          <h2>Motion, operational not decorative.</h2>
+          <p>Every animation communicates system state. Scroll reveals cascade. Pulses confirm the system is alive. Hovers acknowledge presence. No bounce. No elastic. No decoration.</p>
+        </div>
+
+        <div class="vr-anim-grid reveal-stagger">
+
+          <div class="vr-anim-card">
+            <div class="vr-anim-card-head">
+              <span class="vr-anim-card-label">Scroll Reveal</span>
+              <span class="vr-anim-card-spec">600ms &middot; cubic-bezier(0.4,0,0.2,1)</span>
+            </div>
+            <div class="vr-anim-card-name">Fade + slide up</div>
+            <div class="vr-anim-card-desc">Elements fade in and slide up 24px as they enter the viewport. IntersectionObserver triggers; one-shot. This very card revealed on scroll.</div>
+            <div class="vr-anim-stage">
+              <button class="vr-hover-target" id="vr-replay-reveal" type="button">Replay reveal</button>
+            </div>
+          </div>
+
+          <div class="vr-anim-card">
+            <div class="vr-anim-card-head">
+              <span class="vr-anim-card-label">Stagger Reveal</span>
+              <span class="vr-anim-card-spec">80ms between children</span>
+            </div>
+            <div class="vr-anim-card-name">Cascade children</div>
+            <div class="vr-anim-card-desc">Children of a stagger container animate in sequence, 80ms apart. Creates the "cascade" feeling across grids of cards.</div>
+            <div class="vr-anim-stage" id="vr-stagger-stage">
+              <span class="vr-pipe-pill" style="opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease;">01</span>
+              <span class="vr-pipe-pill" style="opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease;">02</span>
+              <span class="vr-pipe-pill" style="opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease;">03</span>
+              <span class="vr-pipe-pill" style="opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease;">04</span>
+              <span class="vr-pipe-pill" style="opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease;">05</span>
+            </div>
+          </div>
+
+          <div class="vr-anim-card">
+            <div class="vr-anim-card-head">
+              <span class="vr-anim-card-label">Pulse Dot</span>
+              <span class="vr-anim-card-spec">2.5s &middot; ease-in-out &middot; infinite</span>
+            </div>
+            <div class="vr-anim-card-name">Live indicator</div>
+            <div class="vr-anim-card-desc">Green dot pulses to confirm the system is alive. Gold and blue variants for verified and info states. Disabled by prefers-reduced-motion.</div>
+            <div class="vr-anim-stage">
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-green); letter-spacing: 0.08em;"><span class="pulse-dot"></span> OPERATIONAL</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-accent); letter-spacing: 0.08em;"><span class="pulse-dot gold"></span> VERIFIED</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-blue); letter-spacing: 0.08em;"><span class="pulse-dot blue"></span> SUPPORTED</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--rouaa-text-muted); letter-spacing: 0.08em;"><span class="pulse-dot muted"></span> BUILDING</span>
+            </div>
+          </div>
+
+          <div class="vr-anim-card">
+            <div class="vr-anim-card-head">
+              <span class="vr-anim-card-label">Hover Lift</span>
+              <span class="vr-anim-card-spec">250ms &middot; ease</span>
+            </div>
+            <div class="vr-anim-card-name">TranslateY &minus;2px + shadow</div>
+            <div class="vr-anim-card-desc">Cards lift 2px on hover with a soft shadow and gold-tinted border. Confirms interactivity without being loud.</div>
+            <div class="vr-anim-stage">
+              <div class="vr-hover-target">Hover me</div>
+            </div>
+          </div>
+
+          <div class="vr-anim-card" style="grid-column: 1 / -1;">
+            <div class="vr-anim-card-head">
+              <span class="vr-anim-card-label">Progressive Disclosure</span>
+              <span class="vr-anim-card-spec">300ms &middot; max-height 0&rarr;60px</span>
+            </div>
+            <div class="vr-anim-card-name">Reveal description on hover</div>
+            <div class="vr-anim-card-desc">Descriptions stay hidden until the user hovers. Keeps the default view dense; reveals detail on demand. The demo below expands its body on hover.</div>
+            <div class="vr-anim-stage" style="justify-content: flex-start;">
+              <div class="vr-disclosure" style="max-width: 480px;">
+                <div class="vr-disclosure-summary">
+                  <span>Layer 04 &middot; Event Engine</span>
+                  <span style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted);">HOVER &rarr;</span>
+                </div>
+                <div class="vr-disclosure-body">
+                  Monitors 411+ sources for material change events &mdash; rate decisions, filings, statistical releases. Surfaces what matters, suppresses noise.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ SECTION 13: SECTION RHYTHM ============ -->
+    <section class="vr-section" id="sec-rhythm">
+      <div class="container">
+        <div class="vr-section-head reveal">
+          <span class="vr-section-num">Section 13</span>
+          <span class="eyebrow">Section Rhythm</span>
+          <h2>The page breathes.</h2>
+          <p>Backgrounds alternate between primary and secondary navy. Between sections, a 1px gradient line creates visual pause without heavy separation. Not every section is the same height &mdash; the rhythm varies.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="vr-rhythm-stack">
+            <div class="vr-rhythm-block a">
+              <div class="rhythm-label">Section A</div>
+              <div class="rhythm-title">bg-primary</div>
+              <div class="rhythm-hex">#080B12</div>
+            </div>
+            <div class="vr-rhythm-divider"></div>
+            <div class="vr-rhythm-block b">
+              <div class="rhythm-label">Section B</div>
+              <div class="rhythm-title">bg-secondary</div>
+              <div class="rhythm-hex">#0B0F18</div>
+            </div>
+            <div class="vr-rhythm-divider"></div>
+            <div class="vr-rhythm-block a">
+              <div class="rhythm-label">Section C</div>
+              <div class="rhythm-title">bg-primary</div>
+              <div class="rhythm-hex">#080B12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="vr-divider">
+
+    <!-- ============ CLOSING ============ -->
+    <section class="vr-section" style="text-align: center;">
+      <div class="container">
+        <div class="reveal" style="max-width: 720px; margin: 0 auto;">
+          <span class="eyebrow">End of Reference</span>
+          <h2 style="font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--rouaa-text-primary); margin: 12px 0 18px;">This is the DNA. Every ROUAA page inherits from here.</span>
+          <p style="font-size: 16px; color: var(--rouaa-text-secondary); line-height: 1.7; margin-bottom: 32px;">When building a new page, return to this reference. Verify every color, type style, and component traces back to a token defined here. If it isn't in the DNA, it isn't ROUAA.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="architecture.html" class="btn btn-primary">View Architecture Page</a>
+            <a href="VISUAL-IDENTITY-SYSTEM.md" class="btn btn-secondary">Read Visual Identity Spec</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (copied from architecture.html) ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand"><div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div><p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p></div>
+        <div class="footer-col"><div class="footer-heading">Products</div><a href="investment-intelligence.html">Investment Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="market-intelligence.html">Market Intelligence</a><a href="media-intelligence.html">Media Intelligence</a><a href="developer-intelligence.html">Developer Intelligence</a><a href="catalog.html">Intelligence Modules Catalog</a></div>
+        <div class="footer-col"><div class="footer-heading">Platform</div><a href="architecture.html">Architecture</a><a href="platform.html">Platform Overview</a><a href="source-registry.html">Source Registry</a><a href="trust-framework.html">Trust Framework</a><a href="methodology.html">Methodology</a><a href="infrastructure-report.html">Infrastructure Report</a></div>
+        <div class="footer-col"><div class="footer-heading">Solutions</div><a href="trading-platform.html">Trading Intelligence</a><a href="financial-intelligence.html">Institutional Intelligence</a><a href="financial-media.html">Financial Media</a><a href="solutions.html">Solutions Overview</a><a href="enterprise.html">Enterprise</a><a href="why-rouaa.html">Why ROUAA</a><a href="business-case.html">Business Case</a></div>
+        <div class="footer-col"><div class="footer-heading">Experience</div><a href="product-experience.html">Product Experience Center</a><a href="evidence-explorer.html">Evidence Explorer</a><a href="sample-library.html">Sample Intelligence Library</a><a href="source-explorer.html">Source Registry Explorer</a></div>
+        <div class="footer-col"><div class="footer-heading">Company</div><a href="company.html">About</a><a href="research-institute.html">Research Institute</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
+      </div>
+      <div class="footer-bottom"><p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Navbar scroll state =====
+    (function() {
+      const navbar = document.getElementById('navbar');
+      const onScroll = () => {
+        if (window.scrollY > 8) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // ===== Navbar toggle (mobile) =====
+    (function() {
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+      });
+    })();
+
+    // ===== Nav dropdown keyboard/click support (mobile) =====
+    (function() {
+      const items = document.querySelectorAll('.nav-item-has-dropdown');
+      items.forEach(item => {
+        const trigger = item.querySelector('.nav-dropdown-trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', (e) => {
+          if (window.innerWidth <= 968) {
+            e.preventDefault();
+            item.classList.toggle('is-open');
+            trigger.setAttribute('aria-expanded', item.classList.contains('is-open'));
+          }
+        });
+      });
+    })();
+
+    // ===== Scroll Reveal (IntersectionObserver) =====
+    (function() {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => revealObserver.observe(el));
+    })();
+
+    // ===== Stagger demo: re-trigger on each stage entering view =====
+    (function() {
+      const stage = document.getElementById('vr-stagger-stage');
+      if (!stage) return;
+      const pills = stage.querySelectorAll('.vr-pipe-pill');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            pills.forEach((pill, i) => {
+              setTimeout(() => {
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 80 * i);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      obs.observe(stage);
+
+      // Allow replay by clicking the stage
+      stage.style.cursor = 'pointer';
+      stage.addEventListener('click', () => {
+        pills.forEach(pill => {
+          pill.style.opacity = '0';
+          pill.style.transform = 'translateY(18px)';
+        });
+        setTimeout(() => {
+          pills.forEach((pill, i) => {
+            setTimeout(() => {
+              pill.style.opacity = '1';
+              pill.style.transform = 'translateY(0)';
+            }, 80 * i);
+          });
+        }, 50);
+      });
+    })();
+
+    // ===== Scroll reveal replay button =====
+    (function() {
+      const btn = document.getElementById('vr-replay-reveal');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.vr-anim-card');
+        if (!card) return;
+        card.classList.remove('visible');
+        // Force reflow then re-add
+        void card.offsetWidth;
+        setTimeout(() => card.classList.add('visible'), 50);
+      });
+    })();
+  </script>
+</body>
+</html>
