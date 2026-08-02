@@ -28,12 +28,12 @@
     .arch-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; }
     .arch-hero-grid {
       position: absolute; inset: 0; z-index: 0;
-      background-image: linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent 80%);
     }
-    .arch-hero-glow { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(201,162,39,0.05), transparent 70%); z-index: 0; }
+    .arch-hero-glow { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(201,162,39,0.07), transparent 70%); z-index: 0; }
     .arch-hero-content { position: relative; z-index: 1; }
     .arch-hero h1 { max-width: 22ch; margin: 0 auto 28px; }
     .arch-pipeline-label { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--rouaa-text-muted); letter-spacing: var(--tracking-wider); margin-bottom: 40px; }
@@ -47,7 +47,7 @@
     .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--rouaa-border-strong), transparent); max-width: 800px; margin: 0 auto; }
 
     /* ===== Visual Architecture Diagram ===== */
-    .arch-diagram { padding: 96px 0; background: var(--rouaa-bg-secondary); }
+    .arch-diagram { padding: 96px 0; background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border); }
     .diagram-container { max-width: 880px; margin: 0 auto; }
     .diagram-zone {
       text-align: center; padding: 20px 24px; border-radius: var(--radius-md); margin-bottom: 0;
@@ -60,7 +60,7 @@
 
     /* SVG flow connectors */
     .diagram-flow-svg { width: 100%; height: 40px; display: block; }
-    .diagram-flow-svg path { stroke: var(--rouaa-accent); stroke-width: 1.5; fill: none; opacity: 0.3; stroke-dasharray: 4 4; }
+    .diagram-flow-svg path { stroke: var(--rouaa-accent); stroke-width: 1.5; fill: none; opacity: 0.5; stroke-dasharray: 4 4; }
 
     .diagram-zone-core { background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); margin-bottom: 16px; }
     .diagram-zone-core .zone-title { font-size: 16px; font-weight: 700; color: var(--rouaa-accent); }
@@ -74,9 +74,9 @@
       border-radius: var(--radius-md); border-top: 2px solid var(--rouaa-accent);
       transition: border-color 300ms ease, transform 300ms ease;
     }
-    .diagram-layer-card:hover { border-color: var(--rouaa-accent-border); transform: translateY(-2px); }
+    .diagram-layer-card:hover { border-color: var(--rouaa-accent-border); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
     .diagram-layer-card.dev { border-top-color: var(--rouaa-text-muted); }
-    .diagram-layer-icon { width: 40px; height: 40px; margin-bottom: 10px; color: var(--rouaa-accent); }
+    .diagram-layer-icon { width: 40px; height: 40px; margin-bottom: 10px; color: var(--rouaa-accent); filter: drop-shadow(0 0 8px rgba(201,162,39,0.15)); }
     .diagram-layer-card.dev .diagram-layer-icon { color: var(--rouaa-text-muted); }
     .diagram-layer-num { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--rouaa-text-muted); margin-bottom: 4px; }
     .diagram-layer-name { font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px; }
@@ -119,12 +119,12 @@
     .layer-panel-value.muted { color: var(--rouaa-text-muted); }
 
     /* ===== Evidence Chain Visual ===== */
-    .evidence-section { padding: 96px 0; background: var(--rouaa-bg-secondary); }
+    .evidence-section { padding: 96px 0; background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border); }
     .evidence-visual { max-width: 720px; margin: 48px auto 0; position: relative; }
     .evidence-chain-svg { width: 100%; height: auto; display: block; }
     .evidence-chain-svg .node-bg { fill: var(--rouaa-surface); stroke: var(--rouaa-border); stroke-width: 1; }
     .evidence-chain-svg .node-bg-final { fill: var(--rouaa-accent-subtle); stroke: var(--rouaa-accent); stroke-width: 1.5; }
-    .evidence-chain-svg .connector { stroke: var(--rouaa-accent); stroke-width: 1.5; fill: none; opacity: 0.3; stroke-dasharray: 4 3; }
+    .evidence-chain-svg .connector { stroke: var(--rouaa-accent); stroke-width: 2; fill: none; opacity: 0.5; stroke-dasharray: 4 3; }
     .evidence-chain-svg .node-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; fill: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .evidence-chain-svg .node-label-final { fill: var(--rouaa-accent); }
     .evidence-chain-svg .node-value { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; fill: var(--rouaa-text-primary); }
