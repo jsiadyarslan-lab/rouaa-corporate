@@ -139,7 +139,7 @@
       background: var(--rouaa-surface);
       border: 1px solid var(--rouaa-border-strong);
       border-radius: var(--radius-md);
-      padding: 18px 24px;
+      padding: 24px;
     }
     .pipeline-zone-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -240,7 +240,7 @@
     @media (max-width: 880px) { .pipeline-layers-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .pipeline-layers-grid { grid-template-columns: 1fr; } }
 
-    .pipeline-layer-card {
+    .pipeline-layer-card { height: 100%;
       display: flex; flex-direction: column;
       padding: 18px 16px 14px;
       background: var(--rouaa-bg-secondary);
@@ -593,6 +593,8 @@
     }
     .status-row:last-child { border-bottom: none; }
     .status-row:hover { background: var(--rouaa-surface-hover); }
+    .status-row:nth-child(even) { background: rgba(255,255,255,0.015); }
+    .status-row:nth-child(even):hover { background: var(--rouaa-surface-hover); }
     .status-row-icon { width: 16px; height: 16px; color: var(--rouaa-text-muted); }
     .status-row-name { font-size: 14px; color: var(--rouaa-text-primary); font-weight: 500; }
     .status-row-outputs { font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-text-secondary); letter-spacing: 0.01em; }
@@ -616,7 +618,7 @@
     @media (max-width: 640px) {
       .status-col-header { grid-template-columns: 1.4fr 0.9fr; gap: 12px; padding: 8px 16px; }
       .status-col-header .col-icon, .status-col-header .col-outputs { display: none; }
-      .status-row { grid-template-columns: 1.4fr 0.9fr; gap: 12px; padding: 12px 16px; }
+      .status-row { grid-template-columns: 1.4fr 0.9fr; gap: 12px; padding: 16px; }
       .status-row-icon, .status-row-outputs { display: none; }
       .status-row-name { font-size: 13px; }
     }
@@ -794,17 +796,13 @@
         <div class="arch-hero-content">
           <!-- Dense metadata bar (monospace) -->
           <div class="arch-meta-bar reveal">
-            <span class="arch-meta-item"><span class="arch-meta-key">SYSTEM</span> ROUAA Intelligence Architecture</span>
-            <span class="arch-meta-sep"></span>
-            <span class="arch-meta-item"><span class="arch-meta-key">VERSION</span> v4.2.0</span>
-            <span class="arch-meta-sep"></span>
-            <span class="arch-meta-item"><span class="arch-meta-key">BUILD</span> 2026.03.14</span>
-            <span class="arch-meta-sep"></span>
-            <span class="arch-meta-item"><span class="arch-meta-key">REGION</span> GLOBAL</span>
+            <span class="arch-meta-item arch-meta-live"><span class="pulse-dot"></span> OPERATIONAL</span>
             <span class="arch-meta-sep"></span>
             <span class="arch-meta-item"><span class="arch-meta-key">SOURCES</span> 411+</span>
             <span class="arch-meta-sep"></span>
-            <span class="arch-meta-item arch-meta-live"><span class="pulse-dot"></span> OPERATIONAL</span>
+            <span class="arch-meta-item"><span class="arch-meta-key">LAYERS</span> 7</span>
+            <span class="arch-meta-sep"></span>
+            <span class="arch-meta-item"><span class="arch-meta-key">SNAPSHOT</span> 2026-08</span>
           </div>
 
           <span class="eyebrow reveal" style="display: block; margin-bottom: 18px;">ROUAA Intelligence Architecture</span>
@@ -932,7 +930,7 @@
               <div class="pipeline-layer-card flow-continuation">
                 <div class="flow-continuation-content">
                   <span class="flow-continuation-arrow">↓</span>
-                  <span class="flow-continuation-label">To Applications</span>
+                  <span class="flow-continuation-label">↓ Applications</span>
                 </div>
               </div>
 
