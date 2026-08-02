@@ -1,8 +1,8 @@
-# ROUAA Visual Identity System
+# ROUAA Institutional Intelligence Design System
 
-## The Visual DNA of Institutional Financial Intelligence Infrastructure
+## The Visual, Informational, Operational, and Cognitive Foundation for Financial Intelligence Infrastructure
 
-> This is not a website design. This is the genetic code from which every ROUAA page will naturally emerge.
+> This is not a website design. This is the institutional design system from which every ROUAA interface, component, and interaction will naturally emerge.
 
 ---
 
@@ -61,16 +61,15 @@ MUTED STEEL (metadata)
 #949EAF — labels, timestamps, system identifiers.
 ```
 
-### Accent — Muted Institutional Gold
+### Accent — Muted Institutional Gold (Trust Signal, NOT Brand Color)
 
 ```
 INSTITUTIONAL GOLD
 #C9A227 — used ONLY for:
   • "Verified" status badges
   • Evidence chain final nodes
-  • One keyword in hero headlines
-  • Primary CTA button
-  • Trust indicators
+  • Trust indicators (e.g., "Evidence Verified")
+  • Certification marks
 
 GOLD HOVER
 #D4B542 — interaction state only.
@@ -82,7 +81,26 @@ GOLD BORDER
 rgba(201, 162, 39, 0.20) — luminous edge for verified elements.
 ```
 
-**Gold Rule**: Gold is never decoration. Gold is never a fill. Gold is never a gradient. Gold means "this has been verified." If it's not verified, it's not gold.
+### Primary Interaction Color — Steel Blue-Gray
+
+```
+STEEL BLUE-GRAY (primary interaction)
+#7B8FA8 — buttons, links, hover states, active navigation
+This is the WORKING color. Gold is the TRUST color.
+
+STEEL HOVER
+#94A8C1 — lighter on hover
+
+STEEL SUBTLE
+rgba(123, 143, 168, 0.08) — subtle background for active states
+```
+
+**Gold vs Steel Rule**:
+- Gold = "this has been verified" (trust signal, like a central bank seal)
+- Steel = "this is interactive" (buttons, links, hover, active states)
+- Gold is NOT the primary interaction color. Steel is.
+- Gold appears maybe 5-10 times per page. Steel can appear 50+ times.
+- If everything is gold, gold means nothing.
 
 ### Functional Colors
 
@@ -645,4 +663,522 @@ If they don't understand these 5 things in 30 seconds, the visual identity has f
 
 ---
 
-*This document is the source of truth for all ROUAA visual design decisions. Every page, every component, every interaction must trace back to this DNA.*
+## 16. STRUCTURED SURFACES (NOT GLASSMORPHISM)
+
+### Why Not Glassmorphism
+
+Glassmorphism (backdrop-filter, transparency, blur) is associated with:
+- SaaS dashboards
+- Consumer AI products
+- Apple-style interfaces
+- Modern marketing sites
+
+ROUAA is NOT any of these. ROUAA is institutional infrastructure.
+
+### What ROUAA Uses: Structured Surfaces
+
+```
+SOLID GRAPHITE PANELS
+Background: #131B27 (solid, not transparent)
+Borders: #2A3543 (hard, visible, structural)
+No backdrop-filter
+No transparency
+No blur
+
+LAYER SEPARATION
+Layers are separated by:
+  1. Solid background color shifts (#080B12 → #0B0F18)
+  2. Hard 1px borders (#2A3543)
+  3. Section dividers (gradient lines)
+  NOT by: transparency, blur, or glass effects
+
+HARD BOUNDARIES
+Every panel, card, and surface has:
+  - A visible solid border
+  - A distinct solid background
+  - Clear edge definition
+  - No ambiguity about where one element ends and another begins
+```
+
+### Surface Hierarchy
+
+```
+Level 0: Page background     #080B12 (deepest)
+Level 1: Section alt          #0B0F18 (subtle shift)
+Level 2: Panel/Card surface   #131B27 (clearly visible)
+Level 3: Elevated surface     #18222F (hover/active)
+Level 4: Input/Data surface   #0D1119 (darker, for data fields)
+```
+
+Each level is a SOLID color. No transparency. No blur. Hard boundaries.
+
+---
+
+## 17. INTELLIGENCE OBJECT COMPONENT
+
+### The Core Component That Defines ROUAA
+
+This is the component that Bloomberg doesn't have. ChatGPT doesn't have. Only ROUAA has it.
+
+An Intelligence Object is a **verified, reusable, traceable financial intelligence artifact**.
+
+### Component Structure
+
+```
+┌─────────────────────────────────────────────┐
+│ INTELLIGENCE OBJECT                         │
+│                                             │
+│ TYPE:        Monetary Policy Event          │
+│ ENTITY:      Federal Reserve                │
+│ FACT:        Rate maintained 5.25–5.50%     │
+│ EVIDENCE:    FOMC Statement · Page 1 · ¶ 2 │
+│ CONFIDENCE:  97% · Tier 1 · Official        │
+│                                             │
+│ USED BY:                                    │
+│ Research · Trading · Risk · Media           │
+│                                             │
+│ [Gold border = verified]                    │
+└─────────────────────────────────────────────┘
+```
+
+### Visual Design
+
+```
+Container: Solid graphite panel (#131B27)
+Border: 1px solid #2A3543 (standard) OR gold #C9A227 (if verified)
+Header: "INTELLIGENCE OBJECT" — mono, 12px, uppercase, muted
+Fields: Label (mono, muted) → Value (white, 600 weight)
+Confidence: Gold if ≥90%, steel if 70-89%, muted if <70%
+Used By: Small pills, steel border
+```
+
+### Intelligence Object Types
+
+```
+• Source Record      — authority, jurisdiction, trust tier
+• Document Record    — format, hash, publication date
+• Fact Record        — metric, value, extraction confidence
+• Event Record       — type, entity, impact level
+• Evidence Record    — fact ref, document ref, location
+• Scenario Record    — probability, assumptions, risk factors
+• Intelligence Output — analysis, evidence package, audit trail
+```
+
+Each type shares the same visual container but shows different fields.
+
+---
+
+## 18. DEPENDENCY MODEL
+
+### Layers Are Not a List — They're a System
+
+Every layer card must show:
+1. What it depends on (inputs from which layers)
+2. What it feeds (outputs to which layers/consumers)
+
+### Dependency Display
+
+```
+LAYER 05 — Evidence Layer
+
+Purpose: Creates provenance chains
+
+Depends on:
+  ← Layer 02 (Document Intelligence)
+  ← Layer 03 (Financial Fact Engine)
+
+Feeds:
+  → Layer 06 (Knowledge Graph)
+  → Layer 07 (Intelligence Governance)
+  → Applications (Research, Risk, Trading, Media)
+
+Status: Verified
+```
+
+### Visual Design
+
+```
+Dependencies shown as:
+  ← arrow + layer name (muted, mono)
+Feeds shown as:
+  → arrow + consumer name (steel, mono)
+This creates a visual web of connections, not a flat list.
+```
+
+---
+
+## 19. DATA OBJECTS METRICS
+
+### Beyond Source Counts
+
+Institutions don't just ask "how many sources?" They ask "what is the system producing?"
+
+### Data Objects Dashboard
+
+```
+DATA OBJECTS
+
+Documents Processed     [count]
+Facts Extracted         [count]
+Events Detected         [count]
+Evidence Links Created  [count]
+Intelligence Outputs    [count]
+Pipeline Success Rate   [percentage]
+```
+
+### Visual Design
+
+```
+6 metric cards in a grid
+Each: large number (gold or steel) + label (mono, muted)
+Numbers use tabular-nums for alignment
+Below: "Last updated: [timestamp]" in monospace
+```
+
+**Important**: Only show REAL numbers. If counts aren't available yet, show the metric structure with "—" as placeholder. Never fabricate.
+
+---
+
+## 20. DATA FLOW ANIMATION
+
+### The Signature Motion of ROUAA
+
+This is NOT a fade-in. This is **data moving through the pipeline**.
+
+### How It Works
+
+```
+A small dot (or packet) travels:
+  Source → Document → Fact → Evidence → Output
+
+The dot is small (4px), gold (verified data moving)
+It moves slowly (2s per segment)
+It follows the dashed connector lines
+When it reaches a node, the node briefly highlights
+When it reaches the final node (Output), the node glows gold
+```
+
+### Visual Design
+
+```
+Dot: 4px circle, gold #C9A227, slight glow
+Path: follows existing dashed connector lines
+Speed: 2s per segment, 0.5s pause at each node
+Node highlight: border brightens for 0.5s when dot arrives
+Final node: gold glow pulse when dot arrives
+Loop: restarts after 3s pause
+
+Reduced motion: dot is static at final position, no animation
+```
+
+### Where to Use
+
+- Architecture page (pipeline section)
+- Evidence Explorer (chain section)
+- Home page (hero pipeline)
+- Product Experience Center (shared foundation)
+
+This animation becomes the **visual signature** of ROUAA — when you see data flowing through verified layers, you know you're looking at ROUAA.
+
+---
+
+## 21. DATA VISUALIZATION LANGUAGE
+
+### Not TradingView. Not Excel. ROUAA's Own.
+
+ROUAA doesn't show price charts. It shows **intelligence relationships**.
+
+### Visualization Types
+
+```
+1. EVENT TIMELINE
+   Horizontal timeline showing:
+   - When sources published
+   - When facts were extracted
+   - When events were classified
+   - When intelligence was generated
+   Each event: dot on timeline, hover shows evidence chain
+
+2. EVIDENCE GRAPH
+   Network diagram showing:
+   - Source nodes (blue-gray)
+   - Document nodes (graphite)
+   - Fact nodes (white)
+   - Evidence nodes (gold border = verified)
+   - Connection lines (dashed, directional)
+   Like a knowledge graph but focused on provenance
+
+3. ENTITY NETWORK
+   Shows relationships between financial entities:
+   - Central bank → policy → market impact
+   - Regulator → rule → affected entities
+   - Corporation → filing → market reaction
+   Nodes = entities, edges = relationships
+
+4. SCENARIO TREE
+   Branching diagram showing:
+   - Current event at root
+   - 2-3 scenario branches
+   - Probability on each branch
+   - Evidence supporting each branch
+   - Risk factors on each branch
+
+5. CONFIDENCE DISTRIBUTION
+   Shows confidence scores across:
+   - Sources (x-axis: trust tier, y-axis: count)
+   - Facts (x-axis: confidence %, y-axis: count)
+   - Outputs (x-axis: confidence, y-axis: type)
+   Simple bar chart, monospace labels, no decoration
+```
+
+### Visualization Design Rules
+
+```
+Colors: white/steel for structure, gold ONLY for verified nodes
+Lines: 1px solid (structural) or 1px dashed (flow)
+Labels: monospace, 12px, muted
+Background: transparent (on page bg) or panel bg
+No: gradients, 3D, shadows on data elements
+No: TradingView-style candlesticks, price lines, volume bars
+Yes: clean, labeled, precise diagrams that look like engineering schematics
+```
+
+---
+
+## 22. INSTITUTIONAL WORKSPACE PATTERNS
+
+### How Applications Look
+
+Each ROUAA application is NOT a dashboard. It's an **intelligence workspace**.
+
+### Workspace Layout
+
+```
+┌──────────────────────────────────────────────────┐
+│ NAVIGATION BAR                                    │
+├──────────┬───────────────────────────────────────┤
+│          │ WORKSPACE HEADER                      │
+│ SIDEBAR  │ (title, metadata, last updated)       │
+│          ├───────────────────────────────────────┤
+│ - Items  │                                       │
+│ - Items  │ INTELLIGENCE PANELS                   │
+│ - Items  │ (evidence chains, fact cards,         │
+│          │  scenario trees, event feeds)         │
+│          │                                       │
+│          ├───────────────────────────────────────┤
+│          │ EVIDENCE TRAIL (bottom)               │
+│          │ (trace any output to source)          │
+└──────────┴───────────────────────────────────────┘
+```
+
+### Workspace Types
+
+```
+RESEARCH WORKSPACE
+  Sidebar: Briefs, Macro Research, Equity Analysis, Evidence Library
+  Panels: Committee brief, scenario analysis, evidence summary
+  Trail: Every claim → source document
+
+TRADING WORKSPACE
+  Sidebar: Events, Scenarios, Positions, Alerts
+  Panels: Event feed, market context, evidence chain
+  Trail: Every signal → verified event → source
+
+RISK WORKSPACE
+  Sidebar: Exposure, Regulatory Monitor, Audit Trail
+  Panels: Risk alerts, exposure breakdown, compliance
+  Trail: Every alert → regulatory source → affected entities
+
+MEDIA WORKSPACE
+  Sidebar: Newsroom, Source Monitor, Drafts, Published
+  Panels: Breaking story, evidence verification, publish
+  Trail: Every published claim → official source
+
+DEVELOPER WORKSPACE
+  Sidebar: API Explorer, Endpoints, SDK, Keys
+  Panels: Request/response, evidence metadata
+  Trail: Every API response → evidence chain included
+```
+
+### Workspace Design Rules
+
+```
+- Sidebar: 240px, bg-secondary, border-right
+- Header: 64px, shows title + metadata + status
+- Panels: solid graphite, visible borders
+- Evidence Trail: fixed bottom bar, expandable
+- All workspaces share the same shell, different content
+```
+
+---
+
+## 23. TRUST INDICATORS
+
+### Institutional Trust Signals
+
+Trust in ROUAA is not claimed — it's **displayed**.
+
+### Trust Indicator Components
+
+```
+SOURCE VERIFIED
+┌──────────────────────────┐
+│ ✓ SOURCE VERIFIED        │
+│ Federal Reserve · Tier 1 │
+└──────────────────────────┘
+Gold border, green check, mono text
+
+DOCUMENT AUTHENTICATED
+┌──────────────────────────┐
+│ ✓ DOCUMENT AUTHENTICATED │
+│ Hash: a3f8...e2b1        │
+└──────────────────────────┘
+Gold border, green check, mono hash
+
+FACT EXTRACTED
+┌──────────────────────────┐
+│ ✓ FACT EXTRACTED         │
+│ Confidence: 97%          │
+└──────────────────────────┘
+Gold border, confidence in gold
+
+EVIDENCE ATTACHED
+┌──────────────────────────┐
+│ ✓ EVIDENCE ATTACHED      │
+│ Page 1 · Paragraph 2     │
+└──────────────────────────┘
+Gold border, location in mono
+
+OUTPUT GOVERNED
+┌──────────────────────────┐
+│ ✓ OUTPUT GOVERNED        │
+│ Validation: passed       │
+│ Audit trail: preserved   │
+└──────────────────────────┘
+Gold border, validation status
+```
+
+### Visual Design
+
+```
+Shape: small rectangular badge, 3px radius
+Border: 1px solid gold (if verified) or steel (if pending)
+Icon: ✓ checkmark (12px)
+Text: monospace, 11px, uppercase
+Background: gold-subtle (if verified) or transparent
+```
+
+### Where Trust Indicators Appear
+
+- On every intelligence output
+- On every evidence chain node
+- On source records
+- On document records
+- On fact records
+- In system status console
+- In workspace headers
+
+Trust indicators are **pervasive**. The user should see "✓ VERIFIED" everywhere they look. This is how ROUAA builds trust — not through marketing claims, but through structural, visible verification.
+
+---
+
+## 24. EMPTY STATES & ERROR STATES
+
+### Institutional Systems Must Handle Failure Gracefully
+
+#### Empty States
+
+```
+SOURCE UNAVAILABLE
+┌──────────────────────────────────┐
+│ Source temporarily unavailable   │
+│                                  │
+│ Federal Reserve · FOMC           │
+│ Last successful check: 14:00 UTC │
+│ Retry in: 60s                    │
+│                                  │
+│ [Retry Now]  [View Last Cache]   │
+└──────────────────────────────────┘
+Design: amber border, amber icon, mono timestamps
+
+DOCUMENT INCOMPLETE
+┌──────────────────────────────────┐
+│ Document processing incomplete   │
+│                                  │
+│ Document: fomc_2026_08.pdf       │
+│ Pages processed: 2 of 3          │
+│ Issue: Page 3 extraction failed  │
+│                                  │
+│ [Retry Extraction]  [View Partial]│
+└──────────────────────────────────┘
+Design: amber border, progress indicator
+
+LOW CONFIDENCE
+┌──────────────────────────────────┐
+│ Confidence below threshold       │
+│                                  │
+│ Fact: "Rate cut expected Q4"     │
+│ Confidence: 62%                  │
+│ Threshold: 80%                   │
+│                                  │
+│ Flagged for human review.        │
+│ [Override]  [Request Review]     │
+└──────────────────────────────────┘
+Design: amber border, confidence in amber
+
+HUMAN REVIEW REQUIRED
+┌──────────────────────────────────┐
+│ Human review required            │
+│                                  │
+│ Intelligence output: INT-2026-041│
+│ Reason: Confidence 62% < 80%     │
+│ Evidence: 2 sources (need 3+)    │
+│                                  │
+│ [Review Now]  [Escalate]         │
+└──────────────────────────────────┘
+Design: steel border, review icon
+```
+
+#### Error States
+
+```
+EXTRACTION FAILED
+┌──────────────────────────────────┐
+│ ⚠ Extraction failed              │
+│                                  │
+│ Document: fomc_2026_08.pdf       │
+│ Error: PDF structure corrupted   │
+│ Timestamp: 2026-08-02 14:00:14   │
+│                                  │
+│ [Retry]  [Report Issue]          │
+└──────────────────────────────────┘
+Design: red border, red icon, mono error details
+
+SOURCE DISCONNECTED
+┌──────────────────────────────────┐
+│ ⚠ Source disconnected            │
+│                                  │
+│ Source: ECB · Statistical Release│
+│ Last connection: 2h ago          │
+│ Error: Connection timeout        │
+│                                  │
+│ [Reconnect]  [View Cache]        │
+└──────────────────────────────────┘
+Design: red border, red icon, mono timestamps
+```
+
+### Design Rules for States
+
+```
+Empty/Pending: amber border (#F5A623), amber icon
+Error/Critical: red border (#E5484D), red icon
+Review/Action: steel border (#7B8FA8), info icon
+All states: monospace for IDs, timestamps, error details
+All states: clear action buttons (steel, not gold)
+Never: hide errors, use generic "something went wrong"
+Always: show what happened, when, and what can be done
+```
+
+---
+
+*This document is the source of truth for all ROUAA institutional design decisions. Every page, every component, every interaction must trace back to this system. ROUAA is not a website — it is an institutional intelligence infrastructure with a visual language that proves its own trustworthiness.*
