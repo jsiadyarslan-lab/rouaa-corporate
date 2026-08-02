@@ -4,33 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROUAA Intelligence Architecture — The Infrastructure Layer</title>
-  <meta name="description" content="ROUAA Intelligence Architecture — the infrastructure layer that transforms official financial information into defensible institutional decisions. 7 layers from source registry to intelligence applications.">
+  <meta name="description" content="ROUAA Intelligence Architecture — the infrastructure layer that transforms official financial information into defensible institutional decisions.">
   <link rel="stylesheet" href="design-system/tokens.css">
   <link rel="stylesheet" href="design-system/typography.css">
   <link rel="stylesheet" href="design-system/components.css">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* ===== Enterprise Motion System ===== */
-    /* Scroll reveal — fade in + slide up, very subtle */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 600ms ease, transform 600ms ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* Stagger children */
-    .reveal-stagger > * {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 500ms ease, transform 500ms ease;
-    }
-    .reveal-stagger.visible > * {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ===== Scroll Reveal ===== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 500ms ease, transform 500ms ease; }
+    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
     .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; }
     .reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; }
     .reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; }
@@ -41,521 +25,140 @@
     .reveal-stagger.visible > *:nth-child(8) { transition-delay: 560ms; }
 
     /* ===== Hero ===== */
-    .arch-hero {
-      padding: 140px 0 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Data grid background — very subtle */
+    .arch-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; }
     .arch-hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(201, 162, 39, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201, 162, 39, 0.025) 1px, transparent 1px);
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px);
       background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black, transparent 80%);
-      z-index: 0;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent 80%);
     }
-    .arch-hero-glow {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 300px;
-      background: radial-gradient(ellipse, rgba(201, 162, 39, 0.04), transparent 70%);
-      z-index: 0;
-    }
-    .arch-hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    .arch-hero h1 {
-      max-width: 22ch;
-      margin: 0 auto 28px;
-    }
-    .arch-pipeline-label {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--rouaa-text-muted);
-      letter-spacing: var(--tracking-wider);
-      margin-bottom: 40px;
-    }
+    .arch-hero-glow { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(201,162,39,0.05), transparent 70%); z-index: 0; }
+    .arch-hero-content { position: relative; z-index: 1; }
+    .arch-hero h1 { max-width: 22ch; margin: 0 auto 28px; }
+    .arch-pipeline-label { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--rouaa-text-muted); letter-spacing: var(--tracking-wider); margin-bottom: 40px; }
     .arch-pipeline-label .arrow { color: var(--rouaa-accent); margin: 0 8px; }
-    .arch-hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .arch-hero-stat {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-full);
-    }
-    .arch-hero-stat .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--rouaa-green);
-      animation: pulse-dot 3s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .arch-hero-stat .text {
-      font-size: 13px;
-      color: var(--rouaa-text-secondary);
-      font-weight: 500;
-    }
+    .arch-hero-stats { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .arch-hero-stat { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-full); }
+    .arch-hero-stat .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rouaa-green); animation: pulse-dot 3s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .arch-hero-stat .text { font-size: 13px; color: var(--rouaa-text-secondary); font-weight: 500; }
 
-    /* ===== Section Divider ===== */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--rouaa-border-strong), transparent);
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--rouaa-border-strong), transparent); max-width: 800px; margin: 0 auto; }
 
-    /* ===== Pipeline (scroll experience) ===== */
-    .pipeline-section {
-      padding: 96px 0;
-      background: var(--rouaa-bg-secondary);
+    /* ===== Visual Architecture Diagram ===== */
+    .arch-diagram { padding: 96px 0; background: var(--rouaa-bg-secondary); }
+    .diagram-container { max-width: 880px; margin: 0 auto; }
+    .diagram-zone {
+      text-align: center; padding: 20px 24px; border-radius: var(--radius-md); margin-bottom: 0;
     }
-    .pipeline-flow {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .pipeline-zone {
-      text-align: center;
-      padding: 24px;
-      border-radius: var(--radius-md);
-    }
-    .pipeline-zone-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--rouaa-text-muted);
-      margin-bottom: 12px;
-    }
-    .pipeline-zone-sources {
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-    }
-    .source-types {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .source-type {
-      padding: 6px 14px;
-      background: var(--rouaa-bg-secondary);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      color: var(--rouaa-text-secondary);
-    }
-    .pipeline-zone-core {
-      background: var(--rouaa-accent-subtle);
-      border: 1px solid var(--rouaa-accent-border);
-    }
-    .pipeline-zone-core .zone-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--rouaa-accent);
-    }
-    .pipeline-zone-apps {
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-    }
-    .app-types {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .app-type {
-      padding: 6px 14px;
-      background: var(--rouaa-bg-secondary);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      color: var(--rouaa-text-secondary);
-    }
+    .diagram-zone-label { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px; }
+    .diagram-zone-sources { background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); }
+    .diagram-source-types { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+    .diagram-source-type { display: flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary); }
+    .diagram-source-type svg { width: 14px; height: 14px; color: var(--rouaa-text-muted); }
 
-    /* Pipeline layers */
-    .pipeline-layer {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-md);
-      border-left: 3px solid var(--rouaa-accent);
-      margin-bottom: 4px;
-      align-items: center;
-      transition: border-color 300ms ease, background 300ms ease;
+    /* SVG flow connectors */
+    .diagram-flow-svg { width: 100%; height: 40px; display: block; }
+    .diagram-flow-svg path { stroke: var(--rouaa-accent); stroke-width: 1.5; fill: none; opacity: 0.3; stroke-dasharray: 4 4; }
+
+    .diagram-zone-core { background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); margin-bottom: 16px; }
+    .diagram-zone-core .zone-title { font-size: 16px; font-weight: 700; color: var(--rouaa-accent); }
+
+    /* Layer cards in diagram — horizontal grid with icons */
+    .diagram-layers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+    @media (max-width: 768px) { .diagram-layers-grid { grid-template-columns: repeat(2, 1fr); } }
+    .diagram-layer-card {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 20px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border);
+      border-radius: var(--radius-md); border-top: 2px solid var(--rouaa-accent);
+      transition: border-color 300ms ease, transform 300ms ease;
     }
-    .pipeline-layer:hover {
-      border-color: var(--rouaa-accent-border);
-      background: var(--rouaa-surface-hover);
-    }
-    .pipeline-layer-num {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--rouaa-accent);
-    }
-    .pipeline-layer-name {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--rouaa-text-primary);
-    }
-    .pipeline-layer-desc {
-      font-size: 12px;
-      color: var(--rouaa-text-muted);
-      margin-top: 2px;
-    }
-    .pipeline-arrow {
-      text-align: center;
-      color: var(--rouaa-accent);
-      opacity: 0.2;
-      font-size: 14px;
-      padding: 4px 0;
-    }
-    .pipeline-arrow-large {
-      text-align: center;
-      color: var(--rouaa-accent);
-      opacity: 0.3;
-      font-size: 20px;
-      padding: 16px 0;
-    }
+    .diagram-layer-card:hover { border-color: var(--rouaa-accent-border); transform: translateY(-2px); }
+    .diagram-layer-card.dev { border-top-color: var(--rouaa-text-muted); }
+    .diagram-layer-icon { width: 40px; height: 40px; margin-bottom: 10px; color: var(--rouaa-accent); }
+    .diagram-layer-card.dev .diagram-layer-icon { color: var(--rouaa-text-muted); }
+    .diagram-layer-num { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--rouaa-text-muted); margin-bottom: 4px; }
+    .diagram-layer-name { font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary); margin-bottom: 4px; }
+    .diagram-layer-desc { font-size: 11px; color: var(--rouaa-text-muted); line-height: 1.4; }
+    .diagram-layer-status { margin-top: 8px; font-family: var(--font-mono); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: var(--radius-sm); }
+    .diagram-layer-status.op { color: var(--rouaa-green); background: var(--rouaa-green-subtle); }
+    .diagram-layer-status.dev { color: var(--rouaa-text-muted); background: var(--rouaa-bg-secondary); }
+
+    .diagram-zone-apps { background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); }
+    .diagram-app-types { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+    .diagram-app-type { padding: 6px 14px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary); }
 
     /* ===== Interactive Layer Explorer ===== */
-    .layer-explorer {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 0;
-      max-width: 1040px;
-      margin: 0 auto;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border-strong);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      min-height: 420px;
-    }
-    @media (max-width: 768px) {
-      .layer-explorer { grid-template-columns: 1fr; }
-    }
-
-    /* Left: Layer navigation */
-    .layer-nav {
-      background: var(--rouaa-bg-secondary);
-      border-right: 1px solid var(--rouaa-border);
-      padding: 16px 0;
-    }
-    .layer-nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 20px;
-      cursor: pointer;
-      border-left: 2px solid transparent;
-      transition: all 200ms ease;
-    }
-    .layer-nav-item:hover {
-      background: var(--rouaa-surface);
-    }
-    .layer-nav-item.active {
-      background: var(--rouaa-accent-subtle);
-      border-left-color: var(--rouaa-accent);
-    }
-    .layer-nav-num {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--rouaa-text-muted);
-      min-width: 24px;
-    }
-    .layer-nav-item.active .layer-nav-num {
-      color: var(--rouaa-accent);
-    }
-    .layer-nav-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--rouaa-text-secondary);
-    }
-    .layer-nav-item.active .layer-nav-name {
-      color: var(--rouaa-accent);
-      font-weight: 600;
-    }
-
-    /* Right: Layer detail */
-    .layer-detail-panel {
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-    }
-    .layer-panel-content {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-    }
-    .layer-panel-content.active {
-      display: flex;
-      animation: fade-in-panel 400ms ease;
-    }
-    @keyframes fade-in-panel {
-      from { opacity: 0; transform: translateX(12px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .layer-panel-num {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--rouaa-accent);
-      margin-bottom: 4px;
-    }
-    .layer-panel-name {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--rouaa-text-primary);
-      margin-bottom: 8px;
-    }
-    .layer-panel-purpose {
-      font-size: 15px;
-      color: var(--rouaa-text-secondary);
-      line-height: var(--leading-relaxed);
-      margin-bottom: 24px;
-    }
-    .layer-panel-row {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 16px;
-      padding: 10px 0;
-      border-top: 1px solid var(--rouaa-border);
-    }
-    .layer-panel-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: var(--tracking-wider);
-      text-transform: uppercase;
-      color: var(--rouaa-text-muted);
-      padding-top: 2px;
-    }
-    .layer-panel-value {
-      font-size: 14px;
-      color: var(--rouaa-text-primary);
-    }
+    .layer-explorer { display: grid; grid-template-columns: 280px 1fr; gap: 0; max-width: 1040px; margin: 0 auto; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border-strong); border-radius: var(--radius-lg); overflow: hidden; min-height: 420px; }
+    @media (max-width: 768px) { .layer-explorer { grid-template-columns: 1fr; } }
+    .layer-nav { background: var(--rouaa-bg-secondary); border-right: 1px solid var(--rouaa-border); padding: 16px 0; }
+    @media (max-width: 768px) { .layer-nav { border-right: none; border-bottom: 1px solid var(--rouaa-border); } }
+    .layer-nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; border-left: 2px solid transparent; transition: all 200ms ease; }
+    .layer-nav-item:hover { background: var(--rouaa-surface); }
+    .layer-nav-item.active { background: var(--rouaa-accent-subtle); border-left-color: var(--rouaa-accent); }
+    .layer-nav-icon { width: 20px; height: 20px; color: var(--rouaa-text-muted); flex-shrink: 0; }
+    .layer-nav-item.active .layer-nav-icon { color: var(--rouaa-accent); }
+    .layer-nav-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--rouaa-text-muted); min-width: 24px; }
+    .layer-nav-item.active .layer-nav-num { color: var(--rouaa-accent); }
+    .layer-nav-name { font-size: 13px; font-weight: 500; color: var(--rouaa-text-secondary); }
+    .layer-nav-item.active .layer-nav-name { color: var(--rouaa-accent); font-weight: 600; }
+    .layer-detail-panel { padding: 32px; display: flex; flex-direction: column; }
+    .layer-panel-content { display: none; flex-direction: column; gap: 0; }
+    .layer-panel-content.active { display: flex; animation: fade-in-panel 400ms ease; }
+    @keyframes fade-in-panel { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+    .layer-panel-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .layer-panel-icon { width: 48px; height: 48px; color: var(--rouaa-accent); flex-shrink: 0; }
+    .layer-panel-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--rouaa-accent); margin-bottom: 4px; }
+    .layer-panel-name { font-size: 22px; font-weight: 700; color: var(--rouaa-text-primary); }
+    .layer-panel-purpose { font-size: 15px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 24px; }
+    .layer-panel-row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid var(--rouaa-border); }
+    .layer-panel-label { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--rouaa-text-muted); padding-top: 2px; }
+    .layer-panel-value { font-size: 14px; color: var(--rouaa-text-primary); }
     .layer-panel-value.accent { color: var(--rouaa-accent); font-weight: 600; }
     .layer-panel-value.muted { color: var(--rouaa-text-muted); }
 
-    /* ===== Evidence Chain Animation ===== */
-    .evidence-section {
-      padding: 96px 0;
-      background: var(--rouaa-bg-secondary);
-    }
-    .evidence-chain-interactive {
-      max-width: 480px;
-      margin: 48px auto 0;
-    }
-    .evidence-step {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-md);
-      opacity: 0.3;
-      transform: translateX(-12px);
-      transition: opacity 400ms ease, transform 400ms ease, border-color 400ms ease;
-    }
-    .evidence-step.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .evidence-step.final {
-      border-color: var(--rouaa-accent-border);
-      background: var(--rouaa-accent-subtle);
-    }
-    .evidence-step.final.visible {
-      border-color: var(--rouaa-accent);
-    }
-    .evidence-step-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: var(--tracking-wider);
-      text-transform: uppercase;
-      color: var(--rouaa-text-muted);
-      min-width: 90px;
-    }
-    .evidence-step.final .evidence-step-label {
-      color: var(--rouaa-accent);
-    }
-    .evidence-step-value {
-      font-size: 14px;
-      color: var(--rouaa-text-primary);
-      font-weight: 600;
-    }
-    .evidence-step.final .evidence-step-value {
-      color: var(--rouaa-accent);
-    }
-    .evidence-step-arrow {
-      text-align: center;
-      color: var(--rouaa-accent);
-      opacity: 0.2;
-      font-size: 14px;
-      padding: 4px 0;
-    }
+    /* ===== Evidence Chain Visual ===== */
+    .evidence-section { padding: 96px 0; background: var(--rouaa-bg-secondary); }
+    .evidence-visual { max-width: 720px; margin: 48px auto 0; position: relative; }
+    .evidence-chain-svg { width: 100%; height: auto; display: block; }
+    .evidence-chain-svg .node-bg { fill: var(--rouaa-surface); stroke: var(--rouaa-border); stroke-width: 1; }
+    .evidence-chain-svg .node-bg-final { fill: var(--rouaa-accent-subtle); stroke: var(--rouaa-accent); stroke-width: 1.5; }
+    .evidence-chain-svg .connector { stroke: var(--rouaa-accent); stroke-width: 1.5; fill: none; opacity: 0.3; stroke-dasharray: 4 3; }
+    .evidence-chain-svg .node-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; fill: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .evidence-chain-svg .node-label-final { fill: var(--rouaa-accent); }
+    .evidence-chain-svg .node-value { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; fill: var(--rouaa-text-primary); }
+    .evidence-chain-svg .node-value-final { fill: var(--rouaa-accent); }
+    .evidence-chain-svg .node-icon { color: var(--rouaa-accent); opacity: 0.6; }
 
     /* ===== System Status Console ===== */
-    .status-console {
-      max-width: 720px;
-      margin: 0 auto;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border-strong);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .status-console-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 24px;
-      background: var(--rouaa-bg-secondary);
-      border-bottom: 1px solid var(--rouaa-border);
-    }
-    .status-console-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--rouaa-text-muted);
-    }
-    .status-console-live {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--rouaa-green);
-      font-weight: 600;
-    }
-    .status-console-live .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--rouaa-green);
-      animation: pulse-dot 3s ease-in-out infinite;
-    }
-    .status-console-body {
-      padding: 8px 0;
-    }
-    .status-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 12px 24px;
-      border-bottom: 1px solid var(--rouaa-border);
-    }
+    .status-console { max-width: 720px; margin: 0 auto; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border-strong); border-radius: var(--radius-lg); overflow: hidden; }
+    .status-console-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--rouaa-bg-secondary); border-bottom: 1px solid var(--rouaa-border); }
+    .status-console-title { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--rouaa-text-muted); }
+    .status-console-live { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--rouaa-green); font-weight: 600; }
+    .status-console-live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rouaa-green); animation: pulse-dot 3s ease-in-out infinite; }
+    .status-console-body { padding: 8px 0; }
+    .status-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 12px 24px; border-bottom: 1px solid var(--rouaa-border); }
     .status-row:last-child { border-bottom: none; }
-    .status-row-name {
-      font-size: 14px;
-      color: var(--rouaa-text-primary);
-      font-weight: 500;
-    }
-    .status-row-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-    }
-    .status-row-badge.operational {
-      color: var(--rouaa-green);
-      background: var(--rouaa-green-subtle);
-      border: 1px solid rgba(45, 186, 142, 0.2);
-    }
-    .status-row-badge.verified {
-      color: var(--rouaa-accent);
-      background: var(--rouaa-accent-subtle);
-      border: 1px solid var(--rouaa-accent-border);
-    }
-    .status-row-badge.building {
-      color: var(--rouaa-text-muted);
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-    }
-    .status-row-badge.ready {
-      color: var(--rouaa-blue);
-      background: var(--rouaa-blue-subtle);
-      border: 1px solid rgba(74, 144, 217, 0.2);
-    }
-    .status-badge-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-    }
+    .status-row-name { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--rouaa-text-primary); font-weight: 500; }
+    .status-row-icon { width: 16px; height: 16px; color: var(--rouaa-text-muted); }
+    .status-row-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+    .status-row-badge.operational { color: var(--rouaa-green); background: var(--rouaa-green-subtle); border: 1px solid rgba(45,186,142,0.2); }
+    .status-row-badge.verified { color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); }
+    .status-row-badge.building { color: var(--rouaa-text-muted); background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); }
+    .status-row-badge.ready { color: var(--rouaa-blue); background: var(--rouaa-blue-subtle); border: 1px solid rgba(74,144,217,0.2); }
+    .status-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 
     /* ===== Deployment ===== */
-    .deploy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      max-width: 880px;
-      margin: 0 auto;
-    }
-    .deploy-card {
-      padding: 24px;
-      background: var(--rouaa-surface);
-      border: 1px solid var(--rouaa-border);
-      border-radius: var(--radius-md);
-      text-align: center;
-      transition: border-color 300ms ease, background 300ms ease;
-    }
-    .deploy-card:hover {
-      border-color: var(--rouaa-accent-border);
-      background: var(--rouaa-surface-hover);
-    }
-    .deploy-name {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--rouaa-accent);
-      margin-bottom: 8px;
-    }
-    .deploy-desc {
-      font-size: 12px;
-      color: var(--rouaa-text-muted);
-    }
+    .deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 880px; margin: 0 auto; }
+    .deploy-card { display: flex; flex-direction: column; align-items: center; padding: 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-md); text-align: center; transition: border-color 300ms ease, background 300ms ease; }
+    .deploy-card:hover { border-color: var(--rouaa-accent-border); background: var(--rouaa-surface-hover); }
+    .deploy-icon { width: 32px; height: 32px; color: var(--rouaa-accent); margin-bottom: 12px; }
+    .deploy-name { font-size: 15px; font-weight: 600; color: var(--rouaa-accent); margin-bottom: 8px; }
+    .deploy-desc { font-size: 12px; color: var(--rouaa-text-muted); }
 
     @media (max-width: 768px) {
       .arch-hero-stats { flex-direction: column; align-items: center; }
-      .layer-nav { border-right: none; border-bottom: 1px solid var(--rouaa-border); }
     }
   </style>
 </head>
@@ -569,80 +172,33 @@
       <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
       <div class="nav-links" id="navLinks">
         <div class="nav-item-has-dropdown">
-          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
-            Products
-            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">Products<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
-            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
-            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
-            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
-            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
-            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
-            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a><a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a><a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a><a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a><a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a><a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
           </div>
         </div>
         <div class="nav-item-has-dropdown">
-          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
-            Platform
-            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">Platform<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
-            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
-            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
-            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
-            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
-            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
-            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a><a href="platform.html" class="nav-dropdown-link">Platform Overview</a><a href="source-registry.html" class="nav-dropdown-link">Source Registry</a><a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a><a href="methodology.html" class="nav-dropdown-link">Methodology</a><a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
           </div>
         </div>
         <div class="nav-item-has-dropdown">
-          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
-            Solutions
-            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">Solutions<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
-            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
-            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
-            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
-            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
-            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
-            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
-            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a><a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a><a href="financial-media.html" class="nav-dropdown-link">Financial Media</a><a href="enterprise.html" class="nav-dropdown-link">Enterprise</a><a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a><a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a><a href="business-case.html" class="nav-dropdown-link">Business Case</a>
           </div>
         </div>
         <div class="nav-item-has-dropdown">
-          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
-            Experience
-            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">Experience<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
-            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
-            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
-            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
-            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a><a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a><a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a><a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
           </div>
         </div>
         <div class="nav-item-has-dropdown">
-          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
-            Company
-            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">Company<svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
-            <a href="company.html" class="nav-dropdown-link">About</a>
-            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
-            <a href="careers.html" class="nav-dropdown-link">Careers</a>
-            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+            <a href="company.html" class="nav-dropdown-link">About</a><a href="research-institute.html" class="nav-dropdown-link">Research Institute</a><a href="careers.html" class="nav-dropdown-link">Careers</a><a href="contact.html" class="nav-dropdown-link">Contact</a>
           </div>
         </div>
         <a href="developers.html" class="nav-link">Developers</a>
@@ -663,31 +219,13 @@
     <div class="container">
       <div class="arch-hero-content">
         <span class="eyebrow" style="display: block; margin-bottom: 24px;">ROUAA Intelligence Architecture</span>
-        <h1>
-          The infrastructure layer that transforms<br>
-          official financial information into<br>
-          <span class="text-accent">defensible institutional decisions.</span>
-        </h1>
-        <div class="arch-pipeline-label">
-          Source <span class="arrow">→</span> Evidence <span class="arrow">→</span> Intelligence <span class="arrow">→</span> Decision
-        </div>
+        <h1>The infrastructure layer that transforms<br>official financial information into<br><span class="text-accent">defensible institutional decisions.</span></h1>
+        <div class="arch-pipeline-label">Source <span class="arrow">→</span> Evidence <span class="arrow">→</span> Intelligence <span class="arrow">→</span> Decision</div>
         <div class="arch-hero-stats reveal-stagger">
-          <div class="arch-hero-stat">
-            <div class="dot"></div>
-            <span class="text">Operational Foundation</span>
-          </div>
-          <div class="arch-hero-stat">
-            <div class="dot"></div>
-            <span class="text">411+ Sources</span>
-          </div>
-          <div class="arch-hero-stat">
-            <div class="dot"></div>
-            <span class="text">Evidence Provenance</span>
-          </div>
-          <div class="arch-hero-stat">
-            <div class="dot"></div>
-            <span class="text">Event Engine</span>
-          </div>
+          <div class="arch-hero-stat"><div class="dot"></div><span class="text">Operational Foundation</span></div>
+          <div class="arch-hero-stat"><div class="dot"></div><span class="text">411+ Sources</span></div>
+          <div class="arch-hero-stat"><div class="dot"></div><span class="text">Evidence Provenance</span></div>
+          <div class="arch-hero-stat"><div class="dot"></div><span class="text">Event Engine</span></div>
         </div>
       </div>
     </div>
@@ -695,107 +233,119 @@
 
   <div class="section-divider"></div>
 
-  <!-- ============ INTELLIGENCE PIPELINE ============ -->
-  <section class="pipeline-section">
+  <!-- ============ VISUAL ARCHITECTURE DIAGRAM ============ -->
+  <section class="arch-diagram">
     <div class="container">
       <div class="section-header text-center reveal" style="margin: 0 auto 48px;">
         <span class="eyebrow">The Intelligence Pipeline</span>
         <h2>From official publication to institutional decision.</h2>
-        <p style="margin: 0 auto; max-width: 640px;">This is ROUAA visually — the complete path from official sources through the intelligence core to institutional applications. Every step preserves evidence. Every output carries its proof.</p>
+        <p style="margin: 0 auto; max-width: 640px;">This is ROUAA visually — the complete path from official sources through the intelligence core to institutional applications.</p>
       </div>
 
-      <div class="pipeline-flow reveal-stagger">
+      <div class="diagram-container reveal-stagger">
 
-        <div class="pipeline-zone pipeline-zone-sources">
-          <div class="pipeline-zone-label">Official Information</div>
-          <div class="source-types">
-            <span class="source-type">Central Banks</span>
-            <span class="source-type">Regulators</span>
-            <span class="source-type">Statistical Agencies</span>
-            <span class="source-type">Corporate Filings</span>
-            <span class="source-type">Exchanges</span>
+        <!-- Sources Zone -->
+        <div class="diagram-zone diagram-zone-sources">
+          <div class="diagram-zone-label">Official Information</div>
+          <div class="diagram-source-types">
+            <span class="diagram-source-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>Central Banks</span>
+            <span class="diagram-source-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9"/></svg>Regulators</span>
+            <span class="diagram-source-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 6-6"/></svg>Statistical Agencies</span>
+            <span class="diagram-source-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6M8 13h8M8 17h5"/></svg>Corporate Filings</span>
+            <span class="diagram-source-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 12l4 4 4-4 4-4"/></svg>Exchanges</span>
           </div>
         </div>
 
-        <div class="pipeline-arrow-large">↓</div>
+        <!-- SVG Flow Connector -->
+        <svg class="diagram-flow-svg" viewBox="0 0 880 40" preserveAspectRatio="none">
+          <path d="M440 0 L440 40" />
+        </svg>
 
-        <div class="pipeline-zone pipeline-zone-core" style="margin-bottom: 12px;">
-          <div class="pipeline-zone-label" style="color: var(--rouaa-accent);">ROUAA Intelligence Core</div>
+        <!-- Intelligence Core -->
+        <div class="diagram-zone diagram-zone-core" style="margin-bottom: 16px;">
+          <div class="diagram-zone-label" style="color: var(--rouaa-accent);">ROUAA Intelligence Core</div>
           <div class="zone-title">7 Connected Intelligence Layers</div>
         </div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">01</div>
-          <div>
-            <div class="pipeline-layer-name">Source Registry</div>
-            <div class="pipeline-layer-desc">Authority + Classification + Monitoring</div>
+        <!-- Layer Cards Grid with SVG Icons -->
+        <div class="diagram-layers-grid">
+
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+            <div class="diagram-layer-num">01</div>
+            <div class="diagram-layer-name">Source Registry</div>
+            <div class="diagram-layer-desc">Authority + Classification</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">02</div>
-          <div>
-            <div class="pipeline-layer-name">Document Intelligence</div>
-            <div class="pipeline-layer-desc">PDF / HTML / API Processing</div>
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+            <div class="diagram-layer-num">02</div>
+            <div class="diagram-layer-name">Document Intelligence</div>
+            <div class="diagram-layer-desc">PDF / HTML / API</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">03</div>
-          <div>
-            <div class="pipeline-layer-name">Financial Fact Engine</div>
-            <div class="pipeline-layer-desc">Structured Facts</div>
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <div class="diagram-layer-num">03</div>
+            <div class="diagram-layer-name">Financial Fact Engine</div>
+            <div class="diagram-layer-desc">Structured Facts</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">04</div>
-          <div>
-            <div class="pipeline-layer-name">Event Engine</div>
-            <div class="pipeline-layer-desc">Economic + Market Events</div>
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+            <div class="diagram-layer-num">04</div>
+            <div class="diagram-layer-name">Event Engine</div>
+            <div class="diagram-layer-desc">Economic + Market Events</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">05</div>
-          <div>
-            <div class="pipeline-layer-name">Evidence Layer</div>
-            <div class="pipeline-layer-desc">Source → Page → Paragraph</div>
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <div class="diagram-layer-num">05</div>
+            <div class="diagram-layer-name">Evidence Layer</div>
+            <div class="diagram-layer-desc">Source → Page → Paragraph</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">06</div>
-          <div>
-            <div class="pipeline-layer-name">Knowledge Graph</div>
-            <div class="pipeline-layer-desc">Relationships + Context</div>
+          <div class="diagram-layer-card dev">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M6 6l3 3M18 6l-3 3M6 18l3-3M18 18l-3-3"/><circle cx="12" cy="12" r="8"/></svg>
+            <div class="diagram-layer-num">06</div>
+            <div class="diagram-layer-name">Knowledge Graph</div>
+            <div class="diagram-layer-desc">Relationships + Context</div>
+            <span class="diagram-layer-status dev">Building</span>
           </div>
-        </div>
-        <div class="pipeline-arrow">↓</div>
 
-        <div class="pipeline-layer">
-          <div class="pipeline-layer-num">07</div>
-          <div>
-            <div class="pipeline-layer-name">Intelligence Governance</div>
-            <div class="pipeline-layer-desc">Validation + Confidence + Audit</div>
+          <div class="diagram-layer-card">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+            <div class="diagram-layer-num">07</div>
+            <div class="diagram-layer-name">Intelligence Governance</div>
+            <div class="diagram-layer-desc">Validation + Confidence</div>
+            <span class="diagram-layer-status op">Operational</span>
           </div>
+
+          <div class="diagram-layer-card" style="border-top-color: var(--rouaa-green);">
+            <svg class="diagram-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--rouaa-green);"><path d="M4 6h16M4 12h16M4 18h7"/><circle cx="20" cy="18" r="2"/></svg>
+            <div class="diagram-layer-num">08</div>
+            <div class="diagram-layer-name">Applications</div>
+            <div class="diagram-layer-desc">Research · Risk · Trading · Media</div>
+            <span class="diagram-layer-status op">Deployable</span>
+          </div>
+
         </div>
 
-        <div class="pipeline-arrow-large">↓</div>
+        <!-- SVG Flow Connector -->
+        <svg class="diagram-flow-svg" viewBox="0 0 880 40" preserveAspectRatio="none">
+          <path d="M440 0 L440 40" />
+        </svg>
 
-        <div class="pipeline-zone pipeline-zone-apps">
-          <div class="pipeline-zone-label">Institutional Applications</div>
-          <div class="app-types">
-            <span class="app-type">Research</span>
-            <span class="app-type">Risk</span>
-            <span class="app-type">Trading</span>
-            <span class="app-type">Media</span>
-            <span class="app-type">Developer</span>
+        <!-- Applications Zone -->
+        <div class="diagram-zone diagram-zone-apps">
+          <div class="diagram-zone-label">Institutional Applications</div>
+          <div class="diagram-app-types">
+            <span class="diagram-app-type">Research</span><span class="diagram-app-type">Risk</span><span class="diagram-app-type">Trading</span><span class="diagram-app-type">Media</span><span class="diagram-app-type">Developer</span>
           </div>
         </div>
 
@@ -813,91 +363,81 @@
       </div>
 
       <div class="layer-explorer reveal">
-        <!-- Left: Navigation -->
         <div class="layer-nav" id="layerNav">
-          <div class="layer-nav-item active" data-layer="1">
-            <span class="layer-nav-num">01</span>
-            <span class="layer-nav-name">Source Registry</span>
-          </div>
-          <div class="layer-nav-item" data-layer="2">
-            <span class="layer-nav-num">02</span>
-            <span class="layer-nav-name">Document Intelligence</span>
-          </div>
-          <div class="layer-nav-item" data-layer="3">
-            <span class="layer-nav-num">03</span>
-            <span class="layer-nav-name">Financial Fact Engine</span>
-          </div>
-          <div class="layer-nav-item" data-layer="4">
-            <span class="layer-nav-num">04</span>
-            <span class="layer-nav-name">Event Engine</span>
-          </div>
-          <div class="layer-nav-item" data-layer="5">
-            <span class="layer-nav-num">05</span>
-            <span class="layer-nav-name">Evidence Layer</span>
-          </div>
-          <div class="layer-nav-item" data-layer="6">
-            <span class="layer-nav-num">06</span>
-            <span class="layer-nav-name">Knowledge Graph</span>
-          </div>
-          <div class="layer-nav-item" data-layer="7">
-            <span class="layer-nav-num">07</span>
-            <span class="layer-nav-name">Intelligence Governance</span>
-          </div>
+          <div class="layer-nav-item active" data-layer="1"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg><span class="layer-nav-num">01</span><span class="layer-nav-name">Source Registry</span></div>
+          <div class="layer-nav-item" data-layer="2"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"/></svg><span class="layer-nav-num">02</span><span class="layer-nav-name">Document Intelligence</span></div>
+          <div class="layer-nav-item" data-layer="3"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span class="layer-nav-num">03</span><span class="layer-nav-name">Financial Fact Engine</span></div>
+          <div class="layer-nav-item" data-layer="4"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg><span class="layer-nav-num">04</span><span class="layer-nav-name">Event Engine</span></div>
+          <div class="layer-nav-item" data-layer="5"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="layer-nav-num">05</span><span class="layer-nav-name">Evidence Layer</span></div>
+          <div class="layer-nav-item" data-layer="6"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M6 6l3 3M18 6l-3 3M6 18l3-3M18 18l-3-3"/><circle cx="12" cy="12" r="8"/></svg><span class="layer-nav-num">06</span><span class="layer-nav-name">Knowledge Graph</span></div>
+          <div class="layer-nav-item" data-layer="7"><svg class="layer-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg><span class="layer-nav-num">07</span><span class="layer-nav-name">Intelligence Governance</span></div>
         </div>
-
-        <!-- Right: Detail Panel -->
         <div class="layer-detail-panel">
           <div class="layer-panel-content active" id="layer-1">
-            <div class="layer-panel-num">LAYER 01</div>
-            <div class="layer-panel-name">Source Registry</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+              <div><div class="layer-panel-num">LAYER 01</div><div class="layer-panel-name">Source Registry</div></div>
+            </div>
             <div class="layer-panel-purpose">The institutional memory of financial sources. Know where trusted information originates.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">411+ official sources</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Classified source records</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value accent">Operational</div></div>
           </div>
           <div class="layer-panel-content" id="layer-2">
-            <div class="layer-panel-num">LAYER 02</div>
-            <div class="layer-panel-name">Document Intelligence</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+              <div><div class="layer-panel-num">LAYER 02</div><div class="layer-panel-name">Document Intelligence</div></div>
+            </div>
             <div class="layer-panel-purpose">Transforms official publications into structured intelligence inputs.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">PDF, HTML, API documents</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Structured document records</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value accent">Operational</div></div>
           </div>
           <div class="layer-panel-content" id="layer-3">
-            <div class="layer-panel-num">LAYER 03</div>
-            <div class="layer-panel-name">Financial Fact Engine</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              <div><div class="layer-panel-num">LAYER 03</div><div class="layer-panel-name">Financial Fact Engine</div></div>
+            </div>
             <div class="layer-panel-purpose">Extracts verified financial facts from documents — every fact linked to its exact location.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">Structured documents</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Verified financial facts</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value accent">Operational</div></div>
           </div>
           <div class="layer-panel-content" id="layer-4">
-            <div class="layer-panel-num">LAYER 04</div>
-            <div class="layer-panel-name">Event Engine</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+              <div><div class="layer-panel-num">LAYER 04</div><div class="layer-panel-name">Event Engine</div></div>
+            </div>
             <div class="layer-panel-purpose">Detects and classifies financial events — rate decisions, economic releases, regulatory changes.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">Verified facts</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Classified financial events</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value accent">Operational</div></div>
           </div>
           <div class="layer-panel-content" id="layer-5">
-            <div class="layer-panel-num">LAYER 05</div>
-            <div class="layer-panel-name">Evidence Layer</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <div><div class="layer-panel-num">LAYER 05</div><div class="layer-panel-name">Evidence Layer</div></div>
+            </div>
             <div class="layer-panel-purpose">Creates the provenance chain — linking every fact to source document, page, and paragraph.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">Facts + Documents</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Evidence chain records</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value accent">Operational</div></div>
           </div>
           <div class="layer-panel-content" id="layer-6">
-            <div class="layer-panel-num">LAYER 06</div>
-            <div class="layer-panel-name">Knowledge Graph</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--rouaa-text-muted);"><circle cx="12" cy="12" r="2"/><path d="M6 6l3 3M18 6l-3 3M6 18l3-3M18 18l-3-3"/><circle cx="12" cy="12" r="8"/></svg>
+              <div><div class="layer-panel-num">LAYER 06</div><div class="layer-panel-name">Knowledge Graph</div></div>
+            </div>
             <div class="layer-panel-purpose">Connects entities, events, and facts through an institutional-grade ontology.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">Events + Facts + Entities</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Entity relationships, context</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Status</div><div class="layer-panel-value muted">In Development</div></div>
           </div>
           <div class="layer-panel-content" id="layer-7">
-            <div class="layer-panel-num">LAYER 07</div>
-            <div class="layer-panel-name">Intelligence Governance</div>
+            <div class="layer-panel-header">
+              <svg class="layer-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+              <div><div class="layer-panel-num">LAYER 07</div><div class="layer-panel-name">Intelligence Governance</div></div>
+            </div>
             <div class="layer-panel-purpose">Validation rules, confidence scoring, and audit controls operate before intelligence reaches output.</div>
             <div class="layer-panel-row"><div class="layer-panel-label">Inputs</div><div class="layer-panel-value">All intelligence outputs</div></div>
             <div class="layer-panel-row"><div class="layer-panel-label">Outputs</div><div class="layer-panel-value">Governed, audit-ready intelligence</div></div>
@@ -908,43 +448,57 @@
     </div>
   </section>
 
-  <!-- ============ EVIDENCE IS THE DIFFERENTIATOR ============ -->
+  <!-- ============ EVIDENCE CHAIN VISUAL ============ -->
   <section class="evidence-section">
     <div class="container">
       <div class="section-header text-center reveal" style="margin: 0 auto 48px;">
         <span class="eyebrow">Evidence Is The Differentiator</span>
         <h2>Every intelligence output carries its proof.</h2>
-        <p style="margin: 0 auto; max-width: 640px;">This is what makes ROUAA different from any AI tool, data platform, or research system. Not the output — the traceable path behind it.</p>
+        <p style="margin: 0 auto; max-width: 640px;">This is what makes ROUAA different. Not the output — the traceable path behind it.</p>
       </div>
 
-      <div class="evidence-chain-interactive">
-        <div class="evidence-step" data-step="0">
-          <div class="evidence-step-label">Source</div>
-          <div class="evidence-step-value">Federal Reserve</div>
-        </div>
-        <div class="evidence-step-arrow">↓</div>
-        <div class="evidence-step" data-step="1">
-          <div class="evidence-step-label">Document</div>
-          <div class="evidence-step-value">FOMC Statement.pdf</div>
-        </div>
-        <div class="evidence-step-arrow">↓</div>
-        <div class="evidence-step" data-step="2">
-          <div class="evidence-step-label">Fact</div>
-          <div class="evidence-step-value">Rate maintained 5.25–5.50%</div>
-        </div>
-        <div class="evidence-step-arrow">↓</div>
-        <div class="evidence-step" data-step="3">
-          <div class="evidence-step-label">Evidence</div>
-          <div class="evidence-step-value">Page 1 · Paragraph 2</div>
-        </div>
-        <div class="evidence-step-arrow">↓</div>
-        <div class="evidence-step final" data-step="4">
-          <div class="evidence-step-label">Output</div>
-          <div class="evidence-step-value">Investment Brief</div>
-        </div>
+      <!-- SVG Evidence Chain Diagram -->
+      <div class="evidence-visual reveal">
+        <svg class="evidence-chain-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
+          <!-- Connectors -->
+          <path class="connector" d="M130 100 Q160 100 180 100" />
+          <path class="connector" d="M290 100 Q320 100 340 100" />
+          <path class="connector" d="M450 100 Q480 100 500 100" />
+          <path class="connector" d="M610 100 Q640 100 660 100" />
+
+          <!-- Node 1: Source -->
+          <rect class="node-bg" x="10" y="60" width="120" height="80" rx="8" />
+          <text class="node-label" x="70" y="80" text-anchor="middle">SOURCE</text>
+          <text class="node-value" x="70" y="100" text-anchor="middle">Federal</text>
+          <text class="node-value" x="70" y="115" text-anchor="middle">Reserve</text>
+
+          <!-- Node 2: Document -->
+          <rect class="node-bg" x="170" y="60" width="120" height="80" rx="8" />
+          <text class="node-label" x="230" y="80" text-anchor="middle">DOCUMENT</text>
+          <text class="node-value" x="230" y="100" text-anchor="middle">FOMC</text>
+          <text class="node-value" x="230" y="115" text-anchor="middle">Statement.pdf</text>
+
+          <!-- Node 3: Fact -->
+          <rect class="node-bg" x="330" y="60" width="120" height="80" rx="8" />
+          <text class="node-label" x="390" y="80" text-anchor="middle">FACT</text>
+          <text class="node-value" x="390" y="100" text-anchor="middle">Rate maintained</text>
+          <text class="node-value" x="390" y="115" text-anchor="middle">5.25–5.50%</text>
+
+          <!-- Node 4: Evidence -->
+          <rect class="node-bg" x="490" y="60" width="120" height="80" rx="8" />
+          <text class="node-label" x="550" y="80" text-anchor="middle">EVIDENCE</text>
+          <text class="node-value" x="550" y="100" text-anchor="middle">Page 1</text>
+          <text class="node-value" x="550" y="115" text-anchor="middle">Paragraph 2</text>
+
+          <!-- Node 5: Output (final, gold) -->
+          <rect class="node-bg-final" x="650" y="55" width="60" height="90" rx="8" />
+          <text class="node-label node-label-final" x="680" y="75" text-anchor="middle" font-size="8">OUTPUT</text>
+          <text class="node-value node-value-final" x="680" y="95" text-anchor="middle" font-size="10">Investment</text>
+          <text class="node-value node-value-final" x="680" y="108" text-anchor="middle" font-size="10">Brief</text>
+        </svg>
       </div>
 
-      <div style="max-width: 560px; margin: 40px auto 0; text-align: center;" class="reveal">
+      <div style="max-width: 560px; margin: 32px auto 0; text-align: center;" class="reveal">
         <p style="font-size: 15px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed);">
           Every output can be traced back to its origin in seconds. This is not a feature added on top — it is the architecture itself.
         </p>
@@ -961,44 +515,41 @@
       <div class="section-header text-center reveal" style="margin: 0 auto 48px;">
         <span class="eyebrow">System Status</span>
         <h2>Current production status.</h2>
-        <p style="margin: 0 auto; max-width: 640px;">ROUAA is built layer by layer — with core intelligence components already operational. This is disclosed honestly, not hidden.</p>
+        <p style="margin: 0 auto; max-width: 640px;">ROUAA is built layer by layer — with core intelligence components already operational.</p>
       </div>
 
       <div class="status-console reveal">
         <div class="status-console-header">
           <div class="status-console-title">ROUAA System Status</div>
-          <div class="status-console-live">
-            <span class="dot"></span>
-            Live
-          </div>
+          <div class="status-console-live"><span class="dot"></span>Live</div>
         </div>
         <div class="status-console-body">
           <div class="status-row">
-            <div class="status-row-name">Source Registry</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4v18"/></svg>Source Registry</div>
             <span class="status-row-badge operational"><span class="status-badge-dot"></span>Operational</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Document Pipeline</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"/></svg>Document Pipeline</div>
             <span class="status-row-badge operational"><span class="status-badge-dot"></span>Operational</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Evidence Layer</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Evidence Layer</div>
             <span class="status-row-badge verified"><span class="status-badge-dot"></span>Verified</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Event Engine</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>Event Engine</div>
             <span class="status-row-badge operational"><span class="status-badge-dot"></span>Operational</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Intelligence Governance</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>Intelligence Governance</div>
             <span class="status-row-badge verified"><span class="status-badge-dot"></span>Verified</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Knowledge Graph</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M6 6l3 3M18 6l-3 3M6 18l3-3M18 18l-3-3"/><circle cx="12" cy="12" r="8"/></svg>Knowledge Graph</div>
             <span class="status-row-badge building"><span class="status-badge-dot"></span>Building</span>
           </div>
           <div class="status-row">
-            <div class="status-row-name">Enterprise Deployment</div>
+            <div class="status-row-name"><svg class="status-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h7"/></svg>Enterprise Deployment</div>
             <span class="status-row-badge ready"><span class="status-badge-dot"></span>Ready</span>
           </div>
         </div>
@@ -1016,26 +567,13 @@
       <div class="section-header text-center reveal" style="margin: 0 auto 48px;">
         <span class="eyebrow">Deployment Model</span>
         <h2>How institutions deploy ROUAA.</h2>
-        <p style="margin: 0 auto; max-width: 640px;">Same intelligence infrastructure. Different deployment paths based on governance, security, and sovereignty requirements.</p>
+        <p style="margin: 0 auto; max-width: 640px;">Same intelligence infrastructure. Different deployment paths.</p>
       </div>
-
       <div class="deploy-grid reveal-stagger">
-        <div class="deploy-card">
-          <div class="deploy-name">Cloud</div>
-          <div class="deploy-desc">Fastest start · fully hosted · automatic updates</div>
-        </div>
-        <div class="deploy-card">
-          <div class="deploy-name">Private Cloud</div>
-          <div class="deploy-desc">Dedicated environment · isolated infrastructure · regional compliance</div>
-        </div>
-        <div class="deploy-card">
-          <div class="deploy-name">Enterprise Deployment</div>
-          <div class="deploy-desc">Inside your infrastructure · full data sovereignty</div>
-        </div>
-        <div class="deploy-card">
-          <div class="deploy-name">API Integration</div>
-          <div class="deploy-desc">Embed intelligence into existing systems</div>
-        </div>
+        <div class="deploy-card"><svg class="deploy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><div class="deploy-name">Cloud</div><div class="deploy-desc">Fastest start · fully hosted · automatic updates</div></div>
+        <div class="deploy-card"><svg class="deploy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><div class="deploy-name">Private Cloud</div><div class="deploy-desc">Dedicated environment · isolated infrastructure</div></div>
+        <div class="deploy-card"><svg class="deploy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="deploy-name">Enterprise Deployment</div><div class="deploy-desc">Inside your infrastructure · full data sovereignty</div></div>
+        <div class="deploy-card"><svg class="deploy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7c0-2 2-4 4-4M20 7c0-2-2-4-4-4M4 17c0 2 2 4 4 4M20 17c0 2-2 4-4 4"/><circle cx="12" cy="12" r="3"/><path d="M12 9V5M12 19v-4M9 12H5M19 12h-4"/></svg><div class="deploy-name">API Integration</div><div class="deploy-desc">Embed intelligence into existing systems</div></div>
       </div>
     </div>
   </section>
@@ -1044,9 +582,7 @@
   <section class="cta-section">
     <div class="container">
       <h2>See how ROUAA maps to your institutional workflow.</h2>
-      <p style="max-width: 640px; margin: 0 auto 32px;">
-        In a briefing, we walk through your sources, your evidence chains, and your decision workflows — mapped onto the ROUAA intelligence architecture.
-      </p>
+      <p style="max-width: 640px; margin: 0 auto 32px;">In a briefing, we walk through your sources, your evidence chains, and your decision workflows — mapped onto the ROUAA intelligence architecture.</p>
       <div class="cta-buttons">
         <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
         <a href="product-experience.html" class="btn btn-secondary">Product Experience Center →</a>
@@ -1061,115 +597,40 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-mega-grid">
-        <div class="footer-brand">
-          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
-          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-heading">Products</div>
-          <a href="investment-intelligence.html">Investment Intelligence</a>
-          <a href="risk-intelligence.html">Risk Intelligence</a>
-          <a href="market-intelligence.html">Market Intelligence</a>
-          <a href="media-intelligence.html">Media Intelligence</a>
-          <a href="developer-intelligence.html">Developer Intelligence</a>
-          <a href="catalog.html">Intelligence Modules Catalog</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-heading">Platform</div>
-          <a href="architecture.html">Architecture</a>
-          <a href="platform.html">Platform Overview</a>
-          <a href="source-registry.html">Source Registry</a>
-          <a href="trust-framework.html">Trust Framework</a>
-          <a href="methodology.html">Methodology</a>
-          <a href="infrastructure-report.html">Infrastructure Report</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-heading">Solutions</div>
-          <a href="trading-platform.html">Trading Intelligence</a>
-          <a href="financial-intelligence.html">Institutional Intelligence</a>
-          <a href="financial-media.html">Financial Media</a>
-          <a href="solutions.html">Solutions Overview</a>
-          <a href="enterprise.html">Enterprise</a>
-          <a href="why-rouaa.html">Why ROUAA</a>
-          <a href="business-case.html">Business Case</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-heading">Experience</div>
-          <a href="product-experience.html">Product Experience Center</a>
-          <a href="evidence-explorer.html">Evidence Explorer</a>
-          <a href="sample-library.html">Sample Intelligence Library</a>
-          <a href="source-explorer.html">Source Registry Explorer</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-heading">Company</div>
-          <a href="company.html">About</a>
-          <a href="research-institute.html">Research Institute</a>
-          <a href="careers.html">Careers</a>
-          <a href="contact.html">Contact</a>
-        </div>
+        <div class="footer-brand"><div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div><p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p></div>
+        <div class="footer-col"><div class="footer-heading">Products</div><a href="investment-intelligence.html">Investment Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="market-intelligence.html">Market Intelligence</a><a href="media-intelligence.html">Media Intelligence</a><a href="developer-intelligence.html">Developer Intelligence</a><a href="catalog.html">Intelligence Modules Catalog</a></div>
+        <div class="footer-col"><div class="footer-heading">Platform</div><a href="architecture.html">Architecture</a><a href="platform.html">Platform Overview</a><a href="source-registry.html">Source Registry</a><a href="trust-framework.html">Trust Framework</a><a href="methodology.html">Methodology</a><a href="infrastructure-report.html">Infrastructure Report</a></div>
+        <div class="footer-col"><div class="footer-heading">Solutions</div><a href="trading-platform.html">Trading Intelligence</a><a href="financial-intelligence.html">Institutional Intelligence</a><a href="financial-media.html">Financial Media</a><a href="solutions.html">Solutions Overview</a><a href="enterprise.html">Enterprise</a><a href="why-rouaa.html">Why ROUAA</a><a href="business-case.html">Business Case</a></div>
+        <div class="footer-col"><div class="footer-heading">Experience</div><a href="product-experience.html">Product Experience Center</a><a href="evidence-explorer.html">Evidence Explorer</a><a href="sample-library.html">Sample Intelligence Library</a><a href="source-explorer.html">Source Registry Explorer</a></div>
+        <div class="footer-col"><div class="footer-heading">Company</div><a href="company.html">About</a><a href="research-institute.html">Research Institute</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
       </div>
-      <div class="footer-bottom">
-        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
-      </div>
+      <div class="footer-bottom"><p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p></div>
     </div>
   </footer>
 
   <script src="main.js"></script>
   <script>
-    // ===== Enterprise Motion System =====
-
-    // 1. Scroll Reveal — Intersection Observer
+    // Scroll reveal
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => revealObserver.observe(el));
 
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
-      revealObserver.observe(el);
-    });
-
-    // 2. Interactive Layer Explorer
+    // Interactive Layer Explorer
     const navItems = document.querySelectorAll('.layer-nav-item');
     const panels = document.querySelectorAll('.layer-panel-content');
-
     navItems.forEach(item => {
       item.addEventListener('click', () => {
         const layerNum = item.dataset.layer;
-
-        // Update nav
         navItems.forEach(n => n.classList.remove('active'));
         item.classList.add('active');
-
-        // Update panel
         panels.forEach(p => p.classList.remove('active'));
         const target = document.getElementById('layer-' + layerNum);
         if (target) target.classList.add('active');
       });
     });
-
-    // 3. Evidence Chain — sequential reveal on scroll
-    const evidenceSteps = document.querySelectorAll('.evidence-step');
-    const evidenceObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const step = entry.target;
-          const stepIndex = parseInt(step.dataset.step || 0);
-
-          // Reveal this step
-          setTimeout(() => {
-            step.classList.add('visible');
-          }, stepIndex * 300);
-
-          evidenceObserver.unobserve(step);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    evidenceSteps.forEach(step => evidenceObserver.observe(step));
   </script>
 </body>
 </html>
