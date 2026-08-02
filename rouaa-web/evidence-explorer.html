@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Evidence Explorer — Trace Intelligence from Source to Output</title>
+  <meta name="description" content="Evidence Explorer — follow how an official source becomes evidence-backed intelligence. Interactive walkthrough from publication to intelligence output with full provenance chain.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .explorer-frame {
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .explorer-step {
+      display: none;
+    }
+    .explorer-step.active {
+      display: block;
+    }
+    .step-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--rouaa-bg-secondary);
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .step-progress {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--rouaa-text-muted);
+      font-weight: 600;
+    }
+    .step-dot.completed {
+      background: var(--rouaa-accent);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-bg-primary);
+    }
+    .step-dot.active {
+      background: var(--rouaa-accent-subtle);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-accent);
+    }
+    .step-line {
+      width: 24px;
+      height: 1px;
+      background: var(--rouaa-surface-border);
+    }
+    .step-line.completed {
+      background: var(--rouaa-accent);
+    }
+    .step-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .step-btn {
+      padding: 8px 16px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-sm);
+      color: var(--rouaa-text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .step-btn:hover {
+      border-color: var(--rouaa-accent-border);
+      color: var(--rouaa-text-primary);
+    }
+    .step-btn.primary {
+      background: var(--rouaa-accent);
+      color: var(--rouaa-bg-primary);
+      border-color: var(--rouaa-accent);
+    }
+    .step-btn.primary:hover {
+      background: var(--rouaa-accent-hover);
+    }
+    .step-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .step-content {
+      padding: 32px;
+      min-height: 420px;
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-bottom: 8px;
+    }
+    .step-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 16px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+    .step-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .step-card.highlight {
+      border-color: var(--rouaa-accent-border);
+      background: linear-gradient(180deg, rgba(200,169,81,0.06), rgba(200,169,81,0.02));
+    }
+    .step-field {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .step-field:last-child {
+      border-bottom: none;
+    }
+    .step-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+    }
+    .step-field-value {
+      font-size: 14px;
+      color: var(--rouaa-text-primary);
+      font-weight: 500;
+    }
+    .step-field-value.accent {
+      color: var(--rouaa-accent);
+    }
+    .concept-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(200, 169, 81, 0.15);
+      border: 1px solid var(--rouaa-accent-border);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 16px;">Evidence Explorer</span>
+      <h1>
+        Trace intelligence<br>
+        <span class="text-accent">from source to output.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        Follow how an official source becomes evidence-backed intelligence — step by step.
+        Every claim ROUAA produces carries a traceable chain: source, document, page, paragraph, fact, event, evidence, and output.
+      </p>
+      <div style="margin-top: 24px; padding: 12px 20px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); display: inline-block;">
+        <span style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">ⓘ Concept Preview</span>
+        <span style="font-size: 13px; color: var(--rouaa-text-secondary); margin-left: 8px;">Interactive walkthrough showing the planned evidence tracing experience.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPLORER ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="explorer-frame" style="max-width: 880px; margin: 0 auto;">
+
+        <!-- Step navigation -->
+        <div class="step-nav">
+          <div class="step-progress" id="stepProgress">
+            <div class="step-dot active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="5">5</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="6">6</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="7">7</div>
+          </div>
+          <div class="step-controls">
+            <button class="step-btn" id="prevBtn" disabled>← Previous</button>
+            <button class="step-btn primary" id="nextBtn">Next →</button>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="step-content">
+
+          <!-- Step 1: Source -->
+          <div class="explorer-step active" id="step1">
+            <div class="step-label">Step 01 · Source Publication</div>
+            <div class="step-title">Federal Reserve publishes FOMC statement</div>
+            <div class="step-desc">
+              ROUAA monitors 411+ official sources continuously. When the Federal Reserve publishes a new FOMC statement,
+              the Source Registry detects it within seconds and registers the document for processing.
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Source</div>
+                <div class="step-field-value">Federal Reserve — Federal Open Market Committee</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Type</div>
+                <div class="step-field-value">Central Bank · Tier 1 Trust</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Jurisdiction</div>
+                <div class="step-field-value">United States</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Publication Time</div>
+                <div class="step-field-value">2026-08-02 · 14:00 UTC</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Detected By ROUAA</div>
+                <div class="step-field-value accent">14:00:14 UTC · (14 seconds after publication)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Source Registry</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Document -->
+          <div class="explorer-step" id="step2">
+            <div class="step-label">Step 02 · Document Intelligence</div>
+            <div class="step-title">ROUAA ingests and normalizes the document</div>
+            <div class="step-desc">
+              The Document Intelligence Engine extracts the full text from the PDF, structures it into sections,
+              normalizes metadata, and stores it with a permanent link to the original source.
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Document</div>
+                <div class="step-field-value">FOMC Statement — August 2, 2026</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Format</div>
+                <div class="step-field-value">PDF · 847 words · 3 pages</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Extraction</div>
+                <div class="step-field-value">Full text · 8 paragraphs · 2 tables</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Normalization</div>
+                <div class="step-field-value">Metadata structured · sections indexed</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Link</div>
+                <div class="step-field-value">federalreserve.gov/fomc/2026-08-02.pdf</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Document Store</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Fact Extraction -->
+          <div class="explorer-step" id="step3">
+            <div class="step-label">Step 03 · Fact Extraction</div>
+            <div class="step-title">Key facts extracted from the statement</div>
+            <div class="step-desc">
+              The Fact Engine identifies and extracts the key financial facts from the document —
+              the interest rate decision, policy stance, economic assessment, and forward guidance.
+              Each fact is linked to its exact location in the source document.
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Fact 01</div>
+                <div class="step-field-value">Federal funds target range: 5.25–5.50% (maintained)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 02</div>
+                <div class="step-field-value">Policy stance: Restrictive, data-dependent</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 03</div>
+                <div class="step-field-value">Economic assessment: Solid expansion, moderating inflation</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 04</div>
+                <div class="step-field-value">Forward guidance: Data-dependent, no specific timeline</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Confidence</div>
+                <div class="step-field-value accent">97% · Tier 1 source · direct extraction</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Fact Database</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Event Detection -->
+          <div class="explorer-step" id="step4">
+            <div class="step-label">Step 04 · Event Detection</div>
+            <div class="step-title">Monetary Policy Decision event classified</div>
+            <div class="step-desc">
+              The Financial Event Engine classifies the extracted facts into a structured event —
+              an Interest Rate Decision by the Federal Reserve. The event is tagged with type, jurisdiction,
+              and impact level for downstream intelligence workflows.
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Event Type</div>
+                <div class="step-field-value">Interest Rate Decision</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Entity</div>
+                <div class="step-field-value">Federal Reserve (FOMC)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Jurisdiction</div>
+                <div class="step-field-value">United States</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Impact Level</div>
+                <div class="step-field-value accent">Material · Global market impact</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Timestamp</div>
+                <div class="step-field-value">2026-08-02 · 14:00:14 UTC</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Event Log</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Evidence Linking -->
+          <div class="explorer-step" id="step5">
+            <div class="step-label">Step 05 · Evidence Linking</div>
+            <div class="step-title">Every fact linked to source, document, page, paragraph</div>
+            <div class="step-desc">
+              The Evidence Layer creates the provenance chain — linking each extracted fact back to its exact location
+              in the source document. This is what makes ROUAA intelligence defensible: every claim can be traced
+              to its origin in seconds.
+            </div>
+            <div class="step-card highlight">
+              <div class="step-field">
+                <div class="step-field-label">Provenance Chain</div>
+                <div class="step-field-value accent">Fact → Document → Page → Paragraph</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact</div>
+                <div class="step-field-value">"Federal funds target range maintained at 5.25–5.50%"</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Document</div>
+                <div class="step-field-value">FOMC Statement — August 2, 2026</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Page</div>
+                <div class="step-field-value">Page 1</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Paragraph</div>
+                <div class="step-field-value">Paragraph 2</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Confidence Score</div>
+                <div class="step-field-value accent">0.97 · Tier 1 · Official source</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Evidence Layer</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6: Scenario -->
+          <div class="explorer-step" id="step6">
+            <div class="step-label">Step 06 · Scenario Construction</div>
+            <div class="step-title">Governed scenarios built on the evidence</div>
+            <div class="step-desc">
+              The Reasoning Engine constructs scenarios based on the verified evidence — not on indicators alone.
+              Each scenario carries its own evidence package, assumptions, and risk factors.
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Scenario A</div>
+                <div class="step-field-value">Rate cut in September 2026 · Probability: 35%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Scenario B</div>
+                <div class="step-field-value">Rate cut in December 2026 · Probability: 45%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Scenario C</div>
+                <div class="step-field-value">No cut until Q1 2027 · Probability: 20%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Evidence Base</div>
+                <div class="step-field-value">FOMC statement · CPI data · Employment data · GDP estimate</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Assumptions</div>
+                <div class="step-field-value">Inflation continues moderating · Labor market softens</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Risk Factors</div>
+                <div class="step-field-value">Inflation resurgence · Geopolitical shock · Energy prices</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 7: Output -->
+          <div class="explorer-step" id="step7">
+            <div class="step-label">Step 07 · Intelligence Output</div>
+            <div class="step-title">Monetary policy intelligence brief generated</div>
+            <div class="step-desc">
+              The intelligence brief is generated — evidence-backed, governance-validated, and audit-ready.
+              It carries the full provenance chain inherited from every step above. This is what arrives at
+              committee, research, or editorial workflows.
+            </div>
+            <div class="step-card highlight">
+              <div class="step-field">
+                <div class="step-field-label">Output Type</div>
+                <div class="step-field-value accent">Monetary Policy Intelligence Brief</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Headline</div>
+                <div class="step-field-value">Federal Reserve maintains federal funds rate at 5.25–5.50%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Context</div>
+                <div class="step-field-value">Policy stance unchanged · economic assessment updated · forward guidance adjusted</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Evidence Chain</div>
+                <div class="step-field-value">Source: Federal Reserve · Document: FOMC Statement · Page 1 · Paragraph 2 · Confidence: 97%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Governance</div>
+                <div class="step-field-value">Validation rules applied · confidence scored · audit trail preserved</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Status</div>
+                <div class="step-field-value accent">Evidence-backed · Governance-validated · Audit-ready</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Delivered To</div>
+                <div class="step-field-value">→ Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs</div>
+              </div>
+            </div>
+            <div style="margin-top: 24px; text-align: center;">
+              <a href="sample-library.html" class="btn btn-primary">View Sample Intelligence Outputs →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="max-width: 880px; margin: 32px auto 0; text-align: center;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">
+          Every ROUAA intelligence output carries this same chain — from the official source to the final product.
+          This is what makes ROUAA intelligence defensible: not the output itself, but the traceable path behind it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
+    <div class="container">
+      <h2>Trace your own sources in a live briefing.</h2>
+      <p style="max-width: 640px; margin: 0 auto 32px;">
+        In a live briefing, we walk through the evidence chain on your source coverage — your jurisdictions, your event types, your workflows.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
+        <a href="product-experience.html" class="btn btn-secondary">Product Experience Center →</a>
+        <a href="source-explorer.html" class="btn btn-secondary">Source Registry Explorer →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Evidence Explorer step navigation
+    (function() {
+      let currentStep = 1;
+      const totalSteps = 7;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const steps = document.querySelectorAll('.explorer-step');
+      const dots = document.querySelectorAll('.step-dot');
+      const lines = document.querySelectorAll('.step-line');
+
+      function updateUI() {
+        steps.forEach((s, i) => {
+          s.classList.toggle('active', i + 1 === currentStep);
+        });
+        dots.forEach((d, i) => {
+          d.classList.remove('active', 'completed');
+          if (i + 1 < currentStep) d.classList.add('completed');
+          else if (i + 1 === currentStep) d.classList.add('active');
+        });
+        lines.forEach((l, i) => {
+          l.classList.toggle('completed', i + 1 < currentStep);
+        });
+        prevBtn.disabled = currentStep === 1;
+        nextBtn.textContent = currentStep === totalSteps ? 'Complete ✓' : 'Next →';
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateUI();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateUI();
+        }
+      });
+
+      // Allow clicking on dots to jump
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          currentStep = i + 1;
+          updateUI();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Product Experience Center — Interface Previews</title>
+  <meta name="description" content="Product Experience Center — interface previews of ROUAA's five intelligence applications: Trading, Research, Risk, Media, and Developer Intelligence. Concept previews of the institutional intelligence platform.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Mockup-specific styles */
+    .mockup-frame {
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .mockup-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--rouaa-bg-secondary);
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .mockup-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .mockup-dot.red { background: #EF4444; }
+    .mockup-dot.yellow { background: #F59E0B; }
+    .mockup-dot.green { background: #10B981; }
+    .mockup-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+    .mockup-body {
+      padding: 20px;
+      min-height: 400px;
+    }
+
+    /* Dashboard layout */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      min-height: 480px;
+    }
+    .dash-sidebar {
+      background: var(--rouaa-bg-secondary);
+      border-right: 1px solid var(--rouaa-surface-border);
+      padding: 16px 12px;
+    }
+    .dash-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--rouaa-text-secondary);
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .dash-sidebar-item.active {
+      background: var(--rouaa-accent-subtle);
+      color: var(--rouaa-accent);
+      border-left: 2px solid var(--rouaa-accent);
+    }
+    .dash-sidebar-item:hover {
+      color: var(--rouaa-text-primary);
+    }
+    .dash-sidebar-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+    .dash-main {
+      padding: 20px;
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .dash-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--rouaa-text-primary);
+    }
+    .dash-meta {
+      font-size: 11px;
+      color: var(--rouaa-text-muted);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+    .dash-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .dash-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .dash-card-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--rouaa-text-muted);
+      margin-bottom: 6px;
+    }
+    .dash-card-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--rouaa-text-primary);
+    }
+    .dash-card-value.accent { color: var(--rouaa-accent); }
+    .dash-card-value.green { color: var(--rouaa-green); }
+    .dash-card-value.blue { color: var(--rouaa-blue); }
+    .dash-card-delta {
+      font-size: 11px;
+      color: var(--rouaa-text-muted);
+      margin-top: 4px;
+    }
+    .dash-panel {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .dash-panel-h {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 12px;
+    }
+    .dash-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Event feed */
+    .event-item {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rouaa-surface-border);
+      align-items: center;
+    }
+    .event-item:last-child { border-bottom: none; }
+    .event-time {
+      font-size: 10px;
+      color: var(--rouaa-text-muted);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+    .event-name {
+      font-size: 12px;
+      color: var(--rouaa-text-primary);
+    }
+    .event-tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .event-tag.rate { color: var(--rouaa-blue); background: rgba(59,130,246,0.1); }
+    .event-tag.inflation { color: var(--rouaa-accent); background: var(--rouaa-accent-subtle); }
+    .event-tag.earnings { color: var(--rouaa-green); background: rgba(16,185,129,0.1); }
+
+    /* Evidence chain visual */
+    .evidence-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .evidence-node {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--rouaa-bg-secondary);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+    }
+    .evidence-node-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--rouaa-text-muted);
+      min-width: 80px;
+    }
+    .evidence-node-value {
+      color: var(--rouaa-text-primary);
+      font-weight: 600;
+    }
+    .evidence-arrow {
+      text-align: center;
+      color: var(--rouaa-accent);
+      opacity: 0.4;
+      font-size: 10px;
+    }
+
+    /* Chart placeholder */
+    .chart-placeholder {
+      height: 120px;
+      background: linear-gradient(180deg, rgba(200,169,81,0.06), transparent);
+      border-radius: var(--radius-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .chart-placeholder::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(180deg, transparent, rgba(200,169,81,0.15));
+      clip-path: polygon(0 80%, 10% 60%, 20% 70%, 30% 40%, 40% 50%, 50% 30%, 60% 45%, 70% 20%, 80% 35%, 90% 15%, 100% 25%, 100% 100%, 0 100%);
+    }
+
+    /* Product selector tabs */
+    .product-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .product-tab {
+      padding: 12px 20px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      color: var(--rouaa-text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+    .product-tab:hover {
+      border-color: var(--rouaa-accent-border);
+      color: var(--rouaa-text-primary);
+    }
+    .product-tab.active {
+      background: var(--rouaa-accent-subtle);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-accent);
+    }
+
+    /* Concept badge */
+    .concept-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: rgba(200, 169, 81, 0.15);
+      border: 1px solid var(--rouaa-accent-border);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 16px;">Product Experience Center</span>
+      <h1>
+        See the platform.<br>
+        <span class="text-accent">Before the briefing.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        Interface previews of ROUAA's five intelligence applications — Trading, Research, Risk, Media, and Developer Intelligence.
+        Each preview shows the dashboard, workflow, evidence chain, and sample output an institutional user would see.
+      </p>
+      <div style="margin-top: 24px; padding: 12px 20px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); display: inline-block;">
+        <span style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">ⓘ Concept Preview</span>
+        <span style="font-size: 13px; color: var(--rouaa-text-secondary); margin-left: 8px;">These are interface mockups representing the planned user experience. They will be connected to live data at launch.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT SELECTOR ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary); padding: 48px 0;">
+    <div class="container">
+      <div class="product-tabs">
+        <a href="#trading" class="product-tab active">Trading Intelligence</a>
+        <a href="#research" class="product-tab">Research Intelligence</a>
+        <a href="#risk" class="product-tab">Risk Intelligence</a>
+        <a href="#media" class="product-tab">Media Intelligence</a>
+        <a href="#developer" class="product-tab">Developer Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRADING INTELLIGENCE ============ -->
+  <section class="section" id="trading">
+    <div class="container">
+      <div class="section-header" style="margin: 0 auto 32px;">
+        <span class="eyebrow">Application 01 · Trading Intelligence</span>
+        <h2>Trading Intelligence Dashboard</h2>
+        <p style="max-width: 680px;">For trading desks that need event-driven market understanding, scenario intelligence, and decision-to-execution workflows — every signal backed by evidence.</p>
+      </div>
+
+      <div class="mockup-frame">
+        <span class="concept-badge">Concept Preview</span>
+        <div class="mockup-titlebar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <div class="mockup-title">rouaa.ai / trading / dashboard</div>
+        </div>
+        <div class="mockup-body" style="padding: 0;">
+          <div class="dash-grid">
+            <!-- Sidebar -->
+            <div class="dash-sidebar">
+              <div class="dash-sidebar-item active">
+                <div class="dash-sidebar-icon"></div>
+                Dashboard
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Market Context
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Scenarios
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Evidence Chain
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Positions
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Alerts
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rouaa-surface-border);">
+                <div class="dash-sidebar-item">
+                  <div class="dash-sidebar-icon"></div>
+                  Settings
+                </div>
+              </div>
+            </div>
+
+            <!-- Main -->
+            <div class="dash-main">
+              <div class="dash-header">
+                <div>
+                  <div class="dash-title">Trading Intelligence</div>
+                  <div class="dash-meta">Last updated: 14:32 UTC · Sources: 411 active</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <div style="padding: 6px 12px; background: var(--rouaa-green); color: #fff; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;">● Live</div>
+                </div>
+              </div>
+
+              <!-- Stat cards -->
+              <div class="dash-cards">
+                <div class="dash-card">
+                  <div class="dash-card-label">Events Today</div>
+                  <div class="dash-card-value accent">74</div>
+                  <div class="dash-card-delta">↑ 12% vs yesterday</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Active Scenarios</div>
+                  <div class="dash-card-value blue">8</div>
+                  <div class="dash-card-delta">3 material · 5 moderate</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Evidence Links</div>
+                  <div class="dash-card-value green">2,841</div>
+                  <div class="dash-card-delta">All traceable to source</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Pipeline Status</div>
+                  <div class="dash-card-value green">●</div>
+                  <div class="dash-card-delta">Operational · 99.8%</div>
+                </div>
+              </div>
+
+              <div class="dash-row">
+                <!-- Event Feed -->
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Today's Financial Events</div>
+                  <div class="event-item">
+                    <div class="event-time">14:30</div>
+                    <div class="event-name">Federal Reserve — FOMC Rate Decision</div>
+                    <div class="event-tag rate">Rate</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">13:15</div>
+                    <div class="event-name">Eurozone — CPI Flash Estimate</div>
+                    <div class="event-tag inflation">Inflation</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">12:00</div>
+                    <div class="event-name">Saudi Aramco — Q2 Earnings Release</div>
+                    <div class="event-tag earnings">Earnings</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">10:30</div>
+                    <div class="event-name">BLS — Employment Situation Report</div>
+                    <div class="event-tag inflation">Macro</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">08:00</div>
+                    <div class="event-name">ECB — Monetary Policy Statement</div>
+                    <div class="event-tag rate">Rate</div>
+                  </div>
+                </div>
+
+                <!-- Evidence Chain -->
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Evidence Chain — FOMC Decision</div>
+                  <div class="evidence-chain">
+                    <div class="evidence-node">
+                      <div class="evidence-node-label">Source</div>
+                      <div class="evidence-node-value">Federal Reserve</div>
+                    </div>
+                    <div class="evidence-arrow">↓</div>
+                    <div class="evidence-node">
+                      <div class="evidence-node-label">Document</div>
+                      <div class="evidence-node-value">FOMC Statement.pdf</div>
+                    </div>
+                    <div class="evidence-arrow">↓</div>
+                    <div class="evidence-node">
+                      <div class="evidence-node-label">Location</div>
+                      <div class="evidence-node-value">Page 1 · Paragraph 2</div>
+                    </div>
+                    <div class="evidence-arrow">↓</div>
+                    <div class="evidence-node">
+                      <div class="evidence-node-label">Extracted Fact</div>
+                      <div class="evidence-node-value">Rate maintained: 5.25–5.50%</div>
+                    </div>
+                    <div class="evidence-arrow">↓</div>
+                    <div class="evidence-node" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+                      <div class="evidence-node-label" style="color: var(--rouaa-accent);">Output</div>
+                      <div class="evidence-node-value" style="color: var(--rouaa-accent);">Trading context brief</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Market Impact Chart -->
+              <div class="dash-panel">
+                <div class="dash-panel-h">Market Impact — FOMC Decision (Last 4 Hours)</div>
+                <div class="chart-placeholder"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="trading-platform.html" class="btn btn-secondary">View Trading Intelligence Page →</a>
+        <a href="evidence-explorer.html" class="btn btn-secondary">Explore Evidence Chain →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH INTELLIGENCE ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="research">
+    <div class="container">
+      <div class="section-header" style="margin: 0 auto 32px;">
+        <span class="eyebrow">Application 02 · Research Intelligence</span>
+        <h2>Research Intelligence Workspace</h2>
+        <p style="max-width: 680px;">For investment firms and research teams — committee briefs, macro research, and equity analysis with every claim evidence-linked.</p>
+      </div>
+
+      <div class="mockup-frame">
+        <span class="concept-badge">Concept Preview</span>
+        <div class="mockup-titlebar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <div class="mockup-title">rouaa.ai / research / workspace</div>
+        </div>
+        <div class="mockup-body" style="padding: 0;">
+          <div class="dash-grid">
+            <div class="dash-sidebar">
+              <div class="dash-sidebar-item active">
+                <div class="dash-sidebar-icon"></div>
+                Committee Brief
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Macro Research
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Equity Analysis
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Sector Briefs
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Evidence Library
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Reports Archive
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rouaa-surface-border);">
+                <div class="dash-sidebar-item">
+                  <div class="dash-sidebar-icon"></div>
+                  Export
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-main">
+              <div class="dash-header">
+                <div>
+                  <div class="dash-title">Q3 2026 Investment Committee Brief</div>
+                  <div class="dash-meta">Prepared: August 2, 2026 · Evidence links: 312 · Sources: 47</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <div style="padding: 6px 12px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); color: var(--rouaa-accent); border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;">Audit-Ready</div>
+                </div>
+              </div>
+
+              <div class="dash-cards">
+                <div class="dash-card">
+                  <div class="dash-card-label">Macro Outlook</div>
+                  <div class="dash-card-value accent">Neutral</div>
+                  <div class="dash-card-delta">3 scenarios · 89 evidence links</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Rate Decision</div>
+                  <div class="dash-card-value blue">Hold</div>
+                  <div class="dash-card-delta">FOMC · Page 1 · Para 2</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Inflation Trend</div>
+                  <div class="dash-card-value" style="color: var(--rouaa-accent);">Moderating</div>
+                  <div class="dash-card-delta">CPI · BLS · Page 3 · Table A</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Confidence</div>
+                  <div class="dash-card-value green">97%</div>
+                  <div class="dash-card-delta">Tier 1 sources · verified</div>
+                </div>
+              </div>
+
+              <div class="dash-row">
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Investment Thesis — Evidence Summary</div>
+                  <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+                    <p style="margin: 0 0 12px 0;"><strong style="color: var(--rouaa-text-primary);">Headline:</strong> Federal Reserve maintains federal funds target range at 5.25–5.50%.</p>
+                    <p style="margin: 0 0 12px 0;"><strong style="color: var(--rouaa-text-primary);">Context:</strong> Policy stance unchanged. Economic assessment updated. Forward guidance adjusted to reflect moderating inflation trajectory.</p>
+                    <p style="margin: 0;"><strong style="color: var(--rouaa-text-primary);">Implication:</strong> Rate cut timeline pushed to Q4 2026. Equity markets likely to reprice duration risk. Fixed income: extend duration selectively.</p>
+                  </div>
+                  <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
+                    <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Sources (3 of 47)</div>
+                    <div style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                      <div>📄 Federal Reserve — FOMC Statement · Page 1 · Para 2</div>
+                      <div>📊 BLS — CPI Summary Report · Page 3 · Table A</div>
+                      <div>📈 BEA — GDP Estimate · Page 7 · Para 4</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Scenario Analysis</div>
+                  <div class="event-item">
+                    <div class="event-time">S1</div>
+                    <div class="event-name">Rate cut in September 2026</div>
+                    <div class="event-tag" style="color: var(--rouaa-green); background: rgba(16,185,129,0.1);">35%</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">S2</div>
+                    <div class="event-name">Rate cut in December 2026</div>
+                    <div class="event-tag" style="color: var(--rouaa-accent); background: var(--rouaa-accent-subtle);">45%</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">S3</div>
+                    <div class="event-name">No cut until Q1 2027</div>
+                    <div class="event-tag" style="color: var(--rouaa-text-muted); background: var(--rouaa-surface);">20%</div>
+                  </div>
+                  <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border); font-size: 12px; color: var(--rouaa-text-muted);">
+                    Each scenario carries its own evidence package — traceable to the source documents that support it.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="financial-intelligence.html" class="btn btn-secondary">View Institutional Intelligence →</a>
+        <a href="sample-library.html" class="btn btn-secondary">View Sample Briefs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RISK INTELLIGENCE ============ -->
+  <section class="section" id="risk">
+    <div class="container">
+      <div class="section-header" style="margin: 0 auto 32px;">
+        <span class="eyebrow">Application 03 · Risk Intelligence</span>
+        <h2>Risk Intelligence Dashboard</h2>
+        <p style="max-width: 680px;">For risk committees and compliance teams — exposure analysis, regulatory event monitoring, and governance-ready decision audit trails.</p>
+      </div>
+
+      <div class="mockup-frame">
+        <span class="concept-badge">Concept Preview</span>
+        <div class="mockup-titlebar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <div class="mockup-title">rouaa.ai / risk / dashboard</div>
+        </div>
+        <div class="mockup-body" style="padding: 0;">
+          <div class="dash-grid">
+            <div class="dash-sidebar">
+              <div class="dash-sidebar-item active">
+                <div class="dash-sidebar-icon"></div>
+                Risk Dashboard
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Exposure Analysis
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Regulatory Monitor
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Audit Trail
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Compliance Reports
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rouaa-surface-border);">
+                <div class="dash-sidebar-item">
+                  <div class="dash-sidebar-icon"></div>
+                  Export Audit
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-main">
+              <div class="dash-header">
+                <div>
+                  <div class="dash-title">Risk Intelligence — Exposure Overview</div>
+                  <div class="dash-meta">Last updated: 14:31 UTC · Audit trail: enabled</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <div style="padding: 6px 12px; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #EF4444; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;">2 Alerts</div>
+                </div>
+              </div>
+
+              <div class="dash-cards">
+                <div class="dash-card">
+                  <div class="dash-card-label">Material Exposures</div>
+                  <div class="dash-card-value" style="color: #EF4444;">3</div>
+                  <div class="dash-card-delta">Requires committee escalation</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Counterparties Monitored</div>
+                  <div class="dash-card-value blue">247</div>
+                  <div class="dash-card-delta">Across 4 jurisdictions</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Regulatory Events</div>
+                  <div class="dash-card-value accent">12</div>
+                  <div class="dash-card-delta">This week · all traceable</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Audit-Ready</div>
+                  <div class="dash-card-value green">100%</div>
+                  <div class="dash-card-delta">Every decision reconstructable</div>
+                </div>
+              </div>
+
+              <div class="dash-row">
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Active Risk Alerts</div>
+                  <div class="event-item">
+                    <div class="event-time">14:11</div>
+                    <div class="event-name">Entity X — Regulatory designation updated</div>
+                    <div class="event-tag" style="color: #EF4444; background: rgba(239,68,68,0.1);">Material</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">11:45</div>
+                    <div class="event-name">Jurisdiction Y — New compliance requirement</div>
+                    <div class="event-tag" style="color: #EF4444; background: rgba(239,68,68,0.1);">Material</div>
+                  </div>
+                  <div class="event-item">
+                    <div class="event-time">09:20</div>
+                    <div class="event-name">Counterparty Z — Credit rating change</div>
+                    <div class="event-tag" style="color: var(--rouaa-accent); background: var(--rouaa-accent-subtle);">Moderate</div>
+                  </div>
+                  <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border); font-size: 12px; color: var(--rouaa-text-muted);">
+                    Each alert links to the regulatory source document and affected counterparties.
+                  </div>
+                </div>
+
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Exposure Breakdown</div>
+                  <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                        <span style="color: var(--rouaa-text-secondary);">Direct exposure</span>
+                        <span style="color: var(--rouaa-text-primary); font-weight: 600;">USD 47M</span>
+                      </div>
+                      <div style="height: 6px; background: var(--rouaa-bg-secondary); border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; width: 25%; background: #EF4444;"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                        <span style="color: var(--rouaa-text-secondary);">Indirect exposure</span>
+                        <span style="color: var(--rouaa-text-primary); font-weight: 600;">USD 184M</span>
+                      </div>
+                      <div style="height: 6px; background: var(--rouaa-bg-secondary); border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; width: 75%; background: var(--rouaa-accent);"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                        <span style="color: var(--rouaa-text-secondary);">Jurisdictions affected</span>
+                        <span style="color: var(--rouaa-text-primary); font-weight: 600;">4</span>
+                      </div>
+                      <div style="height: 6px; background: var(--rouaa-bg-secondary); border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; width: 40%; background: var(--rouaa-blue);"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <a href="risk-intelligence.html" class="btn btn-secondary">View Risk Intelligence Page →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEDIA INTELLIGENCE ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="media">
+    <div class="container">
+      <div class="section-header" style="margin: 0 auto 32px;">
+        <span class="eyebrow">Application 04 · Media Intelligence</span>
+        <h2>Media Intelligence Newsroom</h2>
+        <p style="max-width: 680px;">For financial media and data companies — verified newsroom intelligence, evidence-backed publishing, and white-label distribution.</p>
+      </div>
+
+      <div class="mockup-frame">
+        <span class="concept-badge">Concept Preview</span>
+        <div class="mockup-titlebar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <div class="mockup-title">rouaa.ai / media / newsroom</div>
+        </div>
+        <div class="mockup-body" style="padding: 0;">
+          <div class="dash-grid">
+            <div class="dash-sidebar">
+              <div class="dash-sidebar-item active">
+                <div class="dash-sidebar-icon"></div>
+                Newsroom
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Source Monitor
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Draft Articles
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Published
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Verification
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rouaa-surface-border);">
+                <div class="dash-sidebar-item">
+                  <div class="dash-sidebar-icon"></div>
+                  White Label
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-main">
+              <div class="dash-header">
+                <div>
+                  <div class="dash-title">Newsroom — Source Monitor</div>
+                  <div class="dash-meta">411 sources monitored · Last detection: 14:32 UTC</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <div style="padding: 6px 12px; background: var(--rouaa-green); color: #fff; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;">● Live</div>
+                </div>
+              </div>
+
+              <div class="dash-cards">
+                <div class="dash-card">
+                  <div class="dash-card-label">Breaking Stories</div>
+                  <div class="dash-card-value accent">7</div>
+                  <div class="dash-card-delta">Ready for editorial review</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Published Today</div>
+                  <div class="dash-card-value blue">23</div>
+                  <div class="dash-card-delta">All evidence-linked</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Avg Publish Time</div>
+                  <div class="dash-card-value green">4.2m</div>
+                  <div class="dash-card-delta">From source to publication</div>
+                </div>
+                <div class="dash-card">
+                  <div class="dash-card-label">Verification Rate</div>
+                  <div class="dash-card-value green">100%</div>
+                  <div class="dash-card-delta">Every claim traceable</div>
+                </div>
+              </div>
+
+              <div class="dash-panel">
+                <div class="dash-panel-h">Breaking — FOMC Rate Decision</div>
+                <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 8px;">Federal Reserve Maintains Federal Funds Rate at 5.25–5.50%</div>
+                <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7; margin-bottom: 16px;">
+                  The Federal Open Market Committee voted to maintain the target range for the federal funds rate at 5.25 to 5.50 percent.
+                  The Committee noted that economic activity has continued to expand at a solid pace, while inflation has moved toward the 2 percent objective.
+                </div>
+                <div style="padding-top: 12px; border-top: 1px solid var(--rouaa-surface-border);">
+                  <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Chain</div>
+                  <div style="font-size: 12px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                    <div>📄 Source: Federal Reserve — FOMC Statement</div>
+                    <div>📍 Location: Page 1 · Paragraph 2</div>
+                    <div>✓ Verified: Tier 1 · Official · 14:30 UTC</div>
+                  </div>
+                </div>
+                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                  <div style="padding: 8px 16px; background: var(--rouaa-accent); color: var(--rouaa-bg-primary); border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer;">Publish</div>
+                  <div style="padding: 8px 16px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-secondary); border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer;">Edit Draft</div>
+                  <div style="padding: 8px 16px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); color: var(--rouaa-text-secondary); border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer;">View Evidence</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <a href="media-intelligence.html" class="btn btn-secondary">View Media Intelligence Page →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEVELOPER PLATFORM ============ -->
+  <section class="section" id="developer">
+    <div class="container">
+      <div class="section-header" style="margin: 0 auto 32px;">
+        <span class="eyebrow">Application 05 · Developer Platform</span>
+        <h2>Developer Intelligence — API Explorer</h2>
+        <p style="max-width: 680px;">For platforms, brokers, and fintechs — embed evidence-backed intelligence into your products via REST APIs, WebSocket streaming, and SDKs.</p>
+      </div>
+
+      <div class="mockup-frame">
+        <span class="concept-badge">Concept Preview</span>
+        <div class="mockup-titlebar">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+          <div class="mockup-title">rouaa.ai / developers / api-explorer</div>
+        </div>
+        <div class="mockup-body" style="padding: 0;">
+          <div class="dash-grid">
+            <div class="dash-sidebar">
+              <div class="dash-sidebar-item active">
+                <div class="dash-sidebar-icon"></div>
+                API Explorer
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                REST Endpoints
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                WebSocket Stream
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                SDK Downloads
+              </div>
+              <div class="dash-sidebar-item">
+                <div class="dash-sidebar-icon"></div>
+                Authentication
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rouaa-surface-border);">
+                <div class="dash-sidebar-item">
+                  <div class="dash-sidebar-icon"></div>
+                  API Keys
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-main">
+              <div class="dash-header">
+                <div>
+                  <div class="dash-title">GET /api/v1/events</div>
+                  <div class="dash-meta">Returns financial events with evidence chains · Rate limit: 1000 req/min</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <div style="padding: 6px 12px; background: var(--rouaa-green); color: #fff; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600;">200 OK</div>
+                </div>
+              </div>
+
+              <div class="dash-row">
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Request</div>
+                  <div style="background: var(--rouaa-bg-primary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); padding: 14px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; line-height: 1.7;">
+                    <div style="color: var(--rouaa-blue);">GET</div>
+                    <div style="color: var(--rouaa-text-secondary); margin-bottom: 8px;">/api/v1/events?type=rate_decision&amp;jurisdiction=US&amp;limit=5</div>
+                    <div style="color: var(--rouaa-text-muted);">Authorization: Bearer rouaa_sk_...</div>
+                    <div style="color: var(--rouaa-text-muted);">Accept: application/json</div>
+                  </div>
+                </div>
+
+                <div class="dash-panel">
+                  <div class="dash-panel-h">Response (200 OK)</div>
+                  <div style="background: var(--rouaa-bg-primary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); padding: 14px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; line-height: 1.7; overflow-x: auto;">
+                    <div style="color: var(--rouaa-text-muted);">{</div>
+                    <div style="color: var(--rouaa-text-secondary); padding-left: 16px;">"events": [</div>
+                    <div style="color: var(--rouaa-text-secondary); padding-left: 32px;">{</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"id"</span>: <span style="color: var(--rouaa-green);">"evt_fomc_2026_08"</span>,</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"type"</span>: <span style="color: var(--rouaa-green);">"rate_decision"</span>,</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"source"</span>: <span style="color: var(--rouaa-green);">"Federal Reserve"</span>,</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"fact"</span>: <span style="color: var(--rouaa-green);">"Rate maintained: 5.25-5.50%"</span>,</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"evidence"</span>: {</div>
+                    <div style="padding-left: 64px;"><span style="color: var(--rouaa-blue);">"document"</span>: <span style="color: var(--rouaa-green);">"FOMC_Statement.pdf"</span>,</div>
+                    <div style="padding-left: 64px;"><span style="color: var(--rouaa-blue);">"page"</span>: <span style="color: var(--rouaa-green);">1</span>,</div>
+                    <div style="padding-left: 64px;"><span style="color: var(--rouaa-blue);">"paragraph"</span>: <span style="color: var(--rouaa-green);">2</span>,</div>
+                    <div style="padding-left: 64px;"><span style="color: var(--rouaa-blue);">"confidence"</span>: <span style="color: var(--rouaa-green);">0.97</span></div>
+                    <div style="padding-left: 48px;">},</div>
+                    <div style="padding-left: 48px;"><span style="color: var(--rouaa-accent);">"timestamp"</span>: <span style="color: var(--rouaa-green);">"2026-08-02T14:30:00Z"</span></div>
+                    <div style="color: var(--rouaa-text-secondary); padding-left: 32px;">}</div>
+                    <div style="color: var(--rouaa-text-secondary); padding-left: 16px;">]</div>
+                    <div style="color: var(--rouaa-text-muted);">}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dash-panel">
+                <div class="dash-panel-h">Every API response includes the full evidence chain — source, document, page, paragraph, and confidence score.</div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px;">
+                  <div style="padding: 8px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">REST API · 339 endpoints</div>
+                  <div style="padding: 8px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">WebSocket · Real-time events</div>
+                  <div style="padding: 8px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">SDK · Python · JS · Go</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <a href="developers.html" class="btn btn-secondary">View Developer Platform →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2>Experience the platform in a live briefing.</h2>
+      <p style="max-width: 640px; margin: 0 auto 32px;">
+        These concept previews show the planned interface. In a live briefing, we walk through your specific use case — your sources, your workflows, your evidence chains.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
+        <a href="evidence-explorer.html" class="btn btn-secondary">Explore Evidence Chain →</a>
+        <a href="sample-library.html" class="btn btn-secondary">View Sample Outputs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
