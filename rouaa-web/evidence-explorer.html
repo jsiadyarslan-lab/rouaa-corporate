@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Evidence Explorer — From Source to Defensible Intelligence</title>
+  <meta name="description" content="Evidence Explorer — interactive walkthrough of how an official source becomes a defensible Intelligence Object. Seven steps from publication to governed output, with full provenance chain and human oversight.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .explorer-frame {
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .explorer-step {
+      display: none;
+    }
+    .explorer-step.active {
+      display: block;
+    }
+    .step-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--rouaa-bg-secondary);
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .step-progress {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--rouaa-text-muted);
+      font-weight: 600;
+    }
+    .step-dot.completed {
+      background: var(--rouaa-accent);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-bg-primary);
+    }
+    .step-dot.active {
+      background: var(--rouaa-accent-subtle);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-accent);
+    }
+    .step-line {
+      width: 24px;
+      height: 1px;
+      background: var(--rouaa-surface-border);
+    }
+    .step-line.completed {
+      background: var(--rouaa-accent);
+    }
+    .step-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .step-btn {
+      padding: 8px 16px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-sm);
+      color: var(--rouaa-text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .step-btn:hover {
+      border-color: var(--rouaa-accent-border);
+      color: var(--rouaa-text-primary);
+    }
+    .step-btn.primary {
+      background: var(--rouaa-accent);
+      color: var(--rouaa-bg-primary);
+      border-color: var(--rouaa-accent);
+    }
+    .step-btn.primary:hover {
+      background: var(--rouaa-accent-hover);
+    }
+    .step-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .step-content {
+      padding: 32px;
+      min-height: 420px;
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-bottom: 8px;
+    }
+    .step-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--rouaa-text-primary);
+      margin-bottom: 16px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+    .step-card {
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .step-card.highlight {
+      border-color: var(--rouaa-accent-border);
+      background: linear-gradient(180deg, rgba(201, 162, 39,0.06), rgba(201, 162, 39,0.02));
+    }
+    .step-field {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .step-field:last-child {
+      border-bottom: none;
+    }
+    .step-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+    }
+    .step-field-value {
+      font-size: 14px;
+      color: var(--rouaa-text-primary);
+      font-weight: 500;
+    }
+    .step-field-value.accent {
+      color: var(--rouaa-accent);
+    }
+    .concept-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(201, 162, 39, 0.15);
+      border: 1px solid var(--rouaa-accent-border);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 16px;">Evidence Explorer</span>
+      <h1>
+        Every intelligence claim.<br>
+        <span class="text-accent">Proven.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 780px; margin: 24px auto 0;">
+        See the complete reasoning path behind every ROUAA intelligence output. From official publication
+        to reviewed Intelligence Object &mdash; every claim carries its source, evidence, confidence, and
+        accountability record. This is what institutions need to defend a decision six months later
+        in front of an investment committee or auditor.
+      </p>
+      <div style="margin-top: 24px; padding: 12px 20px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); display: inline-block;">
+        <span style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">Product Experience Preview</span>
+        <span style="font-size: 13px; color: var(--rouaa-text-secondary); margin-left: 8px;">Interactive representation of the ROUAA evidence tracing workflow.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAILURE PHILOSOPHY ============ -->
+  <section class="section" style="padding: 64px 0 48px;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 40px 36px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md);">
+        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 18px;">Foundational Principle</div>
+        <p style="font-size: clamp(18px, 2.2vw, 24px); font-weight: 600; line-height: 1.4; color: var(--rouaa-text-primary); margin: 0 0 18px; letter-spacing: -0.01em;">ROUAA does not optimize for producing more outputs.<br>It optimizes for producing <span style="color: var(--rouaa-accent);">defensible outputs</span>.</p>
+        <p style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: 1.7; margin: 0;">The walkthrough below shows how a single FOMC statement becomes a defensible Intelligence Object. Every step is logged, every claim is traceable, every output is auditable. This is the path from official publication to institutional decision.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ WHY THIS MATTERS ============ -->
+  <section class="section" style="padding: 48px 0 64px;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+
+        <!-- The Problem -->
+        <div style="padding: 28px 28px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-md);">
+          <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 16px;">The Institutional Problem</div>
+          <p style="font-size: 15px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 0 0 12px;">Most intelligence systems answer:</p>
+          <p style="font-size: 18px; font-weight: 600; color: var(--rouaa-text-primary); line-height: 1.4; margin: 0;">&ldquo;What happened?&rdquo;</p>
+        </div>
+
+        <!-- The ROUAA Answer -->
+        <div style="padding: 28px 28px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md);">
+          <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 16px;">What Institutions Need</div>
+          <p style="font-size: 15px; color: var(--rouaa-text-secondary); line-height: 1.6; margin: 0 0 12px;">Institutions need to answer:</p>
+          <p style="font-size: 18px; font-weight: 600; color: var(--rouaa-accent); line-height: 1.4; margin: 0;">&ldquo;Can we prove why we believe it?&rdquo;</p>
+        </div>
+
+      </div>
+      <div style="max-width: 800px; margin: 24px auto 0; text-align: center;">
+        <p style="font-size: 16px; color: var(--rouaa-text-secondary); line-height: 1.7; margin: 0;">ROUAA Evidence Explorer answers the second question. The walkthrough below shows how.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE EVIDENCE CHAIN — INTRO ============ -->
+  <section class="section" style="padding-top: 48px; padding-bottom: 0;">
+    <div class="container">
+      <div style="max-width: 880px; margin: 0 auto; text-align: center;">
+        <span class="eyebrow">The Provenance Chain</span>
+        <h2 style="margin: 16px 0;">Every conclusion carries its complete history.</h2>
+        <p style="max-width: 720px; margin: 0 auto; font-size: 16px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed);">
+          Every ROUAA Intelligence Object carries a complete provenance chain &mdash; from official source publication
+          through document intelligence, fact extraction, event classification, and evidence linking. Seven steps,
+          each logged, each verifiable. The Intelligence Object is the destination. Follow the path an institutional
+          user would trace to defend any claim ROUAA produces.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPLORER ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="explorer-frame" style="max-width: 880px; margin: 0 auto;">
+
+        <!-- Destination strip: shows where the chain arrives -->
+        <div style="padding: 16px 24px; background: var(--rouaa-bg-secondary); border-bottom: 1px solid var(--rouaa-surface-border); display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted);">Destination:</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); padding: 4px 10px; border: 1px solid var(--rouaa-accent-border); background: var(--rouaa-accent-subtle); border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 6px;">
+            <span class="pulse-dot gold"></span> VERIFIED INTELLIGENCE OBJECT
+          </span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">EVT-FOMC-2026-08-001 &middot; 97.4% confidence</span>
+        </div>
+
+        <!-- Step navigation -->
+        <div class="step-nav">
+          <div class="step-progress" id="stepProgress">
+            <div class="step-dot active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="5">5</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="6">6</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="7">7</div>
+          </div>
+          <div class="step-controls">
+            <button class="step-btn" id="prevBtn" disabled>← Previous</button>
+            <button class="step-btn primary" id="nextBtn">Next →</button>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="step-content">
+
+          <!-- Step 1: Source Publication -->
+          <div class="explorer-step active" id="step1">
+            <div class="step-label">Step 01 · Source Publication</div>
+            <div class="step-title">Federal Reserve publishes FOMC statement</div>
+            <div class="step-desc">
+              ROUAA monitors 411+ official sources continuously. When the Federal Reserve publishes a new FOMC statement,
+              the Source Registry detects it within seconds and registers the document for processing.
+            </div>
+            <!-- Structured summary -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rouaa-surface-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px;">
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Event</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement Published</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Input</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Official Fed Document</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">System Action</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Detected &rarr; Registered</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Source Record Created</div>
+              </div>
+            </div>
+            <!-- Status badge -->
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(32, 168, 120, 0.06); border: 1px solid rgba(32, 168, 120, 0.20); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-green); font-weight: 600;">&check; Verified Source</span>
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Source</div>
+                <div class="step-field-value">Federal Reserve — Federal Open Market Committee</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Type</div>
+                <div class="step-field-value">Central Bank · Tier 1 Trust</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Jurisdiction</div>
+                <div class="step-field-value">United States</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Publication Time</div>
+                <div class="step-field-value">2026-08-02 · 14:00 UTC</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Detected By ROUAA</div>
+                <div class="step-field-value accent">14:00:14 UTC · (14 seconds after publication)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Source Registry</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Source Record</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Authority · Jurisdiction · Trust Tier · Monitoring Status · Source URL · Detection Method
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Document -->
+          <div class="explorer-step" id="step2">
+            <div class="step-label">Step 02 · Document Intelligence</div>
+            <div class="step-title">ROUAA ingests and normalizes the document</div>
+            <div class="step-desc">
+              The Document Intelligence Engine extracts the full text from the PDF, structures it into sections,
+              normalizes metadata, and stores it with a permanent link to the original source.
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rouaa-surface-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px;">
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Event</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Document Ingested</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Input</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">PDF &middot; 847 words</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">System Action</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Extracted &rarr; Structured</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Document Record</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(32, 168, 120, 0.06); border: 1px solid rgba(32, 168, 120, 0.20); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-green); font-weight: 600;">&check; Document Processed</span>
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Document</div>
+                <div class="step-field-value">FOMC Statement — August 2, 2026</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Format</div>
+                <div class="step-field-value">PDF · 847 words · 3 pages</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Extraction</div>
+                <div class="step-field-value">Full text · 8 paragraphs · 2 tables</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Normalization</div>
+                <div class="step-field-value">Metadata structured · sections indexed</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Link</div>
+                <div class="step-field-value">federalreserve.gov/fomc/2026-08-02.pdf</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Document Store</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Document Record</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Document ID · Publication Date · Content Hash · Version · Source Link · Extraction Timestamp
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Fact Extraction -->
+          <div class="explorer-step" id="step3">
+            <div class="step-label">Step 03 · Fact Extraction</div>
+            <div class="step-title">Key facts extracted from the statement</div>
+            <div class="step-desc">
+              The Fact Engine identifies and extracts the key financial facts from the document —
+              the interest rate decision, policy stance, economic assessment, and forward guidance.
+              Each fact is linked to its exact location in the source document.
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rouaa-surface-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px;">
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Event</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Facts Extracted</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Input</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Structured Document</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">System Action</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Parsed &rarr; Typed</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">4 Financial Facts</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(32, 168, 120, 0.06); border: 1px solid rgba(32, 168, 120, 0.20); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-green); font-weight: 600;">&check; Facts Extracted &amp; Located</span>
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Fact 01</div>
+                <div class="step-field-value">Federal funds target range: 5.25–5.50% (maintained)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 02</div>
+                <div class="step-field-value">Policy stance: Restrictive, data-dependent</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 03</div>
+                <div class="step-field-value">Economic assessment: Solid expansion, moderating inflation</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact 04</div>
+                <div class="step-field-value">Forward guidance: Data-dependent, no specific timeline</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Confidence</div>
+                <div class="step-field-value accent">97% · Tier 1 source · direct extraction</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Fact Database</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Fact Record</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Metric · Value · Extraction Confidence · Location (Page/Paragraph) · Source Document ID · Extraction Method
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Event Detection -->
+          <div class="explorer-step" id="step4">
+            <div class="step-label">Step 04 · Event Detection</div>
+            <div class="step-title">Monetary Policy Decision event classified</div>
+            <div class="step-desc">
+              The Financial Event Engine classifies the extracted facts into a structured event —
+              an Interest Rate Decision by the Federal Reserve. The event is tagged with type, jurisdiction,
+              and impact level for downstream intelligence workflows.
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rouaa-surface-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px;">
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Event</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Rate Decision Classified</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Input</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Extracted Facts</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">System Action</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Classified &rarr; Tagged</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Structured Event</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(32, 168, 120, 0.06); border: 1px solid rgba(32, 168, 120, 0.20); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-green); font-weight: 600;">&check; Event Classified</span>
+            </div>
+            <div class="step-card">
+              <div class="step-field">
+                <div class="step-field-label">Event Type</div>
+                <div class="step-field-value">Interest Rate Decision</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Source Entity</div>
+                <div class="step-field-value">Federal Reserve (FOMC)</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Jurisdiction</div>
+                <div class="step-field-value">United States</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Impact Level</div>
+                <div class="step-field-value accent">Material · Global market impact</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Timestamp</div>
+                <div class="step-field-value">2026-08-02 · 14:00:14 UTC</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Event Log</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Event Record</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Event ID · Event Type · Source Entity · Jurisdiction · Impact Level · Timestamp · Linked Facts
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Evidence Linking -->
+          <div class="explorer-step" id="step5">
+            <div class="step-label">Step 05 · Evidence Linking</div>
+            <div class="step-title">Every fact linked to source, document, page, paragraph</div>
+            <div class="step-desc">
+              The Evidence Layer creates the provenance chain — linking each extracted fact back to its exact location
+              in the source document. This is what makes ROUAA intelligence defensible: every claim can be traced
+              to its origin in seconds.
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rouaa-surface-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 16px;">
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Event</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Provenance Bound</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Input</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Facts + Citations</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">System Action</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Linked &rarr; Sealed</div>
+              </div>
+              <div style="background: var(--rouaa-bg-tertiary); padding: 12px 14px;">
+                <div style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">Evidence Chain</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(201, 162, 39, 0.06); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-accent); font-weight: 600;">&check; Evidence Located &amp; Verified</span>
+            </div>
+            <div class="step-card highlight">
+              <div class="step-field">
+                <div class="step-field-label">Provenance Chain</div>
+                <div class="step-field-value accent">Fact → Document → Page → Paragraph</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Fact</div>
+                <div class="step-field-value">"Federal funds target range maintained at 5.25–5.50%"</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Document</div>
+                <div class="step-field-value">FOMC Statement — August 2, 2026</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Page</div>
+                <div class="step-field-value">Page 1</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Paragraph</div>
+                <div class="step-field-value">Paragraph 2</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Confidence Score</div>
+                <div class="step-field-value accent">0.97 · Tier 1 · Official source</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Storage</div>
+                <div class="step-field-value">→ Evidence Layer</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Evidence Record</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Evidence ID · Fact Reference · Document Reference · Page · Paragraph · Confidence Score · Verification Timestamp
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6: Intelligence Object (THE ATOMIC UNIT) -->
+          <div class="explorer-step" id="step6">
+            <div class="step-label" style="color: var(--rouaa-accent);">Step 06 · Intelligence Object &middot; The Atomic Unit</div>
+            <div class="step-title">The evidence chain produces an Intelligence Object</div>
+            <div class="step-desc">
+              This is what ROUAA actually produces. Not a document. Not a data point. A typed, reusable, traceable artifact
+              that carries its own provenance, confidence, and consumer list. Every workflow &mdash; research, trading, risk &mdash;
+              consumes the same verified object. This is the component that makes ROUAA different from a dashboard.
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent);">DESTINATION REACHED</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-accent); font-weight: 700;">&check; Intelligence Object Created &middot; 97.4% confidence</span>
+            </div>
+
+            <!-- The Intelligence Object Card (production-ready, from Design System Section 19) -->
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px;">
+
+              <!-- Object header -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: var(--rouaa-bg-tertiary); border-bottom: 1px solid var(--rouaa-surface-border-strong); flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); padding: 3px 8px; border: 1px solid var(--rouaa-accent-border); background: var(--rouaa-accent-subtle); border-radius: var(--radius-sm);">INTELLIGENCE OBJECT</span>
+                  <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">EVT-FOMC-2026-08-001</span>
+                </div>
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">
+                  <span class="pulse-dot"></span> VERIFIED
+                </span>
+              </div>
+
+              <!-- Object body: 6-field grid -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rouaa-surface-border-strong);">
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Type</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-accent);">Event</div>
+                </div>
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Entity</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Federal Reserve &middot; FOMC</div>
+                </div>
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Fact</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--rouaa-text-primary);">Rate maintained 5.25&ndash;5.50%</div>
+                </div>
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Evidence</div>
+                  <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement &middot; p.1 &sect;2</div>
+                </div>
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Confidence</div>
+                  <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">97.4%</div>
+                </div>
+                <div style="background: var(--rouaa-surface); padding: 16px 20px;">
+                  <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Used By</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                    <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Research</span>
+                    <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Trading</span>
+                    <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-secondary); padding: 2px 6px; border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm);">Risk</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dependency footer -->
+              <div style="padding: 12px 20px; background: var(--rouaa-bg-tertiary); border-top: 1px solid var(--rouaa-surface-border-strong); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.04em;">
+                <span><span style="font-weight: 700;">DEPENDS ON:</span> <span style="color: var(--rouaa-text-secondary);">L01 Source Registry &middot; L02 Document Intelligence &middot; L03 Fact Engine</span></span>
+                <span><span style="font-weight: 700;">FEEDS:</span> <span style="color: var(--rouaa-text-secondary);">L06 Knowledge Graph &middot; Investment &middot; Risk Intelligence</span></span>
+              </div>
+            </div>
+
+            <!-- Reusability callout -->
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle); border-left: 3px solid var(--rouaa-accent);">
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Reusability Rule</div>
+              <div style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+                One Intelligence Object can be consumed by multiple workflows. The same FOMC Rate Decision object feeds a research brief, a trading signal, and a risk dashboard &mdash; all from one verified source. This is what makes ROUAA an <strong style="color: var(--rouaa-text-primary);">intelligence infrastructure</strong>, not a dashboard.
+              </div>
+            </div>
+
+            <!-- Institutional use cases -->
+            <div class="step-card" style="border-color: var(--rouaa-surface-border-strong); background: var(--rouaa-bg-tertiary);">
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 12px;">Where This Object Is Used</div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Investment Committee Memo</div>
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Risk Review Report</div>
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Market Commentary</div>
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Regulatory Response</div>
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Client Report</div>
+                <div style="padding: 10px 12px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); font-size: 13px; color: var(--rouaa-text-primary); font-weight: 500;">Trading Signal Feed</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Step 7: Output -->
+          <div class="explorer-step" id="step7">
+            <div class="step-label">Step 07 · Governed Output</div>
+            <div class="step-title">Intelligence Object published to institutional workflows</div>
+            <div class="step-desc">
+              After human review (for high-stakes objects), the Intelligence Object is published &mdash; immutable, versioned,
+              and auditable. It carries the full provenance chain inherited from every step above. This is what arrives at
+              committee, research, trading, or editorial workflows.
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(32, 168, 120, 0.06); border: 1px solid rgba(32, 168, 120, 0.20); border-radius: var(--radius-sm); margin-bottom: 16px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-green);">STATUS</span>
+              <span style="font-family: var(--font-mono); font-size: 12px; color: var(--rouaa-green); font-weight: 600;">&check; Published &middot; Immutable &middot; Audit-Ready</span>
+            </div>
+            <div class="step-card highlight">
+              <div class="step-field">
+                <div class="step-field-label">Output Type</div>
+                <div class="step-field-value accent">Monetary Policy Intelligence Brief</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Headline</div>
+                <div class="step-field-value">Federal Reserve maintains federal funds rate at 5.25–5.50%</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Context</div>
+                <div class="step-field-value">Policy stance unchanged · economic assessment updated · forward guidance adjusted</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Intelligence Object</div>
+                <div class="step-field-value accent">EVT-FOMC-2026-08-001 · Verified · 97.4% confidence</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Evidence Chain</div>
+                <div class="step-field-value">Source &rarr; Document &rarr; Fact &rarr; Evidence &rarr; Object &middot; 5 links &middot; all verified</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Governance</div>
+                <div class="step-field-value">Validation rules applied · confidence scored · audit trail preserved</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Human Review</div>
+                <div class="step-field-value">Analyst: J. Sinskey &middot; Approved 2026-08-02 14:08 UTC</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Status</div>
+                <div class="step-field-value accent">Published &middot; Immutable &middot; Audit-ready</div>
+              </div>
+              <div class="step-field">
+                <div class="step-field-label">Delivered To</div>
+                <div class="step-field-value">→ Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs</div>
+              </div>
+            </div>
+            <div class="step-card" style="border-color: var(--rouaa-accent-border); background: var(--rouaa-accent-subtle);">
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 10px;">Stored Artifact · Published Intelligence Object</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.8;">
+                <strong style="color: var(--rouaa-text-primary);">Contains:</strong> Object ID · Version · Evidence Package · Confidence Score · Reviewer ID · Review Timestamp · Audit Trail · Delivery Targets
+              </div>
+            </div>
+            <div style="margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <a href="#evidence-package" class="btn btn-primary">View Complete Evidence Package ↓</a>
+              <a href="sample-library.html" class="btn btn-secondary">View Sample Intelligence Outputs →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="max-width: 880px; margin: 32px auto 0; text-align: center;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">
+          Every ROUAA intelligence output carries this same chain — from the official source to the final product.
+          This is what makes ROUAA intelligence defensible: not the output itself, but the traceable path behind it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ OBJECT RELATIONSHIPS ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Object Relationships</span>
+        <h2>The object is not isolated.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">An Intelligence Object participates in a typed relationship graph. Events are caused by source documents, supported by facts, influence scenarios, and are consumed by workflows. These relationships are first-class data &mdash; not afterthoughts. This is what distinguishes ROUAA from a dashboard.</p>
+      </div>
+
+      <div style="max-width: 880px; margin: 0 auto;">
+        <div style="background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-md); padding: 36px 32px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
+
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-sm); padding: 14px 28px; min-width: 320px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Event</div>
+              <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Rate Decision</div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 3px 10px; border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">caused by</span>
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+            </div>
+
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 14px 28px; min-width: 320px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Source Document</div>
+              <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">FOMC Statement &middot; 2026-08</div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 3px 10px; border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">supports</span>
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+            </div>
+
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 14px 28px; min-width: 320px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Fact</div>
+              <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Rate maintained 5.25&ndash;5.50%</div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 3px 10px; border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">influences</span>
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+            </div>
+
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 14px 28px; min-width: 320px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Scenario</div>
+              <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Base Case &middot; 60% &middot; Bull 25% &middot; Bear 15%</div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0;">
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+              <span style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); background: var(--rouaa-bg-tertiary); padding: 3px 10px; border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">consumed by</span>
+              <div style="width: 1px; height: 20px; background: var(--rouaa-surface-border-strong);"></div>
+            </div>
+
+            <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-sm); padding: 14px 28px; min-width: 320px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Workflow</div>
+              <div style="font-size: 15px; font-weight: 600; color: var(--rouaa-text-primary);">Investment Brief &middot; Risk Dashboard &middot; Trading Signal</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HUMAN OVERSIGHT CHECKPOINT ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Human Accountability Layer</span>
+        <h2>The system produces evidence. The institution owns the decision.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">The Intelligence Object does not auto-publish for high-stakes events. Between Step 06 (Object creation) and Step 07 (Publication), an authorized analyst reviews the evidence, confirms the confidence, and signs off. The reviewer&rsquo;s identity is recorded in the object&rsquo;s provenance &mdash; permanently. The system can process. Only institutions can approve.</p>
+      </div>
+
+      <div style="max-width: 880px; margin: 0 auto;">
+        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border-strong); border-radius: var(--radius-md); padding: 32px;">
+
+          <!-- Oversight pipeline (compact) -->
+          <div style="display: flex; justify-content: space-between; align-items: stretch; gap: 12px; flex-wrap: wrap;">
+
+            <div style="flex: 1; min-width: 140px; text-align: center; padding: 16px 12px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">01</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Automation</div>
+              <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 4px;">System assembles</div>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; text-align: center; padding: 16px 12px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">02</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Evidence Validation</div>
+              <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 4px;">Chain verified</div>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; text-align: center; padding: 16px 12px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">03</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Confidence Check</div>
+              <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 4px;">97.4% &ge; 85% threshold</div>
+            </div>
+
+            <!-- Step 4: Human Review (highlighted) -->
+            <div style="flex: 1; min-width: 140px; text-align: center; padding: 16px 12px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent); border-radius: var(--radius-sm);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 6px;">04 &middot; HERE</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-accent);">Human Review</div>
+              <div style="font-size: 11px; color: var(--rouaa-text-secondary); margin-top: 4px;">Analyst signs off</div>
+            </div>
+
+            <div style="flex: 1; min-width: 140px; text-align: center; padding: 16px 12px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm);">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-green); margin-bottom: 6px;">05</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--rouaa-text-primary);">Publication</div>
+              <div style="font-size: 11px; color: var(--rouaa-text-muted); margin-top: 4px;">Immutable, auditable</div>
+            </div>
+
+          </div>
+
+          <!-- Review record -->
+          <div style="margin-top: 24px; padding: 20px; background: var(--rouaa-bg-tertiary); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm);">
+            <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 12px;">Review Record &middot; Permanent</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; font-size: 13px;">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.06em; margin-bottom: 2px;">ANALYST ID</div>
+                <div style="font-family: var(--font-mono); color: var(--rouaa-text-primary); font-weight: 600;">USR-28491</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.06em; margin-bottom: 2px;">DECISION</div>
+                <div style="color: var(--rouaa-green); font-weight: 600;">Approved</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.06em; margin-bottom: 2px;">TIMESTAMP</div>
+                <div style="font-family: var(--font-mono); color: var(--rouaa-text-primary); font-weight: 600;">2026-08-02 14:08 UTC</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--rouaa-text-muted); letter-spacing: 0.06em; margin-bottom: 2px;">OBJECT ID</div>
+                <div style="font-family: var(--font-mono); color: var(--rouaa-accent); font-weight: 600;">EVT-FOMC-2026-08-001</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLETE EVIDENCE PACKAGE ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="evidence-package">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">The Audit Package</span>
+        <h2>Everything required to defend the conclusion.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">This is what arrives with every ROUAA Intelligence Object &mdash; the complete provenance package that makes the output defensible, auditable, and governance-ready. Seven links, one verified object, full traceability. This is why institutions buy ROUAA.</p>
+      </div>
+      <div style="max-width: 640px; margin: 0 auto;">
+        <div class="step-card">
+          <div class="step-field">
+            <div class="step-field-label">01 · Source</div>
+            <div class="step-field-value">Federal Reserve — Federal Open Market Committee</div>
+          </div>
+          <div class="step-field">
+            <div class="step-field-label">02 · Document</div>
+            <div class="step-field-value">FOMC Statement — August 2, 2026 · PDF · 3 pages</div>
+          </div>
+          <div class="step-field">
+            <div class="step-field-label">03 · Fact</div>
+            <div class="step-field-value">Federal funds target range maintained at 5.25–5.50%</div>
+          </div>
+          <div class="step-field">
+            <div class="step-field-label">04 · Event</div>
+            <div class="step-field-value">Interest Rate Decision · Material · Global market impact</div>
+          </div>
+          <div class="step-field">
+            <div class="step-field-label">05 · Evidence</div>
+            <div class="step-field-value accent">Page 1 · Paragraph 2 · Confidence: 97.4%</div>
+          </div>
+          <div class="step-field" style="background: var(--rouaa-accent-subtle); margin: 8px -24px; padding: 12px 24px; border-bottom: 1px solid var(--rouaa-accent-border); border-left: 3px solid var(--rouaa-accent);">
+            <div class="step-field-label" style="color: var(--rouaa-accent);">06 · Intelligence Object</div>
+            <div class="step-field-value accent" style="font-weight: 700;">EVT-FOMC-2026-08-001 · Verified · 97.4% · Used by Research + Trading + Risk</div>
+          </div>
+          <div class="step-field" style="border-bottom: none;">
+            <div class="step-field-label">07 · Governed Output</div>
+            <div class="step-field-value accent">Published &middot; Reviewed by Authorized Analyst (USR-28491) &middot; Immutable &middot; Audit-ready</div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="sample-library.html" class="btn btn-primary">View Sample Outputs →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
+    <div class="container">
+      <h2>See a real intelligence object reconstructed from your domain.</h2>
+      <p style="max-width: 680px; margin: 0 auto 24px;">
+        In a live briefing, we walk through the evidence chain on your source coverage &mdash; your jurisdictions, your event types, your workflows. You will see an Intelligence Object emerge from your own data, reviewed by your own analysts, ready for your own committees.
+      </p>
+      <p style="max-width: 640px; margin: 0 auto 32px; font-size: 14px; color: var(--rouaa-text-muted); line-height: 1.7;">
+        Not a demo. Not a slide deck. Your domain, your sources, your decision &mdash; reconstructed from evidence to conclusion.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
+        <a href="product-experience.html" class="btn btn-secondary">Product Experience Center →</a>
+        <a href="source-explorer.html" class="btn btn-secondary">Source Registry Explorer →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Evidence Explorer step navigation
+    (function() {
+      let currentStep = 1;
+      const totalSteps = 7;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const steps = document.querySelectorAll('.explorer-step');
+      const dots = document.querySelectorAll('.step-dot');
+      const lines = document.querySelectorAll('.step-line');
+
+      function updateUI() {
+        steps.forEach((s, i) => {
+          s.classList.toggle('active', i + 1 === currentStep);
+        });
+        dots.forEach((d, i) => {
+          d.classList.remove('active', 'completed');
+          if (i + 1 < currentStep) d.classList.add('completed');
+          else if (i + 1 === currentStep) d.classList.add('active');
+        });
+        lines.forEach((l, i) => {
+          l.classList.toggle('completed', i + 1 < currentStep);
+        });
+        prevBtn.disabled = currentStep === 1;
+        nextBtn.textContent = currentStep === totalSteps ? 'Complete ✓' : 'Next →';
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateUI();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateUI();
+        }
+      });
+
+      // Allow clicking on dots to jump
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          currentStep = i + 1;
+          updateUI();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

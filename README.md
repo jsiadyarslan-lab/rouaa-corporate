@@ -1,187 +1,119 @@
+# ROUAA · رؤى
 
-رُؤى — بنية تحتية للاستخبارات المالية
-<p align="center">
-  <img src="https://jsiadyarslan-lab.github.io/rouaa-corporate/assets/logo.svg" width="120" alt="رؤى">
-</p>
-<p align="center">
-  <strong>بنية تحتية مالية للمؤسسات — حيث يلتقي الخبر بالتحليل والتنفيذ في منصة واحدة</strong>
-</p>
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/الحالة-قيد%20التطوير-3b82f6?style=flat-square"></a>
-  <a href="#"><img src="https://img.shields.io/badge/الإصدار-v0.9.0--beta-22d3ee?style=flat-square"></a>
-  <a href="#"><img src="https://img.shields.io/badge/الترخيص-ملكي-fbbf24?style=flat-square"></a>
-</p>
-📋 فهرس المحتويات
-نظرة عامة
-المنظومتان
-رؤى الأخبار
-رؤى التداول
-البنية التقنية
-المميزات الرئيسية
-متطلبات التشغيل
-التثبيت والتشغيل
-هيكل المشروع
-الأمان
-خارطة الطريق
-الفريق
-التواصل
-🔭 نظرة عامة
-رُؤى هي بنية تحتية مالية متكاملة تجمع الاستخبارات المالية والتحليل الذكي والتنفيذ الآلي في مسار واحد مغلق. ليست مجرد منصة أخبار، ولا مجرد منصة تداول — بل طبقة أساسية تخدم المؤسسات المالية والمتداولين المحترفين بخمس لغات حية.
-المعادلة
-plain
-رؤى الأخبار (العقل المالي) + رؤى التداول (ذراع التنفيذ الذكي) = بنية تحتية للاستخبارات المالية
-🏛️ المنظومتان
-رؤى الأخبار
-محرك استخبارات مالي يحوّل 729+ مصدراً عالمياً إلى معرفة قابلة للتنفيذ.
-Table
-المنتج	الوصف
-وكيل النشر المستقل	إنتاج محتوى أصلي من مصادر رسمية — لا إعادة نشر
-أنابيب الأخبار	آلاف الأخبار المجمّعة والمُحلّلة يومياً
-أنابيب الإنفوجرافيك	رسوم بيانية احترافية تلقائية
-أنابيب تحليل الأسهم	تحليل فني وأساسي لآلاف الأسهم
-أنابيب التقارير الاستراتيجية	تقارير عميقة متعددة اللغات
-أنابيب الفيديو	7+ أنواع فيديو مولّدة آلياً
-أنابيب المخاطر الجيوسياسية	تحليلات جيوسياسية مبنية على بيانات
-مركز الاستخبارات المالية	411 مصدراً رسمياً موثقاً
-نظام ثقة المصادر	تصنيف 729+ مصدراً حسب المصداقية
-المحتوى الصوتي	ملخصات صوتية بـ 5 لغات
-رؤى التداول
-منظومة ذكاء اصطناعي متكاملة لاتخاذ القرار والتنفيذ.
-Table
-المكون	الوصف
-المجلس الذكي	10 أدوار AI متخصصة + سوق تنبؤي + 11+ نموذج لغوي
-المنفّذ الذكي	15+ فحص أمان + حجم مركز ذكي + عزل كامل
-اللاسع	وكيل فائق السرعة (<5ms) لخلل توازن دفتر الأوامر
-وكيل المحتوى	منصة تسويق محتوى ذكي ثنائية اللغة
-لوحة الشارت الذكية	83 أداة رسم + 15 مؤشر + 64 محرك
-المختبر العصبي	5 تبويبات لاختبار وتحسين الاستراتيجيات
-ملاذ المحفظة	تحليل مخاطر شامل عبر كل الحسابات
-مساعد التداول الذكي	14 خدمة متخصصة في واجهة دردشة
-جسر المنفّذ	تكامل مع MetaTrader 5 ومنصات أخرى
-🏗️ البنية التقنية
-plain
-┌─────────────────────────────────────────────────────────────┐
-│                      طبقة الواجهة                            │
-│         (Next.js · React · WebSocket · D3.js)               │
-├─────────────────────────────────────────────────────────────┤
-│                      طبقة API                                │
-│         (FastAPI · GraphQL · REST · gRPC)                   │
-├─────────────────────────────────────────────────────────────┤
-│                      طبقة المنطق                             │
-│    (مجلس AI · منفّذ · وكلاء · أنابيب محتوى · تحليل)        │
-├─────────────────────────────────────────────────────────────┤
-│                      طبقة البيانات                           │
-│      (PostgreSQL · Redis · ClickHouse · Vector DB)          │
-├─────────────────────────────────────────────────────────────┤
-│                      طبقة المصادر                            │
-│   (729+ مصدر · WebSocket · RSS · APIs · Scraping)           │
-└─────────────────────────────────────────────────────────────┘
-المكدس التقني
-Table
-الطبقة	التقنيات
-الواجهة	Next.js 14, React, TailwindCSS, Framer Motion, D3.js
-الخادم	FastAPI, Python 3.11, AsyncIO, Uvicorn
-الذكاء الاصطناعي	OpenAI GPT-4, Claude, Llama, Mistral, Custom Models
-قواعد البيانات	PostgreSQL 16, Redis 7, ClickHouse, Qdrant
-البنية	Docker, Kubernetes, Railway, AWS
-الأمان	AES-256, JWT, OAuth2, Rate Limiting, WAF
-⭐ المميزات الرئيسية
-🔒 عزل كامل — كل مستخدم له سياق تداول مستقل 100%
-⚡ تنفيذ فائق السرعة — وكيل اللاسع <5ms بدون استدعاء شبكة
-🧠 تعلم ذاتي — المجلس يتعلم من أخطائه ويُعدّل أوزانه ديناميكياً
-🌍 متعدد اللغات — 5 لغات حية: العربية، الإنجليزية، الفرنسية، الإسبانية، الصينية
-📊 شفافية مطلقة — سجل تدقيق كامل لكل عملية
-🛡️ لا نلمس أموالك — التداول على وسيطك مباشرة، نحن نوفّر الذكاء فقط
-📦 متطلبات التشغيل
-Python 3.11+
-Node.js 20+
-PostgreSQL 16+
-Redis 7+
-Docker (اختياري)
-🚀 التثبيت والتشغيل
-bash
-# استنساخ المستودع
-git clone https://github.com/jsiadyarslan-lab/rouaa-corporate.git
-cd rouaa-corporate
+> **Institutional Decision Intelligence Platform**
+>
+> منصة ذكاء قرار مؤسسي تحوّل المعلومات المالية الموثقة إلى قرارات أسرع، قابلة للتفسير، وجاهزة للتدقيق.
 
-# إنشاء بيئة افتراضية
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate  # Windows
+---
 
-# تثبيت المتطلبات
-pip install -r requirements.txt
+## 📚 ابدأ من هنا
 
-# إعداد متغيرات البيئة
-cp .env.example .env
-# عدّل .env بمفاتيحك الخاصة
+> **[docs/foundation/00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md](docs/foundation/00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md)** — ⭐ **نقطة الدخول الوحيدة**. الـ Operating Blueprint الذي يحول 63 وثيقة إلى برنامج بناء واحد.
 
-# تشغيل قاعدة البيانات
-docker-compose up -d postgres redis
+كل الإجابات التأسيسية الأخرى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
-# تشغيل التطبيق
-python manage.py migrate
-python manage.py runserver
+خطة التنفيذ اليومية موجودة في **[docs/execution/](docs/execution/INDEX.md)**.
 
-# تشغيل الواجهة
-cd frontend
-npm install
-npm run dev
-📁 هيكل المشروع
-plain
-rouaa/
-├── apps/
-│   ├── news/                 # رؤى الأخبار
-│   ├── trading/              # رؤى التداول
-│   ├── ai_council/           # المجلس الذكي
-│   ├── executor/             # المنفّذ الذكي
-│   ├── agents/               # الوكلاء
-│   ├── content/              # أنابيب المحتوى
-│   └── security/             # طبقة الأمان
-├── core/                     # البنية الأساسية
-├── frontend/                 # واجهة Next.js
-├── infrastructure/           # Docker · K8s · CI/CD
-├── tests/                    # اختبارات شاملة
-└── docs/                     # التوثيق
-🔐 الأمان
-Table
-الميزة	التفاصيل
-التشفير	AES-256 at-rest + TLS 1.3 in-transit
-العزل	سياق مستقل لكل مستخدم في الذاكرة والقاعدة
-التدقيق	سجل كامل للعمليات مع IP و timestamp
-الحماية	Rate limiting · WAF · DDoS protection
-الامتثال	GDPR-ready · SOC2 roadmap
-🗺️ خارطة الطريق
-المرحلة 1: الأساس (Q3 2025)
-[x] بنية رؤى الأخبار
-[x] 729+ مصدر مالي
-[x] أنابيب المحتوى العشرة
-[x] نظام ثقة المصادر
-المرحلة 2: الذكاء (Q4 2025)
-[x] المجلس الذكي (10 أدوار)
-[x] المنفّذ الذكي (15 فحص أمان)
-[x] وكيل اللاسع (<5ms)
-[x] لوحة الشارت الذكية
-المرحلة 3: التكامل (Q1 2026)
-[ ] جسر MetaTrader 5
-[ ] تكامل Binance · Alpaca · OANDA
-[ ] API للمؤسسات
-[ ] العلامة البيضاء
-المرحلة 4: النضج (Q2 2026)
-[ ] SOC2 Type II
-[ ] الترخيص التنظيمي
-[ ] الشراكات المؤسسية
-[ ] التوسع الجغرافي
-👥 الفريق
-رُؤى مشروع يُبنى بعناية من فريق صغير مُتخصص في الذكاء الاصطناعي المالي والبنية التحتية للأسواق.
-ملاحظة: المشروع قيد البناء والتطوير المستمر. بعض الميزات الموضحة قيد التنفيذ أو في مرحلة الاختبار التجريبي.
-📬 التواصل
-الموقع: rouaa-corporate
-البريد: contact@rouaa.ai
-تويتر: @rouaa_ai
-<p align="center">
-  <strong>رؤى · ببصيرة نحو الأسواق</strong>
-</p>
-<p align="center">
-  © 2026 رؤى — بنية تحتية مالية للمؤسسات. جميع الحقوق محفوظة.
-</p>
+هناك ستجد 65 وثيقة تأسيسية مُعتمدة (00 + 01-64) تجيب عن:
+
+| السؤال | الوثيقة |
+|---|---|
+| ما هي رؤى داخليًا؟ | [01-INTELLIGENCE-MODEL](docs/foundation/01-INTELLIGENCE-MODEL-v4.md) |
+| كيف تُرخّص؟ | [02-VALUE-MODEL](docs/foundation/02-ROUAA-VALUE-MODEL-v1.md) |
+| لماذا تُشترى؟ | [03-OUTCOME-MODEL](docs/foundation/03-ROUAA-OUTCOME-MODEL-v2.md) |
+| كم تُسعّر؟ | [04-PRICING-MODEL](docs/foundation/04-PRICING-MODEL-v3.md) |
+| من يشتريها؟ | [05-CUSTOMER-SEGMENT-MODEL](docs/foundation/05-CUSTOMER-SEGMENT-MODEL-v1.md) |
+| كيف تُباع؟ | [06-SALES-MOTION-MODEL](docs/foundation/06-SALES-MOTION-MODEL-v1.md) |
+| كيف تُتبنّى؟ | [07-CUSTOMER-JOURNEY-MODEL](docs/foundation/07-CUSTOMER-JOURNEY-MODEL-v1.md) |
+| كيف تنجح؟ | [08-CUSTOMER-SUCCESS-MODEL](docs/foundation/08-CUSTOMER-SUCCESS-MODEL-v1.md) |
+| كيف تُنفّذ؟ | [09-ENTERPRISE-IMPLEMENTATION-MODEL](docs/foundation/09-ENTERPRISE-IMPLEMENTATION-MODEL-v1.md) |
+| لماذا تُوثق؟ | [10-ENTERPRISE-TRUST-MODEL](docs/foundation/10-ENTERPRISE-TRUST-MODEL-v1.md) |
+| كيف تُبنى؟ | [11-ENTERPRISE-ARCHITECTURE-MODEL](docs/foundation/11-ENTERPRISE-ARCHITECTURE-MODEL-v1.md) |
+| كيف تُحوكَم؟ | [12-DATA-GOVERNANCE-MODEL](docs/foundation/12-DATA-GOVERNANCE-MODEL-v1.md) |
+| كيف تفهم العلاقات؟ | [14-KNOWLEDGE-GRAPH-MODEL](docs/foundation/14-KNOWLEDGE-GRAPH-MODEL-v1.md) |
+| كيف تُعرّف المعنى؟ | [15-KNOWLEDGE-ONTOLOGY-MODEL](docs/foundation/15-KNOWLEDGE-ONTOLOGY-MODEL-v1.md) |
+| كيف يُعرّف الكيان؟ | [16-ENTITY-RESOLUTION-MODEL](docs/foundation/16-ENTITY-RESOLUTION-MODEL-v1.md) |
+| كيف ترتبط الكيانات؟ | [17-RELATIONSHIP-MODEL](docs/foundation/17-RELATIONSHIP-MODEL-v1.md) |
+| كيف تُكتسب المعرفة؟ | [18-KNOWLEDGE-INGESTION-MODEL](docs/foundation/18-KNOWLEDGE-INGESTION-MODEL-v1.md) |
+| كيف يستدل النظام؟ | [19-REASONING-MODEL](docs/foundation/19-REASONING-MODEL-v1.md) |
+| ⭐ كيف يقرر؟ | [20-DECISION-MODEL](docs/foundation/20-DECISION-MODEL-v1.md) (الوثيقة المركزية، مُحسَّنة) |
+| كيف يحوكَم القرار؟ | [21-DECISION-GOVERNANCE-MODEL](docs/foundation/21-DECISION-GOVERNANCE-MODEL-v1.md) |
+| كيف يعمل في المؤسسة؟ | [22-DECISION-WORKFLOW-MODEL](docs/foundation/22-DECISION-WORKFLOW-MODEL-v1.md) |
+| كيف تتوحّد في منصة؟ | [23-ROUAA-PLATFORM-MODEL-v2](docs/foundation/23-ROUAA-PLATFORM-MODEL-v2.md) ✅ v2 |
+| كيف تُباع كمنتجات؟ | [24-ROUAA-PRODUCT-MODEL-v2](docs/foundation/24-ROUAA-PRODUCT-MODEL-v2.md) ✅ v2 |
+| كيف تشتغل الشركة؟ | [25-OPERATING-MODEL](docs/foundation/25-OPERATING-MODEL-v1.md) |
+| كيف يتدفّق الذكاء؟ | [26-INTELLIGENCE-PIPELINE-MODEL](docs/foundation/26-INTELLIGENCE-PIPELINE-MODEL-v1.md) |
+| كيف تُهيكَل الوحدات؟ | [27-OBJECT-MODEL](docs/foundation/27-OBJECT-MODEL-v1.md) |
+| كيف تُستهلك؟ | [28-API-CONTRACT-MODEL](docs/foundation/28-API-CONTRACT-MODEL-v1.md) |
+| كيف تُخزَّن؟ | [29-DATA-MODEL](docs/foundation/29-DATA-MODEL-v1.md) |
+| كيف يُسترجع؟ | [30-SEARCH-MODEL](docs/foundation/30-SEARCH-MODEL-v1.md) |
+| كيف يتفاعل؟ | [31-AI-ASSISTANT-MODEL](docs/foundation/31-AI-ASSISTANT-MODEL-v1.md) |
+| كيف يُنفّذ؟ | [32-AI-AGENT-MODEL](docs/foundation/32-AI-AGENT-MODEL-v1.md) |
+| كيف يُنسّق؟ | [33-AI-ORCHESTRATION-MODEL](docs/foundation/33-AI-ORCHESTRATION-MODEL-v1.md) |
+| كيف تدخل السوق؟ | [34-MARKET-ENTRY-MODEL](docs/foundation/34-MARKET-ENTRY-MODEL-v1.md) |
+| كيف تتنافس؟ | [35-COMPETITIVE-MODEL](docs/foundation/35-COMPETITIVE-MODEL-v1.md) |
+| كيف تحمي نفسها؟ | [36-MOAT-MODEL](docs/foundation/36-MOAT-MODEL-v1.md) |
+| كيف تنمو؟ | [37-GROWTH-MODEL](docs/foundation/37-GROWTH-MODEL-v1.md) |
+| كيف تُموَّل؟ | [38-INVESTMENT-MODEL](docs/foundation/38-INVESTMENT-MODEL-v1.md) |
+| كيف تُنفَّذ الخارطة؟ | [39-ROADMAP-MODEL](docs/foundation/39-ROADMAP-MODEL-v1.md) |
+| كيف تقيس؟ | [40-METRICS-MODEL](docs/foundation/40-METRICS-MODEL-v1.md) |
+| كيف تدير المخاطر؟ | [41-RISK-MODEL](docs/foundation/41-RISK-MODEL-v1.md) |
+| كيف تُنظَّم الشركة؟ | [42-ORGANIZATION-MODEL](docs/foundation/42-ORGANIZATION-MODEL-v1.md) |
+| كيف تشارك؟ | [43-PARTNERSHIP-MODEL](docs/foundation/43-PARTNERSHIP-MODEL-v1.md) |
+| كيف تبني منظومة؟ | [44-ECOSYSTEM-MODEL](docs/foundation/44-ECOSYSTEM-MODEL-v1.md) |
+| كيف تتوسع عالميًا؟ | [45-INTERNATIONALIZATION-MODEL](docs/foundation/45-INTERNATIONALIZATION-MODEL-v1.md) |
+| كيف تبني علامتها؟ | [46-BRAND-MODEL](docs/foundation/46-BRAND-MODEL-v1.md) |
+| كيف تخلق فئة؟ | [47-CATEGORY-DESIGN-MODEL](docs/foundation/47-CATEGORY-DESIGN-MODEL-v1.md) |
+| كيف تقود الفكر؟ | [48-THOUGHT-LEADERSHIP-MODEL](docs/foundation/48-THOUGHT-LEADERSHIP-MODEL-v1.md) |
+| كيف تبني مجتمعًا؟ | [49-COMMUNITY-MODEL](docs/foundation/49-COMMUNITY-MODEL-v1.md) |
+| كيف تعلّم؟ | [50-EDUCATION-MODEL](docs/foundation/50-EDUCATION-MODEL-v1.md) |
+| كيف تُقيّس؟ | [51-STANDARDIZATION-MODEL](docs/foundation/51-STANDARDIZATION-MODEL-v1.md) |
+| كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUAA-CERTIFICATION-MODEL-v1.md) |
+| كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) |
+| كيف تُبنى المنظومة؟ | [54-ECOSYSTEM-ARCHITECTURE-MODEL](docs/foundation/54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) 🔄 |
+| كيف تُصمّم المنتجات؟ | [55-PRODUCT-PORTFOLIO-MODEL](docs/foundation/55-ROUAA-PRODUCT-PORTFOLIO-MODEL-v1.md) 🔄 |
+| كيف تُنفّذ الموقع؟ | ~~[54-SITE-IMPLEMENTATION-MODEL](docs/foundation/archive/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md)~~ ⚠️ مؤرشفة |
+| كيف تصمّم بصريًا؟ | ~~[55-DESIGN-SYSTEM](docs/foundation/archive/55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md)~~ ⚠️ مؤرشفة — سيُعاد بناؤها |
+| كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) ⚠️ قيد المراجعة |
+| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) ⚠️ قيد المراجعة |
+| كيف تُهيكَل الصفحات؟ | [58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
+| كيف يُبنى المحتوى؟ | [59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v2](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
+| كيف تظهر في البحث؟ | [60-ROUAA-SEO-STRATEGY-MODEL-v2](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v2.md) ✅ v2 |
+| كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
+| كيف تُحزَّم الحلول التجارية؟ | [63-ROUAA-SOLUTION-SUITES-MODEL-v1](docs/foundation/63-ROUAA-SOLUTION-SUITES-MODEL-v1.md) ✅ جديد |
+| كيف نُدير التنفيذ؟ | [64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1](docs/foundation/64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1.md) ✅ جديد |
+| كيف نبدأ الكود الفعلي؟ | ~~[63-HTML-REACT-IMPLEMENTATION](docs/foundation/archive/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1-superseeded.md)~~ ⚠️ مؤرشفة — ستُعاد كتابتها بعد استقرار الأساس |
+| كيف تُروى؟ | [13-ROUAA-SITE-NARRATIVE-v2](docs/foundation/13-ROUAA-SITE-NARRATIVE-v2.md) ✅ v2 |
+
+---
+
+## 🎯 القاعدة الذهبية
+
+> **أي قرار (تصميم، تطوير، بيع، تسعير، سرد) يجب أن يستند إلى وثيقة من `docs/foundation/`.**
+> **إن لم تجد الوثيقة التي تجيب عن سؤالك، فالسؤال لم يُحسم بعد.**
+
+---
+
+## 🏗️ حالة المشروع
+
+- ✅ **65/65 وثيقة تأسيسية معتمدة — 🏁 المرحلة التوثيقية مكتملة بالكامل**
+- ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
+- ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
+- 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64)
+- 📋 **مرحلة التنفيذ**: [docs/execution/](docs/execution/INDEX.md) — Backlog + Sprint Plan + Tech Architecture + Engineering Spec + MVP Spec + Implementation Tasks (13 Epics / 40+ Tasks / 11 Sprints / Critical Path defined)
+- 🔨 **البناء يبدأ الآن**: 3 رسائل مُعتمدة (Homepage + Trading + Financial Intelligence) → HTML/CSS كنظام تصميم واحد
+- 🌿 **Branch:** `redesign-v20-architecture`
+
+---
+
+## 🔗 روابط سريعة
+
+- 📖 **[دليل الوثائق التأسيسية الكامل](docs/foundation/INDEX.md)** — ابدأ هنا
+- 🏛️ **[المبادئ المركزية](docs/foundation/INDEX.md#-المبادئ-المركزية-تظهر-في-كل-وثيقة)** — 10 مبادئ غير قابلة للتفاوض
+- 📊 **[خريطة الأسئلة المؤسسية](docs/foundation/INDEX.md#-خريطة-الأسئلة-المؤسسية-إجابات-موحَّدة)** — إجابات موحَّدة لكل سؤال
+- 🚫 **[ما يُمنع في الموقع](docs/foundation/INDEX.md#-ما-يجب-ألا-يظهر-في-الموقع-من-الوثيقة-13)** — قائمة الحظر
+
+---
+
+*© 2026 رؤى · ROUAA — Institutional Decision Intelligence Platform*

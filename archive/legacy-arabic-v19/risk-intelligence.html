@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Risk Intelligence — From Event to Action in Minutes</title>
+<meta name="description" content="حدث جيوسياسي أو اقتصادي → تعرّض المحفظة → تأثير → إجراء. رؤى تربط الأحداث العالمية بمخاطر مؤسستك.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+.hero-market { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-market-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--rose-dim), transparent 70%); z-index: 0; }
+.hero-market-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-market-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
+.hero-market-h1 .rose { color: var(--rose); }
+.hero-market-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-market-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* Risk flow: Event → Exposure → Impact → Action */
+.risk-flow { max-width: 800px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 0; }
+.risk-flow-step { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1rem 0; align-items: start; border-bottom: 1px solid var(--border-soft); }
+.risk-flow-step:last-child { border-bottom: none; }
+.risk-flow-num { font-family: var(--font-mono); font-size: 1rem; color: var(--step-color, var(--gold)); font-weight: 700; width: 48px; height: 48px; border-radius: 50%; background: var(--card); border: 1px solid var(--step-color, var(--gold)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.risk-flow-body { padding-top: 0.5rem; }
+.risk-flow-lbl { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--step-color, var(--gold)); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.375rem; }
+.risk-flow-text { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; }
+.risk-flow-text strong { color: var(--text); font-weight: 600; }
+.risk-flow-step.event { --step-color: var(--blue); }
+.risk-flow-step.exposure { --step-color: var(--amber); }
+.risk-flow-step.impact { --step-color: var(--rose); }
+.risk-flow-step.action { --step-color: var(--emerald); }
+
+/* Risk demo preview */
+.risk-demo { max-width: 800px; margin: 2rem auto 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; }
+.risk-demo-bar { padding: 0.625rem 1rem; background: var(--surface); border-bottom: 1px solid var(--border-soft); display: flex; align-items: center; gap: 0.5rem; }
+.risk-demo-dot { width: 8px; height: 8px; border-radius: 50%; }
+.risk-demo-dot.r { background: #EF4444; } .risk-demo-dot.y { background: #F59E0B; } .risk-demo-dot.g { background: #34D399; }
+.risk-demo-title { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-mute); }
+.risk-demo-live { padding: 0.15rem 0.5rem; background: rgba(239, 68, 68, 0.15); color: var(--rose); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; text-transform: uppercase; }
+.risk-demo-body { padding: 1.25rem; }
+.risk-demo-h { font-family: var(--font-mono); font-size: 0.625rem; color: var(--rose); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.625rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-soft); }
+.risk-exposure-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.625rem; margin: 0.75rem 0; }
+.risk-exposure-item { padding: 0.75rem; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-md); border-right: 3px solid var(--sev-color, var(--amber)); }
+.risk-exposure-item.high { --sev-color: var(--rose); }
+.risk-exposure-item.medium { --sev-color: var(--amber); }
+.risk-exposure-item.low { --sev-color: var(--emerald); }
+.risk-exposure-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.risk-exposure-sev { font-family: var(--font-mono); font-size: 0.625rem; color: var(--sev-color); font-weight: 700; text-transform: uppercase; }
+.risk-exposure-detail { font-size: 0.6875rem; color: var(--text-mute); margin-top: 0.25rem; }
+.risk-action-list { list-style: none; display: flex; flex-direction: column; gap: 0.375rem; margin-top: 0.5rem; }
+.risk-action-list li { font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: flex-start; gap: 0.375rem; }
+.risk-action-list li::before { content: '→'; color: var(--emerald); font-weight: 700; flex-shrink: 0; }
+.risk-evidence-badge { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.625rem; color: var(--gold); margin-top: 0.375rem; }
+.risk-evidence-badge::before { content: '✓'; color: var(--emerald); font-weight: 700; }
+
+/* Products */
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.prod-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); border-top: 3px solid var(--rose); }
+.prod-card:hover { border-color: var(--rose); }
+.prod-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.prod-h { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.prod-ar { font-size: 0.75rem; color: var(--text-mute); margin-bottom: 0.5rem; }
+.prod-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+
+/* Buyers */
+.buyer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+.buyer-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); }
+.buyer-card:hover { border-color: var(--rose); }
+.buyer-card-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.buyer-card-name { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.buyer-card-need { font-size: 0.75rem; color: var(--text-mute); line-height: 1.5; }
+
+/* Integration */
+.integration-row { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.integration-chip { padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); }
+
+/* CTA */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* Footer */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="رؤى · ROUAA — Home">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Risk Intelligence</span>
+      </div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="has-dropdown"><a href="platform.html">Platform</a><div class="nav-dropdown"><div class="dropdown-h">Platform</div><a href="platform.html">Platform</a><a href="products-architecture.html">Products Architecture</a><a href="catalog.html">Full Catalog</a></div></li><li class="has-dropdown"><a href="solutions.html" class="active">Solutions</a><div class="nav-dropdown"><div class="dropdown-h">Intelligence Markets</div><a href="media-technologies.html">Media Intelligence</a><a href="trading-technologies.html">Trading Intelligence</a><a href="enterprise.html">Research Intelligence</a><a href="risk-intelligence.html" class="active">Risk Intelligence</a><a href="developers.html">Developer Intelligence</a></div></li><li><a href="trust.html">Trust</a></li><li class="has-dropdown"><a href="company.html">Company</a><div class="nav-dropdown"><div class="dropdown-h">Company</div><a href="company.html">Why ROUAA Exists</a><a href="company.html#manifesto">Manifesto</a><a href="company.html#principles">Principles</a></div></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="products-architecture.html">— Products Architecture</a><a href="catalog.html">— Full Catalog</a><a href="solutions.html">Solutions</a><a href="media-technologies.html">— Media Intelligence</a><a href="trading-technologies.html">— Trading Intelligence</a><a href="enterprise.html">— Research Intelligence</a><a href="risk-intelligence.html" class="active">— Risk Intelligence</a><a href="developers.html">— Developer Intelligence</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <div class="nav-mobile-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const mobile = document.getElementById('navMobile');
+  if (!toggle || !mobile) return;
+  function setOpen(open) {
+    mobile.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!mobile.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!mobile.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (window.innerWidth > 1024) setOpen(false); }, 100); });
+})();
+</script>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-market">
+    <div class="hero-market-bg"></div>
+    <div class="container">
+      <div class="hero-market-content">
+        <div class="mono-label" style="color: var(--rose);">05 · Risk Intelligence</div>
+        <h1 class="hero-market-h1">
+          From Global Event to<br>
+          <span class="rose">Portfolio Action</span> in Minutes
+        </h1>
+        <p class="hero-market-sub">
+          حدث جيوسياسي أو اقتصادي → تعرّض المحفظة → تأثير → إجراء. رؤى تربط ما يحدث في العالم بما يحدث في محفظتك — مع دليل لكل خطوة.
+        </p>
+        <div class="hero-market-cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request Risk Briefing</a>
+          <a href="#flow" class="btn btn-ghost btn-lg">See the Flow</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TEMPLATE PROGRESS ============= -->
+  <section style="background: var(--navy); padding: 1rem 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div style="display: flex; justify-content: center; gap: 0.375rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <span style="color: var(----rose); font-weight: 700;">● Problem</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Solution</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Products</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Workflow</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Integration</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">Use Case</span>
+        <span style="color: var(--text-mute);">→</span>
+        <span style="color: var(--text-dim);">CTA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PROBLEM ============= -->
+  <section class="section reveal" id="problem">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">The Problem · 04</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">حدث عالمي يقع — والمؤسسة تكتشف تعرّضها بعد ساعات</h2>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>تأخير في التقييم</strong> · من حدث عالمي إلى تقييم التأثير على المحفظة: 4-8 ساعات</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>رؤية مجزّأة</strong> · كل قسم يقيّم من زاويته — لا توجد صورة موحدة للمخاطر</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>لا سلسلة دليل</strong> · تقييم المخاطر مبني على تكهنات، لا على حقائق موثقة</div></div>
+        <div style="padding: 1.25rem; background: var(--card); border: 1px solid var(--border); border-right: 3px solid var(--rose); border-radius: var(--radius-md);"><div style="font-size: 0.875rem; color: var(--text); line-height: 1.6;"><strong>إجراء متأخر</strong> ·等到 تقرير المخاطر، السوق تحرّك بالفعل — فات الأوان</div></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="#solution" class="btn-link">كيف تحلّ رؤى هذا؟ ↓</a>
+      </div>
+    </div>
+  </section>
+  <!-- ============= ROUAA SOLUTION (bridge) ============= -->
+  <section class="section reveal" id="solution" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">The ROUAA Solution</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">ذكاء موثّق، بلغة تحليل المخاطر</h2>
+        <p class="section-lead" style="margin: 0 auto;">رؤى لا تبيعك أداة. تبيعك ذكاءً موثّقاً — كل معلومة مرتبطة بمصدرها الرسمي. هذا ما يغير المعادلة.</p>
+      </div>
+
+      <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Evidence-Native</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">كل مخرج يحمل سلسلة دليله — من المصدر إلى الحقيقة إلى التحليل</div>
+        </div>
+        <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Multi-Channel</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">حدث واحد يولّد مخرجات متعددة — كلها بنفس الدليل</div>
+        </div>
+        <div style="padding: 1.5rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
+          <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Market-Native</div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); line-height: 1.6;">بلغة مشتريك — لا تضطر لتعلّم تقنية جديدة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- ============= RISK FLOW: Event → Exposure → Impact → Action ============= -->
+  <section class="section reveal" id="flow" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Risk Intelligence Flow</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">حدث واحد. أربع خطوات. قرار حازم.</h2>
+        <p class="section-lead" style="margin: 0 auto;">رؤى لا تخبرك بوجود خطر. تخبرك: ما المعرض للخطر، ما حجم التأثير، وما الإجراء المطلوب.</p>
+      </div>
+
+      <div class="risk-flow">
+        <div class="risk-flow-step event">
+          <div class="risk-flow-num">01</div>
+          <div class="risk-flow-body">
+            <div class="risk-flow-lbl">Event · الحدث</div>
+            <div class="risk-flow-text"><strong>Iran sanctions announced</strong> — عقوبات جديدة على صادرات النفط الإيراني. مصدر رسمي: US Treasury OFAC.</div>
+          </div>
+        </div>
+        <div class="risk-flow-step exposure">
+          <div class="risk-flow-num">02</div>
+          <div class="risk-flow-body">
+            <div class="risk-flow-lbl">Exposure · التعرّض</div>
+            <div class="risk-flow-text">رؤى تحلل محفظتك مقابل الحدث: <strong>Energy portfolio</strong> (تعرّض مرتفع) · <strong>Shipping exposure</strong> (تعرّض متوسط) · <strong>USD liquidity</strong> (تعرّض منخفض).</div>
+          </div>
+        </div>
+        <div class="risk-flow-step impact">
+          <div class="risk-flow-num">03</div>
+          <div class="risk-flow-body">
+            <div class="risk-flow-lbl">Impact · التأثير</div>
+            <div class="risk-flow-text">Oil volatility <strong>+18%</strong> · USD strength expected · Counterparty risk elevated for 3 entities · Supply chain disruption probability <strong>34%</strong>.</div>
+          </div>
+        </div>
+        <div class="risk-flow-step action">
+          <div class="risk-flow-num">04</div>
+          <div class="risk-flow-body">
+            <div class="risk-flow-lbl">Action · الإجراء</div>
+            <div class="risk-flow-text">Monitor: Oil volatility · USD liquidity · Counterparty exposure. Reduce: Energy overweight by 10%. Review: 3 counterparties for compliance. <strong>كل إجراء موثّق بالدليل.</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= LIVE RISK DEMO ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Live Risk Assessment</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">تقييم مخاطر حي</h2>
+        <p class="section-lead" style="margin: 0 auto;">هذا ما يراه فريق المخاطر عند وقوع حدث جيوسياسي — تعرّض، تأثير، وإجراءات، مع دليل.</p>
+      </div>
+
+      <div class="risk-demo">
+        <div class="risk-demo-bar">
+          <div class="risk-demo-dot r"></div><div class="risk-demo-dot y"></div><div class="risk-demo-dot g"></div>
+          <div class="risk-demo-title">ROUAA Risk Intelligence · Iran Sanctions · Live</div>
+          <div class="risk-demo-live">Alert</div>
+        </div>
+        <div class="risk-demo-body">
+          <div class="risk-demo-h">Event · Iran Sanctions · OFAC · 14:00 UTC</div>
+          <div style="font-size: 0.8125rem; color: var(--text-dim); margin-bottom: 0.75rem;">US Treasury announces new sanctions on Iranian oil exports. 3 entities designated.</div>
+          <div class="risk-evidence-badge">Source: US Treasury OFAC · Document: SDN List Update · Verified</div>
+
+          <div class="risk-demo-h" style="margin-top: 1.25rem;">Portfolio Exposure</div>
+          <div class="risk-exposure-grid">
+            <div class="risk-exposure-item high">
+              <div class="risk-exposure-name">Energy Portfolio</div>
+              <div class="risk-exposure-sev">High Exposure</div>
+              <div class="risk-exposure-detail">12% of AUM in energy sector</div>
+            </div>
+            <div class="risk-exposure-item medium">
+              <div class="risk-exposure-name">Shipping Exposure</div>
+              <div class="risk-exposure-sev">Medium Exposure</div>
+              <div class="risk-exposure-detail">2 counterparties in Strait of Hormuz routes</div>
+            </div>
+            <div class="risk-exposure-item medium">
+              <div class="risk-exposure-name">Currency Risk</div>
+              <div class="risk-exposure-sev">Medium</div>
+              <div class="risk-exposure-detail">USD long positions exposed to oil price correlation</div>
+            </div>
+            <div class="risk-exposure-item low">
+              <div class="risk-exposure-name">Counterparty</div>
+              <div class="risk-exposure-sev">3 Entities Flagged</div>
+              <div class="risk-exposure-detail">OFAC SDN list cross-reference completed</div>
+            </div>
+          </div>
+
+          <div class="risk-demo-h" style="margin-top: 1rem;">Impact Assessment</div>
+          <div style="font-size: 0.8125rem; color: var(--text-dim); line-height: 1.7;">
+            Oil volatility <strong style="color: var(--rose);">+18%</strong> · USD strength expected · Supply chain disruption probability <strong style="color: var(--amber);">34%</strong> · 3 counterparties require compliance review.
+          </div>
+
+          <div class="risk-demo-h" style="margin-top: 1rem;">Recommended Actions</div>
+          <ul class="risk-action-list">
+            <li>Monitor: Oil volatility, USD liquidity, counterparty exposure</li>
+            <li>Reduce: Energy overweight by 10% (current: 12% of AUM)</li>
+            <li>Review: 3 flagged counterparties for compliance within 48h</li>
+            <li>Hedge: Consider oil call options for Q4 supply contracts</li>
+            <li>Report: Generate compliance memo for risk committee</li>
+          </ul>
+
+          <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute);">
+            <span>Evidence: OFAC · BLS · EIA · 3 sources · 8 facts</span>
+            <span>Export: PDF · JSON · Risk Committee Memo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PRODUCTS ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Risk Products</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">منتجات ذكاء المخاطر</h2>
+      </div>
+
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-icon">🌍</div>
+          <div class="prod-h">Geopolitical Monitor</div>
+          <div class="prod-ar">مراقبة جيوسياسية</div>
+          <div class="prod-desc">عقوبات، حروب، انتخابات، نزاعات تجارية — تأثيرها على الأسواق والمحفظة.</div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-icon">📊</div>
+          <div class="prod-h">Exposure Mapping</div>
+          <div class="prod-ar">خريطة التعرّض</div>
+          <div class="prod-desc">ربط كل حدث بمحفظتك — ما المعرض للخطر، بأي نسبة، وبأي درجة تأثير.</div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-icon">⚠</div>
+          <div class="prod-h">Risk Alerts</div>
+          <div class="prod-ar">تنبيهات مخاطر</div>
+          <div class="prod-desc">تنبيهات استباقية عند أحداث تؤثر على محفظتك — قبل أن يتحرك السوق.</div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-icon">📋</div>
+          <div class="prod-h">Compliance Memo</div>
+          <div class="prod-ar">مذكرة امتثال</div>
+          <div class="prod-desc">سجل كامل قابل للتصدير — للمراجع التنظيمي ولجنة المخاطر.</div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-icon">🔬</div>
+          <div class="prod-h">Counterparty Screening</div>
+          <div class="prod-ar">فحص الأطراف المقابلة</div>
+          <div class="prod-desc">ربط الأحداث بالكيانات — فحص OFAC، SDN list، وتقييم المخاطر.</div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-icon">📈</div>
+          <div class="prod-h">Scenario Stress Test</div>
+          <div class="prod-ar">اختبار سيناريوهات</div>
+          <div class="prod-desc">محاكاة تأثير الأحداث على المحفظة — 3 سيناريوهات مع احتمالات وأدلة.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHO BUYS ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Who Buys</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من يحتاج هذا</h2>
+      </div>
+
+      <div class="buyer-grid">
+        <div class="buyer-card">
+          <div class="buyer-card-icon">🏦</div>
+          <div class="buyer-card-name">Banks</div>
+          <div class="buyer-card-need">مراقبة مخاطر + امتثال تنظيمي + سجل تدقيق قابل للتصدير</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">🏛</div>
+          <div class="buyer-card-name">Sovereign Funds</div>
+          <div class="buyer-card-need">تقييم المخاطر الجيوسياسية + تأثير على الاستثمارات الاستراتيجية</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">🏭</div>
+          <div class="buyer-card-name">Multinationals</div>
+          <div class="buyer-card-need">مخاطر سلسلة التوريد + تعرّض العملات + مخاطر الطاقة</div>
+        </div>
+        <div class="buyer-card">
+          <div class="buyer-card-icon">⚖</div>
+          <div class="buyer-card-name">Insurance & Risk Teams</div>
+          <div class="buyer-card-need">تقييم المخاطر + فحص الأطراف المقابلة + سيناريوهات إجهاد</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= INTEGRATION ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Integration</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تدمج في نظام مخاطرك</h2>
+      </div>
+
+      <div class="integration-row">
+        <span class="integration-chip">Risk Dashboard</span>
+        <span class="integration-chip">API</span>
+        <span class="integration-chip">Webhook Alerts</span>
+        <span class="integration-chip">Compliance Memo Export</span>
+        <span class="integration-chip">OFAC/SDN Integration</span>
+        <span class="integration-chip">White Label</span>
+      </div>
+
+      <p class="text-center text-mute small mt-5">من تنبيه استباقي → تقييم تعرّض → مذكرة امتثال — في دقائق.</p>
+    </div>
+  </section>
+  <!-- ============= USE CASE ============= -->
+  <section class="section reveal" id="usecase" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center; color: var(--rose);">Use Case</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">قصة استخدم: بنك إقليمي</h2>
+      </div>
+
+      <div style="max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; border-right: 4px solid var(--rose);">
+        <div style="font-size: 1rem; color: var(--text); line-height: 1.8; margin-bottom: 1.5rem;">بنك إقليمي بإدارة محفظة 45 مليار دولار كان يحتاج <strong>6-8 ساعات</strong> لتقييم تأثير حدث جيوسياسي على محفظته — يجمع فريق المخاطر، يراجع التقارير، يقدّر التعرّض، يكتب مذكرة. اليوم، عبر رؤى، عند وقوع حدث (مثل تعطّل البحر الأحمر)، يستلم رئيس المخاطر في <strong>تحت 4 دقائق</strong>: الحدث، التعرّض الـ47 شركة في المحفظة، تأثير محتمل على كل قطاع، و3 سيناريوهات مع احتمالاتهم. اللجنة تتخذ إجراءً في الجلسة نفسها — بدلاً من اجتماع طارئ بعد 24 ساعة.</div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border-soft);">
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
+            <div style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text-mute); text-decoration: line-through;">6-8 ساعات</div>
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); margin-top: 0.25rem;">↓</div>
+            <div style="font-family: var(--font-en); font-size: 1.125rem; font-weight: 800; color: var(--rose);">→ 4 دقائق</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
+            <div style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text-mute); text-decoration: line-through;">رؤية مجزّأة</div>
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); margin-top: 0.25rem;">↓</div>
+            <div style="font-family: var(--font-en); font-size: 1.125rem; font-weight: 800; color: var(--rose);">→ صورة موحدة</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
+            <div style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text-mute); text-decoration: line-through;">تكهنات</div>
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); margin-top: 0.25rem;">↓</div>
+            <div style="font-family: var(--font-en); font-size: 1.125rem; font-weight: 800; color: var(--rose);">→ حقائق موثقة</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem;">Before</div>
+            <div style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text-mute); text-decoration: line-through;">إجراء متأخر</div>
+            <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--rose); margin-top: 0.25rem;">↓</div>
+            <div style="font-family: var(--font-en); font-size: 1.125rem; font-weight: 800; color: var(--rose);">→ إجراء فوري</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>See how ROUAA connects global events to your portfolio</h2>
+      <p>مكالمة 30 دقيقة — نوضح كيف تربط رؤى الأحداث العالمية بمخاطر مؤسستك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Risk Intelligence Briefing" class="btn btn-primary btn-lg">Request Risk Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

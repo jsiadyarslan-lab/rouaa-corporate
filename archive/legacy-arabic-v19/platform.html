@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Platform — How Official Data Becomes Financial Intelligence</title>
+<meta name="description" content="المؤسسات تبني نفس الأنبوب مراراً. رؤى تبنيه مرة واحدة. سبع طبقات من المصدر الرسمي إلى المنتجات الموزعة.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.hero-platform { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-platform-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-platform-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-platform-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
+.hero-platform-h1 .gold { color: var(--gold); }
+.hero-platform-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-platform-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === Why Platform Exists (the missing intro) === */
+.why-exists { max-width: 700px; margin: 2rem auto 0; text-align: center; }
+.why-exists-step { padding: 0.75rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.375rem; font-size: 0.875rem; color: var(--text-dim); transition: border-color var(--transition-slow); }
+.why-exists-step:hover { border-color: var(--gold); }
+.why-exists-step strong { color: var(--text); }
+.why-exists-step.final { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+.why-exists-arrow { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.75rem; margin: 0.2rem 0; }
+
+/* === 95% / 5% visual === */
+.ratio-visual { max-width: 500px; margin: 3rem auto; text-align: center; }
+.ratio-bar { display: flex; height: 60px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+.ratio-infra { flex: 95; background: var(--gold-dim); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+.ratio-products { flex: 5; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; color: var(--text-mute); }
+.ratio-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* === Architecture stack — grouped by abstraction level === */
+.arch-group { max-width: 600px; margin: 0 auto; }
+.arch-group-h { font-family: var(--font-mono); font-size: 0.625rem; color: var(--group-color, var(--gold)); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin: 1.5rem 0 0.5rem; text-align: center; padding-bottom: 0.375rem; border-bottom: 1px solid var(--border-soft); }
+.arch-group.data { --group-color: var(--emerald); }
+.arch-group.processing { --group-color: var(--blue); }
+.arch-group.knowledge { --group-color: var(--gold); }
+.arch-group.intelligence { --group-color: var(--amber); }
+.arch-group.delivery { --group-color: var(--gold); }
+
+.arch-layer { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.375rem; align-items: center; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.arch-layer:hover { border-color: var(--layer-color, var(--gold)); }
+.arch-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--layer-color, var(--gold)); }
+.arch-layer-num { font-family: var(--font-mono); font-size: 0.875rem; color: var(--layer-color, var(--gold)); font-weight: 700; width: 48px; text-align: center; }
+.arch-layer-body { flex: 1; }
+.arch-layer-name { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); }
+.arch-layer-name .ar { font-family: var(--font-ar); font-size: 0.75rem; color: var(--text-mute); margin-right: 0.5rem; }
+.arch-layer-value { font-size: 0.6875rem; color: var(--text-dim); margin-top: 0.125rem; line-height: 1.4; }
+.arch-layer-stat { font-family: var(--font-mono); font-size: 0.625rem; color: var(--layer-color, var(--gold)); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; }
+.arch-layer.l1 { --layer-color: var(--emerald); }
+.arch-layer.l2 { --layer-color: var(--blue); }
+.arch-layer.l3 { --layer-color: var(--blue); }
+.arch-layer.l4 { --layer-color: var(--gold); }
+.arch-layer.l5 { --layer-color: var(--gold); }
+.arch-layer.l6 { --layer-color: var(--amber); }
+.arch-layer.l7 { --layer-color: var(--gold); }
+.arch-connector { text-align: center; color: var(--gold); opacity: 0.25; font-size: 0.625rem; margin: 0.1rem 0; }
+
+/* Products fan-out */
+.arch-products { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.arch-product-chip { padding: 0.375rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); text-decoration: none; transition: border-color var(--transition-slow); }
+.arch-product-chip:hover { border-color: var(--gold); color: var(--gold); }
+
+/* === Why not build === */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+.why-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; text-align: center; transition: border-color var(--transition-slow); }
+.why-card:hover { border-color: var(--gold); }
+.why-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.why-h { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.why-desc { font-size: 0.75rem; color: var(--text-mute); line-height: 1.5; }
+
+/* === Deployment === */
+.deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
+.deploy-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem 1rem; transition: border-color var(--transition-slow); }
+.deploy-card:hover { border-color: var(--gold); }
+.deploy-name { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.deploy-desc { font-size: 0.6875rem; color: var(--text-dim); line-height: 1.5; }
+
+/* === Architecture Visualization — Follow One Event === */
+.viz-wrap { max-width: 1100px; margin: 0 auto; }
+.viz-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.viz-tab { padding: 0.625rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); cursor: pointer; transition: all var(--transition-slow); }
+.viz-tab:hover { border-color: var(--gold); color: var(--text); }
+.viz-tab.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+.viz-flow { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; }
+@media (max-width: 768px) { .viz-flow { grid-template-columns: 1fr; } }
+
+.viz-source { display: flex; flex-direction: column; gap: 0.75rem; }
+.viz-source-label { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+.viz-source-doc { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; transition: border-color var(--transition-slow); }
+.viz-source-doc:hover { border-color: var(--gold); }
+.viz-source-type { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.viz-source-title { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; }
+.viz-source-meta { font-size: 0.6875rem; color: var(--text-mute); line-height: 1.4; }
+
+.viz-layers { display: flex; flex-direction: column; gap: 0.25rem; }
+.viz-layer { display: grid; grid-template-columns: 32px 1fr 1fr 110px; gap: 0.75rem; padding: 0.625rem 0.875rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); align-items: center; transition: all var(--transition-slow); position: relative; overflow: hidden; }
+.viz-layer:hover { border-color: var(--gold); transform: translateX(-4px); }
+.viz-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--l-color, var(--gold)); }
+.viz-layer.l1 { --l-color: var(--emerald); }
+.viz-layer.l2 { --l-color: var(--blue); }
+.viz-layer.l3 { --l-color: var(--blue); }
+.viz-layer.l4 { --l-color: var(--gold); }
+.viz-layer.l5 { --l-color: var(--gold); }
+.viz-layer.l6 { --l-color: var(--amber); }
+.viz-layer.l7 { --l-color: var(--gold); }
+
+.viz-layer-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--l-color); font-weight: 700; }
+.viz-layer-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 700; color: var(--text); }
+.viz-layer-name .ar { font-family: var(--font-ar); font-size: 0.625rem; color: var(--text-mute); display: block; }
+.viz-layer-transform { font-size: 0.6875rem; color: var(--text-dim); line-height: 1.4; }
+.viz-layer-transform strong { color: var(--l-color); font-family: var(--font-en); font-size: 0.6875rem; }
+.viz-layer-output { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--l-color); padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.viz-connector { text-align: center; color: var(--gold); opacity: 0.3; font-size: 0.5rem; margin: 0; }
+
+.viz-outputs { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); }
+.viz-outputs-h { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+.viz-outputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
+.viz-output { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); border-right: 2px solid var(--o-color); }
+.viz-output.o-news { --o-color: var(--blue); }
+.viz-output.o-research { --o-color: var(--gold); }
+.viz-output.o-trading { --o-color: var(--emerald); }
+.viz-output.o-risk { --o-color: var(--rose); }
+.viz-output.o-media { --o-color: var(--amber); }
+.viz-output.o-api { --o-color: var(--text-mute); }
+.viz-output-icon { font-size: 0.875rem; }
+.viz-output-text { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--text); }
+.viz-output-text .ar { font-family: var(--font-ar); display: block; font-size: 0.625rem; color: var(--text-mute); }
+
+/* === Evidence Trace Demo === */
+.trace-demo { max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; }
+.trace-head { padding: 1rem 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.trace-title { font-family: var(--font-en); font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.trace-title .ar { font-family: var(--font-ar); display: block; font-size: 0.75rem; color: var(--text-mute); }
+.trace-badge { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); padding: 0.25rem 0.5rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-sm); }
+.trace-steps { padding: 1rem 1.5rem; }
+.trace-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed var(--border-soft); align-items: center; }
+.trace-step:last-child { border-bottom: none; }
+.trace-step-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); font-weight: 700; }
+.trace-step-body { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+.trace-step-body strong { color: var(--text); font-family: var(--font-en); font-size: 0.75rem; }
+.trace-step-time { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); white-space: nowrap; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="رؤى · ROUAA — Home">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Intelligence Platform</span>
+      </div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="has-dropdown"><a href="platform.html" class="active">Platform</a><div class="nav-dropdown"><div class="dropdown-h">Platform</div><a href="platform.html" class="active">Platform</a><a href="products-architecture.html">Products Architecture</a><a href="catalog.html">Full Catalog</a></div></li><li class="has-dropdown"><a href="solutions.html">Solutions</a><div class="nav-dropdown"><div class="dropdown-h">Intelligence Markets</div><a href="media-technologies.html">Media Intelligence</a><a href="trading-technologies.html">Trading Intelligence</a><a href="enterprise.html">Research Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="developers.html">Developer Intelligence</a></div></li><li><a href="trust.html">Trust</a></li><li class="has-dropdown"><a href="company.html">Company</a><div class="nav-dropdown"><div class="dropdown-h">Company</div><a href="company.html">Why ROUAA Exists</a><a href="company.html#manifesto">Manifesto</a><a href="company.html#principles">Principles</a></div></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="platform.html" class="active">Platform</a><a href="products-architecture.html">— Products Architecture</a><a href="catalog.html">— Full Catalog</a><a href="solutions.html">Solutions</a><a href="media-technologies.html">— Media Intelligence</a><a href="trading-technologies.html">— Trading Intelligence</a><a href="enterprise.html">— Research Intelligence</a><a href="risk-intelligence.html">— Risk Intelligence</a><a href="developers.html">— Developer Intelligence</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <div class="nav-mobile-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const mobile = document.getElementById('navMobile');
+  if (!toggle || !mobile) return;
+  function setOpen(open) {
+    mobile.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!mobile.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!mobile.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (window.innerWidth > 1024) setOpen(false); }, 100); });
+})();
+</script>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-platform">
+    <div class="hero-platform-bg"></div>
+    <div class="container">
+      <div class="hero-platform-content">
+        <div class="mono-label text-gold">Intelligence Platform</div>
+        <h1 class="hero-platform-h1">
+          How Official Data Becomes<br>
+          <span class="gold">Financial Intelligence</span>
+        </h1>
+        <p class="hero-platform-sub">
+          المؤسسات تبني نفس طبقة الذكاء مراراً — جمع المصادر، معالجة الوثائق، استخراج الحقائق، وتوزيع التحليلات.
+
+          رؤى تبني هذه البنية مرة واحدة وتحوّلها إلى ذكاء مؤسسي موزع.
+        </p>
+        <div class="hero-platform-cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+          <a href="#why" class="btn btn-ghost btn-lg">Why This Platform Exists</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY THIS PLATFORM EXISTS (the missing intro) ============= -->
+  <section class="section reveal" id="why" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why This Platform Exists</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كل مؤسسة تعيد بناء نفس الأنبوب</h2>
+      </div>
+
+      <div class="why-exists">
+        <div class="why-exists-step">المعلومات المالية الرسمية <strong>مجزّأة</strong> عبر مئات المصادر</div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step">كل مؤسسة <strong>تبني نفس الأنبوب</strong> داخلياً — جمع، معالجة، تحليل</div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step">تكلفة: <strong>سنوات · ملايين · فريق 30+</strong></div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step final">رؤى تبني الأنبوب مرة واحدة — وتوزّع الذكاء على الجميع</div>
+      </div>
+
+      <!-- The Intelligence Stack -->
+      <div class="ratio-visual reveal" style="max-width: 600px; margin: 3rem auto; text-align: center;">
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">The Intelligence Stack</div>
+          <div style="font-size: 1rem; color: var(--text); line-height: 1.6;">
+            Source → Document Intelligence → Facts → Evidence → Knowledge Graph → Reasoning → Distribution
+          </div>
+          <div style="font-size: 0.875rem; color: var(--text-dim); margin-top: 0.75rem;">
+            Infrastructure + Evidence + Knowledge + Reasoning = Trustworthy Institutional Intelligence
+          </div>
+        </div>
+      </div>
+
+      <!-- Production coverage disclaimer -->
+      <div style="max-width: 600px; margin: 1.5rem auto 0; padding: 0.875rem 1.25rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-md); text-align: center;">
+        <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;">
+          <strong style="color: var(--gold);">Current Production Coverage</strong> · Updated: يوليو 2026<br>
+          Environment: Internal Production Pipeline · Not demo metrics
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Without ROUAA / With ROUAA -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Difference</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">What changes when you adopt ROUAA?</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+        <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Without ROUAA</div>
+          <div style="font-size: 0.9375rem; color: var(--text-dim); line-height: 1.7;">
+            Source → Analyst → Report → Decision
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--text-mute); margin-top: 0.75rem;">Manual processing, fragmented tools, no evidence chain.</p>
+        </div>
+        <div style="background: var(--card); border: 1px solid var(--gold); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">With ROUAA</div>
+          <div style="font-size: 0.9375rem; color: var(--text); line-height: 1.7;">
+            Source → Evidence → Intelligence → Decision
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--text-dim); margin-top: 0.75rem;">Verified facts, complete evidence chain, institutional intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PLATFORM ARCHITECTURE — grouped by abstraction ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Platform Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">سبع طبقات · خمس مجموعات</h2>
+        <p class="section-lead" style="margin: 0 auto;">من البيانات الخام إلى المعرفة الموثقة إلى الذكاء الموزع — كل طبقة تضيف قيمة لا تملكها التي قبلها.</p>
+      </div>
+
+      <div class="arch-group">
+        <!-- DATA -->
+        <div class="arch-group-h data">Data · البيانات</div>
+        <div class="arch-layer l1">
+          <div class="arch-layer-num">01</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة استخبارات المصادر</span>Source Intelligence Layer</div>
+            <div class="arch-layer-value">411 مؤسسة رسمية مراقبة 24/7 — كل مصدر موثوق ومُفهرس بدرجة ثقة</div>
+          </div>
+          <div class="arch-layer-stat">411 sources</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- PROCESSING -->
+        <div class="arch-group-h processing">Processing · المعالجة</div>
+        <div class="arch-layer l2">
+          <div class="arch-layer-num">02</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة ذكاء الوثائق</span>Document Intelligence Layer</div>
+            <div class="arch-layer-value">كل وثيقة رسمية تتحول إلى معرفة مالية مهيكلة — تلقائياً</div>
+          </div>
+          <div class="arch-layer-stat">10,000+ official documents processed</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- STRUCTURED KNOWLEDGE -->
+        <div class="arch-group-h knowledge">Structured Knowledge · المعرفة الموثقة</div>
+        <div class="arch-layer l3">
+          <div class="arch-layer-num">03</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة استخبارات الحقائق</span>Fact Intelligence Layer</div>
+            <div class="arch-layer-value">كل رقم مرتبط بصفحة وفقرة في الوثيقة الأصلية</div>
+          </div>
+          <div class="arch-layer-stat">1,247 facts</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l4">
+          <div class="arch-layer-num">04</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">بنية الأدلة التحتية</span>Evidence Infrastructure Layer</div>
+            <div class="arch-layer-value">كل حقيقة يمكن تتبعها لمصدرها الأصلي في أقل من 5 ثوانٍ</div>
+          </div>
+          <div class="arch-layer-stat">every fact → origin</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l5">
+          <div class="arch-layer-num">05</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">رسم المعرفة المالي</span>Financial Knowledge Graph Layer</div>
+            <div class="arch-layer-value">شبكة العلاقات المالية — كل حدث مرتبط بمن أثّر عليه</div>
+          </div>
+          <div class="arch-layer-stat">living graph</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- INTELLIGENCE -->
+        <div class="arch-group-h intelligence">Intelligence · الاستخبارات</div>
+        <div class="arch-layer l6">
+          <div class="arch-layer-num">06</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">طبقة استخبارات الاستدلال</span>Reasoning Intelligence Layer</div>
+            <div class="arch-layer-value">نظام استدلال متعدد الطبقات لتحليل تأثير الأحداث عبر فئات الأصول</div>
+          </div>
+          <div class="arch-layer-stat">10 roles</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- DELIVERY -->
+        <div class="arch-group-h delivery">Delivery · التوصيل</div>
+        <div class="arch-layer l7">
+          <div class="arch-layer-num">07</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name"><span class="ar">بنية التوزيع التحتية</span>Distribution Infrastructure Layer</div>
+            <div class="arch-layer-value">توليد مرة واحدة، توزيع عبر آلاف نقاط الاتصال</div>
+          </div>
+          <div class="arch-layer-stat">generate once → everywhere</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE VISUALIZATION — FOLLOW ONE EVENT ============= -->
+  <section class="section reveal" id="viz">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Architecture Visualization</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">تابع حدثاً عبر الطبقات السبع</h2>
+        <p class="section-lead" style="margin: 0 auto;">اختر حدثاً — وشاهد كيف يتحوّل من وثيقة رسمية خام إلى ذكاء مالي موزّع عبر القنوات.</p>
+      </div>
+
+      <div class="viz-wrap">
+        <div class="viz-tabs">
+          <button class="viz-tab active" data-event="fed">📄 Fed FOMC Statement</button>
+          <button class="viz-tab" data-event="earnings">📈 Saudi Aramco Q2 Earnings</button>
+          <button class="viz-tab" data-event="geopolitical">⚠ Geopolitical Event</button>
+        </div>
+
+        <div class="viz-flow">
+          <div class="viz-source">
+            <div class="viz-source-label">Source Document</div>
+            <div class="viz-source-doc">
+              <div class="viz-source-type" id="vizType">Official Statement</div>
+              <div class="viz-source-title" id="vizTitle">Federal Reserve FOMC Statement · July 2026</div>
+              <div class="viz-source-meta" id="vizMeta">Federal Reserve · 14:00 EST · 847 words · PDF</div>
+            </div>
+            <div class="viz-source-label" style="margin-top: 0.5rem;">Input State</div>
+            <div style="font-size: 0.6875rem; color: var(--text-mute); line-height: 1.5; padding: 0.5rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-sm);">وثيقة PDF خام · نص غير مهيكلة · بدون سياق · بدون روابط</div>
+          </div>
+
+          <div>
+            <div class="viz-layers" id="vizLayers">
+              <!-- Layers injected by JS -->
+            </div>
+
+            <div class="viz-outputs">
+              <div class="viz-outputs-h">↓ Generated Outputs · Same Evidence Chain</div>
+              <div class="viz-outputs-grid">
+                <div class="viz-output o-news"><span class="viz-output-icon">📰</span><span class="viz-output-text"><span class="ar">خبر إخباري</span>News Article</span></div>
+                <div class="viz-output o-research"><span class="viz-output-icon">📑</span><span class="viz-output-text"><span class="ar">مذكرة بحث</span>Research Brief</span></div>
+                <div class="viz-output o-trading"><span class="viz-output-icon">📊</span><span class="viz-output-text"><span class="ar">سياق تداول</span>Trading Context</span></div>
+                <div class="viz-output o-risk"><span class="viz-output-icon">⚠</span><span class="viz-output-text"><span class="ar">مذكرة مخاطر</span>Risk Memo</span></div>
+                <div class="viz-output o-media"><span class="viz-output-icon">🎬</span><span class="viz-output-text"><span class="ar">سكربت</span>Video Script</span></div>
+                <div class="viz-output o-api"><span class="viz-output-icon">🔌</span><span class="viz-output-text"><span class="ar">API</span>API Response</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-mute small mt-5">كل مخرج يحمل نفس سلسلة الأدلة — من المصدر الرسمي إلى الحقيقة إلى التحليل. هذا هو جوهر رؤى: حدث واحد، ذكاء واحد، توزيع متعدد.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= EVIDENCE TRACE DEMO ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Evidence Trace</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من القرار إلى المصدر الأصلي</h2>
+        <p class="section-lead" style="margin: 0 auto;">كل معلومة في رؤى قابلة للتتبع. اختر أي قرار، اضغط على «الدليل»، تجد نفسك في صفحة المصدر الأصلي.</p>
+      </div>
+
+      <div class="trace-demo">
+        <div class="trace-head">
+          <div class="trace-title">
+            <span class="ar">مذكرة بحث استثماري</span>
+            Investment Research Note · Aramco Analysis
+          </div>
+          <span class="trace-badge">EVIDENCE TRACE · 4 STEPS · 4.2s</span>
+        </div>
+        <div class="trace-steps">
+          <div class="trace-step">
+            <div class="trace-step-num">01</div>
+            <div class="trace-step-body"><strong>Investment Thesis</strong> · توصية: زيادة الوزن في أرامكو السعودية، هدف 38.5 ريال، أفق 12 شهراً.</div>
+            <div class="trace-step-time">T+0.0s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">02</div>
+            <div class="trace-step-body"><strong>Verified Fact</strong> · أرامكو تجاوزت توقعات الإيرادات بـ 4.2% في الربع الثاني 2026 (118 مليار ريال).</div>
+            <div class="trace-step-time">T+1.1s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">03</div>
+            <div class="trace-step-body"><strong>Source Document</strong> · Saudi Aramco Q2 2026 Earnings Release · صحفة 4، فقرة 3، جدول الإيرادات.</div>
+            <div class="trace-step-time">T+2.8s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">04</div>
+            <div class="trace-step-body"><strong>Official Origin</strong> · تقرير مالي ربع سنوي مودع لدى تداول السعودية · مُصدَّق رقمياً · 14 أغسطس 2026.</div>
+            <div class="trace-step-time">T+4.2s</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="trust.html" class="btn-link">Explore the Trust Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ONE PLATFORM → MULTIPLE BUSINESS LINES ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">One Platform → Multiple Business Lines</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">منصة واحدة. خطوط أعمال متعددة.</h2>
+        <p class="section-lead" style="margin: 0 auto;">المنصة ليست غاية بحد ذاتها — هي الأصل الذي يولّد جميع خطوط الأعمال.</p>
+      </div>
+
+      <div style="max-width: 500px; margin: 2rem auto 0; text-align: center;">
+        <div style="display: inline-flex; padding: 1rem 2rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-xl); margin-bottom: 1rem;">
+          <span style="font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--gold);">One Platform</span>
+        </div>
+        <div style="color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
+        <div class="arch-products">
+          <a href="media-technologies.html" class="arch-product-chip" style="color: var(--blue); border-color: rgba(96,165,250,0.3);">Financial Media</a>
+          <a href="enterprise.html" class="arch-product-chip" style="color: var(--gold); border-color: rgba(200,169,81,0.3);">Investment Research</a>
+          <a href="trading-technologies.html" class="arch-product-chip" style="color: var(--emerald); border-color: rgba(52,211,153,0.3);">Trading Intelligence</a>
+          <a href="risk-intelligence.html" class="arch-product-chip" style="color: var(--rose); border-color: rgba(239,68,68,0.3);">Risk Intelligence</a>
+          <a href="developers.html" class="arch-product-chip" style="color: var(--amber); border-color: rgba(245,158,11,0.3);">Developer APIs</a>
+        </div>
+        <p class="text-center text-mute small mt-5">منصة واحدة · خطوط أعمال متعددة · محرك ذكاء يتحسّن باستمرار</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY NOT BUILD INTERNALLY ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why Not Build Internally</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">لماذا لا تبنيه داخلياً؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">Building this infrastructure internally requires years of specialized development across source integration, document intelligence, evidence systems, knowledge graphs, reasoning models, and enterprise deployment.
+
+        ROUAA provides the complete intelligence infrastructure layer.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-h">Build in Weeks</div>
+          <div class="why-desc">ابنِ منتجك فوق المنصة في أسابيع — لا سنوات</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡</div>
+          <div class="why-h">Defensible Decisions</div>
+          <div class="why-desc">كل قرار مدعوم بأدلة — قابل للدفاع أمام أي لجنة</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📦</div>
+          <div class="why-h">Deploy Anywhere</div>
+          <div class="why-desc">سحابي، خاص، أو داخل بنيتك — رؤى تتكيّف معك</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔄</div>
+          <div class="why-h">Continuously Improving</div>
+          <div class="why-desc">كل يوم يزداد الرسم عمقاً — أنت تستفيد من التحسين المستمر</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= DEPLOYMENT ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Enterprise Deployment</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">المرونة المؤسسية</h2>
+        <p class="section-lead" style="margin: 0 auto;">هل تستطيع تشغيل رؤى بالطريقة التي تتوافق مع متطلبات الحوكمة والأمن لديك؟ نعم.</p>
+      </div>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <div class="deploy-name">Cloud SaaS</div>
+          <div class="deploy-desc">أسرع بدء · مستضاف بالكامل · تحديثات تلقائية</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Private Cloud</div>
+          <div class="deploy-desc">بيئة مخصصة · بنية معزولة · امتثال إقليمي</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">On-Premise</div>
+          <div class="deploy-desc">داخل بنيتك الآمنة · سيادة كاملة على البيانات · للبنوك المركزية والحكومات</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Hybrid</div>
+          <div class="deploy-desc">البيانات الحساسة داخلياً · خدمات الذكاء سحابياً · مزيج حسب الحاجة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Explore the platform behind the products</h2>
+      <p>مكالمة 30 دقيقة — نشرح طبقات المنصة وكيف تنتج الذكاء الذي يغذي منتجاتك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Platform Briefing" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
+        <li><a href="catalog.html" class="small text-dim">Full Catalog</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// === Architecture Visualization — event switching ===
+const EVENTS = {
+  fed: {
+    type: 'Official Statement',
+    title: 'Federal Reserve FOMC Statement · July 2026',
+    meta: 'Federal Reserve · 14:00 EST · 847 words · PDF',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'اكتشاف الوثيقة في موقع الاحتياطي الفيدرالي بعد <strong>14 ثانية</strong> من النشر', output: 'Raw PDF' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'استخراج <strong>23 رقماً</strong> · 8 فقرات قرار · 4 جداول', output: 'Structured Doc' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>14 حقيقة</strong> موثقة — معدل الفائدة، التضخم، النمو', output: '14 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل حقيقة مرتبطة بصفحة وفقرة في الوثيقة الأصلية', output: '14 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط الحدث بالكيانات والقطاعات ذات الصلة عبر الرسم المعرفي<br><strong>89 entity relationships</strong>', output: '89 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء يتشاورون: تأثير الدولار، الأسهم، السندات، النفط، الذهب', output: '7 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> مختلفة بنفس سلسلة الأدلة', output: '6 Outputs' }
+    ]
+  },
+  earnings: {
+    type: 'Earnings Release',
+    title: 'Saudi Aramco Q2 2026 Earnings Release',
+    meta: 'Tadawul · 07:00 AST · 1,247 words · PDF + XLSX',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'مراقبة تداول السعودية · اكتشاف بعد <strong>3 ثوانٍ</strong> من الإيداع', output: 'Raw Filing' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'استخراج <strong>47 رقماً</strong> مالياً · 3 قوائم · 12 ملاحظة', output: 'Financial Model' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>23 حقيقة</strong> — إيرادات، أرباح، توزيعات، توقعات', output: '23 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل رقم مرتبط بصفحة وفقرة وجدول في التقرير', output: '23 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط أرامكو بـ <strong>14 شركة</strong> في سلسلة التوريد و<strong>7 صناعات</strong>', output: '21 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء: تأثير البترورياض، سابك، البنوك، التأمين، الصناديق', output: '5 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> — خبر، بحث، سياق تداول، مخاطر، فيديو، API', output: '6 Outputs' }
+    ]
+  },
+  geopolitical: {
+    type: 'Geopolitical Alert',
+    title: 'Red Sea Shipping Disruption Alert · August 2026',
+    meta: 'IMF · WTO · Lloyd\'s · 3 sources · 11:42 UTC',
+    layers: [
+      { num: '01', name: 'Source Network', ar: 'شبكة المصادر', transform: 'مراقبة <strong>3 مصادر</strong> رسمية + 7 وكالات + 14 ميناء', output: '3 Source Events' },
+      { num: '02', name: 'Document Intelligence', ar: 'ذكاء الوثائق', transform: 'توحيد التقارير · استخراج <strong>9 حقائق</strong> جغرافية وزمنية', output: 'Unified Brief' },
+      { num: '03', name: 'Fact Engine', ar: 'محرّك الحقائق', transform: 'استخراج <strong>9 حقائق</strong> — تكاليف الشحن، المدة، البدائل', output: '9 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', ar: 'طبقة الأدلة', transform: 'كل حقيقة مرتبطة بتقرير IMF أو WTO أو Lloyd\'s', output: '9 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', ar: 'رسم المعرفة', transform: 'ربط بـ <strong>47 شركة شحن</strong> و<strong>23 سلسلة توريد</strong>', output: '70 Connections' },
+      { num: '06', name: 'Reasoning Engine', ar: 'محرّك الاستدلال', transform: '10 وكلاء: تأثير النفط، الكيماويات، التجزئة، اللوجستيات', output: '4 Scenarios' },
+      { num: '07', name: 'Distribution Layer', ar: 'طبقة التوزيع', transform: 'توليد <strong>6 مخرجات</strong> — تنبيه مخاطر، بحث، خبر، API', output: '6 Outputs' }
+    ]
+  }
+};
+
+function renderViz(key) {
+  const e = EVENTS[key];
+  document.getElementById('vizType').textContent = e.type;
+  document.getElementById('vizTitle').textContent = e.title;
+  document.getElementById('vizMeta').textContent = e.meta;
+  const layersEl = document.getElementById('vizLayers');
+  layersEl.innerHTML = e.layers.map((l, i) => {
+    const html = `<div class="viz-layer l${i+1}">
+      <div class="viz-layer-num">${l.num}</div>
+      <div class="viz-layer-name">${l.name}<span class="ar">${l.ar}</span></div>
+      <div class="viz-layer-transform">${l.transform}</div>
+      <div class="viz-layer-output">${l.output}</div>
+    </div>`;
+    return html + (i < e.layers.length - 1 ? '<div class="viz-connector">↓</div>' : '');
+  }).join('');
+}
+
+document.querySelectorAll('.viz-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderViz(tab.dataset.event);
+  });
+});
+
+renderViz('fed');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>رؤى · Products Architecture — What You Get From the Engine</title>
+<meta name="description" content="رؤى ليست متجر أدوات. كل وحدة تجارية تستهلك من نفس المحرك، وكل منتج يحمل نفس سلسلة الإثبات.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/design-system.css">
+
+<style>
+body { class: motion-marketing; }
+
+/* === Hero === */
+.hero-pa { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-pa-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--gold-dim), transparent 70%); z-index: 0; }
+.hero-pa-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-pa-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
+.hero-pa-h1 .gold { color: var(--gold); }
+.hero-pa-sub { font-size: 1.0625rem; color: var(--text-dim); max-width: 60ch; line-height: 1.7; }
+.hero-pa-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === The Bridge Logic === */
+.bridge-logic { max-width: 1000px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: center; gap: 0.5rem; }
+@media (max-width: 768px) { .bridge-logic { grid-template-columns: 1fr; gap: 1rem; } }
+.bridge-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; }
+.bridge-block.center { background: var(--gold-dim); border-color: var(--gold); }
+.bridge-block-h { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.bridge-block-val { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.bridge-block-val.ar { font-family: var(--font-ar); display: block; font-size: 0.875rem; color: var(--text-dim); margin-top: 0.25rem; }
+.bridge-arrow { text-align: center; color: var(--gold); opacity: 0.4; font-size: 1.25rem; }
+
+/* === Architecture Tree === */
+.arch-tree { max-width: 1200px; margin: 2rem auto 0; }
+.arch-root { text-align: center; padding: 1.5rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: var(--radius-xl); margin-bottom: 1.5rem; }
+.arch-root-h { font-family: var(--font-en); font-size: 1.125rem; font-weight: 700; color: var(--gold); }
+.arch-root-h .ar { font-family: var(--font-ar); display: block; font-size: 1rem; color: var(--text-dim); margin-top: 0.25rem; }
+.arch-root-sub { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; }
+
+/* === Tree visual: Engine → 5 lines → 44 products === */
+.tree-visual { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; }
+.tree-connector { color: var(--gold); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0; }
+.tree-lines { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+@media (max-width: 600px) { .tree-lines { grid-template-columns: repeat(3, 1fr); } }
+.tree-line { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.75rem 0.5rem; background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--tl-color, var(--gold)); border-radius: var(--radius-md); }
+.tree-line-icon { font-size: 1.25rem; }
+.tree-line-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 700; color: var(--text); }
+.tree-line-count { font-family: var(--font-mono); font-size: 0.625rem; color: var(--tl-color, var(--gold)); font-weight: 700; }
+.tree-products { display: inline-block; padding: 0.625rem 1.25rem; background: var(--gold-dim); border: 1px solid rgba(200,169,81,0.3); border-radius: var(--radius-md); font-family: var(--font-en); font-size: 0.8125rem; font-weight: 700; color: var(--gold); }
+
+.arch-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.arch-branch { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.25rem; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.arch-branch:hover { border-color: var(--b-color, var(--gold)); }
+.arch-branch::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 3px; background: var(--b-color, var(--gold)); }
+.arch-branch.b-media { --b-color: var(--blue); }
+.arch-branch.b-trading { --b-color: var(--emerald); }
+.arch-branch.b-research { --b-color: var(--gold); }
+.arch-branch.b-risk { --b-color: var(--rose); }
+.arch-branch.b-dev { --b-color: var(--amber); }
+
+.arch-branch-h { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.arch-branch-icon { font-size: 1.25rem; }
+.arch-branch-name { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); }
+.arch-branch-name .ar { font-family: var(--font-ar); display: block; font-size: 0.8125rem; color: var(--text-dim); }
+.arch-branch-count { margin-right: auto; font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); }
+
+/* === Suite-based layout (Capability, not Engine list) === */
+.arch-suite-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.875rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--border-soft); }
+.arch-capabilities { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-capability { display: block; padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); text-decoration: none; transition: all var(--transition-base); }
+.arch-capability:hover { border-color: var(--b-color); transform: translateX(-2px); background: rgba(255,255,255,0.03); }
+.arch-cap-name { font-family: var(--font-en); font-size: 0.8125rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.arch-cap-ar { font-family: var(--font-ar); font-size: 0.6875rem; color: var(--text-mute); margin-top: 0.125rem; }
+.arch-suite-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); }
+.arch-suite-count { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color); letter-spacing: 0.05em; }
+.arch-suite-link { font-family: var(--font-en); font-size: 0.6875rem; font-weight: 600; color: var(--b-color); text-decoration: none; }
+.arch-suite-link:hover { text-decoration: underline; }
+
+.arch-products-list { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-product-row { padding: 0.5rem 0.625rem; background: var(--surface); border: 1px solid var(--border-soft); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.5rem; transition: all var(--transition-base); text-decoration: none; color: inherit; }
+.arch-product-row:hover { border-color: var(--b-color); transform: translateX(-2px); }
+.arch-product-name { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--text); }
+.arch-product-name .ar { font-family: var(--font-ar); display: block; font-size: 0.6875rem; color: var(--text-mute); margin-top: 0.0625rem; }
+.arch-product-arrow { margin-right: auto; color: var(--b-color); opacity: 0.4; font-size: 0.75rem; }
+
+/* === Buying Logic === */
+.buying-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+.buying-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); }
+.buying-card:hover { border-color: var(--gold); }
+.buying-num { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gold); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.buying-h { font-family: var(--font-en); font-size: 0.9375rem; font-weight: 700; color: var(--text); margin-bottom: 0.375rem; }
+.buying-h .ar { font-family: var(--font-ar); display: block; font-size: 1rem; color: var(--text-dim); margin-bottom: 0.125rem; }
+.buying-desc { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.6; }
+.buying-example { margin-top: 0.625rem; padding-top: 0.625rem; border-top: 1px solid var(--border-soft); font-family: var(--font-mono); font-size: 0.5625rem; color: var(--gold); letter-spacing: 0.05em; }
+
+/* === Powered-by strip (defensive moat visible at every level) === */
+.arch-powered { margin-top: 0.75rem; padding-top: 0.625rem; border-top: 1px dashed var(--border-soft); display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+.arch-powered-h { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; margin-left: 0.25rem; }
+.arch-powered-tag { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--b-color, var(--gold)); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--surface); border-top: 1px solid var(--border-soft); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--text-dim); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Footer === */
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+</style>
+</head>
+<body class="motion-marketing">
+
+<a href="#main" class="skip-link">تخطّ إلى المحتوى الرئيسي</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="رؤى · ROUAA — Home">
+      <div class="nav-brand-logo">R</div>
+      <div class="nav-brand-text">
+        <span class="name">رؤى · ROUAA</span>
+        <span class="sub">Products Architecture</span>
+      </div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li class="has-dropdown"><a href="platform.html" class="active">Platform</a><div class="nav-dropdown"><div class="dropdown-h">Platform</div><a href="platform.html">Platform</a><a href="products-architecture.html" class="active">Products Architecture</a><a href="catalog.html">Full Catalog</a></div></li><li class="has-dropdown"><a href="solutions.html">Solutions</a><div class="nav-dropdown"><div class="dropdown-h">Intelligence Markets</div><a href="media-technologies.html">Media Intelligence</a><a href="trading-technologies.html">Trading Intelligence</a><a href="enterprise.html">Research Intelligence</a><a href="risk-intelligence.html">Risk Intelligence</a><a href="developers.html">Developer Intelligence</a></div></li><li><a href="trust.html">Trust</a></li><li class="has-dropdown"><a href="company.html">Company</a><div class="nav-dropdown"><div class="dropdown-h">Company</div><a href="company.html">Why ROUAA Exists</a><a href="company.html#manifesto">Manifesto</a><a href="company.html#principles">Principles</a></div></li></ul>
+    <div class="nav-cta"><a href="#contact" class="btn btn-primary">Request Briefing</a></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span class="nav-toggle-icon"><span></span><span></span><span></span></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="platform.html">Platform</a><a href="products-architecture.html" class="active">— Products Architecture</a><a href="catalog.html">— Full Catalog</a><a href="solutions.html">Solutions</a><a href="media-technologies.html">— Media Intelligence</a><a href="trading-technologies.html">— Trading Intelligence</a><a href="enterprise.html">— Research Intelligence</a><a href="risk-intelligence.html">— Risk Intelligence</a><a href="developers.html">— Developer Intelligence</a><a href="trust.html">Trust</a><a href="company.html">Company</a>
+    <div class="nav-mobile-cta">
+      <a href="#contact" class="btn btn-primary">Request Briefing</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const mobile = document.getElementById('navMobile');
+  if (!toggle || !mobile) return;
+  function setOpen(open) {
+    mobile.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!mobile.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!mobile.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (window.innerWidth > 1024) setOpen(false); }, 100); });
+})();
+</script>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-pa">
+    <div class="hero-pa-bg"></div>
+    <div class="container">
+      <div class="hero-pa-content">
+        <div class="mono-label text-gold">Products Architecture</div>
+        <h1 class="hero-pa-h1">
+          بنية تحتية ذكاء واحدة.<br>
+          <span class="gold">تطبيقات مؤسسية متعددة.</span>
+        </h1>
+        <p style="font-size: 0.9375rem; color: var(--text-dim); margin-top: 0.5rem;">
+          44 intelligence products powered by the same evidence chain.
+        </p>
+        <p class="hero-pa-sub">
+          رؤى ليست متجر أدوات. كل وحدة تجارية تستهلك من نفس المحرك، وكل منتج يحمل نفس سلسلة الإثبات. هذه هي البنية التي تنظم كيف تشتري من رؤى.
+        </p>
+        <div class="hero-pa-cta">
+          <a href="#architecture" class="btn btn-primary btn-lg">See the Architecture</a>
+          <a href="catalog.html" class="btn btn-ghost btn-lg">Browse Full Catalog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BRIDGE LOGIC ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">من المحرك إلى الشراء</h2>
+        <p class="section-lead" style="margin: 0 auto;">ثلاث طبقات تفصل «البنية التحتية» عن «ما تشتريه». هذا هو المسار الكامل.</p>
+      </div>
+
+      <div class="bridge-logic">
+        <div class="bridge-block">
+          <div class="bridge-block-h">01 · Official Data</div>
+          <div class="bridge-block-val">Intelligence Engine<span class="ar ar">المحرك · 7 طبقات</span></div>
+        </div>
+        <div class="bridge-arrow">←</div>
+        <div class="bridge-block center">
+          <div class="bridge-block-h">02 · Intelligence Engine</div>
+          <div class="bridge-block-val">5 Business Lines<span class="ar">5 خطوط أعمال · 44 منتج</span></div>
+        </div>
+        <div class="bridge-arrow">←</div>
+        <div class="bridge-block">
+          <div class="bridge-block-h">03 · Business Outcome</div>
+          <div class="bridge-block-val">Pick Your Line<span class="ar">اختر خطك · اشترك</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE TREE ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Intelligence Suites</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">خمس قدرات مؤسسية + منصة المطورين</h2>
+        <p class="section-lead" style="margin: 0 auto;">المؤسسات لا تشتري Engines — تشتري Capabilities. كل حزمة تجمع منتجات متعددة تحت قدرة واحدة قابلة للشراء، مدعومة بنفس المحرك.</p>
+      </div>
+
+      <div class="arch-tree">
+        <div class="arch-root">
+          <div class="arch-root-h">
+            ROUAA Intelligence Engine
+            <span class="ar">محرّك رؤى للذكاء المالي</span>
+          </div>
+          <div class="arch-root-sub">7 LAYERS · SOURCES → DISTRIBUTION</div>
+        </div>
+
+        <!-- Tree visual: Engine → 5 lines → 44 products -->
+        <div class="tree-visual">
+          <div class="tree-connector">↓</div>
+          <div class="tree-lines">
+            <div class="tree-line" style="--tl-color: var(--blue);"><span class="tree-line-icon">📰</span><span class="tree-line-name">Media</span><span class="tree-line-count">8</span></div>
+            <div class="tree-line" style="--tl-color: var(--emerald);"><span class="tree-line-icon">📈</span><span class="tree-line-name">Trading</span><span class="tree-line-count">9</span></div>
+            <div class="tree-line" style="--tl-color: var(--gold);"><span class="tree-line-icon">📊</span><span class="tree-line-name">Research</span><span class="tree-line-count">6</span></div>
+            <div class="tree-line" style="--tl-color: var(--rose);"><span class="tree-line-icon">⚠</span><span class="tree-line-name">Risk</span><span class="tree-line-count">5</span></div>
+            <div class="tree-line" style="--tl-color: var(--amber);"><span class="tree-line-icon">🔌</span><span class="tree-line-name">Developer</span><span class="tree-line-count">16</span></div>
+          </div>
+          <div class="tree-connector">↓</div>
+          <div class="tree-products">44 Intelligence Products · Same Evidence Chain</div>
+        </div>
+
+        <div class="arch-branches">
+
+          <!-- MEDIA SUITE — Capability-based, not Engine list -->
+          <div class="arch-branch b-research">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📊</div>
+              <div class="arch-branch-name">Research Intelligence Suite<span class="ar">حزمة الأبحاث الاستثمارية</span></div>
+            </div>
+            <div class="arch-suite-desc">مذكرات قرار مدعومة بالأدلة للجنة الاستثمار — أبحاث ماكرو، ذكاء أسهم، مقارنات قطاعية، قوائم مراقبة ذكية. كل رقم موثّق بمصدره.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=res-brief" class="arch-capability">
+                <div class="arch-cap-name">Macro Research</div>
+                <div class="arch-cap-ar">أبحاث الماكرو</div>
+              </a>
+              <a href="product.html?id=res-deepdive" class="arch-capability">
+                <div class="arch-cap-name">Equity Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الأسهم</div>
+              </a>
+              <a href="product.html?id=res-committee" class="arch-capability">
+                <div class="arch-cap-name">Investment Committee Briefs</div>
+                <div class="arch-cap-ar">مذكرات اللجنة</div>
+              </a>
+              <a href="product.html?id=res-comparison" class="arch-capability">
+                <div class="arch-cap-name">Sector & Strategy Intelligence</div>
+                <div class="arch-cap-ar">ذكاء القطاعات</div>
+              </a>
+              <a href="product.html?id=res-screening" class="arch-capability">
+                <div class="arch-cap-name">Investment Screening</div>
+                <div class="arch-cap-ar">فحص استثماري</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">6 products · Committee-ready</span>
+              <a href="catalog.html?cat=research" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Equity Knowledge Graph</span>
+              <span class="arch-powered-tag">Fact Extraction</span>
+              <span class="arch-powered-tag">Reasoning Council</span>
+            </div>
+          </div>
+
+          <!-- RISK SUITE -->
+          <div class="arch-branch b-risk">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">⚠</div>
+              <div class="arch-branch-name">Risk Intelligence Suite<span class="ar">حزمة ذكاء المخاطر</span></div>
+            </div>
+            <div class="arch-suite-desc">من حدث عالمي إلى إجراء محفظة في دقائق — مراقبة جيوسياسية، تحليل تعرّض، سيناريوهات، توصيات إجراء موثّقة، سجل امتثال كامل.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=risk-monitor" class="arch-capability">
+                <div class="arch-cap-name">Geopolitical Risk Monitoring</div>
+                <div class="arch-cap-ar">مراقبة المخاطر الجيوسياسية</div>
+              </a>
+              <a href="product.html?id=risk-exposure" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Exposure Analysis</div>
+                <div class="arch-cap-ar">تحليل تعرّض المحفظة</div>
+              </a>
+              <a href="product.html?id=risk-scenario" class="arch-capability">
+                <div class="arch-cap-name">Scenario Intelligence</div>
+                <div class="arch-cap-ar">ذكاء السيناريوهات</div>
+              </a>
+              <a href="product.html?id=risk-action" class="arch-capability">
+                <div class="arch-cap-name">Risk Actions</div>
+                <div class="arch-cap-ar">إجراءات المخاطر</div>
+              </a>
+              <a href="product.html?id=risk-compliance" class="arch-capability">
+                <div class="arch-cap-name">Compliance & Audit Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الامتثال والتدقيق</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">5 products · Regulator-ready</span>
+              <a href="catalog.html?cat=risk" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Geopolitical Engine</span>
+              <span class="arch-powered-tag">Portfolio Graph</span>
+              <span class="arch-powered-tag">Scenario Engine</span>
+              <span class="arch-powered-tag">Audit Trail</span>
+            </div>
+          </div>
+
+          <!-- DEVELOPER SUITE -->
+          <div class="arch-branch b-trading">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📈</div>
+              <div class="arch-branch-name">Trading Intelligence Suite<span class="ar">حزمة ذكاء التداول المؤسسي</span></div>
+            </div>
+            <div class="arch-suite-desc">أضف طبقة ذكاء تشرح «لماذا» خلف كل صفقة — سياق سوق، تحليل شارت ذكي، مساعد بلغة طبيعية. للبروكرات الذين يحتفظون بالعملاء.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=trd-dashboard" class="arch-capability">
+                <div class="arch-cap-name">Market Context Engine</div>
+                <div class="arch-cap-ar">محرّك سياق السوق</div>
+              </a>
+              <a href="product.html?id=trd-chart" class="arch-capability">
+                <div class="arch-cap-name">AI Chart Intelligence</div>
+                <div class="arch-cap-ar">ذكاء الشارت</div>
+              </a>
+              <a href="product.html?id=trd-portfolio" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Intelligence</div>
+                <div class="arch-cap-ar">ذكاء المحفظة</div>
+              </a>
+              <a href="product.html?id=trd-assistant" class="arch-capability">
+                <div class="arch-cap-name">Trading Assistant</div>
+                <div class="arch-cap-ar">مساعد التداول</div>
+              </a>
+              <a href="product.html?id=trd-ai-council" class="arch-capability">
+                <div class="arch-cap-name">Market Intelligence Council</div>
+                <div class="arch-cap-ar">مجلس تحليل السوق</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">9 products · Decision Support (not signals)</span>
+              <a href="catalog.html?cat=trading" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Event Intelligence</span>
+              <span class="arch-powered-tag">Market Knowledge Graph</span>
+              <span class="arch-powered-tag">Evidence Layer</span>
+              <span class="arch-powered-tag">Reasoning Engine</span>
+            </div>
+          </div>
+
+          <!-- RESEARCH SUITE -->
+          <div class="arch-branch b-dev">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">🔌</div>
+              <div class="arch-branch-name">Developer Platform<span class="ar">منصة المطورين</span></div>
+            </div>
+            <div class="arch-suite-desc">ابنِ منتجك المالي فوق ذكاء موثّق — APIs، بث لحظي، SDK، وكلاء ذكيون، مكونات منصة. كل استجابة تحمل دليلها.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=api-events" class="arch-capability">
+                <div class="arch-cap-name">Intelligence APIs</div>
+                <div class="arch-cap-ar">واجهات الاستخبارات</div>
+              </a>
+              <a href="product.html?id=api-streaming" class="arch-capability">
+                <div class="arch-cap-name">Streaming & Real-time</div>
+                <div class="arch-cap-ar">البث اللحظي</div>
+              </a>
+              <a href="product.html?id=api-sdk" class="arch-capability">
+                <div class="arch-cap-name">Official SDK</div>
+                <div class="arch-cap-ar">حزمة SDK الرسمية</div>
+              </a>
+              <a href="product.html?id=agt-macro" class="arch-capability">
+                <div class="arch-cap-name">AI Agents</div>
+                <div class="arch-cap-ar">الوكلاء الأذكياء</div>
+              </a>
+              <a href="product.html?id=cmp-graph" class="arch-capability">
+                <div class="arch-cap-name">Platform Components</div>
+                <div class="arch-cap-ar">مكونات المنصة</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">16 products · Build in weeks</span>
+              <a href="catalog.html?cat=api" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Event Intelligence</span>
+              <span class="arch-powered-tag">Market Knowledge Graph</span>
+              <span class="arch-powered-tag">Evidence Layer</span>
+              <span class="arch-powered-tag">Reasoning Engine</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BUYING LOGIC ============= -->
+  <section class="section reveal" style="background: var(--surface); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Buying Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">كيف تشتري من رؤى؟</h2>
+        <p class="section-lead" style="margin: 0 auto;">أربعة مسارات شراء. كل مسار يحدّد وحدتك التجارية، نطاق منتجاتك، وطرق دمجها.</p>
+      </div>
+
+      <div class="buying-grid">
+        <div class="buying-card">
+          <div class="buying-num">PATH 01</div>
+          <div class="buying-h"><span class="ar">حل سوقي واحد</span>Single-Market Solution</div>
+          <div class="buying-desc">اختر سوقاً واحداً (إعلام، تداول، أبحاث، مخاطر، أو مطورين) — اشترك في كل منتجاته أو في المهم فقط.</div>
+          <div class="buying-example">e.g., Media Intelligence — 8 products</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 02</div>
+          <div class="buying-h"><span class="ar">حل مخصص</span>Tailored Bundle</div>
+          <div class="buying-desc">اختر منتجات محددة من عدة أسواق. مثلاً: News Engine + Risk Monitor + Events API — حزمة واحدة لحاجة محددة.</div>
+          <div class="buying-example">e.g., News + Risk + Events API</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 03</div>
+          <div class="buying-h"><span class="ar">منصة كاملة</span>Platform License</div>
+          <div class="buying-desc">اشترك في المنصة كاملة — كل المنتجات، كل الأسواق. للبنوك الكبيرة وصناديق السيادة التي تريد حلاً شاملاً.</div>
+          <div class="buying-example">Enterprise · 44 products · all markets</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 04</div>
+          <div class="buying-h"><span class="ar">بناء فوق رؤى</span>Build on ROUAA</div>
+          <div class="buying-desc">خذ APIs + SDK + Components — وابنِ منتجك الخاص فوق ذكاء رؤى الموثّق. للفينتك والمطورين.</div>
+          <div class="buying-example">APIs + SDK + Knowledge Graph</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which path fits your institution?</h2>
+      <p>مكالمة 30 دقيقة — نساعدك على تحديد مسار الشراء المناسب، ونرسم لك خريطة المنتجات التي تخدم حاجتك.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Products Architecture Briefing" class="btn btn-primary btn-lg">Request Product Architecture Briefing</a>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="catalog.html" class="btn-link">← Browse Full Catalog (44 products)</a>
+        <a href="platform.html" class="btn-link">← How the Engine Works</a>
+        <a href="solutions.html" class="btn-link">← Solutions by Market</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background: var(--navy); padding: 4rem 0 2rem; border-top: 1px solid var(--border-soft);">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">رؤى · ROUAA</div>
+      <div style="font-size: 0.9375rem; color: var(--text-dim); max-width: 32ch; line-height: 1.7; margin-bottom: 1rem;">Financial Intelligence Infrastructure.</div>
+      <div class="mono-label text-mute">v18 · يوليو 2026</div>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Platform</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="platform.html" class="small text-dim">Platform</a></li>
+        <li><a href="products-architecture.html" class="small text-dim">Products Architecture</a></li>
+        <li><a href="catalog.html" class="small text-dim">Full Catalog</a></li>
+        <li><a href="trust.html" class="small text-dim">Trust</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Solutions</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="media-technologies.html" class="small text-dim">Media</a></li>
+        <li><a href="trading-technologies.html" class="small text-dim">Trading</a></li>
+        <li><a href="enterprise.html" class="small text-dim">Research</a></li>
+        <li><a href="risk-intelligence.html" class="small text-dim">Risk</a></li>
+        <li><a href="developers.html" class="small text-dim">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="mono-label text-mute mb-3">Company</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><a href="company.html" class="small text-dim">About</a></li>
+        <li><a href="#contact" class="small text-dim">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 2rem 2rem 0; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-mute); max-width: 1280px; margin: 0 auto;">
+    <span>© 2026 رؤى · ROUAA</span>
+    <span>contact@rouaa.ai</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

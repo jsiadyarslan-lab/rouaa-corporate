@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070D">
+<title>ROUAA · Platform — How Official Evidence Becomes Institutional Intelligence</title>
+<meta name="description" content="Institutions rebuild the same pipeline over and over. ROUAA builds it once. Seven layers from official source to distributed products.">
+
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/typography.css">
+<link rel="stylesheet" href="design-system/components.css">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* === Hero === */
+.hero-platform { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
+.hero-platform-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--rouaa-accent-subtle), transparent 70%); z-index: 0; }
+.hero-platform-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-platform-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
+.hero-platform-h1 .gold { color: var(--rouaa-accent); }
+.hero-platform-sub { font-size: 1.0625rem; color: var(--rouaa-text-secondary); max-width: 60ch; line-height: 1.7; }
+.hero-platform-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === Why Platform Exists (the missing intro) === */
+.why-exists { max-width: 700px; margin: 2rem auto 0; text-align: center; }
+.why-exists-step { padding: 0.75rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; font-size: 0.875rem; color: var(--rouaa-text-secondary); transition: border-color 400ms ease; }
+.why-exists-step:hover { border-color: var(--rouaa-accent); }
+.why-exists-step strong { color: var(--rouaa-text-primary); }
+.why-exists-step.final { background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent); color: var(--rouaa-accent); font-weight: 600; }
+.why-exists-arrow { text-align: center; color: var(--rouaa-accent); opacity: 0.3; font-size: 0.75rem; margin: 0.2rem 0; }
+
+/* === 95% / 5% visual === */
+.ratio-visual { max-width: 500px; margin: 3rem auto; text-align: center; }
+.ratio-bar { display: flex; height: 60px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--rouaa-surface-border); }
+.ratio-infra { flex: 95; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-accent); }
+.ratio-products { flex: 5; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; font-weight: 700; color: var(--rouaa-text-muted); }
+.ratio-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* === Architecture stack — grouped by abstraction level === */
+.arch-group { max-width: 600px; margin: 0 auto; }
+.arch-group-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--group-color, var(--rouaa-accent)); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin: 1.5rem 0 0.5rem; text-align: center; padding-bottom: 0.375rem; border-bottom: 1px solid var(--rouaa-border); }
+.arch-group.data { --group-color: #2DBA8E; }
+.arch-group.processing { --group-color: #4A90D9; }
+.arch-group.knowledge { --group-color: var(--rouaa-accent); }
+.arch-group.intelligence { --group-color: #F5A623; }
+.arch-group.delivery { --group-color: var(--rouaa-accent); }
+
+.arch-layer { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; padding: 1rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; align-items: center; transition: border-color 400ms ease; position: relative; overflow: hidden; }
+.arch-layer:hover { border-color: var(--layer-color, var(--rouaa-accent)); }
+.arch-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--layer-color, var(--rouaa-accent)); }
+.arch-layer-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; color: var(--layer-color, var(--rouaa-accent)); font-weight: 700; width: 48px; text-align: center; }
+.arch-layer-body { flex: 1; }
+.arch-layer-name { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); }
+.arch-layer-value { font-size: 0.6875rem; color: var(--rouaa-text-secondary); margin-top: 0.125rem; line-height: 1.4; }
+.arch-layer-stat { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--layer-color, var(--rouaa-accent)); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; }
+.arch-layer.l1 { --layer-color: #2DBA8E; }
+.arch-layer.l2 { --layer-color: #4A90D9; }
+.arch-layer.l3 { --layer-color: #4A90D9; }
+.arch-layer.l4 { --layer-color: var(--rouaa-accent); }
+.arch-layer.l5 { --layer-color: var(--rouaa-accent); }
+.arch-layer.l6 { --layer-color: #F5A623; }
+.arch-layer.l7 { --layer-color: var(--rouaa-accent); }
+.arch-connector { text-align: center; color: var(--rouaa-accent); opacity: 0.25; font-size: 0.625rem; margin: 0.1rem 0; }
+
+/* Products fan-out */
+.arch-products { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.arch-product-chip { padding: 0.375rem 0.75rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--rouaa-text-secondary); text-decoration: none; transition: border-color 400ms ease; }
+.arch-product-chip:hover { border-color: var(--rouaa-accent); color: var(--rouaa-accent); }
+
+/* === Why not build === */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+.why-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; text-align: center; transition: border-color 400ms ease; }
+.why-card:hover { border-color: var(--rouaa-accent); }
+.why-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.why-h { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); margin-bottom: 0.375rem; }
+.why-desc { font-size: 0.75rem; color: var(--rouaa-text-muted); line-height: 1.5; }
+
+/* === Deployment === */
+.deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
+.deploy-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.25rem 1rem; transition: border-color 400ms ease; }
+.deploy-card:hover { border-color: var(--rouaa-accent); }
+.deploy-name { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); margin-bottom: 0.375rem; }
+.deploy-desc { font-size: 0.6875rem; color: var(--rouaa-text-secondary); line-height: 1.5; }
+
+/* === Architecture Visualization — Follow One Event === */
+.viz-wrap { max-width: 1100px; margin: 0 auto; }
+.viz-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.viz-tab { padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); font-family: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--rouaa-text-secondary); cursor: pointer; transition: all 400ms ease; }
+.viz-tab:hover { border-color: var(--rouaa-accent); color: var(--rouaa-text-primary); }
+.viz-tab.active { background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent); color: var(--rouaa-accent); }
+
+.viz-flow { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); padding: 2rem; }
+@media (max-width: 768px) { .viz-flow { grid-template-columns: 1fr; } }
+
+.viz-source { display: flex; flex-direction: column; gap: 0.75rem; }
+.viz-source-label { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.viz-source-doc { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1rem; transition: border-color 400ms ease; }
+.viz-source-doc:hover { border-color: var(--rouaa-accent); }
+.viz-source-type { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.viz-source-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); line-height: 1.3; margin-bottom: 0.5rem; }
+.viz-source-meta { font-size: 0.6875rem; color: var(--rouaa-text-muted); line-height: 1.4; }
+
+.viz-layers { display: flex; flex-direction: column; gap: 0.25rem; }
+.viz-layer { display: grid; grid-template-columns: 32px 1fr 1fr 110px; gap: 0.75rem; padding: 0.625rem 0.875rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); align-items: center; transition: all 400ms ease; position: relative; overflow: hidden; }
+.viz-layer:hover { border-color: var(--rouaa-accent); transform: translateX(-4px); }
+.viz-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--l-color, var(--rouaa-accent)); }
+.viz-layer.l1 { --l-color: #2DBA8E; }
+.viz-layer.l2 { --l-color: #4A90D9; }
+.viz-layer.l3 { --l-color: #4A90D9; }
+.viz-layer.l4 { --l-color: var(--rouaa-accent); }
+.viz-layer.l5 { --l-color: var(--rouaa-accent); }
+.viz-layer.l6 { --l-color: #F5A623; }
+.viz-layer.l7 { --l-color: var(--rouaa-accent); }
+
+.viz-layer-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--l-color); font-weight: 700; }
+.viz-layer-name { font-family: inherit; font-size: 0.75rem; font-weight: 700; color: var(--rouaa-text-primary); }
+.viz-layer-transform { font-size: 0.6875rem; color: var(--rouaa-text-secondary); line-height: 1.4; }
+.viz-layer-transform strong { color: var(--l-color); font-family: inherit; font-size: 0.6875rem; }
+.viz-layer-output { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--l-color); padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.viz-connector { text-align: center; color: var(--rouaa-accent); opacity: 0.3; font-size: 0.5rem; margin: 0; }
+
+.viz-outputs { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--rouaa-surface-border); }
+.viz-outputs-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+.viz-outputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
+.viz-output { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); border-right: 2px solid var(--o-color); }
+.viz-output.o-news { --o-color: #4A90D9; }
+.viz-output.o-research { --o-color: var(--rouaa-accent); }
+.viz-output.o-trading { --o-color: #2DBA8E; }
+.viz-output.o-risk { --o-color: #E5484D; }
+.viz-output.o-media { --o-color: #F5A623; }
+.viz-output.o-api { --o-color: var(--rouaa-text-muted); }
+.viz-output-icon { font-size: 0.875rem; }
+.viz-output-text { font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--rouaa-text-primary); }
+
+/* === Evidence Trace Demo === */
+.trace-demo { max-width: 900px; margin: 0 auto; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); overflow: hidden; }
+.trace-head { padding: 1rem 1.5rem; background: var(--rouaa-bg-secondary); border-bottom: 1px solid var(--rouaa-surface-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.trace-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); }
+.trace-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); padding: 0.25rem 0.5rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-sm); }
+.trace-steps { padding: 1rem 1.5rem; }
+.trace-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed var(--rouaa-border); align-items: center; }
+.trace-step:last-child { border-bottom: none; }
+.trace-step-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--rouaa-accent); font-weight: 700; }
+.trace-step-body { font-size: 0.75rem; color: var(--rouaa-text-secondary); line-height: 1.5; }
+.trace-step-body strong { color: var(--rouaa-text-primary); font-family: inherit; font-size: 0.75rem; }
+.trace-step-time { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); white-space: nowrap; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--rouaa-text-secondary); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>          </div>
+        </div>
+                <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-platform">
+    <div class="hero-platform-bg"></div>
+    <div class="container">
+      <div class="hero-platform-content">
+        <div class="mono-label text-gold">Intelligence Platform</div>
+        <h1 class="hero-platform-h1">
+          How Official Financial Information Becomes<br>
+          Defensible Intelligence<br>
+          <span class="gold">Financial Intelligence</span>
+        </h1>
+        <p class="hero-platform-sub">
+          Institutions rebuild the same intelligence layer over and over — source collection, document processing, fact extraction, and insight distribution.
+
+          ROUAA builds this intelligence infrastructure once and enables institutions to deploy evidence-backed intelligence across their workflows.
+        </p>
+        <div class="hero-platform-cta">
+          <a href="contact.html" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+          <a href="#why" class="btn btn-ghost btn-lg">Why This Platform Exists</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY THIS PLATFORM EXISTS (the missing intro) ============= -->
+  <section class="section reveal" id="why" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Every institution rebuilds the same pipeline</h2>
+      </div>
+
+      <div class="why-exists">
+        <div class="why-exists-step">Official financial information is <strong>fragmented</strong> across hundreds of sources</div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step">Every institution <strong>builds the same pipeline</strong> internally — collection, processing, analysis</div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step">Requires specialized teams across data engineering, governance, research, and deployment.</div>
+        <div class="why-exists-arrow">↓</div>
+        <div class="why-exists-step final">ROUAA builds the pipeline once — and distributes intelligence to everyone</div>
+      </div>
+
+      <!-- The Intelligence Stack -->
+      <div class="ratio-visual reveal" style="max-width: 600px; margin: 3rem auto; text-align: center;">
+        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">The Intelligence Stack</div>
+          <div style="font-size: 1rem; color: var(--rouaa-text-primary); line-height: 1.6;">
+            Source → Document Intelligence → Facts → Evidence → Knowledge Graph → Governance → Reasoning → Distribution
+          </div>
+          <div style="font-size: 0.875rem; color: var(--rouaa-text-secondary); margin-top: 0.75rem;">
+            Infrastructure + Evidence + Knowledge + Reasoning = Trustworthy Institutional Intelligence
+          </div>
+        </div>
+      </div>
+
+      <!-- Production coverage disclaimer -->
+      <div style="max-width: 600px; margin: 1.5rem auto 0; padding: 0.875rem 1.25rem; background: var(--rouaa-bg-secondary); border: 1px dashed var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;">
+          <strong style="color: var(--rouaa-accent);">Production Metrics</strong> · Continuously updated<br>
+          Environment: Internal Production Infrastructure
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Without ROUAA / With ROUAA -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Difference</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">What changes when you adopt ROUAA?</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Without ROUAA</div>
+          <div style="font-size: 0.9375rem; color: var(--rouaa-text-secondary); line-height: 1.7;">
+            Source → Manual Processing → Report → Decision
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--rouaa-text-muted); margin-top: 0.75rem;">Manual processing, fragmented tools, no evidence chain.</p>
+        </div>
+        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">With ROUAA</div>
+          <div style="font-size: 0.9375rem; color: var(--rouaa-text-primary); line-height: 1.7;">
+            Source → Evidence → Governed Intelligence → Decision
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--rouaa-text-secondary); margin-top: 0.75rem;">Verified facts, complete evidence chain, institutional intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PLATFORM ARCHITECTURE — grouped by abstraction ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Platform Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Seven Layers · Five Groups</h2>
+        <p class="section-lead" style="margin: 0 auto;">From raw data to verified knowledge to distributed intelligence — each layer adds value the previous one does not have.</p>
+      </div>
+
+      <div class="arch-group">
+        <!-- DATA -->
+        <div class="arch-group-h data">Data</div>
+        <div class="arch-layer l1">
+          <div class="arch-layer-num">01</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Source Registry Layer</div>
+            <div class="arch-layer-value">A governed registry of 411+ institutional sources — central banks, regulators, statistical agencies, exchanges, and government financial institutions. Every source trusted and indexed by trust tier.</div>
+          </div>
+          <div class="arch-layer-stat">411 sources</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- PROCESSING -->
+        <div class="arch-group-h processing">Processing</div>
+        <div class="arch-layer l2">
+          <div class="arch-layer-num">02</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Document Intelligence Layer</div>
+            <div class="arch-layer-value">Every official document transforms into structured financial knowledge — automatically</div>
+          </div>
+          <div class="arch-layer-stat">PDF · HTML · API</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- STRUCTURED KNOWLEDGE -->
+        <div class="arch-group-h knowledge">Structured Knowledge</div>
+        <div class="arch-layer l3">
+          <div class="arch-layer-num">03</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Financial Facts & Events Layer</div>
+            <div class="arch-layer-value">Every number is linked to a page and paragraph in the original document</div>
+          </div>
+          <div class="arch-layer-stat">Verified financial facts</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l4">
+          <div class="arch-layer-num">04</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Evidence & Provenance Layer</div>
+            <div class="arch-layer-value">Every fact can be traced to its original source in less than 5 seconds</div>
+          </div>
+          <div class="arch-layer-stat">every fact → origin</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer l5">
+          <div class="arch-layer-num">05</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Knowledge Graph Layer</div>
+            <div class="arch-layer-value">The network of financial relationships — every event linked to those it impacted</div>
+          </div>
+          <div class="arch-layer-stat">living graph</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- INTELLIGENCE -->
+        <div class="arch-group-h intelligence">Intelligence</div>
+        <div class="arch-layer l6">
+          <div class="arch-layer-num">06</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Governed Reasoning Layer</div>
+            <div class="arch-layer-value">Multi-layered reasoning system to analyze event impact across asset classes</div>
+          </div>
+          <div class="arch-layer-stat">governed reasoning</div>
+        </div>
+        <div class="arch-connector">↓</div>
+
+        <!-- DELIVERY -->
+        <div class="arch-group-h delivery">Delivery</div>
+        <div class="arch-layer l7">
+          <div class="arch-layer-num">07</div>
+          <div class="arch-layer-body">
+            <div class="arch-layer-name">Distribution Infrastructure Layer</div>
+            <div class="arch-layer-value">Generate once, distribute across thousands of touchpoints</div>
+          </div>
+          <div class="arch-layer-stat">generate once → everywhere</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= BUILT TODAY — OPERATIONAL PROOF ============= -->
+  <section class="section reveal" id="built-today" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-8">
+        <span class="section-tag" style="justify-content: center;">Built Today</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Production infrastructure already built.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ROUAA is not a conceptual framework. The intelligence infrastructure is built layer by layer — with operational components already running. Here is what exists today.</p>
+      </div>
+
+      <div class="why-grid" style="max-width: 1040px;">
+        <div class="why-card" style="text-align: left;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div class="why-h" style="text-align: left;">Source Intelligence Layer</div>
+          <div class="why-desc" style="text-align: left;">Official Source Registry · source classification · source health monitoring · RSS / HTML / PDF / API ingestion · source prioritization.</div>
+          <div style="font-size: 0.6875rem; color: var(--rouaa-accent); margin-top: 0.5rem; font-weight: 600;">411+ institutional sources mapped</div>
+        </div>
+        <div class="why-card" style="text-align: left;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div class="why-h" style="text-align: left;">Document Intelligence Layer</div>
+          <div class="why-desc" style="text-align: left;">Transforms official publications into structured intelligence inputs. Document ingestion · text extraction · document classification · metadata normalization · source linking.</div>
+        </div>
+        <div class="why-card" style="text-align: left;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div class="why-h" style="text-align: left;">Evidence &amp; Provenance Layer</div>
+          <div class="why-desc" style="text-align: left;">The foundation of defensible intelligence. Fact-to-document linking · source traceability · evidence records · confidence scoring framework. Every output can be traced back to its origin.</div>
+        </div>
+        <div class="why-card" style="text-align: left;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div class="why-h" style="text-align: left;">Financial Event Engine</div>
+          <div class="why-desc" style="text-align: left;">Detects and structures financial events. Central bank decisions · inflation releases · employment reports · GDP publications · regulatory announcements.</div>
+        </div>
+      </div>
+
+      <!-- Intelligence Pipeline -->
+      <div style="max-width: 560px; margin: 3rem auto 0;">
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-bottom: 1rem;">Running Architecture</div>
+        <div style="display: flex; flex-direction: column; gap: 0.375rem;">
+          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Official Source</div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Document</div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Extracted Fact</div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Financial Event</div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Evidence Chain</div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.75rem 1.25rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-md); text-align: center; font-size: 0.875rem; color: var(--rouaa-accent); font-weight: 700;">Intelligence Output</div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 2rem;">
+        <a href="infrastructure-report.html" class="btn btn-secondary">View Infrastructure Report →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE VISUALIZATION — FOLLOW ONE EVENT ============= -->
+  <section class="section reveal" id="viz">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Architecture Visualization</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Follow One Event Across the Seven Layers</h2>
+        <p class="section-lead" style="margin: 0 auto;">Choose an event — and see how it transforms from a raw official document into distributed financial intelligence across channels.</p>
+      </div>
+
+      <div class="viz-wrap">
+        <div class="viz-tabs">
+          <button class="viz-tab active" data-event="fed">📄 Fed FOMC Statement</button>
+          <button class="viz-tab" data-event="earnings">📈 Saudi Aramco Q2 Earnings</button>
+          <button class="viz-tab" data-event="geopolitical">⚠ Geopolitical Event</button>
+        </div>
+
+        <div class="viz-flow">
+          <div class="viz-source">
+            <div class="viz-source-label">Source Document</div>
+            <div class="viz-source-doc">
+              <div class="viz-source-type" id="vizType">Official Statement</div>
+              <div class="viz-source-title" id="vizTitle">Federal Reserve Monetary Policy Statement</div>
+              <div class="viz-source-meta" id="vizMeta">Federal Reserve · 14:00 EST · 847 words · PDF</div>
+            </div>
+            <div class="viz-source-label" style="margin-top: 0.5rem;">Input State</div>
+            <div style="font-size: 0.6875rem; color: var(--rouaa-text-muted); line-height: 1.5; padding: 0.5rem; background: var(--rouaa-bg-secondary); border: 1px dashed var(--rouaa-surface-border); border-radius: var(--radius-sm);">Raw PDF document · unstructured text · no context · no links</div>
+          </div>
+
+          <div>
+            <div class="viz-layers" id="vizLayers">
+              <!-- Layers injected by JS -->
+            </div>
+
+            <div class="viz-outputs">
+              <div class="viz-outputs-h">↓ Generated Outputs · Same Evidence Chain</div>
+              <div class="viz-outputs-grid">
+                <div class="viz-output o-news"><span class="viz-output-icon">📰</span><span class="viz-output-text">News Article</span></div>
+                <div class="viz-output o-research"><span class="viz-output-icon">📑</span><span class="viz-output-text">Research Brief</span></div>
+                <div class="viz-output o-trading"><span class="viz-output-icon">📊</span><span class="viz-output-text">Trading Context</span></div>
+                <div class="viz-output o-risk"><span class="viz-output-icon">⚠</span><span class="viz-output-text">Risk Memo</span></div>
+                <div class="viz-output o-media"><span class="viz-output-icon">🎬</span><span class="viz-output-text">Video Script</span></div>
+                <div class="viz-output o-api"><span class="viz-output-icon">🔌</span><span class="viz-output-text">API Response</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-mute small mt-5">Every output carries the same evidence chain — from the official source to the fact to the analysis. This is the essence of ROUAA: one event, one intelligence, multiple distribution points.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= EVIDENCE TRACE DEMO ============= -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Evidence Trace</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">From Decision to Original Source</h2>
+        <p class="section-lead" style="margin: 0 auto;">Every piece of information in ROUAA is traceable. Choose any decision, click 'Evidence', and you land on the original source page.</p>
+      </div>
+
+      <div class="trace-demo">
+        <div class="trace-head">
+          <div class="trace-title">
+            Investment Research Note · Aramco Analysis
+          </div>
+          <span class="trace-badge">EVIDENCE TRACE · 4 STEPS · 4.2s</span>
+        </div>
+        <div class="trace-steps">
+          <div class="trace-step">
+            <div class="trace-step-num">01</div>
+            <div class="trace-step-body"><strong>Research Conclusion</strong> · Earnings context assessment based on verified financial evidence.</div>
+            <div class="trace-step-time">T+0.0s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">02</div>
+            <div class="trace-step-body"><strong>Verified Fact</strong> · Verified earnings metric extracted from the official quarterly disclosure.</div>
+            <div class="trace-step-time">T+1.1s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">03</div>
+            <div class="trace-step-body"><strong>Source Document</strong> · Saudi Aramco Q2 2026 Earnings Release · Page 4, Paragraph 3, Revenue Table.</div>
+            <div class="trace-step-time">T+2.8s</div>
+          </div>
+          <div class="trace-step">
+            <div class="trace-step-num">04</div>
+            <div class="trace-step-body"><strong>Official Origin</strong> · Quarterly financial report filed with the Saudi Exchange · digitally certified · August 14, 2026.</div>
+            <div class="trace-step-time">T+4.2s</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="trust-framework.html" class="btn-link">Explore the Trust Architecture ←</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ONE PLATFORM → MULTIPLE APPLICATIONS ============= -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">One Platform → Multiple Applications</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">One Platform. Multiple Institutional Applications.</h2>
+        <p class="section-lead" style="margin: 0 auto;">The platform is not an end in itself — it is the asset that powers every institutional application ROUAA delivers.</p>
+      </div>
+
+      <div style="max-width: 600px; margin: 2rem auto 0; text-align: center;">
+        <div style="display: inline-flex; padding: 1rem 2rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-xl); margin-bottom: 1rem;">
+          <span style="font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--rouaa-accent);">One Platform</span>
+        </div>
+        <div style="color: var(--rouaa-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
+
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Current Applications</div>
+        <div class="arch-products">
+          <a href="trading-platform.html" class="arch-product-chip" style="color: #2DBA8E; border-color: rgba(52,211,153,0.3);">01 · Trading Intelligence</a>
+          <a href="financial-intelligence.html" class="arch-product-chip" style="color: var(--rouaa-accent); border-color: rgba(201, 162, 39,0.3);">02 · Institutional Intelligence</a>
+        </div>
+
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Additional Intelligence Suites</div>
+        <div class="arch-products">
+          <a href="media-intelligence.html" class="arch-product-chip" style="color: #4A90D9; border-color: rgba(96,165,250,0.3);">Media Intelligence</a>
+          <a href="risk-intelligence.html" class="arch-product-chip" style="color: #E5484D; border-color: rgba(229, 72, 77,0.3);">Risk Intelligence</a>
+          <a href="developer-intelligence.html" class="arch-product-chip" style="color: #F5A623; border-color: rgba(245, 166, 35,0.3);">Developer Intelligence</a>
+        </div>
+        <p class="text-center text-mute small mt-5">One platform · multiple institutional applications · a continuously improving intelligence engine</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY NOT BUILD INTERNALLY ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Why Not Build Internally</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Why Not Build It Internally?</h2>
+        <p class="section-lead" style="margin: 0 auto;">Building this infrastructure internally requires years of specialized development across source integration, document intelligence, evidence systems, knowledge graphs, reasoning models, and enterprise deployment.
+
+        ROUAA provides the complete intelligence infrastructure layer.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-h">Build in Weeks</div>
+          <div class="why-desc">Deploy intelligence capabilities without rebuilding the underlying infrastructure</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡</div>
+          <div class="why-h">Defensible Decisions</div>
+          <div class="why-desc">Every decision is evidence-backed — defensible before any committee</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📦</div>
+          <div class="why-h">Deploy Anywhere</div>
+          <div class="why-desc">Cloud, private, or inside your infrastructure — ROUAA adapts to you</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔄</div>
+          <div class="why-h">Continuously Improving</div>
+          <div class="why-desc">Every day the graph grows deeper — you benefit from continuous improvement</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= DEPLOYMENT ============= -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Enterprise Deployment</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Institutional Flexibility</h2>
+        <p class="section-lead" style="margin: 0 auto;">Can you run ROUAA in a way that fits your governance and security requirements? Yes.</p>
+      </div>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <div class="deploy-name">Cloud SaaS</div>
+          <div class="deploy-desc">Fastest start · fully hosted · automatic updates</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Private Cloud</div>
+          <div class="deploy-desc">Dedicated environment · isolated infrastructure · regional compliance</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">On-Premise</div>
+          <div class="deploy-desc">Inside your secure infrastructure · full data sovereignty · for central banks and governments</div>
+        </div>
+        <div class="deploy-card">
+          <div class="deploy-name">Hybrid</div>
+          <div class="deploy-desc">Sensitive data on-premise · intelligence services in the cloud · mix as needed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PRODUCTION INFRASTRUCTURE ============= -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Production Infrastructure</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Built for institutional volume.</h2>
+        <p class="section-lead" style="margin: 0 auto;">The architecture is designed for the scale at which financial institutions actually operate — not demo volumes.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">📡</div>
+          <div class="why-h">Continuous Monitoring</div>
+          <div class="why-desc">411+ official sources monitored 24/7. New publications detected within seconds. No source goes unchecked.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📄</div>
+          <div class="why-h">Daily Document Volume</div>
+          <div class="why-desc">Official documents processed continuously across monitored institutional sources — PDFs, filings, releases, statistical bulletins. Each one extracted, classified, and evidence-linked.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🌍</div>
+          <div class="why-h">Multi-Language Support</div>
+          <div class="why-desc">Multi-language source processing and intelligence delivery. Evidence chains preserved across translations.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔐</div>
+          <div class="why-h">Private Deployment</div>
+          <div class="why-desc">Full architecture deployable inside your infrastructure. Your data, your sources, your audit trails. Built for data sovereignty and regulatory jurisdiction.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal" id="contact">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Explore the platform behind the products</h2>
+      <p>A platform briefing covering architecture, deployment models, and institutional workflows.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Platform Briefing" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Channels</div>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html#solution-02">Investment Firms</a>
+          <a href="solutions.html#solution-05">Banks &amp; Institutions</a>
+          <a href="solutions.html#solution-03">Trading Desks</a>
+          <a href="enterprise.html">Private Deployment</a>
+          <a href="enterprise.html">White Label</a>
+        </div>
+                <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// === Architecture Visualization — event switching ===
+const EVENTS = {
+  fed: {
+    type: 'Official Statement',
+    title: 'Federal Reserve Monetary Policy Statement',
+    meta: 'Federal Reserve · 14:00 EST · 847 words · PDF',
+    layers: [
+      { num: '01', name: 'Source Network', transform: 'Document discovered on the Federal Reserve website after <strong>14 seconds</strong> from publication', output: 'Raw PDF' },
+      { num: '02', name: 'Document Intelligence', transform: 'Extracted <strong>23 numbers</strong> · 8 decision paragraphs · 4 tables', output: 'Structured Doc' },
+      { num: '03', name: 'Fact Engine', transform: 'Extracted <strong>14 verified facts</strong> — interest rate, inflation, growth', output: '14 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', transform: 'Every fact linked to a page and paragraph in the original document', output: '14 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', transform: 'Linked the event to relevant entities and sectors across the knowledge graph<br><strong>89 entity relationships</strong>', output: '89 Connections' },
+      { num: '06', name: 'Reasoning Engine', transform: 'Multi-role reasoning: impact on the dollar, equities, bonds, oil, gold', output: '7 Scenarios' },
+      { num: '07', name: 'Distribution Layer', transform: 'Generated <strong>6 different outputs</strong> from the same evidence chain', output: '6 Outputs' }
+    ]
+  },
+  earnings: {
+    type: 'Earnings Release',
+    title: 'Saudi Aramco Q2 2026 Earnings Release',
+    meta: 'Tadawul · 07:00 AST · verified content · PDF + XLSX',
+    layers: [
+      { num: '01', name: 'Source Network', transform: 'Monitoring Saudi Exchange · discovered <strong>3 seconds</strong> after filing', output: 'Raw Filing' },
+      { num: '02', name: 'Document Intelligence', transform: 'Extracted <strong>47 financial numbers</strong> · 3 statements · 12 notes', output: 'Financial Model' },
+      { num: '03', name: 'Fact Engine', transform: 'Extracted <strong>23 facts</strong> — revenue, profit, dividends, guidance', output: '23 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', transform: 'Every number linked to a page, paragraph, and table in the report', output: '23 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', transform: 'Linked Aramco to <strong>14 companies</strong> in the supply chain and <strong>7 industries</strong>', output: '21 Connections' },
+      { num: '06', name: 'Reasoning Engine', transform: 'Multi-role reasoning: impact on Petro Rabigh, SABIC, banks, insurance, funds', output: '5 Scenarios' },
+      { num: '07', name: 'Distribution Layer', transform: 'Generated <strong>6 outputs</strong> — news, research, trading context, risk, video, API', output: '6 Outputs' }
+    ]
+  },
+  geopolitical: {
+    type: 'Geopolitical Alert',
+    title: 'Red Sea Shipping Disruption Alert · August 2026',
+    meta: 'IMF · WTO · Lloyd\'s · 3 sources · 11:42 UTC',
+    layers: [
+      { num: '01', name: 'Source Network', transform: 'Monitoring <strong>3 official sources</strong> + 7 agencies + 14 ports', output: '3 Source Events' },
+      { num: '02', name: 'Document Intelligence', transform: 'Unified the reports · extracted <strong>9 geographic and temporal facts</strong>', output: 'Unified Brief' },
+      { num: '03', name: 'Fact Engine', transform: 'Extracted <strong>9 facts</strong> — shipping costs, duration, alternatives', output: '9 Verified Facts' },
+      { num: '04', name: 'Evidence Layer', transform: 'Every fact linked to an IMF, WTO, or Lloyd\'s report', output: '9 Evidence Links' },
+      { num: '05', name: 'Knowledge Graph', transform: 'Linked to <strong>47 shipping companies</strong> and <strong>23 supply chains</strong>', output: '70 Connections' },
+      { num: '06', name: 'Reasoning Engine', transform: 'Multi-role reasoning: impact on oil, chemicals, retail, logistics', output: '4 Scenarios' },
+      { num: '07', name: 'Distribution Layer', transform: 'Generated <strong>6 outputs</strong> — risk alert, research, news, API', output: '6 Outputs' }
+    ]
+  }
+};
+
+function renderViz(key) {
+  const e = EVENTS[key];
+  document.getElementById('vizType').textContent = e.type;
+  document.getElementById('vizTitle').textContent = e.title;
+  document.getElementById('vizMeta').textContent = e.meta;
+  const layersEl = document.getElementById('vizLayers');
+  layersEl.innerHTML = e.layers.map((l, i) => {
+    const html = `<div class="viz-layer l${i+1}">
+      <div class="viz-layer-num">${l.num}</div>
+      <div class="viz-layer-name">${l.name}</div>
+      <div class="viz-layer-transform">${l.transform}</div>
+      <div class="viz-layer-output">${l.output}</div>
+    </div>`;
+    return html + (i < e.layers.length - 1 ? '<div class="viz-connector">↓</div>' : '');
+  }).join('');
+}
+
+document.querySelectorAll('.viz-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderViz(tab.dataset.event);
+  });
+});
+
+renderViz('fed');
+</script>
+
+<script src="main.js"></script>
+
+</body>
+</html>
