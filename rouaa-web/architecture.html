@@ -1294,6 +1294,7 @@
     <section class="arch-hero">
       <div class="arch-hero-grid"></div>
       <div class="arch-hero-glow"></div>
+      <div id="hero-3d-container" style="position:absolute;inset:0;z-index:0;pointer-events:none;"></div>
       <canvas class="hero-particles" id="heroParticles"></canvas>
       <div class="container">
         <div class="arch-hero-content">
@@ -2624,6 +2625,488 @@
             window.scrollTo({ top: top, behavior: 'smooth' });
           }
         });
+      });
+    })();
+  </script>
+
+  <!-- ============ Three.js + GSAP via CDN ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    // ============================================================
+    // THREE.JS HERO SCENE — 3D Intelligence Architecture
+    // Floating layer planes + wireframe cube + data particles
+    // ============================================================
+    (function() {
+      if (typeof THREE === 'undefined') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const container = document.getElementById('hero-3d-container');
+      if (!container) return;
+
+      const hero = container.parentElement;
+      let scene, camera, renderer, animationId;
+      let layerGroup, particleSystem, wireCube;
+      let mouseX = 0, mouseY = 0;
+      let targetRotX = 0, targetRotY = 0;
+
+      function init() {
+        // Scene
+        scene = new THREE.Scene();
+
+        // Camera
+        camera = new THREE.PerspectiveCamera(45, hero.offsetWidth / hero.offsetHeight, 0.1, 100);
+        camera.position.set(0, 0, 8);
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(hero.offsetWidth, hero.offsetHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+        container.appendChild(renderer.domElement);
+
+        // ---- Wireframe cube (outer frame) ----
+        const cubeGeo = new THREE.BoxGeometry(4.8, 6, 0.4);
+        const cubeMat = new THREE.MeshBasicMaterial({
+          color: 0xC9A227,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.12
+        });
+        wireCube = new THREE.Mesh(cubeGeo, cubeMat);
+        scene.add(wireCube);
+
+        // ---- Layer planes ----
+        layerGroup = new THREE.Group();
+        const layerData = [
+          { label: 'L01 SOURCE REGISTRY',     color: 0x20A878, opacity: 0.08 },
+          { label: 'L02 DOCUMENT INTELLIGENCE', color: 0x4A90D9, opacity: 0.08 },
+          { label: 'L03 FACT ENGINE',          color: 0x4A90D9, opacity: 0.08 },
+          { label: 'L04 EVENT ENGINE',         color: 0x4A90D9, opacity: 0.08 },
+          { label: 'L05 EVIDENCE LAYER',       color: 0xC9A227, opacity: 0.12 },
+          { label: 'L06 KNOWLEDGE GRAPH',      color: 0xF5A623, opacity: 0.08 },
+          { label: 'L07 GOVERNANCE',           color: 0xC9A227, opacity: 0.12 },
+        ];
+
+        const spacing = 0.85;
+        const startY = -((layerData.length - 1) * spacing) / 2;
+
+        layerData.forEach((layer, i) => {
+          const y = startY + i * spacing;
+
+          // Plane
+          const planeGeo = new THREE.PlaneGeometry(3.6, 0.7);
+          const planeMat = new THREE.MeshBasicMaterial({
+            color: layer.color,
+            transparent: true,
+            opacity: layer.opacity,
+            side: THREE.DoubleSide
+          });
+          const plane = new THREE.Mesh(planeGeo, planeMat);
+          plane.position.set(0, y, 0);
+          plane.userData = { baseY: y, offset: i };
+          layerGroup.add(plane);
+
+          // Edges
+          const edges = new THREE.EdgesGeometry(planeGeo);
+          const lineMat = new THREE.LineBasicMaterial({
+            color: layer.color,
+            transparent: true,
+            opacity: layer.opacity * 2.5
+          });
+          const line = new THREE.LineSegments(edges, lineMat);
+          line.position.copy(plane.position);
+          line.userData = { baseY: y, offset: i };
+          layerGroup.add(line);
+        });
+
+        scene.add(layerGroup);
+
+        // ---- Connecting lines (dashed) ----
+        const lineMat2 = new THREE.LineBasicMaterial({
+          color: 0x38465A,
+          transparent: true,
+          opacity: 0.5
+        });
+
+        for (let i = 0; i < layerData.length - 1; i++) {
+          const y1 = startY + i * spacing;
+          const y2 = startY + (i + 1) * spacing;
+
+          // Left line
+          const leftPts = [
+            new THREE.Vector3(-1.3, y1, 0),
+            new THREE.Vector3(-1.3, y2, 0)
+          ];
+          const leftGeo = new THREE.BufferGeometry().setFromPoints(leftPts);
+          scene.add(new THREE.Line(leftGeo, lineMat2));
+
+          // Right line
+          const rightPts = [
+            new THREE.Vector3(1.3, y1, 0),
+            new THREE.Vector3(1.3, y2, 0)
+          ];
+          const rightGeo = new THREE.BufferGeometry().setFromPoints(rightPts);
+          scene.add(new THREE.Line(rightGeo, lineMat2));
+        }
+
+        // ---- Data particles (flowing upward) ----
+        const particleCount = 60;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+
+        for (let i = 0; i < particleCount; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 3;
+          positions[i * 3 + 1] = -3 + Math.random() * 6;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
+          velocities.push(0.005 + Math.random() * 0.012);
+        }
+
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const particleMat = new THREE.PointsMaterial({
+          size: 0.05,
+          color: 0xC9A227,
+          transparent: true,
+          opacity: 0.7,
+          sizeAttenuation: true,
+          blending: THREE.AdditiveBlending
+        });
+
+        particleSystem = new THREE.Points(particleGeo, particleMat);
+        particleSystem.userData = { velocities: velocities };
+        scene.add(particleSystem);
+
+        // Mouse tracking
+        hero.addEventListener('mousemove', onMouseMove);
+
+        // Resize
+        window.addEventListener('resize', onResize);
+
+        animate();
+      }
+
+      function onMouseMove(e) {
+        const rect = hero.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        targetRotY = mouseX * 0.3;
+        targetRotX = mouseY * 0.15;
+      }
+
+      function onResize() {
+        if (!camera || !renderer) return;
+        camera.aspect = hero.offsetWidth / hero.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(hero.offsetWidth, hero.offsetHeight);
+      }
+
+      function animate() {
+        animationId = requestAnimationFrame(animate);
+        const time = Date.now() * 0.001;
+
+        // Rotate wireframe cube
+        if (wireCube) {
+          wireCube.rotation.y = time * 0.12;
+          wireCube.rotation.x = Math.sin(time * 0.2) * 0.08;
+        }
+
+        // Float layer planes
+        if (layerGroup) {
+          layerGroup.children.forEach((child) => {
+            if (child.userData.baseY !== undefined) {
+              child.position.y = child.userData.baseY + Math.sin(time * 0.5 + child.userData.offset) * 0.12;
+              child.rotation.y = Math.sin(time * 0.3 + child.userData.offset) * 0.08;
+            }
+          });
+
+          // Smooth camera follow mouse
+          layerGroup.rotation.y += (targetRotY - layerGroup.rotation.y) * 0.05;
+          layerGroup.rotation.x += (targetRotX - layerGroup.rotation.x) * 0.05;
+        }
+
+        // Animate particles
+        if (particleSystem) {
+          const positions = particleSystem.geometry.attributes.position.array;
+          const velocities = particleSystem.userData.velocities;
+
+          for (let i = 0; i < velocities.length; i++) {
+            positions[i * 3 + 1] += velocities[i];
+
+            if (positions[i * 3 + 1] > 3) {
+              positions[i * 3 + 1] = -3;
+              positions[i * 3] = (Math.random() - 0.5) * 3;
+            }
+          }
+          particleSystem.geometry.attributes.position.needsUpdate = true;
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      // Pause when off-screen
+      const heroObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            if (!animationId && typeof THREE !== 'undefined') init();
+          } else {
+            if (animationId) {
+              cancelAnimationFrame(animationId);
+              animationId = null;
+            }
+          }
+        });
+      }, { threshold: 0 });
+
+      heroObserver.observe(hero);
+    })();
+
+
+    // ============================================================
+    // GSAP SCROLLTRIGGER — Cinematic scroll animations
+    // ============================================================
+    (function() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Enhance reveal elements with GSAP ----
+      // Override the CSS reveal with GSAP for richer animation
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach(function(el) {
+        // Skip if already visible (above the fold)
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          return; // Let CSS handle it
+        }
+
+        gsap.fromTo(el,
+          {
+            opacity: 0,
+            y: 50,
+            rotateX: 5,
+            transformPerspective: 1000
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // ---- Stagger groups ----
+      const staggerGroups = document.querySelectorAll('.reveal-stagger');
+      staggerGroups.forEach(function(group) {
+        const children = group.children;
+        if (children.length === 0) return;
+
+        const rect = group.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+        gsap.fromTo(children,
+          {
+            opacity: 0,
+            y: 30,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: group,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // ---- Parallax on hero elements ----
+      const heroGlow = document.querySelector('.arch-hero-glow');
+      const heroGrid = document.querySelector('.arch-hero-grid');
+      const hero3d = document.getElementById('hero-3d-container');
+
+      if (heroGlow || heroGrid || hero3d) {
+        gsap.to([heroGlow, hero3d].filter(Boolean), {
+          y: 200,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.arch-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1
+          }
+        });
+
+        if (heroGrid) {
+          gsap.to(heroGrid, {
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.arch-hero',
+              start: 'top top',
+              end: '40% top',
+              scrub: 1
+            }
+          });
+        }
+      }
+
+      // ---- Section headers: gold line draw ----
+      const sectionHeaders = document.querySelectorAll('.arch-section-header h2');
+      sectionHeaders.forEach(function(h2) {
+        const rect = h2.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+        gsap.fromTo(h2,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: h2,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // ---- Pipeline layer cards: 3D entrance ----
+      const layerCards = document.querySelectorAll('.pipeline-layer-card');
+      layerCards.forEach(function(card, i) {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+        gsap.fromTo(card,
+          {
+            opacity: 0,
+            y: 40,
+            rotateY: -8,
+            transformPerspective: 800
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotateY: 0,
+            duration: 0.7,
+            delay: i * 0.08,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // ---- Deployment cells: stagger entrance ----
+      const deployCells = document.querySelectorAll('.deploy-cell');
+      if (deployCells.length > 0) {
+        const firstCell = deployCells[0];
+        const rect = firstCell.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          gsap.fromTo(deployCells,
+            { opacity: 0, y: 40, scale: 0.9 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: firstCell,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+      }
+
+      // ---- Evidence chain: sequential node reveal ----
+      const evidenceNodes = document.querySelectorAll('.evidence-chain-svg g');
+      if (evidenceNodes.length > 0) {
+        evidenceNodes.forEach(function(node, i) {
+          gsap.fromTo(node,
+            { opacity: 0, scale: 0.8 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.5,
+              delay: i * 0.12,
+              ease: 'back.out(1.4)',
+              scrollTrigger: {
+                trigger: '.evidence-chain-svg',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        });
+      }
+
+      // ---- Failure Philosophy: dramatic entrance ----
+      const philosophy = document.querySelector('.arch-section[style*="padding: 80px 0 64px"] > div > div');
+      if (philosophy) {
+        const rect = philosophy.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          gsap.fromTo(philosophy,
+            { opacity: 0, scale: 0.92, y: 30 },
+            {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 1.2,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: philosophy,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+      }
+
+      // ---- Scroll progress bar ----
+      const progressBar = document.getElementById('scrollProgress');
+      if (progressBar) {
+        gsap.to(progressBar, {
+          width: '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.3
+          }
+        });
+      }
+
+      // Refresh on load
+      window.addEventListener('load', function() {
+        ScrollTrigger.refresh();
       });
     })();
   </script>
