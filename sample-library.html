@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Sample Intelligence Library — Evidence-Backed Outputs</title>
+  <meta name="description" content="Sample Intelligence Library — example intelligence products as they would arrive in institutional workflows: FOMC briefs, CPI analyses, earnings reports, and risk alerts with full evidence chains.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .sample-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .sample-tab {
+      padding: 10px 18px;
+      background: var(--rouaa-surface);
+      border: 1px solid var(--rouaa-surface-border);
+      border-radius: var(--radius-md);
+      color: var(--rouaa-text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+    .sample-tab:hover {
+      border-color: var(--rouaa-accent-border);
+      color: var(--rouaa-text-primary);
+    }
+    .sample-tab.active {
+      background: var(--rouaa-accent-subtle);
+      border-color: var(--rouaa-accent);
+      color: var(--rouaa-accent);
+    }
+
+    .sample-display {
+      display: none;
+    }
+    .sample-display.active {
+      display: block;
+    }
+
+    .brief-frame {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--rouaa-bg-tertiary);
+      border: 1px solid var(--rouaa-surface-border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .brief-header {
+      padding: 24px 32px;
+      background: var(--rouaa-bg-secondary);
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .brief-type {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-bottom: 8px;
+    }
+    .brief-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--rouaa-text-primary);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .brief-meta {
+      font-size: 12px;
+      color: var(--rouaa-text-muted);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+    .brief-body {
+      padding: 32px;
+    }
+    .brief-section {
+      margin-bottom: 32px;
+    }
+    .brief-section-h {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rouaa-text-muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rouaa-surface-border);
+    }
+    .brief-text {
+      font-size: 15px;
+      color: var(--rouaa-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    .brief-text strong {
+      color: var(--rouaa-text-primary);
+    }
+    .evidence-box {
+      padding: 16px 20px;
+      background: var(--rouaa-accent-subtle);
+      border: 1px solid var(--rouaa-accent-border);
+      border-radius: var(--radius-md);
+      margin-top: 16px;
+    }
+    .evidence-box-h {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-bottom: 12px;
+    }
+    .evidence-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      padding: 6px 0;
+      font-size: 13px;
+    }
+    .evidence-label {
+      color: var(--rouaa-text-muted);
+      font-weight: 600;
+    }
+    .evidence-value {
+      color: var(--rouaa-text-primary);
+    }
+    .evidence-value.accent {
+      color: var(--rouaa-accent);
+    }
+    .concept-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(201, 162, 39, 0.15);
+      border: 1px solid var(--rouaa-accent-border);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rouaa-accent);
+      margin-left: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 16px;">Sample Intelligence Library</span>
+      <h1>
+        Institutional Intelligence Outputs<br>
+        <span class="text-accent">evidence-backed.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        Examples of evidence-backed intelligence delivered into institutional workflows — committee briefs, macro analyses,
+        earnings reports, and risk alerts. Each carries a full evidence chain: source, document, page, paragraph, and confidence.
+      </p>
+      <div style="margin-top: 24px; padding: 12px 20px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); display: inline-block;">
+        <span style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">ⓘ Illustrative View</span>
+        <span style="font-size: 13px; color: var(--rouaa-text-secondary); margin-left: 8px;">Structural examples showing how ROUAA intelligence is delivered. Full samples on your coverage available in briefing.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SAMPLE SELECTOR ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="sample-tabs">
+        <a href="#" class="sample-tab active" data-sample="fomc">FOMC Intelligence Brief</a>
+        <a href="#" class="sample-tab" data-sample="cpi">CPI Event Analysis</a>
+        <a href="#" class="sample-tab" data-sample="earnings">Earnings Evidence Report</a>
+        <a href="#" class="sample-tab" data-sample="risk">Risk Alert</a>
+        <a href="#" class="sample-tab" data-sample="committee">Investment Committee Brief</a>
+      </div>
+
+      <!-- Sample 1: FOMC Brief -->
+      <div class="sample-display active" id="sample-fomc">
+        <div class="brief-frame">
+          <div class="brief-header">
+            <div class="brief-type">Monetary Policy Intelligence Brief <span class="concept-badge">Illustrative View</span></div>
+            <div class="brief-title">Federal Reserve Maintains Federal Funds Rate at 5.25–5.50%</div>
+            <div class="brief-meta">Generated: 2026-08-02 14:00:14 UTC · Confidence: 97% · Sources: 1 · Evidence links: 4</div>
+          </div>
+          <div class="brief-body">
+            <div class="brief-section">
+              <div class="brief-section-h">Intelligence Metadata</div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px;">
+                <div style="padding: 10px 14px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Output ID</div>
+                  <div style="font-size: 13px; color: var(--rouaa-text-primary); font-family: 'SFMono-Regular', Consolas, monospace;">INT-2026-0041</div>
+                </div>
+                <div style="padding: 10px 14px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Generated</div>
+                  <div style="font-size: 13px; color: var(--rouaa-text-primary);">14:00 UTC</div>
+                </div>
+                <div style="padding: 10px 14px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Generated By</div>
+                  <div style="font-size: 13px; color: var(--rouaa-text-primary);">Policy Engine</div>
+                </div>
+                <div style="padding: 10px 14px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Evidence Links</div>
+                  <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">4</div>
+                </div>
+                <div style="padding: 10px 14px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Confidence</div>
+                  <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">97%</div>
+                </div>
+                <div style="padding: 10px 14px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-sm);">
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase; margin-bottom: 4px;">Status</div>
+                  <div style="font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">Audit Ready</div>
+                </div>
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Headline</div>
+              <div class="brief-text">
+                The Federal Open Market Committee voted to maintain the target range for the federal funds rate at <strong>5.25 to 5.50 percent</strong>.
+                The Committee noted that economic activity has continued to expand at a solid pace, while inflation has moved toward the 2 percent objective.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Context</div>
+              <div class="brief-text">
+                Policy stance remains <strong>restrictive and data-dependent</strong>. The Committee updated its economic assessment,
+                noting solid economic expansion, moderating inflation, and a strong labor market. Forward guidance was adjusted
+                to emphasize data dependence, with no specific timeline for rate adjustments.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Implication</div>
+              <div class="brief-text">
+                Rate cut timeline pushed to <strong>Q4 2026</strong>. Equity markets likely to reprice duration risk.
+                Fixed income: extend duration selectively. USD likely to remain firm in the near term.
+              </div>
+            </div>
+            <div class="evidence-box">
+              <div class="evidence-box-h">Evidence Chain</div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source</div>
+                <div class="evidence-value">Federal Reserve — Federal Open Market Committee</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Document</div>
+                <div class="evidence-value">FOMC Statement — August 2, 2026</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Location</div>
+                <div class="evidence-value">Page 1 · Paragraph 2</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Extracted Fact</div>
+                <div class="evidence-value">"target range for the federal funds rate at 5.25 to 5.50 percent"</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Confidence</div>
+                <div class="evidence-value accent">97% · Tier 1 · Official source · direct extraction</div>
+              </div>
+            </div>
+            <div class="brief-section" style="margin-top: 24px;">
+              <div class="brief-section-h">Supporting Evidence</div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                <div style="padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm); text-align: center;">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">3</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Documents</div>
+                </div>
+                <div style="padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm); text-align: center;">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">6</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Facts</div>
+                </div>
+                <div style="padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm); text-align: center;">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">2</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Historical Events</div>
+                </div>
+                <div style="padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm); text-align: center;">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">1</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Related Scenario</div>
+                </div>
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Available As</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="padding: 6px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">PDF</span>
+                <span style="padding: 6px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">API</span>
+                <span style="padding: 6px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">Dashboard</span>
+                <span style="padding: 6px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">Email</span>
+                <span style="padding: 6px 14px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-size: 12px; color: var(--rouaa-text-secondary);">Committee Brief</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 2: CPI Analysis -->
+      <div class="sample-display" id="sample-cpi">
+        <div class="brief-frame">
+          <div class="brief-header">
+            <div class="brief-type">Economic Release Analysis <span class="concept-badge">Illustrative View</span></div>
+            <div class="brief-title">US CPI — Year-over-Year Inflation Moderates to 2.9%</div>
+            <div class="brief-meta">Generated: 2026-08-02 13:30:08 UTC · Confidence: 99% · Sources: 1 · Evidence links: 6</div>
+          </div>
+          <div class="brief-body">
+            <div class="brief-section">
+              <div class="brief-section-h">Headline</div>
+              <div class="brief-text">
+                The Bureau of Labor Statistics reported that the Consumer Price Index increased <strong>2.9 percent</strong> year-over-year,
+                down from 3.1 percent in the prior month. Core CPI, excluding food and energy, rose 3.2 percent.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Context</div>
+              <div class="brief-text">
+                Inflation trend continues <strong>moderating</strong> toward the Federal Reserve's 2 percent objective.
+                Comparison to previous release shows a 0.2 percentage point decline in headline CPI.
+                Market expectations had priced in 3.0 percent; actual print came in below consensus.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Implication</div>
+              <div class="brief-text">
+                Reinforces the case for a <strong>rate cut in Q4 2026</strong>. Treasury yields likely to decline.
+                Equity markets may rally on dovish interpretation. USD may weaken against major currencies.
+              </div>
+            </div>
+            <div class="evidence-box">
+              <div class="evidence-box-h">Evidence Chain</div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source</div>
+                <div class="evidence-value">U.S. Bureau of Labor Statistics</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Document</div>
+                <div class="evidence-value">Consumer Price Index Summary — August 2026</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Location</div>
+                <div class="evidence-value">Page 3 · Table A</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Extracted Fact</div>
+                <div class="evidence-value">"CPI increased 2.9 percent for the 12 months ending August 2026"</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Confidence</div>
+                <div class="evidence-value accent">99% · Tier 1 · Official statistical release</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 3: Earnings Report -->
+      <div class="sample-display" id="sample-earnings">
+        <div class="brief-frame">
+          <div class="brief-header">
+            <div class="brief-type">Corporate Event Evidence Report <span class="concept-badge">Illustrative View</span></div>
+            <div class="brief-title">Saudi Aramco Q2 2026 — Revenue and Profit Exceed Expectations</div>
+            <div class="brief-meta">Generated: 2026-08-02 07:00:12 UTC · Confidence: 98% · Sources: 2 · Evidence links: 12</div>
+          </div>
+          <div class="brief-body">
+            <div class="brief-section">
+              <div class="brief-section-h">Headline</div>
+              <div class="brief-text">
+                Saudi Aramco reported Q2 2026 revenue of <strong>USD 108.2 billion</strong>, up 8.4 percent year-over-year,
+                and net income of <strong>USD 33.1 billion</strong>, exceeding analyst consensus by 6.2 percent.
+                Dividend declared at USD 0.2588 per share.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Context</div>
+              <div class="brief-text">
+                Year-over-year comparison shows <strong>strong upstream performance</strong> driven by higher realized prices
+                and increased production volumes. Segment breakdown: Upstream +12%, Downstream +4%, Chemicals -2%.
+                Forward guidance maintained — capital expenditure outlook unchanged for FY2026.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Implication</div>
+              <div class="brief-text">
+                Positive read-through for <strong>energy sector and GCC equities</strong>. Petro Rabigh, SABIC,
+                and regional banks likely beneficiaries. Aramco dividend yield remains attractive for income-focused portfolios.
+              </div>
+            </div>
+            <div class="evidence-box">
+              <div class="evidence-box-h">Evidence Chain</div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source</div>
+                <div class="evidence-value">Saudi Aramco — Official Earnings Filing</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Document</div>
+                <div class="evidence-value">Q2 2026 Earnings Release</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Location</div>
+                <div class="evidence-value">Page 4 · Paragraph 3 · Revenue Table</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Extracted Fact</div>
+                <div class="evidence-value">"Revenue: USD 108.2B (+8.4% YoY) · Net Income: USD 33.1B"</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Confidence</div>
+                <div class="evidence-value accent">98% · Tier 1 · Official regulatory filing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 4: Risk Alert -->
+      <div class="sample-display" id="sample-risk">
+        <div class="brief-frame">
+          <div class="brief-header">
+            <div class="brief-type">Risk Intelligence Alert <span class="concept-badge">Illustrative View</span></div>
+            <div class="brief-title">Regulatory Designation Update — Material Exposure Detected</div>
+            <div class="brief-meta">Generated: 2026-08-02 14:11:32 UTC · Severity: Material · Affected counterparties: 3 direct · 11 indirect</div>
+          </div>
+          <div class="brief-body">
+            <div class="brief-section">
+              <div class="brief-section-h">Alert</div>
+              <div class="brief-text">
+                A regulatory authority has updated the designation of <strong>Entity X</strong>, triggering exposure assessment
+                across the institution's portfolio. Direct exposure: <strong>USD 47M</strong> across 2 designated entities.
+                Indirect exposure: <strong>USD 184M</strong> via 11 second-order links.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Affected Counterparties</div>
+              <div class="brief-text">
+                <strong>Direct (2):</strong> Entity X · Entity Y<br>
+                <strong>Indirect (11):</strong> Counterparties with second-order links to designated entities —
+                full list available in the exposure analysis module.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Recommended Action</div>
+              <div class="brief-text">
+                Risk Committee Action — <strong>Reduce Exposure Within 5 Business Days</strong>.
+                Exit direct exposure to 2 designated entities. Initiate exposure reduction on 4 highest-priority indirect links.
+                Report execution status to risk committee at next scheduled meeting.
+              </div>
+            </div>
+            <div class="evidence-box">
+              <div class="evidence-box-h">Evidence Chain</div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source</div>
+                <div class="evidence-value">Regulatory Authority — Official Announcement</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Document</div>
+                <div class="evidence-value">Regulatory Notice — August 2, 2026</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Location</div>
+                <div class="evidence-value">Page 1 · Paragraph 1</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Extracted Fact</div>
+                <div class="evidence-value">"Entity X designation updated to [Designation Category]"</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Confidence</div>
+                <div class="evidence-value accent">100% · Tier 1 · Official regulatory source</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 5: Investment Committee Brief -->
+      <div class="sample-display" id="sample-committee">
+        <div class="brief-frame">
+          <div class="brief-header">
+            <div class="brief-type">Investment Committee Brief <span class="concept-badge">Illustrative View</span></div>
+            <div class="brief-title">Q3 2026 Investment Committee — Macro Positioning &amp; Rate Outlook</div>
+            <div class="brief-meta">Generated: 2026-08-02 14:35:00 UTC · Confidence: 96% · Sources: 8 · Evidence links: 47</div>
+          </div>
+          <div class="brief-body">
+            <div class="brief-section">
+              <div class="brief-section-h">Generation Pipeline</div>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px;">
+                <div style="text-align: center; padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">8</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Sources</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">14</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Documents</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">52</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Facts</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: var(--rouaa-bg-secondary); border-radius: var(--radius-sm);">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">47</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Evidence Links</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-sm);">
+                  <div style="font-size: 18px; font-weight: 700; color: var(--rouaa-accent);">96%</div>
+                  <div style="font-size: 10px; color: var(--rouaa-text-muted); text-transform: uppercase;">Confidence</div>
+                </div>
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Headline</div>
+              <div class="brief-text">
+                <strong>Macro positioning: Neutral-to-cautious.</strong> Federal Reserve maintains restrictive stance with rate cut timeline pushed to Q4 2026.
+                Inflation moderating but above target. Labor market softening but resilient. Equity valuations stretched; fixed income offers selective opportunity.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Key Findings</div>
+              <div class="brief-text">
+                <strong style="color: var(--rouaa-text-primary);">1. Monetary Policy:</strong> FOMC held rate at 5.25–5.50%. Forward guidance adjusted to data-dependent stance. Cut expected December 2026 (45% probability).<br><br>
+                <strong style="color: var(--rouaa-text-primary);">2. Inflation:</strong> CPI at 2.9% YoY, down from 3.1%. Core CPI at 3.2%. Trend: moderating toward 2% objective.<br><br>
+                <strong style="color: var(--rouaa-text-primary);">3. Labor Market:</strong> Nonfarm payrolls +187K. Unemployment at 3.8%. Wage growth cooling to 3.5%.<br><br>
+                <strong style="color: var(--rouaa-text-primary);">4. Growth:</strong> GDP estimate at 2.1% annualized. Solid expansion continuing but decelerating.
+              </div>
+            </div>
+            <div class="brief-section">
+              <div class="brief-section-h">Recommendation</div>
+              <div class="brief-text">
+                <strong>Equities:</strong> Maintain neutral positioning. Reduce duration risk in growth names. Add defensive sectors (utilities, healthcare).<br><br>
+                <strong>Fixed Income:</strong> Extend duration selectively. 5–7 year Treasuries offer attractive risk/reward at current yields.<br><br>
+                <strong>USD:</strong> Expect near-term strength. Reduce exposure to EM currencies vulnerable to higher-for-longer rates.<br><br>
+                <strong>Commodities:</strong> Neutral on energy. Positive on gold as portfolio hedge against rate cut delay risk.
+              </div>
+            </div>
+            <div class="evidence-box">
+              <div class="evidence-box-h">Evidence Package — 8 Sources, 47 Evidence Links</div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source 01</div>
+                <div class="evidence-value">Federal Reserve — FOMC Statement · Page 1 · Para 2</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source 02</div>
+                <div class="evidence-value">BLS — CPI Summary · Page 3 · Table A</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source 03</div>
+                <div class="evidence-value">BLS — Employment Situation · Page 2 · Table B</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Source 04</div>
+                <div class="evidence-value">BEA — GDP Estimate · Page 7 · Para 4</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Sources 05–08</div>
+                <div class="evidence-value">ECB · IMF · OECD · BIS — cross-reference and validation</div>
+              </div>
+              <div class="evidence-row">
+                <div class="evidence-label">Overall Confidence</div>
+                <div class="evidence-value accent">96% · 8 Tier 1 sources · 47 evidence links · audit-ready</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width: 880px; margin: 40px auto 0; text-align: center;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">
+          These are structural examples showing how ROUAA intelligence is delivered — every output carries source, document,
+          location, and confidence. Full sample intelligence products on your source coverage are available during the institutional briefing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section" style="background: var(--rouaa-bg-secondary);" id="cta">
+    <div class="container">
+      <h2>See intelligence on your sources.</h2>
+      <p style="max-width: 640px; margin: 0 auto 32px;">
+        In a live briefing, we generate sample intelligence products on your source coverage — your jurisdictions, your event types, your workflows.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
+        <a href="evidence-explorer.html" class="btn btn-secondary">Evidence Explorer →</a>
+        <a href="product-experience.html" class="btn btn-secondary">Product Experience Center →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Sample tab switching
+    (function() {
+      const tabs = document.querySelectorAll('.sample-tab');
+      const displays = document.querySelectorAll('.sample-display');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const sample = tab.dataset.sample;
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          displays.forEach(d => d.classList.remove('active'));
+          const target = document.getElementById('sample-' + sample);
+          if (target) target.classList.add('active');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

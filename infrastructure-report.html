@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROUAA Infrastructure Report — What Exists Today</title>
+  <meta name="description" content="Operational status of ROUAA's intelligence infrastructure by layer — what exists, what is operational, and validation examples showing how official sources become evidence-backed intelligence.">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/typography.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger active" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>
+          </div>
+        </div>
+                <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" style="display: block; margin-bottom: 24px;">ROUAA Infrastructure Report</span>
+      <h1>
+        What exists today.<br>
+        <span class="text-accent">Not what is planned.</span>
+      </h1>
+      <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
+        Institutions evaluating ROUAA need to see what is built and operating — not what is on a roadmap.
+        This report documents the current operational status of each layer, the components in production,
+        and validation examples showing how official sources become evidence-backed intelligence.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTION EVIDENCE ============ -->
+  <section class="section" id="production-evidence">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Production Evidence</span>
+        <h2>Operational components already running.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">This is not a design document or a roadmap. The components below are running in production — processing real sources, extracting real facts, and building real evidence chains.</p>
+      </div>
+
+      <!-- Operational components checklist -->
+      <div style="max-width: 720px; margin: 0 auto;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+
+          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
+            <div style="color: var(--rouaa-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Official Source Registry</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary);">411+ institutional sources classified and monitored.</div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
+            <div style="color: var(--rouaa-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Document Intelligence Pipeline</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary);">PDF, HTML, API ingestion and normalization.</div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
+            <div style="color: var(--rouaa-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Evidence Provenance</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Fact → Document → Location → Source traceability.</div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
+            <div style="color: var(--rouaa-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Financial Event Engine</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Macro events, releases, and policy decisions detected.</div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; border-color: var(--rouaa-accent-border); background: linear-gradient(180deg, rgba(201, 162, 39,0.06), rgba(201, 162, 39,0.02));">
+            <div style="color: var(--rouaa-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-size: 15px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 4px;">Intelligence Pipeline</div>
+              <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Source → Evidence → Intelligence Output.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Status badges -->
+      <div style="max-width: 720px; margin: 32px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+        <div style="padding: 16px 24px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(201, 162, 39, 0.08), rgba(201, 162, 39, 0.02)); text-align: center;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">System Status</div>
+          <div style="font-size: 18px; color: var(--rouaa-accent); font-weight: 700;">● Operational</div>
+        </div>
+        <div style="padding: 16px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Infrastructure Snapshot</div>
+          <div style="font-size: 18px; color: var(--rouaa-text-primary); font-weight: 700;">August 2026</div>
+        </div>
+        <div style="padding: 16px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 6px;">Environment</div>
+          <div style="font-size: 18px; color: var(--rouaa-text-primary); font-weight: 700;">Internal Production</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT EXISTS TODAY ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="what-exists">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">What Exists Today</span>
+        <h2>Operational status by component.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">Each component is mapped to its current operational status and the evidence behind that status. No status is claimed without supporting evidence.</p>
+      </div>
+      <div style="max-width: 1040px; margin: 0 auto; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--rouaa-surface-border);">
+              <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rouaa-text-muted); font-weight: 600;">Component</th>
+              <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rouaa-text-muted); font-weight: 600;">Status</th>
+              <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rouaa-text-muted); font-weight: 600;">Evidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Source Registry</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">411+ institutional sources registered and monitored</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Document Engine</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">PDF / HTML / API ingestion across central bank, regulator, and statistical sources</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Fact Engine</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Financial metrics extraction — CPI, GDP, employment, interest rate decisions</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Event Engine</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Economic event detection and classification across covered source types</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Evidence Layer</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Provenance chain: Fact → Document → Page → Paragraph</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Governance Controls</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Operational Foundation</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Confidence scoring, source hierarchy, validation rules, audit trail structure</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rouaa-surface-border);">
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Knowledge Graph</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-text-muted); font-weight: 600;">Active Development</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Entity model and event connections in development</td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-primary); font-weight: 600;">Intelligence Applications</td>
+              <td style="padding: 14px 16px;"><span style="color: var(--rouaa-accent); font-weight: 600;">Deployable</span></td>
+              <td style="padding: 14px 16px; color: var(--rouaa-text-secondary);">Trading, Institutional, Media, Developer Intelligence applications</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="max-width: 720px; margin: 32px auto 0; text-align: center;">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">
+          Status definitions: <strong style="color: var(--rouaa-text-primary);">Operational</strong> = in production, processing real sources. <strong style="color: var(--rouaa-text-primary);">Operational Foundation</strong> = framework in place and operating, with continued extension. <strong style="color: var(--rouaa-text-primary);">Active Development</strong> = under construction, not yet in production.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLATFORM WALKTHROUGH ============ -->
+  <section class="section" id="walkthrough">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Platform Walkthrough</span>
+        <h2>How intelligence moves through ROUAA.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">Follow one official source from publication to intelligence output. Each step shows what ROUAA does — and what evidence is preserved at every stage.</p>
+      </div>
+
+      <div style="max-width: 720px; margin: 0 auto;">
+
+        <!-- Step 1: Source publishes -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #2DBA8E;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #2DBA8E; margin-bottom: 6px;">Step 01 · Source Publication</div>
+            <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">European Central Bank publishes monetary policy statement</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Official source · Tier 1 trust · detected within seconds of publication</div>
+          </div>
+          <div style="padding: 14px 16px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary); margin-bottom: 8px;">Raw PDF document</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Stored In</div>
+            <div style="font-size: 12px; color: #2DBA8E; font-weight: 600;">Source Registry</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 14px; padding: 6px 0;">↓</div>
+
+        <!-- Step 2: Document ingestion -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4A90D9; margin-bottom: 6px;">Step 02 · Document Intelligence</div>
+            <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">ROUAA ingests and normalizes the document</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">PDF extracted · text structured · metadata normalized</div>
+          </div>
+          <div style="padding: 14px 16px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary); margin-bottom: 8px;">Structured document</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Stored In</div>
+            <div style="font-size: 12px; color: #4A90D9; font-weight: 600;">Document Store</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 14px; padding: 6px 0;">↓</div>
+
+        <!-- Step 3: Fact extraction -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4A90D9; margin-bottom: 6px;">Step 03 · Fact Extraction</div>
+            <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Key facts extracted from the statement</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Interest rate decision · policy stance · forward guidance · economic assessment</div>
+          </div>
+          <div style="padding: 14px 16px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary); margin-bottom: 8px;">Verified financial facts</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Stored In</div>
+            <div style="font-size: 12px; color: #4A90D9; font-weight: 600;">Fact Database</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 14px; padding: 6px 0;">↓</div>
+
+        <!-- Step 4: Event detection -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4A90D9; margin-bottom: 6px;">Step 04 · Event Detection</div>
+            <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Monetary Policy Decision event classified</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Event type: Interest Rate Decision · jurisdiction: Eurozone · impact: Material</div>
+          </div>
+          <div style="padding: 14px 16px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary); margin-bottom: 8px;">Classified financial event</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Stored In</div>
+            <div style="font-size: 12px; color: #4A90D9; font-weight: 600;">Event Log</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 14px; padding: 6px 0;">↓</div>
+
+        <!-- Step 5: Evidence linking -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid var(--rouaa-accent);">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 6px;">Step 05 · Evidence Linking</div>
+            <div style="font-size: 15px; color: var(--rouaa-text-primary); font-weight: 600; margin-bottom: 4px;">Every fact linked to source document, page, and paragraph</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Provenance chain: Fact → ECB Statement → Page 2 → Paragraph 3</div>
+          </div>
+          <div style="padding: 14px 16px; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-text-secondary); margin-bottom: 8px;">Evidence chain records</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Stored In</div>
+            <div style="font-size: 12px; color: var(--rouaa-accent); font-weight: 600;">Evidence Layer</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 14px; padding: 6px 0;">↓</div>
+
+        <!-- Step 6: Intelligence output -->
+        <div style="display: grid; grid-template-columns: 1fr 180px; gap: 12px; align-items: stretch;">
+          <div style="padding: 20px 24px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(201, 162, 39, 0.10), rgba(201, 162, 39, 0.04)); border-left: 3px solid var(--rouaa-accent);">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 6px;">Step 06 · Intelligence Output</div>
+            <div style="font-size: 15px; color: var(--rouaa-accent); font-weight: 700; margin-bottom: 4px;">Monetary policy intelligence brief generated</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary);">Evidence-backed · governance-validated · audit-ready</div>
+          </div>
+          <div style="padding: 14px 16px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(201, 162, 39, 0.08), rgba(201, 162, 39, 0.02)); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Output</div>
+            <div style="font-size: 12px; color: var(--rouaa-accent); font-weight: 600; margin-bottom: 8px;">Intelligence brief</div>
+            <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 4px;">Delivered To</div>
+            <div style="font-size: 12px; color: var(--rouaa-accent); font-weight: 600;">Applications</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="max-width: 640px; margin: 32px auto 0; text-align: center;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">
+          Every step preserves its output in the appropriate storage layer — Source Registry, Document Store, Fact Database, Event Log, and Evidence Layer. The intelligence brief inherits all of them. This is what makes ROUAA intelligence defensible: not the output itself, but the traceable path behind it.
+        </p>
+      </div>
+      <div class="text-center" style="margin-top: 24px;">
+        <a href="#sample-outputs" class="btn btn-secondary">View Sample Outputs ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE ARCHITECTURE WALKTHROUGH ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="live-walkthrough">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Live Architecture Walkthrough</span>
+        <h2>Federal Reserve Rate Decision — the full path.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">Not a technical explanation — a story. Follow one real event from publication to institutional brief, and see exactly what happens at each stage.</p>
+      </div>
+      <div style="max-width: 560px; margin: 0 auto;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+
+          <div style="padding: 14px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #2DBA8E; text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #2DBA8E; margin-bottom: 4px;">Source Published</div>
+            <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600;">Federal Reserve publishes FOMC statement</div>
+          </div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 12px;">↓</div>
+
+          <div style="padding: 14px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9; text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A90D9; margin-bottom: 4px;">Document Captured</div>
+            <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600;">PDF ingested · text extracted · metadata normalized</div>
+          </div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 12px;">↓</div>
+
+          <div style="padding: 14px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9; text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A90D9; margin-bottom: 4px;">Facts Extracted</div>
+            <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600;">Rate decision · policy stance · forward guidance</div>
+          </div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 12px;">↓</div>
+
+          <div style="padding: 14px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid #4A90D9; text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4A90D9; margin-bottom: 4px;">Event Classified</div>
+            <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600;">Interest Rate Decision · Material · Global impact</div>
+          </div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 12px;">↓</div>
+
+          <div style="padding: 14px 20px; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); border-left: 3px solid var(--rouaa-accent); text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Evidence Linked</div>
+            <div style="font-size: 14px; color: var(--rouaa-text-primary); font-weight: 600;">Fact → FOMC Statement → Page 1 → Paragraph 2</div>
+          </div>
+          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 12px;">↓</div>
+
+          <div style="padding: 14px 20px; border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(201, 162, 39, 0.10), rgba(201, 162, 39, 0.04)); border-left: 3px solid var(--rouaa-accent); text-align: center;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); margin-bottom: 4px;">Institutional Brief Generated</div>
+            <div style="font-size: 14px; color: var(--rouaa-accent); font-weight: 700;">Monetary Policy Intelligence Brief · Audit-ready</div>
+          </div>
+
+        </div>
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="evidence-explorer.html" class="btn btn-secondary">Explore Interactive Evidence Explorer →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SAMPLE INTELLIGENCE OUTPUTS ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);" id="sample-outputs">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">Sample Intelligence Outputs</span>
+        <h2>What ROUAA intelligence looks like.</h2>
+        <p style="margin: 0 auto; max-width: 720px;">Example intelligence products as they would arrive in an institutional workflow — each with the evidence chain attached, each traceable to the original source document.</p>
+      </div>
+
+      <div class="grid-2" style="max-width: 960px; margin: 0 auto; gap: 24px;">
+
+        <!-- Sample 01: FOMC Brief -->
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Sample 01 · Monetary Policy</div>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">FOMC Intelligence Brief</h4>
+          <div style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 16px;">
+            <strong style="color: var(--rouaa-text-primary);">Headline:</strong> Federal Reserve maintains federal funds target range.<br>
+            <strong style="color: var(--rouaa-text-primary);">Context:</strong> Policy stance unchanged · economic assessment updated · forward guidance adjusted.
+          </div>
+          <div style="border-top: 1px solid var(--rouaa-surface-border); padding-top: 12px; margin-bottom: 16px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Chain</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+              <div>Source: Federal Reserve — FOMC Statement</div>
+              <div>Document: FOMC Meeting Statement</div>
+              <div>Location: Page 1 · Paragraph 2</div>
+              <div>Confidence: Tier 1 · Official</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">
+            <span>Open Sample</span> <span>→</span>
+          </div>
+        </div>
+
+        <!-- Sample 02: CPI Event Analysis -->
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Sample 02 · Economic Release</div>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">CPI Event Analysis</h4>
+          <div style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 16px;">
+            <strong style="color: var(--rouaa-text-primary);">Headline:</strong> Consumer Price Index released — year-over-year change extracted.<br>
+            <strong style="color: var(--rouaa-text-primary);">Context:</strong> Inflation trend · comparison to previous release · market expectations vs actual.
+          </div>
+          <div style="border-top: 1px solid var(--rouaa-surface-border); padding-top: 12px; margin-bottom: 16px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Chain</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+              <div>Source: Bureau of Labor Statistics</div>
+              <div>Document: CPI Summary Report</div>
+              <div>Location: Page 3 · Table A</div>
+              <div>Confidence: Tier 1 · Official</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">
+            <span>Open Sample</span> <span>→</span>
+          </div>
+        </div>
+
+        <!-- Sample 03: Earnings Evidence Report -->
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Sample 03 · Corporate Event</div>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Earnings Evidence Report</h4>
+          <div style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 16px;">
+            <strong style="color: var(--rouaa-text-primary);">Headline:</strong> Quarterly earnings released — revenue, profit, and guidance extracted.<br>
+            <strong style="color: var(--rouaa-text-primary);">Context:</strong> Year-over-year comparison · segment breakdown · forward guidance.
+          </div>
+          <div style="border-top: 1px solid var(--rouaa-surface-border); padding-top: 12px; margin-bottom: 16px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Chain</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+              <div>Source: Official earnings filing</div>
+              <div>Document: Quarterly Earnings Release</div>
+              <div>Location: Page 4 · Paragraph 3 · Revenue Table</div>
+              <div>Confidence: Tier 1 · Official</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">
+            <span>Open Sample</span> <span>→</span>
+          </div>
+        </div>
+
+        <!-- Sample 04: Risk Scenario -->
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Sample 04 · Risk Intelligence</div>
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent); font-size: 17px;">Risk Scenario Intelligence</h4>
+          <div style="font-size: 14px; color: var(--rouaa-text-secondary); line-height: var(--leading-relaxed); margin-bottom: 16px;">
+            <strong style="color: var(--rouaa-text-primary);">Headline:</strong> Regulatory event detected — exposure assessment generated.<br>
+            <strong style="color: var(--rouaa-text-primary);">Context:</strong> Affected counterparties · jurisdictional exposure · recommended action.
+          </div>
+          <div style="border-top: 1px solid var(--rouaa-surface-border); padding-top: 12px; margin-bottom: 16px;">
+            <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rouaa-text-muted); margin-bottom: 8px;">Evidence Chain</div>
+            <div style="font-size: 13px; color: var(--rouaa-text-secondary); line-height: 1.7;">
+              <div>Source: Regulatory authority announcement</div>
+              <div>Document: Official regulatory notice</div>
+              <div>Location: Page 1 · Paragraph 1</div>
+              <div>Confidence: Tier 1 · Official</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--rouaa-accent); font-weight: 600;">
+            <span>Open Sample</span> <span>→</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="max-width: 720px; margin: 32px auto 0; text-align: center;">
+        <p style="font-size: 14px; color: var(--rouaa-text-muted); line-height: var(--leading-relaxed);">
+          These are structural examples showing how ROUAA intelligence is delivered — every output carries source, document, location, and confidence. Full sample intelligence products on your source coverage are available during the institutional briefing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT THIS MEANS ============ -->
+  <section class="section" style="background: var(--rouaa-bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center" style="margin: 0 auto 48px;">
+        <span class="eyebrow">What This Means</span>
+        <h2>ROUAA is built. Not just designed.</h2>
+      </div>
+      <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Operational Layers</h4>
+          <p style="font-size: 14px;">Five of seven architecture layers are operational. Sources are monitored. Documents are processed. Facts are extracted. Evidence is linked. Governance rules operate before output. This is not a design document — it is a running system.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Active Development</h4>
+          <p style="font-size: 14px;">The knowledge graph layer is in active development — entity relationships, event connections, and institutional ontology. This is disclosed honestly, not hidden. Institutions can evaluate ROUAA on what exists today.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom: 12px; color: var(--rouaa-accent);">Verifiable Claims</h4>
+          <p style="font-size: 14px;">Every claim in this report is supported by evidence — source counts, document types, provenance chains, and validation examples. Institutions engaged in the briefing process receive deeper operational visibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2>See the infrastructure in operation.</h2>
+      <p style="max-width: 680px; margin: 0 auto 32px;">
+        Request an institutional briefing. We will walk through the operational layers, validation examples on your source coverage, and the deployment model that fits your requirements.
+      </p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Request Institutional Briefing</a>
+        <a href="architecture.html" class="btn btn-secondary">View Architecture</a>
+        <a href="source-registry.html" class="btn btn-secondary">Source Registry</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Channels</div>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html#solution-02">Investment Firms</a>
+          <a href="solutions.html#solution-05">Banks &amp; Institutions</a>
+          <a href="solutions.html#solution-03">Trading Desks</a>
+          <a href="enterprise.html">Private Deployment</a>
+          <a href="enterprise.html">White Label</a>
+        </div>
+                <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

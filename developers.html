@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080B12">
+<title>ROUAA Developer Intelligence — Products Architecture & How to Buy</title>
+<meta name="description" content="ROUAA is not a tool store. Every business unit consumes from the same engine, and every product carries the same evidence chain. This is the architecture that organizes how you buy from ROUAA.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/typography.css">
+<link rel="stylesheet" href="design-system/components.css">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* === Accessibility & legacy utility class definitions (preserved from source) === */
+.skip-link { position: absolute; left: 0; top: -100px; padding: 8px 16px; background: var(--rouaa-accent); color: var(--rouaa-bg-primary); text-decoration: none; z-index: 2000; font-size: 14px; font-weight: 600; transition: top 200ms ease; }
+.skip-link:focus { top: 0; }
+
+.mono-label { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rouaa-text-muted); font-weight: 600; display: inline-block; }
+.text-gold { color: var(--rouaa-accent); }
+.text-mute { color: var(--rouaa-text-muted); }
+.text-dim { color: var(--rouaa-text-secondary); }
+.small { font-size: 13px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-6 { margin-bottom: 32px; }
+
+/* Section utility classes (preserved from source design-system) */
+.section-centered { text-align: center; }
+.section-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent-border); border-radius: var(--radius-full); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rouaa-accent); }
+.section-h { font-size: clamp(1.875rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--rouaa-text-primary); max-width: 24ch; }
+.section-lead { font-size: 1.0625rem; color: var(--rouaa-text-secondary); max-width: 60ch; line-height: 1.7; }
+
+/* Button helpers (preserved from source) */
+.btn-lg { padding: 14px 32px; font-size: 15px; }
+.btn-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 4px; font-size: 14px; font-weight: 600; color: var(--rouaa-text-secondary); text-decoration: none; transition: color var(--transition-base); }
+.btn-link:hover { color: var(--rouaa-accent); }
+
+/* Reveal-on-scroll (preserved from source script) */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* === Hero === */
+.hero-pa { position: relative; padding: 9rem 0 4rem; overflow: hidden; text-align: center; }
+.hero-pa-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--rouaa-accent-subtle), transparent 70%); z-index: 0; }
+.hero-pa-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.hero-pa-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 22ch; }
+.hero-pa-h1 .gold { color: var(--rouaa-accent); }
+.hero-pa-sub { font-size: 1.0625rem; color: var(--rouaa-text-secondary); max-width: 60ch; line-height: 1.7; }
+.hero-pa-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+/* === The Bridge Logic === */
+.bridge-logic { max-width: 1000px; margin: 2rem auto 0; display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: center; gap: 0.5rem; }
+@media (max-width: 768px) { .bridge-logic { grid-template-columns: 1fr; gap: 1rem; } }
+.bridge-block { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; text-align: center; }
+.bridge-block.center { background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent); }
+.bridge-block-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.bridge-block-val { font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--rouaa-text-primary); line-height: 1.3; }
+.bridge-arrow { text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 1.25rem; }
+
+/* === Architecture Tree === */
+.arch-tree { max-width: 1200px; margin: 2rem auto 0; }
+.arch-root { text-align: center; padding: 1.5rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-xl); margin-bottom: 1.5rem; }
+.arch-root-h { font-family: inherit; font-size: 1.125rem; font-weight: 700; color: var(--rouaa-accent); }
+.arch-root-sub { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; }
+
+/* === Tree visual: Engine → 5 lines → 44 products === */
+.tree-visual { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; }
+.tree-connector { color: var(--rouaa-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0; }
+.tree-lines { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+@media (max-width: 600px) { .tree-lines { grid-template-columns: repeat(3, 1fr); } }
+.tree-line { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.75rem 0.5rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-top: 3px solid var(--tl-color, var(--rouaa-accent)); border-radius: var(--radius-md); }
+.tree-line-icon { font-size: 1.25rem; }
+.tree-line-name { font-family: inherit; font-size: 0.75rem; font-weight: 700; color: var(--rouaa-text-primary); }
+.tree-line-count { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--tl-color, var(--rouaa-accent)); font-weight: 700; }
+.tree-products { display: inline-block; padding: 0.625rem 1.25rem; background: var(--rouaa-accent-subtle); border: 1px solid rgba(201, 162, 39,0.3); border-radius: var(--radius-md); font-family: inherit; font-size: 0.8125rem; font-weight: 700; color: var(--rouaa-accent); }
+
+.arch-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.arch-branch { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); padding: 1.25rem; transition: border-color var(--transition-slow); position: relative; overflow: hidden; }
+.arch-branch:hover { border-color: var(--b-color, var(--rouaa-accent)); }
+.arch-branch::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 3px; background: var(--b-color, var(--rouaa-accent)); }
+.arch-branch.b-media { --b-color: #4A90D9; }
+.arch-branch.b-trading { --b-color: #2DBA8E; }
+.arch-branch.b-research { --b-color: var(--rouaa-accent); }
+.arch-branch.b-risk { --b-color: #E5484D; }
+.arch-branch.b-dev { --b-color: #F5A623; }
+
+.arch-branch-h { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.arch-branch-icon { font-size: 1.25rem; }
+.arch-branch-name { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); }
+.arch-branch-count { margin-right: auto; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--b-color); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); }
+
+/* === Suite-based layout (Capability, not Engine list) === */
+.arch-suite-desc { font-size: 0.8125rem; color: var(--rouaa-text-secondary); line-height: 1.6; margin-bottom: 0.875rem; padding-bottom: 0.75rem; border-bottom: 1px dashed var(--rouaa-border); }
+.arch-capabilities { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-capability { display: block; padding: 0.5rem 0.625rem; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-border); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); text-decoration: none; transition: all var(--transition-base); }
+.arch-capability:hover { border-color: var(--b-color); transform: translateX(-2px); background: rgba(255,255,255,0.03); }
+.arch-cap-name { font-family: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--rouaa-text-primary); line-height: 1.3; }
+.arch-suite-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.625rem; border-top: 1px solid var(--rouaa-border); }
+.arch-suite-count { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--b-color); letter-spacing: 0.05em; }
+.arch-suite-link { font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--b-color); text-decoration: none; }
+.arch-suite-link:hover { text-decoration: underline; }
+
+.arch-products-list { display: flex; flex-direction: column; gap: 0.375rem; }
+.arch-product-row { padding: 0.5rem 0.625rem; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-border); border-right: 2px solid var(--b-color); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.5rem; transition: all var(--transition-base); text-decoration: none; color: inherit; }
+.arch-product-row:hover { border-color: var(--b-color); transform: translateX(-2px); }
+.arch-product-name { font-family: inherit; font-size: 0.75rem; font-weight: 600; color: var(--rouaa-text-primary); }
+.arch-product-arrow { margin-right: auto; color: var(--b-color); opacity: 0.4; font-size: 0.75rem; }
+
+/* === Buying Logic === */
+.buying-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+.buying-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); padding: 1.5rem 1.25rem; transition: border-color var(--transition-slow); }
+.buying-card:hover { border-color: var(--rouaa-accent); }
+.buying-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--rouaa-accent); letter-spacing: 0.15em; font-weight: 700; margin-bottom: 0.5rem; }
+.buying-h { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); margin-bottom: 0.375rem; }
+.buying-desc { font-size: 0.8125rem; color: var(--rouaa-text-secondary); line-height: 1.6; }
+.buying-example { margin-top: 0.625rem; padding-top: 0.625rem; border-top: 1px solid var(--rouaa-border); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.05em; }
+
+/* === Powered-by strip (defensive moat visible at every level) === */
+.arch-powered { margin-top: 0.75rem; padding-top: 0.625rem; border-top: 1px dashed var(--rouaa-border); display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+.arch-powered-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-left: 0.25rem; }
+.arch-powered-tag { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--b-color, var(--rouaa-accent)); padding: 0.125rem 0.375rem; background: rgba(255,255,255,0.03); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); letter-spacing: 0.03em; }
+
+/* === CTA === */
+.cta-final { text-align: center; padding: 5rem 0; background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); }
+.cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.cta-final p { color: var(--rouaa-text-secondary); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <div class="nav-links" id="navLinks">
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
+            Products
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-products">
+            <a href="investment-intelligence.html" class="nav-dropdown-link">Investment Intelligence</a>
+            <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
+            <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
+            <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-platform">
+            Platform
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-platform">
+            <a href="architecture.html" class="nav-dropdown-link">Architecture</a>
+            <a href="platform.html" class="nav-dropdown-link">Platform Overview</a>
+            <a href="source-registry.html" class="nav-dropdown-link">Source Registry</a>
+            <a href="trust-framework.html" class="nav-dropdown-link">Trust Framework</a>
+            <a href="methodology.html" class="nav-dropdown-link">Methodology</a>
+            <a href="infrastructure-report.html" class="nav-dropdown-link">Infrastructure Report</a>          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-solutions">
+            Solutions
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-solutions">
+            <a href="trading-platform.html" class="nav-dropdown-link">Trading Intelligence</a>
+            <a href="financial-intelligence.html" class="nav-dropdown-link">Institutional Intelligence</a>
+            <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
+            <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
+            <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
+            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="business-case.html" class="nav-dropdown-link">Business Case</a>          </div>
+        </div>
+                <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-experience">
+            Experience
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-experience">
+            <a href="product-experience.html" class="nav-dropdown-link">Product Experience Center</a>
+            <a href="evidence-explorer.html" class="nav-dropdown-link">Evidence Explorer</a>
+            <a href="sample-library.html" class="nav-dropdown-link">Sample Intelligence Library</a>
+            <a href="source-explorer.html" class="nav-dropdown-link">Source Registry Explorer</a>
+          </div>
+        </div>
+        <div class="nav-item-has-dropdown">
+          <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-company">
+            Company
+            <svg class="nav-dropdown-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5L5 6L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-labelledby="nav-dropdown-company">
+            <a href="company.html" class="nav-dropdown-link">About</a>
+            <a href="research-institute.html" class="nav-dropdown-link">Research Institute</a>
+            <a href="careers.html" class="nav-dropdown-link">Careers</a>
+            <a href="contact.html" class="nav-dropdown-link">Contact</a>
+          </div>
+        </div>
+        <a href="developers.html" class="nav-link active">Developers</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Request Briefing</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+<main id="main">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero-pa">
+    <div class="hero-pa-bg"></div>
+    <div class="container">
+      <div class="hero-pa-content">
+        <div class="mono-label text-gold">Products Architecture</div>
+        <h1 class="hero-pa-h1">
+          One intelligence infrastructure.<br>
+          <span class="gold">Multiple institutional applications.</span>
+        </h1>
+        <p style="font-size: 0.9375rem; color: var(--rouaa-text-secondary); margin-top: 0.5rem;">
+          44 intelligence products powered by the same evidence chain.
+        </p>
+        <p class="hero-pa-sub">
+          ROUAA is not a tool store. Every business unit consumes from the same engine, and every product carries the same evidence chain. This is the architecture that organizes how you buy from ROUAA.
+        </p>
+        <div class="hero-pa-cta">
+          <a href="#architecture" class="btn btn-primary btn-lg">See the Architecture</a>
+          <a href="products.html" class="btn btn-ghost btn-lg">Browse Full Catalog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BRIDGE LOGIC ============= -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">From the Engine to the Purchase</h2>
+        <p class="section-lead" style="margin: 0 auto;">Three layers separate "the infrastructure" from "what you buy." This is the complete path.</p>
+      </div>
+
+      <div class="bridge-logic">
+        <div class="bridge-block">
+          <div class="bridge-block-h">01 · Official Data</div>
+          <div class="bridge-block-val">Intelligence Engine</div>
+        </div>
+        <div class="bridge-arrow">→</div>
+        <div class="bridge-block center">
+          <div class="bridge-block-h">02 · Intelligence Engine</div>
+          <div class="bridge-block-val">Multiple Applications</div>
+        </div>
+        <div class="bridge-arrow">→</div>
+        <div class="bridge-block">
+          <div class="bridge-block-h">03 · Business Outcome</div>
+          <div class="bridge-block-val">Pick Your Application</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE TREE ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Intelligence Suites</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Five institutional capabilities + the developer platform</h2>
+        <p class="section-lead" style="margin: 0 auto;">Institutions don't buy Engines — they buy Capabilities. Each suite groups multiple products under one purchasable capability, powered by the same engine.</p>
+      </div>
+
+      <div class="arch-tree">
+        <div class="arch-root">
+          <div class="arch-root-h">
+            ROUAA Intelligence Engine
+          </div>
+          <div class="arch-root-sub">7 LAYERS · SOURCES → DISTRIBUTION</div>
+        </div>
+
+        <!-- Tree visual: Engine → 5 lines → 44 products -->
+        <div class="tree-visual">
+          <div class="tree-connector">↓</div>
+          <div class="tree-lines">
+            <div class="tree-line" style="--tl-color: #4A90D9;"><span class="tree-line-icon">📰</span><span class="tree-line-name">Media</span><span class="tree-line-count">8</span></div>
+            <div class="tree-line" style="--tl-color: #2DBA8E;"><span class="tree-line-icon">📈</span><span class="tree-line-name">Trading</span><span class="tree-line-count">9</span></div>
+            <div class="tree-line" style="--tl-color: var(--rouaa-accent);"><span class="tree-line-icon">📊</span><span class="tree-line-name">Research</span><span class="tree-line-count">6</span></div>
+            <div class="tree-line" style="--tl-color: #E5484D;"><span class="tree-line-icon">⚠</span><span class="tree-line-name">Risk</span><span class="tree-line-count">5</span></div>
+            <div class="tree-line" style="--tl-color: #F5A623;"><span class="tree-line-icon">🔌</span><span class="tree-line-name">Developer</span><span class="tree-line-count">16</span></div>
+          </div>
+          <div class="tree-connector">↓</div>
+          <div class="tree-products">44 Intelligence Products · Same Evidence Chain</div>
+        </div>
+
+        <div class="arch-branches">
+
+          <!-- RESEARCH SUITE — Capability-based, not Engine list -->
+          <div class="arch-branch b-research">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📊</div>
+              <div class="arch-branch-name">Research Intelligence Suite</div>
+            </div>
+            <div class="arch-suite-desc">Evidence-backed decision briefs for the investment committee — macro research, equity intelligence, sector comparisons, smart watchlists. Every number documented with its source.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=res-brief" class="arch-capability">
+                <div class="arch-cap-name">Macro Research</div>
+              </a>
+              <a href="product.html?id=res-deepdive" class="arch-capability">
+                <div class="arch-cap-name">Equity Intelligence</div>
+              </a>
+              <a href="product.html?id=res-committee" class="arch-capability">
+                <div class="arch-cap-name">Investment Committee Briefs</div>
+              </a>
+              <a href="product.html?id=res-comparison" class="arch-capability">
+                <div class="arch-cap-name">Sector & Strategy Intelligence</div>
+              </a>
+              <a href="product.html?id=res-screening" class="arch-capability">
+                <div class="arch-cap-name">Investment Screening</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">6 products · Committee-ready</span>
+              <a href="products.html?cat=research" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Equity Knowledge Graph</span>
+              <span class="arch-powered-tag">Fact Extraction</span>
+              <span class="arch-powered-tag">Reasoning Council</span>
+            </div>
+          </div>
+
+          <!-- RISK SUITE -->
+          <div class="arch-branch b-risk">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">⚠</div>
+              <div class="arch-branch-name">Risk Intelligence Suite</div>
+            </div>
+            <div class="arch-suite-desc">From a global event to a portfolio action in minutes — geopolitical monitoring, exposure analysis, scenarios, documented action recommendations, a complete compliance trail.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=risk-monitor" class="arch-capability">
+                <div class="arch-cap-name">Geopolitical Risk Monitoring</div>
+              </a>
+              <a href="product.html?id=risk-exposure" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Exposure Analysis</div>
+              </a>
+              <a href="product.html?id=risk-scenario" class="arch-capability">
+                <div class="arch-cap-name">Scenario Intelligence</div>
+              </a>
+              <a href="product.html?id=risk-action" class="arch-capability">
+                <div class="arch-cap-name">Risk Actions</div>
+              </a>
+              <a href="product.html?id=risk-compliance" class="arch-capability">
+                <div class="arch-cap-name">Compliance & Audit Intelligence</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">5 products · Regulator-ready</span>
+              <a href="products.html?cat=risk" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Geopolitical Engine</span>
+              <span class="arch-powered-tag">Portfolio Graph</span>
+              <span class="arch-powered-tag">Scenario Engine</span>
+              <span class="arch-powered-tag">Audit Trail</span>
+            </div>
+          </div>
+
+          <!-- TRADING SUITE -->
+          <div class="arch-branch b-trading">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">📈</div>
+              <div class="arch-branch-name">Trading Intelligence Suite</div>
+            </div>
+            <div class="arch-suite-desc">Add an intelligence layer that explains the "why" behind every trade — market context, smart chart analysis, a natural-language assistant. For brokers who retain clients.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=trd-dashboard" class="arch-capability">
+                <div class="arch-cap-name">Market Context Engine</div>
+              </a>
+              <a href="product.html?id=trd-chart" class="arch-capability">
+                <div class="arch-cap-name">AI Chart Intelligence</div>
+              </a>
+              <a href="product.html?id=trd-portfolio" class="arch-capability">
+                <div class="arch-cap-name">Portfolio Intelligence</div>
+              </a>
+              <a href="product.html?id=trd-assistant" class="arch-capability">
+                <div class="arch-cap-name">Trading Assistant</div>
+              </a>
+              <a href="product.html?id=trd-ai-council" class="arch-capability">
+                <div class="arch-cap-name">Market Intelligence Council</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">9 products · Decision Support (not signals)</span>
+              <a href="products.html?cat=trading" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Event Intelligence</span>
+              <span class="arch-powered-tag">Market Knowledge Graph</span>
+              <span class="arch-powered-tag">Evidence Layer</span>
+              <span class="arch-powered-tag">Reasoning Engine</span>
+            </div>
+          </div>
+
+          <!-- DEVELOPER SUITE -->
+          <div class="arch-branch b-dev">
+            <div class="arch-branch-h">
+              <div class="arch-branch-icon">🔌</div>
+              <div class="arch-branch-name">Developer Intelligence</div>
+            </div>
+            <div class="arch-suite-desc">Build your financial product on top of verified intelligence — APIs, real-time streaming, SDK, AI agents, platform components. Every response carries its evidence.</div>
+            <div class="arch-capabilities">
+              <a href="product.html?id=api-events" class="arch-capability">
+                <div class="arch-cap-name">Intelligence APIs</div>
+              </a>
+              <a href="product.html?id=api-streaming" class="arch-capability">
+                <div class="arch-cap-name">Streaming & Real-time</div>
+              </a>
+              <a href="product.html?id=api-sdk" class="arch-capability">
+                <div class="arch-cap-name">Official SDK</div>
+              </a>
+              <a href="product.html?id=agt-macro" class="arch-capability">
+                <div class="arch-cap-name">AI Agents</div>
+              </a>
+              <a href="product.html?id=cmp-graph" class="arch-capability">
+                <div class="arch-cap-name">Platform Components</div>
+              </a>
+            </div>
+            <div class="arch-suite-foot">
+              <span class="arch-suite-count">16 products · Build in weeks</span>
+              <a href="products.html?cat=api" class="arch-suite-link">Full list →</a>
+            </div>
+            <div class="arch-powered">
+              <span class="arch-powered-h">Built on:</span>
+              <span class="arch-powered-tag">Event Intelligence</span>
+              <span class="arch-powered-tag">Market Knowledge Graph</span>
+              <span class="arch-powered-tag">Evidence Layer</span>
+              <span class="arch-powered-tag">Reasoning Engine</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= THE BUYING LOGIC ============= -->
+  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">The Buying Logic</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">How do you buy from ROUAA?</h2>
+        <p class="section-lead" style="margin: 0 auto;">Four buying paths. Each path determines your business unit, the scope of your products, and how they integrate.</p>
+      </div>
+
+      <div class="buying-grid">
+        <div class="buying-card">
+          <div class="buying-num">PATH 01</div>
+          <div class="buying-h">Single-Market Solution</div>
+          <div class="buying-desc">Choose one market (media, trading, research, risk, or developer) — subscribe to all its products or only to what matters.</div>
+          <div class="buying-example">e.g., Media Intelligence — 8 products</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 02</div>
+          <div class="buying-h">Tailored Bundle</div>
+          <div class="buying-desc">Choose specific products from multiple markets. For example: News Engine + Risk Monitor + Events API — one bundle for a specific need.</div>
+          <div class="buying-example">e.g., News + Risk + Events API</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 03</div>
+          <div class="buying-h">Platform License</div>
+          <div class="buying-desc">Subscribe to the entire platform — all products, all markets. For major banks and sovereign funds that want a comprehensive solution.</div>
+          <div class="buying-example">Enterprise · 44 products · all markets</div>
+        </div>
+        <div class="buying-card">
+          <div class="buying-num">PATH 04</div>
+          <div class="buying-h">Build on ROUAA</div>
+          <div class="buying-desc">Take APIs + SDK + Components — and build your own product on top of ROUAA's verified intelligence. For fintechs and developers.</div>
+          <div class="buying-example">APIs + SDK + Knowledge Graph</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ENGINEERING ARCHITECTURE ============= -->
+  <section class="section reveal" id="engineering">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Engineering Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">How the system is built.</h2>
+        <p class="section-lead" style="margin: 0 auto;">The patterns and technologies that make the 7-layer architecture production-grade.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-h">Event-Driven Core</div>
+          <div class="why-desc">Source detections, fact extractions, and event detections flow through an event-driven pipeline. Each stage emits events that trigger downstream processing — no polling, no batch delays.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📋</div>
+          <div class="why-h">Queue-Based Processing</div>
+          <div class="why-desc">BullMQ + Redis queues manage ingestion, processing, and intelligence generation workers. Horizontal scaling per layer.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📊</div>
+          <div class="why-h">Streaming + Batch</div>
+          <div class="why-desc">Real-time streaming for event detection and alerts. Batch processing for report generation and deep analysis. Both share the same evidence layer.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔗</div>
+          <div class="why-h">Graph Database</div>
+          <div class="why-desc">PostgreSQL + pgvector for relational and vector storage. Knowledge Graph built on entity-relationship model — queryable across entities, events, facts, and evidence chains.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔌</div>
+          <div class="why-h">API Layer</div>
+          <div class="why-desc">NestJS REST API + WebSocket streaming + SDK layer. OpenAPI 3.1 spec. Rate-limited, authenticated, audited. Every API response carries evidence provenance.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔍</div>
+          <div class="why-h">Search Layer</div>
+          <div class="why-desc">Full-text search across documents, facts, events, and intelligence products. pg_trgm for fuzzy matching. Vector similarity for semantic search across the knowledge graph.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-final reveal">
+    <div class="container">
+      <span class="section-tag" style="justify-content: center;">Next Step</span>
+      <h2>Which path fits your institution?</h2>
+      <p>A 30-minute call — we help you identify the right buying path, and map the products that serve your needs.</p>
+      <a href="mailto:contact@rouaa.ai?subject=Products Architecture Briefing" class="btn btn-primary btn-lg">Request Product Architecture Briefing</a>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="products.html" class="btn-link">Browse Full Catalog (44 products) →</a>
+        <a href="platform.html" class="btn-link">How the Engine Works →</a>
+        <a href="solutions.html" class="btn-link">Solutions by Market →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-mega-grid">
+        <div class="footer-brand">
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUAA builds the trust layer between financial data and institutional decisions &mdash; for decisions that must be defended.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Products</div>
+          <a href="investment-intelligence.html">Investment Intelligence</a>
+          <a href="risk-intelligence.html">Risk Intelligence</a>
+          <a href="market-intelligence.html">Market Intelligence</a>
+          <a href="media-intelligence.html">Media Intelligence</a>
+          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="catalog.html">Intelligence Modules Catalog</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <a href="architecture.html">Architecture</a>
+          <a href="platform.html">Platform Overview</a>
+          <a href="source-registry.html">Source Registry</a>
+          <a href="trust-framework.html">Trust Framework</a>
+          <a href="methodology.html">Methodology</a>
+          <a href="infrastructure-report.html">Infrastructure Report</a>        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Solutions</div>
+          <a href="trading-platform.html">Trading Intelligence</a>
+          <a href="financial-intelligence.html">Institutional Intelligence</a>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html">Solutions Overview</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="business-case.html">Business Case</a>        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Channels</div>
+          <a href="financial-media.html">Financial Media</a>
+          <a href="solutions.html#solution-02">Investment Firms</a>
+          <a href="solutions.html#solution-05">Banks &amp; Institutions</a>
+          <a href="solutions.html#solution-03">Trading Desks</a>
+          <a href="enterprise.html">Private Deployment</a>
+          <a href="enterprise.html">White Label</a>
+        </div>
+                <div class="footer-col">
+          <div class="footer-heading">Experience</div>
+          <a href="product-experience.html">Product Experience Center</a>
+          <a href="evidence-explorer.html">Evidence Explorer</a>
+          <a href="sample-library.html">Sample Intelligence Library</a>
+          <a href="source-explorer.html">Source Registry Explorer</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <a href="company.html">About</a>
+          <a href="research-institute.html">Research Institute</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; The Intelligence Layer Between Financial Information and Institutional Decisions.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) {
+      x.target.classList.add('visible');
+      io.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<script src="main.js"></script>
+
+</body>
+</html>
