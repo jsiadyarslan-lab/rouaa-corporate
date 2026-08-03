@@ -2636,8 +2636,10 @@
 
   <script>
     // ============================================================
-    // THREE.JS HERO SCENE — 3D Intelligence Architecture
-    // Floating layer planes + wireframe cube + data particles
+    // THREE.JS HERO SCENE — The Intelligence Stack
+    // Seven glass-like evidence layers, curved golden data streams
+    // weaving through them, volumetric fog, multi-source lighting.
+    // The L05 Evidence Layer is highlighted as the trust layer.
     // ============================================================
     (function() {
       if (typeof THREE === 'undefined') return;
@@ -2648,153 +2650,411 @@
 
       const hero = container.parentElement;
       let scene, camera, renderer, animationId;
-      let layerGroup, particleSystem, wireCube;
+      let stackGroup, particleField, backdropGlow, accentPointLight;
+      let dataStreams = [];
+      let layers = [];
       let mouseX = 0, mouseY = 0;
       let targetRotX = 0, targetRotY = 0;
+      let targetCamX = 0, targetCamY = 0;
+      const timeStart = Date.now();
+
+      // ---- Color palette (institutional, Palantir-grade) ----
+      const PALETTE = {
+        accent: 0xC9A227,      // muted gold — the trust layer
+        accentBright: 0xF5C842,
+        blue: 0x4A90D9,        // secondary data flow
+        surface: 0x1A2433,     // graphite glass
+        green: 0x20A878,       // operational status
+        edge: 0x4A6080
+      };
+
+      // ---- Seven intelligence layers ----
+      const LAYER_DATA = [
+        { id: 'L01', label: 'SOURCE REGISTRY',      color: 0x2A6A52, opacity: 0.42 },
+        { id: 'L02', label: 'DOCUMENT INTELLIGENCE', color: 0x2E5A88, opacity: 0.42 },
+        { id: 'L03', label: 'FACT ENGINE',          color: 0x2E5A88, opacity: 0.42 },
+        { id: 'L04', label: 'EVENT ENGINE',         color: 0x2E5A88, opacity: 0.42 },
+        { id: 'L05', label: 'EVIDENCE LAYER',       color: 0xC9A227, opacity: 0.62, highlight: true },
+        { id: 'L06', label: 'KNOWLEDGE GRAPH',      color: 0x8A6A28, opacity: 0.42 },
+        { id: 'L07', label: 'GOVERNANCE',           color: 0xA88838, opacity: 0.42 }
+      ];
 
       function init() {
-        // Scene
+        // ----- Scene + volumetric fog -----
         scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x080B12, 0.058);
 
-        // Camera
-        camera = new THREE.PerspectiveCamera(45, hero.offsetWidth / hero.offsetHeight, 0.1, 100);
-        camera.position.set(0, 0, 8);
+        // ----- Camera (3/4 elevated view) -----
+        camera = new THREE.PerspectiveCamera(38, hero.offsetWidth / hero.offsetHeight, 0.1, 100);
+        camera.position.set(0, 0.2, 9);
+        camera.lookAt(0, 0, 0);
 
-        // Renderer
-        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        // ----- Renderer -----
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
         renderer.setSize(hero.offsetWidth, hero.offsetHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.18;
         container.appendChild(renderer.domElement);
 
-        // ---- Wireframe cube (outer frame) ----
-        const cubeGeo = new THREE.BoxGeometry(4.8, 6, 0.4);
-        const cubeMat = new THREE.MeshBasicMaterial({
-          color: 0xC9A227,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.12
-        });
-        wireCube = new THREE.Mesh(cubeGeo, cubeMat);
-        scene.add(wireCube);
+        // ----- Lighting rig (real, institutional) -----
+        const ambient = new THREE.AmbientLight(0x4060A0, 0.45);
+        scene.add(ambient);
 
-        // ---- Layer planes ----
-        layerGroup = new THREE.Group();
-        const layerData = [
-          { label: 'L01 SOURCE REGISTRY',     color: 0x20A878, opacity: 0.08 },
-          { label: 'L02 DOCUMENT INTELLIGENCE', color: 0x4A90D9, opacity: 0.08 },
-          { label: 'L03 FACT ENGINE',          color: 0x4A90D9, opacity: 0.08 },
-          { label: 'L04 EVENT ENGINE',         color: 0x4A90D9, opacity: 0.08 },
-          { label: 'L05 EVIDENCE LAYER',       color: 0xC9A227, opacity: 0.12 },
-          { label: 'L06 KNOWLEDGE GRAPH',      color: 0xF5A623, opacity: 0.08 },
-          { label: 'L07 GOVERNANCE',           color: 0xC9A227, opacity: 0.12 },
-        ];
+        // Key light — cool, from upper right (institutional daylight)
+        const keyLight = new THREE.DirectionalLight(0xE8EEFF, 0.85);
+        keyLight.position.set(6, 7, 8);
+        scene.add(keyLight);
 
-        const spacing = 0.85;
-        const startY = -((layerData.length - 1) * spacing) / 2;
+        // Rim light — deep blue, from behind (depth separation)
+        const rimLight = new THREE.DirectionalLight(0x3A6AAA, 0.55);
+        rimLight.position.set(-7, -1, -5);
+        scene.add(rimLight);
 
-        layerData.forEach((layer, i) => {
+        // Accent gold point light — pulses through the Evidence Layer
+        accentPointLight = new THREE.PointLight(0xF5C842, 2.2, 9, 2);
+        accentPointLight.position.set(0, 0, 1.4);
+        scene.add(accentPointLight);
+
+        // Cool fill from below-left
+        const blueFill = new THREE.PointLight(0x4A90D9, 1.1, 8, 2);
+        blueFill.position.set(-3.2, -2.4, 2.5);
+        scene.add(blueFill);
+
+        // ----- Stack group (everything that tilts with parallax) -----
+        stackGroup = new THREE.Group();
+        scene.add(stackGroup);
+
+        // ----- Build the seven layers -----
+        const spacing = 0.74;
+        const startY = -((LAYER_DATA.length - 1) * spacing) / 2;
+
+        LAYER_DATA.forEach((layer, i) => {
+          const isHighlight = !!layer.highlight;
           const y = startY + i * spacing;
+          const z = isHighlight ? 0.45 : (Math.sin(i * 1.3) * 0.18);
+          const w = isHighlight ? 4.35 : 3.7;
+          const h = isHighlight ? 0.98 : 0.72;
 
-          // Plane
-          const planeGeo = new THREE.PlaneGeometry(3.6, 0.7);
-          const planeMat = new THREE.MeshBasicMaterial({
+          // Glass body — MeshPhysicalMaterial with clearcoat for true surface response
+          const planeGeo = new THREE.PlaneGeometry(w, h, 2, 2);
+          const planeMat = new THREE.MeshPhysicalMaterial({
             color: layer.color,
             transparent: true,
             opacity: layer.opacity,
-            side: THREE.DoubleSide
+            roughness: 0.22,
+            metalness: 0.08,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.18,
+            side: THREE.DoubleSide,
+            emissive: layer.color,
+            emissiveIntensity: isHighlight ? 0.32 : 0.10
           });
           const plane = new THREE.Mesh(planeGeo, planeMat);
-          plane.position.set(0, y, 0);
-          plane.userData = { baseY: y, offset: i };
-          layerGroup.add(plane);
+          plane.position.set(0, y, z);
+          plane.userData = { floats: true, baseY: y, baseZ: z, offset: i * 0.65, isHighlight };
+          stackGroup.add(plane);
 
-          // Edges
+          // Crisp edge frame — defines the architectural surface
           const edges = new THREE.EdgesGeometry(planeGeo);
           const lineMat = new THREE.LineBasicMaterial({
+            color: isHighlight ? 0xF5C842 : layer.color,
+            transparent: true,
+            opacity: isHighlight ? 0.95 : 0.55
+          });
+          const edgeLine = new THREE.LineSegments(edges, lineMat);
+          edgeLine.position.copy(plane.position);
+          edgeLine.userData = { floats: true, baseY: y, baseZ: z, offset: i * 0.65 };
+          stackGroup.add(edgeLine);
+
+          // Soft glow halo — additive-blended plane behind, faux bloom
+          const haloGeo = new THREE.PlaneGeometry(w * 1.22, h * 2.05);
+          const haloMat = new THREE.MeshBasicMaterial({
             color: layer.color,
             transparent: true,
-            opacity: layer.opacity * 2.5
+            opacity: isHighlight ? 0.30 : 0.085,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            side: THREE.DoubleSide
           });
-          const line = new THREE.LineSegments(edges, lineMat);
-          line.position.copy(plane.position);
-          line.userData = { baseY: y, offset: i };
-          layerGroup.add(line);
+          const halo = new THREE.Mesh(haloGeo, haloMat);
+          halo.position.set(0, y, z - 0.06);
+          halo.userData = { floats: true, baseY: y, baseZ: z - 0.06, offset: i * 0.65, isHalo: true };
+          stackGroup.add(halo);
+
+          // Inset detail line — gives the surface a "panel" feel (subtle inner rectangle)
+          const insetGeo = new THREE.EdgesGeometry(new THREE.PlaneGeometry(w * 0.88, h * 0.55));
+          const insetMat = new THREE.LineBasicMaterial({
+            color: isHighlight ? 0xC9A227 : 0x4A6080,
+            transparent: true,
+            opacity: isHighlight ? 0.55 : 0.22
+          });
+          const insetLine = new THREE.LineSegments(insetGeo, insetMat);
+          insetLine.position.set(0, y, z + 0.005);
+          insetLine.userData = { floats: true, baseY: y, baseZ: z + 0.005, offset: i * 0.65, followsPlane: true };
+          stackGroup.add(insetLine);
+
+          // Highlight: corner ticks + status pip (L05 Evidence Layer)
+          if (isHighlight) {
+            const tickMat = new THREE.LineBasicMaterial({ color: 0xF5C842, transparent: true, opacity: 0.95 });
+            const tSize = 0.22;
+            const corners = [[-w/2,  h/2, 1, 1],[ w/2,  h/2,-1, 1],[-w/2, -h/2, 1,-1],[ w/2, -h/2,-1,-1]];
+            corners.forEach(([cx, cy, sx, sy]) => {
+              const pts = [
+                new THREE.Vector3(cx - sx * tSize, cy, z + 0.012),
+                new THREE.Vector3(cx, cy, z + 0.012),
+                new THREE.Vector3(cx, cy - sy * tSize, z + 0.012)
+              ];
+              const g = new THREE.BufferGeometry().setFromPoints(pts);
+              const t = new THREE.Line(g, tickMat);
+              t.userData = { floats: true, baseY: y, baseZ: z + 0.012, offset: i * 0.65 };
+              stackGroup.add(t);
+            });
+
+            // Status pip — small green sphere on the right edge (operational)
+            const pipMat = new THREE.MeshBasicMaterial({ color: 0x20A878, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending });
+            const pip = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 12), pipMat);
+            pip.position.set(w/2 - 0.18, h/2 - 0.16, z + 0.02);
+            pip.userData = { floats: true, baseY: y, baseZ: z + 0.02, offset: i * 0.65, isPip: true };
+            stackGroup.add(pip);
+          }
+
+          layers.push({ plane, edgeLine, halo, data: layer, y, z, isHighlight });
         });
 
-        scene.add(layerGroup);
-
-        // ---- Connecting lines (dashed) ----
-        const lineMat2 = new THREE.LineBasicMaterial({
-          color: 0x38465A,
-          transparent: true,
-          opacity: 0.5
-        });
-
-        for (let i = 0; i < layerData.length - 1; i++) {
-          const y1 = startY + i * spacing;
-          const y2 = startY + (i + 1) * spacing;
-
-          // Left line
-          const leftPts = [
-            new THREE.Vector3(-1.3, y1, 0),
-            new THREE.Vector3(-1.3, y2, 0)
+        // ----- Vertical guide rails (architectural spine) -----
+        const railMat = new THREE.LineBasicMaterial({ color: 0x38465A, transparent: true, opacity: 0.42 });
+        const railTop = startY + (LAYER_DATA.length - 1) * spacing + 0.55;
+        const railBottom = startY - 0.55;
+        [-2.55, 2.55].forEach(x => {
+          const pts = [
+            new THREE.Vector3(x, railBottom, -0.25),
+            new THREE.Vector3(x, railTop,    -0.25)
           ];
-          const leftGeo = new THREE.BufferGeometry().setFromPoints(leftPts);
-          scene.add(new THREE.Line(leftGeo, lineMat2));
+          const geo = new THREE.BufferGeometry().setFromPoints(pts);
+          stackGroup.add(new THREE.Line(geo, railMat));
 
-          // Right line
-          const rightPts = [
-            new THREE.Vector3(1.3, y1, 0),
-            new THREE.Vector3(1.3, y2, 0)
-          ];
-          const rightGeo = new THREE.BufferGeometry().setFromPoints(rightPts);
-          scene.add(new THREE.Line(rightGeo, lineMat2));
-        }
-
-        // ---- Data particles (flowing upward) ----
-        const particleCount = 60;
-        const particleGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = [];
-
-        for (let i = 0; i < particleCount; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 3;
-          positions[i * 3 + 1] = -3 + Math.random() * 6;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
-          velocities.push(0.005 + Math.random() * 0.012);
-        }
-
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        const particleMat = new THREE.PointsMaterial({
-          size: 0.05,
-          color: 0xC9A227,
-          transparent: true,
-          opacity: 0.7,
-          sizeAttenuation: true,
-          blending: THREE.AdditiveBlending
+          // Rail end caps (small horizontal ticks)
+          [railTop, railBottom].forEach(yy => {
+            const capPts = [
+              new THREE.Vector3(x - 0.12, yy, -0.25),
+              new THREE.Vector3(x + 0.12, yy, -0.25)
+            ];
+            const capGeo = new THREE.BufferGeometry().setFromPoints(capPts);
+            stackGroup.add(new THREE.Line(capGeo, railMat));
+          });
         });
 
-        particleSystem = new THREE.Points(particleGeo, particleMat);
-        particleSystem.userData = { velocities: velocities };
-        scene.add(particleSystem);
+        // ----- Curved data streams weaving through the layers -----
+        buildDataStreams(startY, spacing);
 
-        // Mouse tracking
+        // ----- Background particle field -----
+        buildParticleField();
+
+        // ----- Backdrop radial glow (depth atmosphere) -----
+        buildBackdrop();
+
+        // ----- Interactivity -----
         hero.addEventListener('mousemove', onMouseMove);
-
-        // Resize
+        hero.addEventListener('mouseleave', onMouseLeave);
         window.addEventListener('resize', onResize);
 
         animate();
       }
 
+      // ----- Build the curved data streams (golden intelligence flow) -----
+      function buildDataStreams(startY, spacing) {
+        const streamColors = [
+          0xC9A227, 0xC9A227, 0xF5C842,
+          0x4A90D9, 0x4A90D9, 0x20A878
+        ];
+        const totalSpan = (LAYER_DATA.length - 1) * spacing;
+        const bottomY = startY - 0.35;
+        const topY = startY + totalSpan + 0.35;
+
+        streamColors.forEach((color, s) => {
+          const xOffset = (s - (streamColors.length - 1) / 2) * 0.55;
+          const phase = s * 1.13;
+          const segments = 16;
+
+          // Catmull-Rom path that snakes vertically through every layer plane
+          const points = [];
+          for (let i = 0; i <= segments; i++) {
+            const t = i / segments;
+            const y = bottomY + (topY - bottomY) * t;
+            const wave = Math.sin(t * Math.PI * 3 + phase) * 0.75;
+            const x = xOffset + wave * (1 - Math.abs(t - 0.5) * 0.45);
+            const z = Math.cos(t * Math.PI * 2 + phase) * 0.55 + 0.35;
+            points.push(new THREE.Vector3(x, y, z));
+          }
+          const curve = new THREE.CatmullRomCurve3(points);
+          curve.tension = 0.5;
+
+          // Thin glowing tube along the curve — the data conduit
+          const tubeGeo = new THREE.TubeGeometry(curve, 64, 0.011, 6, false);
+          const tubeMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.22,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          });
+          const tube = new THREE.Mesh(tubeGeo, tubeMat);
+          tube.userData = { isStream: true };
+          stackGroup.add(tube);
+
+          // Second, wider, fainter tube — outer glow shell
+          const outerTubeGeo = new THREE.TubeGeometry(curve, 64, 0.03, 6, false);
+          const outerTubeMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.06,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          });
+          const outerTube = new THREE.Mesh(outerTubeGeo, outerTubeMat);
+          outerTube.userData = { isStream: true };
+          stackGroup.add(outerTube);
+
+          // Data packets — bright moving spheres with trailing ghosts
+          const packets = [];
+          const packetCount = 2;
+          for (let p = 0; p < packetCount; p++) {
+            const baseT = (p / packetCount + s * 0.17) % 1;
+            const speed = 0.06 + Math.random() * 0.04;
+
+            const head = makePacket(color, 0.07, 1.0);
+            head.userData = { isStream: true, t: baseT, speed, curve };
+            stackGroup.add(head);
+            packets.push(head);
+
+            const t1 = makePacket(color, 0.045, 0.55);
+            t1.userData = { isStream: true, t: (baseT - 0.025 + 1) % 1, speed, curve };
+            stackGroup.add(t1);
+            packets.push(t1);
+
+            const t2 = makePacket(color, 0.03, 0.25);
+            t2.userData = { isStream: true, t: (baseT - 0.05 + 1) % 1, speed, curve };
+            stackGroup.add(t2);
+            packets.push(t2);
+          }
+
+          dataStreams.push({ tube, outerTube, curve, packets });
+        });
+      }
+
+      function makePacket(color, radius, opacity) {
+        const mat = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: opacity,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        return new THREE.Mesh(new THREE.SphereGeometry(radius, 10, 10), mat);
+      }
+
+      // ----- Background particle field (procedural radial sprite) -----
+      function buildParticleField() {
+        const count = 240;
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+        const velocities = [];
+
+        const cWhite = new THREE.Color(0xB8C8DC);
+        const cBlue  = new THREE.Color(0x4A90D9);
+        const cGold  = new THREE.Color(0xC9A227);
+
+        for (let i = 0; i < count; i++) {
+          positions[i * 3]     = (Math.random() - 0.5) * 20;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 16;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 12 - 4;
+          velocities.push((0.0015 + Math.random() * 0.004));
+
+          const r = Math.random();
+          const c = r < 0.62 ? cWhite : (r < 0.88 ? cBlue : cGold);
+          colors[i * 3]     = c.r;
+          colors[i * 3 + 1] = c.g;
+          colors[i * 3 + 2] = c.b;
+        }
+
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+        const mat = new THREE.PointsMaterial({
+          size: 0.085,
+          map: makeRadialSprite(),
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.9,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          sizeAttenuation: true
+        });
+
+        particleField = new THREE.Points(geo, mat);
+        particleField.userData = { velocities };
+        scene.add(particleField);
+      }
+
+      // Procedural radial-gradient sprite texture for particles
+      function makeRadialSprite() {
+        const size = 64;
+        const canvas = document.createElement('canvas');
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+        g.addColorStop(0.0, 'rgba(255,255,255,1.0)');
+        g.addColorStop(0.25, 'rgba(255,255,255,0.75)');
+        g.addColorStop(0.55, 'rgba(255,255,255,0.18)');
+        g.addColorStop(1.0, 'rgba(255,255,255,0.0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, size, size);
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.needsUpdate = true;
+        return tex;
+      }
+
+      // ----- Backdrop radial glow behind the stack -----
+      function buildBackdrop() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512; canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        const g = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+        g.addColorStop(0.0, 'rgba(201,162,39,0.30)');
+        g.addColorStop(0.35, 'rgba(74,144,217,0.10)');
+        g.addColorStop(1.0, 'rgba(0,0,0,0.0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 512, 512);
+        const tex = new THREE.CanvasTexture(canvas);
+
+        const mat = new THREE.MeshBasicMaterial({
+          map: tex,
+          transparent: true,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          side: THREE.DoubleSide
+        });
+        backdropGlow = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), mat);
+        backdropGlow.position.set(0, 0, -3.8);
+        scene.add(backdropGlow);
+      }
+
+      // ----- Mouse parallax -----
       function onMouseMove(e) {
         const rect = hero.getBoundingClientRect();
-        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        targetRotY = mouseX * 0.3;
-        targetRotX = mouseY * 0.15;
+        mouseX = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+        targetRotY = mouseX * 0.34;
+        targetRotX = mouseY * 0.18;
+        targetCamX =  mouseX * 0.55;
+        targetCamY = -mouseY * 0.45;
+      }
+      function onMouseLeave() {
+        targetRotX = 0; targetRotY = 0; targetCamX = 0; targetCamY = 0;
       }
 
       function onResize() {
@@ -2804,44 +3064,82 @@
         renderer.setSize(hero.offsetWidth, hero.offsetHeight);
       }
 
+      // ----- Animation loop -----
       function animate() {
         animationId = requestAnimationFrame(animate);
-        const time = Date.now() * 0.001;
+        const time = (Date.now() - timeStart) * 0.001;
 
-        // Rotate wireframe cube
-        if (wireCube) {
-          wireCube.rotation.y = time * 0.12;
-          wireCube.rotation.x = Math.sin(time * 0.2) * 0.08;
-        }
+        // Float the layer surfaces (breathing motion)
+        if (stackGroup) {
+          stackGroup.children.forEach((child) => {
+            const ud = child.userData;
+            if (!ud || !ud.floats) return;
 
-        // Float layer planes
-        if (layerGroup) {
-          layerGroup.children.forEach((child) => {
-            if (child.userData.baseY !== undefined) {
-              child.position.y = child.userData.baseY + Math.sin(time * 0.5 + child.userData.offset) * 0.12;
-              child.rotation.y = Math.sin(time * 0.3 + child.userData.offset) * 0.08;
+            const floatY = Math.sin(time * 0.6 + ud.offset) * 0.055;
+            child.position.y = ud.baseY + floatY;
+
+            // Planes get a slow rotation; halos and ticks stay flat
+            if (!ud.isHalo && !ud.followsPlane && !ud.isPip) {
+              child.rotation.y = Math.sin(time * 0.28 + ud.offset) * 0.12;
+              child.rotation.x = Math.cos(time * 0.22 + ud.offset * 0.4) * 0.035;
+            }
+
+            // L05 Evidence Layer: subtle pulse on the halo and a gentle Z breathe
+            if (ud.isHalo) {
+              const pulse = ud.isHighlight ? (0.85 + Math.sin(time * 1.4) * 0.18) : 1.0;
+              child.material.opacity = (ud.isHighlight ? 0.30 : 0.085) * pulse;
+            }
+            if (ud.isPip) {
+              const s = 0.85 + Math.sin(time * 2.2) * 0.25;
+              child.scale.setScalar(s);
             }
           });
 
-          // Smooth camera follow mouse
-          layerGroup.rotation.y += (targetRotY - layerGroup.rotation.y) * 0.05;
-          layerGroup.rotation.x += (targetRotX - layerGroup.rotation.x) * 0.05;
+          // Smooth parallax tilt of the whole stack
+          stackGroup.rotation.y += (targetRotY - stackGroup.rotation.y) * 0.045;
+          stackGroup.rotation.x += (targetRotX - stackGroup.rotation.x) * 0.045;
         }
 
-        // Animate particles
-        if (particleSystem) {
-          const positions = particleSystem.geometry.attributes.position.array;
-          const velocities = particleSystem.userData.velocities;
+        // Subtle camera parallax (independent of stack tilt for depth feel)
+        if (camera) {
+          camera.position.x += (targetCamX - camera.position.x) * 0.035;
+          camera.position.y += (targetCamY - camera.position.y) * 0.035;
+          camera.lookAt(0, 0, 0);
+        }
 
-          for (let i = 0; i < velocities.length; i++) {
-            positions[i * 3 + 1] += velocities[i];
+        // Drive data packets along their curves
+        dataStreams.forEach(function(stream) {
+          stream.packets.forEach(function(pkt) {
+            pkt.userData.t += pkt.userData.speed * 0.01;
+            if (pkt.userData.t > 1) pkt.userData.t -= 1;
+            const p = stream.curve.getPointAt(pkt.userData.t);
+            if (p) pkt.position.copy(p);
+          });
+        });
 
-            if (positions[i * 3 + 1] > 3) {
-              positions[i * 3 + 1] = -3;
-              positions[i * 3] = (Math.random() - 0.5) * 3;
+        // Accent gold light breathes with the Evidence Layer
+        if (accentPointLight) {
+          accentPointLight.intensity = 1.9 + Math.sin(time * 1.4) * 0.55;
+        }
+
+        // Drift the particle field upward, recycle at top
+        if (particleField) {
+          const pos = particleField.geometry.attributes.position.array;
+          const vel = particleField.userData.velocities;
+          for (let i = 0; i < vel.length; i++) {
+            pos[i * 3 + 1] += vel[i];
+            if (pos[i * 3 + 1] > 8) {
+              pos[i * 3 + 1] = -8;
+              pos[i * 3]     = (Math.random() - 0.5) * 20;
             }
           }
-          particleSystem.geometry.attributes.position.needsUpdate = true;
+          particleField.geometry.attributes.position.needsUpdate = true;
+          particleField.rotation.y = time * 0.018;
+        }
+
+        // Slow backdrop drift
+        if (backdropGlow) {
+          backdropGlow.rotation.z = Math.sin(time * 0.05) * 0.05;
         }
 
         renderer.render(scene, camera);
