@@ -983,8 +983,8 @@
 .hero-split {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
+  gap: 64px;
+  align-items: start;
   max-width: var(--container-wide);
   margin: 0 auto;
   padding: 100px 0 80px;
@@ -997,6 +997,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 80px 0 48px;
+    align-items: stretch;
   }
 }
 
@@ -1005,6 +1006,18 @@
   flex-direction: column;
   gap: 20px;
   min-width: 0;
+  /* Top padding so eyebrow aligns with the top of the glass card */
+  padding-top: 8px;
+}
+
+.hero-split-right {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Slight top offset so the card visually centers against the headline+sub block rather than against the small eyebrow */
+  padding-top: 32px;
 }
 
 .hero-split-left .eyebrow {
@@ -1096,14 +1109,6 @@
 .hero-trust-pill-sub {
   font-size: 12px;
   color: var(--rouaa-text-muted);
-}
-
-.hero-split-right {
-  position: relative;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* ============ GLASS STATUS CARD (Hero right) ============ */
