@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROUAA — Financial Intelligence Platform for Institutional Decisions</title>
+  <script>document.documentElement.classList.add('js');</script>
   <meta name="description" content="Institutions already have data. What they lack is the infrastructure that turns information into governed intelligence. ROUAA transforms fragmented official financial information into evidence-backed intelligence workflows — where every output can be verified, traced, and defended. Every intelligence output carries a complete provenance chain — from source document to verified fact to institutional workflow.">
   <meta name="theme-color" content="#040b1c">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 3 43 14v20L24 45 5 34V14z' fill='none' stroke='%23e3b45a' stroke-width='4'/%3E%3C/svg%3E">
@@ -961,6 +962,7 @@ nav{position:static}
 </div></footer>
 
 <script>
+(function(){try{
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const px=document.getElementById('px');
 if(px){for(let i=0;i<44;i++){const s=document.createElement('i');const z=Math.random()*3+1.5;
@@ -982,6 +984,10 @@ document.addEventListener('click',()=>{document.querySelectorAll('.nav-item-has-
 /* reveal + counters */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.18});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+/* revealVisible fallback */
+function revealVisible(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<(window.innerHeight||document.documentElement.clientHeight)+150){el.classList.add('in');}});}
+window.addEventListener('load',revealVisible);
+setTimeout(revealVisible,800);
 document.querySelectorAll('[data-stag]').forEach(p=>[...p.children].forEach((c,i)=>c.style.transitionDelay=(i*90)+'ms'));
 const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);
  const el=e.target,v=+el.dataset.v,dec=+(el.dataset.dec||0),suf=el.dataset.suf||'';
@@ -1041,6 +1047,7 @@ if(cv&&gl){
    if(idx!==lastIdx){lastIdx=idx;cns.forEach((c,i)=>c.classList.toggle('on',i===idx));}}
   requestAnimationFrame(master);})(performance.now());}
 }
+}catch(e){console.error('ROUAA script error:',e);}})();
 </script>
 </body>
 </html>
