@@ -1,0 +1,27 @@
+/* ========= ROUAA v7 UNIFICATION PATCH — يُربط آخِراً دائماً ========= */
+:root{--bg:#040b1c;--bg2:#071228;--panel:#0a1630;--line:rgba(148,184,255,.14);--line2:rgba(148,184,255,.28);
+--gold:#e3b45a;--gold2:#f4d492;--blue:#4f8cff;--blue2:#8ab6ff;--txt:#eaf2ff;--dim:#9fb0cc;--dim2:#6b7f9f;
+--op:#10b981;--pr:#f59e0b;--sans:Inter,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'Fira Code','SFMono-Regular',Consolas,monospace}
+
+/* 1) فشل-آمن: إن غاب JS أو انكسر، يبقى كل المحتوى ظاهراً */
+html:not(.js) .rv{opacity:1!important;transform:none!important}
+html:not(.js) .hline>span{transform:none!important}
+html:not(.js) .cdot{display:none}
+
+/* 2) حدّ أدنى للمقاسات (قراءة مؤسسية) */
+.chip,.kpis span,.ametrics span,.cats span,.gstats span{font-size:.66rem}
+
+/* 3) توحيد تحويم البطاقات (إضافي، لا يكسر الموجود) */
+.cx{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.cx:hover{transform:translateY(-5px);box-shadow:0 26px 54px -22px rgba(0,0,0,.85)}
+
+/* 4) شريط التقدم والـ Nav */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:99;box-shadow:0 0 10px rgba(227,180,90,.6)}
+nav.scd{background:rgba(4,11,28,.97)!important;box-shadow:0 12px 30px -18px rgba(0,0,0,.9)}
+
+/* 5) وصول */
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 6) حركة مخفّضة + طباعة */
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.rv{opacity:1!important;transform:none!important}}
+@media print{nav,#px,#prog,#glow{display:none!important}.rv{opacity:1!important;transform:none!important}}
