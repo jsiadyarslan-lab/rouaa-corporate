@@ -1,4 +1,4 @@
-# ROUAA · Commercial Operating Model (COM) v1
+# ROUA · Commercial Operating Model (COM) v1
 
 > الوثيقة الموحّدة الأخيرة قبل أي HTML أو Figma.
 >
@@ -60,7 +60,7 @@
                    │                       │
         ┌──────────┼───────────┬───────────┼──────────┐
         │          │           │           │          │
-   Bloomberg    Refinitiv    FactSet    AlphaSense   ROUAA
+   Bloomberg    Refinitiv    FactSet    AlphaSense   ROUA
    Terminal     Eikon        Research   AI Search    ★
                                                      │
                                                      │
@@ -232,7 +232,7 @@
 
 ```
 ┌────────────────────────────────────────────────┐
-│  LAYER 0: ROUAA (Company)                      │  ← Who we are (about.html)
+│  LAYER 0: ROUA (Company)                      │  ← Who we are (about.html)
 │  «Financial Intelligence Infrastructure»        │
 └────────────────────┬───────────────────────────┘
                      │

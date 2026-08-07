@@ -1,4 +1,4 @@
-# ROUAA · Product & Monetization Architecture v1
+# ROUA · Product & Monetization Architecture v1
 
 > وثيقة مرجعية موحّدة تُكتب قبل أي تعديل صفحات.
 >
@@ -15,7 +15,7 @@
 رؤى **أربع شركات داخل شركة واحدة**:
 
 ```
-ROUAA Intelligence Ecosystem
+ROUA Intelligence Ecosystem
               │
    ┌──────────┼──────────────┐
    │          │              │
@@ -37,7 +37,7 @@ ROUAA Intelligence Ecosystem
 
 ```
                 Layer 0
-         ROUAA Intelligence Platform
+         ROUA Intelligence Platform
                     │
    ┌────────────────┼─────────────────┐
    │                │                 │
@@ -66,7 +66,7 @@ Infrastructure   Engines          Products
 
 رؤى تبيع 4 عائلات منتجات، كل عائلة تحوي منتجات قابلة للبيع بشكل مستقل:
 
-### 3A — ROUAA Intelligence Platform (Licensing)
+### 3A — ROUA Intelligence Platform (Licensing)
 
 **لمن:** البنوك، الصناديق، المؤسسات البحثية، الحكومات
 **السعر:** Enterprise Licensing (حسب العقد)
@@ -75,7 +75,7 @@ Infrastructure   Engines          Products
 |--------|------|------|
 | Intelligence Infrastructure | وصول كامل لـ Layer 1 + Layer 2 | `/intelligence-platform` |
 
-### 3B — ROUAA Media Intelligence Suite (Content Factories)
+### 3B — ROUA Media Intelligence Suite (Content Factories)
 
 **لمن:** المواقع الإخبارية، الصحف المالية، القنوات، المؤسسات الإعلامية، الوسطاء (لمحتوى عملائهم)
 **السعر:** $1,000 — $50,000 شهرياً حسب المنتج والباقة
@@ -95,7 +95,7 @@ Infrastructure   Engines          Products
 - Professional Newsroom — $10,000 — $50,000 (غرفة أخبار كاملة)
 - Enterprise Media Infrastructure — حسب العقد
 
-### 3C — ROUAA Trading Intelligence Suite
+### 3C — ROUA Trading Intelligence Suite
 
 **لمن:** الأفراد، الصناديق، الوسطاء، المؤسسات
 **السعر:** $99 — $50,000 شهرياً حسب المنتج والباقة
@@ -129,7 +129,7 @@ Executor  Agent     Scalper
 (Swing)   (Full)    (<5ms)
 ```
 
-### 3D — ROUAA APIs + White Label (Platform Access)
+### 3D — ROUA APIs + White Label (Platform Access)
 
 **لمن:** الشركات التي تبني منتجاتها
 **السعر:** حسب الاستهلاك ( APIs) / حسب العقد (White Label)
@@ -197,7 +197,7 @@ index.html (Home — Layer 0 + 5-layer overview)
 ### يتغير:
 - قسم المنتجات يُعاد ترتيبه من 4 منتجات إلى **4 عائلات منتجات**
 - كل عائلة تعرض منتجاتها الفرعية كروابط
-- شارة "Powered by ROUAA Intelligence Core" تبقى على كل صفحة منتج
+- شارة "Powered by ROUA Intelligence Core" تبقى على كل صفحة منتج
 
 ### القسم الجديد في Home:
 
@@ -268,7 +268,7 @@ Platform · Intelligence · Media Suite · Trading Suite · APIs · Enterprise �
 
 كل صفحة منتج فردي تحوي:
 - Breadcrumb: Home > [Suite] > [Product]
-- Powered by ROUAA Intelligence Core (شارة)
+- Powered by ROUA Intelligence Core (شارة)
 
 ---
 

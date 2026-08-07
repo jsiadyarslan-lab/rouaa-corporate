@@ -1,8 +1,8 @@
-# ROUAA Institutional Intelligence Design System
+# ROUA Institutional Intelligence Design System
 
 ## The Visual, Informational, Operational, and Cognitive Foundation for Financial Intelligence Infrastructure
 
-> This is not a website design. This is the institutional design system from which every ROUAA interface, component, and interaction will naturally emerge.
+> This is not a website design. This is the institutional design system from which every ROUA interface, component, and interaction will naturally emerge.
 
 ---
 
@@ -10,15 +10,15 @@
 
 ### Core Metaphor
 
-ROUAA looks like **the blueprint of a financial institution's nervous system** — the infrastructure that connects official sources to defensible decisions. Not a building. Not a machine. A **living evidence architecture**.
+ROUA looks like **the blueprint of a financial institution's nervous system** — the infrastructure that connects official sources to defensible decisions. Not a building. Not a machine. A **living evidence architecture**.
 
-### What ROUAA Looks Like
+### What ROUA Looks Like
 
 Imagine walking into the engineering room beneath a central bank. The walls are dark navy. The screens show data flowing through verified pipelines. Every number has a source. Every conclusion has a chain. The room is quiet, precise, and authoritative. Nothing is decorative. Everything is functional. The light is dim but clear. The air feels institutional.
 
-That is ROUAA.
+That is ROUA.
 
-### What ROUAA Does NOT Look Like
+### What ROUA Does NOT Look Like
 
 | ❌ Never This | ✅ Always This |
 |---|---|
@@ -253,7 +253,7 @@ Every space is a multiple of 8:
 
 ### Original Style: "Institutional Blueprints"
 
-ROUAA's illustrations are **abstract architectural diagrams** — not marketing illustrations. They look like:
+ROUA's illustrations are **abstract architectural diagrams** — not marketing illustrations. They look like:
 
 - **Engineering schematics** of intelligence pipelines
 - **Network topology** showing source-to-decision flow
@@ -342,7 +342,7 @@ NAVIGATION ICONS:
 
 ### Motion Philosophy
 
-Motion in ROUAA is **operational, not decorative**. Every animation communicates system state — nothing animates "because it looks nice."
+Motion in ROUA is **operational, not decorative**. Every animation communicates system state — nothing animates "because it looks nice."
 
 ### Animation Types
 
@@ -391,7 +391,7 @@ PIPELINE FLOW
 3. **Stagger**: 80ms between siblings. Creates "cascade" feeling.
 4. **Reduced motion**: `prefers-reduced-motion: reduce` disables ALL animations.
 5. **No continuous animations** except: pulse dots, pipeline flow lines.
-6. **No bounce, no elastic, no spring.** ROUAA is calm, not playful.
+6. **No bounce, no elastic, no spring.** ROUA is calm, not playful.
 
 ---
 
@@ -527,7 +527,7 @@ Between sections: 1px gradient line (transparent → border-strong → transpare
 
 ## 12. INTERACTION PHILOSOPHY
 
-### How ROUAA Feels to Use
+### How ROUA Feels to Use
 
 1. **Calm.** Nothing flashes. Nothing bounces. Nothing demands attention.
 2. **Responsive.** Every hover is acknowledged. Every click has feedback.
@@ -559,7 +559,7 @@ DISABLED:   Element shows unavailability. 40% opacity, no cursor.
 
 ## 13. BRAND PERSONALITY SUMMARY
 
-### ROUAA Is:
+### ROUA Is:
 
 | Trait | How It's Expressed Visually |
 |---|---|
@@ -570,7 +570,7 @@ DISABLED:   Element shows unavailability. 40% opacity, no cursor.
 | **Global** | Multi-jurisdiction sources, universal visual language |
 | **Institutional** | Navy + gold palette, institutional typography, serious tone |
 
-### ROUAA Is NOT:
+### ROUA Is NOT:
 
 | Anti-Trait | What We Avoid |
 |---|---|
@@ -584,14 +584,14 @@ DISABLED:   Element shows unavailability. 40% opacity, no cursor.
 
 ## 14. IMPLEMENTATION CHECKLIST
 
-When building any ROUAA page, verify:
+When building any ROUA page, verify:
 
 ```
 COLOR:
-  ☐ Background uses --rouaa-bg-primary or --rouaa-bg-secondary
-  ☐ Cards use --rouaa-surface with visible borders
+  ☐ Background uses --roua-bg-primary or --roua-bg-secondary
+  ☐ Cards use --roua-surface with visible borders
   ☐ Gold used ONLY for verified/CTA/hero keyword
-  ☐ Body text is --rouaa-text-secondary (not white, not muted)
+  ☐ Body text is --roua-text-secondary (not white, not muted)
   ☐ Labels are uppercase, tracked, gold or muted
 
 TYPOGRAPHY:
@@ -637,11 +637,11 @@ ACCESSIBILITY:
 
 ---
 
-## 15. THE ROUAA FEEL
+## 15. THE ROUA FEEL
 
 ### The 5-Second Test
 
-When a visitor lands on any ROUAA page, within 5 seconds they should feel:
+When a visitor lands on any ROUA page, within 5 seconds they should feel:
 
 1. **"This is institutional."** — Not a startup, not a SaaS, not a crypto project.
 2. **"This is engineered."** — Not a marketing page, but a system architecture.
@@ -653,7 +653,7 @@ When a visitor lands on any ROUAA page, within 5 seconds they should feel:
 
 After 30 seconds of scrolling, the visitor should understand:
 
-1. ROUAA is infrastructure, not a tool.
+1. ROUA is infrastructure, not a tool.
 2. Every output has a traceable evidence chain.
 3. The system is operational, not conceptual.
 4. It's built for institutions, not individuals.
@@ -673,9 +673,9 @@ Glassmorphism (backdrop-filter, transparency, blur) is associated with:
 - Apple-style interfaces
 - Modern marketing sites
 
-ROUAA is NOT any of these. ROUAA is institutional infrastructure.
+ROUA is NOT any of these. ROUA is institutional infrastructure.
 
-### What ROUAA Uses: Structured Surfaces
+### What ROUA Uses: Structured Surfaces
 
 ```
 SOLID GRAPHITE PANELS
@@ -716,9 +716,9 @@ Each level is a SOLID color. No transparency. No blur. Hard boundaries.
 
 ## 17. INTELLIGENCE OBJECT COMPONENT
 
-### The Core Component That Defines ROUAA
+### The Core Component That Defines ROUA
 
-This is the component that Bloomberg doesn't have. ChatGPT doesn't have. Only ROUAA has it.
+This is the component that Bloomberg doesn't have. ChatGPT doesn't have. Only ROUA has it.
 
 An Intelligence Object is a **verified, reusable, traceable financial intelligence artifact**.
 
@@ -841,7 +841,7 @@ Below: "Last updated: [timestamp]" in monospace
 
 ## 20. DATA FLOW ANIMATION
 
-### The Signature Motion of ROUAA
+### The Signature Motion of ROUA
 
 This is NOT a fade-in. This is **data moving through the pipeline**.
 
@@ -878,15 +878,15 @@ Reduced motion: dot is static at final position, no animation
 - Home page (hero pipeline)
 - Product Experience Center (shared foundation)
 
-This animation becomes the **visual signature** of ROUAA — when you see data flowing through verified layers, you know you're looking at ROUAA.
+This animation becomes the **visual signature** of ROUA — when you see data flowing through verified layers, you know you're looking at ROUA.
 
 ---
 
 ## 21. DATA VISUALIZATION LANGUAGE
 
-### Not TradingView. Not Excel. ROUAA's Own.
+### Not TradingView. Not Excel. ROUA's Own.
 
-ROUAA doesn't show price charts. It shows **intelligence relationships**.
+ROUA doesn't show price charts. It shows **intelligence relationships**.
 
 ### Visualization Types
 
@@ -949,7 +949,7 @@ Yes: clean, labeled, precise diagrams that look like engineering schematics
 
 ### How Applications Look
 
-Each ROUAA application is NOT a dashboard. It's an **intelligence workspace**.
+Each ROUA application is NOT a dashboard. It's an **intelligence workspace**.
 
 ### Workspace Layout
 
@@ -1016,7 +1016,7 @@ DEVELOPER WORKSPACE
 
 ### Institutional Trust Signals
 
-Trust in ROUAA is not claimed — it's **displayed**.
+Trust in ROUA is not claimed — it's **displayed**.
 
 ### Trust Indicator Components
 
@@ -1078,7 +1078,7 @@ Background: gold-subtle (if verified) or transparent
 - In system status console
 - In workspace headers
 
-Trust indicators are **pervasive**. The user should see "✓ VERIFIED" everywhere they look. This is how ROUAA builds trust — not through marketing claims, but through structural, visible verification.
+Trust indicators are **pervasive**. The user should see "✓ VERIFIED" everywhere they look. This is how ROUA builds trust — not through marketing claims, but through structural, visible verification.
 
 ---
 
@@ -1181,4 +1181,4 @@ Always: show what happened, when, and what can be done
 
 ---
 
-*This document is the source of truth for all ROUAA institutional design decisions. Every page, every component, every interaction must trace back to this system. ROUAA is not a website — it is an institutional intelligence infrastructure with a visual language that proves its own trustworthiness.*
+*This document is the source of truth for all ROUA institutional design decisions. Every page, every component, every interaction must trace back to this system. ROUA is not a website — it is an institutional intelligence infrastructure with a visual language that proves its own trustworthiness.*

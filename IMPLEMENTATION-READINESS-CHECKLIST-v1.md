@@ -1,4 +1,4 @@
-# ROUAA · Implementation Readiness Checklist v1
+# ROUA · Implementation Readiness Checklist v1
 
 > وثيقة قصيرة. ليست استراتيجية. ليست معمارية.
 > هي **فحص جاهزية قبل أي HTML** — ما جاهز، ما Mock، ما الفجوات.
@@ -201,7 +201,7 @@
 - Confidence Calculator (🟡 Mock جاهز)
 - Before/After Demo (🟡 جاهز)
 - Error Reports section (🔴 Roadmap — يُعرض كـ "Coming Q4 2026")
-- Status Page (🔴 Roadmap — link to status.rouaa.ai placeholder)
+- Status Page (🔴 Roadmap — link to status.roua.ai placeholder)
 
 **الحالة:** 🟡 يحتاج توضيح ما هو Production vs Demo vs Roadmap بصراحة
 
@@ -329,7 +329,7 @@
 
 - 🔴 Human Review pipeline (5 mandatory cases)
 - 🔴 Public Error Reports page
-- 🔴 Status page (status.rouaa.ai)
+- 🔴 Status page (status.roua.ai)
 - 🔴 Custom confidence weightings UI
 - 🔴 7-10 year retention infrastructure
 - 🔴 Conflict Resolution UI (automated display)

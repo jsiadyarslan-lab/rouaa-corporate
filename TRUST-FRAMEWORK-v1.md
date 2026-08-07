@@ -1,4 +1,4 @@
-# ROUAA · Trust Framework v1
+# ROUA · Trust Framework v1
 
 > الوثيقة التاسعة والأخيرة.
 >

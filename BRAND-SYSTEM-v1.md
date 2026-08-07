@@ -1,4 +1,4 @@
-# ROUAA · Brand System v1
+# ROUA · Brand System v1
 
 > الوثيقة الثانية عشرة والأخيرة فعلاً.
 >
@@ -147,7 +147,7 @@
 - **ما لا يكون:**
   - ❌ «Best Financial Platform»
   - ❌ «Revolutionizing Trading with AI»
-  - ❌ «Welcome to ROUAA»
+  - ❌ «Welcome to ROUA»
 
 ### H2 (القسم):
 

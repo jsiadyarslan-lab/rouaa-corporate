@@ -1,4 +1,4 @@
-# ROUAA · Pricing Model v1
+# ROUA · Pricing Model v1
 
 > وثيقة منفصلة عن Business Architecture — لأن الأسعار ستتغير أكثر من الهيكل، وقد تختلف حسب السوق.
 >

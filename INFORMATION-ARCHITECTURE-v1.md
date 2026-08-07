@@ -1,4 +1,4 @@
-# ROUAA · Information Architecture (IA) v1
+# ROUA · Information Architecture (IA) v1
 
 > بنية المحتوى والتنقل والعلاقات بين الصفحات.
 >
@@ -295,7 +295,7 @@ Home > Resources > Documentation
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ROUAA · Intelligence Platform                              │
+│  ROUA · Intelligence Platform                              │
 │  من المصدر الرسمي إلى القرار الموثّق                       │
 │  v23 · المؤسسي · 2026                                       │
 ├──────────────┬──────────────┬──────────────┬───────────────┤
@@ -308,7 +308,7 @@ Home > Resources > Documentation
 │  Pricing     │  Security    │  Government  │  Trust        │
 │  Services    │  Docs        │  Research    │               │
 ├──────────────┴──────────────┴──────────────┴───────────────┤
-│  © 2026 ROUAA · Privacy · Terms · Security · Status       │
+│  © 2026 ROUA · Privacy · Terms · Security · Status       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -416,7 +416,7 @@ Filter Sidebar (يمين الشاشة في RTL):
    - 6 sector badges
 
 7. Positioning (1 viewport)
-   - "Why ROUAA, not Bloomberg/Refinitiv"
+   - "Why ROUA, not Bloomberg/Refinitiv"
 
 8. Final CTA (1 viewport)
    - Demo / Contact
@@ -451,7 +451,7 @@ Filter Sidebar (يمين الشاشة في RTL):
 ### 9.4 Industry Page Hierarchy (7 sections per COM)
 
 ```
-1. Hero — "ROUAA for [Industry]"
+1. Hero — "ROUA for [Industry]"
 2. Challenges
 3. Solutions + Products
 4. Use Cases

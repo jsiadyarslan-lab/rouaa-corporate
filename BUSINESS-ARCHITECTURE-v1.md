@@ -1,4 +1,4 @@
-# ROUAA · Business Architecture v1
+# ROUA · Business Architecture v1
 
 > الوثيقة الأم — تثبّت **نموذج الأعمال** قبل **نموذج المنتج**.
 >

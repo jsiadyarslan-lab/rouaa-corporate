@@ -1,4 +1,4 @@
-# ROUAA · رؤى
+# ROUA · رؤى
 
 > **Institutional Decision Intelligence Platform**
 >
@@ -8,7 +8,7 @@
 
 ## 📚 ابدأ من هنا
 
-> **[docs/foundation/00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md](docs/foundation/00-ROUAA-MASTER-BUILD-BLUEPRINT-v1.md)** — ⭐ **نقطة الدخول الوحيدة**. الـ Operating Blueprint الذي يحول 63 وثيقة إلى برنامج بناء واحد.
+> **[docs/foundation/00-ROUA-MASTER-BUILD-BLUEPRINT-v1.md](docs/foundation/00-ROUA-MASTER-BUILD-BLUEPRINT-v1.md)** — ⭐ **نقطة الدخول الوحيدة**. الـ Operating Blueprint الذي يحول 63 وثيقة إلى برنامج بناء واحد.
 
 كل الإجابات التأسيسية الأخرى موجودة في **[docs/foundation/](docs/foundation/INDEX.md)**.
 
@@ -19,8 +19,8 @@
 | السؤال | الوثيقة |
 |---|---|
 | ما هي رؤى داخليًا؟ | [01-INTELLIGENCE-MODEL](docs/foundation/01-INTELLIGENCE-MODEL-v4.md) |
-| كيف تُرخّص؟ | [02-VALUE-MODEL](docs/foundation/02-ROUAA-VALUE-MODEL-v1.md) |
-| لماذا تُشترى؟ | [03-OUTCOME-MODEL](docs/foundation/03-ROUAA-OUTCOME-MODEL-v2.md) |
+| كيف تُرخّص؟ | [02-VALUE-MODEL](docs/foundation/02-ROUA-VALUE-MODEL-v1.md) |
+| لماذا تُشترى؟ | [03-OUTCOME-MODEL](docs/foundation/03-ROUA-OUTCOME-MODEL-v2.md) |
 | كم تُسعّر؟ | [04-PRICING-MODEL](docs/foundation/04-PRICING-MODEL-v3.md) |
 | من يشتريها؟ | [05-CUSTOMER-SEGMENT-MODEL](docs/foundation/05-CUSTOMER-SEGMENT-MODEL-v1.md) |
 | كيف تُباع؟ | [06-SALES-MOTION-MODEL](docs/foundation/06-SALES-MOTION-MODEL-v1.md) |
@@ -39,8 +39,8 @@
 | ⭐ كيف يقرر؟ | [20-DECISION-MODEL](docs/foundation/20-DECISION-MODEL-v1.md) (الوثيقة المركزية، مُحسَّنة) |
 | كيف يحوكَم القرار؟ | [21-DECISION-GOVERNANCE-MODEL](docs/foundation/21-DECISION-GOVERNANCE-MODEL-v1.md) |
 | كيف يعمل في المؤسسة؟ | [22-DECISION-WORKFLOW-MODEL](docs/foundation/22-DECISION-WORKFLOW-MODEL-v1.md) |
-| كيف تتوحّد في منصة؟ | [23-ROUAA-PLATFORM-MODEL-v2](docs/foundation/23-ROUAA-PLATFORM-MODEL-v2.md) ✅ v2 |
-| كيف تُباع كمنتجات؟ | [24-ROUAA-PRODUCT-MODEL-v2](docs/foundation/24-ROUAA-PRODUCT-MODEL-v2.md) ✅ v2 |
+| كيف تتوحّد في منصة؟ | [23-ROUA-PLATFORM-MODEL-v2](docs/foundation/23-ROUA-PLATFORM-MODEL-v2.md) ✅ v2 |
+| كيف تُباع كمنتجات؟ | [24-ROUA-PRODUCT-MODEL-v2](docs/foundation/24-ROUA-PRODUCT-MODEL-v2.md) ✅ v2 |
 | كيف تشتغل الشركة؟ | [25-OPERATING-MODEL](docs/foundation/25-OPERATING-MODEL-v1.md) |
 | كيف يتدفّق الذكاء؟ | [26-INTELLIGENCE-PIPELINE-MODEL](docs/foundation/26-INTELLIGENCE-PIPELINE-MODEL-v1.md) |
 | كيف تُهيكَل الوحدات؟ | [27-OBJECT-MODEL](docs/foundation/27-OBJECT-MODEL-v1.md) |
@@ -68,23 +68,23 @@
 | كيف تبني مجتمعًا؟ | [49-COMMUNITY-MODEL](docs/foundation/49-COMMUNITY-MODEL-v1.md) |
 | كيف تعلّم؟ | [50-EDUCATION-MODEL](docs/foundation/50-EDUCATION-MODEL-v1.md) |
 | كيف تُقيّس؟ | [51-STANDARDIZATION-MODEL](docs/foundation/51-STANDARDIZATION-MODEL-v1.md) |
-| كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUAA-CERTIFICATION-MODEL-v1.md) |
-| كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUAA-RESEARCH-INSTITUTE-MODEL-v1.md) |
-| كيف تُبنى المنظومة؟ | [54-ECOSYSTEM-ARCHITECTURE-MODEL](docs/foundation/54-ROUAA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) 🔄 |
-| كيف تُصمّم المنتجات؟ | [55-PRODUCT-PORTFOLIO-MODEL](docs/foundation/55-ROUAA-PRODUCT-PORTFOLIO-MODEL-v1.md) 🔄 |
-| كيف تُنفّذ الموقع؟ | ~~[54-SITE-IMPLEMENTATION-MODEL](docs/foundation/archive/54-ROUAA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md)~~ ⚠️ مؤرشفة |
-| كيف تصمّم بصريًا؟ | ~~[55-DESIGN-SYSTEM](docs/foundation/archive/55-ROUAA-DESIGN-SYSTEM-v1-superseeded.md)~~ ⚠️ مؤرشفة — سيُعاد بناؤها |
-| كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUAA-HOMEPAGE-WIREFRAME-v1.md) ⚠️ قيد المراجعة |
-| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUAA-COMPONENT-LIBRARY-v1.md) ⚠️ قيد المراجعة |
-| كيف تُهيكَل الصفحات؟ | [58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2](docs/foundation/58-ROUAA-PAGE-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
-| كيف يُبنى المحتوى؟ | [59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v2](docs/foundation/59-ROUAA-CONTENT-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
-| كيف تظهر في البحث؟ | [60-ROUAA-SEO-STRATEGY-MODEL-v2](docs/foundation/60-ROUAA-SEO-STRATEGY-MODEL-v2.md) ✅ v2 |
-| كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUAA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
-| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUAA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
-| كيف تُحزَّم الحلول التجارية؟ | [63-ROUAA-SOLUTION-SUITES-MODEL-v1](docs/foundation/63-ROUAA-SOLUTION-SUITES-MODEL-v1.md) ✅ جديد |
-| كيف نُدير التنفيذ؟ | [64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1](docs/foundation/64-ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1.md) ✅ جديد |
-| كيف نبدأ الكود الفعلي؟ | ~~[63-HTML-REACT-IMPLEMENTATION](docs/foundation/archive/63-ROUAA-HTML-REACT-IMPLEMENTATION-v1-superseeded.md)~~ ⚠️ مؤرشفة — ستُعاد كتابتها بعد استقرار الأساس |
-| كيف تُروى؟ | [13-ROUAA-SITE-NARRATIVE-v2](docs/foundation/13-ROUAA-SITE-NARRATIVE-v2.md) ✅ v2 |
+| كيف تُعتمد؟ | [52-CERTIFICATION-MODEL](docs/foundation/52-ROUA-CERTIFICATION-MODEL-v1.md) |
+| كيف تبحث؟ | [53-RESEARCH-INSTITUTE-MODEL](docs/foundation/53-ROUA-RESEARCH-INSTITUTE-MODEL-v1.md) |
+| كيف تُبنى المنظومة؟ | [54-ECOSYSTEM-ARCHITECTURE-MODEL](docs/foundation/54-ROUA-ECOSYSTEM-ARCHITECTURE-MODEL-v1.md) 🔄 |
+| كيف تُصمّم المنتجات؟ | [55-PRODUCT-PORTFOLIO-MODEL](docs/foundation/55-ROUA-PRODUCT-PORTFOLIO-MODEL-v1.md) 🔄 |
+| كيف تُنفّذ الموقع؟ | ~~[54-SITE-IMPLEMENTATION-MODEL](docs/foundation/archive/54-ROUA-SITE-IMPLEMENTATION-MODEL-v1-superseeded.md)~~ ⚠️ مؤرشفة |
+| كيف تصمّم بصريًا؟ | ~~[55-DESIGN-SYSTEM](docs/foundation/archive/55-ROUA-DESIGN-SYSTEM-v1-superseeded.md)~~ ⚠️ مؤرشفة — سيُعاد بناؤها |
+| كيف تُخطّط الصفحة الرئيسية؟ | [56-HOMEPAGE-WIREFRAME](docs/foundation/56-ROUA-HOMEPAGE-WIREFRAME-v1.md) ⚠️ قيد المراجعة |
+| كيف تُبنى المكونات؟ | [57-COMPONENT-LIBRARY](docs/foundation/57-ROUA-COMPONENT-LIBRARY-v1.md) ⚠️ قيد المراجعة |
+| كيف تُهيكَل الصفحات؟ | [58-ROUA-PAGE-ARCHITECTURE-MODEL-v2](docs/foundation/58-ROUA-PAGE-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
+| كيف يُبنى المحتوى؟ | [59-ROUA-CONTENT-ARCHITECTURE-MODEL-v2](docs/foundation/59-ROUA-CONTENT-ARCHITECTURE-MODEL-v2.md) ✅ v2 |
+| كيف تظهر في البحث؟ | [60-ROUA-SEO-STRATEGY-MODEL-v2](docs/foundation/60-ROUA-SEO-STRATEGY-MODEL-v2.md) ✅ v2 |
+| كيف تُقاس النتائج؟ | [61-ANALYTICS-MEASUREMENT-MODEL](docs/foundation/61-ROUA-ANALYTICS-MEASUREMENT-MODEL-v1.md) ⚠️ قيد المراجعة |
+| كيف يُبنى الموقع تقنيًا؟ | [62-WEB-IMPLEMENTATION-ARCHITECTURE](docs/foundation/62-ROUA-WEB-IMPLEMENTATION-ARCHITECTURE-v1.md) ⚠️ قيد المراجعة |
+| كيف تُحزَّم الحلول التجارية؟ | [63-ROUA-SOLUTION-SUITES-MODEL-v1](docs/foundation/63-ROUA-SOLUTION-SUITES-MODEL-v1.md) ✅ جديد |
+| كيف نُدير التنفيذ؟ | [64-ROUA-EXECUTION-PROGRAM-MANAGEMENT-v1](docs/foundation/64-ROUA-EXECUTION-PROGRAM-MANAGEMENT-v1.md) ✅ جديد |
+| كيف نبدأ الكود الفعلي؟ | ~~[63-HTML-REACT-IMPLEMENTATION](docs/foundation/archive/63-ROUA-HTML-REACT-IMPLEMENTATION-v1-superseeded.md)~~ ⚠️ مؤرشفة — ستُعاد كتابتها بعد استقرار الأساس |
+| كيف تُروى؟ | [13-ROUA-SITE-NARRATIVE-v2](docs/foundation/13-ROUA-SITE-NARRATIVE-v2.md) ✅ v2 |
 
 ---
 
@@ -98,8 +98,8 @@
 ## 🏗️ حالة المشروع
 
 - ✅ **65/65 وثيقة تأسيسية معتمدة — 🏁 المرحلة التوثيقية مكتملة بالكامل**
-- ⭐ **doc 00: ROUAA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
-- ⭐ **doc 64: ROUAA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
+- ⭐ **doc 00: ROUA-MASTER-BUILD-BLUEPRINT-v1** — نقطة الدخول الوحيدة
+- ⭐ **doc 64: ROUA-EXECUTION-PROGRAM-MANAGEMENT-v1** — Master Execution Governance
 - 🏗️ **سلسلة إعادة البناء المعماري مكتملة** (9 وثائق + doc 00 + doc 64)
 - 📋 **مرحلة التنفيذ**: [docs/execution/](docs/execution/INDEX.md) — Backlog + Sprint Plan + Tech Architecture + Engineering Spec + MVP Spec + Implementation Tasks (13 Epics / 40+ Tasks / 11 Sprints / Critical Path defined)
 - 🔨 **البناء يبدأ الآن**: 3 رسائل مُعتمدة (Homepage + Trading + Financial Intelligence) → HTML/CSS كنظام تصميم واحد
@@ -116,4 +116,4 @@
 
 ---
 
-*© 2026 رؤى · ROUAA — Institutional Decision Intelligence Platform*
+*© 2026 رؤى · ROUA — Institutional Decision Intelligence Platform*

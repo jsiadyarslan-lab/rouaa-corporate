@@ -1,4 +1,4 @@
-# ROUAA · Proof Assets v1
+# ROUA · Proof Assets v1
 
 > الوثيقة العاشرة والأخيرة.
 >
@@ -74,7 +74,7 @@
 
 ### الإنجليزية:
 
-> **ROUAA exists to turn the verifiability gap in financial markets into trusted decision power.**
+> **ROUA exists to turn the verifiability gap in financial markets into trusted decision power.**
 
 ### أين تظهر الفلسفة:
 

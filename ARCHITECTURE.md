@@ -1,4 +1,4 @@
-# ROUAA · Product Architecture Map (v3 — المعتمدة)
+# ROUA · Product Architecture Map (v3 — المعتمدة)
 
 > وثيقة مرجعية تُكتب قبل أي صفحة. كل قرار تصميمي لاحق يجب أن يرجع إلى هذه الوثيقة.
 >
@@ -33,13 +33,13 @@
                   ↑
 
                  Layer 0
-        ROUAA Intelligence Platform
+        ROUA Intelligence Platform
          (الإطار السردي الأعلى)
 ```
 
 ---
 
-## Layer 0 · ROUAA Intelligence Platform
+## Layer 0 · ROUA Intelligence Platform
 
 **السؤال:** ما هي رؤى؟
 **الوظيفة:** ليست تقنية. هي الصورة الكبيرة التي تمنع الزائر من القفز مباشرة إلى Layers دون فهم لماذا توجد.
@@ -47,7 +47,7 @@
 ```
 Official World Data
         ↓
-ROUAA Intelligence Platform
+ROUA Intelligence Platform
         ↓
 Applications
         ↓
@@ -131,10 +131,10 @@ Enterprise Solutions
 
 | المنتج | السؤال الذي يجيب عنه | التعريف النهائي |
 |--------|---------------------|-----------------|
-| ROUAA News | كيف أفهم السوق؟ | Financial Intelligence Application |
-| ROUAA Trade | كيف أتخذ القرار وأنفّذه؟ | Decision & Execution Intelligence Platform |
+| ROUA News | كيف أفهم السوق؟ | Financial Intelligence Application |
+| ROUA Trade | كيف أتخذ القرار وأنفّذه؟ | Decision & Execution Intelligence Platform |
 
-**ROUAA News** لا يقدّم "محتوى" — يقدّم استخبارات مالية:
+**ROUA News** لا يقدّم "محتوى" — يقدّم استخبارات مالية:
 - Intelligence Feed
 - Research
 - Reports
@@ -142,7 +142,7 @@ Enterprise Solutions
 - Asset Intelligence
 - Media Intelligence
 
-**ROUAA Trade** ليست "منصة تداول" — هي دورة كاملة:
+**ROUA Trade** ليست "منصة تداول" — هي دورة كاملة:
 ```
 Information → Reasoning → Risk → Decision → Execution → Learning
 ```
@@ -151,10 +151,10 @@ Information → Reasoning → Risk → Decision → Execution → Learning
 
 | المنتج | السؤال الذي يجيب عنه | ما يقدمه |
 |--------|---------------------|---------|
-| ROUAA Intelligence APIs | كيف أدمج استخبارات رؤى في بنيتي؟ | منتج كامل (مثل Bloomberg Data License / Refinitiv APIs) — Data + Intelligence عبر REST، Streaming، SDK، Webhooks، Authentication |
-| ROUAA White Label | كيف أبيع رؤى بعلامتي؟ | نسخة كاملة قابلة للعلامة التجارية — واجهات + APIs + بنية |
+| ROUA Intelligence APIs | كيف أدمج استخبارات رؤى في بنيتي؟ | منتج كامل (مثل Bloomberg Data License / Refinitiv APIs) — Data + Intelligence عبر REST، Streaming، SDK، Webhooks، Authentication |
+| ROUA White Label | كيف أبيع رؤى بعلامتي؟ | نسخة كاملة قابلة للعلامة التجارية — واجهات + APIs + بنية |
 
-**ملاحظة:** ROUAA Intelligence APIs ليست «APIs» فقط — هي **منتج**. كل وصول يسلّم بيانات واستخبارات من نفس المنظومة، بنفس طبقات الأدلة. التسمية المختصرة الداخلية: Intelligence APIs.
+**ملاحظة:** ROUA Intelligence APIs ليست «APIs» فقط — هي **منتج**. كل وصول يسلّم بيانات واستخبارات من نفس المنظومة، بنفس طبقات الأدلة. التسمية المختصرة الداخلية: Intelligence APIs.
 
 **لماذا White Label في Layer 3 وليس Layer 4؟** لأنه منتج. المؤسسة قد تشتريه (وسيط يريد منصة باسم علامته)، لكنه ليس "حل قطاع" — هو منتج تجاري.
 
@@ -228,7 +228,7 @@ News     Trade   Intelligence   White Label    Enterprise
 
 2. **صفحات Layer 3 (News / Trade / Intelligence APIs / White Label):** لا تشرح الطبقات كدرس للزائر. بدلاً من "أنت الآن في مخرج من النظام"، استخدم الإشارة الضمنية:
    ```
-   Powered by ROUAA Intelligence Core
+   Powered by ROUA Intelligence Core
    Built on: ✓ Official Sources ✓ Evidence Engine ✓ AI Reasoning
    ```
    الزائر يشعر بالاتصال بدون شرح معماري.
@@ -242,26 +242,26 @@ News     Trade   Intelligence   White Label    Enterprise
    Platform · Products · Solutions · API · Enterprise · Security
    ```
 
-6. **اللغة:** "Financial Intelligence Application" (News)، "Decision & Execution Intelligence Platform" (Trade)، "ROUAA Intelligence APIs" (وليس فقط APIs) — لا تقليل للقيمة بأسماء سوقية بسيطة.
+6. **اللغة:** "Financial Intelligence Application" (News)، "Decision & Execution Intelligence Platform" (Trade)، "ROUA Intelligence APIs" (وليس فقط APIs) — لا تقليل للقيمة بأسماء سوقية بسيطة.
 
 ---
 
 ## ما الذي تم تثبيته في v3 (النسخة المعتمدة)
 
-- [x] إضافة Layer 0 — ROUAA Intelligence Platform كإطار سردي أعلى
+- [x] إضافة Layer 0 — ROUA Intelligence Platform كإطار سردي أعلى
 - [x] Layer 1 — Intelligence Infrastructure (داخلي للتشغيل + خارجي لإثبات الثقة)
 - [x] **إزالة التداخل:** Evidence Engine و Knowledge Graph انتقلتا من Layer 1 إلى Layer 2A (الأصل مقابل المعالجة)
 - [x] Layer 1 تحتوي الآن على: Official Sources · Source Registry · Data Quality · Provenance Storage
 - [x] تقسيم Layer 2 إلى 2A Knowledge Engines + 2B Decision Engines
 - [x] Layer 3 — Commercial Products، منقسمة إلى 3A Intelligence Applications + 3B Platform Access
-- [x] **ROUAA Intelligence APIs** (وليس فقط APIs) — منتج كامل مثل Bloomberg Data License
+- [x] **ROUA Intelligence APIs** (وليس فقط APIs) — منتج كامل مثل Bloomberg Data License
 - [x] White Label في Layer 3 وليس Layer 4 (لأنه منتج، ليس حل قطاع)
 - [x] Layer 4 — صفحة Enterprise واحدة، لا تقسيم الموقع
 - [x] التعريف النهائي: News = Financial Intelligence Application
 - [x] التعريف النهائي: Trade = Decision & Execution Intelligence Platform
 - [x] **رحلة المعلومة مُصحّحة:** Source → Document → Extraction → Fact → Evidence Validation → Event Understanding → Intelligence (الحقيقة غير الموثقة ليست حقيقة)
 - [x] **قاعدة index.html مُصحّحة:** لا تبيع منتجاً، لكنها تبيع الفكرة والقيمة
-- [x] **قاعدة صفحات Layer 3 مُصحّحة:** لا تشرح الطبقات كدرس، استخدم "Powered by ROUAA Intelligence Core" ضمنياً
+- [x] **قاعدة صفحات Layer 3 مُصحّحة:** لا تشرح الطبقات كدرس، استخدم "Powered by ROUA Intelligence Core" ضمنياً
 - [x] **قاعدة Navigation:** Enterprise يظهر مبكراً، لا يمر البنك بكل الطبقات
 - [x] المبدأ المركزي: "كلها مخرجات من نفس النظام"
 
@@ -271,7 +271,7 @@ News     Trade   Intelligence   White Label    Enterprise
 
 ```
 LAYER 0
-ROUAA Intelligence Platform (Why)
+ROUA Intelligence Platform (Why)
         ↓
 LAYER 1
 Intelligence Infrastructure (On what)
@@ -284,10 +284,10 @@ Decision Engines (Reasoning)
         ↓
 LAYER 3
 Commercial Products (Consumption)
-   ├── ROUAA News
-   ├── ROUAA Trade
-   ├── ROUAA Intelligence APIs
-   └── ROUAA White Label
+   ├── ROUA News
+   ├── ROUA Trade
+   ├── ROUA Intelligence APIs
+   └── ROUA White Label
         ↓
 LAYER 4
 Enterprise Solutions (Deployment)

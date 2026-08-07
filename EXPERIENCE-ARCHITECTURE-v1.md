@@ -1,4 +1,4 @@
-# ROUAA · Experience Architecture (EXA) v1
+# ROUA · Experience Architecture (EXA) v1
 
 > المرجع الوحيد لأي مصمم أو Frontend Engineer.
 >
@@ -334,15 +334,15 @@ ACT 3 — PAYOFF
 Visitor arrives at index.html
 │
 ├── Referrer = LinkedIn ad mentioning "Bloomberg alternative"
-│   → Hero shows "Why ROUAA, not Bloomberg" message
+│   → Hero shows "Why ROUA, not Bloomberg" message
 │   → Primary CTA: compare/bloomberg.html
 │
 ├── Referrer = Google search "financial intelligence API"
-│   → Hero shows "Build with ROUAA APIs" message
+│   → Hero shows "Build with ROUA APIs" message
 │   → Primary CTA: developers.html
 │
 ├── Referrer = Google search "Arabic financial news"
-│   → Hero shows "ROUAA Media Technologies" message
+│   → Hero shows "ROUA Media Technologies" message
 │   → Primary CTA: media-technologies.html
 │
 ├── First-time visitor (no referrer, no cookie)

@@ -1,4 +1,4 @@
-# ROUAA · Business Architecture v2
+# ROUA · Business Architecture v2
 
 > الوثيقة الأم — تثبّت **نموذج الأعمال** قبل **نموذج المنتج**.
 >
@@ -114,7 +114,7 @@ Solutions Layer (بين Business Lines والمنتجات)
 
 ## 4. فصل واضح: Who We Are vs What We Sell
 
-### تعديل 3 — إضافة صفحة About Rouaa
+### تعديل 3 — إضافة صفحة About Roua
 
 **v1 (نقص):** لا يوجد فصل بين الهوية والمنتجات
 **v2 (إضافة):** صفحة `about.html` تشرح:

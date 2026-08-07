@@ -1,4 +1,4 @@
-# ROUAA · Product Bible v1
+# ROUA · Product Bible v1
 
 > الوثيقة المرجعية النهائية قبل أي تصميم أو كتابة HTML.
 >
@@ -840,7 +840,7 @@ TradingView يقدّم شارت قوي لكن بلا ذكاء. المنصات ا
 **المكونات:**
 - Frontend Apps (News, Trade, Dashboards — قابلة لإعادة العلامة كاملة)
 - APIs (REST + Streaming + SDK)
-- ROUAA Intelligence Core (Knowledge + Decision Engines)
+- ROUA Intelligence Core (Knowledge + Decision Engines)
 - Infrastructure (Hosting + DBs + Monitoring + Backups)
 - Support (SLA + dedicated + updates)
 - Brand Customization (logo, colors, fonts, domain)

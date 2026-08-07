@@ -5,152 +5,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070D">
-<title>ROUAA · Platform — How Official Evidence Becomes Institutional Intelligence</title>
-<meta name="description" content="Institutions rebuild the same pipeline over and over. ROUAA builds it once. Seven layers from official source to distributed products.">
+<title>ROUA · Platform — How Official Evidence Becomes Institutional Intelligence</title>
+<meta name="description" content="Institutions rebuild the same pipeline over and over. ROUA builds it once. Seven layers from official source to distributed products.">
 
 
 <style>
 /* === Hero === */
 .hero-platform { position: relative; padding: 6rem 0 3rem; overflow: hidden; text-align: center; }
-.hero-platform-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--rouaa-accent-subtle), transparent 70%); z-index: 0; }
+.hero-platform-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--roua-accent-subtle), transparent 70%); z-index: 0; }
 .hero-platform-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
 .hero-platform-h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; max-width: 20ch; }
-.hero-platform-h1 .gold { color: var(--rouaa-accent); }
-.hero-platform-sub { font-size: 1.0625rem; color: var(--rouaa-text-secondary); max-width: 60ch; line-height: 1.7; }
+.hero-platform-h1 .gold { color: var(--roua-accent); }
+.hero-platform-sub { font-size: 1.0625rem; color: var(--roua-text-secondary); max-width: 60ch; line-height: 1.7; }
 .hero-platform-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
 
 /* === Why Platform Exists (the missing intro) === */
 .why-exists { max-width: 700px; margin: 2rem auto 0; text-align: center; }
-.why-exists-step { padding: 0.75rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; font-size: 0.875rem; color: var(--rouaa-text-secondary); transition: border-color 400ms ease; }
-.why-exists-step:hover { border-color: var(--rouaa-accent); }
-.why-exists-step strong { color: var(--rouaa-text-primary); }
-.why-exists-step.final { background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent); color: var(--rouaa-accent); font-weight: 600; }
-.why-exists-arrow { text-align: center; color: var(--rouaa-accent); opacity: 0.3; font-size: 0.75rem; margin: 0.2rem 0; }
+.why-exists-step { padding: 0.75rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; font-size: 0.875rem; color: var(--roua-text-secondary); transition: border-color 400ms ease; }
+.why-exists-step:hover { border-color: var(--roua-accent); }
+.why-exists-step strong { color: var(--roua-text-primary); }
+.why-exists-step.final { background: var(--roua-accent-subtle); border-color: var(--roua-accent); color: var(--roua-accent); font-weight: 600; }
+.why-exists-arrow { text-align: center; color: var(--roua-accent); opacity: 0.3; font-size: 0.75rem; margin: 0.2rem 0; }
 
 /* === 95% / 5% visual === */
 .ratio-visual { max-width: 500px; margin: 3rem auto; text-align: center; }
-.ratio-bar { display: flex; height: 60px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--rouaa-surface-border); }
-.ratio-infra { flex: 95; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-accent); }
-.ratio-products { flex: 5; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; font-weight: 700; color: var(--rouaa-text-muted); }
-.ratio-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.ratio-bar { display: flex; height: 60px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--roua-surface-border); }
+.ratio-infra { flex: 95; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; font-weight: 700; color: var(--roua-accent); }
+.ratio-products { flex: 5; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; font-weight: 700; color: var(--roua-text-muted); }
+.ratio-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--roua-text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
 
 /* === Architecture stack — grouped by abstraction level === */
 .arch-group { max-width: 600px; margin: 0 auto; }
-.arch-group-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--group-color, var(--rouaa-accent)); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin: 1.5rem 0 0.5rem; text-align: center; padding-bottom: 0.375rem; border-bottom: 1px solid var(--rouaa-border); }
+.arch-group-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--group-color, var(--roua-accent)); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin: 1.5rem 0 0.5rem; text-align: center; padding-bottom: 0.375rem; border-bottom: 1px solid var(--roua-border); }
 .arch-group.data { --group-color: #2DBA8E; }
 .arch-group.processing { --group-color: #4A90D9; }
-.arch-group.knowledge { --group-color: var(--rouaa-accent); }
+.arch-group.knowledge { --group-color: var(--roua-accent); }
 .arch-group.intelligence { --group-color: #F5A623; }
-.arch-group.delivery { --group-color: var(--rouaa-accent); }
+.arch-group.delivery { --group-color: var(--roua-accent); }
 
-.arch-layer { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; padding: 1rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; align-items: center; transition: border-color 400ms ease; position: relative; overflow: hidden; }
-.arch-layer:hover { border-color: var(--layer-color, var(--rouaa-accent)); }
-.arch-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--layer-color, var(--rouaa-accent)); }
-.arch-layer-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; color: var(--layer-color, var(--rouaa-accent)); font-weight: 700; width: 48px; text-align: center; }
+.arch-layer { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; padding: 1rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); margin-bottom: 0.375rem; align-items: center; transition: border-color 400ms ease; position: relative; overflow: hidden; }
+.arch-layer:hover { border-color: var(--layer-color, var(--roua-accent)); }
+.arch-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--layer-color, var(--roua-accent)); }
+.arch-layer-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; color: var(--layer-color, var(--roua-accent)); font-weight: 700; width: 48px; text-align: center; }
 .arch-layer-body { flex: 1; }
-.arch-layer-name { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); }
-.arch-layer-value { font-size: 0.6875rem; color: var(--rouaa-text-secondary); margin-top: 0.125rem; line-height: 1.4; }
-.arch-layer-stat { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--layer-color, var(--rouaa-accent)); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; }
+.arch-layer-name { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--roua-text-primary); }
+.arch-layer-value { font-size: 0.6875rem; color: var(--roua-text-secondary); margin-top: 0.125rem; line-height: 1.4; }
+.arch-layer-stat { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--layer-color, var(--roua-accent)); padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); white-space: nowrap; }
 .arch-layer.l1 { --layer-color: #2DBA8E; }
 .arch-layer.l2 { --layer-color: #4A90D9; }
 .arch-layer.l3 { --layer-color: #4A90D9; }
-.arch-layer.l4 { --layer-color: var(--rouaa-accent); }
-.arch-layer.l5 { --layer-color: var(--rouaa-accent); }
+.arch-layer.l4 { --layer-color: var(--roua-accent); }
+.arch-layer.l5 { --layer-color: var(--roua-accent); }
 .arch-layer.l6 { --layer-color: #F5A623; }
-.arch-layer.l7 { --layer-color: var(--rouaa-accent); }
-.arch-connector { text-align: center; color: var(--rouaa-accent); opacity: 0.25; font-size: 0.625rem; margin: 0.1rem 0; }
+.arch-layer.l7 { --layer-color: var(--roua-accent); }
+.arch-connector { text-align: center; color: var(--roua-accent); opacity: 0.25; font-size: 0.625rem; margin: 0.1rem 0; }
 
 /* Products fan-out */
 .arch-products { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-.arch-product-chip { padding: 0.375rem 0.75rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--rouaa-text-secondary); text-decoration: none; transition: border-color 400ms ease; }
-.arch-product-chip:hover { border-color: var(--rouaa-accent); color: var(--rouaa-accent); }
+.arch-product-chip { padding: 0.375rem 0.75rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--roua-text-secondary); text-decoration: none; transition: border-color 400ms ease; }
+.arch-product-chip:hover { border-color: var(--roua-accent); color: var(--roua-accent); }
 
 /* === Why not build === */
 .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
-.why-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; text-align: center; transition: border-color 400ms ease; }
-.why-card:hover { border-color: var(--rouaa-accent); }
+.why-card { background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem; text-align: center; transition: border-color 400ms ease; }
+.why-card:hover { border-color: var(--roua-accent); }
 .why-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.why-h { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--rouaa-text-primary); margin-bottom: 0.375rem; }
-.why-desc { font-size: 0.75rem; color: var(--rouaa-text-muted); line-height: 1.5; }
+.why-h { font-family: inherit; font-size: 0.9375rem; font-weight: 700; color: var(--roua-text-primary); margin-bottom: 0.375rem; }
+.why-desc { font-size: 0.75rem; color: var(--roua-text-muted); line-height: 1.5; }
 
 /* === Deployment === */
 .deploy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
-.deploy-card { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.25rem 1rem; transition: border-color 400ms ease; }
-.deploy-card:hover { border-color: var(--rouaa-accent); }
-.deploy-name { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); margin-bottom: 0.375rem; }
-.deploy-desc { font-size: 0.6875rem; color: var(--rouaa-text-secondary); line-height: 1.5; }
+.deploy-card { background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); padding: 1.25rem 1rem; transition: border-color 400ms ease; }
+.deploy-card:hover { border-color: var(--roua-accent); }
+.deploy-name { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--roua-text-primary); margin-bottom: 0.375rem; }
+.deploy-desc { font-size: 0.6875rem; color: var(--roua-text-secondary); line-height: 1.5; }
 
 /* === Architecture Visualization — Follow One Event === */
 .viz-wrap { max-width: 1100px; margin: 0 auto; }
 .viz-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-.viz-tab { padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); font-family: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--rouaa-text-secondary); cursor: pointer; transition: all 400ms ease; }
-.viz-tab:hover { border-color: var(--rouaa-accent); color: var(--rouaa-text-primary); }
-.viz-tab.active { background: var(--rouaa-accent-subtle); border-color: var(--rouaa-accent); color: var(--rouaa-accent); }
+.viz-tab { padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); font-family: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--roua-text-secondary); cursor: pointer; transition: all 400ms ease; }
+.viz-tab:hover { border-color: var(--roua-accent); color: var(--roua-text-primary); }
+.viz-tab.active { background: var(--roua-accent-subtle); border-color: var(--roua-accent); color: var(--roua-accent); }
 
-.viz-flow { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; background: var(--rouaa-bg-secondary); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); padding: 2rem; }
+.viz-flow { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; background: var(--roua-bg-secondary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-xl); padding: 2rem; }
 @media (max-width: 768px) { .viz-flow { grid-template-columns: 1fr; } }
 
 .viz-source { display: flex; flex-direction: column; gap: 0.75rem; }
-.viz-source-label { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
-.viz-source-doc { background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1rem; transition: border-color 400ms ease; }
-.viz-source-doc:hover { border-color: var(--rouaa-accent); }
-.viz-source-type { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
-.viz-source-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); line-height: 1.3; margin-bottom: 0.5rem; }
-.viz-source-meta { font-size: 0.6875rem; color: var(--rouaa-text-muted); line-height: 1.4; }
+.viz-source-label { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.viz-source-doc { background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); padding: 1rem; transition: border-color 400ms ease; }
+.viz-source-doc:hover { border-color: var(--roua-accent); }
+.viz-source-type { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.375rem; }
+.viz-source-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--roua-text-primary); line-height: 1.3; margin-bottom: 0.5rem; }
+.viz-source-meta { font-size: 0.6875rem; color: var(--roua-text-muted); line-height: 1.4; }
 
 .viz-layers { display: flex; flex-direction: column; gap: 0.25rem; }
-.viz-layer { display: grid; grid-template-columns: 32px 1fr 1fr 110px; gap: 0.75rem; padding: 0.625rem 0.875rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); align-items: center; transition: all 400ms ease; position: relative; overflow: hidden; }
-.viz-layer:hover { border-color: var(--rouaa-accent); transform: translateX(-4px); }
-.viz-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--l-color, var(--rouaa-accent)); }
+.viz-layer { display: grid; grid-template-columns: 32px 1fr 1fr 110px; gap: 0.75rem; padding: 0.625rem 0.875rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-sm); align-items: center; transition: all 400ms ease; position: relative; overflow: hidden; }
+.viz-layer:hover { border-color: var(--roua-accent); transform: translateX(-4px); }
+.viz-layer::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px; background: var(--l-color, var(--roua-accent)); }
 .viz-layer.l1 { --l-color: #2DBA8E; }
 .viz-layer.l2 { --l-color: #4A90D9; }
 .viz-layer.l3 { --l-color: #4A90D9; }
-.viz-layer.l4 { --l-color: var(--rouaa-accent); }
-.viz-layer.l5 { --l-color: var(--rouaa-accent); }
+.viz-layer.l4 { --l-color: var(--roua-accent); }
+.viz-layer.l5 { --l-color: var(--roua-accent); }
 .viz-layer.l6 { --l-color: #F5A623; }
-.viz-layer.l7 { --l-color: var(--rouaa-accent); }
+.viz-layer.l7 { --l-color: var(--roua-accent); }
 
 .viz-layer-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--l-color); font-weight: 700; }
-.viz-layer-name { font-family: inherit; font-size: 0.75rem; font-weight: 700; color: var(--rouaa-text-primary); }
-.viz-layer-transform { font-size: 0.6875rem; color: var(--rouaa-text-secondary); line-height: 1.4; }
+.viz-layer-name { font-family: inherit; font-size: 0.75rem; font-weight: 700; color: var(--roua-text-primary); }
+.viz-layer-transform { font-size: 0.6875rem; color: var(--roua-text-secondary); line-height: 1.4; }
 .viz-layer-transform strong { color: var(--l-color); font-family: inherit; font-size: 0.6875rem; }
-.viz-layer-output { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--l-color); padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--rouaa-border); border-radius: var(--radius-sm); text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
+.viz-layer-output { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--l-color); padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--roua-border); border-radius: var(--radius-sm); text-align: center; letter-spacing: 0.05em; text-transform: uppercase; }
 
-.viz-connector { text-align: center; color: var(--rouaa-accent); opacity: 0.3; font-size: 0.5rem; margin: 0; }
+.viz-connector { text-align: center; color: var(--roua-accent); opacity: 0.3; font-size: 0.5rem; margin: 0; }
 
-.viz-outputs { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--rouaa-surface-border); }
-.viz-outputs-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+.viz-outputs { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--roua-surface-border); }
+.viz-outputs-h { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
 .viz-outputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
-.viz-output { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-sm); border-right: 2px solid var(--o-color); }
+.viz-output { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-sm); border-right: 2px solid var(--o-color); }
 .viz-output.o-news { --o-color: #4A90D9; }
-.viz-output.o-research { --o-color: var(--rouaa-accent); }
+.viz-output.o-research { --o-color: var(--roua-accent); }
 .viz-output.o-trading { --o-color: #2DBA8E; }
 .viz-output.o-risk { --o-color: #E5484D; }
 .viz-output.o-media { --o-color: #F5A623; }
-.viz-output.o-api { --o-color: var(--rouaa-text-muted); }
+.viz-output.o-api { --o-color: var(--roua-text-muted); }
 .viz-output-icon { font-size: 0.875rem; }
-.viz-output-text { font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--rouaa-text-primary); }
+.viz-output-text { font-family: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--roua-text-primary); }
 
 /* === Evidence Trace Demo === */
-.trace-demo { max-width: 900px; margin: 0 auto; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-xl); overflow: hidden; }
-.trace-head { padding: 1rem 1.5rem; background: var(--rouaa-bg-secondary); border-bottom: 1px solid var(--rouaa-surface-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-.trace-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--rouaa-text-primary); }
-.trace-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); padding: 0.25rem 0.5rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-sm); }
+.trace-demo { max-width: 900px; margin: 0 auto; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-xl); overflow: hidden; }
+.trace-head { padding: 1rem 1.5rem; background: var(--roua-bg-secondary); border-bottom: 1px solid var(--roua-surface-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.trace-title { font-family: inherit; font-size: 0.875rem; font-weight: 700; color: var(--roua-text-primary); }
+.trace-badge { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); padding: 0.25rem 0.5rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent); border-radius: var(--radius-sm); }
 .trace-steps { padding: 1rem 1.5rem; }
-.trace-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed var(--rouaa-border); align-items: center; }
+.trace-step { display: grid; grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed var(--roua-border); align-items: center; }
 .trace-step:last-child { border-bottom: none; }
-.trace-step-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--rouaa-accent); font-weight: 700; }
-.trace-step-body { font-size: 0.75rem; color: var(--rouaa-text-secondary); line-height: 1.5; }
-.trace-step-body strong { color: var(--rouaa-text-primary); font-family: inherit; font-size: 0.75rem; }
-.trace-step-time { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); white-space: nowrap; }
+.trace-step-num { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; color: var(--roua-accent); font-weight: 700; }
+.trace-step-body { font-size: 0.75rem; color: var(--roua-text-secondary); line-height: 1.5; }
+.trace-step-body strong { color: var(--roua-text-primary); font-family: inherit; font-size: 0.75rem; }
+.trace-step-time { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-text-muted); white-space: nowrap; }
 
 /* === CTA === */
-.cta-final { text-align: center; padding: 5rem 0; background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); }
+.cta-final { text-align: center; padding: 5rem 0; background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); }
 .cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
-.cta-final p { color: var(--rouaa-text-secondary); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+.cta-final p { color: var(--roua-text-secondary); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
 </style>
-  <link rel="stylesheet" href="design-system/rouaa-v7.css">
-  <link rel="stylesheet" href="design-system/rouaa-v7-patch.css">
+  <link rel="stylesheet" href="design-system/roua-v7.css">
+  <link rel="stylesheet" href="design-system/roua-v7-patch.css">
 </head>
 <body>
 
@@ -159,7 +159,7 @@
   <!-- ============ NAVIGATION ============ -->
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUAA</span></a>
+      <a href="index.html" class="nav-logo"><span class="nav-logo-text">ROUA</span></a>
       <div class="nav-links" id="navLinks">
         <div class="nav-item-has-dropdown">
           <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" id="nav-dropdown-products">
@@ -205,7 +205,7 @@
             <a href="financial-media.html" class="nav-dropdown-link">Financial Media</a>
             <a href="enterprise.html" class="nav-dropdown-link">Enterprise</a>
             <a href="solutions.html" class="nav-dropdown-link">Solutions Overview</a>
-            <a href="why-rouaa.html" class="nav-dropdown-link">Why ROUAA</a>
+            <a href="why-roua.html" class="nav-dropdown-link">Why ROUA</a>
             <a href="business-case.html" class="nav-dropdown-link">Business Case</a>          </div>
         </div>
                 <div class="nav-item-has-dropdown">
@@ -261,7 +261,7 @@
         <p class="hero-platform-sub">
           Institutions rebuild the same intelligence layer over and over — source collection, document processing, fact extraction, and insight distribution.
 
-          ROUAA builds this intelligence infrastructure once and enables institutions to deploy evidence-backed intelligence across their workflows.
+          ROUA builds this intelligence infrastructure once and enables institutions to deploy evidence-backed intelligence across their workflows.
         </p>
         <div class="hero-platform-cta">
           <a href="contact.html" class="btn btn-primary btn-lg">Request Platform Briefing</a>
@@ -272,7 +272,7 @@
   </section>
 
   <!-- ============= WHY THIS PLATFORM EXISTS (the missing intro) ============= -->
-  <section class="section reveal" id="why" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <section class="section reveal" id="why" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-6">
         <h2 class="section-h" style="margin: 0 auto 1rem;">Every institution rebuilds the same pipeline</h2>
@@ -285,53 +285,53 @@
         <div class="why-exists-arrow">↓</div>
         <div class="why-exists-step">Requires specialized teams across data engineering, governance, research, and deployment.</div>
         <div class="why-exists-arrow">↓</div>
-        <div class="why-exists-step final">ROUAA builds the pipeline once — and distributes intelligence to everyone</div>
+        <div class="why-exists-step final">ROUA builds the pipeline once — and distributes intelligence to everyone</div>
       </div>
 
       <!-- The Intelligence Stack -->
       <div class="ratio-visual reveal" style="max-width: 600px; margin: 3rem auto; text-align: center;">
-        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">The Intelligence Stack</div>
-          <div style="font-size: 1rem; color: var(--rouaa-text-primary); line-height: 1.6;">
+        <div style="background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--roua-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">The Intelligence Stack</div>
+          <div style="font-size: 1rem; color: var(--roua-text-primary); line-height: 1.6;">
             Source → Document Intelligence → Facts → Evidence → Knowledge Graph → Governance → Reasoning → Distribution
           </div>
-          <div style="font-size: 0.875rem; color: var(--rouaa-text-secondary); margin-top: 0.75rem;">
+          <div style="font-size: 0.875rem; color: var(--roua-text-secondary); margin-top: 0.75rem;">
             Infrastructure + Evidence + Knowledge + Reasoning = Trustworthy Institutional Intelligence
           </div>
         </div>
       </div>
 
       <!-- Production coverage disclaimer -->
-      <div style="max-width: 600px; margin: 1.5rem auto 0; padding: 0.875rem 1.25rem; background: var(--rouaa-bg-secondary); border: 1px dashed var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center;">
-        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;">
-          <strong style="color: var(--rouaa-accent);">Production Metrics</strong> · Continuously updated<br>
+      <div style="max-width: 600px; margin: 1.5rem auto 0; padding: 0.875rem 1.25rem; background: var(--roua-bg-secondary); border: 1px dashed var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;">
+          <strong style="color: var(--roua-accent);">Production Metrics</strong> · Continuously updated<br>
           Environment: Internal Production Infrastructure
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Without ROUAA / With ROUAA -->
-  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <!-- Without ROUA / With ROUA -->
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">The Difference</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">What changes when you adopt ROUAA?</h2>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">What changes when you adopt ROUA?</h2>
       </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto;">
-        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Without ROUAA</div>
-          <div style="font-size: 0.9375rem; color: var(--rouaa-text-secondary); line-height: 1.7;">
+        <div style="background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--roua-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Without ROUA</div>
+          <div style="font-size: 0.9375rem; color: var(--roua-text-secondary); line-height: 1.7;">
             Source → Manual Processing → Report → Decision
           </div>
-          <p style="font-size: 0.8125rem; color: var(--rouaa-text-muted); margin-top: 0.75rem;">Manual processing, fragmented tools, no evidence chain.</p>
+          <p style="font-size: 0.8125rem; color: var(--roua-text-muted); margin-top: 0.75rem;">Manual processing, fragmented tools, no evidence chain.</p>
         </div>
-        <div style="background: var(--rouaa-surface); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-md); padding: 1.5rem;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--rouaa-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">With ROUAA</div>
-          <div style="font-size: 0.9375rem; color: var(--rouaa-text-primary); line-height: 1.7;">
+        <div style="background: var(--roua-surface); border: 1px solid var(--roua-accent); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; color: var(--roua-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">With ROUA</div>
+          <div style="font-size: 0.9375rem; color: var(--roua-text-primary); line-height: 1.7;">
             Source → Evidence → Governed Intelligence → Decision
           </div>
-          <p style="font-size: 0.8125rem; color: var(--rouaa-text-secondary); margin-top: 0.75rem;">Verified facts, complete evidence chain, institutional intelligence.</p>
+          <p style="font-size: 0.8125rem; color: var(--roua-text-secondary); margin-top: 0.75rem;">Verified facts, complete evidence chain, institutional intelligence.</p>
         </div>
       </div>
     </div>
@@ -428,33 +428,33 @@
   </section>
 
   <!-- ============= BUILT TODAY — OPERATIONAL PROOF ============= -->
-  <section class="section reveal" id="built-today" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <section class="section reveal" id="built-today" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-8">
         <span class="section-tag" style="justify-content: center;">Built Today</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">Production infrastructure already built.</h2>
-        <p class="section-lead" style="margin: 0 auto;">ROUAA is not a conceptual framework. The intelligence infrastructure is built layer by layer — with operational components already running. Here is what exists today.</p>
+        <p class="section-lead" style="margin: 0 auto;">ROUA is not a conceptual framework. The intelligence infrastructure is built layer by layer — with operational components already running. Here is what exists today.</p>
       </div>
 
       <div class="why-grid" style="max-width: 1040px;">
         <div class="why-card" style="text-align: left;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
           <div class="why-h" style="text-align: left;">Source Intelligence Layer</div>
           <div class="why-desc" style="text-align: left;">Official Source Registry · source classification · source health monitoring · RSS / HTML / PDF / API ingestion · source prioritization.</div>
-          <div style="font-size: 0.6875rem; color: var(--rouaa-accent); margin-top: 0.5rem; font-weight: 600;">411+ institutional sources mapped</div>
+          <div style="font-size: 0.6875rem; color: var(--roua-accent); margin-top: 0.5rem; font-weight: 600;">411+ institutional sources mapped</div>
         </div>
         <div class="why-card" style="text-align: left;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
           <div class="why-h" style="text-align: left;">Document Intelligence Layer</div>
           <div class="why-desc" style="text-align: left;">Transforms official publications into structured intelligence inputs. Document ingestion · text extraction · document classification · metadata normalization · source linking.</div>
         </div>
         <div class="why-card" style="text-align: left;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
           <div class="why-h" style="text-align: left;">Evidence &amp; Provenance Layer</div>
           <div class="why-desc" style="text-align: left;">The foundation of defensible intelligence. Fact-to-document linking · source traceability · evidence records · confidence scoring framework. Every output can be traced back to its origin.</div>
         </div>
         <div class="why-card" style="text-align: left;">
-          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
+          <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Operational</div>
           <div class="why-h" style="text-align: left;">Financial Event Engine</div>
           <div class="why-desc" style="text-align: left;">Detects and structures financial events. Central bank decisions · inflation releases · employment reports · GDP publications · regulatory announcements.</div>
         </div>
@@ -462,19 +462,19 @@
 
       <!-- Intelligence Pipeline -->
       <div style="max-width: 560px; margin: 3rem auto 0;">
-        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-bottom: 1rem;">Running Architecture</div>
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-bottom: 1rem;">Running Architecture</div>
         <div style="display: flex; flex-direction: column; gap: 0.375rem;">
-          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Official Source</div>
-          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
-          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Document</div>
-          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
-          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Extracted Fact</div>
-          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
-          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Financial Event</div>
-          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
-          <div style="padding: 0.625rem 1.25rem; background: var(--rouaa-surface); border: 1px solid var(--rouaa-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--rouaa-text-primary); font-weight: 600;">Evidence Chain</div>
-          <div style="text-align: center; color: var(--rouaa-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
-          <div style="padding: 0.75rem 1.25rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-md); text-align: center; font-size: 0.875rem; color: var(--rouaa-accent); font-weight: 700;">Intelligence Output</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--roua-text-primary); font-weight: 600;">Official Source</div>
+          <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--roua-text-primary); font-weight: 600;">Document</div>
+          <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--roua-text-primary); font-weight: 600;">Extracted Fact</div>
+          <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--roua-text-primary); font-weight: 600;">Financial Event</div>
+          <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.625rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; font-size: 0.8125rem; color: var(--roua-text-primary); font-weight: 600;">Evidence Chain</div>
+          <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 0.75rem;">↓</div>
+          <div style="padding: 0.75rem 1.25rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent); border-radius: var(--radius-md); text-align: center; font-size: 0.875rem; color: var(--roua-accent); font-weight: 700;">Intelligence Output</div>
         </div>
       </div>
 
@@ -509,7 +509,7 @@
               <div class="viz-source-meta" id="vizMeta">Federal Reserve · 14:00 EST · 847 words · PDF</div>
             </div>
             <div class="viz-source-label" style="margin-top: 0.5rem;">Input State</div>
-            <div style="font-size: 0.6875rem; color: var(--rouaa-text-muted); line-height: 1.5; padding: 0.5rem; background: var(--rouaa-bg-secondary); border: 1px dashed var(--rouaa-surface-border); border-radius: var(--radius-sm);">Raw PDF document · unstructured text · no context · no links</div>
+            <div style="font-size: 0.6875rem; color: var(--roua-text-muted); line-height: 1.5; padding: 0.5rem; background: var(--roua-bg-secondary); border: 1px dashed var(--roua-surface-border); border-radius: var(--radius-sm);">Raw PDF document · unstructured text · no context · no links</div>
           </div>
 
           <div>
@@ -531,18 +531,18 @@
           </div>
         </div>
 
-        <p class="text-center text-mute small mt-5">Every output carries the same evidence chain — from the official source to the fact to the analysis. This is the essence of ROUAA: one event, one intelligence, multiple distribution points.</p>
+        <p class="text-center text-mute small mt-5">Every output carries the same evidence chain — from the official source to the fact to the analysis. This is the essence of ROUA: one event, one intelligence, multiple distribution points.</p>
       </div>
     </div>
   </section>
 
   <!-- ============= EVIDENCE TRACE DEMO ============= -->
-  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Evidence Trace</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">From Decision to Original Source</h2>
-        <p class="section-lead" style="margin: 0 auto;">Every piece of information in ROUAA is traceable. Choose any decision, click 'Evidence', and you land on the original source page.</p>
+        <p class="section-lead" style="margin: 0 auto;">Every piece of information in ROUA is traceable. Choose any decision, click 'Evidence', and you land on the original source page.</p>
       </div>
 
       <div class="trace-demo">
@@ -583,27 +583,27 @@
   </section>
 
   <!-- ============= ONE PLATFORM → MULTIPLE APPLICATIONS ============= -->
-  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">One Platform → Multiple Applications</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">One Platform. Multiple Institutional Applications.</h2>
-        <p class="section-lead" style="margin: 0 auto;">The platform is not an end in itself — it is the asset that powers every institutional application ROUAA delivers.</p>
+        <p class="section-lead" style="margin: 0 auto;">The platform is not an end in itself — it is the asset that powers every institutional application ROUA delivers.</p>
       </div>
 
       <div style="max-width: 600px; margin: 2rem auto 0; text-align: center;">
-        <div style="display: inline-flex; padding: 1rem 2rem; background: var(--rouaa-accent-subtle); border: 1px solid var(--rouaa-accent); border-radius: var(--radius-xl); margin-bottom: 1rem;">
-          <span style="font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--rouaa-accent);">One Platform</span>
+        <div style="display: inline-flex; padding: 1rem 2rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent); border-radius: var(--radius-xl); margin-bottom: 1rem;">
+          <span style="font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--roua-accent);">One Platform</span>
         </div>
-        <div style="color: var(--rouaa-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
+        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">↓</div>
 
-        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Current Applications</div>
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Current Applications</div>
         <div class="arch-products">
           <a href="trading-platform.html" class="arch-product-chip" style="color: #2DBA8E; border-color: rgba(52,211,153,0.3);">01 · Trading Intelligence</a>
-          <a href="financial-intelligence.html" class="arch-product-chip" style="color: var(--rouaa-accent); border-color: rgba(201, 162, 39,0.3);">02 · Institutional Intelligence</a>
+          <a href="financial-intelligence.html" class="arch-product-chip" style="color: var(--roua-accent); border-color: rgba(201, 162, 39,0.3);">02 · Institutional Intelligence</a>
         </div>
 
-        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--rouaa-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Additional Intelligence Suites</div>
+        <div style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.5625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 1.5rem 0 0.75rem;">Additional Intelligence Suites</div>
         <div class="arch-products">
           <a href="media-intelligence.html" class="arch-product-chip" style="color: #4A90D9; border-color: rgba(96,165,250,0.3);">Media Intelligence</a>
           <a href="risk-intelligence.html" class="arch-product-chip" style="color: #E5484D; border-color: rgba(229, 72, 77,0.3);">Risk Intelligence</a>
@@ -622,7 +622,7 @@
         <h2 class="section-h" style="margin: 0 auto 1rem;">Why Not Build It Internally?</h2>
         <p class="section-lead" style="margin: 0 auto;">Building this infrastructure internally requires years of specialized development across source integration, document intelligence, evidence systems, knowledge graphs, reasoning models, and enterprise deployment.
 
-        ROUAA provides the complete intelligence infrastructure layer.</p>
+        ROUA provides the complete intelligence infrastructure layer.</p>
       </div>
 
       <div class="why-grid">
@@ -639,7 +639,7 @@
         <div class="why-card">
           <div class="why-icon">📦</div>
           <div class="why-h">Deploy Anywhere</div>
-          <div class="why-desc">Cloud, private, or inside your infrastructure — ROUAA adapts to you</div>
+          <div class="why-desc">Cloud, private, or inside your infrastructure — ROUA adapts to you</div>
         </div>
         <div class="why-card">
           <div class="why-icon">🔄</div>
@@ -651,12 +651,12 @@
   </section>
 
   <!-- ============= DEPLOYMENT ============= -->
-  <section class="section reveal" style="background: var(--rouaa-bg-secondary); border-top: 1px solid var(--rouaa-border); border-bottom: 1px solid var(--rouaa-border);">
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Enterprise Deployment</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">Institutional Flexibility</h2>
-        <p class="section-lead" style="margin: 0 auto;">Can you run ROUAA in a way that fits your governance and security requirements? Yes.</p>
+        <p class="section-lead" style="margin: 0 auto;">Can you run ROUA in a way that fits your governance and security requirements? Yes.</p>
       </div>
 
       <div class="deploy-grid">
@@ -719,7 +719,7 @@
       <span class="section-tag" style="justify-content: center;">Next Step</span>
       <h2>Explore the platform behind the products</h2>
       <p>A platform briefing covering architecture, deployment models, and institutional workflows.</p>
-      <a href="mailto:contact@rouaa.ai?subject=Platform Briefing" class="btn btn-primary btn-lg">Request Platform Briefing</a>
+      <a href="mailto:contact@roua.ai?subject=Platform Briefing" class="btn btn-primary btn-lg">Request Platform Briefing</a>
     </div>
   </section>
 
@@ -731,8 +731,8 @@
     <div class="container">
       <div class="footer-mega-grid">
         <div class="footer-brand">
-          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUAA</div>
-          <p style="font-size: 14px; max-width: 280px;">ROUAA delivers institutional intelligence products powered by a governed financial intelligence foundation &mdash; for decisions that must be defended.</p>
+          <div class="nav-logo-text" style="font-size: 24px; margin-bottom: 16px;">ROUA</div>
+          <p style="font-size: 14px; max-width: 280px;">ROUA delivers institutional intelligence products powered by a governed financial intelligence foundation &mdash; for decisions that must be defended.</p>
         </div>
         <div class="footer-col">
           <div class="footer-heading">Products</div>
@@ -758,7 +758,7 @@
           <a href="financial-media.html">Financial Media</a>
           <a href="solutions.html">Solutions Overview</a>
           <a href="enterprise.html">Enterprise</a>
-          <a href="why-rouaa.html">Why ROUAA</a>
+          <a href="why-roua.html">Why ROUA</a>
           <a href="business-case.html">Business Case</a>        </div>
         <div class="footer-col">
           <div class="footer-heading">Channels</div>
@@ -785,7 +785,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p style="font-size: 13px; color: var(--rouaa-text-muted);">&copy; 2026 ROUAA &mdash; Institutional Intelligence Products Powered by Evidence Infrastructure.</p>
+        <p style="font-size: 13px; color: var(--roua-text-muted);">&copy; 2026 ROUA &mdash; Institutional Intelligence Products Powered by Evidence Infrastructure.</p>
       </div>
     </div>
   </footer>
@@ -877,6 +877,6 @@ renderViz('fed');
 
 <script src="main.js"></script>
 
-  <script src="design-system/rouaa-v7.js"></script>
+  <script src="design-system/roua-v7.js"></script>
 </body>
 </html>

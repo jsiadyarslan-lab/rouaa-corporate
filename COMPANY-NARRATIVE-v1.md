@@ -1,4 +1,4 @@
-# ROUAA · Company Narrative v1
+# ROUA · Company Narrative v1
 
 > الوثيقة الأخيرة. تحوّل كل البنية السابقة إلى **رسالة بسيطة يفهمها العميل في 15 ثانية**.
 >
@@ -60,7 +60,7 @@
 
 ### النسخة الإنجليزية (للموقع ثنائي اللغة مستقبلاً):
 
-> **ROUAA is the intelligence layer between official financial data and trusted investment decisions.**
+> **ROUA is the intelligence layer between official financial data and trusted investment decisions.**
 
 ### ما لا تقوله الجملة (متعمد):
 
@@ -210,7 +210,7 @@
 > «حسناً، أنتم طبقة استخبارات. لكن ماذا يعني هذا لي؟»
 
 **ما يريد رؤيته:**
-- Layer Diagram بسيط: `Official Sources → ROUAA → Decisions`
+- Layer Diagram بسيط: `Official Sources → ROUA → Decisions`
 - 4 خيارات **مبنية على المشكلة/الهدف** (لا على الهوية):
   - «أريد أتمتة الأخبار» → Media Technologies
   - «أريد بناء API» → Developers
@@ -331,7 +331,7 @@
 
 | البنية الداخلية (موظفو رؤى يرونها) | الرسالة الخارجية (العميل يراها) |
 |------------------------------------|-------------------------------|
-| Layer 0: ROUAA Intelligence Platform | «رؤى طبقة استخبارات مالية» |
+| Layer 0: ROUA Intelligence Platform | «رؤى طبقة استخبارات مالية» |
 | Layer 1: Infrastructure (411 sources, Evidence System) | «دليل كامل لكل ادعاء» |
 | Layer 2: Knowledge Engines + Decision Engines | «من المصدر إلى القرار» |
 | Business Lines (Media + Trading) | «للإعلام، للتداول» |
@@ -384,7 +384,7 @@
 
 كل صفحة منتج تحوي:
 ```
-Powered by ROUAA Intelligence Core
+Powered by ROUA Intelligence Core
 ```
 
 هذه الشارة تقول للعميل: «هذا المنتج جزء من منظومة أكبر، لا منتج معزول».
@@ -427,7 +427,7 @@ Viewport 1: HERO
 Viewport 2: LAYER DIAGRAM + "WHAT DO YOU WANT?" SELECTOR
    - Layer Diagram بسيط (يجعل «طبقة استخبارات» مفهومة فوراً):
      ```
-     Official Sources  →  ROUAA  →  Decisions
+     Official Sources  →  ROUA  →  Decisions
      (411 مصدر رسمي)     (الطبقة)   (قابلة للتنفيذ)
      ```
    - 4 خيارات **مبنية على الهدف** (لا على الهوية):
@@ -543,7 +543,7 @@ Viewport 8: FINAL CTA
 - [ ] لغة موحّدة (Voice + Tone)
 - [ ] ألوان موحّدة (Gold/Blue/Emerald + لا ألوان جديدة)
 - [ ] خطوط موحّدة (Cairo + Inter + JetBrains Mono)
-- [ ] شارة "Powered by ROUAA Intelligence Core" على كل صفحة منتج
+- [ ] شارة "Powered by ROUA Intelligence Core" على كل صفحة منتج
 - [ ] ربط متقاطع بين كل المنتجات والـ Solutions والـ Industries
 
 ### الصفحة الرئيسية:

@@ -1,4 +1,4 @@
-// ROUAA — Main JavaScript
+// ROUA — Main JavaScript
 // Navigation: mobile toggle, scroll effect, dropdown menus (click + keyboard)
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,11 +1,11 @@
 /**
- * ROUAA Intelligence Systems — Data Layer
+ * ROUA Intelligence Systems — Data Layer
  * 54 capabilities across 7 categories
  * Each capability has: id, name, category, description, industries, roles,
  * deploy type, evidence chain, key features, pricing, integration
  */
 
-const ROUAA_PRODUCTS = [
+const ROUA_PRODUCTS = [
   // === MEDIA (8) ===
   {
     id: 'med-news-engine',
@@ -844,7 +844,7 @@ const ROUAA_PRODUCTS = [
     cat: 'component',
     nameEn: 'Evidence Store',
     tagline: 'Immutable storage for all evidence',
-    desc: 'Immutable storage for all evidence chains in ROUAA — queryable, exportable, auditable.',
+    desc: 'Immutable storage for all evidence chains in ROUA — queryable, exportable, auditable.',
     industries: ['fintech', 'banks', 'brokers'],
     roles: ['cto'],
     deploy: ['api', 'enterprise', 'whitelabel'],
@@ -1106,8 +1106,8 @@ const ROUAA_PRODUCTS = [
 ];
 
 if (typeof window !== 'undefined') {
-  window.ROUAA_PRODUCTS = ROUAA_PRODUCTS;
+  window.ROUA_PRODUCTS = ROUA_PRODUCTS;
 }
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = ROUAA_PRODUCTS;
+  module.exports = ROUA_PRODUCTS;
 }
