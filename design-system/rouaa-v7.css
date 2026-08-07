@@ -415,13 +415,26 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:60px 0 30p
 .section-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-full);font-size:11px;font-weight:600;color:var(--dim);letter-spacing:.04em}
 .mono-label{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2)}
 
-/* Old card system → v7 premium card */
-.card{position:relative;overflow:hidden;border:1px solid var(--line2);border-radius:10px;
-  background:linear-gradient(180deg,rgba(13,25,52,.7),rgba(7,15,34,.85));
-  padding:24px;transition:transform .35s,box-shadow .35s,border-color .35s}
-.card:hover{transform:translateY(-4px);border-color:rgba(227,180,90,.4);box-shadow:0 24px 48px -20px rgba(0,0,0,.8),0 0 20px -8px rgba(227,180,90,.15)}
-.card-accent{border-top:2px solid var(--gold)}
+/* Old card system → v7 premium card (matches .cx aesthetic) */
+.card{position:relative;overflow:hidden;border:1px solid transparent;border-radius:12px;
+  background:linear-gradient(180deg,rgba(13,25,52,.85),rgba(7,15,34,.96)) padding-box,
+  linear-gradient(165deg,rgba(227,180,90,.5),rgba(79,140,255,.3) 45%,rgba(148,184,255,.12)) border-box;
+  padding:24px;box-shadow:0 18px 44px -24px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+.card:hover{transform:translateY(-6px);box-shadow:0 32px 64px -26px rgba(0,0,0,.9),0 0 24px -6px rgba(227,180,90,.18),inset 0 1px 0 rgba(255,255,255,.09)}
+.card-accent{border-top:2px solid var(--gold);background:linear-gradient(180deg,rgba(13,25,52,.85),rgba(7,15,34,.96)) padding-box,linear-gradient(165deg,rgba(227,180,90,.6),rgba(79,140,255,.3) 45%,rgba(148,184,255,.12)) border-box}
 .card.text-center{text-align:center}
+/* Premium card corner brackets on hover (matches .cx::before) */
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;background:
+  linear-gradient(var(--gold),var(--gold)) top left/18px 2px,linear-gradient(var(--gold),var(--gold)) top left/2px 18px,
+  linear-gradient(var(--gold),var(--gold)) top right/18px 2px,linear-gradient(var(--gold),var(--gold)) top right/2px 18px,
+  linear-gradient(var(--gold),var(--gold)) bottom left/18px 2px,linear-gradient(var(--gold),var(--gold)) bottom left/2px 18px,
+  linear-gradient(var(--gold),var(--gold)) bottom right/18px 2px,linear-gradient(var(--gold),var(--gold)) bottom right/2px 18px;background-repeat:no-repeat}
+.card:hover::before{opacity:1}
+/* Shine sweep on hover (matches .cx::after) */
+.card::after{content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.08),transparent);transform:skewX(-18deg);transition:left .8s ease}
+.card:hover::after{left:130%}
 
 /* Old buttons → v7 buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:12px 24px;border-radius:var(--radius-full);border:none;cursor:pointer;transition:all .25s;text-decoration:none}
