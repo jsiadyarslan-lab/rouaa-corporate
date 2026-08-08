@@ -116,8 +116,9 @@
       </h1>
       <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
         Institutions evaluating ROUA need to see what is built and operating — not what is on a roadmap.
-        This report documents the current operational status of each layer, the components in production,
-        and validation examples showing how official sources become evidence-backed intelligence.
+        This report documents the current operational status of each layer in ROUA's internal production
+        environment, the components running today, and validation examples showing how official sources
+        become evidence-backed intelligence. Customer production deployment is a separate engagement.
       </p>
     </div>
   </section>
@@ -128,50 +129,85 @@
       <div class="section-header text-center" style="margin: 0 auto 48px;">
         <span class="eyebrow">Production Evidence</span>
         <h2>Operational components already running.</h2>
-        <p style="margin: 0 auto; max-width: 720px;">This is not a design document or a roadmap. The components below are running in production — processing real sources, extracting real facts, and building real evidence chains.</p>
+        <p style="margin: 0 auto; max-width: 720px;">This is not a design document or a roadmap. The components below are running in ROUA's internal production environment — processing real sources, extracting real facts, and building real evidence chains. Customer-facing production deployment is configured during institutional onboarding.</p>
       </div>
 
-      <!-- Operational components checklist -->
-      <div style="max-width: 720px; margin: 0 auto;">
+      <!-- Operational components checklist with validation -->
+      <div style="max-width: 880px; margin: 0 auto;">
         <div style="display: flex; flex-direction: column; gap: 12px;">
 
-          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
-            <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
-            <div>
-              <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Official Source Registry</div>
-              <div style="font-size: 13px; color: var(--roua-text-secondary);">411+ institutional sources classified and monitored.</div>
+          <div class="card" style="padding: 20px 24px;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px;">
+              <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Official Source Registry</div>
+                <div style="font-size: 13px; color: var(--roua-text-secondary);">Institutional sources classified, monitored, and versioned.</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-accent); padding: 4px 10px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm); white-space: nowrap;">Operational</div>
+            </div>
+            <div style="padding: 10px 14px; background: var(--roua-surface); border-radius: var(--radius-sm); border-left: 2px solid var(--roua-accent); margin-left: 36px;">
+              <span style="font-family: var(--mono, monospace); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-text-muted); margin-right: 8px;">Validation:</span>
+              <span style="font-size: 13px; color: var(--roua-text-secondary);">Registry entries inspectable during briefing — source classification, trust tier, monitoring status per source.</span>
             </div>
           </div>
 
-          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
-            <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
-            <div>
-              <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Document Intelligence Pipeline</div>
-              <div style="font-size: 13px; color: var(--roua-text-secondary);">PDF, HTML, API ingestion and normalization.</div>
+          <div class="card" style="padding: 20px 24px;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px;">
+              <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Document Intelligence Pipeline</div>
+                <div style="font-size: 13px; color: var(--roua-text-secondary);">PDF, HTML, API ingestion and normalization.</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-accent); padding: 4px 10px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm); white-space: nowrap;">Operational</div>
+            </div>
+            <div style="padding: 10px 14px; background: var(--roua-surface); border-radius: var(--radius-sm); border-left: 2px solid var(--roua-accent); margin-left: 36px;">
+              <span style="font-family: var(--mono, monospace); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-text-muted); margin-right: 8px;">Validation:</span>
+              <span style="font-size: 13px; color: var(--roua-text-secondary);">Live ingestion logs viewable for sample sources — parse status, document count, ingestion timestamp per source.</span>
             </div>
           </div>
 
-          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
-            <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
-            <div>
-              <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Evidence Provenance</div>
-              <div style="font-size: 13px; color: var(--roua-text-secondary);">Fact → Document → Location → Source traceability.</div>
+          <div class="card" style="padding: 20px 24px;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px;">
+              <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Evidence Provenance</div>
+                <div style="font-size: 13px; color: var(--roua-text-secondary);">Fact → Document → Location → Source traceability.</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-accent); padding: 4px 10px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm); white-space: nowrap;">Operational</div>
+            </div>
+            <div style="padding: 10px 14px; background: var(--roua-surface); border-radius: var(--radius-sm); border-left: 2px solid var(--roua-accent); margin-left: 36px;">
+              <span style="font-family: var(--mono, monospace); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-text-muted); margin-right: 8px;">Validation:</span>
+              <span style="font-size: 13px; color: var(--roua-text-secondary);">Golden-test validation: any extracted fact traceable back to source document, page, and paragraph — demonstrable on demand.</span>
             </div>
           </div>
 
-          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;">
-            <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
-            <div>
-              <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Financial Event Engine</div>
-              <div style="font-size: 13px; color: var(--roua-text-secondary);">Macro events, releases, and policy decisions detected.</div>
+          <div class="card" style="padding: 20px 24px;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px;">
+              <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 4px;">Financial Event Engine</div>
+                <div style="font-size: 13px; color: var(--roua-text-secondary);">Macro events, releases, and policy decisions detected.</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-accent); padding: 4px 10px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm); white-space: nowrap;">Operational</div>
+            </div>
+            <div style="padding: 10px 14px; background: var(--roua-surface); border-radius: var(--radius-sm); border-left: 2px solid var(--roua-accent); margin-left: 36px;">
+              <span style="font-family: var(--mono, monospace); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-text-muted); margin-right: 8px;">Validation:</span>
+              <span style="font-size: 13px; color: var(--roua-text-secondary);">Event detection logs for recent central bank and statistical releases — event type, source, detection timestamp.</span>
             </div>
           </div>
 
-          <div class="card" style="padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; border-color: var(--roua-accent-border); background: linear-gradient(180deg, rgba(201, 162, 39,0.06), rgba(201, 162, 39,0.02));">
-            <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
-            <div>
-              <div style="font-size: 15px; color: var(--roua-accent); font-weight: 600; margin-bottom: 4px;">Intelligence Pipeline</div>
-              <div style="font-size: 13px; color: var(--roua-text-secondary);">Source → Evidence → Intelligence Output.</div>
+          <div class="card" style="padding: 20px 24px; border-color: var(--roua-accent-border); background: linear-gradient(180deg, rgba(201, 162, 39,0.06), rgba(201, 162, 39,0.02));">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px;">
+              <div style="color: var(--roua-accent); font-size: 20px; font-weight: 700; flex-shrink: 0;">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 15px; color: var(--roua-accent); font-weight: 600; margin-bottom: 4px;">Intelligence Pipeline</div>
+                <div style="font-size: 13px; color: var(--roua-text-secondary);">Source → Evidence → Intelligence Output.</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-accent); padding: 4px 10px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm); white-space: nowrap;">Operational</div>
+            </div>
+            <div style="padding: 10px 14px; background: var(--roua-surface); border-radius: var(--radius-sm); border-left: 2px solid var(--roua-accent); margin-left: 36px;">
+              <span style="font-family: var(--mono, monospace); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--roua-text-muted); margin-right: 8px;">Validation:</span>
+              <span style="font-size: 13px; color: var(--roua-text-secondary);">End-to-end walkthrough on a live source — from publication detection through evidence chain to intelligence output, with every stage inspectable.</span>
             </div>
           </div>
 
@@ -191,6 +227,7 @@
         <div style="padding: 16px 24px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
           <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-text-muted); margin-bottom: 6px;">Environment</div>
           <div style="font-size: 18px; color: var(--roua-text-primary); font-weight: 700;">Internal Production</div>
+          <div style="font-size: 11px; color: var(--roua-text-muted); margin-top: 4px;">ROUA internal environment — not customer production</div>
         </div>
       </div>
     </div>
@@ -211,55 +248,70 @@
               <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--roua-text-muted); font-weight: 600;">Component</th>
               <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--roua-text-muted); font-weight: 600;">Status</th>
               <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--roua-text-muted); font-weight: 600;">Evidence</th>
+              <th style="text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--roua-text-muted); font-weight: 600;">Validation</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Source Registry</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational</span></td>
-              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">411+ institutional sources registered and monitored</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Institutional sources registered, classified, and monitored</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Registry entries inspectable during briefing — live count confirmed on engagement</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Document Engine</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">PDF / HTML / API ingestion across central bank, regulator, and statistical sources</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Live ingestion logs viewable for sample sources — parse status, document count, timestamp</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Fact Engine</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Financial metrics extraction — CPI, GDP, employment, interest rate decisions</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Extracted facts cross-checkable against source document — extraction confidence per fact</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Event Engine</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Economic event detection and classification across covered source types</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Event detection logs for recent releases — event type, source, detection timestamp</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Evidence Layer</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Provenance chain: Fact → Document → Page → Paragraph</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Golden-test: any fact traceable to source document, page, paragraph — demonstrable on demand</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Governance Controls</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Operational Foundation</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Confidence scoring, source hierarchy, validation rules, audit trail structure</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Governance rules inspectable — confidence thresholds, source tiers, validation gate logic</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--roua-surface-border);">
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Knowledge Graph</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-text-muted); font-weight: 600;">Active Development</span></td>
               <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Entity model and event connections in development</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-muted); font-style: italic;">Not yet validated — under construction</td>
             </tr>
             <tr>
               <td style="padding: 14px 16px; color: var(--roua-text-primary); font-weight: 600;">Intelligence Applications</td>
               <td style="padding: 14px 16px;"><span style="color: var(--roua-accent); font-weight: 600;">Deployable</span></td>
-              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Trading, Institutional, Media, Developer Intelligence applications</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Investment, Market, Risk, Media Intelligence products + Developer API</td>
+              <td style="padding: 14px 16px; color: var(--roua-text-secondary);">Sample outputs viewable in Sample Library — each output carries its evidence chain</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div style="max-width: 720px; margin: 32px auto 0; text-align: center;">
-        <p style="font-size: 13px; color: var(--roua-text-muted);">
-          Status definitions: <strong style="color: var(--roua-text-primary);">Operational</strong> = in production, processing real sources. <strong style="color: var(--roua-text-primary);">Operational Foundation</strong> = framework in place and operating, with continued extension. <strong style="color: var(--roua-text-primary);">Active Development</strong> = under construction, not yet in production.
+      <div style="max-width: 880px; margin: 32px auto 0; text-align: center; padding: 20px; border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); background: var(--roua-surface);">
+        <p style="font-size: 13px; color: var(--roua-text-muted); margin: 0; line-height: 1.7;">
+          <strong style="color: var(--roua-text-primary);">Status definitions:</strong>
+          <strong>Operational</strong> = running in ROUA internal production, processing real sources.
+          <strong>Operational Foundation</strong> = framework in place and operating, with continued extension.
+          <strong>Active Development</strong> = under construction, not yet in production.
+          <br><br>
+          <strong style="color: var(--roua-text-primary);">Environment note:</strong>
+          All components above run in ROUA's internal production environment. Customer-facing production deployment is configured during institutional onboarding — this report does not describe customer production.
         </p>
       </div>
     </div>
