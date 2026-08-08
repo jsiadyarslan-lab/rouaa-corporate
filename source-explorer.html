@@ -4,8 +4,8 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROUA Source Registry — Illustrative View of 411+ Institutional Sources</title>
-  <meta name="description" content="Source Registry Explorer — illustrative view of the 411+ official institutional sources ROUA monitors: central banks, regulators, statistical agencies, exchanges, and government bodies. Filter by type, jurisdiction, and status.">
+  <title>ROUA Source Registry Explorer — Illustrative View of 411+ Registered Institutional Sources</title>
+  <meta name="description" content="Source Registry Explorer — illustrative view of the 411+ registered institutional sources ROUA governs: central banks, regulators, statistical agencies, exchanges, and government bodies. Browse by type, jurisdiction, and monitoring status.">
   
   
   
@@ -195,6 +195,199 @@
       text-transform: uppercase;
       color: var(--roua-accent);
     }
+
+    /* ============ EXPANDABLE SOURCE DETAIL ============ */
+    .source-entry {
+      border-bottom: 1px solid var(--roua-surface-border);
+    }
+    .source-entry:last-child {
+      border-bottom: none;
+    }
+    .source-entry > summary {
+      list-style: none;
+      cursor: pointer;
+      outline: none;
+    }
+    .source-entry > summary::-webkit-details-marker {
+      display: none;
+    }
+    .source-entry > summary::marker {
+      content: '';
+    }
+    .source-entry > .source-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+      gap: 12px;
+      padding: 14px 16px;
+      align-items: center;
+      font-size: 13px;
+      transition: background var(--transition-fast);
+    }
+    .source-entry > .source-row:hover {
+      background: var(--roua-surface-hover);
+    }
+    .source-entry[open] > .source-row {
+      background: var(--roua-surface-hover);
+      border-bottom: 1px solid var(--roua-surface-border);
+    }
+    .source-name-row {
+      color: var(--roua-text-primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .expand-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--roua-surface-border);
+      border-radius: var(--radius-sm);
+      color: var(--roua-text-muted);
+      font-size: 10px;
+      transition: transform var(--transition-fast), color var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .source-entry[open] .expand-icon {
+      transform: rotate(180deg);
+      color: var(--roua-accent);
+      border-color: var(--roua-accent-border);
+    }
+
+    .source-detail {
+      padding: 20px 16px 24px;
+      background: var(--roua-bg-secondary);
+      border-bottom: 1px solid var(--roua-surface-border);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px 24px;
+    }
+    @media (max-width: 768px) {
+      .detail-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+    .detail-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .detail-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--roua-text-muted);
+    }
+    .detail-value {
+      font-size: 13px;
+      color: var(--roua-text-primary);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      word-break: break-word;
+    }
+
+    /* ============ STATUS LEGEND ============ */
+    .status-legend {
+      max-width: 1200px;
+      margin: 0 auto 20px;
+      padding: 14px 18px;
+      background: var(--roua-surface);
+      border: 1px solid var(--roua-surface-border);
+      border-radius: var(--radius-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .status-legend { grid-template-columns: 1fr; }
+    }
+    .legend-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .legend-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .legend-badge.healthy {
+      color: var(--roua-green);
+      background: rgba(45, 186, 142, 0.1);
+      border: 1px solid rgba(45, 186, 142, 0.2);
+    }
+    .legend-badge.warning {
+      color: #F5A623;
+      background: rgba(245, 166, 35, 0.1);
+      border: 1px solid rgba(245, 166, 35, 0.2);
+    }
+    .legend-text {
+      font-size: 12px;
+      color: var(--roua-text-secondary);
+      line-height: 1.5;
+    }
+    .legend-text strong {
+      color: var(--roua-text-primary);
+      font-weight: 600;
+    }
+
+    /* ============ WHAT THE REGISTRY RECORDS ============ */
+    .registry-definition {
+      max-width: 880px;
+      margin: 0 auto 36px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.06) 0%, rgba(201, 162, 39, 0.02) 100%);
+      border: 1px solid var(--roua-accent-border);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--roua-accent);
+    }
+    .registry-definition h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--roua-accent);
+      margin: 0 0 12px;
+    }
+    .registry-definition p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--roua-text-secondary);
+      margin: 0;
+    }
+    .registry-definition .verified-marks {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .verified-marks .vmark {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--roua-surface);
+      border: 1px solid var(--roua-surface-border);
+      border-radius: var(--radius-full);
+      color: var(--roua-text-secondary);
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+    .verified-marks .vmark strong {
+      color: var(--roua-text-primary);
+    }
+
   </style>
   <link rel="stylesheet" href="design-system/roua-v7.css">
   <link rel="stylesheet" href="design-system/roua-v7-patch.css">
@@ -218,7 +411,7 @@
             <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
             <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
             <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
-            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Platform</a>
             <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
           </div>
         </div>
@@ -301,12 +494,13 @@
         <span class="text-accent">behind ROUA intelligence.</span>
       </h1>
       <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
-        The ROUA Source Registry contains 411+ official institutional sources — central banks, regulators, statistical agencies,
-        exchanges, and government bodies. Browse by type, jurisdiction, and monitoring status.
+        The ROUA Source Registry organizes 411+ official institutional sources across central banks,
+        regulators, statistical agencies, exchanges, and government bodies — with source identity,
+        jurisdiction, type, and monitoring status captured for each source.
       </p>
       <div style="margin-top: 24px; padding: 12px 20px; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); display: inline-block;">
         <span style="font-size: 13px; color: var(--roua-accent); font-weight: 600;">ⓘ Illustrative View</span>
-        <span style="font-size: 13px; color: var(--roua-text-secondary); margin-left: 8px;">Illustrative view — sample entries shown below. Full 411+ source list available in institutional briefing.</span>
+        <span style="font-size: 13px; color: var(--roua-text-secondary); margin-left: 8px;">Illustrative registry view — sample entries shown below. The production registry contains the full institutional source set and monitoring metadata.</span>
       </div>
     </div>
   </section>
@@ -321,15 +515,32 @@
         </div>
         <div class="stat-card">
           <div class="stat-value" style="color: var(--roua-green);">190+</div>
-          <div class="stat-label">Jurisdictions Covered</div>
+          <div class="stat-label">Jurisdictions</div>
         </div>
         <div class="stat-card">
           <div class="stat-value" style="color: #F5A623;">5</div>
           <div class="stat-label">Source Categories</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Categories</div>
+          <div class="stat-value" style="color: var(--roua-accent);">24/7</div>
+          <div class="stat-label">Source Monitoring</div>
+        </div>
+      </div>
+
+
+      <!-- ============ WHAT THE REGISTRY RECORDS ============ -->
+      <div class="registry-definition">
+        <h3>What the Registry Records</h3>
+        <p>
+          Each registered source is represented as a governed source record — identifying the
+          institution, jurisdiction, source type, official endpoint, access method, and monitoring
+          state. This registry is the control layer for source acquisition across ROUA.
+        </p>
+        <div class="verified-marks">
+          <span class="vmark"><strong>Verified</strong> = official domain confirmed</span>
+          <span class="vmark"><strong>Healthy</strong> = endpoint reachable</span>
+          <span class="vmark"><strong>Monitored</strong> = ingestion active</span>
+          <span class="vmark"><strong>Classified</strong> = type &amp; jurisdiction captured</span>
         </div>
       </div>
 
@@ -423,7 +634,29 @@
               Showing <strong style="color: var(--roua-text-primary);">15 of 411</strong> sources
             </div>
             <div style="font-size: 12px; color: var(--roua-text-muted); font-family: 'SFMono-Regular', Consolas, monospace;">
-              Snapshot: 2026-08-02 14:31 UTC
+              Illustrative snapshot · Production registry maintained continuously
+            </div>
+          </div>
+
+
+          <!-- Status Legend -->
+          <div class="status-legend">
+            <div class="legend-item">
+              <span class="legend-badge healthy"><span class="status-dot"></span>Healthy</span>
+              <div class="legend-text">
+                <strong>Endpoint reachable · recent successful fetch.</strong>
+                The official endpoint responded successfully and the latest publication was ingested
+                within the expected window for this source's publication cadence.
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-badge warning"><span class="status-dot"></span>Warning</span>
+              <div class="legend-text">
+                <strong>Monitoring issue · last successful fetch older than expected.</strong>
+                The source remains registered and its identity is still verified, but the most recent
+                fetch is older than the source's expected cadence. The registry entry is preserved;
+                downstream intelligence is flagged for review until the next successful fetch.
+              </div>
             </div>
           </div>
 
@@ -432,129 +665,834 @@
               <div>Source</div>
               <div>Type</div>
               <div>Jurisdiction</div>
-              <div>Last Update</div>
+              <div>Last Checked</div>
               <div>Status</div>
             </div>
 
-            <div class="source-row">
-              <div class="source-name">Federal Reserve (FOMC)</div>
-              <div class="source-type">Central Bank</div>
-              <div class="source-jurisdiction">United States</div>
-              <div class="source-last-update">14:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Federal Reserve (FOMC)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Central Bank</div>
+      <div class="source-jurisdiction">United States</div>
+      <div class="source-last-update">03:14 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Federal Reserve (FOMC)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">U.S. Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United States</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">federalreserve.gov</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">FOMC Statement — 2026-07-30</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:14 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">European Central Bank</div>
-              <div class="source-type">Central Bank</div>
-              <div class="source-jurisdiction">Eurozone</div>
-              <div class="source-last-update">08:11 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>European Central Bank</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Central Bank</div>
+      <div class="source-jurisdiction">Eurozone</div>
+      <div class="source-last-update">03:21 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">European Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Eurozone Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Eurozone</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">ecb.europa.eu</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Monetary Policy Decision — 2026-07-17</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:21 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">Bank of England</div>
-              <div class="source-type">Central Bank</div>
-              <div class="source-jurisdiction">United Kingdom</div>
-              <div class="source-last-update">12:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Bank of England</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Central Bank</div>
+      <div class="source-jurisdiction">United Kingdom</div>
+      <div class="source-last-update">03:18 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Bank of England</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">United Kingdom Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United Kingdom</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">bankofengland.co.uk</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Monetary Policy Report — 2026-08-01</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:18 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">Bank of Japan</div>
-              <div class="source-type">Central Bank</div>
-              <div class="source-jurisdiction">Japan</div>
-              <div class="source-last-update">03:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Bank of Japan</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Central Bank</div>
+      <div class="source-jurisdiction">Japan</div>
+      <div class="source-last-update">03:09 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Bank of Japan</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Japan Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Japan</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">boj.or.jp</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Outlook for Economic Activity — 2026-07-31</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:09 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">People's Bank of China</div>
-              <div class="source-type">Central Bank</div>
-              <div class="source-jurisdiction">China</div>
-              <div class="source-last-update">01:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>People's Bank of China</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Central Bank</div>
+      <div class="source-jurisdiction">China</div>
+      <div class="source-last-update">03:02 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">People's Bank of China</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">China Central Bank</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">China</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">pbc.gov.cn</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Monetary Policy Report — 2026-08-02</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:02 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">U.S. Bureau of Labor Statistics</div>
-              <div class="source-type">Statistical Agency</div>
-              <div class="source-jurisdiction">United States</div>
-              <div class="source-last-update">13:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>U.S. Bureau of Labor Statistics</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Statistical Agency</div>
+      <div class="source-jurisdiction">United States</div>
+      <div class="source-last-update">03:11 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">U.S. Bureau of Labor Statistics</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">U.S. Statistical Agency</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United States</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">bls.gov</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">HTML · API · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Employment Situation — 2026-08-08</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:11 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">Bureau of Economic Analysis</div>
-              <div class="source-type">Statistical Agency</div>
-              <div class="source-jurisdiction">United States</div>
-              <div class="source-last-update">12:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Bureau of Economic Analysis</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Statistical Agency</div>
+      <div class="source-jurisdiction">United States</div>
+      <div class="source-last-update">03:16 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Bureau of Economic Analysis</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">U.S. Statistical Agency</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United States</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">bea.gov</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">HTML · API</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">GDP Release — 2026-07-25</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:16 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">Eurostat</div>
-              <div class="source-type">Statistical Agency</div>
-              <div class="source-jurisdiction">Eurozone</div>
-              <div class="source-last-update">11:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Eurostat</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Statistical Agency</div>
+      <div class="source-jurisdiction">Eurozone</div>
+      <div class="source-last-update">03:19 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Eurostat</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Eurozone Statistical Agency</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Eurozone</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">ec.europa.eu/eurostat</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">HTML · API · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">HICP Flash Estimate — 2026-07-31</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:19 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">SEC (Securities and Exchange Commission)</div>
-              <div class="source-type">Regulator</div>
-              <div class="source-jurisdiction">United States</div>
-              <div class="source-last-update">14:15 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>SEC (Securities and Exchange Commission)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Regulator</div>
+      <div class="source-jurisdiction">United States</div>
+      <div class="source-last-update">03:22 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">SEC (Securities and Exchange Commission)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">U.S. Securities Regulator</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United States</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">sec.gov</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · API · XBRL</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">EDGAR Filing Index — 2026-08-08</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:22 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">FCA (Financial Conduct Authority)</div>
-              <div class="source-type">Regulator</div>
-              <div class="source-jurisdiction">United Kingdom</div>
-              <div class="source-last-update">10:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>FCA (Financial Conduct Authority)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Regulator</div>
+      <div class="source-jurisdiction">United Kingdom</div>
+      <div class="source-last-update">03:08 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">FCA (Financial Conduct Authority)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">United Kingdom Financial Regulator</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United Kingdom</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">fca.org.uk</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Handbook Update — 2026-08-04</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:08 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">NYSE (New York Stock Exchange)</div>
-              <div class="source-type">Exchange</div>
-              <div class="source-jurisdiction">United States</div>
-              <div class="source-last-update">14:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>NYSE (New York Stock Exchange)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Exchange</div>
+      <div class="source-jurisdiction">United States</div>
+      <div class="source-last-update">03:24 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">NYSE (New York Stock Exchange)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">U.S. Securities Exchange</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">United States</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">nyse.com</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">API · HTML · XML</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Daily Market Statistics — 2026-08-08</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:24 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">Saudi Aramco (Official Filings)</div>
-              <div class="source-type">Corporate Filing</div>
-              <div class="source-jurisdiction">Saudi Arabia</div>
-              <div class="source-last-update">07:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>Saudi Aramco (Official Filings)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Corporate Filing</div>
+      <div class="source-jurisdiction">Saudi Arabia</div>
+      <div class="source-last-update">03:05 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">Saudi Aramco (Official Filings)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Saudi Arabia Corporate Filing</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Saudi Arabia</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">aramco.com</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">HTML · PDF · XBRL</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Quarterly Results — 2026-08-06</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:05 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">IMF (International Monetary Fund)</div>
-              <div class="source-type">Government &amp; Multilateral</div>
-              <div class="source-jurisdiction">Multilateral</div>
-              <div class="source-last-update">09:00 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>IMF (International Monetary Fund)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Government &amp; Multilateral</div>
+      <div class="source-jurisdiction">Multilateral</div>
+      <div class="source-last-update">03:13 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">IMF (International Monetary Fund)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Multilateral Institution</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Multilateral</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">imf.org</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF · API</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">World Economic Outlook Update — 2026-07-22</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:13 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">BIS (Bank for International Settlements)</div>
-              <div class="source-type">Government &amp; Multilateral</div>
-              <div class="source-jurisdiction">Multilateral</div>
-              <div class="source-last-update">08:00 UTC</div>
-              <div><span class="status-badge warning"><span class="status-dot"></span>Warning</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>BIS (Bank for International Settlements)</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Government &amp; Multilateral</div>
+      <div class="source-jurisdiction">Multilateral</div>
+      <div class="source-last-update">02:47 UTC</div>
+      <div><span class="status-badge warning"><span class="status-dot"></span>Warning</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">BIS (Bank for International Settlements)</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Multilateral Institution</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Multilateral</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">bis.org</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Warning · Fetch lag</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Quarterly Review — 2026-07-15</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 02:47 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified · Fetch Lag</div>
+      </div>
+    </div>
+  </div>
+</details>
 
-            <div class="source-row">
-              <div class="source-name">OECD</div>
-              <div class="source-type">Government &amp; Multilateral</div>
-              <div class="source-jurisdiction">Multilateral</div>
-              <div class="source-last-update">07:30 UTC</div>
-              <div><span class="status-badge healthy"><span class="status-dot"></span>Jurisdictions Covered</span></div>
-            </div>
+            <details class="source-entry">
+  <summary>
+    <div class="source-row">
+      <div class="source-name-row">
+        <span>OECD</span>
+        <span class="expand-icon" aria-hidden="true">▾</span>
+      </div>
+      <div class="source-type">Government &amp; Multilateral</div>
+      <div class="source-jurisdiction">Multilateral</div>
+      <div class="source-last-update">03:17 UTC</div>
+      <div><span class="status-badge healthy"><span class="status-dot"></span>Healthy</span></div>
+    </div>
+  </summary>
+  <div class="source-detail">
+    <div class="detail-grid">
+      <div class="detail-cell">
+        <div class="detail-label">Source</div>
+        <div class="detail-value">OECD</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Authority / Type</div>
+        <div class="detail-value">Multilateral Institution</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Jurisdiction</div>
+        <div class="detail-value">Multilateral</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Official Domain</div>
+        <div class="detail-value">oecd.org</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Access Method</div>
+        <div class="detail-value">RSS · HTML · PDF · API</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Monitoring Status</div>
+        <div class="detail-value">Healthy · Endpoint reachable</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Latest Publication</div>
+        <div class="detail-value">Economic Outlook — 2026-07-18</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Last Successful Fetch</div>
+        <div class="detail-value">2026-08-09 03:17 UTC</div>
+      </div>
+      <div class="detail-cell">
+        <div class="detail-label">Verification State</div>
+        <div class="detail-value">Verified</div>
+      </div>
+    </div>
+  </div>
+</details>
 
           </div>
 
@@ -692,7 +1630,7 @@
           <a href="risk-intelligence.html">Risk Intelligence</a>
           <a href="market-intelligence.html">Market Intelligence</a>
           <a href="media-intelligence.html">Media Intelligence</a>
-          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="developer-intelligence.html">Developer Platform</a>
           <a href="catalog.html">Intelligence Modules Catalog</a>
         </div>
         <div class="footer-col">
