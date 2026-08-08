@@ -190,7 +190,7 @@
             <a href="risk-intelligence.html" class="nav-dropdown-link">Risk Intelligence</a>
             <a href="market-intelligence.html" class="nav-dropdown-link">Market Intelligence</a>
             <a href="media-intelligence.html" class="nav-dropdown-link">Media Intelligence</a>
-            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Intelligence</a>
+            <a href="developer-intelligence.html" class="nav-dropdown-link">Developer Platform</a>
             <a href="catalog.html" class="nav-dropdown-link">Intelligence Modules Catalog</a>
           </div>
         </div>
@@ -275,7 +275,7 @@
           <span class="gold">with ROUA.</span>
         </h1>
         <p class="hero-pa-sub">
-          ROUA's API and SDK surface give engineering teams programmatic access to verified intelligence —
+          ROUA's API and SDK surface give engineering teams programmatic access to source-linked, governed intelligence —
           sources, evidence chains, extracted facts, and governed intelligence outputs. This page is for
           the engineers who will build the integration, not the buyer who will sign the contract.
         </p>
@@ -317,7 +317,7 @@
         </div>
         <div class="dev-scope-chain">
           <strong>Official Sources</strong> &rarr; <strong>Evidence</strong> &rarr; <strong>Intelligence</strong> &rarr; <strong>Institutional Workflow</strong>
-          <br><span style="font-size: 0.75rem; opacity: 0.8;">The API does not return JSON. It returns evidence-linked intelligence your institution can defend.</span>
+          <br><span style="font-size: 0.75rem; opacity: 0.8;">The API returns structured intelligence with provenance &mdash; not raw data without context.</span>
         </div>
       </div>
     </div>
@@ -334,18 +334,18 @@
       <div class="why-grid">
         <div class="why-card">
           <div class="why-icon">{ }</div>
-          <div class="why-h">REST API</div>
-          <div class="why-desc">Synchronous request/response for on-demand intelligence queries &mdash; source lookups, fact retrieval, evidence chain pulls, intelligence module outputs. Every response carries provenance: source document, page, paragraph, confidence score. OpenAPI 3.1 spec.</div>
+          <div class="why-h">REST API <span style="font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 400; letter-spacing: 0.05em;">&middot; representative</span></div>
+          <div class="why-desc">Synchronous request/response for on-demand intelligence queries &mdash; source lookups, fact retrieval, evidence chain pulls, intelligence module outputs. Every response carries provenance: source document, page, paragraph, extraction confidence. Full specification shared during onboarding.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&rarr;</div>
-          <div class="why-h">Streaming (WebSocket)</div>
-          <div class="why-desc">Real-time push of events as they are detected and validated &mdash; new source publications, fact extractions, risk alerts, intelligence updates. For dashboards, alerts, and live workflows that must react as the registry moves.</div>
+          <div class="why-h">Streaming (WebSocket) <span style="font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 400; letter-spacing: 0.05em;">&middot; integration roadmap</span></div>
+          <div class="why-desc">Real-time push of events as they are detected and validated &mdash; new source publications, fact extractions, risk alerts, intelligence updates. For dashboards, alerts, and live workflows that must react as the registry moves. Available by deployment model.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&lt;/&gt;</div>
-          <div class="why-h">SDK + Components</div>
-          <div class="why-desc">Typed SDK (TypeScript / Python) wrapping the REST and streaming surfaces, plus embeddable UI components for evidence cards, source citations, and intelligence briefs &mdash; for teams building ROUA output directly into internal tools.</div>
+          <div class="why-h">SDK + Components <span style="font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 400; letter-spacing: 0.05em;">&middot; integration roadmap</span></div>
+          <div class="why-desc">Typed SDK (TypeScript / Python) wrapping the REST and streaming surfaces, plus embeddable UI components for evidence cards, source citations, and intelligence briefs. Planned for supported integration environments &mdash; availability confirmed during onboarding.</div>
         </div>
       </div>
     </div>
@@ -368,12 +368,12 @@
         <div class="why-card">
           <div class="why-icon">&#128274;</div>
           <div class="why-h">TLS + Bearer Token</div>
-          <div class="why-desc">All traffic over TLS 1.2+. Authentication via Bearer token in the Authorization header. No basic auth, no query-string secrets. Keys are rotatable on demand and revocable instantly.</div>
+          <div class="why-desc">All traffic over TLS 1.2+. Authentication via Bearer token in the Authorization header. No basic auth, no query-string secrets. Key rotation and revocation configured per environment.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&#128203;</div>
           <div class="why-h">Per-Request Audit</div>
-          <div class="why-desc">Every API call is logged with credential, scope, endpoint, source accessed, and timestamp. Audit logs are available to your institution's security and compliance teams &mdash; not just to ROUA operators.</div>
+          <div class="why-desc">API requests are logged with credential, scope, endpoint, timestamp, and applicable source/evidence references. Audit logs are available to your institution's security and compliance teams &mdash; not just to ROUA operators.</div>
         </div>
       </div>
     </div>
@@ -385,7 +385,7 @@
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">API Surface</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">Representative endpoint surface.</h2>
-        <p class="section-lead" style="margin: 0 auto;">The list below is illustrative &mdash; the full OpenAPI 3.1 specification is shared with engineering teams during onboarding, not published openly. Each endpoint returns evidence-linked output, not raw data.</p>
+        <p class="section-lead" style="margin: 0 auto;">The endpoints below are <strong style="color: var(--roua-text-primary);">representative and illustrative</strong> &mdash; not a production API contract. The full specification is shared with engineering teams during onboarding, not published openly. Each endpoint is designed to return evidence-linked output, not raw data.</p>
       </div>
       <div class="dev-endpoints">
         <div class="dev-endpoint">
@@ -416,7 +416,7 @@
           <div class="dev-method get">GET</div>
           <div>
             <div class="dev-path">/v1/evidence/{evidence_id}</div>
-            <div class="dev-path-desc">Pull the full evidence chain for a specific intelligence output &mdash; from source document through validation to the reasoning trace that produced it.</div>
+            <div class="dev-path-desc">Pull the full evidence chain for a specific intelligence output &mdash; from source document through validation to the derivation trace that produced it.</div>
           </div>
           <div class="dev-auth">scope: evidence:read</div>
         </div>
@@ -459,7 +459,7 @@
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Evidence Access</span>
         <h2 class="section-h" style="margin: 0 auto 1rem;">Every response is evidence-linked.</h2>
-        <p class="section-lead" style="margin: 0 auto;">This is the difference between ROUA and a generic data API. Every intelligence response includes structured provenance your downstream systems &mdash; and your audit committee &mdash; can inspect.</p>
+        <p class="section-lead" style="margin: 0 auto;">This is the difference between ROUA and a generic data API. Every intelligence response includes structured provenance your downstream systems &mdash; and authorized reviewers &mdash; can inspect.</p>
       </div>
       <div class="why-grid">
         <div class="why-card">
@@ -469,18 +469,18 @@
         </div>
         <div class="why-card">
           <div class="why-icon">&#9881;</div>
-          <div class="why-h">Confidence Scores</div>
-          <div class="why-desc">Extraction confidence, source trust tier, and validation status travel with every fact. Your downstream code can filter, threshold, or flag based on confidence &mdash; not assume all facts are equal.</div>
+          <div class="why-h">Confidence Signals</div>
+          <div class="why-desc">Extraction confidence, source trust tier, and validation status travel with every fact. Your downstream code can filter, threshold, or flag based on these signals &mdash; not assume all facts are equal.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&#128221;</div>
-          <div class="why-h">Reasoning Trace</div>
-          <div class="why-desc">Intelligence outputs include the reasoning trace that produced them &mdash; which facts combined, which rules fired, which validation gates passed. The "why" is part of the response, not a separate audit log.</div>
+          <div class="why-h">Derivation Trace</div>
+          <div class="why-desc">Intelligence outputs include a derivation trace &mdash; which facts were used, which rules were applied, which validation gates passed. The "how" is part of the response, not a separate audit log.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&#128202;</div>
           <div class="why-h">Evidence Chain Pull</div>
-          <div class="why-desc">For any intelligence output, the full evidence chain is retrievable via a single endpoint &mdash; source &rarr; document &rarr; fact &rarr; validation &rarr; evidence &rarr; reasoning &rarr; output. Defensible by construction.</div>
+          <div class="why-desc">For any intelligence output, the full evidence chain is retrievable via a single endpoint &mdash; source &rarr; document &rarr; fact &rarr; validation &rarr; evidence &rarr; derivation &rarr; output. Traceable by construction.</div>
         </div>
       </div>
     </div>
@@ -491,13 +491,13 @@
     <div class="container">
       <div class="section-centered mb-6">
         <span class="section-tag" style="justify-content: center;">Example</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">A representative request and response.</h2>
-        <p class="section-lead" style="margin: 0 auto;">Illustrative only &mdash; the actual schema is larger and includes additional provenance fields. Shown here to demonstrate the shape: intelligence with embedded evidence, not raw data.</p>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Illustrative API response.</h2>
+        <p class="section-lead" style="margin: 0 auto;"><strong style="color: var(--roua-text-primary);">Illustrative example.</strong> The response below is synthetic &mdash; field names, IDs, and values are representative, not production records. The actual schema is finalized during onboarding.</p>
       </div>
       <div class="dev-code">
         <div class="dev-code-tab"><span>REQUEST</span></div>
         <pre><span class="c"># Retrieve an Investment Intelligence brief for NVIDIA</span>
-<span class="k">curl</span> -X POST https://api.roua.com/v1/intelligence/investment/brief \
+<span class="k">curl</span> -X POST https://api.representative.roua.com/v1/intelligence/investment/brief \
   -H <span class="s">"Authorization: Bearer $ROUA_API_KEY"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{
@@ -509,10 +509,10 @@
       <div class="dev-code" style="margin-top: 1rem;">
         <div class="dev-code-tab"><span>RESPONSE (excerpt)</span></div>
         <pre>{
-  <span class="p">"brief_id"</span>: <span class="s">"brf_8f3a2c1e"</span>,
+  <span class="p">"brief_id"</span>: <span class="s">"example_brief_id"</span>,
   <span class="p">"entity"</span>: { <span class="p">"ticker"</span>: <span class="s">"NVDA"</span>, <span class="p">"name"</span>: <span class="s">"NVIDIA Corporation"</span> },
   <span class="p">"scope"</span>: <span class="s">"earnings_analysis"</span>,
-  <span class="p">"generated_at"</span>: <span class="s">"2026-08-08T09:42:11Z"</span>,
+  <span class="p">"generated_at"</span>: <span class="s">"example_timestamp"</span>,
   <span class="p">"headline"</span>: <span class="s">"Q2 FY26 revenue $30.0B, +94% YoY, driven by Data Center."</span>,
   <span class="p">"summary"</span>: <span class="s">"..."</span>,
   <span class="p">"key_facts"</span>: [
@@ -521,28 +521,28 @@
       <span class="p">"value"</span>: <span class="n">30000000000</span>,
       <span class="p">"currency"</span>: <span class="s">"USD"</span>,
       <span class="p">"evidence"</span>: {
-        <span class="p">"source_id"</span>: <span class="s">"src_nvidia_ir"</span>,
+        <span class="p">"source_id"</span>: <span class="s">"example_source_id"</span>,
         <span class="p">"source_name"</span>: <span class="s">"NVIDIA Investor Relations"</span>,
         <span class="p">"source_tier"</span>: <span class="n">1</span>,
-        <span class="p">"document_id"</span>: <span class="s">"doc_q2fy26_press_release"</span>,
+        <span class="p">"document_id"</span>: <span class="s">"example_document_id"</span>,
         <span class="p">"page"</span>: <span class="n">1</span>,
         <span class="p">"paragraph"</span>: <span class="n">3</span>,
         <span class="p">"extraction_confidence"</span>: <span class="n">0.98</span>,
-        <span class="p">"validation_status"</span>: <span class="s">"verified"</span>
+        <span class="p">"validation_status"</span>: <span class="s">"source_linked"</span>
       }
     }
   ],
-  <span class="p">"reasoning_trace"</span>: {
-    <span class="p">"facts_combined"</span>: <span class="n">12</span>,
-    <span class="p">"rules_fired"</span>: <span class="n">4</span>,
+  <span class="p">"derivation"</span>: {
+    <span class="p">"facts_used"</span>: <span class="n">12</span>,
+    <span class="p">"rules_applied"</span>: <span class="n">4</span>,
     <span class="p">"validation_gates_passed"</span>: [<span class="s">"source_tier"</span>, <span class="s">"extraction_confidence"</span>, <span class="s">"cross_source"</span>]
   },
-  <span class="p">"evidence_chain_url"</span>: <span class="s">"/v1/evidence/brf_8f3a2c1e"</span>
+  <span class="p">"evidence_chain_url"</span>: <span class="s">"/v1/evidence/example_brief_id"</span>
 }</pre>
       </div>
       <div class="section-centered" style="margin-top: 2rem;">
         <p class="small text-mute" style="max-width: 720px; margin: 0 auto;">
-          The response above is illustrative. Field names, structure, and provenance depth are finalized during onboarding and documented in the OpenAPI 3.1 specification shared with your engineering team.
+          The response above is a <strong style='color: var(--roua-text-primary);'>synthetic illustrative example</strong>. Field names, structure, IDs, and provenance depth are finalized during onboarding and documented in the specification shared with your engineering team.
         </p>
       </div>
     </div>
@@ -564,13 +564,13 @@
         </div>
         <div class="why-card">
           <div class="why-icon">&#128268;</div>
-          <div class="why-h">Idempotent + Cached</div>
-          <div class="why-desc">REST endpoints are idempotent and cacheable by evidence ID &mdash; the same intelligence brief returns the same evidence chain until the underlying sources change. No surprise mutations in your downstream cache.</div>
+          <div class="why-h">Versioned Retrieval</div>
+          <div class="why-desc">Retrieval endpoints are cacheable by immutable evidence/object identifiers &mdash; the same governed object version resolves to the same evidence snapshot. Generation endpoints use request identifiers for traceability.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&#128241;</div>
-          <div class="why-h">Typed SDK</div>
-          <div class="why-desc">TypeScript and Python SDKs with full type definitions for request and response shapes. Your engineers get autocomplete on intelligence structures &mdash; not a JSON blob to reverse-engineer.</div>
+          <div class="why-h">Typed SDK <span style="font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 400; letter-spacing: 0.05em;">&middot; planned</span></div>
+          <div class="why-desc">TypeScript and Python SDKs with full type definitions for request and response shapes. Planned for supported integration environments &mdash; availability confirmed during onboarding.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">&#128230;</div>
@@ -605,13 +605,13 @@
       <div class="dev-access">
         <div class="dev-access-h">What onboarding includes</div>
         <p class="dev-access-p">
-          API access is not a sign-up form. It is a structured onboarding that aligns the API surface with your institution's intelligence products, source-tier permissions, security review, and audit requirements. The process typically takes one to two weeks from initial briefing to first authenticated request.
+          API access is not a sign-up form. It is a structured onboarding that aligns the API surface with your institution's intelligence products, source-tier permissions, security review, and audit requirements. The onboarding timeline is determined by integration scope and institutional security requirements.
         </p>
         <ul class="dev-access-list">
           <li>Scope alignment &mdash; which intelligence products, which source tiers, which endpoints your institution will access</li>
           <li>Environment provisioning &mdash; staging keys for integration development, production keys for live deployment</li>
           <li>OpenAPI 3.1 specification &mdash; the full schema, request/response shapes, pagination, rate limits, error codes</li>
-          <li>SDK access &mdash; TypeScript and Python SDKs with type definitions and integration examples</li>
+          <li>SDK access &mdash; TypeScript and Python SDKs with type definitions and integration examples (availability confirmed during onboarding)</li>
           <li>Security review &mdash; credential rotation, audit log access, network and deployment options</li>
           <li>Engineering briefing &mdash; a working session with your integration team on evidence access patterns and best practices</li>
         </ul>
@@ -653,8 +653,8 @@
         </div>
         <div class="why-card">
           <div class="why-icon">&#129309;</div>
-          <div class="why-h">White-Label Option</div>
-          <div class="why-desc">For media and data companies building customer-facing products on ROUA: white-label intelligence outputs with your brand, your source attributions, your editorial layer on top.</div>
+          <div class="why-h">White-Label Presentation</div>
+          <div class="why-desc">For media and data companies building customer-facing products on ROUA: white-label presentation with your brand and editorial layer &mdash; with source attribution and provenance preserved. Trust requires provenance to remain visible.</div>
         </div>
       </div>
       <div class="section-centered" style="margin-top: 2.5rem;">
@@ -694,7 +694,7 @@
           <a href="risk-intelligence.html">Risk Intelligence</a>
           <a href="market-intelligence.html">Market Intelligence</a>
           <a href="media-intelligence.html">Media Intelligence</a>
-          <a href="developer-intelligence.html">Developer Intelligence</a>
+          <a href="developer-intelligence.html">Developer Platform</a>
           <a href="catalog.html">Intelligence Modules Catalog</a>
         </div>
         <div class="footer-col">
