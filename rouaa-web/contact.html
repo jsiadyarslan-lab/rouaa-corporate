@@ -148,7 +148,7 @@
       <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
         <div class="card">
           <h4 style="margin-bottom: 12px; color: var(--roua-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Stage 01 — Product &amp; Workflow Fit</h4>
-          <p style="font-size: 14px;">A 30-minute call to map your institution's decisions against ROUA's five intelligence products. Outcome: a clear assessment of which products fit, which do not, and why.</p>
+          <p style="font-size: 14px;">A 30-minute call to map your institution's decisions against ROUA's intelligence products and developer platform. Outcome: a clear assessment of which products fit, which do not, and why.</p>
         </div>
         <div class="card">
           <h4 style="margin-bottom: 12px; color: var(--roua-text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;">Stage 02 — Workflow Review</h4>
@@ -172,11 +172,11 @@
     <div class="container">
       <div class="section-header text-center" style="margin: 0 auto 48px;">
         <span class="eyebrow">Briefing Request</span>
-        <h2>Six fields. Two minutes.</h2>
-        <p style="margin: 0 auto; max-width: 640px;">A member of the ROUA team will review your request and follow up regarding the next step. Your information is used to evaluate and respond to your briefing request.</p>
+        <h2>A short briefing request. About two minutes.</h2>
+        <p style="margin: 0 auto; max-width: 640px;">Submit your request below. A member of the ROUA team will review the workflow, product area, and deployment context you provide before contacting you. Your information is used to evaluate and respond to your briefing request.</p>
       </div>
 
-      <form id="briefingForm" style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;" action="mailto:institutional@roua.com" method="post" enctype="text/plain" onsubmit="return submitBriefing(event);">
+      <form id="briefingForm" style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;" onsubmit="return submitBriefing(event);">
 
         <div>
           <label style="display: block; font-size: 13px; color: var(--roua-text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Name</label>
@@ -203,15 +203,12 @@
           <select required style="width: 100%; padding: 12px 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); color: var(--roua-text-primary); font-family: inherit; font-size: 14px;">
             <option value="">Select a product or area…</option>
             <option>Investment Intelligence</option>
-            <option>Market Intelligence</option>
+            <option>Market &amp; Trading Intelligence</option>
             <option>Risk Intelligence</option>
             <option>Media Intelligence</option>
-            <option>Trading Intelligence</option>
-            <option>Developer Platform / API</option>
-            <option>Platform / Architecture</option>
-            <option>Enterprise / Private Deployment</option>
-            <option>Partnership / Distribution</option>
-            <option>Other / Not sure yet</option>
+            <option>Developer Platform</option>
+            <option>Institutional Intelligence</option>
+            <option>Not sure — need guidance</option>
           </select>
         </div>
 
@@ -219,17 +216,17 @@
           <label style="display: block; font-size: 13px; color: var(--roua-text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Deployment Context</label>
           <select required style="width: 100%; padding: 12px 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); color: var(--roua-text-primary); font-family: inherit; font-size: 14px;">
             <option value="">Select deployment context…</option>
-            <option>SaaS / Platform Access</option>
-            <option>API Integration</option>
+            <option>Cloud / SaaS</option>
             <option>Private Cloud</option>
             <option>On-Premise</option>
-            <option>Exploring Options</option>
+            <option>API Integration</option>
+            <option>Not sure — need guidance</option>
           </select>
         </div>
 
         <div>
           <label style="display: block; font-size: 13px; color: var(--roua-text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Message</label>
-          <textarea rows="4" required placeholder="Briefly describe the decision workflow you want to support, the information or intelligence you need, and what would make the briefing useful." style="width: 100%; padding: 12px 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); color: var(--roua-text-primary); font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
+          <textarea rows="4" required placeholder="Describe the decision workflow you want to support, the intelligence you need, and what you want to evaluate." style="width: 100%; padding: 12px 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); color: var(--roua-text-primary); font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
         </div>
 
         <div style="display: flex; gap: 12px; justify-content: center; margin-top: 12px;">
@@ -237,30 +234,46 @@
           <a href="mailto:institutional@roua.com" class="btn btn-secondary">Or email us directly</a>
         </div>
       </form>
-      <div id="formSuccess" style="max-width: 680px; margin: 20px auto 0; padding: 20px; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); text-align: center; display: none;">
-        <div style="font-size: 15px; color: var(--roua-accent); font-weight: 600; margin-bottom: 8px;">Briefing request received.</div>
-        <p style="font-size: 14px; color: var(--roua-text-secondary); margin: 0;">A member of the ROUA team will review your request and follow up regarding the next step.</p>
+      <div id="formSuccess" style="max-width: 680px; margin: 20px auto 0; padding: 24px; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); text-align: center; display: none;">
+        <div style="font-size: 15px; color: var(--roua-accent); font-weight: 600; margin-bottom: 10px;">Your email client should have opened.</div>
+        <p style="font-size: 14px; color: var(--roua-text-secondary); margin: 0; line-height: 1.6;">If it did not, please email us directly at <a href="mailto:institutional@roua.com" style="color: var(--roua-accent); text-decoration: underline;">institutional@roua.com</a> with your briefing request.</p>
+        <p style="font-size: 13px; color: var(--roua-text-muted); margin: 8px 0 0; font-style: italic;">We will review the workflow, product area, and deployment context you provided. If ROUA is not a fit, we will say so.</p>
       </div>
       <script>
       function submitBriefing(e) {
         e.preventDefault();
         var form = document.getElementById('briefingForm');
         var success = document.getElementById('formSuccess');
-        // Build mailto link with form data
+        var submitBtn = form.querySelector('button[type="submit"]');
+
+        // Disable button during submission
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Opening email client…';
+
+        // Build email body from form data
         var name = form.querySelector('input[type="text"]').value;
-        var email = form.querySelector('input[type="email"]').value;
         var subject = 'Briefing Request — ' + (name || 'Institutional Lead');
-        var body = 'Name: ' + name + '\n';
+        var body = '';
         var inputs = form.querySelectorAll('input, select, textarea');
         for (var i = 0; i < inputs.length; i++) {
           if (inputs[i].type === 'submit' || inputs[i].type === 'button') continue;
           var label = inputs[i].placeholder || inputs[i].name || 'Field';
           body += label + ': ' + inputs[i].value + '\n';
         }
+
+        // Open the user's email client with pre-filled content.
+        // This is the honest path: the user sees their email client open
+        // and must actually send the email for the request to reach ROUA.
         var mailto = 'mailto:institutional@roua.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         window.location.href = mailto;
-        form.style.display = 'none';
-        success.style.display = 'block';
+
+        // Show honest intermediate state after a brief delay.
+        // We do NOT claim the email was sent — only that the client was opened.
+        setTimeout(function() {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        }, 500);
+
         return false;
       }
       </script>
