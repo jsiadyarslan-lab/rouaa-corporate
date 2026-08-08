@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080B12">
-<title>ROUA Developer Intelligence — Products Architecture & How to Buy</title>
-<meta name="description" content="ROUA is not a tool store. Every business unit consumes from the same engine, and every product carries the same evidence chain. This is the architecture that organizes how you buy from ROUA.">
+<title>ROUA Developers — API, SDK & Integration Portal</title>
+<meta name="description" content="How developers integrate with ROUA. REST API, streaming, SDK, evidence access patterns, example requests, and enterprise deployment options for engineering teams building on ROUA intelligence.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +66,7 @@
 .arch-root-h { font-family: inherit; font-size: 1.125rem; font-weight: 700; color: var(--roua-accent); }
 .arch-root-sub { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.625rem; color: var(--roua-text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; }
 
-/* === Tree visual: Engine → 5 lines → 44 products === */
+/* === Tree visual: Engine → 5 lines → multiple products (legacy, unused) === */
 .tree-visual { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; }
 .tree-connector { color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0; }
 .tree-lines { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
@@ -127,6 +127,44 @@
 .cta-final { text-align: center; padding: 5rem 0; background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); }
 .cta-final h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
 .cta-final p { color: var(--roua-text-secondary); max-width: 50ch; margin: 0 auto 2rem; font-size: 1.125rem; }
+
+/* === Developer Portal extensions === */
+.dev-scope { max-width: 920px; margin: 0 auto 3rem; padding: 1.75rem 2rem; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-xl); background: linear-gradient(180deg, rgba(201,162,39,0.05), rgba(201,162,39,0.01)); }
+.dev-scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.25rem; }
+@media (max-width: 768px) { .dev-scope-grid { grid-template-columns: 1fr; gap: 1.25rem; } }
+.dev-scope-h { font-size: 1.0625rem; font-weight: 700; color: var(--roua-accent); margin-bottom: 0.5rem; }
+.dev-scope-p { font-size: 0.875rem; color: var(--roua-text-secondary); line-height: 1.65; }
+.dev-scope-chain { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--roua-surface-border); text-align: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; letter-spacing: 0.05em; color: var(--roua-text-muted); }
+.dev-scope-chain strong { color: var(--roua-accent); font-weight: 700; }
+
+.dev-endpoints { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.dev-endpoint { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); }
+@media (max-width: 640px) { .dev-endpoint { grid-template-columns: 1fr; gap: 0.5rem; } }
+.dev-method { display: inline-block; padding: 4px 10px; border-radius: var(--radius-sm); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-align: center; }
+.dev-method.get { background: rgba(45,186,142,0.12); color: #2DBA8E; border: 1px solid rgba(45,186,142,0.3); }
+.dev-method.post { background: rgba(74,144,217,0.12); color: #4A90D9; border: 1px solid rgba(74,144,217,0.3); }
+.dev-method.ws { background: rgba(201,162,39,0.12); color: var(--roua-accent); border: 1px solid var(--roua-accent-border); }
+.dev-path { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.875rem; color: var(--roua-text-primary); word-break: break-all; }
+.dev-path-desc { font-size: 0.75rem; color: var(--roua-text-muted); margin-top: 0.25rem; font-family: inherit; }
+.dev-auth { font-size: 0.6875rem; color: var(--roua-text-muted); font-family: 'SFMono-Regular', Consolas, monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.dev-code { max-width: 920px; margin: 0 auto; background: #0a0e1a; border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); overflow: hidden; }
+.dev-code-tab { display: flex; gap: 0; border-bottom: 1px solid var(--roua-surface-border); background: var(--roua-bg-secondary); }
+.dev-code-tab span { padding: 0.625rem 1.25rem; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; font-weight: 700; color: var(--roua-accent); letter-spacing: 0.05em; }
+.dev-code pre { margin: 0; padding: 1.5rem; overflow-x: auto; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; line-height: 1.7; color: #c4cad6; }
+.dev-code .k { color: #ff79c6; } /* keyword */
+.dev-code .s { color: #f1fa8c; } /* string */
+.dev-code .c { color: #6272a4; font-style: italic; } /* comment */
+.dev-code .p { color: var(--roua-accent); } /* punctuation/property */
+.dev-code .n { color: #8be9fd; } /* number/null */
+
+.dev-access { max-width: 920px; margin: 0 auto; padding: 2rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-xl); }
+.dev-access-h { font-size: 1.125rem; font-weight: 700; color: var(--roua-accent); margin-bottom: 0.75rem; }
+.dev-access-p { font-size: 0.9375rem; color: var(--roua-text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
+.dev-access-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0.625rem; }
+.dev-access-list li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.875rem; color: var(--roua-text-secondary); line-height: 1.6; }
+.dev-access-list li::before { content: "→"; color: var(--roua-accent); font-weight: 700; flex-shrink: 0; }
+
 </style>
   <link rel="stylesheet" href="design-system/roua-v7.css">
   <link rel="stylesheet" href="design-system/roua-v7-patch.css">
@@ -231,316 +269,396 @@
     <div class="hero-pa-bg"></div>
     <div class="container">
       <div class="hero-pa-content">
-        <div class="mono-label text-gold">Products Architecture</div>
+        <div class="mono-label text-gold">Developer Portal</div>
         <h1 class="hero-pa-h1">
-          One intelligence infrastructure.<br>
-          <span class="gold">Multiple institutional applications.</span>
+          How developers integrate<br>
+          <span class="gold">with ROUA.</span>
         </h1>
-        <p style="font-size: 0.9375rem; color: var(--roua-text-secondary); margin-top: 0.5rem;">
-          44 intelligence products powered by the same evidence chain.
-        </p>
         <p class="hero-pa-sub">
-          ROUA is not a tool store. Every business unit consumes from the same engine, and every product carries the same evidence chain. This is the architecture that organizes how you buy from ROUA.
+          ROUA's API and SDK surface give engineering teams programmatic access to verified intelligence —
+          sources, evidence chains, extracted facts, and governed intelligence outputs. This page is for
+          the engineers who will build the integration, not the buyer who will sign the contract.
         </p>
         <div class="hero-pa-cta">
-          <a href="#architecture" class="btn btn-primary btn-lg">See the Architecture</a>
-          <a href="catalog.html" class="btn btn-ghost btn-lg">Browse Full Catalog</a>
+          <a href="#access" class="btn btn-primary btn-lg">Request API Access</a>
+          <a href="#architecture" class="btn btn-ghost btn-lg">View Integration Architecture</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= THE BRIDGE LOGIC ============= -->
-  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
+  <!-- ============= SCOPE: WHAT THIS PAGE IS (vs Developer Intelligence) ============= -->
+  <section class="section reveal">
     <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">The Logic</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">From the Engine to the Purchase</h2>
-        <p class="section-lead" style="margin: 0 auto;">Three layers separate "the infrastructure" from "what you buy." This is the complete path.</p>
-      </div>
-
-      <div class="bridge-logic">
-        <div class="bridge-block">
-          <div class="bridge-block-h">01 · Official Data</div>
-          <div class="bridge-block-val">Intelligence Engine</div>
+      <div class="dev-scope">
+        <span class="section-tag">Two Pages, Two Jobs</span>
+        <h2 class="section-h" style="margin: 1rem auto 0; max-width: 36ch;">
+          Developer Intelligence is what you buy. This page is how you integrate.
+        </h2>
+        <div class="dev-scope-grid">
+          <div>
+            <div class="dev-scope-h">
+              <a href="developer-intelligence.html" style="color: inherit; text-decoration: underline;">Developer Intelligence &rarr;</a>
+            </div>
+            <p class="dev-scope-p">
+              <strong>What you buy.</strong> The product: API access, SDK, knowledge graph surface, intelligence
+              modules, white-label options. Commercial scope, pricing tiers, deployment models. If you are
+              evaluating ROUA as a build-on platform, start there.
+            </p>
+          </div>
+          <div>
+            <div class="dev-scope-h">This page &mdash; Developers</div>
+            <p class="dev-scope-p">
+              <strong>How you integrate.</strong> Authentication, API surface, evidence access patterns,
+              example requests, deployment options for engineering teams. If your institution has already
+              engaged ROUA and you are the engineer building the integration, this is your page.
+            </p>
+          </div>
         </div>
-        <div class="bridge-arrow">→</div>
-        <div class="bridge-block center">
-          <div class="bridge-block-h">02 · Intelligence Engine</div>
-          <div class="bridge-block-val">Multiple Applications</div>
-        </div>
-        <div class="bridge-arrow">→</div>
-        <div class="bridge-block">
-          <div class="bridge-block-h">03 · Business Outcome</div>
-          <div class="bridge-block-val">Pick Your Application</div>
+        <div class="dev-scope-chain">
+          <strong>Official Sources</strong> &rarr; <strong>Evidence</strong> &rarr; <strong>Intelligence</strong> &rarr; <strong>Institutional Workflow</strong>
+          <br><span style="font-size: 0.75rem; opacity: 0.8;">The API does not return JSON. It returns evidence-linked intelligence your institution can defend.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============= ARCHITECTURE TREE ============= -->
-  <section class="section reveal" id="architecture">
+  <!-- ============= API / INTEGRATION OVERVIEW ============= -->
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);" id="overview">
     <div class="container">
       <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Intelligence Suites</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">Five institutional capabilities + the developer platform</h2>
-        <p class="section-lead" style="margin: 0 auto;">Institutions don't buy Engines — they buy Capabilities. Each suite groups multiple products under one purchasable capability, powered by the same engine.</p>
-      </div>
-
-      <div class="arch-tree">
-        <div class="arch-root">
-          <div class="arch-root-h">
-            ROUA Intelligence Engine
-          </div>
-          <div class="arch-root-sub">7 LAYERS · SOURCES → DISTRIBUTION</div>
-        </div>
-
-        <!-- Tree visual: Engine → 5 lines → 44 products -->
-        <div class="tree-visual">
-          <div class="tree-connector">↓</div>
-          <div class="tree-lines">
-            <div class="tree-line" style="--tl-color: #4A90D9;"><span class="tree-line-icon">📰</span><span class="tree-line-name">Media</span><span class="tree-line-count">8</span></div>
-            <div class="tree-line" style="--tl-color: #2DBA8E;"><span class="tree-line-icon">📈</span><span class="tree-line-name">Trading</span><span class="tree-line-count">9</span></div>
-            <div class="tree-line" style="--tl-color: var(--roua-accent);"><span class="tree-line-icon">📊</span><span class="tree-line-name">Research</span><span class="tree-line-count">6</span></div>
-            <div class="tree-line" style="--tl-color: #E5484D;"><span class="tree-line-icon">⚠</span><span class="tree-line-name">Risk</span><span class="tree-line-count">5</span></div>
-            <div class="tree-line" style="--tl-color: #F5A623;"><span class="tree-line-icon">🔌</span><span class="tree-line-name">Developer</span><span class="tree-line-count">16</span></div>
-          </div>
-          <div class="tree-connector">↓</div>
-          <div class="tree-products">44 Intelligence Products · Same Evidence Chain</div>
-        </div>
-
-        <div class="arch-branches">
-
-          <!-- RESEARCH SUITE — Capability-based, not Engine list -->
-          <div class="arch-branch b-research">
-            <div class="arch-branch-h">
-              <div class="arch-branch-icon">📊</div>
-              <div class="arch-branch-name">Research Intelligence Suite</div>
-            </div>
-            <div class="arch-suite-desc">Evidence-backed decision briefs for the investment committee — macro research, equity intelligence, sector comparisons, smart watchlists. Every number documented with its source.</div>
-            <div class="arch-capabilities">
-              <a href="product.html?id=res-brief" class="arch-capability">
-                <div class="arch-cap-name">Macro Research</div>
-              </a>
-              <a href="product.html?id=res-deepdive" class="arch-capability">
-                <div class="arch-cap-name">Equity Intelligence</div>
-              </a>
-              <a href="product.html?id=res-committee" class="arch-capability">
-                <div class="arch-cap-name">Investment Committee Briefs</div>
-              </a>
-              <a href="product.html?id=res-comparison" class="arch-capability">
-                <div class="arch-cap-name">Sector & Strategy Intelligence</div>
-              </a>
-              <a href="product.html?id=res-screening" class="arch-capability">
-                <div class="arch-cap-name">Investment Screening</div>
-              </a>
-            </div>
-            <div class="arch-suite-foot">
-              <span class="arch-suite-count">6 products · Committee-ready</span>
-              <a href="products.html?cat=research" class="arch-suite-link">Full list →</a>
-            </div>
-            <div class="arch-powered">
-              <span class="arch-powered-h">Built on:</span>
-              <span class="arch-powered-tag">Equity Knowledge Graph</span>
-              <span class="arch-powered-tag">Fact Extraction</span>
-              <span class="arch-powered-tag">Reasoning Council</span>
-            </div>
-          </div>
-
-          <!-- RISK SUITE -->
-          <div class="arch-branch b-risk">
-            <div class="arch-branch-h">
-              <div class="arch-branch-icon">⚠</div>
-              <div class="arch-branch-name">Risk Intelligence Suite</div>
-            </div>
-            <div class="arch-suite-desc">From a global event to a portfolio action in minutes — geopolitical monitoring, exposure analysis, scenarios, documented action recommendations, a complete compliance trail.</div>
-            <div class="arch-capabilities">
-              <a href="product.html?id=risk-monitor" class="arch-capability">
-                <div class="arch-cap-name">Geopolitical Risk Monitoring</div>
-              </a>
-              <a href="product.html?id=risk-exposure" class="arch-capability">
-                <div class="arch-cap-name">Portfolio Exposure Analysis</div>
-              </a>
-              <a href="product.html?id=risk-scenario" class="arch-capability">
-                <div class="arch-cap-name">Scenario Intelligence</div>
-              </a>
-              <a href="product.html?id=risk-action" class="arch-capability">
-                <div class="arch-cap-name">Risk Actions</div>
-              </a>
-              <a href="product.html?id=risk-compliance" class="arch-capability">
-                <div class="arch-cap-name">Compliance & Audit Intelligence</div>
-              </a>
-            </div>
-            <div class="arch-suite-foot">
-              <span class="arch-suite-count">5 products · Regulator-ready</span>
-              <a href="products.html?cat=risk" class="arch-suite-link">Full list →</a>
-            </div>
-            <div class="arch-powered">
-              <span class="arch-powered-h">Built on:</span>
-              <span class="arch-powered-tag">Geopolitical Engine</span>
-              <span class="arch-powered-tag">Portfolio Graph</span>
-              <span class="arch-powered-tag">Scenario Engine</span>
-              <span class="arch-powered-tag">Audit Trail</span>
-            </div>
-          </div>
-
-          <!-- TRADING SUITE -->
-          <div class="arch-branch b-trading">
-            <div class="arch-branch-h">
-              <div class="arch-branch-icon">📈</div>
-              <div class="arch-branch-name">Trading Intelligence Suite</div>
-            </div>
-            <div class="arch-suite-desc">Add an intelligence layer that explains the "why" behind every trade — market context, smart chart analysis, a natural-language assistant. For brokers who retain clients.</div>
-            <div class="arch-capabilities">
-              <a href="product.html?id=trd-dashboard" class="arch-capability">
-                <div class="arch-cap-name">Market Context Engine</div>
-              </a>
-              <a href="product.html?id=trd-chart" class="arch-capability">
-                <div class="arch-cap-name">AI Chart Intelligence</div>
-              </a>
-              <a href="product.html?id=trd-portfolio" class="arch-capability">
-                <div class="arch-cap-name">Portfolio Intelligence</div>
-              </a>
-              <a href="product.html?id=trd-assistant" class="arch-capability">
-                <div class="arch-cap-name">Trading Assistant</div>
-              </a>
-              <a href="product.html?id=trd-ai-council" class="arch-capability">
-                <div class="arch-cap-name">Market Intelligence Council</div>
-              </a>
-            </div>
-            <div class="arch-suite-foot">
-              <span class="arch-suite-count">9 products · Decision Support (not signals)</span>
-              <a href="products.html?cat=trading" class="arch-suite-link">Full list →</a>
-            </div>
-            <div class="arch-powered">
-              <span class="arch-powered-h">Built on:</span>
-              <span class="arch-powered-tag">Event Intelligence</span>
-              <span class="arch-powered-tag">Market Knowledge Graph</span>
-              <span class="arch-powered-tag">Evidence Layer</span>
-              <span class="arch-powered-tag">Reasoning Engine</span>
-            </div>
-          </div>
-
-          <!-- DEVELOPER SUITE -->
-          <div class="arch-branch b-dev">
-            <div class="arch-branch-h">
-              <div class="arch-branch-icon">🔌</div>
-              <div class="arch-branch-name">Developer Intelligence</div>
-            </div>
-            <div class="arch-suite-desc">Build your financial product on top of verified intelligence — APIs, real-time streaming, SDK, AI agents, platform components. Every response carries its evidence.</div>
-            <div class="arch-capabilities">
-              <a href="product.html?id=api-events" class="arch-capability">
-                <div class="arch-cap-name">Intelligence APIs</div>
-              </a>
-              <a href="product.html?id=api-streaming" class="arch-capability">
-                <div class="arch-cap-name">Streaming & Real-time</div>
-              </a>
-              <a href="product.html?id=api-sdk" class="arch-capability">
-                <div class="arch-cap-name">Official SDK</div>
-              </a>
-              <a href="product.html?id=agt-macro" class="arch-capability">
-                <div class="arch-cap-name">AI Agents</div>
-              </a>
-              <a href="product.html?id=cmp-graph" class="arch-capability">
-                <div class="arch-cap-name">Platform Components</div>
-              </a>
-            </div>
-            <div class="arch-suite-foot">
-              <span class="arch-suite-count">16 products · Build in weeks</span>
-              <a href="products.html?cat=api" class="arch-suite-link">Full list →</a>
-            </div>
-            <div class="arch-powered">
-              <span class="arch-powered-h">Built on:</span>
-              <span class="arch-powered-tag">Event Intelligence</span>
-              <span class="arch-powered-tag">Market Knowledge Graph</span>
-              <span class="arch-powered-tag">Evidence Layer</span>
-              <span class="arch-powered-tag">Reasoning Engine</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= THE BUYING LOGIC ============= -->
-  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">The Buying Logic</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">How do you buy from ROUA?</h2>
-        <p class="section-lead" style="margin: 0 auto;">Four buying paths. Each path determines your business unit, the scope of your products, and how they integrate.</p>
-      </div>
-
-      <div class="buying-grid">
-        <div class="buying-card">
-          <div class="buying-num">PATH 01</div>
-          <div class="buying-h">Single-Market Solution</div>
-          <div class="buying-desc">Choose one market (media, trading, research, risk, or developer) — subscribe to all its products or only to what matters.</div>
-          <div class="buying-example">e.g., Media Intelligence — 8 products</div>
-        </div>
-        <div class="buying-card">
-          <div class="buying-num">PATH 02</div>
-          <div class="buying-h">Tailored Bundle</div>
-          <div class="buying-desc">Choose specific products from multiple markets. For example: News Engine + Risk Monitor + Events API — one bundle for a specific need.</div>
-          <div class="buying-example">e.g., News + Risk + Events API</div>
-        </div>
-        <div class="buying-card">
-          <div class="buying-num">PATH 03</div>
-          <div class="buying-h">Platform License</div>
-          <div class="buying-desc">Subscribe to the entire platform — all products, all markets. For major banks and sovereign funds that want a comprehensive solution.</div>
-          <div class="buying-example">Enterprise · 44 products · all markets</div>
-        </div>
-        <div class="buying-card">
-          <div class="buying-num">PATH 04</div>
-          <div class="buying-h">Build on ROUA</div>
-          <div class="buying-desc">Take APIs + SDK + Components — and build your own product on top of ROUA's verified intelligence. For fintechs and developers.</div>
-          <div class="buying-example">APIs + SDK + Knowledge Graph</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= ENGINEERING ARCHITECTURE ============= -->
-  <section class="section reveal" id="engineering">
-    <div class="container">
-      <div class="section-centered mb-6">
-        <span class="section-tag" style="justify-content: center;">Engineering Architecture</span>
-        <h2 class="section-h" style="margin: 0 auto 1rem;">How the system is built.</h2>
-        <p class="section-lead" style="margin: 0 auto;">The patterns and technologies that make the 7-layer architecture production-grade.</p>
+        <span class="section-tag" style="justify-content: center;">Integration Overview</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Three integration surfaces.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ROUA exposes three distinct surfaces. Each returns evidence-linked intelligence &mdash; the difference is latency, format, and use case.</p>
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <div class="why-icon">⚡</div>
-          <div class="why-h">Event-Driven Core</div>
-          <div class="why-desc">Source detections, fact extractions, and event detections flow through an event-driven pipeline. Each stage emits events that trigger downstream processing — no polling, no batch delays.</div>
+          <div class="why-icon">{ }</div>
+          <div class="why-h">REST API</div>
+          <div class="why-desc">Synchronous request/response for on-demand intelligence queries &mdash; source lookups, fact retrieval, evidence chain pulls, intelligence module outputs. Every response carries provenance: source document, page, paragraph, confidence score. OpenAPI 3.1 spec.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">📋</div>
-          <div class="why-h">Queue-Based Processing</div>
-          <div class="why-desc">BullMQ + Redis queues manage ingestion, processing, and intelligence generation workers. Horizontal scaling per layer.</div>
+          <div class="why-icon">&rarr;</div>
+          <div class="why-h">Streaming (WebSocket)</div>
+          <div class="why-desc">Real-time push of events as they are detected and validated &mdash; new source publications, fact extractions, risk alerts, intelligence updates. For dashboards, alerts, and live workflows that must react as the registry moves.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">📊</div>
-          <div class="why-h">Streaming + Batch</div>
-          <div class="why-desc">Real-time streaming for event detection and alerts. Batch processing for report generation and deep analysis. Both share the same evidence layer.</div>
+          <div class="why-icon">&lt;/&gt;</div>
+          <div class="why-h">SDK + Components</div>
+          <div class="why-desc">Typed SDK (TypeScript / Python) wrapping the REST and streaming surfaces, plus embeddable UI components for evidence cards, source citations, and intelligence briefs &mdash; for teams building ROUA output directly into internal tools.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= AUTHENTICATION ============= -->
+  <section class="section reveal" id="auth">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Authentication</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">How your requests are authenticated.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ROUA uses scoped API keys issued per institution, per environment. Keys are not shared across staging and production. Every request is auditable back to the issuing credential.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">@</div>
+          <div class="why-h">Scoped API Keys</div>
+          <div class="why-desc">Keys carry explicit scopes &mdash; which intelligence products, which source tiers, which endpoints. A key cannot read beyond its scope. Scopes are reviewed during onboarding and adjustable per environment.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🔗</div>
-          <div class="why-h">Graph Database</div>
-          <div class="why-desc">PostgreSQL + pgvector for relational and vector storage. Knowledge Graph built on entity-relationship model — queryable across entities, events, facts, and evidence chains.</div>
+          <div class="why-icon">&#128274;</div>
+          <div class="why-h">TLS + Bearer Token</div>
+          <div class="why-desc">All traffic over TLS 1.2+. Authentication via Bearer token in the Authorization header. No basic auth, no query-string secrets. Keys are rotatable on demand and revocable instantly.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🔌</div>
-          <div class="why-h">API Layer</div>
-          <div class="why-desc">NestJS REST API + WebSocket streaming + SDK layer. OpenAPI 3.1 spec. Rate-limited, authenticated, audited. Every API response carries evidence provenance.</div>
+          <div class="why-icon">&#128203;</div>
+          <div class="why-h">Per-Request Audit</div>
+          <div class="why-desc">Every API call is logged with credential, scope, endpoint, source accessed, and timestamp. Audit logs are available to your institution's security and compliance teams &mdash; not just to ROUA operators.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= API SURFACE / ENDPOINTS ============= -->
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);" id="endpoints">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">API Surface</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Representative endpoint surface.</h2>
+        <p class="section-lead" style="margin: 0 auto;">The list below is illustrative &mdash; the full OpenAPI 3.1 specification is shared with engineering teams during onboarding, not published openly. Each endpoint returns evidence-linked output, not raw data.</p>
+      </div>
+      <div class="dev-endpoints">
+        <div class="dev-endpoint">
+          <div class="dev-method get">GET</div>
+          <div>
+            <div class="dev-path">/v1/sources</div>
+            <div class="dev-path-desc">List monitored sources by tier, jurisdiction, or type. Returns source registry entries with trust tier and last-checked status.</div>
+          </div>
+          <div class="dev-auth">scope: sources:read</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method get">GET</div>
+          <div>
+            <div class="dev-path">/v1/sources/{source_id}/documents</div>
+            <div class="dev-path-desc">Retrieve documents ingested from a specific source. Each document includes ingestion timestamp, parse status, and paragraph-level anchors.</div>
+          </div>
+          <div class="dev-auth">scope: sources:read</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method get">GET</div>
+          <div>
+            <div class="dev-path">/v1/facts?entity={entity_id}</div>
+            <div class="dev-path-desc">Retrieve extracted facts for an entity. Each fact carries source document, page, paragraph, extraction confidence, and validation status.</div>
+          </div>
+          <div class="dev-auth">scope: facts:read</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method get">GET</div>
+          <div>
+            <div class="dev-path">/v1/evidence/{evidence_id}</div>
+            <div class="dev-path-desc">Pull the full evidence chain for a specific intelligence output &mdash; from source document through validation to the reasoning trace that produced it.</div>
+          </div>
+          <div class="dev-auth">scope: evidence:read</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method post">POST</div>
+          <div>
+            <div class="dev-path">/v1/intelligence/investment/brief</div>
+            <div class="dev-path-desc">Request an Investment Intelligence brief for a given entity or theme. Returns a structured brief with embedded evidence references, not free text.</div>
+          </div>
+          <div class="dev-auth">scope: intelligence:investment</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method post">POST</div>
+          <div>
+            <div class="dev-path">/v1/intelligence/risk/scan</div>
+            <div class="dev-path-desc">Run a Risk Intelligence scan against a portfolio or exposure set. Returns flagged risks with source citations and confidence scores.</div>
+          </div>
+          <div class="dev-auth">scope: intelligence:risk</div>
+        </div>
+        <div class="dev-endpoint">
+          <div class="dev-method ws">WS</div>
+          <div>
+            <div class="dev-path">/v1/stream/events</div>
+            <div class="dev-path-desc">WebSocket subscription for real-time event pushes &mdash; new source publications, fact extractions, risk alerts. Filterable by entity, source tier, or event type.</div>
+          </div>
+          <div class="dev-auth">scope: stream:events</div>
+        </div>
+      </div>
+      <div class="section-centered" style="margin-top: 2rem;">
+        <p class="small text-mute" style="max-width: 640px; margin: 0 auto;">
+          Endpoint paths and scopes shown above are representative. The full OpenAPI 3.1 specification, including request/response schemas, pagination, rate limits, and error codes, is provided to engineering teams under NDA during onboarding.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= EVIDENCE / PROVENANCE ACCESS ============= -->
+  <section class="section reveal" id="evidence">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Evidence Access</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Every response is evidence-linked.</h2>
+        <p class="section-lead" style="margin: 0 auto;">This is the difference between ROUA and a generic data API. Every intelligence response includes structured provenance your downstream systems &mdash; and your audit committee &mdash; can inspect.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">&#128279;</div>
+          <div class="why-h">Source Anchors</div>
+          <div class="why-desc">Every fact carries a source anchor: document identifier, page, paragraph. Not a URL to a homepage &mdash; a structural reference into the original document your compliance team can pull on demand.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🔍</div>
-          <div class="why-h">Search Layer</div>
-          <div class="why-desc">Full-text search across documents, facts, events, and intelligence products. pg_trgm for fuzzy matching. Vector similarity for semantic search across the knowledge graph.</div>
+          <div class="why-icon">&#9881;</div>
+          <div class="why-h">Confidence Scores</div>
+          <div class="why-desc">Extraction confidence, source trust tier, and validation status travel with every fact. Your downstream code can filter, threshold, or flag based on confidence &mdash; not assume all facts are equal.</div>
         </div>
+        <div class="why-card">
+          <div class="why-icon">&#128221;</div>
+          <div class="why-h">Reasoning Trace</div>
+          <div class="why-desc">Intelligence outputs include the reasoning trace that produced them &mdash; which facts combined, which rules fired, which validation gates passed. The "why" is part of the response, not a separate audit log.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128202;</div>
+          <div class="why-h">Evidence Chain Pull</div>
+          <div class="why-desc">For any intelligence output, the full evidence chain is retrievable via a single endpoint &mdash; source &rarr; document &rarr; fact &rarr; validation &rarr; evidence &rarr; reasoning &rarr; output. Defensible by construction.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= EXAMPLE REQUEST / RESPONSE ============= -->
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);" id="example">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Example</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">A representative request and response.</h2>
+        <p class="section-lead" style="margin: 0 auto;">Illustrative only &mdash; the actual schema is larger and includes additional provenance fields. Shown here to demonstrate the shape: intelligence with embedded evidence, not raw data.</p>
+      </div>
+      <div class="dev-code">
+        <div class="dev-code-tab"><span>REQUEST</span></div>
+        <pre><span class="c"># Retrieve an Investment Intelligence brief for NVIDIA</span>
+<span class="k">curl</span> -X POST https://api.roua.com/v1/intelligence/investment/brief \
+  -H <span class="s">"Authorization: Bearer $ROUA_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "entity": { "ticker": "NVDA" },
+    "scope": "earnings_analysis",
+    "evidence_depth": "full"
+  }'</span></pre>
+      </div>
+      <div class="dev-code" style="margin-top: 1rem;">
+        <div class="dev-code-tab"><span>RESPONSE (excerpt)</span></div>
+        <pre>{
+  <span class="p">"brief_id"</span>: <span class="s">"brf_8f3a2c1e"</span>,
+  <span class="p">"entity"</span>: { <span class="p">"ticker"</span>: <span class="s">"NVDA"</span>, <span class="p">"name"</span>: <span class="s">"NVIDIA Corporation"</span> },
+  <span class="p">"scope"</span>: <span class="s">"earnings_analysis"</span>,
+  <span class="p">"generated_at"</span>: <span class="s">"2026-08-08T09:42:11Z"</span>,
+  <span class="p">"headline"</span>: <span class="s">"Q2 FY26 revenue $30.0B, +94% YoY, driven by Data Center."</span>,
+  <span class="p">"summary"</span>: <span class="s">"..."</span>,
+  <span class="p">"key_facts"</span>: [
+    {
+      <span class="p">"fact"</span>: <span class="s">"Q2 FY26 revenue $30.0B"</span>,
+      <span class="p">"value"</span>: <span class="n">30000000000</span>,
+      <span class="p">"currency"</span>: <span class="s">"USD"</span>,
+      <span class="p">"evidence"</span>: {
+        <span class="p">"source_id"</span>: <span class="s">"src_nvidia_ir"</span>,
+        <span class="p">"source_name"</span>: <span class="s">"NVIDIA Investor Relations"</span>,
+        <span class="p">"source_tier"</span>: <span class="n">1</span>,
+        <span class="p">"document_id"</span>: <span class="s">"doc_q2fy26_press_release"</span>,
+        <span class="p">"page"</span>: <span class="n">1</span>,
+        <span class="p">"paragraph"</span>: <span class="n">3</span>,
+        <span class="p">"extraction_confidence"</span>: <span class="n">0.98</span>,
+        <span class="p">"validation_status"</span>: <span class="s">"verified"</span>
+      }
+    }
+  ],
+  <span class="p">"reasoning_trace"</span>: {
+    <span class="p">"facts_combined"</span>: <span class="n">12</span>,
+    <span class="p">"rules_fired"</span>: <span class="n">4</span>,
+    <span class="p">"validation_gates_passed"</span>: [<span class="s">"source_tier"</span>, <span class="s">"extraction_confidence"</span>, <span class="s">"cross_source"</span>]
+  },
+  <span class="p">"evidence_chain_url"</span>: <span class="s">"/v1/evidence/brf_8f3a2c1e"</span>
+}</pre>
+      </div>
+      <div class="section-centered" style="margin-top: 2rem;">
+        <p class="small text-mute" style="max-width: 720px; margin: 0 auto;">
+          The response above is illustrative. Field names, structure, and provenance depth are finalized during onboarding and documented in the OpenAPI 3.1 specification shared with your engineering team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ARCHITECTURE REFERENCES ============= -->
+  <section class="section reveal" id="architecture">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Integration Architecture</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">How the integration fits your stack.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ROUA does not replace your data warehouse, your OMS, or your editorial CMS. It sits alongside them as an intelligence layer &mdash; queried on demand, pushed via stream, or embedded via SDK.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">&#9881;</div>
+          <div class="why-h">Behind Your Stack</div>
+          <div class="why-desc">ROUA is called from your existing services &mdash; research workflows, risk engines, editorial tools &mdash; not placed in front of them. Your systems own the user experience; ROUA supplies the evidence-linked intelligence.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128268;</div>
+          <div class="why-h">Idempotent + Cached</div>
+          <div class="why-desc">REST endpoints are idempotent and cacheable by evidence ID &mdash; the same intelligence brief returns the same evidence chain until the underlying sources change. No surprise mutations in your downstream cache.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128241;</div>
+          <div class="why-h">Typed SDK</div>
+          <div class="why-desc">TypeScript and Python SDKs with full type definitions for request and response shapes. Your engineers get autocomplete on intelligence structures &mdash; not a JSON blob to reverse-engineer.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128230;</div>
+          <div class="why-h">Embeddable Components</div>
+          <div class="why-desc">For teams building internal tools: embeddable evidence cards, source citation widgets, and brief renderers. Drop a ROUA evidence card into your research portal without rebuilding the brief UI.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128737;</div>
+          <div class="why-h">Private Deployment</div>
+          <div class="why-desc">For institutions that cannot send intelligence queries over the public API: ROUA can be deployed inside your environment &mdash; same API surface, same evidence model, your network boundary.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128202;</div>
+          <div class="why-h">Observable</div>
+          <div class="why-desc">Structured logs, metrics, and traces available to your observability stack. Request IDs propagate end-to-end &mdash; from your service through ROUA's pipeline to the source document.</div>
+        </div>
+      </div>
+      <div class="section-centered" style="margin-top: 2.5rem;">
+        <a href="architecture.html" class="btn-link">Full platform architecture &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ACCESS / CREDENTIALS ============= -->
+  <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);" id="access">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">API Access</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">Request API access.</h2>
+        <p class="section-lead" style="margin: 0 auto;">ROUA does not publish a public sandbox or self-serve API keys. API access is provisioned through institutional onboarding &mdash; because every key carries product scopes, source-tier access, and audit obligations that must be configured for your institution.</p>
+      </div>
+      <div class="dev-access">
+        <div class="dev-access-h">What onboarding includes</div>
+        <p class="dev-access-p">
+          API access is not a sign-up form. It is a structured onboarding that aligns the API surface with your institution's intelligence products, source-tier permissions, security review, and audit requirements. The process typically takes one to two weeks from initial briefing to first authenticated request.
+        </p>
+        <ul class="dev-access-list">
+          <li>Scope alignment &mdash; which intelligence products, which source tiers, which endpoints your institution will access</li>
+          <li>Environment provisioning &mdash; staging keys for integration development, production keys for live deployment</li>
+          <li>OpenAPI 3.1 specification &mdash; the full schema, request/response shapes, pagination, rate limits, error codes</li>
+          <li>SDK access &mdash; TypeScript and Python SDKs with type definitions and integration examples</li>
+          <li>Security review &mdash; credential rotation, audit log access, network and deployment options</li>
+          <li>Engineering briefing &mdash; a working session with your integration team on evidence access patterns and best practices</li>
+        </ul>
+        <div class="dev-access-h">How to start</div>
+        <p class="dev-access-p">
+          If your institution has already engaged ROUA through a product briefing, contact your institutional lead and ask to be connected to the developer onboarding team. If you have not yet engaged ROUA, the first step is a product briefing &mdash; API access follows institutional engagement, not the other way around.
+        </p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
+          <a href="contact.html" class="btn btn-primary btn-lg">Request API Access</a>
+          <a href="developer-intelligence.html" class="btn btn-ghost btn-lg">View Developer Intelligence Product</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ENTERPRISE INTEGRATION ============= -->
+  <section class="section reveal" id="enterprise">
+    <div class="container">
+      <div class="section-centered mb-6">
+        <span class="section-tag" style="justify-content: center;">Enterprise Integration</span>
+        <h2 class="section-h" style="margin: 0 auto 1rem;">For institutions with stricter boundaries.</h2>
+        <p class="section-lead" style="margin: 0 auto;">Banks, sovereign funds, and regulated institutions often cannot send intelligence queries over a public API. ROUA supports deployment models that keep the intelligence layer inside your boundary &mdash; without changing the integration surface.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">&#128737;</div>
+          <div class="why-h">Private Deployment</div>
+          <div class="why-desc">ROUA deployed inside your environment &mdash; same API surface, same evidence model, same SDK. Your engineers integrate against a local endpoint; no intelligence query leaves your network.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128274;</div>
+          <div class="why-h">Dedicated Source Tiers</div>
+          <div class="why-desc">For private deployments, source tiers can be scoped to your institution's licensed sources &mdash; your API keys cannot reach beyond what your institution has rights to access.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128203;</div>
+          <div class="why-h">Your Audit Trail</div>
+          <div class="why-desc">Audit logs stay inside your environment. Every API call, every evidence pull, every intelligence output &mdash; logged to your SIEM, not to ROUA's cloud.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#129309;</div>
+          <div class="why-h">White-Label Option</div>
+          <div class="why-desc">For media and data companies building customer-facing products on ROUA: white-label intelligence outputs with your brand, your source attributions, your editorial layer on top.</div>
+        </div>
+      </div>
+      <div class="section-centered" style="margin-top: 2.5rem;">
+        <a href="enterprise.html" class="btn-link">Enterprise deployment options &rarr;</a>
       </div>
     </div>
   </section>
@@ -549,13 +667,13 @@
   <section class="cta-final reveal">
     <div class="container">
       <span class="section-tag" style="justify-content: center;">Next Step</span>
-      <h2>Which path fits your institution?</h2>
-      <p>A 30-minute call — we help you identify the right buying path, and map the products that serve your needs.</p>
-      <a href="mailto:contact@roua.ai?subject=Products Architecture Briefing" class="btn btn-primary btn-lg">Request Product Architecture Briefing</a>
+      <h2>Ready to integrate?</h2>
+      <p>If your institution has engaged ROUA and you are the engineer building the integration, request API access. If you are still evaluating ROUA as a platform, start with Developer Intelligence.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Request API Access</a>
       <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="catalog.html" class="btn-link">Browse Full Catalog (44 products) →</a>
-        <a href="platform.html" class="btn-link">How the Engine Works →</a>
-        <a href="solutions.html" class="btn-link">Solutions by Market →</a>
+        <a href="developer-intelligence.html" class="btn-link">Developer Intelligence Product &rarr;</a>
+        <a href="architecture.html" class="btn-link">Platform Architecture &rarr;</a>
+        <a href="enterprise.html" class="btn-link">Enterprise Deployment &rarr;</a>
       </div>
     </div>
   </section>
