@@ -1,10 +1,16 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–05.
-> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–06.
+> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 1 non-product page audited against this spec (Delta 06, commit `20961e6`).
 > **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026.
+> **Effective date:** August 9, 2026 (v2 — updated August 9, 2026 after Delta 06 Architecture audit).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v2 changelog (post-Delta-06):**
+> - Layer 1.1 Token System expanded: raw-hex prohibition now covers CSS, inline styles, SVG `fill`/`stroke`, Canvas/Three.js colors, and JavaScript color constants.
+> - Layer 4 confirmed defects: D.7 (deprecated raw hex), D.8 ("real time" claims), D.9 ("confidence score/d" claims) added.
+> - Acceptance Contract clarified: PASS requires safety across ALL implementation layers (HTML + CSS + SVG + JS + content claims), not HTML/CSS only.
+> - Technology neutrality principle added: Three.js / GSAP / Canvas are NOT prohibited — inconsistent usage and unproven claims are the problem.
 
 ---
 
@@ -27,13 +33,33 @@
 
 ## 1.1 Token System
 
+> **Scope expansion (v2):** Token rules apply across **all implementation layers** — CSS declarations, inline styles, SVG `fill`/`stroke` attributes, Canvas/Three.js color definitions, and JavaScript color constants. A page is not token-clean if it uses canonical tokens in CSS but hardcodes deprecated colors in SVG or JavaScript.
+
 | Rule | Detail | Verdict |
 |---|---|---|
-| Use `--roua-*` aliases | Never use base tokens (`--bg`, `--gold`, `--txt`, `--dim`, `--panel`, `--line`) directly in inline styles. Always use aliases (`--roua-bg-primary`, `--roua-accent`, `--roua-text-primary`, etc.). | **KEEP** |
-| Never use raw hex in styles | Zero `#xxxxxx` values in `style="..."` attributes. Exception: `<meta name="theme-color">` may use raw hex. | **KEEP** |
-| Never use `rgba(201, 162, 39, ...)` | This is the OLD gold from deprecated `VISUAL-IDENTITY-SYSTEM.md`. Canonical gold is `#e3b45a` = `rgba(227, 180, 90, ...)`. | **FORBID** |
+| Use `--roua-*` aliases | Never use base tokens (`--bg`, `--gold`, `--txt`, `--dim`, `--panel`, `--line`) directly in inline styles or page-level `<style>` blocks. Always use aliases (`--roua-bg-primary`, `--roua-accent`, `--roua-text-primary`, etc.). | **KEEP** |
+| Never use raw hex in CSS or inline styles | Zero `#xxxxxx` values in `style="..."` attributes or `<style>` blocks. Exception: `<meta name="theme-color">` may use raw hex. | **KEEP** |
+| Never use raw hex in SVG `fill` / `stroke` | Inline SVG diagrams (Evidence Chain, flow charts, etc.) must use canonical tokens or `rgba(227, 180, 90, ...)` equivalents. **Forbidden deprecated values:** `#0B0F18`, `#2A3543`, `#949EAF`, `#C4CCDA`, `#C9A227`, `#F5F7FA` (all from deprecated `VISUAL-IDENTITY-SYSTEM.md`). | **FORBID** |
+| Never use raw hex in Canvas / Three.js / WebGL | JavaScript color constants (e.g., Three.js `PALETTE`, Canvas `fillStyle`) must use canonical gold `0xE3B45A` (not deprecated `0xC9A227`). Same for blue `0x4F8CFF`, green `0x10B981`, etc. | **FORBID** |
+| Never use raw hex in JavaScript color strings | `rgba()`/`rgb()`/hex strings in JavaScript (e.g., `'rgba(201,162,39,0.5)'`) must use canonical values, not deprecated palette. | **FORBID** |
+| Never use `rgba(201, 162, 39, ...)` | This is the OLD gold from deprecated `VISUAL-IDENTITY-SYSTEM.md`. Canonical gold is `#e3b45a` = `rgba(227, 180, 90, ...)`. Applies in CSS, SVG, JS — everywhere. | **FORBID** |
 | Never use `var(--gold)` directly | Use `var(--roua-accent)` instead. (Media D.6 is the one violation — REPAIR.) | **FORBID** |
 | White rgba in glass cards | `rgba(255,255,255,0.02)` and `rgba(255,255,255,0.06)` are acceptable in `.glass-status-card` surfaces. | **KEEP** |
+
+### Canonical color reference (for replacement)
+
+| Role | Hex | rgba | Three.js hex | Token alias |
+|---|---|---|---|---|
+| Gold (accent) | `#E3B45A` | `rgba(227, 180, 90, ...)` | `0xE3B45A` | `var(--roua-accent)` |
+| Gold light | `#F4D492` | `rgba(244, 212, 146, ...)` | `0xF4D492` | `var(--roua-accent-hover)` |
+| Blue | `#4F8CFF` | `rgba(79, 140, 255, ...)` | `0x4F8CFF` | `var(--roua-blue)` |
+| Green (operational) | `#10B981` | `rgba(16, 185, 129, ...)` | `0x10B981` | `var(--roua-green)` |
+| Amber (warning) | `#F59E0B` | `rgba(245, 158, 11, ...)` | `0xF59E0B` | `var(--roua-amber)` |
+| Background primary | `#040B1C` | `rgba(4, 11, 28, ...)` | `0x040B1C` | `var(--roua-bg-primary)` |
+| Surface (panel) | `#0A1630` | `rgba(10, 22, 48, ...)` | `0x0A1630` | `var(--roua-surface)` |
+| Text primary | `#EAF2FF` | `rgba(234, 242, 255, ...)` | `0xEAF2FF` | `var(--roua-text-primary)` |
+| Text secondary | `#9FB0CC` | `rgba(159, 176, 204, ...)` | `0x9FB0CC` | `var(--roua-text-secondary)` |
+| Text muted | `#6B7F9F` | `rgba(107, 127, 159, ...)` | `0x6B7F9F` | `var(--roua-text-muted)` |
 
 ## 1.2 Container & Layout
 
@@ -111,19 +137,21 @@
 
 ## 1.9 Trust Grammar (Forbidden Phrases)
 
-| Phrase | Verdict | Exception |
-|---|---|---|
-| "audit-ready" / "Audit-Ready" | **FORBID** | Only `risk-intelligence.html` (legitimate risk context) |
-| "within seconds" / "in seconds" | **FORBID** | None. Use "through configured source monitoring" |
-| "real-time" / "real time" | **FORBID** | None |
-| "instantly" / "instant" | **FORBID** | None |
-| "continuously monitored" (as timing claim) | **FORBID** | None. Use "configured source monitoring" |
-| "every claim" | **FORBID** | None. Use "governed claims" |
-| "VERIFIED INTELLIGENCE OBJECT" | **FORBID** | None. Use "GOVERNED INTELLIGENCE OBJECT" |
-| "Trust Promise" | **FORBID** | None. Use "Trust Property" |
-| "Provenance Immutability" | **FORBID** | None. Use "Versioned Provenance" |
-| "confidence score" / "confidence scored" | **FORBID** | None. Use "Confidence signals" or "Verification tier" |
-| "SOC 2" / "ISO 27001" | **FORBID** | None (removed in P0 sweep) |
+> **v2 note:** Forbidden phrases apply to ALL content — marketing copy, infrastructure descriptions, JavaScript comments, SVG `<text>` elements, and metadata. A "real time" claim in an Architecture pipeline description is just as forbidden as one in a product Hero.
+
+| Phrase | Verdict | Exception | Defect ID |
+|---|---|---|---|
+| "audit-ready" / "Audit-Ready" | **FORBID** | Only `risk-intelligence.html` (legitimate risk context) | D.4 |
+| "within seconds" / "in seconds" | **FORBID** | None. Use "through configured source monitoring" | — |
+| **"real-time" / "real time"** | **FORBID** | None. Use "through configured source monitoring" or "as they are published" | **D.8** |
+| "instantly" / "instant" | **FORBID** | None | — |
+| "continuously monitored" (as timing claim) | **FORBID** | None. Use "configured source monitoring" | — |
+| "every claim" | **REVIEW** | Acceptable in quoted institutional questions ("Can we locate the exact passage behind every claim?"). Forbidden as a ROUA claim — use "governed claims". | — |
+| "VERIFIED INTELLIGENCE OBJECT" | **FORBID** | None. Use "GOVERNED INTELLIGENCE OBJECT" | — |
+| "Trust Promise" | **FORBID** | None. Use "Trust Property" | — |
+| "Provenance Immutability" | **FORBID** | None. Use "Versioned Provenance" | — |
+| **"confidence score" / "confidence scored"** | **FORBID** | None. Use "Confidence signals" or "Verification tier" | **D.9** |
+| "SOC 2" / "ISO 27001" | **FORBID** | None (removed in P0 sweep) | — |
 
 ## 1.10 Taxonomy (Locked)
 
@@ -348,18 +376,62 @@
 | **Effort** | ~1 minute |
 | **Verdict** | **REPAIR** (P1 priority) |
 
+## D.7 — Deprecated raw hex values (from `VISUAL-IDENTITY-SYSTEM.md`)
+
+| Field | Value |
+|---|---|
+| **Pattern** | Raw hex values from the deprecated `VISUAL-IDENTITY-SYSTEM.md` palette used in inline SVG `fill`/`stroke` attributes, Canvas/Three.js color constants, or JavaScript color strings |
+| **Deprecated hex values** | `#0B0F18` (graphite bg), `#2A3543` (border steel), `#949EAF` (muted steel), `#C4CCDA` (light slate), `#C9A227` (OLD institutional gold), `#F5F7FA` (white) |
+| **Deprecated Three.js hex** | `0xC9A227` (old gold), `0xF5C842` (old gold bright), `0x4A90D9` (old blue), `0x1A2433` (old graphite), `0x20A878` (old green) |
+| **Pages affected** | Architecture (Delta 06): 6 deprecated hex in inline SVG Evidence Chain diagram (lines 2018–2068) + 5 deprecated hex in Three.js PALETTE (lines 2734–2738) |
+| **Pages clean** | All 5 product pages (Investment, Market, Risk, Media, Developer) |
+| **Root cause** | Page was built using the deprecated palette and was NOT included in the P0 system sweep that cleaned product pages |
+| **Fix** | Replace each deprecated hex with the canonical equivalent from the Layer 1.1 color reference table. For SVG: use `fill="var(--roua-*)"` where supported, or `fill="#E3B45A"` (canonical) where CSS variables are not supported in SVG attributes. For Three.js: replace `0xC9A227` with `0xE3B45A`, `0x4A90D9` with `0x4F8CFF`, etc. |
+| **Fix type** | Page-specific — find-and-replace in SVG attributes and JavaScript color constants |
+| **Effort** | ~5 minutes (SVG) + ~3 minutes (Three.js PALETTE) = ~8 minutes for Architecture |
+| **Verdict** | **REPAIR** (P1 priority) |
+
+## D.8 — "real time" / "real-time" timing claim
+
+| Field | Value |
+|---|---|
+| **Pattern** | "real time" or "real-time" used as a timing/freshness claim in product or infrastructure descriptions |
+| **Pages affected** | Architecture (Delta 06): line 1517 ("Market-moving events detected, classified, and correlated in real time."), line 1872 ("Detect, classify, and correlate market-moving events in real time...") |
+| **Pages clean** | All 5 product pages (zero instances — they correctly use "through configured source monitoring") |
+| **Why forbidden** | "real time" implies a guaranteed latency that ROUA has not proven. Per Layer 1.9, use "through configured source monitoring" or "as they are published" instead. |
+| **Fix** | Replace "in real time" with "as they are published" or "through configured source monitoring" |
+| **Fix type** | Page-specific — 2 line edits in Architecture |
+| **Effort** | ~2 minutes |
+| **Verdict** | **REPAIR** (P1 priority) |
+
+## D.9 — "confidence score" / "confidence scored" claim
+
+| Field | Value |
+|---|---|
+| **Pattern** | "confidence score" or "confidence scored" used as a verification/metric claim |
+| **Pages affected** | Architecture (Delta 06): line 2312 ("Source fetched, document parsed, facts extracted, evidence chain assembled, confidence scored. All automated, all logged.") |
+| **Pages clean** | All 5 product pages (zero instances — they correctly use "verification tier" or "confidence signals") |
+| **Why forbidden** | Per Layer 1.9, "confidence score" is forbidden — use "confidence signals" or "verification tier" instead. The locked terminology avoids implying a single numeric score for evidence confidence. |
+| **Fix** | Replace "confidence scored" with "verification tier assigned" or "confidence signals recorded" |
+| **Fix type** | Page-specific — 1 line edit in Architecture |
+| **Effort** | ~1 minute |
+| **Verdict** | **REPAIR** (P1 priority) |
+
 ## Defect Summary
 
-| ID | Type | Pages | Priority | Effort | Verdict |
+| ID | Type | Pages affected | Priority | Effort | Verdict |
 |---|---|---|---|---|---|
-| D.1 | Dead `<style>` block | 4/5 | P2 | ~4 min | **REPAIR** |
-| D.2 | Old-gold rgba | 3/5 | P1 | ~6 min | **REPAIR** |
-| D.3 | Malformed HTML comment | 2/5 | P1 | ~2 min | **REPAIR** |
-| D.4 | "Audit-Ready" violation | 1/5 | P1 | ~1 min | **REPAIR** |
-| D.5 | Competitor naming | 3/5 | P3 | content | **REVIEW** |
-| D.6 | `var(--gold)` mixing | 1/5 | P1 | ~1 min | **REPAIR** |
+| D.1 | Dead `<style>` block | 4/5 product pages | P2 | ~4 min | **REPAIR** |
+| D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture | P1 | ~6 min (products) + ~10 min (Architecture) | **REPAIR** |
+| D.3 | Malformed HTML comment | 2/5 product pages | P1 | ~2 min | **REPAIR** |
+| D.4 | "Audit-Ready" violation | Market | P1 | ~1 min | **REPAIR** |
+| D.5 | Competitor naming | 3/5 product pages | P3 | content | **REVIEW** |
+| D.6 | `var(--gold)` mixing | Media | P1 | ~1 min | **REPAIR** |
+| D.7 | Deprecated raw hex (SVG/JS) | Architecture | P1 | ~8 min | **REPAIR** |
+| D.8 | "real time" timing claim | Architecture | P1 | ~2 min | **REPAIR** |
+| D.9 | "confidence score/d" claim | Architecture | P1 | ~1 min | **REPAIR** |
 
-**Total technical repair budget (P1+P2): ~14 minutes.**
+**Total technical repair budget (P1+P2): ~25 minutes** (was ~14 minutes before Delta 06 findings).
 **Content review (P3): separate track.**
 
 ---
@@ -560,32 +632,68 @@ Every page (regardless of category) MUST comply with:
 # ACCEPTANCE CONTRACT
 
 > This spec is the acceptance contract for every subsequent page audit. Any page (Delta 06+) is evaluated against:
-> 1. **Layer 1** — Does it comply with the canonical baseline?
+> 1. **Layer 1** — Does it comply with the canonical baseline? (Covers **all implementation layers**: HTML, CSS, inline styles, SVG attributes, Canvas/Three.js colors, JavaScript color constants, and content claims.)
 > 2. **Layer 5** — Does it violate any do-not-touch rule?
 > 3. **Layer 6** — Does it comply with its category-specific rules?
-> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.6)?
+> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.9)?
+
+## Implementation-Layer Scope (v2)
+
+A page is not compliant merely because its HTML structure is sound and its CSS uses canonical tokens. **PASS requires safety across ALL implementation layers:**
+
+| Layer | What is checked | Example defects |
+|---|---|---|
+| **HTML** | div/section/comment balance, broken anchors, malformed comments | D.1, D.3 |
+| **CSS (page-level `<style>`)** | Token aliases, no deprecated hex, no old-gold rgba | D.2 (in CSS), D.6 |
+| **Inline styles (`style="..."`)** | Token aliases, no raw hex, no `var(--gold)` | D.2 (in inline), D.6 |
+| **SVG `fill`/`stroke`** | No deprecated hex from `VISUAL-IDENTITY-SYSTEM.md` | D.7 (SVG) |
+| **Canvas / Three.js / WebGL colors** | Canonical hex (`0xE3B45A`, not `0xC9A227`) | D.7 (Three.js) |
+| **JavaScript color strings** | `rgba()`/hex strings use canonical values | D.7 (JS) |
+| **Content claims (copy)** | Trust Grammar forbidden phrases, timing claims, taxonomy | D.4, D.5, D.8, D.9 |
+
+> **A single deprecated hex in an SVG diagram, or a single "real time" in a content claim, FAILS the page — even if every CSS rule is canonical.**
+
+## Technology Neutrality Principle (v2)
+
+**Three.js, GSAP, Canvas, WebGL, and similar technologies are NOT prohibited.** The Spec does not forbid any rendering or animation library.
+
+What IS prohibited:
+- Using deprecated color values in any technology's color definitions (D.7)
+- Making timing/freshness claims that the technology has not proven (D.8)
+- Making verification/metric claims that the technology has not proven (D.9)
+- Forcing Decision Environment motion patterns onto non-Decision pages (Layer 5)
+- Using Homepage-brand ambient motion (globe, particles, wave, 3D tilt, decode, chain pulse) on non-Homepage pages (Layer 1.7)
+
+**The technology is neutral. Inconsistent usage and unproven claims are the problem.** Architecture's Three.js 3D "Intelligence Stack" is ALLOWED (Layer 6 — depth/orbits for infrastructure visualization). Architecture's deprecated gold `0xC9A227` in the Three.js PALETTE is FORBIDDEN (D.7).
 
 ## Acceptance Criteria
 
 A page PASSES acceptance when:
-- ✓ All Layer 1 rules satisfied (KEEP / STANDARDIZE-compliant / no FORBID violations)
+- ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + content claims)
 - ✓ Zero Layer 5 do-not-touch violations
 - ✓ Layer 6 category-specific rules satisfied
-- ✓ Zero D.1–D.6 defects (or all REPAIR items resolved)
+- ✓ Zero D.1–D.9 defects (or all REPAIR items resolved)
 
 A page FAILS acceptance when:
-- ✗ Any Layer 1 FORBID violation
+- ✗ Any Layer 1 FORBID violation in any implementation layer
 - ✗ Any Layer 5 do-not-touch violation
 - ✗ Any Layer 6 category-specific FORBID violation
-- ✗ Any unrepaired D.1–D.6 defect
+- ✗ Any unrepaired D.1–D.9 defect in any implementation layer
 
 ## Audit Workflow (for Delta 06+)
 
 1. Identify page category (Layer 6.1)
-2. Run Layer 1 canonical baseline check (14+14 checklist from v1 §17)
+2. Run Layer 1 canonical baseline check across ALL implementation layers:
+   - HTML integrity (div/section/comment balance, anchors)
+   - CSS tokens (page-level `<style>` + external CSS)
+   - Inline style tokens (`style="..."`)
+   - SVG `fill`/`stroke` hex values
+   - Canvas/Three.js/WebGL color constants
+   - JavaScript color strings
+   - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy)
 3. Run Layer 5 do-not-touch check
 4. Run Layer 6 category-specific check
-5. Run Layer 4 defect scan (D.1–D.6)
+5. Run Layer 4 defect scan (D.1–D.9) across ALL implementation layers
 6. Classify remaining drift into A/B/C/D
 7. Produce Delta Report with PASS/FAIL acceptance verdict
 
@@ -595,14 +703,19 @@ A page FAILS acceptance when:
 
 > After this spec is approved, implementation proceeds in this order. No step begins until the prior step is complete.
 
-## Phase 1: Technical Repairs (P1) — ~10 minutes
+## Phase 1: Technical Repairs (P1) — ~22 minutes
 
 | Step | Action | Pages | Effort |
 |---|---|---|---|
-| 1.1 | REPAIR D.2 — replace `rgba(201,162,39,...)` with `rgba(227,180,90,...)` | Market, Risk, Media | ~6 min |
-| 1.2 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
-| 1.3 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468) | ~1 min |
-| 1.4 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
+| 1.1 | REPAIR D.2 — replace `rgba(201,162,39,...)` with `rgba(227,180,90,...)` in CSS | Market, Risk, Media | ~6 min |
+| 1.2 | REPAIR D.2 — replace 23 old-gold rgba in Architecture `<style>` block | Architecture | ~10 min |
+| 1.3 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
+| 1.4 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468) | ~1 min |
+| 1.5 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
+| 1.6 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
+| 1.7 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
+| 1.8 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872) | ~2 min |
+| 1.9 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312) | ~1 min |
 
 ## Phase 2: Cleanup (P2) — ~5 minutes
 
@@ -632,13 +745,15 @@ A page FAILS acceptance when:
 
 | Step | Action |
 |---|---|
-| 5.1 | Audit Architecture (`architecture.html`) against this spec |
-| 5.2 | Audit Explorers (Evidence, Source, Sample) |
+| 5.1 | Audit Architecture (`architecture.html`) against this spec ✅ (Delta 06 — FAIL, D.2+D.7+D.8+D.9) |
+| 5.2 | Audit Explorers (Evidence Explorer, Source Explorer, Sample Library) |
 | 5.3 | Audit Catalog |
 | 5.4 | Audit Solutions pages |
 | 5.5 | Audit Company pages |
 | 5.6 | Audit Trust Framework |
 | 5.7 | Audit remaining reference pages |
+
+> **Note:** Phase 5 audits continue against the **current v2 Spec**. Each new Delta Report may discover additional defect types (D.10+), which will trigger a Spec v3 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance.
 
 ---
 
