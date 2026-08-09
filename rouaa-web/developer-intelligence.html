@@ -133,7 +133,7 @@
         <span class="text-accent">Embed governed intelligence into your products.</span>
       </h1>
       <p class="hero-subheadline" style="max-width: 720px; margin: 24px auto 0;">
-        APIs, SDKs, and streaming interfaces that deliver evidence-linked financial intelligence &mdash; structured facts, events, and provenance your product can embed without rebuilding source governance and evidence infrastructure.</p>
+        Don't rebuild the source governance, evidence layer, provenance, and audit trail yourself. Integrate a governed intelligence layer your product can embed &mdash; through APIs, SDKs, and streaming interfaces designed to carry evidence and provenance through every response.</p>
       <div class="hero-ctas" style="margin-top: 32px;">
         <a href="#cta" class="btn btn-primary">Request Developer Access</a>
         <a href="#workflow" class="btn btn-secondary">View Integration Flow</a>
@@ -143,20 +143,20 @@
       <div style="max-width: 560px; margin: 40px auto 0; padding: 20px; background: var(--roua-surface); border: 1px solid var(--roua-accent-border); border-left: 4px solid var(--roua-accent); border-radius: var(--radius-lg); text-align: left;">
         <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 12px;">Sample API Response &mdash; Illustrative</div>
         <pre style="margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--roua-text-secondary);">{
-  "statement": "Federal funds target range maintained at 3.50%&ndash;3.75%",
+  "statement": "&lt;verified fact or event&gt;",
   "source": {
-    "uri": "federalreserve.gov",
-    "tier": "T1",
-    "published": "2026-07-29"
+    "uri": "&lt;official source URI&gt;",
+    "tier": "&lt;trust tier&gt;",
+    "published": "&lt;date&gt;"
   },
   "evidence": {
-    "document": "FOMC Statement",
-    "paragraph": 1,
-    "excerpt": "The Committee decided to maintain..."
+    "document": "&lt;source document&gt;",
+    "location": "&lt;page, paragraph, or section&gt;",
+    "excerpt": "&lt;source text excerpt&gt;"
   },
   "governance": {
-    "verificationTier": "T1 &mdash; official primary source",
-    "auditId": "AUD-2026-0729-FOMC-001"
+    "verificationTier": "&lt;source trust tier&gt;",
+    "provenancePreserved": true
   }
 }</pre>
         <div style="font-size: 10px; color: var(--roua-text-muted); font-style: italic; margin-top: 8px;">Illustrative response shape &mdash; actual API schema confirmed on engagement.</div>
@@ -387,7 +387,7 @@
             <div style="font-size: 11px; font-weight: 400; color: var(--roua-text-muted); margin-top: 4px;">Central Banks &middot; Regulators &middot; Exchanges &middot; Issuers</div>
           </div>
         </div>
-        <p style="text-align: center; font-size: 13px; color: var(--roua-accent); margin-top: 20px; line-height: var(--leading-relaxed); font-weight: 600;">Each layer below your application is operated, monitored, validated, and governed by ROUA.</p>
+        <p style="text-align: center; font-size: 13px; color: var(--roua-accent); margin-top: 20px; line-height: var(--leading-relaxed); font-weight: 600;">The layers below your application are designed to carry evidence, provenance, and governance metadata &mdash; so your product inherits an intelligence foundation without operating it internally.</p>
       </div>
     </div>
   </section>
@@ -451,7 +451,7 @@
       <div class="section-header text-center" style="margin: 0 auto 48px;">
         <span class="eyebrow">Code Example</span>
         <h2>One query to a source-linked answer.<br>A few more to a live event stream.</h2>
-        <p style="margin: 0 auto; max-width: 680px;">Typed SDKs, evidence attached to each response, and streaming that preserves provenance end-to-end. This is what your integration looks like.</p>
+        <p style="margin: 0 auto; max-width: 680px;">Designed for evidence-linked responses and streaming that preserves provenance. Specific SDK patterns and code examples confirmed on engagement.</p>
       </div>
 
       <!-- TypeScript: Search API query -->
@@ -731,153 +731,25 @@ for event in stream:
   </section>
 
 
-  <!-- ============ BUILT TO SCALE ============ -->
-  <section class="section" id="built-to-scale" style="background: var(--roua-bg-secondary);">
-    <div class="container">
-      <div class="section-header text-center" style="margin: 0 auto 48px;">
-        <span class="eyebrow">Built to Scale</span>
-        <h2>Engineering maturity, not just APIs.</h2>
-        <p style="margin: 0 auto; max-width: 680px;">The protocols, semantics, and operational patterns CTOs expect from a production-grade platform &mdash; not a prototype.</p>
-      </div>
-      <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">REST</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">JSON over HTTPS</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">WebSocket</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Real-time streaming</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">gRPC</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Typed streaming</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Pagination</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Cursor-based</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Idempotency</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Key-based dedup</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Retry Semantics</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Exponential backoff</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Versioned APIs</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Semantic versioning</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Backpressure</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Stream-aware</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Batch APIs</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Bulk operations</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Filtering</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Server-side</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Sorting</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Multi-field</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Caching</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">ETag-based</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Webhooks</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Signed deliveries</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Replay</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Event replay</div>
-        </div>
-        <div style="padding: 16px; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--roua-accent); margin-bottom: 4px;">Rate Limiting</div>
-          <div style="font-size: 11px; color: var(--roua-text-muted);">Token bucket</div>
-        </div>
-      </div>
-      <p style="text-align: center; font-size: 13px; color: var(--roua-text-muted); margin-top: 24px; max-width: 640px; margin-left: auto; margin-right: auto;">SDKs implement all of these patterns natively &mdash; your application code works with typed objects and clean abstractions, not protocol-level concerns.</p>
-    </div>
-  </section>
-
-  <!-- ============ SECURITY & AUTHENTICATION ============ -->
+  <!-- ============ SECURITY & INTEGRATION DESIGN ============ -->
   <section class="section" id="security" style="background: var(--roua-bg-secondary);">
     <div class="container">
       <div class="section-header text-center" style="margin: 0 auto 48px;">
-        <span class="eyebrow">Security &amp; Authentication</span>
-        <h2>Designed for secured, attributed, and auditable API calls.</h2>
-        <p style="margin: 0 auto; max-width: 680px;">Enterprise-grade security controls on each integration &mdash; from authentication to audit tokens. CTOs and security teams can deploy ROUA knowing the API surface meets institutional standards.</p>
+        <span class="eyebrow">Security &amp; Integration Design</span>
+        <h2>Designed for institutional integration requirements.</h2>
+        <p style="margin: 0 auto; max-width: 680px;">The Developer Platform is designed to meet institutional security and governance expectations. Specific implementation details &mdash; authentication methods, rate limiting, audit logging, and compliance posture &mdash; are confirmed during engagement and configured per deployment model.</p>
       </div>
-      <div class="grid-3" style="max-width: 1040px; margin: 0 auto;">
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">OAuth2 &amp; API Keys</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">OAuth2 for user-delegated access, scoped API keys for service-to-service calls. Keys are environment-scoped, rate-limited, and rotatable without downtime.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">Scoped Permissions</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">Granular scopes per key &mdash; Events:read, Facts:read, Evidence:read, Streaming:subscribe. Least-privilege by default; no key has more access than it needs.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">Audit Tokens</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">Designed to return an audit token with each API call &mdash; intended to allow response reconstruction for audit and review, including evidence chain and governance state.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">Rate Limits</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">Per-key and per-IP rate limits with burst allowances. Quotas configurable per environment; overage alerts and graceful degradation, not hard cutoffs.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">IP Allow Lists</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">Restrict API access to known IP ranges per environment. CIDR notation, per-key rules, and instant revocation for compromised ranges.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card card-accent">
-          <div style="display: flex; align-items: flex-start; gap: 12px;">
-            <div style="color: var(--roua-accent); font-size: 18px; line-height: 1; padding-top: 2px;">&#128274;</div>
-            <div>
-              <h4 style="font-size: 15px; margin-bottom: 6px; color: var(--roua-text-primary);">Webhook Signatures</h4>
-              <p style="font-size: 13px; color: var(--roua-text-secondary); line-height: var(--leading-relaxed);">Designed for signed webhook deliveries with timestamp verification and payload integrity checks. Specific implementation details confirmed on engagement.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Compliance & Encryption -->
-      <div style="max-width: 880px; margin: 32px auto 0; padding: 20px 24px; background: var(--roua-surface); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-lg);">
-        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 16px; text-align: center;">Compliance &amp; Encryption</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-          <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--roua-text-primary); background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-full);">SSO</span>
-          <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--roua-text-primary); background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-full);">RBAC</span>
-          <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--roua-text-primary); background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-full);">Encryption at Rest</span>
-          <span style="padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--roua-text-primary); background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-full);">Encryption in Transit</span>
+      <div style="max-width: 680px; margin: 0 auto; padding: 24px; background: var(--roua-surface); border: 1px solid var(--roua-accent-border); border-left: 4px solid var(--roua-accent); border-radius: var(--radius-lg);">
+        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 16px;">Design Intent</div>
+        <div style="font-size: 14px; color: var(--roua-text-secondary); line-height: 1.7;">
+          <p style="margin: 0 0 12px;">The platform is designed to support:</p>
+          <ul style="margin: 0; padding-left: 20px; color: var(--roua-text-secondary); font-size: 13px; line-height: 1.8;">
+            <li>API key authentication with environment scoping</li>
+            <li>Audit tokens designed to allow response reconstruction</li>
+            <li>Evidence and provenance carried through the response schema</li>
+            <li>Encryption in transit and at rest</li>
+          </ul>
+          <p style="margin: 16px 0 0; font-size: 13px; color: var(--roua-text-muted); font-style: italic;">Specific protocols, compliance certifications, and operational SLAs are confirmed on engagement &mdash; not represented as current production capabilities on this page.</p>
         </div>
       </div>
     </div>
