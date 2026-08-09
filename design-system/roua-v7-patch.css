@@ -462,3 +462,114 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* Deploy cells are informational, not interactive */
 .deploy-cell{transition:border-color .25s ease}
 .deploy-cell:hover{transform:none;border-color:var(--line2)}
+
+/* ---- Trust Chain (canonical intelligence chain) ---- */
+/* Reusable component for trust-framework.html and other governance pages.
+   Vertical on mobile, compact on desktop. No inline styles needed. */
+.trust-chain{
+  max-width:540px;
+  margin:0 auto;
+  padding:32px;
+  background:var(--panel);
+  border:1px solid var(--line2);
+  border-radius:10px;
+}
+.trust-chain-header{
+  font-family:var(--mono);
+  font-size:.66rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  margin-bottom:20px;
+  text-align:center;
+}
+.trust-chain-node{
+  text-align:center;
+  padding:6px 0;
+}
+.trust-chain-node-num{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  color:var(--dim2);
+  margin-bottom:2px;
+}
+.trust-chain-node-label{
+  font-size:.88rem;
+  font-weight:600;
+  color:var(--txt);
+  line-height:1.3;
+}
+.trust-chain-node-desc{
+  font-size:.72rem;
+  color:var(--dim2);
+  margin-top:2px;
+  line-height:1.4;
+}
+.trust-chain-node.terminal .trust-chain-node-label{
+  color:var(--gold);
+  font-weight:700;
+}
+.trust-chain-node.audit .trust-chain-node-label{
+  color:var(--dim2);
+  font-style:italic;
+  font-weight:500;
+}
+.trust-chain-connector{
+  text-align:center;
+  color:var(--gold);
+  opacity:.3;
+  font-size:.72rem;
+  line-height:1;
+  padding:3px 0;
+}
+/* Governance overlay — cross-cutting controls, not chain stages */
+.trust-chain-overlay{
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+.trust-chain-overlay-label{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  margin-bottom:10px;
+}
+.trust-chain-overlay-controls{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+.trust-chain-control{
+  display:inline-block;
+  padding:5px 12px;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:4px;
+  font-family:var(--mono);
+  font-size:.66rem;
+  font-weight:600;
+  color:var(--dim);
+  letter-spacing:.04em;
+}
+.trust-chain-control.gold{color:var(--gold);border-color:rgba(227,180,90,.3)}
+.trust-chain-control.green{color:var(--op);border-color:rgba(16,185,129,.3)}
+.trust-chain-audit-note{
+  margin-top:12px;
+  font-size:.72rem;
+  color:var(--dim2);
+  font-style:italic;
+  text-align:center;
+}
+@media(max-width:480px){
+  .trust-chain{padding:20px 16px}
+  .trust-chain-node-label{font-size:.82rem}
+  .trust-chain-control{font-size:.62rem;padding:4px 10px}
+}
