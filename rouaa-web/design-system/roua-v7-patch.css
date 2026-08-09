@@ -12,6 +12,9 @@ html:not(.js) .cdot{display:none}
 .chip,.kpis span,.ametrics span,.cats span,.gstats span{font-size:.66rem}
 
 /* 3) توحيد تحويم البطاقات (إضافي، لا يكسر الموجود) */
+/* .cx = Interactive / Featured Surface — PRESERVED with full premium treatment.
+   Used for: product cards, featured modules, clickable intelligence previews, primary interactive surfaces.
+   NOT used for: static methodology rules, governance explanations, simple facts, documentation blocks. */
 .cx{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
 .cx:hover{transform:translateY(-5px);box-shadow:0 26px 54px -22px rgba(0,0,0,.85)}
 
@@ -443,3 +446,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   color:var(--dim);
   line-height:1.7;
 }
+
+/* ---- Override: Remove hover lift from informational cards ---- */
+/* These are used in architecture.html and other system pages for STATIC information.
+   Hover animation indicates interaction. Static information must remain visually stable. */
+.intel-card{transition:border-color .25s ease}
+.intel-card:hover{transform:none;box-shadow:none;border-color:var(--line2)}
+
+.pipeline-layer-card{transition:border-color .25s ease}
+.pipeline-layer-card:hover{transform:none;background:rgba(7,15,34,.5);border-color:var(--line2)}
+
+/* Pipeline layer cards in the flow-continuation cell should not lift */
+.pipeline-layer-card.flow-continuation:hover{transform:none}
+
+/* Deploy cells are informational, not interactive */
+.deploy-cell{transition:border-color .25s ease}
+.deploy-cell:hover{transform:none;border-color:var(--line2)}

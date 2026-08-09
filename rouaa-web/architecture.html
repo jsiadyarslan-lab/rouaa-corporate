@@ -990,10 +990,7 @@
     }
     .pipeline-layer-card:hover,
     .deploy-cell:hover {
-      transform: translateY(-6px) perspective(1000px) rotateX(3deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
-                  0 0 0 1px rgba(201, 162, 39, 0.15),
-                  0 0 30px rgba(201, 162, 39, 0.08);
+      border-color: var(--roua-surface-border-strong);
     }
 
     /* ===== Layer nav items: 3D press ===== */
@@ -2681,22 +2678,8 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on touch
 
-      const cards = document.querySelectorAll('.pipeline-layer-card, .deploy-cell');
-      cards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -4;
-          const rotateY = ((x - centerX) / centerX) * 4;
-          card.style.transform = 'translateY(-6px) perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
-        });
-        card.addEventListener('mouseleave', function() {
-          card.style.transform = '';
-        });
-      });
+      // 3D tilt removed — static information must remain visually stable.
+      // Hover animation indicates interaction. Pipeline cards and deploy cells are informational.
     })();
 
     // ===== Parallax depth on scroll (subtle) =====
