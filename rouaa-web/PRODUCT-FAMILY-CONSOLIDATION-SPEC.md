@@ -1,10 +1,18 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–08.
-> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 3 non-product pages audited against this spec (Delta 06 Architecture `20961e6`, Delta 07 Evidence Explorer `51e6583`, Delta 08 Source Explorer `1a52234`).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–09.
+> **Source:** 5 product pages + 4 non-product pages audited (Delta 06 Architecture, Delta 07 Evidence Explorer, Delta 08 Source Explorer, Delta 09 Sample Library).
 > **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026 (v4 — updated August 9, 2026 after Delta 08 Source Explorer audit).
+> **Effective date:** August 9, 2026 (v5 — updated August 9, 2026 after Delta 09 Sample Library audit).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v5 changelog (post-Delta-09):**
+> - Layer 1.9 D.4 expanded: FORBID now covers all semantic variants of "audit-ready" — "Audit-Ready", "Audit Ready", "audit ready", "audit-ready". The FORBID applies to the **concept** (claiming audit readiness), not the hyphenation. Scanner matches case-insensitive, hyphen-insensitive.
+> - Layer 1.9 D.9 clarified: "Extraction Confidence" added as **REVIEW** (not auto-FORBID). When "confidence" is used as illustrative metadata (marked "(illustrative)") and NOT as a proven platform claim, it is acceptable. When "confidence" is used as a scoring claim without illustrative disclaimer, it is FORBID. Spec defines the boundary: `illustrative metadata ≠ platform claim`.
+> - Layer 1.10 D.10 clarified: descriptive adjective use of "institutional intelligence" (e.g., "institutional intelligence products", "Institutional Intelligence Outputs" as a headline describing the category of outputs) is **NOT** D.10. D.10 applies only when old taxonomy terms are used as **product names or taxonomy labels** — not when they appear as natural descriptive language. The taxonomy scanner must not block natural language.
+> - Layer 6.3 UX table: Sample Library UX test added: `Sample Output → Evidence Chain → Reasoning/Validation Boundary → Product Cross-Link`.
+> - D.12 scope clarified: remains Explorer-specific. For Sample Library, samples built on a specific identified source should link to that source/document. Not generalized to all site pages.
+> - D.10 status: mandatory scan continues, but NOT system-wide. Evidence Explorer remains the only confirmed case. Three subsequent pages (Architecture, Source Explorer, Sample Library) are clean.
 >
 > **v4 changelog (post-Delta-08):**
 > - Layer 4 confirmed defects: D.11 (non-canonical raw hex), D.12 (no direct source links on Explorer pages), D.13 ("24/7" timing claim — REVIEW) added.
@@ -154,7 +162,7 @@
 
 | Phrase | Verdict | Exception | Defect ID |
 |---|---|---|---|
-| "audit-ready" / "Audit-Ready" | **FORBID** | Only `risk-intelligence.html` (legitimate risk context) | D.4 |
+| "audit-ready" / "Audit-Ready" / "Audit Ready" / "audit ready" (v5 — all semantic variants) | **FORBID** | Only `risk-intelligence.html` (legitimate risk context). FORBID applies to the **concept** (claiming audit readiness), not the hyphenation. Scanner matches case-insensitive, hyphen-insensitive. | D.4 |
 | "within seconds" / "in seconds" | **FORBID** | None. Use "through configured source monitoring" | — |
 | **"real-time" / "real time"** | **FORBID** | None. Use "through configured source monitoring" or "as they are published" | **D.8** |
 | "instantly" / "instant" | **FORBID** | None | — |
@@ -164,6 +172,7 @@
 | "Trust Promise" | **FORBID** | None. Use "Trust Property" | — |
 | "Provenance Immutability" | **FORBID** | None. Use "Versioned Provenance" | — |
 | **"confidence score" / "confidence scored"** | **FORBID** | None. Use "Confidence signals" or "Verification tier" | **D.9** |
+| **"Extraction Confidence"** (v5 — REVIEW) | **REVIEW** | Acceptable as **illustrative metadata** when marked "(illustrative)" — e.g., Sample Library's "Extraction Confidence: 97% (illustrative)". FORBID when used as a **proven platform claim** without illustrative disclaimer. Boundary: `illustrative metadata ≠ platform claim`. | D.9 variant |
 | "SOC 2" / "ISO 27001" | **FORBID** | None (removed in P0 sweep) | — |
 
 ## 1.10 Taxonomy (Locked)
@@ -181,17 +190,27 @@
 | "Investment Firms" | Solution (never "Institutional Intelligence") | **KEEP** |
 | "Intelligence Modules Catalog" | Product reference page | **KEEP** |
 
-### Forbidden old taxonomy (v3 — system-wide potential defect)
+### Forbidden old taxonomy (v5 — descriptive-use clarification)
 
-> **D.10:** The following old terms may appear anywhere in content — body copy, output fields, descriptions, JS strings, SVG text. They are **FORBID** everywhere. Treat as **system-wide potential defect** until each page is audited.
+> **D.10 (v5 clarification):** The following old terms are FORBID when used as **product names or taxonomy labels** — NOT when they appear as natural descriptive language. The taxonomy scanner must not block natural language.
+>
+> **Descriptive use is NOT D.10.** For example:
+> - "institutional intelligence products" (lowercase, descriptive adjective phrase = "products of institutional intelligence") → **acceptable**
+> - "Institutional Intelligence Outputs" as a headline describing the category of outputs → **acceptable** (describes what the outputs are, not a product name)
+> - "Trading Intelligence" as a standalone product name in a "Delivered To" field → **D.10 violation** (used as product name)
+>
+> **Product-name use IS D.10.** For example:
+> - "Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs" in a product delivery list → **D.10 violation** (each term used as a product name)
+>
+> **D.10 status (v5):** Mandatory scan continues on all pages, but NOT system-wide. Evidence Explorer (Delta 07) is the only confirmed case. Three subsequent pages (Architecture, Source Explorer, Sample Library) are clean.
 
-| Old term (FORBID) | Correct term (KEEP) | Where it leaks |
+| Old term (FORBID as product name/taxonomy label) | Correct term (KEEP) | Descriptive use (acceptable) |
 |---|---|---|
-| "Trading Intelligence" (alone, not in "Market & Trading Intelligence") | "Market & Trading Intelligence" | Content fields describing product delivery (e.g., Evidence Explorer Step 07 "Delivered To") |
-| "Institutional Intelligence" | "Investment Intelligence" (product) or "Investment Firms" (solution) | Content fields describing product delivery |
-| "Developer Intelligence" | "Developer Platform" | Content fields, nav (cleaned in P0) |
-| "Developer APIs" | "Developer Platform" | Content fields describing product delivery |
-| "Market Intelligence" (alone, as product name) | "Market & Trading Intelligence" | Content fields (acceptable as descriptive phrase, FORBID as product name) |
+| "Trading Intelligence" (alone, as product name) | "Market & Trading Intelligence" | N/A — always a product reference |
+| "Institutional Intelligence" (as product name) | "Investment Intelligence" (product) or "Investment Firms" (solution) | "institutional intelligence products/outputs" (lowercase, descriptive adjective) = acceptable |
+| "Developer Intelligence" (as product name) | "Developer Platform" | N/A — always a product reference |
+| "Developer APIs" (as product name) | "Developer Platform" | N/A — always a product reference |
+| "Market Intelligence" (alone, as product name) | "Market & Trading Intelligence" | "market intelligence" (lowercase, descriptive) = acceptable |
 
 ---
 
@@ -363,17 +382,17 @@
 | **Effort** | ~1 minute per page |
 | **Verdict** | **REPAIR** (P1 priority) |
 
-## D.4 — "Audit-Ready" Trust Grammar violation
+## D.4 — "Audit-Ready" Trust Grammar violation (v5 — all semantic variants)
 
 | Field | Value |
 |---|---|
-| **Pattern** | "Audit-Ready" chip badge in Market Intelligence Output section |
-| **Pages affected** | Market (line 468) — 1 of 5 |
-| **Pages with legitimate exception** | Risk (9 instances, all legitimate) |
-| **Pages clean** | Investment, Media, Developer |
-| **Fix** | Replace "Audit-Ready" with "Evidence-Linked" or "Inspectable" |
-| **Fix type** | Page-specific — single line edit |
-| **Effort** | ~1 minute |
+| **Pattern** | Any semantic variant of "audit-ready" used as a status badge or claim — "Audit-Ready", "Audit Ready", "audit ready", "audit-ready". FORBID applies to the **concept** (claiming audit readiness), not the hyphenation. Scanner matches case-insensitive, hyphen-insensitive. |
+| **Pages affected** | Market (line 468 — "Audit-Ready"), Evidence Explorer (lines 1177, 1214 — "Audit-Ready"), Sample Library (line 316 — "Audit Ready" without hyphen, v5 variant) |
+| **Pages with legitimate exception** | Risk (9 instances, all legitimate — only page where "audit-ready" is allowed) |
+| **Pages clean** | Investment, Media, Developer, Architecture, Source Explorer |
+| **Fix** | Replace with "Evidence-Linked" or "Inspectable" |
+| **Fix type** | Page-specific — find-and-replace per page |
+| **Effort** | ~1 min (Market) + ~2 min (Evidence Explorer) + ~1 min (Sample Library) = ~4 min |
 | **Verdict** | **REPAIR** (P1 priority) |
 
 ## D.5 — Direct competitor naming ("Bloomberg / Market Terminals")
@@ -435,14 +454,16 @@
 
 | Field | Value |
 |---|---|
-| **Pattern** | "confidence score" or "confidence scored" used as a verification/metric claim |
-| **Pages affected** | Architecture (Delta 06): line 2312 ("Source fetched, document parsed, facts extracted, evidence chain assembled, confidence scored. All automated, all logged.") |
+| **Pattern** | "confidence score" or "confidence scored" used as a verification/metric claim. Also covers "Extraction Confidence" as a **REVIEW variant** (v5). |
+| **Pages affected (D.9 FORBID)** | Architecture (Delta 06): line 2312 ("confidence scored"). Evidence Explorer (Delta 07): lines 632, 1202 ("confidence score"). |
+| **Pages affected (D.9 variant REVIEW)** | Sample Library (Delta 09): 12 instances of "Extraction Confidence" — all marked "(illustrative)". **REVIEW: acceptable as illustrative metadata, FORBID if used as proven platform claim without disclaimer.** |
 | **Pages clean** | All 5 product pages (zero instances — they correctly use "verification tier" or "confidence signals") |
-| **Why forbidden** | Per Layer 1.9, "confidence score" is forbidden — use "confidence signals" or "verification tier" instead. The locked terminology avoids implying a single numeric score for evidence confidence. |
-| **Fix** | Replace "confidence scored" with "verification tier assigned" or "confidence signals recorded" |
-| **Fix type** | Page-specific — 1 line edit in Architecture |
-| **Effort** | ~1 minute |
-| **Verdict** | **REPAIR** (P1 priority) |
+| **Why forbidden** | Per Layer 1.9, "confidence score" is forbidden — use "confidence signals" or "verification tier" instead. The locked terminology avoids implying a single numeric score for evidence confidence. "Extraction Confidence" (v5 REVIEW): acceptable as illustrative metadata when marked "(illustrative)" — boundary: `illustrative metadata ≠ platform claim`. |
+| **Fix (D.9 FORBID)** | Replace "confidence scored" with "verification tier assigned" or "confidence signals recorded" |
+| **Fix (D.9 variant REVIEW)** | If team decides FORBID: replace "Extraction Confidence" with "Verification Tier" across 12 instances. If team decides acceptable: ensure "(illustrative)" disclaimer is always present. |
+| **Fix type** | Page-specific |
+| **Effort** | ~1 min (Architecture) + ~2 min (Evidence Explorer) + TBD (Sample Library — depends on REVIEW decision) |
+| **Verdict** | **REPAIR** (P1 — Architecture + Evidence Explorer) + **REVIEW** (P3 — Sample Library "Extraction Confidence") |
 
 ## D.10 — Old taxonomy in content (confirmed on Evidence Explorer; mandatory scan elsewhere)
 
@@ -451,8 +472,8 @@
 | **Pattern** | Old product taxonomy names used in content — body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements — NOT in nav/footer (which were cleaned in P0 sweep) |
 | **Old terms (FORBID)** | "Trading Intelligence" (alone, should be "Market & Trading Intelligence"), "Institutional Intelligence" (should be "Investment Intelligence" or "Investment Firms"), "Developer Intelligence" (should be "Developer Platform"), "Developer APIs" (should be "Developer Platform"), "Market Intelligence" alone as product name (should be "Market & Trading Intelligence") |
 | **Pages affected** | Evidence Explorer (Delta 07): line 1214 — Step 07 output "Delivered To" field: "Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs" |
-| **Pages clean (confirmed)** | All 5 product pages + Architecture + **Source Explorer (Delta 08 — clean)** |
-| **System-wide status (v4 — downgraded)** | **CONFIRMED DEFECT on Evidence Explorer + MANDATORY SCAN elsewhere.** Source Explorer (Delta 08) is clean, confirming D.10 is NOT system-wide — it was specific to Evidence Explorer's Step 07 output field. However, the scan remains **mandatory** on all subsequent pages because content-level drift may exist on pages built before taxonomy was locked. The risk is lower than v3 assumed, but not zero. |
+| **Pages clean (confirmed)** | All 5 product pages + Architecture + Source Explorer + **Sample Library (Delta 09 — clean, H1 descriptive use clarified as NOT D.10)** |
+| **System-wide status (v5 — final)** | **CONFIRMED DEFECT on Evidence Explorer ONLY. Mandatory scan continues elsewhere but risk is confirmed LOW.** Three subsequent pages (Architecture, Source Explorer, Sample Library) are clean. Descriptive adjective use of old terms (e.g., "institutional intelligence products") is NOT D.10 — only product-name/taxonomy-label use is. |
 | **Root cause** | Content fields written before taxonomy was locked (pre-P0-sweep), survived because they are in body copy/output fields, not in nav/footer where P0 scanned |
 | **Fix** | Replace each old term with the correct term from Layer 1.10 taxonomy table |
 | **Fix type** | Page-specific — find-and-replace in content (NOT nav/footer, which are already clean) |
@@ -479,9 +500,9 @@
 |---|---|
 | **Pattern** | Source registry page shows "Official Domain: federalreserve.gov" as TEXT in a detail field, not as a clickable `<a href>`. Zero external links to official sources. |
 | **Spec rule violated** | Layer 6.3 Explorers: "Direct links to official sources (like product pages)" — **KEEP** |
-| **Pages affected** | Source Explorer (Delta 08): all 15 source entries show "Official Domain" as text, none as clickable link |
-| **Pages clean** | Evidence Explorer (Delta 07) — has 6 direct links to official sources (aramco.com, federalreserve.gov, home.treasury.gov, ofac.treasury.gov) |
-| **Scope** | **Explorer-specific rule** — applies to Explorer-category pages (Evidence Explorer, Source Explorer, Sample Library). NOT extended to all site pages without justification. |
+| **Pages affected** | Source Explorer (Delta 08): all 15 source entries. Sample Library (Delta 09): all 6 samples' evidence boxes show "Source" and "Document" as text. |
+| **Pages clean** | Evidence Explorer (Delta 07) — has 6 direct links |
+| **Scope (v5 clarified)** | **Explorer-specific rule.** For Source Explorer: each source's "Official Domain" should be a clickable link. For Sample Library: samples built on a specific identified source should link to that source/document. NOT generalized to all site pages. |
 | **Root cause** | Source Explorer was built as a metadata browser, not an evidence inspector. The "Official Domain" field was treated as display data, not as a link. |
 | **Fix** | Add `<a href="https://[official-domain]" target="_blank" rel="noopener">` to each source's "Official Domain" `.detail-value` |
 | **Fix type** | Page-specific — 15 source entries need link wrapping |
@@ -509,20 +530,20 @@
 | D.1 | Dead `<style>` block | 4/5 product pages | P2 | ~4 min | **REPAIR** |
 | D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture + Evidence Explorer + Source Explorer | P1 | ~6 min (products) + ~10 min (Architecture) + ~3 min (Evidence Explorer) + ~2 min (Source Explorer) | **REPAIR** |
 | D.3 | Malformed HTML comment | 2/5 product pages | P1 | ~2 min | **REPAIR** |
-| D.4 | "Audit-Ready" violation | Market + Evidence Explorer | P1 | ~1 min (Market) + ~2 min (Explorer) | **REPAIR** |
+| D.4 | "Audit-Ready" violation (all semantic variants) | Market + Evidence Explorer + Sample Library | P1 | ~4 min | **REPAIR** |
 | D.5 | Competitor naming | 3/5 product pages | P3 | content | **REVIEW** |
 | D.6 | `var(--gold)` mixing | Media | P1 | ~1 min | **REPAIR** |
 | D.7 | Deprecated raw hex (SVG/JS) | Architecture | P1 | ~8 min | **REPAIR** |
 | D.8 | "real time" timing claim | Architecture + Source Explorer | P1 | ~2 min (Architecture) + ~1 min (Source Explorer) | **REPAIR** |
-| D.9 | "confidence score/d" claim | Architecture + Evidence Explorer | P1 | ~1 min (Architecture) + ~2 min (Explorer) | **REPAIR** |
-| D.10 | Old taxonomy in content | Evidence Explorer (confirmed); mandatory scan elsewhere (risk lower) | P1 | ~1 min (Explorer) + TBD (unaudited pages — risk lower) | **REPAIR** |
+| D.9 | "confidence score/d" claim + "Extraction Confidence" REVIEW | Architecture + Evidence Explorer (FORBID) + Sample Library (REVIEW) | P1+P3 | ~3 min (FORBID) + TBD (REVIEW) | **REPAIR** + **REVIEW** |
+| D.10 | Old taxonomy in content (product-name use only) | Evidence Explorer (confirmed); mandatory scan elsewhere (risk LOW) | P1 | ~1 min (Explorer) + TBD (risk LOW) | **REPAIR** |
 | D.11 | Non-canonical raw hex (v4) | Source Explorer | P1 | ~5 min | **REPAIR** |
-| D.12 | No direct source links (v4) | Source Explorer | P1 | ~10 min | **REPAIR** |
+| D.12 | No direct source links (v4) | Source Explorer + Sample Library | P1 | ~10 min (Source) + ~3 min (Sample) | **REPAIR** |
 | D.13 | "24/7" timing claim (v4) | Source Explorer | P3 | ~1 min (after REVIEW) | **REVIEW** |
 
-**Total technical repair budget (P1+P2): ~48 minutes** (was ~33 minutes in v3, was ~25 minutes in v2, was ~14 minutes in v1).
-**Content review (P3): D.5 + D.13 on separate track.**
-**D.10 mandatory scan: continues on all subsequent pages, but risk confirmed lower.**
+**Total technical repair budget (P1+P2): ~53 minutes** (was ~48 in v4, was ~33 in v3, was ~25 in v2, was ~14 in v1).
+**Content review (P3): D.5 + D.13 + D.9 variant (Sample Library) on separate track.**
+**D.10 mandatory scan: continues, risk confirmed LOW (Evidence Explorer is only confirmed case).**
 
 ---
 
@@ -657,7 +678,7 @@ Every page (regardless of category) MUST comply with:
 |---|---|---|
 | **Evidence Explorer** (`evidence-explorer.html`) | `Source → Document → Evidence → Provenance → Context` | The full evidence chain behind a claim — from official source to governed intelligence output. User can trace any claim back to its source document, page, paragraph. |
 | **Source Explorer** (`source-explorer.html`) | `Source → Identity → Jurisdiction → Type → Monitoring Status → Official Domain` | Source registry metadata — who the source is, what type, what jurisdiction, whether it's healthy, and where its official endpoint is. User can browse, filter, and inspect any source's registry record. |
-| **Sample Library** (`sample-library.html`) | TBD — will be determined by Delta 09 audit | Sample intelligence outputs — what the user inspects will depend on the page's structure. |
+| **Sample Library** (`sample-library.html`) (v5 — determined) | `Sample Output → Evidence Chain → Reasoning/Validation Boundary → Product Cross-Link` | Sample output gallery — user browses 6 illustrative intelligence outputs, inspects each output's evidence chain + reasoning/validation boundary, and navigates to the relevant product page. |
 
 > **Note:** Each Explorer has its own UX purpose. Do NOT force Evidence Explorer's `Source → Document → Evidence → Provenance → Context` chain onto Source Explorer or Sample Library. Each Explorer's UX test is defined by its own inspection purpose.
 
@@ -864,7 +885,7 @@ A page FAILS acceptance when:
 | 5.8 | Audit Trust Framework |
 | 5.9 | Audit remaining reference pages |
 
-> **Note:** Phase 5 audits continue against the **current v4 Spec**. Each new Delta Report may discover additional defect types (D.14+), which will trigger a Spec v5 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance. **D.10 mandatory scan continues** on all subsequent pages, but risk is confirmed lower (Source Explorer clean). **D.11 non-canonical hex scan** is now mandatory on all subsequent pages.
+> **Note:** Phase 5 audits continue against the **current v5 Spec**. Each new Delta Report may discover additional defect types (D.14+), which will trigger a Spec v6 update before further audits. **D.10 mandatory scan continues** (risk LOW — Evidence Explorer is only confirmed case). **D.11 non-canonical hex scan** is mandatory. **D.4 scanner matches all semantic variants** (case-insensitive, hyphen-insensitive). **D.9 "Extraction Confidence" is REVIEW** (illustrative metadata ≠ platform claim).
 
 ---
 
