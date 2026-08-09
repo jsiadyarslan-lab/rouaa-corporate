@@ -1,10 +1,15 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–06.
-> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 1 non-product page audited against this spec (Delta 06, commit `20961e6`).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–07.
+> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 2 non-product pages audited against this spec (Delta 06 Architecture commit `20961e6`, Delta 07 Evidence Explorer commit `51e6583`).
 > **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026 (v2 — updated August 9, 2026 after Delta 06 Architecture audit).
+> **Effective date:** August 9, 2026 (v3 — updated August 9, 2026 after Delta 07 Evidence Explorer audit).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v3 changelog (post-Delta-07):**
+> - Layer 4 confirmed defects: D.10 (old taxonomy in content) added. Treated as **system-wide potential defect** until proven otherwise by audit — not just an Evidence Explorer issue.
+> - Layer 6.3 Explorer rules softened: `.card-evidence` rule changed from "Must use" to "Must use evidence-first card pattern (`.card-evidence` OR equivalent custom system)".
+> - Layer 1.10 Taxonomy scan scope expanded: taxonomy check applies to ALL content (nav, footer, body copy, output fields, descriptions, JavaScript strings), not just nav/footer.
 >
 > **v2 changelog (post-Delta-06):**
 > - Layer 1.1 Token System expanded: raw-hex prohibition now covers CSS, inline styles, SVG `fill`/`stroke`, Canvas/Three.js colors, and JavaScript color constants.
@@ -155,16 +160,30 @@
 
 ## 1.10 Taxonomy (Locked)
 
+> **v3 scope expansion:** Taxonomy check applies to **ALL content** — navigation, footer, body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements, and metadata. The P0 sweep cleaned nav/footer across the site, but **content-level taxonomy drift survives** in pages built before taxonomy was locked. Every page audit must scan the full content surface, not just nav/footer.
+
 | Term | Correct Usage | Verdict |
 |---|---|---|
 | "Investment Intelligence" | Product name | **KEEP** |
 | "Risk Intelligence" | Product name | **KEEP** |
 | "Market & Trading Intelligence" | Product name (never "Market Intelligence" alone as product name) | **KEEP** |
 | "Media Intelligence" | Product name | **KEEP** |
-| "Developer Platform" | Product name (never "Developer Intelligence") | **KEEP** |
+| "Developer Platform" | Product name (never "Developer Intelligence" or "Developer APIs") | **KEEP** |
 | "Trading Desks" | Solution (never Product) | **KEEP** |
 | "Investment Firms" | Solution (never "Institutional Intelligence") | **KEEP** |
 | "Intelligence Modules Catalog" | Product reference page | **KEEP** |
+
+### Forbidden old taxonomy (v3 — system-wide potential defect)
+
+> **D.10:** The following old terms may appear anywhere in content — body copy, output fields, descriptions, JS strings, SVG text. They are **FORBID** everywhere. Treat as **system-wide potential defect** until each page is audited.
+
+| Old term (FORBID) | Correct term (KEEP) | Where it leaks |
+|---|---|---|
+| "Trading Intelligence" (alone, not in "Market & Trading Intelligence") | "Market & Trading Intelligence" | Content fields describing product delivery (e.g., Evidence Explorer Step 07 "Delivered To") |
+| "Institutional Intelligence" | "Investment Intelligence" (product) or "Investment Firms" (solution) | Content fields describing product delivery |
+| "Developer Intelligence" | "Developer Platform" | Content fields, nav (cleaned in P0) |
+| "Developer APIs" | "Developer Platform" | Content fields describing product delivery |
+| "Market Intelligence" (alone, as product name) | "Market & Trading Intelligence" | Content fields (acceptable as descriptive phrase, FORBID as product name) |
 
 ---
 
@@ -417,22 +436,39 @@
 | **Effort** | ~1 minute |
 | **Verdict** | **REPAIR** (P1 priority) |
 
+## D.10 — Old taxonomy in content (system-wide potential defect)
+
+| Field | Value |
+|---|---|
+| **Pattern** | Old product taxonomy names used in content — body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements — NOT in nav/footer (which were cleaned in P0 sweep) |
+| **Old terms (FORBID)** | "Trading Intelligence" (alone, should be "Market & Trading Intelligence"), "Institutional Intelligence" (should be "Investment Intelligence" or "Investment Firms"), "Developer Intelligence" (should be "Developer Platform"), "Developer APIs" (should be "Developer Platform"), "Market Intelligence" alone as product name (should be "Market & Trading Intelligence") |
+| **Pages affected** | Evidence Explorer (Delta 07): line 1214 — Step 07 output "Delivered To" field: "Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs" |
+| **Pages clean (so far)** | All 5 product pages + Architecture (nav/footer taxonomy correct; content not yet fully audited for all pages) |
+| **System-wide status** | **POTENTIAL DEFECT on all unaudited pages** — content-level taxonomy drift survives in pages built before taxonomy was locked. The P0 sweep cleaned nav/footer but did NOT scan body copy, output fields, or descriptions. Every subsequent Delta audit must scan full content surface. |
+| **Root cause** | Content fields written before taxonomy was locked (pre-P0-sweep), survived because they are in body copy/output fields, not in nav/footer where P0 scanned |
+| **Fix** | Replace each old term with the correct term from Layer 1.10 taxonomy table |
+| **Fix type** | Page-specific — find-and-replace in content (NOT nav/footer, which are already clean) |
+| **Effort** | ~1 minute per instance |
+| **Verdict** | **REPAIR** (P1 priority) — treat as system-wide until each page is audited |
+
 ## Defect Summary
 
 | ID | Type | Pages affected | Priority | Effort | Verdict |
 |---|---|---|---|---|---|
 | D.1 | Dead `<style>` block | 4/5 product pages | P2 | ~4 min | **REPAIR** |
-| D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture | P1 | ~6 min (products) + ~10 min (Architecture) | **REPAIR** |
+| D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture + Evidence Explorer | P1 | ~6 min (products) + ~10 min (Architecture) + ~3 min (Explorer) | **REPAIR** |
 | D.3 | Malformed HTML comment | 2/5 product pages | P1 | ~2 min | **REPAIR** |
-| D.4 | "Audit-Ready" violation | Market | P1 | ~1 min | **REPAIR** |
+| D.4 | "Audit-Ready" violation | Market + Evidence Explorer | P1 | ~1 min (Market) + ~2 min (Explorer) | **REPAIR** |
 | D.5 | Competitor naming | 3/5 product pages | P3 | content | **REVIEW** |
 | D.6 | `var(--gold)` mixing | Media | P1 | ~1 min | **REPAIR** |
 | D.7 | Deprecated raw hex (SVG/JS) | Architecture | P1 | ~8 min | **REPAIR** |
 | D.8 | "real time" timing claim | Architecture | P1 | ~2 min | **REPAIR** |
-| D.9 | "confidence score/d" claim | Architecture | P1 | ~1 min | **REPAIR** |
+| D.9 | "confidence score/d" claim | Architecture + Evidence Explorer | P1 | ~1 min (Architecture) + ~2 min (Explorer) | **REPAIR** |
+| D.10 | Old taxonomy in content | Evidence Explorer (system-wide potential) | P1 | ~1 min (Explorer) + TBD (unaudited pages) | **REPAIR** |
 
-**Total technical repair budget (P1+P2): ~25 minutes** (was ~14 minutes before Delta 06 findings).
+**Total technical repair budget (P1+P2): ~33 minutes** (was ~25 minutes before Delta 07 findings).
 **Content review (P3): separate track.**
+**D.10 system-wide scan: TBD** — will be determined as remaining pages are audited.
 
 ---
 
@@ -552,13 +588,14 @@ Every page (regardless of category) MUST comply with:
 ### Explorers (Evidence Explorer, Source Explorer, Sample Library)
 | Rule | Verdict |
 |---|---|
-| Must use `.card-evidence` (v7-patch) for evidence rows | **ADOPT** |
+| Must use evidence-first card pattern (`.card-evidence` OR equivalent custom system with no hover theatrics, no ambient motion, dense metadata, direct source links) | **KEEP** (v3 — softened from "Must use .card-evidence" to accept equivalent patterns like Evidence Explorer's `.step-card`) |
 | Must NOT use `.cx` hover theatrics on evidence rows | **FORBID** |
-| Minimal motion — zero animation | **KEEP** |
+| Minimal motion — zero animation (user-triggered navigation allowed) | **KEEP** |
 | Dense metadata (mono labels, provenance, source links) | **KEEP** |
 | Direct links to official sources (like product pages) | **KEEP** |
 | Must use "Verified Fact/Event" labels (like product pages) | **KEEP** |
 | Must include "Inspect in Evidence Explorer" continuity links | **KEEP** |
+| Must provide UX inspection test PASS: user can quickly inspect Source → Document → Evidence → Provenance → Context | **KEEP** (v3 — added from Delta 07 UX test) |
 
 ### Catalog (`catalog.html`)
 | Rule | Verdict |
@@ -635,7 +672,7 @@ Every page (regardless of category) MUST comply with:
 > 1. **Layer 1** — Does it comply with the canonical baseline? (Covers **all implementation layers**: HTML, CSS, inline styles, SVG attributes, Canvas/Three.js colors, JavaScript color constants, and content claims.)
 > 2. **Layer 5** — Does it violate any do-not-touch rule?
 > 3. **Layer 6** — Does it comply with its category-specific rules?
-> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.9)?
+> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.10)?
 
 ## Implementation-Layer Scope (v2)
 
@@ -672,13 +709,13 @@ A page PASSES acceptance when:
 - ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + content claims)
 - ✓ Zero Layer 5 do-not-touch violations
 - ✓ Layer 6 category-specific rules satisfied
-- ✓ Zero D.1–D.9 defects (or all REPAIR items resolved)
+- ✓ Zero D.1–D.10 defects (or all REPAIR items resolved)
 
 A page FAILS acceptance when:
 - ✗ Any Layer 1 FORBID violation in any implementation layer
 - ✗ Any Layer 5 do-not-touch violation
 - ✗ Any Layer 6 category-specific FORBID violation
-- ✗ Any unrepaired D.1–D.9 defect in any implementation layer
+- ✗ Any unrepaired D.1–D.10 defect in any implementation layer
 
 ## Audit Workflow (for Delta 06+)
 
@@ -693,7 +730,7 @@ A page FAILS acceptance when:
    - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy)
 3. Run Layer 5 do-not-touch check
 4. Run Layer 6 category-specific check
-5. Run Layer 4 defect scan (D.1–D.9) across ALL implementation layers
+5. Run Layer 4 defect scan (D.1–D.10) across ALL implementation layers
 6. Classify remaining drift into A/B/C/D
 7. Produce Delta Report with PASS/FAIL acceptance verdict
 
@@ -703,19 +740,21 @@ A page FAILS acceptance when:
 
 > After this spec is approved, implementation proceeds in this order. No step begins until the prior step is complete.
 
-## Phase 1: Technical Repairs (P1) — ~22 minutes
+## Phase 1: Technical Repairs (P1) — ~30 minutes
 
 | Step | Action | Pages | Effort |
 |---|---|---|---|
 | 1.1 | REPAIR D.2 — replace `rgba(201,162,39,...)` with `rgba(227,180,90,...)` in CSS | Market, Risk, Media | ~6 min |
 | 1.2 | REPAIR D.2 — replace 23 old-gold rgba in Architecture `<style>` block | Architecture | ~10 min |
-| 1.3 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
-| 1.4 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468) | ~1 min |
-| 1.5 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
-| 1.6 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
-| 1.7 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
-| 1.8 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872) | ~2 min |
-| 1.9 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312) | ~1 min |
+| 1.3 | REPAIR D.2 — replace 3 old-gold rgba in Evidence Explorer `<style>` + inline | Evidence Explorer | ~3 min |
+| 1.4 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
+| 1.5 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468), Evidence Explorer (lines 1177, 1214) | ~3 min |
+| 1.6 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
+| 1.7 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
+| 1.8 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
+| 1.9 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872) | ~2 min |
+| 1.10 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312), Evidence Explorer (lines 632, 1202) | ~3 min |
+| 1.11 | REPAIR D.10 — replace old taxonomy in Evidence Explorer Step 07 output | Evidence Explorer (line 1214) | ~1 min |
 
 ## Phase 2: Cleanup (P2) — ~5 minutes
 
@@ -746,14 +785,16 @@ A page FAILS acceptance when:
 | Step | Action |
 |---|---|
 | 5.1 | Audit Architecture (`architecture.html`) against this spec ✅ (Delta 06 — FAIL, D.2+D.7+D.8+D.9) |
-| 5.2 | Audit Explorers (Evidence Explorer, Source Explorer, Sample Library) |
-| 5.3 | Audit Catalog |
-| 5.4 | Audit Solutions pages |
-| 5.5 | Audit Company pages |
-| 5.6 | Audit Trust Framework |
-| 5.7 | Audit remaining reference pages |
+| 5.2 | Audit Evidence Explorer (`evidence-explorer.html`) against this spec ✅ (Delta 07 — FAIL, D.2+D.4+D.9+D.10) |
+| 5.3 | Audit Source Explorer (`source-explorer.html`) against Spec v3 |
+| 5.4 | Audit Sample Library (`sample-library.html`) against Spec v3 |
+| 5.5 | Audit Catalog |
+| 5.6 | Audit Solutions pages |
+| 5.7 | Audit Company pages |
+| 5.8 | Audit Trust Framework |
+| 5.9 | Audit remaining reference pages |
 
-> **Note:** Phase 5 audits continue against the **current v2 Spec**. Each new Delta Report may discover additional defect types (D.10+), which will trigger a Spec v3 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance.
+> **Note:** Phase 5 audits continue against the **current v3 Spec**. Each new Delta Report may discover additional defect types (D.11+), which will trigger a Spec v4 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance. **D.10 (old taxonomy in content) is treated as system-wide potential** — every subsequent audit MUST scan full content surface for old taxonomy terms, not just nav/footer.
 
 ---
 
