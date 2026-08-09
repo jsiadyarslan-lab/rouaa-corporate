@@ -1,10 +1,26 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–10.
-> **Source:** 5 product pages + 5 non-product pages audited (Delta 06 Architecture, Delta 07 Evidence Explorer, Delta 08 Source Explorer, Delta 09 Sample Library, Delta 10 Catalog).
-> **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026 (v6 — updated August 9, 2026 after Delta 10 Catalog audit).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–30.
+> **Source:** 30 pages audited (Delta 01–30): 5 product pages + 25 non-product pages (Architecture, Explorers, Catalog, Solutions, Company, Trust Framework, Methodology, Infrastructure Report, Platform, Source Registry, Product Experience, Developers, Trading Platform, Financial Intelligence, Financial Media, Contact, Careers, Research Institute, Visual Reference, Design Reference).
+> **Purpose:** Converts audit findings into actionable rules. Every rule ends with one of six verdicts.
+> **Effective date:** August 10, 2026 (v7 — updated August 10, 2026 after Delta 30 Design Reference audit + 30-page cumulative audit completion).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v7 changelog (post-Delta-30, 30-page cumulative audit):**
+> - **No D.15+ added.** Defect taxonomy remains D.1–D.14. All 11 candidate rules from the 30-page audit enter v7 as either NEW category rules (3) or CLARIFICATIONS of existing D.x (8). No new defect types.
+> - **3 NEW Layer 6 category rules added:**
+>   - **GDS-1: Governed Design-System Surface** — A design-reference page and the canonical token definition files it imports are evaluated as one governed surface. Scope is **dependency-based and confined to canonical token definition files** (`tokens.css`, `roua-v7.css`, `roua-v7-patch.css`) — NOT a general gate for all imported CSS/JS. A legacy token in a canonical token file is D.2 for design-reference pages that import it. Does NOT cascade to third-party libraries, utility CSS, or non-token-definition files.
+>   - **Customer-Production Boundary** — Infrastructure Report must explicitly distinguish internal production from customer production in at least 3 locations (hero, status definition, environment note).
+>   - **Design-Reference Exception** — On design-reference pages, documentation of a concept (color swatches, typographic labels, scenario text, localization labels) is ACCEPTABLE even if the concept name matches a D.9 term. This is a context exception, NOT an exemption from claims or governance. Capability descriptions in design-reference page text are still D.9; "Audit Ready" as a visible badge is still D.4.
+> - **8 CLARIFICATIONS of existing D.1–D.14:**
+>   - D.1 expanded: covers dead sub-blocks inside live `<style>` (not just fully-dead blocks).
+>   - D.2 expanded: scan surface includes canonical token definition files, not just page-level usage.
+>   - D.5 expanded: scan surface includes external CSS/JS files loaded by the page (project-authored files only, not third-party libraries).
+>   - D.8 expanded: covers latency-range variants ("in minutes", "in minutes, not hours", "in hours"). Operational-status language ("live", "running", "today", "current", "already", "operational") and meeting/form durations ("30-minute call") are explicitly EXCLUDED — they are not timing claims.
+>   - D.9 expanded: concept-based, not keyword-based. Covers verb forms ("scores confidence"), past tense ("confidence scored"), plural ("confidence scores"). "confidence propagation" is explicitly EXCLUDED — different concept. Design-reference data-type documentation added as acceptable tier.
+>   - D.10 expanded: covers page identity locations (title, meta description, hero eyebrow, hero H1, hero paragraph, section H2, section paragraph), not just UI labels. Case-insensitive.
+>   - Layer 1.9 "every claim" clarified: "material claim" (materiality qualifier) is ACCEPTABLE; "every claim" (universal quantifier) is FORBID. The distinction is the quantifier, not the word "claim".
+>   - D.8 operational-state clarification: operational-status language ≠ timing claim. Meeting durations ≠ timing claim. Form-fill estimates ≠ timing claim.
 >
 > **v6 changelog (post-Delta-10):**
 > - Implementation-Layer Scope expanded: added **JavaScript content/data strings** (text in external JS files that is rendered as visible HTML). Previously covered JS color strings only; now covers ALL JS strings that become user-visible content.
@@ -61,6 +77,8 @@
 ## 1.1 Token System
 
 > **Scope expansion (v2):** Token rules apply across **all implementation layers** — CSS declarations, inline styles, SVG `fill`/`stroke` attributes, Canvas/Three.js color definitions, and JavaScript color constants. A page is not token-clean if it uses canonical tokens in CSS but hardcodes deprecated colors in SVG or JavaScript.
+>
+> **v7 scope expansion — canonical token definition files:** D.2 scan surface now includes **canonical token definition files** (`tokens.css`, `roua-v7.css`, `roua-v7-patch.css`) — not just page-level usage. If a token definition file defines `--roua-accent: #C9A227`, every page that imports that file inherits D.2 at the token-definition layer, even if the page's own markup uses `var(--roua-accent)` correctly. This is the **governed design-system surface** scope (see GDS-1 in Layer 6). **Scope limit:** This applies ONLY to canonical token definition files — NOT to third-party libraries, utility CSS, or non-token-definition JS files.
 
 | Rule | Detail | Verdict |
 |---|---|---|
@@ -166,26 +184,44 @@
 ## 1.9 Trust Grammar (Forbidden Phrases)
 
 > **v2 note:** Forbidden phrases apply to ALL content — marketing copy, infrastructure descriptions, JavaScript comments, SVG `<text>` elements, and metadata. A "real time" claim in an Architecture pipeline description is just as forbidden as one in a product Hero.
+>
+> **v7 clarifications:**
+> - **D.8 latency-range variants:** "in minutes", "in minutes, not hours", "in hours" (as intelligence-delivery latency claims) are FORBID — same concept as "real-time" / "within seconds".
+> - **D.8 operational-state exclusion:** "live", "running", "today", "current", "already", "operational" are ACCEPTABLE — operational-status statements, not timing/freshness claims. Meeting durations ("30-minute call"), form-fill estimates ("about two minutes"), and deployment timelines ("integration in days" — REVIEW) are also acceptable — they describe user/meeting/deployment effort, not intelligence delivery.
+> - **"material claim" ≠ "every claim":** "material claim" / "material claims" (materiality qualifier — only materially-relevant claims require evidence) is ACCEPTABLE. "every claim" / "all claims" (universal quantifier — all claims without qualification) is FORBID. The distinction is the quantifier, not the word "claim".
+> - **D.9 concept-based:** D.9 covers all grammatical forms: noun ("Confidence Scoring", "Extraction Confidence", "confidence scores" plural), verb ("scores confidence", "score source confidence"), past tense ("confidence scored"). "confidence propagation" is NOT D.9 — different concept (research term for how confidence values propagate through evidence chain, not a scoring claim).
+> - **D.9 design-reference tier:** On design-reference pages, documentation of a concept (typographic labels, scenario text, localization labels) is acceptable even if the concept name matches a D.9 term (see Design-Reference Exception in Layer 6).
 
 | Phrase | Verdict | Exception | Defect ID |
 |---|---|---|---|
 | "audit-ready" / "Audit-Ready" / "Audit Ready" / "audit ready" (v5 — all semantic variants) | **FORBID** | Only `risk-intelligence.html` (legitimate risk context). FORBID applies to the **concept** (claiming audit readiness), not the hyphenation. Scanner matches case-insensitive, hyphen-insensitive. | D.4 |
 | "within seconds" / "in seconds" | **FORBID** | None. Use "through configured source monitoring" | — |
 | **"real-time" / "real time"** | **FORBID** | None. Use "through configured source monitoring" or "as they are published" | **D.8** |
+| **"in minutes" / "in minutes, not hours" / "in hours"** (v7 — latency-range variants) | **FORBID** | None. These are intelligence-delivery latency claims — same concept as "real-time". Use "through configured source monitoring". | **D.8** |
+| **"monitored continuously"** (v7 — word-order variant of "continuously monitored") | **REVIEW** | Acceptable as process description ("the source enters continuous monitoring"). Leans FORBID as marketing/timing claim ("sources monitored continuously"). Context-dependent per Delta 18/25. | D.8 variant |
 | "instantly" / "instant" | **FORBID** | None | — |
 | "continuously monitored" (as timing claim) | **FORBID** | None. Use "configured source monitoring" | — |
-| "every claim" | **REVIEW** | Acceptable in quoted institutional questions ("Can we locate the exact passage behind every claim?"). Forbidden as a ROUA claim — use "governed claims". | — |
-| "VERIFIED INTELLIGENCE OBJECT" | **FORBID** | None. Use "GOVERNED INTELLIGENCE OBJECT" | — |
+| **"live" / "running" / "today" / "current" / "already" / "operational"** (v7 — operational-state language) | **ACCEPTABLE** | These are operational-status statements (what exists/works now), NOT timing/freshness claims (how fast intelligence arrives). Acceptable on operational-status pages (Infrastructure Report, Contact, Careers). | — |
+| **Meeting durations** ("30-minute call", "60-minute walkthrough", "45-minute conversation") (v7) | **ACCEPTABLE** | Describe meeting/user effort, not intelligence delivery. | — |
+| **Form-fill estimates** ("about two minutes") (v7) | **ACCEPTABLE** | Describe user effort, not intelligence delivery. | — |
+| **"every claim"** (v7 — FORBID tightened) | **FORBID** | Acceptable ONLY in quoted institutional questions ("Can we locate the exact passage behind every claim?"). Forbidden as a ROUA capability claim — use "governed claims" or "each claim". **Variant:** "every published claim" is also FORBID (concept-based). | — |
+| **"material claim" / "material claims"** (v7 — ACCEPTABLE) | **ACCEPTABLE** | Materiality qualifier — "only claims that matter materially require evidence". NOT the "every claim" universal quantifier. Distinction is the quantifier, not the word "claim". | — |
+| "VERIFIED INTELLIGENCE OBJECT" / "verified Intelligence Object" (v7 — case variants) | **FORBID** | None. Use "GOVERNED INTELLIGENCE OBJECT". FORBID is concept-based — covers all case variants. | — |
 | "Trust Promise" | **FORBID** | None. Use "Trust Property" | — |
 | "Provenance Immutability" | **FORBID** | None. Use "Versioned Provenance" | — |
-| **"confidence score" / "confidence scored"** | **FORBID** | None. Use "Confidence signals" or "Verification tier" | **D.9** |
+| **"confidence score" / "confidence scored" / "confidence scores" (plural)** (v7 — concept-based) | **FORBID** | None. Use "Confidence signals" or "Verification tier". Covers singular, plural, and past-tense forms. | **D.9** |
+| **"scores confidence" / "score source confidence"** (v7 — verb forms) | **REVIEW leans FORBID** | Verb-form variants of "Confidence Scoring". Capability descriptions — lean FORBID. Replace with "assesses confidence signals" or "records confidence signals". | D.9 variant |
 | **"Extraction Confidence"** (v5 — REVIEW) | **REVIEW** | Acceptable as **illustrative metadata** when marked "(illustrative)" — e.g., Sample Library's "Extraction Confidence: 97% (illustrative)". FORBID when used as a **proven platform claim** without illustrative disclaimer. Boundary: `illustrative metadata ≠ platform claim`. | D.9 variant |
-| **"Confidence Scoring"** (v6 — REVIEW leans FORBID) | **REVIEW** | When used as a **capability description** without illustrative disclaimer (e.g., "Validation · Confidence Scoring · Scenario Generation" in Reasoning Engine description) — **leans FORBID**. Unlike "Extraction Confidence" (illustrative metadata), "Confidence Scoring" is a capability claim. Recommend replacing with "Verification Tiering" or "Confidence Signals". Boundary: `illustrative metadata (acceptable) < confidence scoring as capability description (REVIEW leans FORBID) < confidence score as proven claim (FORBID)`. | D.9 variant |
+| **"Confidence Scoring"** (v6 — REVIEW leans FORBID) | **REVIEW** | When used as a **capability description** without illustrative disclaimer — **leans FORBID**. Recommend replacing with "Confidence Signals". | D.9 variant |
+| **"confidence propagation"** (v7 — EXCLUSION) | **ACCEPTABLE** | NOT D.9. Different concept — research term for how confidence values propagate through the evidence chain (structural property), not a scoring claim. | — |
+| **Design-reference documentation of confidence terms** (v7 — Design-Reference Exception) | **ACCEPTABLE** | On design-reference pages, typographic category labels ("Confidence Score" as a type-style label), operational-state scenario text ("Confidence score fell below threshold"), and localization data-type labels ("Confidence scores remain in international format") are acceptable — the page documents how to display/typeset/localize the concept, not claiming it as a capability. See Layer 6 Design-Reference Exception. | — |
 | "SOC 2" / "ISO 27001" | **FORBID** | None (removed in P0 sweep) | — |
 
 ## 1.10 Taxonomy (Locked)
 
 > **v3 scope expansion:** Taxonomy check applies to **ALL content** — navigation, footer, body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements, and metadata. The P0 sweep cleaned nav/footer across the site, but **content-level taxonomy drift survives** in pages built before taxonomy was locked. Every page audit must scan the full content surface, not just nav/footer.
+>
+> **v7 D.10 scope expansion — page identity:** D.10 covers old taxonomy used as **page identity** (title, meta description, hero eyebrow, hero H1, hero paragraph, section H2, section paragraph), NOT just UI labels (CTA buttons, card titles). Using "Trading Intelligence" or "Institutional Intelligence" as the page's primary identity is D.10 — even if canonical names appear correctly in nav/footer. **Case-insensitive:** lowercase "trading intelligence" in meta description is D.10. **Shorthand product lists** ("Investment, Market, Risk, Media, Trading, or Developer") lean acceptable as descriptive shorthand (per Delta 26, 28, 30).
 
 | Term | Correct Usage | Verdict |
 |---|---|---|
@@ -351,31 +387,31 @@
 
 > All defects found in Delta 01–05. Each has page, line/pattern, fix type, and verdict.
 
-## D.1 — Dead inline `<style>` block (lines 13–30)
+## D.1 — Dead inline `<style>` block (lines 13–30) / Dead CSS sub-blocks (v7)
 
 | Field | Value |
 |---|---|
-| **Pattern** | Inline `<style>` block targeting `#integrates-with` and `#powered-by` IDs that do not exist in the page |
-| **Pages affected** | Investment, Market, Risk, Media (4 of 5) |
-| **Pages clean** | Developer |
-| **Lines** | 13–30 in each affected page |
-| **Fix** | Remove the entire `<style>` block (lines 13–30) |
-| **Fix type** | Bulk cleanup — single find-and-delete across 4 pages |
-| **Effort** | ~1 minute per page, ~4 minutes total |
+| **Pattern** | Inline `<style>` block targeting `#integrates-with` and `#powered-by` IDs that do not exist in the page. **v7 expansion:** Also covers **dead sub-blocks inside an otherwise live `<style>`** — classes defined but never referenced in body. |
+| **Pages affected** | Investment, Market, Risk, Media (4 of 5 — fully dead blocks). Developers (Delta 22 — dead sub-blocks: `.tree-*` classes + `.arch-branch.b-*` modifiers inside live `<style>`). |
+| **Pages clean** | Developer (for fully-dead blocks). |
+| **Lines** | 13–30 in each affected page (fully dead). Developers lines 70–78, 84–88 (dead sub-blocks). |
+| **Fix** | Remove the entire `<style>` block (fully dead) OR remove only the dead class definitions (dead sub-blocks). **Detection method (v7):** grep for class definitions in `<style>`, then grep for class usage in `<body>`. If defined but not used, it's dead CSS — whether the block is fully dead or partially dead. |
+| **Fix type** | Bulk cleanup (fully dead) or targeted removal (dead sub-blocks). |
+| **Effort** | ~1 minute per page (fully dead), ~2 min for dead sub-block removal. |
 | **Verdict** | **REPAIR** (P2 priority) |
 
-## D.2 — Old-gold `rgba(201, 162, 39, ...)` in Evidence Example template
+## D.2 — Old-gold `rgba(201, 162, 39, ...)` and legacy `#C9A227` (v7 — includes canonical token files)
 
 | Field | Value |
 |---|---|
-| **Pattern** | `rgba(201, 162, 39, 0.06/0.08/0.02)` — OLD gold from deprecated `VISUAL-IDENTITY-SYSTEM.md`. Canonical gold is `rgba(227, 180, 90, ...)` |
-| **Pages affected** | Market (lines 405, 460), Risk (lines 416, 483), Media (lines 429, 484) — 3 of 5 |
-| **Pages clean** | Investment (no Evidence Example section), Developer (no Evidence Example section) |
-| **Location pattern** | Always in Evidence Example section: (1) gold-bordered flow card box-shadow, (2) output card gradient background |
-| **Fix** | Replace `rgba(201, 162, 39, ...)` with `rgba(227, 180, 90, ...)` |
-| **Fix type** | Bulk find-replace — same string replacement across 3 pages |
-| **Effort** | ~2 minutes per page, ~6 minutes total |
-| **Verdict** | **REPAIR** (P1 priority) |
+| **Pattern** | `rgba(201, 162, 39, 0.06/0.08/0.02)` — OLD gold from deprecated `VISUAL-IDENTITY-SYSTEM.md`. Also covers `#C9A227` (legacy hex). Canonical gold is `#e3b45a` = `rgba(227, 180, 90, ...)`. **v7 expansion:** D.2 scan surface includes **canonical token definition files** (`tokens.css`, `roua-v7.css`, `roua-v7-patch.css`) — not just page-level usage. |
+| **Pages affected** | Market (lines 405, 460), Risk (lines 416, 483), Media (lines 429, 484) — 3 of 5 product pages. Plus: Infrastructure Report (3 instances), Product Experience (1), Developers (3), Trading Platform (2), Financial Intelligence (1), Research Institute (1), Visual Reference (27), Design Reference (0 page-level but inherits via tokens.css). **v7 root cause:** `tokens.css` defines 8 accent tokens using `#C9A227` / `rgba(201,162,39,...)` (lines 30, 35, 37, 38, 41, 42, 59, 65) — every page importing `tokens.css` inherits D.2 at the token-definition layer. |
+| **Pages clean** | Investment (no Evidence Example section), Developer (no Evidence Example section), Contact, Careers. |
+| **Location pattern** | Page-level: gold-bordered flow card box-shadow, output card gradient background, SVG fills. Token-level: `tokens.css` accent token definitions. |
+| **Fix** | Replace `rgba(201, 162, 39, ...)` with `rgba(227, 180, 90, ...)` and `#C9A227` with `#e3b45a`. **Root fix (v7):** Update `tokens.css` to use canonical values — this automatically fixes all pages importing it. See GDS-1 in Layer 6. |
+| **Fix type** | Bulk find-replace (page-level) + root fix (tokens.css). |
+| **Effort** | ~3 min for `tokens.css` root fix (shared across all pages importing it) + page-level residual fixes. |
+| **Verdict** | **REPAIR** (P1 priority — root fix first) |
 
 ## D.3 — Malformed HTML comment at CTA section
 
@@ -403,18 +439,18 @@
 | **Effort** | ~1 min (Market) + ~2 min (Evidence Explorer) + ~1 min (Sample Library) = ~4 min |
 | **Verdict** | **REPAIR** (P1 priority) |
 
-## D.5 — Direct competitor naming ("Bloomberg / Market Terminals")
+## D.5 — Direct competitor naming ("Bloomberg / Market Terminals") + external CSS/JS (v7)
 
 | Field | Value |
 |---|---|
-| **Pattern** | "Bloomberg / Market Terminals" in Differentiation comparison block |
-| **Pages affected** | Investment (line 387), Market (lines 247, 251), Risk (line 334) — 3 of 5 |
-| **Pages clean** | Media (uses generic "News / Wire Layer"), Developer (no Differentiation block) |
-| **Risk** | Direct competitor naming invites legal review; Media + Developer demonstrate the discipline |
-| **Fix** | Soften to "Market Data Terminals" or "Existing Research Platforms" |
-| **Fix type** | Content review — marketing/legal decision, not technical |
-| **Effort** | ~1 minute per page (after content decision) |
-| **Verdict** | **REVIEW** (P3 priority — content decision required before fix) |
+| **Pattern** | "Bloomberg / Market Terminals" in Differentiation comparison block. **v7 expansion:** Also covers competitor naming in **external CSS/JS files loaded by the page** (project-authored files only, not third-party libraries). A competitor reference in `tokens.css` comment is D.5 for every page importing `tokens.css`. |
+| **Pages affected** | Investment (line 387), Market (lines 247, 251), Risk (line 334) — 3 of 5. Financial Intelligence (Delta 24, line 430 — "Bloomberg, FactSet, and Reuters"). Visual Reference + Design Reference (Delta 29/30 — `tokens.css` line 5 comment: "Bloomberg Terminal × Palantir × BlackRock Aladdin"). |
+| **Pages clean** | Media (uses generic "News / Wire Layer"), Developer (no Differentiation block), most other pages. |
+| **Risk** | Direct competitor naming invites legal review; Media + Developer demonstrate the discipline. |
+| **Fix** | Soften to "Market Data Terminals" or "Existing Research Platforms" (HTML content). For `tokens.css` comment: replace with "Visual identity: institutional financial infrastructure" (generic phrasing). **Scope limit (v7):** D.5 external-file scope applies to project-authored CSS/JS files only — NOT to third-party libraries (jQuery, GSAP, Three.js from CDN). |
+| **Fix type** | Content review (HTML) + comment fix (tokens.css — shared root fix). |
+| **Effort** | ~1 minute per page (HTML, after content decision) + ~1 min for tokens.css comment fix. |
+| **Verdict** | **REVIEW** (P3 — HTML content decisions) + **REPAIR** (P1 — tokens.css comment, shared root fix) |
 
 ## D.6 — `var(--gold)` base token mixing
 
@@ -445,48 +481,50 @@
 | **Effort** | ~5 minutes (SVG) + ~3 minutes (Three.js PALETTE) = ~8 minutes for Architecture |
 | **Verdict** | **REPAIR** (P1 priority) |
 
-## D.8 — "real time" / "real-time" timing claim
+## D.8 — "real time" / "real-time" + latency-range variants + operational-state exclusion (v7)
 
 | Field | Value |
 |---|---|
-| **Pattern** | "real time" or "real-time" used as a timing/freshness claim in product or infrastructure descriptions |
-| **Pages affected** | Architecture (Delta 06): line 1517 ("Market-moving events detected, classified, and correlated in real time."), line 1872 ("Detect, classify, and correlate market-moving events in real time...") |
-| **Pages clean** | All 5 product pages (zero instances — they correctly use "through configured source monitoring") |
-| **Why forbidden** | "real time" implies a guaranteed latency that ROUA has not proven. Per Layer 1.9, use "through configured source monitoring" or "as they are published" instead. |
-| **Fix** | Replace "in real time" with "as they are published" or "through configured source monitoring" |
-| **Fix type** | Page-specific — 2 line edits in Architecture |
-| **Effort** | ~2 minutes |
+| **Pattern** | "real time" or "real-time" used as a timing/freshness claim. **v7 expansion:** Also covers **latency-range variants**: "in minutes", "in minutes, not hours", "in hours" (as intelligence-delivery latency claims). **v7 exclusion:** Operational-status language ("live", "running", "today", "current", "already", "operational"), meeting durations ("30-minute call"), and form-fill estimates ("about two minutes") are **NOT D.8** — they describe operational state or user/meeting effort, not intelligence-delivery latency. |
+| **Pages affected** | Architecture (Delta 06): line 1517, 1872 ("in real time"). Developers (Delta 22): lines 343, 443 ("Real-time" push/streaming). Financial Intelligence (Delta 24): line 410 ("in minutes, not hours" — latency variant). Financial Media (Delta 25): line 286 ("Real-time"), line 158 ("monitored continuously" — REVIEW, marketing context leans FORBID). |
+| **Pages clean (operational-state language ACCEPTABLE)** | Infrastructure Report (Delta 20): "live" / "today" / "running" / "current" / "already" / "operational" — all acceptable. Contact (Delta 26): "30-minute call" / "About two minutes" — acceptable. Careers (Delta 27): "45-minute call" / "90-minute conversation" — acceptable. |
+| **Why forbidden** | "real time" and latency-range claims imply a guaranteed delivery speed that ROUA has not proven. Per Layer 1.9, use "through configured source monitoring" or "as they are published" instead. |
+| **Fix** | Replace "in real time" / "Real-time" with "as they are published" or "through configured source monitoring". Replace "in minutes, not hours" with "through configured workflows". Replace "monitored continuously" (marketing context) with "monitored through configured schedules". |
+| **Fix type** | Page-specific line edits. |
+| **Effort** | ~1 min per instance. |
 | **Verdict** | **REPAIR** (P1 priority) |
 
-## D.9 — "confidence score" / "confidence scored" claim
+## D.9 — Confidence terminology (v7 — concept-based, not keyword-based)
 
 | Field | Value |
 |---|---|
-| **Pattern** | "confidence score" or "confidence scored" used as a verification/metric claim. Also covers "Extraction Confidence" as a **REVIEW variant** (v5). |
-| **Pages affected (D.9 FORBID)** | Architecture (Delta 06): line 2312 ("confidence scored"). Evidence Explorer (Delta 07): lines 632, 1202 ("confidence score"). |
-| **Pages affected (D.9 variant REVIEW)** | Sample Library (Delta 09): 12 instances of "Extraction Confidence" — all marked "(illustrative)". **REVIEW: acceptable as illustrative metadata, FORBID if used as proven platform claim without disclaimer.** |
-| **Pages clean** | All 5 product pages (zero instances — they correctly use "verification tier" or "confidence signals") |
-| **Why forbidden** | Per Layer 1.9, "confidence score" is forbidden — use "confidence signals" or "verification tier" instead. The locked terminology avoids implying a single numeric score for evidence confidence. "Extraction Confidence" (v5 REVIEW): acceptable as illustrative metadata when marked "(illustrative)" — boundary: `illustrative metadata ≠ platform claim`. |
-| **Fix (D.9 FORBID)** | Replace "confidence scored" with "verification tier assigned" or "confidence signals recorded" |
-| **Fix (D.9 variant REVIEW)** | If team decides FORBID: replace "Extraction Confidence" with "Verification Tier" across 12 instances. If team decides acceptable: ensure "(illustrative)" disclaimer is always present. |
-| **Fix type** | Page-specific |
-| **Effort** | ~1 min (Architecture) + ~2 min (Evidence Explorer) + TBD (Sample Library — depends on REVIEW decision) |
-| **Verdict** | **REPAIR** (P1 — Architecture + Evidence Explorer) + **REVIEW** (P3 — Sample Library "Extraction Confidence") |
+| **Pattern** | Confidence terminology used as a verification/metric claim. **v7: concept-based, not keyword-based.** Covers all grammatical forms: noun ("Confidence Scoring", "Extraction Confidence", "confidence scores" plural), verb ("scores confidence", "score source confidence"), past tense ("confidence scored"). **v7 exclusion:** "confidence propagation" is NOT D.9 — different concept (research term for how confidence values propagate through evidence chain, not a scoring claim). **v7 design-reference tier:** On design-reference pages, documentation of confidence terms (typographic labels, scenario text, localization labels) is acceptable (see Layer 6 Design-Reference Exception). |
+| **Boundary (v7 — 4 tiers)** | `illustrative metadata (acceptable) < design-reference data-type documentation (acceptable) < capability description (REVIEW leans FORBID) < proven platform claim (FORBID)` |
+| **Pages affected (D.9 FORBID)** | Architecture (line 2312 "confidence scored"). Evidence Explorer (lines 632, 1202 "confidence score"). Developers (Delta 22: line 435 "confidence scores" plural). Visual Reference (Delta 29: lines 1588, 2790, 2935, 3051 — "confidence scores" / "confidence scored"). |
+| **Pages affected (D.9 REVIEW leans FORBID)** | Methodology (Delta 19: 2 instances). Infrastructure Report (Delta 20: 2 instances). Developers (Delta 22: 2 instances). Contact (Delta 26: 1 instance). Research Institute (Delta 28: 6 instances — most on single page, including verb forms). Design Reference (Delta 30: 1 instance). |
+| **Pages affected (D.9 acceptable — design-reference)** | Visual Reference (Delta 29: lines 1640, 2863, 2417 — typographic label, scenario, localization). Design Reference (Delta 30: lines 488, 771 — component samples). |
+| **Pages affected (D.9 acceptable — illustrative)** | Sample Library (Delta 09: 12 instances, all marked "(illustrative)"). Product Experience (Delta 21: 1 instance, marked "illustrative metric"). |
+| **Pages clean** | Investment, Risk, Media, Enterprise, Platform, Source Registry, Trading Platform, Financial Intelligence, Financial Media, Careers. |
+| **Fix (FORBID)** | Replace "confidence score" / "confidence scored" / "confidence scores" with "confidence signals" or "verification tier". Replace verb forms ("scores confidence") with "assesses confidence signals" or "records confidence signals". |
+| **Fix (REVIEW leans FORBID)** | Replace "Confidence Scoring" / "Extraction Confidence" (capability descriptions) with "confidence signals" or "confidence thresholds". |
+| **Fix type** | Page-specific find-and-replace. |
+| **Effort** | ~1 min per instance. |
+| **Verdict** | **REPAIR** (P1 — FORBID instances) + **REVIEW** (P3 — REVIEW leans FORBID instances, team decision) |
 
-## D.10 — Old taxonomy in content (confirmed on Evidence Explorer; mandatory scan elsewhere)
+## D.10 — Old taxonomy in content + page identity (v7)
 
 | Field | Value |
 |---|---|
-| **Pattern** | Old product taxonomy names used in content — body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements — NOT in nav/footer (which were cleaned in P0 sweep) |
+| **Pattern** | Old product taxonomy names used in content — body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements. **v7 expansion:** Also covers **page identity locations** (title, meta description, hero eyebrow, hero H1, hero paragraph, section H2, section paragraph) — NOT just UI labels (CTA buttons, card titles). **Case-insensitive:** lowercase "trading intelligence" in meta is D.10. |
 | **Old terms (FORBID)** | "Trading Intelligence" (alone, should be "Market & Trading Intelligence"), "Institutional Intelligence" (should be "Investment Intelligence" or "Investment Firms"), "Developer Intelligence" (should be "Developer Platform"), "Developer APIs" (should be "Developer Platform"), "Market Intelligence" alone as product name (should be "Market & Trading Intelligence") |
-| **Pages affected** | Evidence Explorer (Delta 07): line 1214 — Step 07 output "Delivered To" field: "Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs" |
-| **Pages clean (confirmed)** | All 5 product pages + Architecture + Source Explorer + **Sample Library (Delta 09 — clean, H1 descriptive use clarified as NOT D.10)** |
-| **System-wide status (v5 — final)** | **CONFIRMED DEFECT on Evidence Explorer ONLY. Mandatory scan continues elsewhere but risk is confirmed LOW.** Three subsequent pages (Architecture, Source Explorer, Sample Library) are clean. Descriptive adjective use of old terms (e.g., "institutional intelligence products") is NOT D.10 — only product-name/taxonomy-label use is. |
-| **Root cause** | Content fields written before taxonomy was locked (pre-P0-sweep), survived because they are in body copy/output fields, not in nav/footer where P0 scanned |
-| **Fix** | Replace each old term with the correct term from Layer 1.10 taxonomy table |
-| **Fix type** | Page-specific — find-and-replace in content (NOT nav/footer, which are already clean) |
-| **Effort** | ~1 minute per instance |
-| **Verdict** | **REPAIR** (P1 priority) — mandatory scan on all pages, but risk is confirmed lower than v3 |
+| **Pages affected** | Evidence Explorer (Delta 07: line 1214 — UI label). Product Experience (Delta 21: lines 668, 744 — CTA button labels). Trading Platform (Delta 23: 6 instances — page identity: title, meta, hero eyebrow, hero paragraph, section H2, section paragraph). Financial Intelligence (Delta 24: 5 "Institutional Intelligence" page-identity instances + 1 "Trading Intelligence" CTA). Financial Media (Delta 25: 1 "Institutional Intelligence Platform" isolated reference). Contact (Delta 26: 1 "trading intelligence" lowercase in meta description). |
+| **Pages clean (confirmed)** | All 5 product pages (nav/footer) + Architecture + Source Explorer + Sample Library + Enterprise + Platform + Methodology + Infrastructure Report + Developers + Careers + Research Institute + Visual/Design Reference (design-reference context). |
+| **ACCEPTABLE (not D.10)** | Descriptive adjective use ("institutional intelligence products" lowercase). Shorthand product lists ("Investment, Market, Risk, Media, Trading, or Developer"). Design-reference component demo content. Footer copyright "Institutional Intelligence Products" (descriptive phrase). |
+| **Root cause** | Content fields + page identity written before taxonomy was locked (pre-P0-sweep), survived because they are in body copy / page identity, not in nav/footer where P0 scanned. |
+| **Fix** | Replace each old term with the correct term from Layer 1.10 taxonomy table. For page-identity violations: update title, meta, hero eyebrow, hero H1/paragraph, section headers. |
+| **Fix type** | Page-specific find-and-replace in content + page identity. |
+| **Effort** | ~1 min per instance. |
+| **Verdict** | **REPAIR** (P1 priority) |
 
 ## D.11 — Non-canonical raw hex colors (v4 — NEW)
 
@@ -775,6 +813,46 @@ Every page (regardless of category) MUST comply with:
 
 ---
 
+## 6.4 v7 NEW Rules — Governance & Context-Specific
+
+### GDS-1: Governed Design-System Surface (v7 — NEW)
+
+> **Scope limit (critical):** GDS-1 is **dependency-based and confined to canonical token definition files** — NOT a general gate for all imported CSS/JS. This rule does NOT cascade to third-party libraries, utility CSS, or non-token-definition files.
+
+| Rule | Verdict |
+|---|---|
+| A design-reference page (`visual-reference.html`, `design-reference.html`) and the canonical token definition files it imports are evaluated as **one governed design-system surface**. | **KEEP** (v7 — NEW) |
+| Canonical token definition files are: `tokens.css`, `roua-v7.css`, `roua-v7-patch.css`. These are the ONLY files in scope for GDS-1. | **KEEP** |
+| A legacy token (e.g., `--roua-accent: #C9A227`) in a canonical token definition file is D.2 for design-reference pages that import it — even when the page's own markup uses `var(--roua-accent)` correctly. | **FORBID** (D.2 at source-of-truth level) |
+| The page's color swatches accurately reflecting the token file is a **symptom**, not the defect. The defect is in the source-of-truth token file. | **KEEP** |
+| **GDS-1 does NOT apply to:** third-party libraries (jQuery, GSAP, Three.js from CDN), utility CSS that isn't a token-definition file, random JS files that don't define design tokens, or any non-canonical-token file. | **KEEP** (scope limit — prevents false-positive cascade) |
+| Fix must happen at the token definition file (root fix), not at individual page swatches. Fixing `tokens.css` automatically corrects all pages importing it. | **KEEP** |
+
+### Customer-Production Boundary (v7 — NEW)
+
+| Rule | Verdict |
+|---|---|
+| Infrastructure Report (`infrastructure-report.html`) must explicitly distinguish **internal production** from **customer production**. | **KEEP** (v7 — NEW) |
+| The boundary must be stated in at least **3 locations**: hero, status definition, environment note. | **KEEP** |
+| "Operational" = running in ROUA internal production — NOT customer production deployment. | **KEEP** |
+| This prevents buyers from assuming ROUA is describing customer-facing production. | **KEEP** |
+| Applies to any page describing ROUA's internal production environment (currently Infrastructure Report only). | **KEEP** |
+
+### Design-Reference Exception (v7 — NEW)
+
+> **Critical scope:** This is a **context exception**, NOT an exemption from claims or governance. Capability descriptions in design-reference page text are still D.9; "Audit Ready" as a visible badge is still D.4.
+
+| Rule | Verdict |
+|---|---|
+| On design-reference pages (`visual-reference.html`, `design-reference.html`), documentation of a concept is ACCEPTABLE even if the concept name matches a D.9 term. | **KEEP** (v7 — NEW) |
+| Acceptable design-reference documentation includes: (a) color swatches documenting the palette, (b) typographic category labels ("Confidence Score" as a type-style label), (c) operational-state scenario text ("Confidence score fell below threshold"), (d) localization data-type labels ("Confidence scores remain in international format"). | **KEEP** |
+| The distinction: `design-reference documentation of a concept (acceptable) ≠ capability claim of the same concept (D.9 leans FORBID)`. | **KEEP** |
+| **NOT excepted:** Capability descriptions in design-reference page text ("confidence scoring" in an architecture layer description) are still D.9. | **FORBID** (still D.9) |
+| **NOT excepted:** "Audit Ready" as a visible badge label in a component demo is still D.4. | **FORBID** (still D.4) |
+| **NOT excepted:** Competitor naming in design-reference page text or imported CSS comments is still D.5. | **FORBID** (still D.5) |
+
+---
+
 # ACCEPTANCE CONTRACT
 
 > This spec is the acceptance contract for every subsequent page audit. Any page (Delta 06+) is evaluated against:
@@ -783,22 +861,24 @@ Every page (regardless of category) MUST comply with:
 > 3. **Layer 6** — Does it comply with its category-specific rules?
 > 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.14)?
 
-## Implementation-Layer Scope (v2)
+## Implementation-Layer Scope (v7)
 
 A page is not compliant merely because its HTML structure is sound and its CSS uses canonical tokens. **PASS requires safety across ALL implementation layers:**
 
 | Layer | What is checked | Example defects |
 |---|---|---|
 | **HTML** | div/section/comment balance, broken anchors, malformed comments | D.1, D.3 |
-| **CSS (page-level `<style>`)** | Token aliases, no deprecated hex, no old-gold rgba | D.2 (in CSS), D.6 |
+| **CSS (page-level `<style>`)** | Token aliases, no deprecated hex, no old-gold rgba, no dead sub-blocks (v7) | D.1 (dead sub-blocks), D.2 (in CSS), D.6 |
 | **Inline styles (`style="..."`)** | Token aliases, no raw hex, no `var(--gold)` | D.2 (in inline), D.6 |
 | **SVG `fill`/`stroke`** | No deprecated hex from `VISUAL-IDENTITY-SYSTEM.md` | D.7 (SVG) |
 | **Canvas / Three.js / WebGL colors** | Canonical hex (`0xE3B45A`, not `0xC9A227`) | D.7 (Three.js) |
 | **JavaScript color strings** | `rgba()`/hex strings use canonical values | D.7 (JS) |
-| **JavaScript content/data strings** (v6 — NEW) | Text in external JS files (e.g., `products.js`) that is rendered as visible HTML must comply with Trust Grammar, forbidden phrases, timing claims, and taxonomy. JS content strings are NOT exempt from content rules. | D.4, D.5, D.8, D.9, D.10, D.13, **D.14** |
-| **Content claims (copy in HTML)** | Trust Grammar forbidden phrases, timing claims, taxonomy | D.4, D.5, D.8, D.9, D.10 |
+| **JavaScript content/data strings** (v6) | Text in external JS files (e.g., `products.js`) that is rendered as visible HTML must comply with Trust Grammar, forbidden phrases, timing claims, and taxonomy. JS content strings are NOT exempt from content rules. | D.4, D.5, D.8, D.9, D.10, D.13, D.14 |
+| **Content claims (copy in HTML)** | Trust Grammar forbidden phrases, timing claims, taxonomy. v7: includes page-identity locations (title, meta, hero, section headers) for D.10. | D.4, D.5, D.8, D.9, D.10 |
+| **External CSS/JS files (project-authored)** (v7 — NEW) | Project-authored CSS/JS files loaded by the page — competitor naming in comments (D.5), timing claims in JS content (D.8/D.14). **Scope limit:** applies to project-authored files only, NOT third-party libraries (jQuery, GSAP, Three.js from CDN). | D.5 (tokens.css comment), D.14 (products.js) |
+| **Canonical token definition files** (v7 — NEW, GDS-1) | `tokens.css`, `roua-v7.css`, `roua-v7-patch.css` — legacy palette in token definitions is D.2 for pages importing them. **Scope limit:** ONLY these 3 files count as "canonical token definition files" — NOT utility CSS, NOT third-party libraries. See GDS-1 in Layer 6.4. | D.2 (tokens.css legacy palette) |
 
-> **A single deprecated hex in an SVG diagram, a single "real time" in a content claim, or a single "in under 30 seconds" in a JS data file — FAILS the page, even if every CSS rule is canonical.**
+> **A single deprecated hex in an SVG diagram, a single "real time" in a content claim, a single "in under 30 seconds" in a JS data file, or a single `#C9A227` in `tokens.css` — FAILS the page, even if every CSS rule is canonical.**
 
 ## Technology Neutrality Principle (v2)
 
@@ -816,18 +896,18 @@ What IS prohibited:
 ## Acceptance Criteria
 
 A page PASSES acceptance when:
-- ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + content claims)
+- ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + external CSS/JS + content claims + canonical token files per GDS-1)
 - ✓ Zero Layer 5 do-not-touch violations
-- ✓ Layer 6 category-specific rules satisfied
+- ✓ Layer 6 category-specific rules satisfied (including v7 rules: GDS-1, Customer-Production Boundary, Design-Reference Exception where applicable)
 - ✓ Zero D.1–D.14 defects (or all REPAIR items resolved; REVIEW items deferred)
 
 A page FAILS acceptance when:
 - ✗ Any Layer 1 FORBID violation in any implementation layer
 - ✗ Any Layer 5 do-not-touch violation
-- ✗ Any Layer 6 category-specific FORBID violation
+- ✗ Any Layer 6 category-specific FORBID violation (including GDS-1 legacy tokens in canonical files, Design-Reference Exception violations)
 - ✗ Any unrepaired D.1–D.14 defect in any implementation layer (REVIEW items are P3, not blocking)
 
-## Audit Workflow (for Delta 06+)
+## Audit Workflow (v7 — for all pages)
 
 1. Identify page category (Layer 6.1)
 2. Run Layer 1 canonical baseline check across ALL implementation layers:
@@ -837,10 +917,12 @@ A page FAILS acceptance when:
    - SVG `fill`/`stroke` hex values
    - Canvas/Three.js/WebGL color constants
    - JavaScript color strings
-   - JavaScript content/data strings (v6 — text rendered as HTML)
-   - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy)
+   - JavaScript content/data strings (text rendered as HTML)
+   - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy — **including page-identity locations** for D.10)
+   - **External CSS/JS files (project-authored)** — competitor naming in comments (D.5), timing claims (D.8/D.14)
+   - **Canonical token definition files** (v7 GDS-1) — if page imports `tokens.css` / `roua-v7.css` / `roua-v7-patch.css`, scan these for D.2 legacy palette
 3. Run Layer 5 do-not-touch check
-4. Run Layer 6 category-specific check
+4. Run Layer 6 category-specific check (**including v7 rules: GDS-1, Customer-Production Boundary, Design-Reference Exception**)
 5. Run Layer 4 defect scan (D.1–D.14) across ALL implementation layers
 6. Classify remaining drift into A/B/C/D
 7. Produce Delta Report with PASS/FAIL acceptance verdict
@@ -910,13 +992,14 @@ A page FAILS acceptance when:
 | 5.4 | Audit Sample Library (`sample-library.html`) ✅ (Delta 09 — FAIL, D.2+D.4 variant+D.9 variant REVIEW+D.12) |
 | 5.5 | Audit Catalog (`catalog.html`) ✅ (Delta 10 — FAIL, D.9 variant+D.10+D.14) |
 | 5.6 | Audit Solutions pages against Spec v6 |
-| 5.7 | Audit Company pages against Spec v6 |
-| 5.8 | Audit Trust Framework against Spec v6 |
-| 5.9 | Audit remaining reference pages against Spec v6 |
+| 5.7 | Audit Company pages against Spec v6 ✅ (Delta 26–28 — Contact, Careers, Research Institute) |
+| 5.8 | Audit Trust Framework against Spec v6 ✅ (Delta 15 — Trust Framework) |
+| 5.9 | Audit remaining reference pages against Spec v6 ✅ (Delta 29–30 — Visual Reference, Design Reference) |
 
-> **Note:** Phase 5 audits continue against the **current v6 Spec**. Each new Delta Report may discover additional defect types (D.15+), triggering Spec v7. **D.10** mandatory scan continues (2 confirmed cases, risk LOW). **D.11** non-canonical hex scan mandatory. **D.4** matches all semantic variants. **D.9** has 3 tiers: FORBID (confidence score/d) → REVIEW leans FORBID (Confidence Scoring as capability) → REVIEW (Extraction Confidence as illustrative metadata). **D.14** scans external JS data files for timing claims.
+> **v7 Note:** All 30 pages audited (Delta 01–30). 4 PASS (Enterprise, Platform, Source Registry borderline, Careers), 26 FAIL. **No D.15+ new defect types found across the entire 30-page audit.** Spec v7 refines D.1–D.14 with 8 clarifications and adds 3 NEW Layer 6 category rules (GDS-1, Customer-Production Boundary, Design-Reference Exception). Defect taxonomy remains D.1–D.14. **D.10** now covers page-identity locations (title/meta/hero/section headers). **D.9** is concept-based (covers verb forms, excludes "confidence propagation"). **D.8** covers latency-range variants and excludes operational-status language. **D.5** covers external CSS/JS (project-authored only). **D.2** covers canonical token definition files (GDS-1 scope — `tokens.css`, `roua-v7.css`, `roua-v7-patch.css` only). **Root-fix priority:** `tokens.css` (D.2 + D.5) is the highest-leverage single fix in the entire audit.
 
 ---
 
-*End of ROUA Product Family Consolidation Spec.*
+*End of ROUA Product Family Consolidation Spec — v7.*
 *This document is the acceptance contract for all subsequent page audits and edits.*
+*30-page cumulative audit complete (Delta 01–30). No D.15+. Ready for Phase B dependency impact analysis and Phase C root-first repair execution.*
