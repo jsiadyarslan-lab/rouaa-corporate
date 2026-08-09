@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="design-system/roua-v7.css">
   <link rel="stylesheet" href="design-system/roua-v7-patch.css">
+  <link rel="stylesheet" href="design-system/roua-v7-homepage.css">
 </head>
 <body>
 
@@ -93,54 +94,102 @@
 
 <main id="main">
 
-  <!-- ============ 01 HERO ============ -->
-  <section class="section" id="hero" style="padding: 5rem 0 3rem; position: relative; overflow: hidden;">
-    <div class="hero-platform-bg" style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 50% 0%, var(--roua-accent-subtle), transparent 70%); z-index: 0;"></div>
-    <div class="container" style="position: relative; z-index: 1;">
-      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
-        <div class="mono-label text-gold" style="margin-bottom: 1.25rem;">Financial Intelligence Infrastructure</div>
-        <h1 style="font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 1.25rem;">
-          Governed financial intelligence<br>
-          <span class="text-gold">for decisions that must be defended.</span>
-        </h1>
-        <p style="font-size: 1.0625rem; color: var(--roua-text-secondary); max-width: 60ch; margin: 0 auto 2rem; line-height: 1.7;">
-          ROUA transforms official financial information into governed intelligence &mdash; powering investment research, market intelligence, risk analysis, financial media, and developer integration from one evidence-linked foundation.
-        </p>
-        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem;">
-          <a href="#environments" class="btn btn-primary btn-lg">Explore Products</a>
-          <a href="contact.html" class="btn btn-ghost btn-lg">Request Briefing</a>
-        </div>
-      </div>
+  <!-- ============ 01 HERO — Composition: narrative left · visual Intelligence Object right ============ -->
+  <section class="hp-hero reveal rv" id="hero">
+    <!-- Atmospheric background: thin grid + 2 muted mesh blobs. No globe, no particles. -->
+    <div class="hp-atmos" aria-hidden="true"></div>
 
-      <!-- Intelligence Object — FOMC July 29, 2026 -->
-      <div style="max-width: 560px; margin: 0 auto; padding: 1.5rem; background: var(--roua-surface); border: 1px solid var(--roua-accent-border); border-left: 4px solid var(--roua-accent); border-radius: var(--radius-lg);">
-        <div style="font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 1rem; text-align: center;">One Source &middot; Different Intelligence</div>
+    <div class="container">
+      <div class="hp-hero-grid">
 
-        <div style="padding: 0.75rem 1rem; background: var(--roua-bg-tertiary); border-radius: var(--radius-sm); margin-bottom: 0.625rem;">
-          <div style="font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-text-muted); margin-bottom: 0.25rem;">Verified Event</div>
-          <div style="font-size: 0.875rem; color: var(--roua-text-primary); font-weight: 600;">Federal funds target range maintained at 3.50%&ndash;3.75%</div>
-          <div style="font-size: 0.6875rem; color: var(--roua-text-muted); margin-top: 0.125rem;">FOMC &middot; July 29, 2026 &middot; 9-3 vote</div>
-        </div>
+        <!-- LEFT — narrative -->
+        <div class="hp-hero-left">
+          <div class="hp-hero-eyebrow">Financial Intelligence Infrastructure</div>
 
-        <div style="padding: 0.75rem 1rem; background: var(--roua-bg-tertiary); border-radius: var(--radius-sm); margin-bottom: 0.625rem;">
-          <div style="font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-text-muted); margin-bottom: 0.25rem;">Source</div>
-          <a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm" target="_blank" rel="noopener" style="font-size: 0.75rem; color: var(--roua-accent); font-weight: 600; text-decoration: underline;">Federal Reserve &mdash; FOMC Statement &rarr;</a>
-        </div>
+          <h1 class="hp-hero-h1">
+            From official information to decisions<br>
+            <em>institutions can defend.</em>
+          </h1>
 
-        <div style="padding: 0.625rem 1rem; background: var(--roua-bg-secondary); border: 1px dashed var(--roua-accent-border); border-radius: var(--radius-sm); margin-bottom: 0.625rem;">
-          <div style="font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.25rem;">Different Intelligence per Environment</div>
-          <div style="font-size: 0.625rem; color: var(--roua-text-secondary); line-height: 1.6;">
-            <strong style="color: var(--roua-text-primary);">Investment:</strong> investment context &middot;
-            <strong style="color: var(--roua-text-primary);">Market:</strong> market context &middot;
-            <strong style="color: var(--roua-text-primary);">Risk:</strong> exposure review &middot;
-            <strong style="color: var(--roua-text-primary);">Media:</strong> editorial context &middot;
-            <strong style="color: var(--roua-text-primary);">Developer:</strong> integration contract
+          <p class="hp-hero-sub">
+            ROUA transforms official financial information into governed intelligence &mdash; producing different decision contexts for investment, market, risk, media, and developer environments from one evidence-linked foundation.
+          </p>
+
+          <div class="hp-hero-cta">
+            <a href="contact.html" class="btn btn-primary btn-lg">Request Institutional Briefing</a>
+            <a href="architecture.html" class="btn btn-ghost btn-lg">Read the Architecture</a>
           </div>
         </div>
 
-        <a href="evidence-explorer.html#fomc-jul-2026" style="display: block; text-align: center; font-size: 0.6875rem; font-weight: 600; color: var(--roua-accent); text-decoration: none; padding: 0.5rem; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-sm);">Inspect in Evidence Explorer &rarr;</a>
+        <!-- RIGHT — visual Intelligence Object (composition, not stats card)
+             FOMC · JUL 29 2026  →  Verified Event  →  Source / Evidence metadata
+                                       ↓ (transformation path)
+                          Market · Media · Risk context
+             The path itself IS the proof: one event produces multiple intelligences. -->
+        <div class="hp-hero-right">
+          <div class="hp-io">
+            <div class="hp-io-meta">
+              <span>FOMC &middot; JUL 29 2026</span>
+              <span class="hp-io-meta-right">9&ndash;3 VOTE</span>
+            </div>
 
-        <div style="font-size: 0.5625rem; color: var(--roua-text-muted); font-style: italic; text-align: center; margin-top: 0.5rem;">Source data: official Federal Reserve disclosure. Product workflow shown for illustration.</div>
+            <div class="hp-io-label">Verified Event</div>
+            <div class="hp-io-fact">
+              Federal funds target range
+              <span class="hp-io-value">3.50% &mdash; 3.75%</span>
+            </div>
+
+            <div class="hp-io-rows">
+              <div>
+                <div class="hp-io-row-label">Source</div>
+                <div class="hp-io-row-value">
+                  <a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm" target="_blank" rel="noopener">Federal Reserve &rarr;</a>
+                </div>
+              </div>
+              <div>
+                <div class="hp-io-row-label">Evidence</div>
+                <div class="hp-io-row-value mono">Statement &middot; &sect;2 &middot; &para;1</div>
+              </div>
+            </div>
+
+            <!-- Transformation path: one event branching into three contexts.
+                 Drawn once on entrance. Static after. -->
+            <svg class="hp-io-path" viewBox="0 0 320 56" preserveAspectRatio="none" aria-hidden="true">
+              <!-- Vertical trunk from the verified fact down -->
+              <path class="stroke" d="M 160 0 L 160 18"/>
+              <!-- Horizontal distribution bar -->
+              <path class="stroke" d="M 60 18 L 260 18"/>
+              <!-- Three branches down to the context labels -->
+              <path class="stroke" d="M 60 18 L 60 44"/>
+              <path class="stroke" d="M 160 18 L 160 44"/>
+              <path class="stroke" d="M 260 18 L 260 44"/>
+              <!-- Node dots at each branch endpoint -->
+              <circle class="node" cx="60" cy="44" r="2.5"/>
+              <circle class="node" cx="160" cy="44" r="2.5"/>
+              <circle class="node" cx="260" cy="44" r="2.5"/>
+            </svg>
+
+            <div class="hp-io-contexts">
+              <div class="hp-io-context">
+                <div class="hp-io-context-label">Market Context</div>
+                <div class="hp-io-context-desc">Affected instruments &middot; decision context</div>
+              </div>
+              <div class="hp-io-context">
+                <div class="hp-io-context-label">Media Context</div>
+                <div class="hp-io-context-desc">Editorial story &middot; publication output</div>
+              </div>
+              <div class="hp-io-context">
+                <div class="hp-io-context-label">Risk Context</div>
+                <div class="hp-io-context-desc">Exposure review &middot; escalation path</div>
+              </div>
+            </div>
+
+            <div class="hp-io-foot">
+              Source data: official Federal Reserve disclosure. Product workflow shown for illustration.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -177,88 +226,164 @@
     </div>
   </section>
 
-  <!-- ============ 03 THE INTELLIGENCE LAYER ============ -->
+  <!-- ============ 03 THE INTELLIGENCE LAYER — cinematic horizontal flow ============ -->
   <section class="section reveal" id="intelligence-layer">
     <div class="container">
       <div style="text-align: center; margin-bottom: 3rem;">
         <span class="section-tag" style="justify-content: center;">The Intelligence Layer</span>
         <h2 class="section-h" style="margin: 1rem auto 0; max-width: 36ch;">From official source to governed intelligence.</h2>
-        <p class="section-lead" style="margin: 1rem auto 0;">One canonical chain. Every product inherits the same evidence. Every output is defensible.</p>
+        <p class="section-lead" style="margin: 1rem auto 0;">One canonical chain. Every environment inherits the same evidence. Every output is defensible.</p>
       </div>
-      <div style="max-width: 540px; margin: 0 auto; padding: 2rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-lg);">
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-          <div style="padding: 0.75rem 1.5rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); text-align: center; min-width: 280px;">
-            <div style="font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.25rem;">01</div>
-            <div style="font-size: 1rem; font-weight: 600; color: var(--roua-text-primary);">Official Sources</div>
-            <div style="font-size: 0.75rem; color: var(--roua-text-muted); margin-top: 0.125rem;">Central banks &middot; regulators &middot; exchanges</div>
-          </div>
-          <div style="color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem;">&darr;</div>
-          <div style="padding: 0.625rem 1.5rem; background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; min-width: 280px;">
-            <div style="font-family: var(--mono); font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">02</div>
-            <div style="font-size: 0.9375rem; font-weight: 600; color: var(--roua-text-primary);">Verified Facts / Events</div>
-          </div>
-          <div style="color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem;">&darr;</div>
-          <div style="padding: 0.625rem 1.5rem; background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; min-width: 280px;">
-            <div style="font-family: var(--mono); font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">03</div>
-            <div style="font-size: 0.9375rem; font-weight: 600; color: var(--roua-text-primary);">Evidence &amp; Provenance</div>
-          </div>
-          <div style="color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem;">&darr;</div>
-          <div style="padding: 0.625rem 1.5rem; background: var(--roua-bg-tertiary); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; min-width: 280px;">
-            <div style="font-family: var(--mono); font-size: 0.625rem; color: var(--roua-text-muted); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">04</div>
-            <div style="font-size: 0.9375rem; font-weight: 600; color: var(--roua-text-primary);">Governed Reasoning</div>
-          </div>
-          <div style="color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem;">&darr;</div>
-          <div style="padding: 0.75rem 1.5rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); text-align: center; min-width: 280px;">
-            <div style="font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.25rem;">05</div>
-            <div style="font-size: 1rem; font-weight: 700; color: var(--roua-accent);">Intelligence Output</div>
-            <div style="font-size: 0.75rem; color: var(--roua-text-muted); margin-top: 0.125rem;">Investment &middot; Market &middot; Risk &middot; Media &middot; Developer</div>
-          </div>
+
+      <!-- Horizontal system flow: source → facts → evidence → context → output.
+           The connecting line draws itself once on entrance (left to right),
+           then remains static. This IS the system, not a list. -->
+      <div class="hp-flow rv">
+        <!-- Drawn connecting line (sits behind nodes) -->
+        <div class="hp-flow-line" aria-hidden="true">
+          <svg viewBox="0 0 1200 1" preserveAspectRatio="none">
+            <path d="M 0 0.5 L 1200 0.5"/>
+          </svg>
         </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-          <a href="architecture.html" class="btn-link">Explore the architecture in depth &rarr;</a>
+
+        <div class="hp-flow-node is-source" style="--i:0">
+          <div class="hp-flow-node-step">01 &middot; Source</div>
+          <div class="hp-flow-node-title">Official Sources</div>
+          <div class="hp-flow-node-sample">Central banks &middot; regulators &middot; exchanges</div>
+        </div>
+
+        <div class="hp-flow-node" style="--i:1">
+          <div class="hp-flow-node-step">02 &middot; Verified</div>
+          <div class="hp-flow-node-title">Facts &amp; Events</div>
+          <div class="hp-flow-node-sample">Source-linked &middot; structured</div>
+        </div>
+
+        <div class="hp-flow-node" style="--i:2">
+          <div class="hp-flow-node-step">03 &middot; Chain</div>
+          <div class="hp-flow-node-title">Evidence &amp; Provenance</div>
+          <div class="hp-flow-node-sample">Document &middot; section &middot; paragraph</div>
+        </div>
+
+        <div class="hp-flow-node" style="--i:3">
+          <div class="hp-flow-node-step">04 &middot; Governed</div>
+          <div class="hp-flow-node-title">Context</div>
+          <div class="hp-flow-node-sample">Investment &middot; market &middot; risk &middot; media</div>
+        </div>
+
+        <div class="hp-flow-node is-output" style="--i:4">
+          <div class="hp-flow-node-step">05 &middot; Output</div>
+          <div class="hp-flow-node-title">Intelligence Object</div>
+          <div class="hp-flow-node-sample">Defensible &middot; inspectable</div>
         </div>
       </div>
+
+      <p class="hp-flow-caption">
+        Each step inherits the evidence of the previous one. The output is not a claim &mdash; it is a governed intelligence object carrying its full chain. <a href="architecture.html">Explore the architecture in depth &rarr;</a>
+      </p>
     </div>
   </section>
 
-  <!-- ============ 04 ONE SOURCE → MULTIPLE INTELLIGENCE OBJECTS ============ -->
+  <!-- ============ 04 ONE SOURCE → MULTIPLE INTELLIGENCE OBJECTS — branching tree (the thesis) ============ -->
   <section class="section reveal" style="background: var(--roua-bg-secondary); border-top: 1px solid var(--roua-border); border-bottom: 1px solid var(--roua-border);">
     <div class="container">
-      <div style="text-align: center; margin-bottom: 3rem;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
         <span class="section-tag" style="justify-content: center;">One Source &middot; Multiple Intelligence</span>
         <h2 class="section-h" style="margin: 1rem auto 0; max-width: 40ch;">One FOMC decision. Five different intelligence objects.</h2>
         <p class="section-lead" style="margin: 1rem auto 0;">The same verified event produces different intelligence for each environment &mdash; each carrying the same evidence chain.</p>
       </div>
-      <div style="max-width: 880px; margin: 0 auto;">
-        <div style="padding: 1.25rem 1.5rem; background: var(--roua-accent-subtle); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-md); text-align: center; margin-bottom: 1rem;">
-          <div style="font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.25rem;">Verified Event</div>
-          <div style="font-size: 1rem; font-weight: 600; color: var(--roua-text-primary);">FOMC maintains federal funds target range at 3.50%&ndash;3.75% &middot; July 29, 2026</div>
+
+      <div class="hp-tree-wrap rv">
+
+        <!-- ROOT — the single official event -->
+        <div class="hp-tree-root">
+          <div class="hp-tree-root-label">Verified Event &middot; Same Source for All Five</div>
+          <div class="hp-tree-root-fact">FOMC maintains federal funds target range at 3.50%&ndash;3.75%</div>
+          <div class="hp-tree-root-meta">JULY 29, 2026 &middot; FEDERAL RESERVE &middot; STATEMENT &sect;2 &para;1</div>
         </div>
-        <div style="text-align: center; color: var(--roua-accent); opacity: 0.4; font-size: 1.25rem; margin: 0.5rem 0;">&darr;</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem;">
-          <a href="investment-intelligence.html" style="padding: 1rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; text-decoration: none; transition: border-color 0.3s;">
-            <div style="font-family: var(--mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.5rem;">Investment</div>
-            <div style="font-size: 0.8125rem; color: var(--roua-text-secondary); line-height: 1.5;">Investment context &middot; portfolio impact</div>
+
+        <!-- SVG BRANCHING TREE — the proof.
+             1 root → 5 leaves. Removing this SVG destroys the meaning. -->
+        <svg class="hp-tree-svg" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Trunk: from root down -->
+          <path class="trunk" d="M 600 0 L 600 30"/>
+          <!-- Horizontal distribution bar: spans all 5 column centers -->
+          <path class="trunk" d="M 120 30 L 1080 30"/>
+          <!-- 5 branches down to each leaf -->
+          <path class="branch b1" d="M 120 30 L 120 130"/>
+          <path class="branch b2" d="M 360 30 L 360 130"/>
+          <path class="branch b3" d="M 600 30 L 600 130"/>
+          <path class="branch b4" d="M 840 30 L 840 130"/>
+          <path class="branch b5" d="M 1080 30 L 1080 130"/>
+          <!-- Node dots at the trunk-top junction and each leaf-top -->
+          <circle class="node n-trunk" cx="600" cy="30" r="3"/>
+          <circle class="node n1" cx="120" cy="130" r="2.5"/>
+          <circle class="node n2" cx="360" cy="130" r="2.5"/>
+          <circle class="node n3" cx="600" cy="130" r="2.5"/>
+          <circle class="node n4" cx="840" cy="130" r="2.5"/>
+          <circle class="node n5" cx="1080" cy="130" r="2.5"/>
+        </svg>
+
+        <!-- Mobile fallback when SVG hidden -->
+        <div class="hp-tree-fallback-arrow" aria-hidden="true">&darr;</div>
+
+        <!-- 5 LEAVES — each shows the DIFFERENT intelligence object produced from the SAME event.
+             This is the visual proof of the thesis. -->
+        <div class="hp-tree-leaves">
+
+          <a href="investment-intelligence.html" class="hp-leaf l1">
+            <div class="hp-leaf-label">Investment</div>
+            <div class="hp-leaf-title">Investment Intelligence</div>
+            <div class="hp-leaf-object">
+              <div class="hp-leaf-object-key">Intelligence Object</div>
+              Investment Context Brief &mdash; portfolio impact assessment for rate-sensitive holdings.
+            </div>
+            <div class="hp-leaf-cta">Explore &rarr;</div>
           </a>
-          <a href="market-intelligence.html" style="padding: 1rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; text-decoration: none; transition: border-color 0.3s;">
-            <div style="font-family: var(--mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.5rem;">Market</div>
-            <div style="font-size: 0.8125rem; color: var(--roua-text-secondary); line-height: 1.5;">Market context &middot; affected instruments</div>
+
+          <a href="market-intelligence.html" class="hp-leaf l2">
+            <div class="hp-leaf-label">Market &amp; Trading</div>
+            <div class="hp-leaf-title">Market Intelligence</div>
+            <div class="hp-leaf-object">
+              <div class="hp-leaf-object-key">Intelligence Object</div>
+              Market Impact Report &mdash; affected instruments and decision context for trading desks.
+            </div>
+            <div class="hp-leaf-cta">Explore &rarr;</div>
           </a>
-          <a href="risk-intelligence.html" style="padding: 1rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; text-decoration: none; transition: border-color 0.3s;">
-            <div style="font-family: var(--mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.5rem;">Risk</div>
-            <div style="font-size: 0.8125rem; color: var(--roua-text-secondary); line-height: 1.5;">Exposure review &middot; escalation context</div>
+
+          <a href="risk-intelligence.html" class="hp-leaf l3">
+            <div class="hp-leaf-label">Risk</div>
+            <div class="hp-leaf-title">Risk Intelligence</div>
+            <div class="hp-leaf-object">
+              <div class="hp-leaf-object-key">Intelligence Object</div>
+              Exposure Review &mdash; escalation path and audit-ready decision record for compliance.
+            </div>
+            <div class="hp-leaf-cta">Explore &rarr;</div>
           </a>
-          <a href="media-intelligence.html" style="padding: 1rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; text-decoration: none; transition: border-color 0.3s;">
-            <div style="font-family: var(--mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.5rem;">Media</div>
-            <div style="font-size: 0.8125rem; color: var(--roua-text-secondary); line-height: 1.5;">Editorial context &middot; publication outputs</div>
+
+          <a href="media-intelligence.html" class="hp-leaf l4">
+            <div class="hp-leaf-label">Media</div>
+            <div class="hp-leaf-title">Media Intelligence</div>
+            <div class="hp-leaf-object">
+              <div class="hp-leaf-object-key">Intelligence Object</div>
+              Editorial Story &mdash; evidence-linked publication output with editorial record.
+            </div>
+            <div class="hp-leaf-cta">Explore &rarr;</div>
           </a>
-          <a href="developer-intelligence.html" style="padding: 1rem; background: var(--roua-surface); border: 1px solid var(--roua-surface-border); border-radius: var(--radius-md); text-align: center; text-decoration: none; transition: border-color 0.3s;">
-            <div style="font-family: var(--mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-accent); margin-bottom: 0.5rem;">Developer</div>
-            <div style="font-size: 0.8125rem; color: var(--roua-text-secondary); line-height: 1.5;">Integration contract &middot; product embedding</div>
+
+          <a href="developer-intelligence.html" class="hp-leaf l5 is-integration">
+            <div class="hp-leaf-label">Developer</div>
+            <div class="hp-leaf-title">Developer Platform</div>
+            <div class="hp-leaf-object">
+              <div class="hp-leaf-object-key">Integration Contract</div>
+              API Response Object &mdash; governed intelligence with embedded evidence for product integration.
+            </div>
+            <div class="hp-leaf-cta">Explore &rarr;</div>
           </a>
+
         </div>
-        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--roua-text-muted); line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto;">
-          One source. Five intelligence objects. Each environment receives different intelligence from the same verified event &mdash; all carrying the same evidence chain.
+
+        <p class="hp-tree-caption">
+          One source. Five intelligence objects &mdash; each a different decision context derived from the same verified event, all carrying the same evidence chain back to the Federal Reserve statement.
         </p>
       </div>
     </div>

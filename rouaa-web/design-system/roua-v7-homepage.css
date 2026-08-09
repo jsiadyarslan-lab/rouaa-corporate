@@ -1,0 +1,573 @@
+/* ============================================================
+   ROUA v7 — HOMEPAGE COMPOSITION LAYER
+   ============================================================
+   Inherits ALL tokens from roua-v7.css and roua-v7-patch.css.
+   Does NOT redefine --bg, --gold, --txt, --sans, --mono, or any
+   base color / typography token.
+
+   Adds ONLY:
+   - Homepage-specific composition tokens (spacing rhythm, hero grid)
+   - Three components unique to the homepage narrative:
+     .hp-hero       — two-sided hero composition with visual Intelligence Object
+     .hp-flow       — cinematic horizontal evidence flow (Section 03)
+     .hp-tree       — SVG branching tree (Section 04 — the thesis)
+
+   Visual Identity Rule:
+   - Product pages  = Evidence-first / restrained
+   - Homepage       = System-first / cinematic but restrained
+   Allowed: subtle motion (entrance only), SVG paths that explain the system,
+            depth via layering, large typography, subtle atmospheric background.
+   Forbidden: globe, particles, 3D tilt, wave, neon glow, excessive glass,
+              gold-everywhere, dashboard aesthetic, fake metrics.
+   ============================================================ */
+
+/* ---- Homepage composition tokens (NOT base tokens) ---- */
+:root{
+  /* Hero composition */
+  --hp-hero-grid: 1.15fr 1fr;                 /* left wider than right */
+  --hp-hero-grid-collapse: 1fr;               /* mobile */
+  --hp-hero-gap: clamp(40px, 5vw, 72px);
+  --hp-hero-min-height: clamp(520px, 70vh, 720px);
+
+  /* Atmospheric background — never opaque enough to read as decoration */
+  --hp-atmos-grid: rgba(148,184,255,.035);    /* grid line color */
+  --hp-atmos-mesh-1: rgba(227,180,90,.05);    /* gold mesh (top-right) */
+  --hp-atmos-mesh-2: rgba(79,140,255,.04);    /* blue mesh (bottom-left) */
+
+  /* Intelligence Object (hero right) typography rhythm */
+  --hp-io-fact-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  --hp-io-fact-lh: 1.15;
+
+  /* Horizontal flow (Section 03) */
+  --hp-flow-node-min: 150px;
+  --hp-flow-gap: clamp(16px, 2vw, 28px);
+  --hp-flow-line: rgba(227,180,90,.32);
+  --hp-flow-line-draw: 1.6s;
+
+  /* Branching tree (Section 04) */
+  --hp-tree-stroke: rgba(227,180,90,.42);
+  --hp-tree-stroke-strong: rgba(227,180,90,.62);
+  --hp-tree-draw: 1.4s;
+}
+
+/* ============================================================
+   ATMOSPHERIC BACKGROUND
+   Used inside hero and final CTA only. Thin grid + 2 muted mesh blobs.
+   No canvas, no WebGL, no particles, no globe.
+   ============================================================ */
+.hp-atmos{
+  position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+}
+.hp-atmos::before{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--hp-atmos-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hp-atmos-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, #000 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, #000 0%, transparent 80%);
+}
+.hp-atmos::after{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 40% 35% at 85% 10%, var(--hp-atmos-mesh-1), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, var(--hp-atmos-mesh-2), transparent 70%);
+}
+
+/* ============================================================
+   01 — HERO COMPOSITION
+   Two-sided: left = narrative, right = visual Intelligence Object.
+   The right side is a COMPOSITION, not a card with stats.
+   ============================================================ */
+.hp-hero{
+  position:relative;
+  padding: clamp(64px, 9vw, 112px) 0 clamp(40px, 5vw, 64px);
+  overflow:hidden;
+  min-height: var(--hp-hero-min-height);
+  display:flex; align-items:center;
+}
+.hp-hero-grid{
+  position:relative; z-index:1;
+  display:grid;
+  grid-template-columns: var(--hp-hero-grid);
+  gap: var(--hp-hero-gap);
+  align-items:center;
+  width:100%;
+}
+@media (max-width: 960px){
+  .hp-hero-grid{ grid-template-columns: var(--hp-hero-grid-collapse); gap:48px; }
+}
+
+/* LEFT — narrative */
+.hp-hero-left{}
+.hp-hero-eyebrow{
+  font-family: var(--mono);
+  font-size: .6875rem; font-weight:700;
+  letter-spacing: .22em; text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 22px;
+  display:flex; align-items:center; gap:14px;
+}
+.hp-hero-eyebrow::after{
+  content:''; flex:1; max-width:64px; height:1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.hp-hero-h1{
+  font-family: var(--sans);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--txt);
+  margin-bottom: 22px;
+  text-wrap: balance;
+}
+.hp-hero-h1 em{
+  font-style: normal;
+  color: var(--gold);
+}
+.hp-hero-sub{
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--dim);
+  max-width: 52ch;
+  margin-bottom: 36px;
+}
+.hp-hero-cta{
+  display:flex; gap:14px; flex-wrap:wrap;
+}
+
+/* RIGHT — visual Intelligence Object (NOT a card with stats)
+   Composed of whitespace + typography + a single SVG transformation path.
+   Reads as: Verified Event → Source/Evidence metadata → branching contexts. */
+.hp-io{
+  position:relative;
+  padding: 28px 32px 32px;
+  background: linear-gradient(180deg, rgba(13,25,52,.55), rgba(7,15,34,.78));
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 24px 60px -28px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.hp-io-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  font-family: var(--mono);
+  font-size: .625rem; font-weight:700;
+  letter-spacing: .14em; text-transform:uppercase;
+  color: var(--dim2);
+  margin-bottom: 18px;
+}
+.hp-io-meta-right{ color: var(--gold); }
+
+.hp-io-label{
+  font-family: var(--mono);
+  font-size: .625rem; font-weight:700;
+  letter-spacing: .18em; text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.hp-io-fact{
+  font-family: var(--sans);
+  font-size: var(--hp-io-fact-size);
+  font-weight: 700;
+  line-height: var(--hp-io-fact-lh);
+  color: var(--txt);
+  letter-spacing: -.01em;
+  margin-bottom: 18px;
+}
+.hp-io-fact .hp-io-value{
+  display:block;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.hp-io-rows{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 12px 24px;
+  margin-bottom: 18px;
+}
+.hp-io-row-label{
+  font-family: var(--mono);
+  font-size: .5625rem; font-weight:700;
+  letter-spacing: .14em; text-transform:uppercase;
+  color: var(--dim2);
+  margin-bottom: 4px;
+}
+.hp-io-row-value{
+  font-size: .8125rem; color: var(--txt); font-weight:500;
+  line-height: 1.4;
+}
+.hp-io-row-value.mono{ font-family: var(--mono); font-size: .75rem; color: var(--dim); }
+.hp-io-row-value a{
+  color: var(--gold); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+
+/* Transformation path — single subtle SVG line going down
+   From the verified fact, branching into three context labels below.
+   This IS the meaning: one event → multiple intelligence contexts. */
+.hp-io-path{
+  display:block;
+  width: 100%;
+  height: 56px;
+  margin: 6px 0 14px;
+  overflow: visible;
+}
+.hp-io-path .stroke{
+  fill: none;
+  stroke: var(--hp-flow-line);
+  stroke-width: 1.25;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  transition: stroke-dashoffset var(--hp-flow-line-draw) cubic-bezier(.2,.7,.2,1);
+}
+.hp-hero.in .hp-io-path .stroke{ stroke-dashoffset: 0; }
+.hp-io-path .node{
+  fill: var(--gold);
+  opacity: 0;
+  transition: opacity .4s ease calc(var(--hp-flow-line-draw) - .2s);
+}
+.hp-hero.in .hp-io-path .node{ opacity: 1; }
+
+.hp-io-contexts{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.hp-io-context{
+  text-align: center;
+}
+.hp-io-context-label{
+  font-family: var(--mono);
+  font-size: .5625rem; font-weight:700;
+  letter-spacing: .14em; text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.hp-io-context-desc{
+  font-size: .6875rem;
+  color: var(--dim);
+  line-height: 1.45;
+}
+
+.hp-io-foot{
+  font-size: .5625rem;
+  color: var(--dim2);
+  font-style: italic;
+  text-align: center;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   03 — THE INTELLIGENCE LAYER (cinematic horizontal flow)
+   Not a vertical list of arrows. A horizontal system-chain where the
+   connecting line draws itself once on entrance — visual proof of
+   "evidence flows through the system". After entrance: static.
+   ============================================================ */
+.hp-flow{
+  position:relative;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--hp-flow-gap);
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 960px){
+  .hp-flow{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hp-flow-arrow{ display:none; }
+}
+
+.hp-flow-node{
+  position:relative;
+  padding: 22px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: calc(var(--i, 0) * 160ms);
+}
+.hp-flow.in .hp-flow-node{ opacity: 1; transform: none; }
+
+.hp-flow-node.is-source,
+.hp-flow-node.is-output{
+  border-color: var(--roua-accent-border);
+  background: linear-gradient(180deg, rgba(227,180,90,.06), var(--panel));
+}
+.hp-flow-node-step{
+  font-family: var(--mono);
+  font-size: .5625rem; font-weight:700;
+  letter-spacing: .18em; text-transform:uppercase;
+  color: var(--dim2);
+  margin-bottom: 8px;
+}
+.hp-flow-node.is-source .hp-flow-node-step,
+.hp-flow-node.is-output .hp-flow-node-step{ color: var(--gold); }
+.hp-flow-node-title{
+  font-size: .9375rem; font-weight:700;
+  color: var(--txt);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.hp-flow-node-sample{
+  font-family: var(--mono);
+  font-size: .6875rem;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+/* Horizontal connecting line — drawn once on entrance.
+   Sits BETWEEN nodes, not over them. Pure SVG path stroke draw. */
+.hp-flow-line{
+  position:absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hp-flow-line svg{ width:100%; height:1px; display:block; }
+.hp-flow-line path{
+  fill:none;
+  stroke: var(--hp-flow-line);
+  stroke-width: 1;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset var(--hp-flow-line-draw) ease;
+}
+.hp-flow.in .hp-flow-line path{ stroke-dashoffset: 0; }
+@media (max-width: 960px){ .hp-flow-line{ display:none; } }
+
+.hp-flow-caption{
+  text-align: center;
+  margin-top: 36px;
+  font-size: .875rem;
+  color: var(--dim);
+  max-width: 64ch;
+  margin-left: auto; margin-right: auto;
+  line-height: 1.7;
+}
+.hp-flow-caption a{ color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ============================================================
+   04 — ONE SOURCE → MULTIPLE INTELLIGENCE OBJECTS (branching tree)
+   THE THESIS-PROVING MOMENT.
+   SVG is not decoration — removing it destroys the meaning.
+   Tree topology: 1 root event → 5 leaves (4 decision envs + 1 integration layer).
+   Each leaf shows the SAME event producing DIFFERENT intelligence.
+   ============================================================ */
+.hp-tree-wrap{
+  position:relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Root event — top center */
+.hp-tree-root{
+  max-width: 520px;
+  margin: 0 auto 0;
+  padding: 20px 28px;
+  background: linear-gradient(180deg, rgba(227,180,90,.08), rgba(7,15,34,.5));
+  border: 1px solid var(--roua-accent-border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.hp-tree-root-label{
+  font-family: var(--mono);
+  font-size: .625rem; font-weight:700;
+  letter-spacing: .18em; text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.hp-tree-root-fact{
+  font-size: 1.0625rem; font-weight:600;
+  color: var(--txt);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.hp-tree-root-meta{
+  font-family: var(--mono);
+  font-size: .6875rem;
+  color: var(--dim2);
+}
+
+/* SVG tree — fills the container width.
+   Path strokes draw on entrance (one-time).
+   After entrance: static. No pulsing, no infinite animation. */
+.hp-tree-svg{
+  display:block;
+  width: 100%;
+  height: 130px;
+  margin: 0;
+  overflow: visible;
+}
+@media (max-width: 960px){ .hp-tree-svg{ display:none; } }
+
+.hp-tree-svg .trunk,
+.hp-tree-svg .branch{
+  fill: none;
+  stroke: var(--hp-tree-stroke);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset var(--hp-tree-draw) cubic-bezier(.2,.7,.2,1);
+}
+.hp-tree-wrap.in .hp-tree-svg .trunk,
+.hp-tree-wrap.in .hp-tree-svg .branch{ stroke-dashoffset: 0; }
+.hp-tree-svg .trunk{ transition-delay: 0s; }
+.hp-tree-svg .branch.b1{ transition-delay: .35s; }
+.hp-tree-svg .branch.b2{ transition-delay: .5s; }
+.hp-tree-svg .branch.b3{ transition-delay: .65s; }
+.hp-tree-svg .branch.b4{ transition-delay: .8s; }
+.hp-tree-svg .branch.b5{ transition-delay: .95s; }
+
+.hp-tree-svg .node{
+  fill: var(--gold);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.hp-tree-wrap.in .hp-tree-svg .node{ opacity: 1; }
+.hp-tree-svg .node.n-trunk{ transition-delay: .3s; }
+.hp-tree-svg .node.n1{ transition-delay: .55s; }
+.hp-tree-svg .node.n2{ transition-delay: .7s; }
+.hp-tree-svg .node.n3{ transition-delay: .85s; }
+.hp-tree-svg .node.n4{ transition-delay: 1s; }
+.hp-tree-svg .node.n5{ transition-delay: 1.15s; }
+
+/* Mobile fallback — when SVG hidden, show a single vertical arrow */
+.hp-tree-fallback-arrow{
+  display:none;
+  text-align:center;
+  color: var(--gold);
+  font-size: 1.25rem;
+  opacity: .45;
+  margin: 8px 0;
+}
+@media (max-width: 960px){
+  .hp-tree-fallback-arrow{ display:block; }
+}
+
+/* Leaves — 5 intelligence objects produced from the same event.
+   Each leaf is a link to its product page. */
+.hp-tree-leaves{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 0;
+}
+@media (max-width: 960px){
+  .hp-tree-leaves{ grid-template-columns: 1fr; }
+}
+
+.hp-leaf{
+  display:flex; flex-direction: column;
+  padding: 18px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease, border-color .25s ease;
+}
+.hp-leaf.l1{ transition-delay: .6s; }
+.hp-leaf.l2{ transition-delay: .75s; }
+.hp-leaf.l3{ transition-delay: .9s; }
+.hp-leaf.l4{ transition-delay: 1.05s; }
+.hp-leaf.l5{ transition-delay: 1.2s; }
+.hp-tree-wrap.in .hp-leaf{ opacity: 1; transform: none; }
+.hp-leaf:hover{
+  border-color: var(--roua-accent-border);
+  background: linear-gradient(180deg, rgba(227,180,90,.05), var(--panel));
+}
+
+.hp-leaf-label{
+  font-family: var(--mono);
+  font-size: .5625rem; font-weight:700;
+  letter-spacing: .16em; text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.hp-leaf-title{
+  font-size: .9375rem; font-weight:700;
+  color: var(--txt);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.hp-leaf-object{
+  font-size: .75rem;
+  color: var(--dim);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.hp-leaf-object-key{
+  font-family: var(--mono);
+  font-size: .5625rem; font-weight:700;
+  letter-spacing: .14em; text-transform:uppercase;
+  color: var(--dim2);
+  margin-bottom: 4px;
+}
+.hp-leaf-cta{
+  font-family: var(--mono);
+  font-size: .625rem; font-weight:700;
+  letter-spacing: .14em; text-transform:uppercase;
+  color: var(--gold);
+}
+
+/* Visual distinction: integration layer (Developer) sits in different surface */
+.hp-leaf.is-integration{
+  background: linear-gradient(180deg, rgba(79,140,255,.04), var(--panel));
+  border-color: rgba(79,140,255,.25);
+}
+.hp-leaf.is-integration .hp-leaf-label{ color: var(--blue2); }
+
+.hp-tree-caption{
+  text-align: center;
+  margin-top: 36px;
+  font-size: .875rem;
+  color: var(--dim);
+  max-width: 56ch;
+  margin-left: auto; margin-right: auto;
+  line-height: 1.7;
+}
+
+/* JS-fail-safe: if observer never fires (no JS, JS broken), content is visible.
+   This rule is OUTSIDE any media query — applies whenever html lacks .js. */
+html:not(.js) .hp-flow-node,
+html:not(.js) .hp-leaf,
+html:not(.js) .hp-io-path .stroke,
+html:not(.js) .hp-io-path .node,
+html:not(.js) .hp-flow-line path,
+html:not(.js) .hp-tree-svg .trunk,
+html:not(.js) .hp-tree-svg .branch,
+html:not(.js) .hp-tree-svg .node{
+  opacity: 1 !important;
+  transform: none !important;
+  stroke-dashoffset: 0 !important;
+}
+
+/* Reduced-motion fallback: show everything immediately, no draws */
+@media (prefers-reduced-motion: reduce){
+  .hp-flow-node, .hp-leaf, .hp-io-path .stroke, .hp-io-path .node,
+  .hp-flow-line path, .hp-tree-svg .trunk, .hp-tree-svg .branch, .hp-tree-svg .node{
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+}
