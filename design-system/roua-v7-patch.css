@@ -38,6 +38,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* ---- Semantic Color Tokens ---- */
 :root{
   --success:var(--op);
+  --success-subtle:rgba(16,185,129,.08);
+  --success-border:rgba(16,185,129,.25);
   --info:var(--blue);
   --warning:var(--pr);
   --critical:#ef4444;
@@ -577,28 +579,30 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* ---- System Chain (generic vertical chain for system pages) ---- */
 /* Used by source-registry.html for Source → Intelligence chain.
    Different semantics from .trust-chain (which is governance-specific).
-   This component represents data flow / system connectivity, not trust controls. */
+   This component represents data flow / system connectivity, not trust controls.
+   Visual language is aligned with .trust-chain: same typography, connector,
+   node geometry, spacing rhythm, and border/surface treatment. */
 .system-chain{
-  max-width:480px;
+  max-width:540px;
   margin:0 auto;
-  text-align:center;
-  padding:36px;
+  padding:32px;
+  background:var(--panel);
   border:1px solid var(--line2);
   border-radius:10px;
-  background:var(--panel);
 }
 .system-chain-header{
   font-family:var(--mono);
-  font-size:.62rem;
+  font-size:.66rem;
   font-weight:700;
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--dim2);
   margin-bottom:20px;
+  text-align:center;
 }
 .system-chain-node{
   text-align:center;
-  padding:4px 0;
+  padding:6px 0;
 }
 .system-chain-node-label{
   font-size:.88rem;
@@ -625,6 +629,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   padding:3px 0;
 }
 @media(max-width:480px){
-  .system-chain{padding:24px 16px}
+  .system-chain{padding:20px 16px}
   .system-chain-node-label{font-size:.82rem}
 }
