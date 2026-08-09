@@ -1,10 +1,17 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–07.
-> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 2 non-product pages audited against this spec (Delta 06 Architecture commit `20961e6`, Delta 07 Evidence Explorer commit `51e6583`).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–08.
+> **Source:** 5 product pages audited against `ROUA-VISUAL-SYSTEM-v1.md` (commits `ff17d40` → `62016e5`) + 3 non-product pages audited against this spec (Delta 06 Architecture `20961e6`, Delta 07 Evidence Explorer `51e6583`, Delta 08 Source Explorer `1a52234`).
 > **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026 (v3 — updated August 9, 2026 after Delta 07 Evidence Explorer audit).
+> **Effective date:** August 9, 2026 (v4 — updated August 9, 2026 after Delta 08 Source Explorer audit).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v4 changelog (post-Delta-08):**
+> - Layer 4 confirmed defects: D.11 (non-canonical raw hex), D.12 (no direct source links on Explorer pages), D.13 ("24/7" timing claim — REVIEW) added.
+> - Layer 1.1 Token System: added explicit rule forbidding non-canonical/off-brand raw colors. ALL hex values must match a canonical token. D.7 (deprecated) and D.11 (non-canonical) are distinct defect classes.
+> - Layer 6.3 Explorer rules: UX acceptance split by Explorer type. Evidence Explorer: `Source → Document → Evidence → Provenance → Context`. Source Explorer: `Source → Identity → Jurisdiction → Type → Monitoring Status → Official Domain`.
+> - D.10 status downgraded: from "system-wide potential" to "confirmed defect on Evidence Explorer + mandatory scan elsewhere". Source Explorer (Delta 08) is clean, confirming D.10 is NOT system-wide — but scan remains mandatory.
+> - D.13 deliberately kept as REVIEW (not auto-FORBID): "24/7" is not automatically equivalent to "real-time". Spec v4 treats it as judgment call until operational evidence is reviewed.
 >
 > **v3 changelog (post-Delta-07):**
 > - Layer 4 confirmed defects: D.10 (old taxonomy in content) added. Treated as **system-wide potential defect** until proven otherwise by audit — not just an Evidence Explorer issue.
@@ -49,6 +56,7 @@
 | Never use raw hex in JavaScript color strings | `rgba()`/`rgb()`/hex strings in JavaScript (e.g., `'rgba(201,162,39,0.5)'`) must use canonical values, not deprecated palette. | **FORBID** |
 | Never use `rgba(201, 162, 39, ...)` | This is the OLD gold from deprecated `VISUAL-IDENTITY-SYSTEM.md`. Canonical gold is `#e3b45a` = `rgba(227, 180, 90, ...)`. Applies in CSS, SVG, JS — everywhere. | **FORBID** |
 | Never use `var(--gold)` directly | Use `var(--roua-accent)` instead. (Media D.6 is the one violation — REPAIR.) | **FORBID** |
+| Never use non-canonical/off-brand raw hex (v4 — D.11) | ALL hex values in CSS, inline styles, SVG, or JS must match a canonical token from the color reference table below. Off-brand colors that match NO token (e.g., `#2DBA8E` instead of `var(--roua-green)` `#10B981`, `#4A90D9` instead of `var(--roua-blue)` `#4F8CFF`, `#F5A623` instead of `var(--roua-amber)` `#F59E0B`) are **FORBID**. Distinct from D.7 (deprecated hex from old palette) — D.11 covers hex values that never existed in any palette. Documented exceptions allowed only when functionally necessary (e.g., a specific chart library requires a precise color not in the token system — must be documented in a code comment explaining why). | **FORBID** |
 | White rgba in glass cards | `rgba(255,255,255,0.02)` and `rgba(255,255,255,0.06)` are acceptable in `.glass-status-card` surfaces. | **KEEP** |
 
 ### Canonical color reference (for replacement)
@@ -436,39 +444,85 @@
 | **Effort** | ~1 minute |
 | **Verdict** | **REPAIR** (P1 priority) |
 
-## D.10 — Old taxonomy in content (system-wide potential defect)
+## D.10 — Old taxonomy in content (confirmed on Evidence Explorer; mandatory scan elsewhere)
 
 | Field | Value |
 |---|---|
 | **Pattern** | Old product taxonomy names used in content — body copy, output fields, descriptions, JavaScript strings, SVG `<text>` elements — NOT in nav/footer (which were cleaned in P0 sweep) |
 | **Old terms (FORBID)** | "Trading Intelligence" (alone, should be "Market & Trading Intelligence"), "Institutional Intelligence" (should be "Investment Intelligence" or "Investment Firms"), "Developer Intelligence" (should be "Developer Platform"), "Developer APIs" (should be "Developer Platform"), "Market Intelligence" alone as product name (should be "Market & Trading Intelligence") |
 | **Pages affected** | Evidence Explorer (Delta 07): line 1214 — Step 07 output "Delivered To" field: "Trading Intelligence · Institutional Intelligence · Media Intelligence · Developer APIs" |
-| **Pages clean (so far)** | All 5 product pages + Architecture (nav/footer taxonomy correct; content not yet fully audited for all pages) |
-| **System-wide status** | **POTENTIAL DEFECT on all unaudited pages** — content-level taxonomy drift survives in pages built before taxonomy was locked. The P0 sweep cleaned nav/footer but did NOT scan body copy, output fields, or descriptions. Every subsequent Delta audit must scan full content surface. |
+| **Pages clean (confirmed)** | All 5 product pages + Architecture + **Source Explorer (Delta 08 — clean)** |
+| **System-wide status (v4 — downgraded)** | **CONFIRMED DEFECT on Evidence Explorer + MANDATORY SCAN elsewhere.** Source Explorer (Delta 08) is clean, confirming D.10 is NOT system-wide — it was specific to Evidence Explorer's Step 07 output field. However, the scan remains **mandatory** on all subsequent pages because content-level drift may exist on pages built before taxonomy was locked. The risk is lower than v3 assumed, but not zero. |
 | **Root cause** | Content fields written before taxonomy was locked (pre-P0-sweep), survived because they are in body copy/output fields, not in nav/footer where P0 scanned |
 | **Fix** | Replace each old term with the correct term from Layer 1.10 taxonomy table |
 | **Fix type** | Page-specific — find-and-replace in content (NOT nav/footer, which are already clean) |
 | **Effort** | ~1 minute per instance |
-| **Verdict** | **REPAIR** (P1 priority) — treat as system-wide until each page is audited |
+| **Verdict** | **REPAIR** (P1 priority) — mandatory scan on all pages, but risk is confirmed lower than v3 |
+
+## D.11 — Non-canonical raw hex colors (v4 — NEW)
+
+| Field | Value |
+|---|---|
+| **Pattern** | Raw hex color values that match NO canonical token (canonical or deprecated). These are "off-brand" colors that drifted from the token system entirely. |
+| **D.11 vs D.7 distinction** | D.7 = deprecated hex from `VISUAL-IDENTITY-SYSTEM.md` (`#C9A227`, `#0B0F18`, `#2A3543`, `#949EAF`, `#C4CCDA`, `#F5F7FA`). D.11 = non-canonical hex that matches NO token at all — colors that never existed in any palette. |
+| **Pages affected** | Source Explorer (Delta 08): 3 hex values, ~8 instances — `#2DBA8E` (green, should be `var(--roua-green)` `#10B981`), `#4A90D9` (blue, should be `var(--roua-blue)` `#4F8CFF`), `#F5A623` (amber, should be `var(--roua-amber)` `#F59E0B`). Used in status badges, stat cards, source lifecycle stages. |
+| **Pages clean** | All 5 product pages + Architecture + Evidence Explorer |
+| **Root cause** | Page was built with ad-hoc color values instead of canonical tokens. The status-badge colors (healthy green, warning amber) and lifecycle-stage colors (discovery green, verification/classification blue) were hardcoded. |
+| **Fix** | Replace each non-canonical hex with the corresponding canonical token: `#2DBA8E` → `var(--roua-green)`, `#4A90D9` → `var(--roua-blue)`, `#F5A623` → `var(--roua-amber)`. Use the Layer 1.1 canonical color reference table for mapping. |
+| **Fix type** | Page-specific — find-and-replace in inline styles + `<style>` block |
+| **Effort** | ~5 minutes for Source Explorer |
+| **Verdict** | **REPAIR** (P1 priority) |
+
+## D.12 — No direct source links on Explorer pages (v4 — NEW)
+
+| Field | Value |
+|---|---|
+| **Pattern** | Source registry page shows "Official Domain: federalreserve.gov" as TEXT in a detail field, not as a clickable `<a href>`. Zero external links to official sources. |
+| **Spec rule violated** | Layer 6.3 Explorers: "Direct links to official sources (like product pages)" — **KEEP** |
+| **Pages affected** | Source Explorer (Delta 08): all 15 source entries show "Official Domain" as text, none as clickable link |
+| **Pages clean** | Evidence Explorer (Delta 07) — has 6 direct links to official sources (aramco.com, federalreserve.gov, home.treasury.gov, ofac.treasury.gov) |
+| **Scope** | **Explorer-specific rule** — applies to Explorer-category pages (Evidence Explorer, Source Explorer, Sample Library). NOT extended to all site pages without justification. |
+| **Root cause** | Source Explorer was built as a metadata browser, not an evidence inspector. The "Official Domain" field was treated as display data, not as a link. |
+| **Fix** | Add `<a href="https://[official-domain]" target="_blank" rel="noopener">` to each source's "Official Domain" `.detail-value` |
+| **Fix type** | Page-specific — 15 source entries need link wrapping |
+| **Effort** | ~10 minutes for Source Explorer |
+| **Verdict** | **REPAIR** (P1 priority) |
+
+## D.13 — "24/7" timing claim (v4 — NEW, REVIEW)
+
+| Field | Value |
+|---|---|
+| **Pattern** | "24/7" used as a timing/freshness stat or claim (e.g., "Source Monitoring: 24/7") |
+| **Spec rule context** | Layer 1.9 forbids "real-time", "within seconds", "continuously monitored" (as timing claim). "24/7" is similar — it implies continuous guaranteed monitoring — but is NOT automatically equivalent to "real-time". |
+| **Pages affected** | Source Explorer (Delta 08): line 525 — stat card "Source Monitoring" shows "24/7" |
+| **Judgment call (v4 — deliberately REVIEW, not FORBID)** | "24/7" describes a monitoring schedule (always-on), not a latency guarantee. It may be an acceptable operational description OR an unproven timing claim. Spec v4 does NOT auto-equate "24/7" with "real-time" — that would be overreach. Instead, this is **REVIEW**: the team must determine whether "24/7" is (a) a proven operational commitment (acceptable) or (b) an unproven positioning claim (FORBID). |
+| **Fix (if FORBID)** | Replace "24/7" with "Continuous" or "Configured" or "Ongoing" |
+| **Fix (if acceptable)** | Leave as-is, but add illustrative disclaimer: "24/7 monitoring — operational target, not guaranteed uptime" |
+| **Fix type** | Content review — Spec v4 decision required before fix |
+| **Effort** | ~1 minute (after REVIEW decision) |
+| **Verdict** | **REVIEW** (P3 priority — deliberate, not auto-FORBID) |
 
 ## Defect Summary
 
 | ID | Type | Pages affected | Priority | Effort | Verdict |
 |---|---|---|---|---|---|
 | D.1 | Dead `<style>` block | 4/5 product pages | P2 | ~4 min | **REPAIR** |
-| D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture + Evidence Explorer | P1 | ~6 min (products) + ~10 min (Architecture) + ~3 min (Explorer) | **REPAIR** |
+| D.2 | Old-gold rgba in CSS | 3/5 product pages + Architecture + Evidence Explorer + Source Explorer | P1 | ~6 min (products) + ~10 min (Architecture) + ~3 min (Evidence Explorer) + ~2 min (Source Explorer) | **REPAIR** |
 | D.3 | Malformed HTML comment | 2/5 product pages | P1 | ~2 min | **REPAIR** |
 | D.4 | "Audit-Ready" violation | Market + Evidence Explorer | P1 | ~1 min (Market) + ~2 min (Explorer) | **REPAIR** |
 | D.5 | Competitor naming | 3/5 product pages | P3 | content | **REVIEW** |
 | D.6 | `var(--gold)` mixing | Media | P1 | ~1 min | **REPAIR** |
 | D.7 | Deprecated raw hex (SVG/JS) | Architecture | P1 | ~8 min | **REPAIR** |
-| D.8 | "real time" timing claim | Architecture | P1 | ~2 min | **REPAIR** |
+| D.8 | "real time" timing claim | Architecture + Source Explorer | P1 | ~2 min (Architecture) + ~1 min (Source Explorer) | **REPAIR** |
 | D.9 | "confidence score/d" claim | Architecture + Evidence Explorer | P1 | ~1 min (Architecture) + ~2 min (Explorer) | **REPAIR** |
-| D.10 | Old taxonomy in content | Evidence Explorer (system-wide potential) | P1 | ~1 min (Explorer) + TBD (unaudited pages) | **REPAIR** |
+| D.10 | Old taxonomy in content | Evidence Explorer (confirmed); mandatory scan elsewhere (risk lower) | P1 | ~1 min (Explorer) + TBD (unaudited pages — risk lower) | **REPAIR** |
+| D.11 | Non-canonical raw hex (v4) | Source Explorer | P1 | ~5 min | **REPAIR** |
+| D.12 | No direct source links (v4) | Source Explorer | P1 | ~10 min | **REPAIR** |
+| D.13 | "24/7" timing claim (v4) | Source Explorer | P3 | ~1 min (after REVIEW) | **REVIEW** |
 
-**Total technical repair budget (P1+P2): ~33 minutes** (was ~25 minutes before Delta 07 findings).
-**Content review (P3): separate track.**
-**D.10 system-wide scan: TBD** — will be determined as remaining pages are audited.
+**Total technical repair budget (P1+P2): ~48 minutes** (was ~33 minutes in v3, was ~25 minutes in v2, was ~14 minutes in v1).
+**Content review (P3): D.5 + D.13 on separate track.**
+**D.10 mandatory scan: continues on all subsequent pages, but risk confirmed lower.**
 
 ---
 
@@ -595,7 +649,17 @@ Every page (regardless of category) MUST comply with:
 | Direct links to official sources (like product pages) | **KEEP** |
 | Must use "Verified Fact/Event" labels (like product pages) | **KEEP** |
 | Must include "Inspect in Evidence Explorer" continuity links | **KEEP** |
-| Must provide UX inspection test PASS: user can quickly inspect Source → Document → Evidence → Provenance → Context | **KEEP** (v3 — added from Delta 07 UX test) |
+| Must provide UX inspection test PASS (v4 — split by Explorer type) | **KEEP** — UX acceptance is split by Explorer type (see table below) |
+
+#### Explorer UX acceptance — split by type (v4)
+
+| Explorer type | UX test chain | What the user must be able to quickly inspect |
+|---|---|---|
+| **Evidence Explorer** (`evidence-explorer.html`) | `Source → Document → Evidence → Provenance → Context` | The full evidence chain behind a claim — from official source to governed intelligence output. User can trace any claim back to its source document, page, paragraph. |
+| **Source Explorer** (`source-explorer.html`) | `Source → Identity → Jurisdiction → Type → Monitoring Status → Official Domain` | Source registry metadata — who the source is, what type, what jurisdiction, whether it's healthy, and where its official endpoint is. User can browse, filter, and inspect any source's registry record. |
+| **Sample Library** (`sample-library.html`) | TBD — will be determined by Delta 09 audit | Sample intelligence outputs — what the user inspects will depend on the page's structure. |
+
+> **Note:** Each Explorer has its own UX purpose. Do NOT force Evidence Explorer's `Source → Document → Evidence → Provenance → Context` chain onto Source Explorer or Sample Library. Each Explorer's UX test is defined by its own inspection purpose.
 
 ### Catalog (`catalog.html`)
 | Rule | Verdict |
@@ -672,7 +736,7 @@ Every page (regardless of category) MUST comply with:
 > 1. **Layer 1** — Does it comply with the canonical baseline? (Covers **all implementation layers**: HTML, CSS, inline styles, SVG attributes, Canvas/Three.js colors, JavaScript color constants, and content claims.)
 > 2. **Layer 5** — Does it violate any do-not-touch rule?
 > 3. **Layer 6** — Does it comply with its category-specific rules?
-> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.10)?
+> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.13)?
 
 ## Implementation-Layer Scope (v2)
 
@@ -709,13 +773,13 @@ A page PASSES acceptance when:
 - ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + content claims)
 - ✓ Zero Layer 5 do-not-touch violations
 - ✓ Layer 6 category-specific rules satisfied
-- ✓ Zero D.1–D.10 defects (or all REPAIR items resolved)
+- ✓ Zero D.1–D.13 defects (or all REPAIR items resolved; REVIEW items deferred)
 
 A page FAILS acceptance when:
 - ✗ Any Layer 1 FORBID violation in any implementation layer
 - ✗ Any Layer 5 do-not-touch violation
 - ✗ Any Layer 6 category-specific FORBID violation
-- ✗ Any unrepaired D.1–D.10 defect in any implementation layer
+- ✗ Any unrepaired D.1–D.13 defect in any implementation layer (REVIEW items are P3, not blocking)
 
 ## Audit Workflow (for Delta 06+)
 
@@ -730,7 +794,7 @@ A page FAILS acceptance when:
    - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy)
 3. Run Layer 5 do-not-touch check
 4. Run Layer 6 category-specific check
-5. Run Layer 4 defect scan (D.1–D.10) across ALL implementation layers
+5. Run Layer 4 defect scan (D.1–D.13) across ALL implementation layers
 6. Classify remaining drift into A/B/C/D
 7. Produce Delta Report with PASS/FAIL acceptance verdict
 
@@ -740,21 +804,26 @@ A page FAILS acceptance when:
 
 > After this spec is approved, implementation proceeds in this order. No step begins until the prior step is complete.
 
-## Phase 1: Technical Repairs (P1) — ~30 minutes
+## Phase 1: Technical Repairs (P1) — ~43 minutes
 
 | Step | Action | Pages | Effort |
 |---|---|---|---|
 | 1.1 | REPAIR D.2 — replace `rgba(201,162,39,...)` with `rgba(227,180,90,...)` in CSS | Market, Risk, Media | ~6 min |
 | 1.2 | REPAIR D.2 — replace 23 old-gold rgba in Architecture `<style>` block | Architecture | ~10 min |
 | 1.3 | REPAIR D.2 — replace 3 old-gold rgba in Evidence Explorer `<style>` + inline | Evidence Explorer | ~3 min |
-| 1.4 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
-| 1.5 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468), Evidence Explorer (lines 1177, 1214) | ~3 min |
-| 1.6 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
-| 1.7 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
-| 1.8 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
-| 1.9 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872) | ~2 min |
-| 1.10 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312), Evidence Explorer (lines 632, 1202) | ~3 min |
-| 1.11 | REPAIR D.10 — replace old taxonomy in Evidence Explorer Step 07 output | Evidence Explorer (line 1214) | ~1 min |
+| 1.4 | REPAIR D.2 — replace 2 old-gold rgba in Source Explorer `<style>` + inline | Source Explorer | ~2 min |
+| 1.5 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
+| 1.6 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468), Evidence Explorer (lines 1177, 1214) | ~3 min |
+| 1.7 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
+| 1.8 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
+| 1.9 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
+| 1.10 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872), Source Explorer (line 1566) | ~3 min |
+| 1.11 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312), Evidence Explorer (lines 632, 1202) | ~3 min |
+| 1.12 | REPAIR D.10 — replace old taxonomy in Evidence Explorer Step 07 output | Evidence Explorer (line 1214) | ~1 min |
+| 1.13 | REPAIR D.11 — replace non-canonical hex `#2DBA8E` with `var(--roua-green)` | Source Explorer (lines 145, 334, 1521, 1522) | ~2 min |
+| 1.14 | REPAIR D.11 — replace non-canonical hex `#4A90D9` with `var(--roua-blue)` | Source Explorer (lines 1526, 1527, 1531, 1532) | ~2 min |
+| 1.15 | REPAIR D.11 — replace non-canonical hex `#F5A623` with `var(--roua-amber)` | Source Explorer (lines 145, 334, 521) | ~1 min |
+| 1.16 | REPAIR D.12 — wrap 15 source "Official Domain" values in `<a href>` | Source Explorer (15 source entries) | ~10 min |
 
 ## Phase 2: Cleanup (P2) — ~5 minutes
 
@@ -768,8 +837,9 @@ A page FAILS acceptance when:
 | Step | Action | Pages | Effort |
 |---|---|---|---|
 | 3.1 | REVIEW D.5 — soften "Bloomberg / Market Terminals" to "Market Data Terminals" | Investment, Market, Risk | Content decision |
-| 3.2 | ADOPT active nav state | Investment, Market, Risk, Media | ~1 min each |
-| 3.3 | ADOPT `.back-link` where appropriate | Investment, Market, Risk, Media | ~1 min each |
+| 3.2 | REVIEW D.13 — determine if "24/7" is FORBID or acceptable operational description | Source Explorer (line 525) | Spec v4 decision |
+| 3.3 | ADOPT active nav state | Investment, Market, Risk, Media | ~1 min each |
+| 3.4 | ADOPT `.back-link` where appropriate | Investment, Market, Risk, Media | ~1 min each |
 
 ## Phase 4: Homepage Repairs — separate track
 
@@ -786,15 +856,15 @@ A page FAILS acceptance when:
 |---|---|
 | 5.1 | Audit Architecture (`architecture.html`) against this spec ✅ (Delta 06 — FAIL, D.2+D.7+D.8+D.9) |
 | 5.2 | Audit Evidence Explorer (`evidence-explorer.html`) against this spec ✅ (Delta 07 — FAIL, D.2+D.4+D.9+D.10) |
-| 5.3 | Audit Source Explorer (`source-explorer.html`) against Spec v3 |
-| 5.4 | Audit Sample Library (`sample-library.html`) against Spec v3 |
+| 5.3 | Audit Source Explorer (`source-explorer.html`) against this spec ✅ (Delta 08 — FAIL, D.2+D.8+D.11+D.12+D.13) |
+| 5.4 | Audit Sample Library (`sample-library.html`) against Spec v4 |
 | 5.5 | Audit Catalog |
 | 5.6 | Audit Solutions pages |
 | 5.7 | Audit Company pages |
 | 5.8 | Audit Trust Framework |
 | 5.9 | Audit remaining reference pages |
 
-> **Note:** Phase 5 audits continue against the **current v3 Spec**. Each new Delta Report may discover additional defect types (D.11+), which will trigger a Spec v4 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance. **D.10 (old taxonomy in content) is treated as system-wide potential** — every subsequent audit MUST scan full content surface for old taxonomy terms, not just nav/footer.
+> **Note:** Phase 5 audits continue against the **current v4 Spec**. Each new Delta Report may discover additional defect types (D.14+), which will trigger a Spec v5 update before further audits. This iterative refinement ensures the Spec evolves with real findings rather than being predicted in advance. **D.10 mandatory scan continues** on all subsequent pages, but risk is confirmed lower (Source Explorer clean). **D.11 non-canonical hex scan** is now mandatory on all subsequent pages.
 
 ---
 
