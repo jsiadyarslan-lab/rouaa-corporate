@@ -242,7 +242,6 @@
       transition: transform 250ms ease, border-color 250ms ease, background 250ms ease;
     }
     .stat-pill:hover {
-      transform: translateY(-2px);
       border-color: var(--roua-surface-border-strong);
       background: var(--roua-surface-hover);
     }
@@ -296,7 +295,6 @@
     .pipeline-chip:hover {
       border-color: var(--roua-surface-border-strong);
       color: var(--roua-text-primary);
-      transform: translateY(-1px);
     }
     .pipeline-chip svg { width: 14px; height: 14px; color: var(--roua-text-muted); flex-shrink: 0; }
 
@@ -345,8 +343,23 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 4px;
+      position: relative;
     }
-    @media (max-width: 980px) { .pipeline-layers-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* Continuous rail connecting all layer cards — visual relationship */
+    .pipeline-layers-grid::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--roua-border) 10%, var(--roua-border) 90%, transparent);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+    @media (max-width: 980px) { .pipeline-layers-grid { grid-template-columns: repeat(2, 1fr); } .pipeline-layers-grid::before { display: none; } }
     @media (max-width: 520px) { .pipeline-layers-grid { grid-template-columns: 1fr; } }
 
     .pipeline-layer-card {
@@ -364,19 +377,15 @@
       min-height: 188px;
     }
     .pipeline-layer-card:hover {
-      transform: translateY(-4px);
       border-color: var(--roua-surface-border-strong);
-      background: var(--roua-surface-hover);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     }
 
     .pipeline-layer-icon {
       width: 32px; height: 32px;
       color: var(--roua-accent);
       margin-bottom: 14px;
-      transition: transform 320ms ease;
     }
-    .pipeline-layer-card:hover .pipeline-layer-icon { transform: scale(1.08); }
+    /* Icon scale removed — static information must remain visually stable */
 
     .pipeline-layer-num {
       font-family: var(--font-mono);
@@ -398,15 +407,6 @@
       font-size: 13px;
       color: var(--roua-text-secondary);
       line-height: 1.55;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 320ms ease, opacity 320ms ease, margin 320ms ease;
-      margin-bottom: 0;
-    }
-    .pipeline-layer-card:hover .pipeline-layer-desc {
-      max-height: 80px;
-      opacity: 1;
       margin-bottom: 12px;
     }
     .pipeline-layer-status {
@@ -426,9 +426,7 @@
     }
     .pipeline-layer-card.flow-continuation:hover {
       background: var(--roua-surface);
-      transform: translateY(-4px);
       border-color: var(--roua-accent-border);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     }
     .flow-continuation-content { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .flow-continuation-arrow {
@@ -812,9 +810,7 @@
                   box-shadow 300ms ease;
     }
     .deploy-cell:hover {
-      transform: translateY(-4px);
       border-color: var(--roua-surface-border-strong);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     }
     .deploy-cell::after {
       content: "";
@@ -977,44 +973,34 @@
       transform: translateY(0) perspective(1000px) rotateX(0deg);
     }
 
-    /* ===== 3D Card depth ===== */
+    /* ===== Static card styling (no 3D depth) ===== */
     .pipeline-layer-card,
     .deploy-cell,
     .step-card,
     .vr-demo-card {
-      transform-style: preserve-3d;
-      transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 400ms ease,
-                  border-color 300ms ease;
-      will-change: transform;
+      transition: border-color 300ms ease;
     }
     .pipeline-layer-card:hover,
     .deploy-cell:hover {
       border-color: var(--roua-surface-border-strong);
     }
 
-    /* ===== Layer nav items: 3D press ===== */
+    /* ===== Layer nav items: system control ===== */
     .layer-nav-item {
-      transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
-                  background 200ms ease,
-                  border-color 200ms ease;
-      transform-style: preserve-3d;
+      transition: background 200ms ease,
+                  border-color 200ms ease,
+                  color 200ms ease;
     }
     .layer-nav-item:hover {
-      transform: translateX(4px) perspective(500px) rotateY(-2deg);
+      background: rgba(255, 255, 255, 0.03);
     }
     .layer-nav-item.active {
-      transform: translateX(6px) perspective(500px) rotateY(-2deg);
+      background: var(--roua-accent-subtle);
+      border-left-color: var(--roua-accent);
     }
 
     /* ===== Animated hero grid (drifting) ===== */
-    .arch-hero-grid {
-      animation: grid-drift 40s linear infinite;
-    }
-    @keyframes grid-drift {
-      0%   { background-position: 0 0, 0 0; }
-      100% { background-position: 48px 48px, 48px 48px; }
-    }
+    /* Grid background kept static — no drift animation on System pages */
 
     /* ===== Hero glow pulse ===== */
     .arch-hero-glow {
@@ -1067,14 +1053,9 @@
       position: absolute;
       bottom: -12px; left: 50%;
       transform: translateX(-50%);
-      width: 0;
+      width: 80px;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--roua-accent), transparent);
-      transition: width 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
-    }
-    .reveal.visible .arch-section-header h2::after,
-    .arch-section-header.reveal.visible h2::after {
-      width: 80px;
     }
 
     /* ===== Evidence chain SVG: animated dash flow ===== */
@@ -1177,10 +1158,10 @@
 
     /* ===== Comparison table row hover ===== */
     .compare-row {
-      transition: background 300ms ease, transform 300ms ease;
+      transition: background 300ms ease;
     }
     .compare-row:hover {
-      transform: translateX(4px);
+      background: rgba(201, 162, 39, 0.02);
     }
     .compare-cell.roua {
       transition: box-shadow 400ms ease;
@@ -1195,15 +1176,9 @@
       to   { opacity: 1; transform: translateY(0) perspective(800px) rotateX(0deg); }
     }
 
-    /* ===== Deployment cells: 3D tilt ===== */
-    .deploy-cell {
-      transform-style: preserve-3d;
-    }
-    .deploy-cell:hover .deploy-icon {
-      transform: translateZ(20px);
-    }
+    /* ===== Deployment cells: static icons ===== */
     .deploy-icon {
-      transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition: color 300ms ease;
     }
 
     /* ===== Navbar blur enhancement ===== */
