@@ -1,10 +1,17 @@
 # ROUA Product Family Consolidation Spec
 
-> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–09.
-> **Source:** 5 product pages + 4 non-product pages audited (Delta 06 Architecture, Delta 07 Evidence Explorer, Delta 08 Source Explorer, Delta 09 Sample Library).
+> **Status:** Authoritative acceptance contract extracted from Delta Reports 01–10.
+> **Source:** 5 product pages + 5 non-product pages audited (Delta 06 Architecture, Delta 07 Evidence Explorer, Delta 08 Source Explorer, Delta 09 Sample Library, Delta 10 Catalog).
 > **Purpose:** Converts audit findings into actionable rules for the remaining 25+ pages. Every rule ends with one of six verdicts.
-> **Effective date:** August 9, 2026 (v5 — updated August 9, 2026 after Delta 09 Sample Library audit).
+> **Effective date:** August 9, 2026 (v6 — updated August 9, 2026 after Delta 10 Catalog audit).
 > **Modification policy:** This spec is the acceptance contract. Page edits must comply. Spec edits require re-auditing the affected product page.
+>
+> **v6 changelog (post-Delta-10):**
+> - Implementation-Layer Scope expanded: added **JavaScript content/data strings** (text in external JS files that is rendered as visible HTML). Previously covered JS color strings only; now covers ALL JS strings that become user-visible content.
+> - Layer 4 confirmed defects: D.14 (timing/freshness/performance claims in external JS data files) added. Extends D.8/D.13 forbidden phrases to JS content strings rendered as HTML.
+> - Layer 1.9 D.9 clarified: "Confidence Scoring" added as **REVIEW leaning FORBID**. Unlike "Extraction Confidence" (illustrative metadata, acceptable when marked "(illustrative)"), "Confidence Scoring" is a capability description without illustrative disclaimer — closer to FORBID. Boundary: `illustrative metadata (acceptable) < confidence scoring as capability description (REVIEW leans FORBID) < confidence score as proven claim (FORBID)`.
+> - Layer 6.3: Catalog UX acceptance added: `Product Overview → Capability Filter → Maturity Classification → Product Page Navigation`.
+> - D.10 confirmed again: Catalog (Delta 10) line 514 — "Trading Intelligence" as filter label (product-name use). Now 2 confirmed cases (Evidence Explorer + Catalog). Risk remains LOW but is NOT zero.
 >
 > **v5 changelog (post-Delta-09):**
 > - Layer 1.9 D.4 expanded: FORBID now covers all semantic variants of "audit-ready" — "Audit-Ready", "Audit Ready", "audit ready", "audit-ready". The FORBID applies to the **concept** (claiming audit readiness), not the hyphenation. Scanner matches case-insensitive, hyphen-insensitive.
@@ -173,6 +180,7 @@
 | "Provenance Immutability" | **FORBID** | None. Use "Versioned Provenance" | — |
 | **"confidence score" / "confidence scored"** | **FORBID** | None. Use "Confidence signals" or "Verification tier" | **D.9** |
 | **"Extraction Confidence"** (v5 — REVIEW) | **REVIEW** | Acceptable as **illustrative metadata** when marked "(illustrative)" — e.g., Sample Library's "Extraction Confidence: 97% (illustrative)". FORBID when used as a **proven platform claim** without illustrative disclaimer. Boundary: `illustrative metadata ≠ platform claim`. | D.9 variant |
+| **"Confidence Scoring"** (v6 — REVIEW leans FORBID) | **REVIEW** | When used as a **capability description** without illustrative disclaimer (e.g., "Validation · Confidence Scoring · Scenario Generation" in Reasoning Engine description) — **leans FORBID**. Unlike "Extraction Confidence" (illustrative metadata), "Confidence Scoring" is a capability claim. Recommend replacing with "Verification Tiering" or "Confidence Signals". Boundary: `illustrative metadata (acceptable) < confidence scoring as capability description (REVIEW leans FORBID) < confidence score as proven claim (FORBID)`. | D.9 variant |
 | "SOC 2" / "ISO 27001" | **FORBID** | None (removed in P0 sweep) | — |
 
 ## 1.10 Taxonomy (Locked)
@@ -523,6 +531,19 @@
 | **Effort** | ~1 minute (after REVIEW decision) |
 | **Verdict** | **REVIEW** (P3 priority — deliberate, not auto-FORBID) |
 
+## D.14 — Timing/freshness/performance claims in external JS data files (v6 — NEW)
+
+| Field | Value |
+|---|---|
+| **Pattern** | Timing/freshness/performance claims ("in under 30 seconds", "in seconds", "real-time", "instant", "24/7") in external JavaScript data files that are rendered as visible HTML content on the page |
+| **Why this is new** | D.8 covers "real time" in HTML content. D.13 covers "24/7" in HTML content. D.14 extends forbidden timing claims to **external JS data files** (e.g., `products.js`) whose string values are rendered as HTML. The Spec v5 Implementation-Layer Scope covered JS color strings but NOT JS content strings. v6 closes this gap. |
+| **Pages affected** | Catalog (Delta 10): `products.js` loaded by `catalog.html` — 10 instances across multiple capability descriptions: "in under 30 seconds" (line 15), "in seconds" (lines 94, 480), "Real-time analysis" (lines 228, 512), "24/7 monitor" + "instant impact assessment" (lines 481), "in real time" (line 500), "Instant response" + "Real-time updates" (line 614), "Instant retrieval" (line 654), "Real-time insights" (line 674) |
+| **Root cause** | `products.js` was written as a data file with marketing-style capability descriptions, including timing claims that were never swept. The P0 sweep cleaned HTML content but did not scan external JS data files. |
+| **Fix** | Replace timing claims in `products.js` with governed-language alternatives: "in under 30 seconds" → "through configured source monitoring", "real-time" → "live" or remove, "instant" → "rapid", "24/7" → "continuous", "in seconds" → "rapidly" |
+| **Fix type** | External JS file — find-and-replace in `products.js` |
+| **Effort** | ~5 minutes |
+| **Verdict** | **REPAIR** (P1 priority) |
+
 ## Defect Summary
 
 | ID | Type | Pages affected | Priority | Effort | Verdict |
@@ -535,15 +556,16 @@
 | D.6 | `var(--gold)` mixing | Media | P1 | ~1 min | **REPAIR** |
 | D.7 | Deprecated raw hex (SVG/JS) | Architecture | P1 | ~8 min | **REPAIR** |
 | D.8 | "real time" timing claim | Architecture + Source Explorer | P1 | ~2 min (Architecture) + ~1 min (Source Explorer) | **REPAIR** |
-| D.9 | "confidence score/d" claim + "Extraction Confidence" REVIEW | Architecture + Evidence Explorer (FORBID) + Sample Library (REVIEW) | P1+P3 | ~3 min (FORBID) + TBD (REVIEW) | **REPAIR** + **REVIEW** |
-| D.10 | Old taxonomy in content (product-name use only) | Evidence Explorer (confirmed); mandatory scan elsewhere (risk LOW) | P1 | ~1 min (Explorer) + TBD (risk LOW) | **REPAIR** |
+| D.9 | "confidence score/d" + "Extraction Confidence" REVIEW + "Confidence Scoring" REVIEW leans FORBID | Architecture + Evidence Explorer (FORBID) + Sample Library (REVIEW) + Catalog (REVIEW leans FORBID) | P1+P3 | ~3 min (FORBID) + TBD (REVIEW) | **REPAIR** + **REVIEW** |
+| D.10 | Old taxonomy in content (product-name use only) | Evidence Explorer + Catalog (confirmed); mandatory scan elsewhere (risk LOW) | P1 | ~1 min (Explorer) + ~1 min (Catalog) + TBD (risk LOW) | **REPAIR** |
 | D.11 | Non-canonical raw hex (v4) | Source Explorer | P1 | ~5 min | **REPAIR** |
 | D.12 | No direct source links (v4) | Source Explorer + Sample Library | P1 | ~10 min (Source) + ~3 min (Sample) | **REPAIR** |
 | D.13 | "24/7" timing claim (v4) | Source Explorer | P3 | ~1 min (after REVIEW) | **REVIEW** |
+| D.14 | Timing claims in external JS data files (v6) | Catalog (`products.js`) | P1 | ~5 min | **REPAIR** |
 
-**Total technical repair budget (P1+P2): ~53 minutes** (was ~48 in v4, was ~33 in v3, was ~25 in v2, was ~14 in v1).
-**Content review (P3): D.5 + D.13 + D.9 variant (Sample Library) on separate track.**
-**D.10 mandatory scan: continues, risk confirmed LOW (Evidence Explorer is only confirmed case).**
+**Total technical repair budget (P1+P2): ~58 minutes** (was ~53 in v5, was ~48 in v4, was ~33 in v3, was ~25 in v2, was ~14 in v1).
+**Content review (P3): D.5 + D.13 + D.9 variants (Sample Library + Catalog) on separate track.**
+**D.10 mandatory scan: continues, risk LOW (2 confirmed cases: Evidence Explorer + Catalog).**
 
 ---
 
@@ -689,6 +711,8 @@ Every page (regardless of category) MUST comply with:
 | No marketing theatrics | **KEEP** |
 | Use `.card` (v7-patch plain) for component cards | **ADOPT** |
 | May use `.card-accent` for featured modules | **KEEP** |
+| Must provide UX test PASS (v6 — added) | **KEEP** — `Product Overview → Capability Filter → Maturity Classification → Product Page Navigation` |
+| External JS data files must comply with Trust Grammar (v6 — D.14) | **FORBID** (timing claims in JS content strings) |
 
 ### Solutions (Trading Desks, Investment Firms, Financial Media, Enterprise)
 | Rule | Verdict |
@@ -757,7 +781,7 @@ Every page (regardless of category) MUST comply with:
 > 1. **Layer 1** — Does it comply with the canonical baseline? (Covers **all implementation layers**: HTML, CSS, inline styles, SVG attributes, Canvas/Three.js colors, JavaScript color constants, and content claims.)
 > 2. **Layer 5** — Does it violate any do-not-touch rule?
 > 3. **Layer 6** — Does it comply with its category-specific rules?
-> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.13)?
+> 4. **Layer 4** — Does it have any of the confirmed defects (D.1–D.14)?
 
 ## Implementation-Layer Scope (v2)
 
@@ -771,9 +795,10 @@ A page is not compliant merely because its HTML structure is sound and its CSS u
 | **SVG `fill`/`stroke`** | No deprecated hex from `VISUAL-IDENTITY-SYSTEM.md` | D.7 (SVG) |
 | **Canvas / Three.js / WebGL colors** | Canonical hex (`0xE3B45A`, not `0xC9A227`) | D.7 (Three.js) |
 | **JavaScript color strings** | `rgba()`/hex strings use canonical values | D.7 (JS) |
-| **Content claims (copy)** | Trust Grammar forbidden phrases, timing claims, taxonomy | D.4, D.5, D.8, D.9 |
+| **JavaScript content/data strings** (v6 — NEW) | Text in external JS files (e.g., `products.js`) that is rendered as visible HTML must comply with Trust Grammar, forbidden phrases, timing claims, and taxonomy. JS content strings are NOT exempt from content rules. | D.4, D.5, D.8, D.9, D.10, D.13, **D.14** |
+| **Content claims (copy in HTML)** | Trust Grammar forbidden phrases, timing claims, taxonomy | D.4, D.5, D.8, D.9, D.10 |
 
-> **A single deprecated hex in an SVG diagram, or a single "real time" in a content claim, FAILS the page — even if every CSS rule is canonical.**
+> **A single deprecated hex in an SVG diagram, a single "real time" in a content claim, or a single "in under 30 seconds" in a JS data file — FAILS the page, even if every CSS rule is canonical.**
 
 ## Technology Neutrality Principle (v2)
 
@@ -794,13 +819,13 @@ A page PASSES acceptance when:
 - ✓ All Layer 1 rules satisfied across ALL implementation layers (HTML + CSS + SVG + JS + content claims)
 - ✓ Zero Layer 5 do-not-touch violations
 - ✓ Layer 6 category-specific rules satisfied
-- ✓ Zero D.1–D.13 defects (or all REPAIR items resolved; REVIEW items deferred)
+- ✓ Zero D.1–D.14 defects (or all REPAIR items resolved; REVIEW items deferred)
 
 A page FAILS acceptance when:
 - ✗ Any Layer 1 FORBID violation in any implementation layer
 - ✗ Any Layer 5 do-not-touch violation
 - ✗ Any Layer 6 category-specific FORBID violation
-- ✗ Any unrepaired D.1–D.13 defect in any implementation layer (REVIEW items are P3, not blocking)
+- ✗ Any unrepaired D.1–D.14 defect in any implementation layer (REVIEW items are P3, not blocking)
 
 ## Audit Workflow (for Delta 06+)
 
@@ -812,10 +837,11 @@ A page FAILS acceptance when:
    - SVG `fill`/`stroke` hex values
    - Canvas/Three.js/WebGL color constants
    - JavaScript color strings
+   - JavaScript content/data strings (v6 — text rendered as HTML)
    - Content claims (Trust Grammar forbidden phrases, timing claims, taxonomy)
 3. Run Layer 5 do-not-touch check
 4. Run Layer 6 category-specific check
-5. Run Layer 4 defect scan (D.1–D.13) across ALL implementation layers
+5. Run Layer 4 defect scan (D.1–D.14) across ALL implementation layers
 6. Classify remaining drift into A/B/C/D
 7. Produce Delta Report with PASS/FAIL acceptance verdict
 
@@ -825,7 +851,7 @@ A page FAILS acceptance when:
 
 > After this spec is approved, implementation proceeds in this order. No step begins until the prior step is complete.
 
-## Phase 1: Technical Repairs (P1) — ~43 minutes
+## Phase 1: Technical Repairs (P1) — ~53 minutes
 
 | Step | Action | Pages | Effort |
 |---|---|---|---|
@@ -834,17 +860,18 @@ A page FAILS acceptance when:
 | 1.3 | REPAIR D.2 — replace 3 old-gold rgba in Evidence Explorer `<style>` + inline | Evidence Explorer | ~3 min |
 | 1.4 | REPAIR D.2 — replace 2 old-gold rgba in Source Explorer `<style>` + inline | Source Explorer | ~2 min |
 | 1.5 | REPAIR D.3 — fix malformed HTML comment | Market (line 652), Risk (line 598) | ~2 min |
-| 1.6 | REPAIR D.4 — replace "Audit-Ready" with "Evidence-Linked" | Market (line 468), Evidence Explorer (lines 1177, 1214) | ~3 min |
+| 1.6 | REPAIR D.4 — replace all semantic variants of "Audit-Ready" with "Evidence-Linked" | Market (line 468), Evidence Explorer (lines 1177, 1214), Sample Library (line 316) | ~4 min |
 | 1.7 | REPAIR D.6 — replace `var(--gold)` with `var(--roua-accent)` | Media (line 338) | ~1 min |
 | 1.8 | REPAIR D.7 — replace deprecated raw hex in Architecture SVG | Architecture (lines 2018–2068) | ~5 min |
 | 1.9 | REPAIR D.7 — replace deprecated hex in Architecture Three.js PALETTE | Architecture (lines 2734–2738) | ~3 min |
 | 1.10 | REPAIR D.8 — replace "real time" with "as they are published" | Architecture (lines 1517, 1872), Source Explorer (line 1566) | ~3 min |
-| 1.11 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" | Architecture (line 2312), Evidence Explorer (lines 632, 1202) | ~3 min |
-| 1.12 | REPAIR D.10 — replace old taxonomy in Evidence Explorer Step 07 output | Evidence Explorer (line 1214) | ~1 min |
+| 1.11 | REPAIR D.9 — replace "confidence scored" with "verification tier assigned" (FORBID instances only) | Architecture (line 2312), Evidence Explorer (lines 632, 1202) | ~3 min |
+| 1.12 | REPAIR D.10 — replace old taxonomy in Evidence Explorer + Catalog | Evidence Explorer (line 1214), Catalog (line 514) | ~2 min |
 | 1.13 | REPAIR D.11 — replace non-canonical hex `#2DBA8E` with `var(--roua-green)` | Source Explorer (lines 145, 334, 1521, 1522) | ~2 min |
 | 1.14 | REPAIR D.11 — replace non-canonical hex `#4A90D9` with `var(--roua-blue)` | Source Explorer (lines 1526, 1527, 1531, 1532) | ~2 min |
 | 1.15 | REPAIR D.11 — replace non-canonical hex `#F5A623` with `var(--roua-amber)` | Source Explorer (lines 145, 334, 521) | ~1 min |
-| 1.16 | REPAIR D.12 — wrap 15 source "Official Domain" values in `<a href>` | Source Explorer (15 source entries) | ~10 min |
+| 1.16 | REPAIR D.12 — wrap source/sample "Official Domain" + "Source" values in `<a href>` | Source Explorer (15 entries), Sample Library (6 samples × 2 fields) | ~13 min |
+| 1.17 | REPAIR D.14 — replace timing claims in `products.js` with governed-language alternatives | Catalog (`products.js` — 10 instances) | ~5 min |
 
 ## Phase 2: Cleanup (P2) — ~5 minutes
 
@@ -859,8 +886,10 @@ A page FAILS acceptance when:
 |---|---|---|---|
 | 3.1 | REVIEW D.5 — soften "Bloomberg / Market Terminals" to "Market Data Terminals" | Investment, Market, Risk | Content decision |
 | 3.2 | REVIEW D.13 — determine if "24/7" is FORBID or acceptable operational description | Source Explorer (line 525) | Spec v4 decision |
-| 3.3 | ADOPT active nav state | Investment, Market, Risk, Media | ~1 min each |
-| 3.4 | ADOPT `.back-link` where appropriate | Investment, Market, Risk, Media | ~1 min each |
+| 3.3 | REVIEW D.9 variant — determine if "Extraction Confidence" (illustrative metadata) is FORBID or acceptable | Sample Library (12 instances, all marked illustrative) | Spec v5 decision |
+| 3.4 | REVIEW D.9 variant — determine if "Confidence Scoring" (capability description, leans FORBID) should be replaced | Catalog (lines 438, 584) | Spec v6 decision |
+| 3.5 | ADOPT active nav state | Investment, Market, Risk, Media | ~1 min each |
+| 3.6 | ADOPT `.back-link` where appropriate | Investment, Market, Risk, Media | ~1 min each |
 
 ## Phase 4: Homepage Repairs — separate track
 
@@ -878,14 +907,14 @@ A page FAILS acceptance when:
 | 5.1 | Audit Architecture (`architecture.html`) against this spec ✅ (Delta 06 — FAIL, D.2+D.7+D.8+D.9) |
 | 5.2 | Audit Evidence Explorer (`evidence-explorer.html`) against this spec ✅ (Delta 07 — FAIL, D.2+D.4+D.9+D.10) |
 | 5.3 | Audit Source Explorer (`source-explorer.html`) against this spec ✅ (Delta 08 — FAIL, D.2+D.8+D.11+D.12+D.13) |
-| 5.4 | Audit Sample Library (`sample-library.html`) against Spec v4 |
-| 5.5 | Audit Catalog |
-| 5.6 | Audit Solutions pages |
-| 5.7 | Audit Company pages |
-| 5.8 | Audit Trust Framework |
-| 5.9 | Audit remaining reference pages |
+| 5.4 | Audit Sample Library (`sample-library.html`) ✅ (Delta 09 — FAIL, D.2+D.4 variant+D.9 variant REVIEW+D.12) |
+| 5.5 | Audit Catalog (`catalog.html`) ✅ (Delta 10 — FAIL, D.9 variant+D.10+D.14) |
+| 5.6 | Audit Solutions pages against Spec v6 |
+| 5.7 | Audit Company pages against Spec v6 |
+| 5.8 | Audit Trust Framework against Spec v6 |
+| 5.9 | Audit remaining reference pages against Spec v6 |
 
-> **Note:** Phase 5 audits continue against the **current v5 Spec**. Each new Delta Report may discover additional defect types (D.14+), which will trigger a Spec v6 update before further audits. **D.10 mandatory scan continues** (risk LOW — Evidence Explorer is only confirmed case). **D.11 non-canonical hex scan** is mandatory. **D.4 scanner matches all semantic variants** (case-insensitive, hyphen-insensitive). **D.9 "Extraction Confidence" is REVIEW** (illustrative metadata ≠ platform claim).
+> **Note:** Phase 5 audits continue against the **current v6 Spec**. Each new Delta Report may discover additional defect types (D.15+), triggering Spec v7. **D.10** mandatory scan continues (2 confirmed cases, risk LOW). **D.11** non-canonical hex scan mandatory. **D.4** matches all semantic variants. **D.9** has 3 tiers: FORBID (confidence score/d) → REVIEW leans FORBID (Confidence Scoring as capability) → REVIEW (Extraction Confidence as illustrative metadata). **D.14** scans external JS data files for timing claims.
 
 ---
 
