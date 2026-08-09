@@ -315,13 +315,13 @@
         <h2>What a registry entry looks like.</h2>
         <p style="margin: 0 auto; max-width: 680px;">Every source in the registry carries the same verification metadata — from identity to ingestion health to document count.</p>
       </div>
-      <div style="max-width: 720px; margin: 0 auto; padding: 28px; background: var(--roua-surface); border: 1px solid var(--roua-accent-border); border-radius: var(--radius-lg); border-left: 4px solid var(--roua-accent);">
+      <div class="card-evidence" style="max-width:720px;margin:0 auto;padding:28px;border-left:4px solid var(--roua-accent);border-radius:var(--radius-lg)">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--roua-border);">
           <div>
             <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--roua-text-muted);">Source ID</div>
             <div style="font-family: var(--font-mono); font-size: 13px; color: var(--roua-accent); font-weight: 600;">SRC-CB-001</div>
           </div>
-          <div style="padding: 4px 12px; background: rgba(32, 168, 120, 0.08); border: 1px solid rgba(32, 168, 120, 0.25); border-radius: var(--radius-full); font-size: 11px; font-weight: 600; color: var(--roua-green); letter-spacing: 0.08em; text-transform: uppercase;">● Active</div>
+          <div style="padding: 4px 12px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-full); font-size: 11px; font-weight: 600; color: var(--success); letter-spacing: 0.08em; text-transform: uppercase;"><span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--success); margin-right: 6px; vertical-align: middle;"></span>Active</div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
@@ -357,7 +357,7 @@
             <div style="font-size: 10px; color: var(--roua-text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px;">Documents</div>
           </div>
           <div style="text-align: center;">
-            <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--roua-green);">Healthy</div>
+            <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--success);">Healthy</div>
             <div style="font-size: 10px; color: var(--roua-text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px;">Health Status</div>
           </div>
           <div style="text-align: center;">
@@ -442,25 +442,37 @@
         <h2>How a registered source becomes intelligence.</h2>
         <p style="margin: 0 auto; max-width: 680px;">The registry is not a directory — it is the first link in a chain that ends in governed intelligence your institution can defend.</p>
       </div>
-      <div style="max-width: 480px; margin: 0 auto; text-align: center; padding: 36px; border: 1px solid var(--roua-accent-border); border-radius: var(--radius-lg); background: var(--roua-surface); box-shadow: 0 0 32px rgba(201, 162, 39, 0.06);">
-        <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--roua-text-muted); margin-bottom: 20px;">The Chain</div>
-        <div style="font-size: 15px; color: var(--roua-text-primary); font-weight: 600; margin-bottom: 6px;">Registered Source</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted); margin-bottom: 6px;">Federal Reserve</div>
-        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 12px; margin-bottom: 6px;">&darr;</div>
-        <div style="font-size: 13px; color: var(--roua-text-secondary); margin-bottom: 6px;">Monitored Endpoint</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted); margin-bottom: 6px;">federalreserve.gov</div>
-        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 12px; margin-bottom: 6px;">&darr;</div>
-        <div style="font-size: 13px; color: var(--roua-text-secondary); margin-bottom: 6px;">Publication</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted); margin-bottom: 6px;">FOMC Statement</div>
-        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 12px; margin-bottom: 6px;">&darr;</div>
-        <div style="font-size: 13px; color: var(--roua-text-secondary); margin-bottom: 6px;">Document Record</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted); margin-bottom: 6px;">DOC-FOMC-2026-08</div>
-        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 12px; margin-bottom: 6px;">&darr;</div>
-        <div style="font-size: 13px; color: var(--roua-text-secondary); margin-bottom: 6px;">Evidence</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted); margin-bottom: 6px;">Page 1 &middot; Paragraph 2</div>
-        <div style="color: var(--roua-accent); opacity: 0.4; font-size: 12px; margin-bottom: 6px;">&darr;</div>
-        <div style="font-size: 15px; color: var(--roua-accent); font-weight: 600; margin-bottom: 6px;">Intelligence Object</div>
-        <div style="font-size: 12px; color: var(--roua-text-muted);">FOMC Rate Decision</div>
+      <div class="system-chain">
+        <div class="system-chain-header">The Chain</div>
+        <div class="system-chain-node">
+          <div class="system-chain-node-label">Registered Source</div>
+          <div class="system-chain-node-value">Federal Reserve</div>
+        </div>
+        <div class="system-chain-connector">&darr;</div>
+        <div class="system-chain-node">
+          <div class="system-chain-node-label">Monitored Endpoint</div>
+          <div class="system-chain-node-value">federalreserve.gov</div>
+        </div>
+        <div class="system-chain-connector">&darr;</div>
+        <div class="system-chain-node">
+          <div class="system-chain-node-label">Publication</div>
+          <div class="system-chain-node-value">FOMC Statement</div>
+        </div>
+        <div class="system-chain-connector">&darr;</div>
+        <div class="system-chain-node">
+          <div class="system-chain-node-label">Document Record</div>
+          <div class="system-chain-node-value">DOC-FOMC-2026-08</div>
+        </div>
+        <div class="system-chain-connector">&darr;</div>
+        <div class="system-chain-node">
+          <div class="system-chain-node-label">Evidence</div>
+          <div class="system-chain-node-value">Page 1 &middot; Paragraph 2</div>
+        </div>
+        <div class="system-chain-connector">&darr;</div>
+        <div class="system-chain-node terminal">
+          <div class="system-chain-node-label">Intelligence Object</div>
+          <div class="system-chain-node-value">FOMC Rate Decision</div>
+        </div>
       </div>
     </div>
   </section>
@@ -514,15 +526,6 @@
           <a href="why-roua.html">Why ROUA</a>
           <a href="business-case.html">Business Case</a>        </div>
         <div class="footer-col">
-          <div class="footer-heading">Channels</div>
-          <a href="financial-media.html">Financial Media</a>
-          <a href="solutions.html#solution-02">Investment Firms</a>
-          <a href="solutions.html#solution-05">Banks &amp; Institutions</a>
-          <a href="solutions.html#solution-01">Trading Desks</a>
-          <a href="enterprise.html">Private Deployment</a>
-          
-        </div>
-                <div class="footer-col">
           <div class="footer-heading">Experience</div>
           <a href="product-experience.html">Product Experience Center</a>
           <a href="evidence-explorer.html">Evidence Explorer</a>

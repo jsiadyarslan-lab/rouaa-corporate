@@ -573,3 +573,58 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .trust-chain-node-label{font-size:.82rem}
   .trust-chain-control{font-size:.62rem;padding:4px 10px}
 }
+
+/* ---- System Chain (generic vertical chain for system pages) ---- */
+/* Used by source-registry.html for Source → Intelligence chain.
+   Different semantics from .trust-chain (which is governance-specific).
+   This component represents data flow / system connectivity, not trust controls. */
+.system-chain{
+  max-width:480px;
+  margin:0 auto;
+  text-align:center;
+  padding:36px;
+  border:1px solid var(--line2);
+  border-radius:10px;
+  background:var(--panel);
+}
+.system-chain-header{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim2);
+  margin-bottom:20px;
+}
+.system-chain-node{
+  text-align:center;
+  padding:4px 0;
+}
+.system-chain-node-label{
+  font-size:.88rem;
+  font-weight:600;
+  color:var(--txt);
+  line-height:1.3;
+}
+.system-chain-node-value{
+  font-size:.72rem;
+  color:var(--dim2);
+  margin-top:2px;
+  line-height:1.4;
+}
+.system-chain-node.terminal .system-chain-node-label{
+  color:var(--gold);
+  font-weight:700;
+}
+.system-chain-connector{
+  text-align:center;
+  color:var(--gold);
+  opacity:.3;
+  font-size:.72rem;
+  line-height:1;
+  padding:3px 0;
+}
+@media(max-width:480px){
+  .system-chain{padding:24px 16px}
+  .system-chain-node-label{font-size:.82rem}
+}
