@@ -172,7 +172,7 @@ const ROUA_PRODUCTS = [
   {
     id: 'trd-dashboard',
     cat: 'trading',
-    nameEn: 'Trading Intelligence Dashboard',
+    nameEn: 'Market & Trading Intelligence Dashboard',
     tagline: 'Context behind every trade — inside your platform',
     desc: 'A panel that appears inside the broker\'s platform — showing for every trade: the event that moved it, the verified facts, its impact on the portfolio.',
     industries: ['brokers', 'banks', 'fintech'],
