@@ -165,6 +165,66 @@ PHASE_B_SOURCES_LIST = {
             # "continue to raise/maintain the policy interest rate"
             (r"continue\s+to\s+(raise|maintain|cut|lower|increase)\s+(?:the\s+)?policy\s+interest\s+rate", "rate_action"),
         ],
+        # B-Closure remediation: role_patterns for BOJ minutes/opinions documents.
+        # BOJ minutes contain individual member views that must be classified as
+        # dissent/alternative, not primary. Without this, IOs contain mixed
+        # rate_decision facts (maintain + hike + action) from different members.
+        "role_patterns": {
+            "dissent": [
+                # Individual member views
+                "one member expressed the view",
+                "one member expressed the recognition",
+                "a different member said",
+                "one of these members pointed out",
+                "some members said",
+                "a few members said",
+                "one member pointed out",
+                "one member stated",
+                "a member argued",
+                "one member argued",
+                # Preference language
+                "preferred to increase",
+                "preferred to raise",
+                "preferred to cut",
+                "preferred to lower",
+                "preferred to maintain",
+                "would have preferred",
+                # Voting language
+                "votes to increase", "votes to raise", "votes to cut", "votes to lower",
+                "voted against", "voted to increase", "voted to raise",
+                "voted to cut", "voted to lower",
+                "preferring to increase", "preferring to raise",
+                "dissented", "dissenting",
+                "objected to", "opposed the",
+            ],
+            "alternative": [
+                # Proposed but not adopted
+                "proposed to", "suggested", "recommend",
+                "alternative", "counterfactual",
+                "considered but", "evaluated but",
+                "expressed the view that it was appropriate",
+                "expressed the recognition that",
+            ],
+            "context": [
+                "previous meeting", "last meeting", "prior to",
+                "compared to", "since the previous",
+                "has been at", "was at", "had been",
+                "previously stood at", "changed from",
+                "since the previous meeting",
+            ],
+            "forecast": [
+                "forecast", "projected", "expected to",
+                "outlook for", "anticipates", "anticipate",
+                "guidance of", "guidance range",
+                "is expected to", "are expected to",
+            ],
+            "revision": [
+                "revised from", "restated", "previously reported as",
+                "corrected from", "updated from",
+                "preliminary", "final estimate",
+                "revised estimate", "revised value",
+            ],
+        },
         "event_type": "monetary_policy_decision",
         "content_keywords": ["policy rate", "monetary policy", "interest rate", "call rate", "money market", "policy interest rate"],
     },
@@ -233,12 +293,19 @@ PHASE_B_SOURCES_LIST = {
             # UK amounts: "£X million" or "X,million fine"
             (r"(?:fine[ds]?|penalty|settlement|sanction\w*)\s+(?:of\s+)?(?:£|GBP\s)?([\d,]+(?:\.\d+)?)\s*(?:million|billion|m|bn)", "penalty_amount"),
             (r"(?:£|GBP\s)([\d,]+(?:\.\d+)?)\s*(?:million|billion)\s+(?:fine|penalty|settlement)", "penalty_amount"),
-            # FCA-specific: "fined X", "X has been fined"
-            (r"fined\s+([A-Z][A-Za-z\s,&\.]{3,80})", "defendant_name"),
+            # B-Closure remediation: tightened defendant_name regex.
+            # Previous: fined\s+([A-Z][A-Za-z\s,&\.]{3,80}) — with IGNORECASE,
+            # [A-Z] matched lowercase, so "defined benefit" matched as defendant.
+            # New: requires Capitalized word (A-Z followed by a-z) and stops at
+            # sentence boundaries (period+space, lowercase connector, or 5 words max).
+            # Matches "fined Barclays Bank" but not "fined benefit pension schemes".
+            (r"fined\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})", "defendant_name"),
+            # "X has been fined" / "X was fined"
+            (r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\s+(?:has\s+been|was)\s+fined", "defendant_name"),
             # Violation types
             (r"(?:for|due\s+to|over)\s+(?:failures?\s+in|breach(?:es)?\s+of|inadequate|poor)\s+([a-z\s,]{5,60})", "violation_type"),
-            # Action type
-            (r"(fined|penalis\w+|sanction\w+|enforcement\s+action|final\s+notice)", "action_type"),
+            # Action type — removed "final notice" (it's a document type, not an action)
+            (r"\b(fined|penalis\w+|sanction\w+|enforcement\s+action)\b", "action_type"),
         ],
         "event_type": "regulatory_enforcement",
         "content_keywords": ["FCA", "fine", "enforcement", "final notice", "regulated", "breach", "consumer"],

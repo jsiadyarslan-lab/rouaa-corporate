@@ -79,16 +79,21 @@ def count_semantic_errors(source_code: str, io: dict) -> dict:
     event_type = io.get("event_type", "")
     event_subtype = io.get("event_subtype", "")
 
-    # Check 1: Multiple conflicting rate_decision values in one IO
+    # Check 1: Multiple conflicting PRIMARY rate_decision values in one IO
+    # This is the real semantic error — if there are multiple PRIMARY decisions
+    # with different values, the IO doesn't know which is the actual decision.
+    # Dissent/alternative/context facts with different values are EXPECTED
+    # in documents like BOJ minutes (multiple member views).
     rate_decisions = [f for f in key_facts if f.get("metric") == "rate_decision"]
-    if len(rate_decisions) > 1:
-        distinct_values = set(f["value"] for f in rate_decisions)
-        if len(distinct_values) > 1:
+    primary_decisions = [f for f in rate_decisions if f.get("role") == "primary"]
+    if len(primary_decisions) > 1:
+        distinct_primary_values = set(f["value"] for f in primary_decisions)
+        if len(distinct_primary_values) > 1:
             errors["ambiguous"] += 1
             errors["details"].append(
-                f"MIXED_DECISIONS — {len(rate_decisions)} rate_decision facts with "
-                f"{len(distinct_values)} distinct values: {distinct_values}. "
-                f"IO mixes primary decision with dissent/alternative without role separation."
+                f"MIXED_PRIMARY_DECISIONS — {len(primary_decisions)} PRIMARY rate_decision facts "
+                f"with {len(distinct_primary_values)} distinct values: {distinct_primary_values}. "
+                f"IO has conflicting primary decisions without clear resolution."
             )
 
     # Check 2: defendant_name that looks like a paragraph fragment
