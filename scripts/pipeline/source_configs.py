@@ -520,3 +520,36 @@ PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
 
 # Source codes for Phase B (new generalization set)
 PHASE_B_SOURCES = ["BOJ", "RBNZ", "SEC", "FCA", "ONS", "BIS_STATS", "APPLE", "ARAMCO", "OFAC", "BIS_QR"]
+
+# ============================================================================
+# ESMA HTML Adapter Validation
+# Independent test: can ESMA become publishable via HTML adapter?
+# Branch: esma-html-validation (from 146aa3b, NOT from 27294db)
+# ============================================================================
+
+ESMA_HTML_SOURCE = {
+    "code": "ESMA_HTML",
+    "name": "European Securities and Markets Authority (HTML)",
+    "type": "financial_regulator",
+    "country": "EU",
+    "jurisdiction": "European Union",
+    "trustTier": 1,
+    "websiteUrl": "https://www.esma.europa.eu",
+    "feedUrl": "https://www.esma.europa.eu/press-news/esma-news",
+    "feed_format": "html_index",
+    "link_pattern": r"/press-news/esma-news/[\w-]+",
+    "link_pattern_prefix": "https://www.esma.europa.eu",
+    "rate_patterns": [],
+    "regulatory_patterns": [
+        (r"€([\d,]+(?:\.\d+)?)\s+(billion|million)", "penalty_amount"),
+        (r"\b(published|authoris\w+|propos\w+|calls\s+for|launches|publishes)\b", "action_type"),
+        (r"\b(EMIR|MiFID\s+II?|MiCA|DORA|SFTR|CRR|CRD\s+IV?|BMR)\b", "violation_type"),
+        (r"\b(final\s+report|draft\s+Regulatory\s+Technical\s+Standards|RTS|ITS)\b", "action_type"),
+        (r"€([\d,]+(?:\.\d+)?)\s+(billion|million)\s+threshold", "penalty_amount"),
+        (r"([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)\s+(?:of|threshold|requirement)", "percentage_statistic"),
+    ],
+    "event_type": "regulatory_enforcement",
+    "content_keywords": ["ESMA", "regulation", "regulatory", "supervision", "enforcement", "authoris", "European"],
+}
+
+SOURCES["ESMA_HTML"] = ESMA_HTML_SOURCE
