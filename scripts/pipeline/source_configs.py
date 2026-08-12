@@ -520,3 +520,43 @@ PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
 
 # Source codes for Phase B (new generalization set)
 PHASE_B_SOURCES = ["BOJ", "RBNZ", "SEC", "FCA", "ONS", "BIS_STATS", "APPLE", "ARAMCO", "OFAC", "BIS_QR"]
+
+# ============================================================================
+# Phase 2 — New-Source Validation
+# BEA: genuinely new source, not part of pipeline development
+# First-attempt config-only onboarding test
+# ============================================================================
+
+BEA_SOURCE = {
+    "code": "BEA",
+    "name": "US Bureau of Economic Analysis",
+    "type": "statistical_authority",
+    "country": "US",
+    "jurisdiction": "United States",
+    "trustTier": 1,
+    "websiteUrl": "https://www.bea.gov",
+    "feedUrl": "https://www.bea.gov/rss/",
+    "rate_patterns": [],
+    "statistical_patterns": [
+        # GDP growth: "Real GDP increased at an annual rate of 1.5 percent"
+        (r"(?:real\s+)?GDP\s+(?:increased|grew|rose|decreased|declined)\s+(?:at\s+an\s+annual\s+rate\s+of\s+)?([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)", "gdp_growth"),
+        # GDP level: "current-dollar GDP increased ... $X billion"
+        (r"current[- ]dollar\s+GDP\s+(?:increased|decreased|was|stood\s+at)\s+(?:at\s+an\s+annual\s+rate\s+of\s+)?\$([\d,]+(?:\.\d+)?)\s+billion", "usd_amount"),
+        # Price index: "price index for gross domestic purchases increased 5.7 percent"
+        (r"price\s+index\s+for\s+gross\s+domestic\s+purchases\s+(?:increased|decreased|rose|fell)\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)", "inflation_rate"),
+        # Personal income: "personal income increased X percent"
+        (r"personal\s+income\s+(?:increased|decreased|rose|fell)\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)", "statistic_value"),
+        # Consumer spending: "consumer spending increased X percent"
+        (r"consumer\s+spending\s+(?:increased|decreased|rose|fell)\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)", "statistic_value"),
+        # Trade deficit: "trade deficit was $X billion"
+        (r"trade\s+(?:deficit|surplus)\s+(?:was|stood\s+at|increased\s+to|decreased\s+to)\s+\$([\d,]+(?:\.\d+)?)\s+billion", "usd_amount"),
+        # Generic billion amount
+        (r"\$([\d,]+(?:\.\d+)?)\s+billion", "usd_amount"),
+        # Generic percent change
+        (r"(?:increased|decreased|rose|fell|grew|declined)\s+(?:at\s+an\s+annual\s+rate\s+of\s+)?([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)", "percentage_statistic"),
+    ],
+    "event_type": "statistical_release",
+    "content_keywords": ["GDP", "trade", "income", "percent", "billion", "consumer", "price index", "BEA"],
+}
+
+SOURCES["BEA"] = BEA_SOURCE

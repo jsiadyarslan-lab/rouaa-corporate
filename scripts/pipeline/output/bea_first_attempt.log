@@ -1,0 +1,79 @@
+======================================================================
+PHASE 2 — NEW-SOURCE VALIDATION: BEA FIRST ATTEMPT
+======================================================================
+Source: BEA — US Bureau of Economic Analysis
+Class: statistical_authority
+Feed: https://www.bea.gov/rss/
+Start: 2026-08-12T21:56:52.664095
+Rules: config-only, no core changes, no source-specific code
+======================================================================
+
+[1/7] Fetching...
+  Fetching BEA (rss): https://www.bea.gov/rss/
+  [OK] rss fetched via urllib (86802 bytes)
+  Parsed 47 items from RSS feed
+  Filtered to 47 relevant items
+    Fetching full content: https://www.bea.gov/news/2026/us-international-trade-goods-and-services-june-202...
+    Fetching full content: https://www.bea.gov/news/2026/gdp-advance-estimate-2nd-quarter-2026...
+    Fetching full content: https://www.bea.gov/news/2026/personal-income-and-outlays-june-2026...
+    Fetching full content: https://www.bea.gov/news/2026/direct-investment-country-and-industry-2025...
+    Fetching full content: https://www.bea.gov/news/2026/activities-us-affiliates-foreign-multinational-ent...
+    Fetching full content: https://www.bea.gov/news/2026/personal-income-and-outlays-may-2026...
+    Fetching full content: https://www.bea.gov/news/2026/us-international-transactions-and-investment-posit...
+    Fetching full content: https://www.bea.gov/news/2026/new-foreign-direct-investment-united-states-2025...
+    Fetching full content: https://www.bea.gov/news/2026/personal-income-and-outlays-april-2026...
+    Fetching full content: https://www.bea.gov/news/2026/personal-income-and-outlays-january-2026...
+  ✓ Fetched 10 documents via urllib
+[2/7] Normalizing...
+  ✓ Normalized 10/10
+[3/7] Extracting facts...
+  → 237 facts
+[4/7] Detecting events...
+  → 10 events
+[5/7] Evidence + Provenance...
+  → 237 chains, verified=True
+[6/7] Generating IOs...
+  → 10 IOs (10 publishable)
+[7/7] Reproducibility...
+  ✓ Reproducibility verified
+
+======================================================================
+FIRST ATTEMPT RESULTS
+======================================================================
+
+Source:              BEA
+First-attempt:       PASS
+Core intervention:   0
+Source-specific code: 0
+Iterations:          1
+Elapsed time:        15.2s
+Documents fetched:   10
+Documents normalized: 10
+Facts:               237
+Events:              10
+Evidence chains:     237
+IOs:                 10
+Publishable:         10
+Provenance:          100%
+Reproducibility:     PASS
+Semantic errors:     0
+Pipeline state:      PUBLISHABLE
+
+=== IO SAMPLES ===
+  IO 1:
+    headline: US Bureau of Economic Analysis Statistical Release
+    summary: USD Amount: $73.3 | Source: US Bureau of Economic Analysis | Published: Tue, 04 Aug 2026 08:30:00 EDT
+    confidence: 0.9500000000000001, facts: 86
+    provenance_complete: True
+  IO 2:
+    headline: US Bureau of Economic Analysis Statistical Release
+    summary: Inflation Rate: 5.7% | GDP Growth: 2.1% | Source: US Bureau of Economic Analysis | Published: Thu, 30 Jul 2026 08:30:00 EDT
+    confidence: 1.0, facts: 10
+    provenance_complete: True
+  IO 3:
+    headline: US Bureau of Economic Analysis Statistical Release
+    summary: USD Amount: $54.9 | Source: US Bureau of Economic Analysis | Published: Thu, 30 Jul 2026 08:30:00 EDT
+    confidence: 0.9500000000000001, facts: 13
+    provenance_complete: True
+
+Results saved: /home/z/my-project/scripts/pipeline/output/bea_first_attempt_results.json
