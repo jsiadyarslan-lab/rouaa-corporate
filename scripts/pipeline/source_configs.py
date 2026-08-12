@@ -520,3 +520,40 @@ PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
 
 # Source codes for Phase B (new generalization set)
 PHASE_B_SOURCES = ["BOJ", "RBNZ", "SEC", "FCA", "ONS", "BIS_STATS", "APPLE", "ARAMCO", "OFAC", "BIS_QR"]
+
+# ============================================================================
+# Phase 2A — Second-Source Validation
+# ESMA: European Securities and Markets Authority (financial_regulator)
+# Genuinely new source, different class from BEA (statistical_authority)
+# First-attempt config-only onboarding test
+# ============================================================================
+
+ESMA_SOURCE = {
+    "code": "ESMA",
+    "name": "European Securities and Markets Authority",
+    "type": "financial_regulator",
+    "country": "EU",
+    "jurisdiction": "European Union",
+    "trustTier": 1,
+    "websiteUrl": "https://www.esma.europa.eu",
+    "feedUrl": "https://www.esma.europa.eu/rss.xml",
+    "rate_patterns": [],
+    "regulatory_patterns": [
+        # EUR amounts: "€X billion", "€X million"
+        (r"€([\d,]+(?:\.\d+)?)\s+(billion|million)", "penalty_amount"),
+        # Regulatory action types: "published", "authorises", "propose", "calls for"
+        (r"\b(published|authoris\w+|propos\w+|calls\s+for|launches|publishes)\b", "action_type"),
+        # Regulatory framework references: "EMIR", "MiFID", "MiCA", "DORA"
+        (r"\b(EMIR|MiFID\s+II?|MiCA|DORA|SFTR|CRR|CRD\s+IV?|BMR)\b", "violation_type"),
+        # "draft Regulatory Technical Standards" / "final report"
+        (r"\b(final\s+report|draft\s+Regulatory\s+Technical\s+Standards|RTS|ITS)\b", "action_type"),
+        # Thresholds: "€X billion threshold"
+        (r"€([\d,]+(?:\.\d+)?)\s+(billion|million)\s+threshold", "penalty_amount"),
+        # Generic percent
+        (r"([+-]?\d+(?:\.\d+)?)\s*(?:percent|%)\s+(?:of|threshold|requirement)", "percentage_statistic"),
+    ],
+    "event_type": "regulatory_enforcement",
+    "content_keywords": ["ESMA", "regulation", "regulatory", "supervision", "enforcement", "authoris", "European"],
+}
+
+SOURCES["ESMA"] = ESMA_SOURCE
