@@ -22,7 +22,7 @@ from source_configs import SOURCES, PHASE_A_SOURCES
 from schemas import Document, Fact, FinancialEvent, Evidence, ProvenanceChain, IntelligenceObject
 from fetcher import fetch_source_publications
 from content_extractor import normalize_documents_v2
-from extractor import extract_facts_multi_category, deduplicate_facts
+from extractor import extract_facts_multi_category, deduplicate_facts, deduplicate_primary_facts
 from detector import detect_event
 from evidence import build_evidence_for_facts, build_provenance_chains, verify_provenance
 from intelligence_object import generate_intelligence_object, render_readable_output, save_io_to_json, save_readable_output
@@ -171,6 +171,7 @@ def run_pipeline_for_source(source_code: str) -> dict:
     for doc in normalized:
         facts = extract_facts_multi_category(doc, config)
         facts = deduplicate_facts(facts)
+        facts = deduplicate_primary_facts(facts)
         all_facts.extend(facts)
 
     results["facts_extracted"] = len(all_facts)
@@ -307,6 +308,7 @@ def run_pipeline_for_source(source_code: str) -> dict:
         # Re-extract
         re_facts = extract_facts_multi_category(first_doc, config)
         re_facts = deduplicate_facts(re_facts)
+        re_facts = deduplicate_primary_facts(re_facts)
 
         # Compare (by metric + value + paragraph)
         original_keys = set((f.metric, f.value, f.paragraph_index) for f in first_facts)

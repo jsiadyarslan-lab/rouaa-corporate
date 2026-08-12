@@ -163,20 +163,28 @@ def detect_fact_role(excerpt: str, paragraph: str, role_patterns: dict = None) -
     if role_patterns is None:
         role_patterns = DEFAULT_ROLE_PATTERNS
 
-    lower_excerpt = excerpt.lower()
-    lower_para = paragraph.lower()
+    # Extraction Hardening: normalize whitespace before role detection.
+    # PDF extraction and HTML normalization can produce text with newlines
+    # where patterns expect spaces (e.g., "will\ncontinue to" vs "will continue to").
+    # This normalization ensures role patterns match regardless of whitespace type.
+    # This is a GENERIC fix — applies to all sources, all patterns.
+    import re as _re
+    normalized_excerpt = _re.sub(r'\s+', ' ', excerpt).strip().lower()
+    normalized_para = _re.sub(r'\s+', ' ', paragraph).strip().lower()
 
     # Check roles in priority order — first match wins
     for role in ROLE_PRIORITY:
         patterns = role_patterns.get(role, [])
         for pattern in patterns:
+            # Normalize pattern whitespace too (in case pattern has newlines)
+            normalized_pattern = _re.sub(r'\s+', ' ', pattern).strip().lower()
             if role == "dissent":
                 # Dissent: check both paragraph and excerpt (broad context)
-                if pattern in lower_para:
+                if normalized_pattern in normalized_para:
                     return role
             else:
                 # Other roles: check excerpt only (immediate context)
-                if pattern in lower_excerpt:
+                if normalized_pattern in normalized_excerpt:
                     return role
 
     return "primary"
@@ -270,6 +278,79 @@ def deduplicate_facts(facts: List[Fact]) -> List[Fact]:
             seen[key] = fact
 
     return list(seen.values())
+
+
+def deduplicate_primary_facts(facts: List[Fact]) -> List[Fact]:
+    """Resolve conflicting PRIMARY facts for the same metric in the same paragraph.
+
+    Extraction Hardening Fix (generic, no source-specific logic):
+
+    When multiple PRIMARY facts exist for the same (metric, paragraph_index) with
+    DIFFERENT values, only ONE can be the actual primary fact. This function keeps
+    the highest-confidence PRIMARY fact and removes the conflicting ones.
+
+    Rules:
+    - Only applies to DECISION-type metrics where conflicting values are semantically wrong
+      (rate_decision, policy_rate, policy_rate_range, monetary_policy_committee)
+    - Does NOT apply to data metrics that can legitimately have multiple values per paragraph
+      (usd_amount, penalty_amount, revenue, designated_entity, etc.)
+    - Only resolves when values are DIFFERENT (same-value facts already deduped)
+    - Facts with other roles (dissent, alternative, forecast, context, revision)
+      are PRESERVED — they are correct and should not be deleted
+    - Tiebreaker: if same confidence, prefer non-generic values (value != "action")
+      because "action" is a fallback when verb mapping fails
+
+    This is NOT blind dedup — it only resolves conflicting PRIMARY facts within
+    the same metric+paragraph context, and only for decision-type metrics.
+    Different roles are always preserved. Data metrics are always preserved.
+    """
+    # Metrics where multiple conflicting PRIMARY values are semantically wrong
+    # (a paragraph should have one decision, not multiple conflicting decisions)
+    DECISION_METRICS = {
+        "rate_decision", "policy_rate", "policy_rate_range",
+        "monetary_policy_committee",
+    }
+
+    # Separate PRIMARY decision facts from others
+    primary_decision_facts = []
+    other_facts = []
+    for fact in facts:
+        if (fact.fact_role == "primary"
+            and fact.paragraph_index is not None
+            and fact.metric in DECISION_METRICS):
+            primary_decision_facts.append(fact)
+        else:
+            other_facts.append(fact)
+
+    # Group PRIMARY decision facts by (metric, paragraph_index)
+    groups = {}
+    for fact in primary_decision_facts:
+        key = (fact.metric, fact.paragraph_index)
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(fact)
+
+    # Resolve conflicts within each group
+    resolved = []
+    for key, group in groups.items():
+        distinct_values = set(f.value for f in group)
+        if len(distinct_values) <= 1:
+            # No conflict — keep all (same value, possibly different confidence)
+            resolved.extend(group)
+        else:
+            # Conflict — multiple PRIMARY facts with different values
+            # Keep only the best one
+            # Tiebreaker: highest confidence, then prefer non-"action" value
+            def sort_key(f):
+                # Higher confidence = better (reverse sort)
+                # Non-"action" value = better (0 > 1 for "action")
+                action_penalty = 1 if f.value == "action" else 0
+                return (-f.extraction_confidence, action_penalty)
+
+            best = min(group, key=sort_key)
+            resolved.append(best)
+
+    return resolved + other_facts
 
 
 # ============================================================================
@@ -583,9 +664,23 @@ def extract_facts_multi_category(
         if len(paragraph) < 20:
             continue
 
-        for pattern_str, pattern_type in all_patterns:
+        for pattern in all_patterns:
+            # Support optional 3rd element: case_sensitive (default False = IGNORECASE)
+            # This is a GENERIC mechanism — any pattern in any source can use it.
+            # Existing 2-tuple patterns are backward compatible (case_sensitive=False).
+            pattern_str = pattern[0]
+            pattern_type = pattern[1]
+            case_sensitive = pattern[2] if len(pattern) > 2 else False
+
             try:
-                matches = re.finditer(pattern_str, paragraph, re.IGNORECASE)
+                # Extraction Hardening Fix: per-pattern case sensitivity control
+                # Default: re.IGNORECASE (backward compatible)
+                # If case_sensitive=True: no IGNORECASE flag (case-sensitive matching)
+                if case_sensitive:
+                    matches = re.finditer(pattern_str, paragraph)
+                else:
+                    matches = re.finditer(pattern_str, paragraph, re.IGNORECASE)
+
                 for match in matches:
                     fact = _extract_fact_from_match(
                         match=match,

@@ -151,12 +151,14 @@ PHASE_B_SOURCES_LIST = {
             (r"uncollateralized\s+overnight\s+call\s+rate\s+(?:at|to|around)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
             # "policy interest rate" — more flexible than "policy-rate balance"
             (r"(?:maintain|kept|keep|hold|held)\s+(?:the\s+)?policy\s+interest\s+rate", "rate_maintain"),
-            (r"(?:raise|raised|increase|increased|cut|lower|lowered|decrease|decreased)\s+(?:the\s+)?policy\s+interest\s+rate", "rate_action"),
+            # Extraction Hardening: added capture group (was non-capturing, producing generic "action")
+            (r"(raise|raised|increase|increased|cut|lower|lowered|decrease|decreased)\s+(?:the\s+)?policy\s+interest\s+rate", "rate_action"),
             # "short-term policy rate" with hyphen variations
             (r"short[- ]term\s+policy\s+rate\s+(?:at|to)\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
             # "policy-rate balance" (original BOJ terminology)
             (r"(?:maintain|kept|keep|hold|held)\s+(?:the\s+)?policy[- ]rate\s+balance", "rate_maintain"),
-            (r"(?:raised|increased|cut|lowered|decreased)\s+(?:the\s+)?policy[- ]rate\s+balance", "rate_action"),
+            # Extraction Hardening: added capture group (was non-capturing, producing generic "action")
+            (r"(raised|increased|cut|lowered|decreased)\s+(?:the\s+)?policy[- ]rate\s+balance", "rate_action"),
             # "interest rate applied to the complementary-lending facility"
             (r"interest\s+rate\s+applied\s+to\s+(?:the\s+)?complementary[- ]lending\s+facility\s+(?:at|to)\s+(\d+(?:\.\d+)?)", "rate_value"),
             (r"basic\s+loan\s+rate\s+(?:at|to)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
@@ -204,6 +206,15 @@ PHASE_B_SOURCES_LIST = {
                 "considered but", "evaluated but",
                 "expressed the view that it was appropriate",
                 "expressed the recognition that",
+                # Extraction Hardening: member recommendation language
+                "it is necessary for the bank to",
+                "it is necessary to",
+                "the bank needs to",
+                "should maintain its stance",
+                "should continue to",
+                "necessary to raise",
+                "necessary to cut",
+                "necessary to adjust",
             ],
             "context": [
                 "previous meeting", "last meeting", "prior to",
@@ -217,6 +228,12 @@ PHASE_B_SOURCES_LIST = {
                 "outlook for", "anticipates", "anticipate",
                 "guidance of", "guidance range",
                 "is expected to", "are expected to",
+                # Extraction Hardening: future guidance language
+                "will continue to", "will raise", "will cut",
+                "will maintain", "will adjust",
+                "will be faster", "will be slower",
+                "pace of rate hikes",
+                "policy interest rate hikes will",
             ],
             "revision": [
                 "revised from", "restated", "previously reported as",
@@ -293,15 +310,16 @@ PHASE_B_SOURCES_LIST = {
             # UK amounts: "£X million" or "X,million fine"
             (r"(?:fine[ds]?|penalty|settlement|sanction\w*)\s+(?:of\s+)?(?:£|GBP\s)?([\d,]+(?:\.\d+)?)\s*(?:million|billion|m|bn)", "penalty_amount"),
             (r"(?:£|GBP\s)([\d,]+(?:\.\d+)?)\s*(?:million|billion)\s+(?:fine|penalty|settlement)", "penalty_amount"),
-            # B-Closure remediation: tightened defendant_name regex.
-            # Previous: fined\s+([A-Z][A-Za-z\s,&\.]{3,80}) — with IGNORECASE,
-            # [A-Z] matched lowercase, so "defined benefit" matched as defendant.
-            # New: requires Capitalized word (A-Z followed by a-z) and stops at
-            # sentence boundaries (period+space, lowercase connector, or 5 words max).
-            # Matches "fined Barclays Bank" but not "fined benefit pension schemes".
-            (r"fined\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})", "defendant_name"),
-            # "X has been fined" / "X was fined"
-            (r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\s+(?:has\s+been|was)\s+fined", "defendant_name"),
+            # Extraction Hardening: case_sensitive=True for defendant_name patterns.
+            # The extractor applies re.IGNORECASE by default, which makes [A-Z] match
+            # lowercase. This caused "defined benefit pension schemes" to match as a
+            # defendant name (from "defined" → "fined" prefix + "benefit...").
+            # With case_sensitive=True (generic mechanism), [A-Z] only matches uppercase,
+            # so only proper noun names (e.g., "Barclays Bank") are captured.
+            # This is a GENERIC mechanism — any pattern in any source can use it.
+            (r"fined\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})", "defendant_name", True),
+            # "X has been fined" / "X was fined" — also case_sensitive
+            (r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\s+(?:has\s+been|was)\s+fined", "defendant_name", True),
             # Violation types
             (r"(?:for|due\s+to|over)\s+(?:failures?\s+in|breach(?:es)?\s+of|inadequate|poor)\s+([a-z\s,]{5,60})", "violation_type"),
             # Action type — removed "final notice" (it's a document type, not an action)
