@@ -76,7 +76,7 @@ This is NOT: "Gate 1 is the most common boundary among official sources." The sc
 
 ### Phase B development sources (retrospective, not validation)
 
-All 11 Phase B sources (ECB, BOE, FED, BOC, BOJ, RBNZ, SEC, FCA, BIS_STATS, APPLE, OFAC, BIS_QR) passed Gates 1-5 during development. These are development sources, not validation sources — they were used to build the pipeline, not to test it.
+Phase B included 12 sources (ECB, BOE, FED, BOC, RBA, BOJ, RBNZ, SEC, FCA, BIS_STATS, APPLE, OFAC, BIS_QR). Of these, 10 passed Gates 1-5 during development. RBNZ did not reach publishable (content URLs blocked — Gate 1 partial failure). RBA was blocked at Gate 1 (Akamai 403). These are development sources, not validation sources — they were used to build the pipeline, not to test it.
 
 ---
 
