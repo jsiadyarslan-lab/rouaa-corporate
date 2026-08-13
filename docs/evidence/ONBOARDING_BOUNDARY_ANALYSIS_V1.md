@@ -245,11 +245,47 @@ This is less commercially exciting than "if all 4 pass, onboarding is a configur
 
 ---
 
+## Prospective Validation Status
+
+| Gate | Retrospective evidence | Prospective prediction | Prospective result |
+|------|----------------------|----------------------|-------------------|
+| Gate 1 | RBA, ARAMCO, RBNZ (Phase B) | IMF: predicted FAIL | **CONFIRMED** (HTTP 403) |
+| Gate 2 | ESMA (RSS + HTML) | Not obtained — >20 sources screened, no suitable candidate | **NOT TESTED PROSPECTIVELY** |
+| Gate 3 | ONS (Phase B) | Not obtained — >30 sources screened, no suitable candidate | **NOT TESTED PROSPECTIVELY** |
+| Gate 4 | None | Not tested | **NOT VALIDATED** |
+| Gate 5 | BEA, SNB (validation); Phase B (development) | CFTC: predicted PASS | **CONFIRMED** (10/10 publishable) |
+
+### Screening search results (not prevalence)
+
+Gate 2 challenge search: >20 official sources screened; no suitable prospective candidate identified. ESMA remains retrospective evidence of the boundary. This does not establish the prevalence of Gate 2 failures statistically.
+
+Gate 3 challenge search: >30 official sources screened; no suitable prospective candidate identified. ONS remains retrospective evidence of the boundary. This does not establish the prevalence of Gate 3 failures statistically.
+
+Gate 1 was the most frequently observed boundary condition during the source-screening activity conducted to date. This is an observation, not a prevalence finding — the screening was ad-hoc, not a designed study.
+
+---
+
+## Overall Boundary Framework Status
+
+```
+Boundary framework              CLEARED
+Retrospective consistency        CLEARED
+Prospective prediction           PARTIALLY VALIDATED
+Gate 1 prediction                VALIDATED
+Gate 2 prediction                NOT TESTED PROSPECTIVELY
+Gate 3 prediction                NOT TESTED PROSPECTIVELY
+Gate 4 prediction                NOT VALIDATED
+Gate 5 prediction                NOT VALIDATED (beyond 1 test)
+Commercial boundary claim        NOT AUTHORIZED
+```
+
+---
+
 ## Relationship to Existing Documents
 
 | Document | Role | Relationship |
 |----------|------|-------------|
 | Supported Source Contract v1.0 | What ROUA supports | This protocol explains **why** those sources are supported (they pass gates 1-4) |
-| Evidence Matrix V2 | What was tested | This protocol maps the test results to boundary factors |
+| Evidence Matrix V3 | What was tested | This protocol maps the test results to boundary factors |
 | Validation Protocol v2 | How to test a new source | This protocol adds pre-screening before the test |
 | Extraction Hardening | Pipeline state | This protocol is based on the hardened pipeline (`146aa3b`) |
