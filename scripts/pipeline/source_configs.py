@@ -520,3 +520,40 @@ PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
 
 # Source codes for Phase B (new generalization set)
 PHASE_B_SOURCES = ["BOJ", "RBNZ", "SEC", "FCA", "ONS", "BIS_STATS", "APPLE", "ARAMCO", "OFAC", "BIS_QR"]
+
+# ============================================================================
+# Prospective Boundary Validation — Case A: CFTC
+# Configuration-boundary prediction: Gates 1-4 PASS → predicted config-only PASS
+# ============================================================================
+
+CFTC_SOURCE = {
+    "code": "CFTC",
+    "name": "US Commodity Futures Trading Commission",
+    "type": "financial_regulator",
+    "country": "US",
+    "jurisdiction": "United States",
+    "trustTier": 1,
+    "websiteUrl": "https://www.cftc.gov",
+    "feedUrl": "https://www.cftc.gov/RSS/RSSENF/rssenf.xml",
+    "rate_patterns": [],
+    "regulatory_patterns": [
+        # Penalty amounts: "$400 Million Fraud", "$8 Million for Supervision"
+        (r"\$([\d,]+(?:\.\d+)?)\s+(million|billion)", "penalty_amount"),
+        # "CFTC Charges X with..."
+        (r"CFTC\s+Charges\s+([A-Z][A-Za-z\s,&\.\(\)]{3,80})", "defendant_name", True),
+        # "CFTC Orders X to Pay..."
+        (r"CFTC\s+Orders\s+([A-Z][A-Za-z\s,&\.\(\)]{3,80})\s+to\s+Pay", "defendant_name", True),
+        # Action types
+        (r"\b(filed\s+a\s+complaint|charges|ordered\s+to\s+pay|settled|sanctioned)\b", "action_type"),
+        # Violation types
+        (r"\b(fraud|manipulation|supervision\s+failure|Ponzi\s+scheme|misappropriation)\b", "violation_type"),
+        # "civil monetary penalties"
+        (r"\b(civil\s+monetary\s+penalt\w+|restitution|disgorgement|trading\s+ban|registration\s+ban)\b", "violation_type"),
+        # "defendants" / "respondents"
+        (r"\bdefendants?\b", "action_type"),
+    ],
+    "event_type": "regulatory_enforcement",
+    "content_keywords": ["CFTC", "charges", "enforcement", "commodity", "fraud", "penalty", "ordered", "defendant"],
+}
+
+SOURCES["CFTC"] = CFTC_SOURCE
