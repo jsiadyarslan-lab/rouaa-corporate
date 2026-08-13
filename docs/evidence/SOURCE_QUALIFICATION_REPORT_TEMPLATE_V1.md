@@ -54,9 +54,11 @@ This template is used by:
 │  GATE 2 — PROVENANCE QUALIFICATION                                  │
 │  Assessed by:           [Solutions Architect]                       │
 │  Date source:           [<pubDate> / <dc:date> / URL pattern /      │
-│                          config / not available]                    │
-│  Result:                [PASS / FAIL]                               │
-│  Notes:                 [if FAIL, where does the date exist?]       │
+│                          config / not available /                    │
+│                          PENDING — depends on content access]       │
+│  Result:                [PASS / FAIL / PENDING]                     │
+│  Notes:                 [if FAIL, where does the date exist?        │
+│                          if PENDING, what content access is needed?]│
 │                                                                     │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
@@ -121,11 +123,15 @@ This template is used by:
 │                                                                     │
 │  QUALIFICATION DECISION                                              │
 │  Decided by:             [Commercial Lead + Solutions Architect]    │
-│  Final classification:   [STANDARD /                                │
+│  Qualification status:  [STANDARD /                                │
 │                           QUALIFIED ENGINEERING /                    │
 │                           CONDITIONAL /                              │
 │                           NOT CURRENTLY SUPPORTED]                  │
+│  Review status:         [NOT REQUIRED / ROOT-CAUSE REVIEW]          │
 │  Confidence:             [HIGH / MEDIUM / LOW]                      │
+│    HIGH = direct evidence from documented test                      │
+│    MEDIUM = screening + partial or retrospective evidence           │
+│    LOW = inference or unresolved condition                          │
 │  Evidence basis:         [test commit / screening / manual review]  │
 │                                                                     │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -176,7 +182,8 @@ This template is used by:
 │  QUALIFIED ENGINEERING:   [N]  ([%])                               │
 │  CONDITIONAL:             [N]  ([%])                               │
 │  NOT CURRENTLY SUPPORTED: [N]  ([%])                               │
-│  ROOT-CAUSE REVIEW:       [N]  ([%])                               │
+│  Open root-cause reviews: [N]  (not a classification —              │
+│                                pending Gate 5 root-cause review)    │
 │                                                                     │
 │  NOTE: Percentages represent portfolio composition for THIS         │
 │  customer's source list. They are NOT a general success rate.       │
