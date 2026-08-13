@@ -66,7 +66,7 @@ The source universe is an inventory of all potential official financial and econ
 
 | Class | Examples | Extensible |
 |-------|---------|-----------|
-| Central banks | ECB, FED, BOE, BOJ, SNB, SNB, CFTC | Yes |
+| Central banks | ECB, Federal Reserve, BOE, BOJ, SNB | Yes |
 | Financial regulators / supervisory authorities | SEC, FCA, CFTC, FINMA, BaFin | Yes |
 | Statistical agencies | BEA, BIS_STATS, ONS, Eurostat | Yes |
 | Ministries of finance / treasury | US Treasury, UK HM Treasury | Yes |
@@ -93,7 +93,8 @@ Each source in the universe is registered with the following operating-model fie
 | region | Geographic region (EU, NA, APAC, MENA, LATAM, Africa) |
 | institutional_class | From taxonomy (Section 4) |
 | sub_class | Optional sub-classification |
-| official_status | Official / quasi-official / industry-standard |
+| authority_status | OFFICIAL / QUASI_OFFICIAL / OTHER_AUTHORITATIVE |
+| eligible_for_global_official_coverage | YES / NO / REVIEW (separate decision from authority_status) |
 | domains | Website domains |
 | source_urls | Main content URLs |
 | feed_urls | RSS/Atom/PDF feed URLs |
@@ -256,7 +257,7 @@ This means: a customer request for a high-value source can move it up the queue,
 DISCOVERED
     ↓
 QUALIFYING (Gates 1-4 pre-screen)
-    ↓
+    ↓  (transition to ONBOARDING only if pre-screen allows Gate 5 attempt)
 ONBOARDING (Gate 5 first-attempt + config)
     ↓
 VERIFIED (provenance + reproducibility confirmed)
