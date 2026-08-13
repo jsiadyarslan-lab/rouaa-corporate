@@ -53,18 +53,36 @@ Risk / Semantic Review (Gate 5)
 Commercial Classification
 ```
 
-Each stage produces a binary or classified result. The first failure point determines the commercial classification.
+The earliest blocking gate determines the **initial routing decision**; final commercial classification may require root-cause review.
 
 ### Decision rules
 
-| First failure gate | Commercial classification | Rationale |
-|-------------------|--------------------------|-----------|
+| Earliest blocking gate | Initial routing | Rationale |
+|----------------------|---------------|-----------|
 | Gate 1 (Access) | **NOT CURRENTLY SUPPORTED** | Cannot reach the source without infrastructure investment (proxy, IP, auth) |
 | Gate 2 (Provenance) | **CONDITIONAL** | Extraction works, but provenance incomplete — publication blocked until date path resolved |
 | Gate 3 (Content) | **NOT CURRENTLY SUPPORTED** | Source is JS-rendered or content shell — requires JS execution infrastructure |
 | Gate 4 (Configuration) | **QUALIFIED ENGINEERING** | Source domain not covered by existing patterns — requires pattern category extension |
-| Gate 5 (First attempt) | **CONDITIONAL** or **QUALIFIED ENGINEERING** | Configuration path exists but produced 0 publishable IOs — root cause review needed |
+| Gate 5 (First attempt) | **ROOT-CAUSE REVIEW** → routes to CONDITIONAL, QUALIFIED ENGINEERING, or NOT CURRENTLY SUPPORTED | Configuration path exists but produced 0 publishable IOs — root cause must be identified before classification |
 | No failure (all gates pass) | **STANDARD** | Configuration-driven onboarding is the expected path |
+
+### Gate 5 failure → Root-cause review
+
+Gate 5 failure does not produce a direct commercial classification. Instead, it opens a **qualification review** that examines the root cause:
+
+```text
+Gate 5 FAIL
+    ↓
+ROOT-CAUSE REVIEW
+    ├── provenance / publication condition
+    │       → CONDITIONAL
+    ├── configuration abstraction insufficient
+    │       → QUALIFIED ENGINEERING
+    └── unsupported / unresolved
+            → NOT CURRENTLY SUPPORTED
+```
+
+This is necessary because Gate 5 failure has not been tested prospectively; its commercial behavior is not yet established.
 
 ### Special case: Gate 5 pass with Quality REVIEW
 
@@ -156,15 +174,16 @@ For every source submitted for qualification, the buyer receives:
 
 ## 6. The Core Commercial Promise
 
-> **"Give us your source list. We will classify every source before we commit to implementation."**
+> **"Give us your source list. We will qualify each source before we commit to implementation, and identify whether it fits the standard path or requires additional engineering review."**
 
 This is the commercial value proposition. It sells **predictability and governance** — not unlimited ingestion.
 
 The buyer knows:
-- Which sources are STANDARD (configuration-only)
+- Which sources are expected to be STANDARD (configuration-only)
 - Which sources need engineering (and what type)
 - Which sources are conditional (and what condition is blocking)
 - Which sources are not currently supported (and why)
+- Which sources require root-cause review before a final classification
 
 **Before any implementation work begins.**
 
@@ -211,7 +230,7 @@ No source has been classified as QUALIFIED ENGINEERING through prospective testi
 
 > Configuration-only onboarding has been demonstrated for 3 genuinely new sources across 3 distinct institutional classes (statistical_authority, central_bank, financial_regulator), with complete provenance, reproducibility, and 0 core code changes.
 
-> Before any implementation work begins, ROUA can classify a source as STANDARD, QUALIFIED ENGINEERING, CONDITIONAL, or NOT CURRENTLY SUPPORTED — giving the buyer predictability before commitment.
+> Before any implementation work begins, ROUA can pre-screen a source against the currently observed qualification boundaries and assign an initial qualification status; cases requiring Gate 4/5 engineering judgment remain subject to validation.
 
 > ROUA's pipeline produces Intelligence Objects with complete provenance chains (source → document → fact → evidence) and deterministic reproducibility for sources that pass the qualification gates.
 
