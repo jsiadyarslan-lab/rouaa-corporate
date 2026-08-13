@@ -520,9 +520,9 @@ By institutional class:
   TOTAL:                              178
 
 By status:
-  DISCOVERED:    160
+  DISCOVERED:    161
   SCREENED:        5
-  QUALIFIED:      13
+  QUALIFIED:      12
   TOTAL:         178
 
 By record scope:
@@ -532,13 +532,34 @@ By record scope:
   TOTAL:               178
 
 By evidence maturity:
-  DEVELOPMENT_VERIFIED:    8  (Phase A/B sources with evidence commits)
+  DEVELOPMENT_VERIFIED:    9  (ECB, FED, BOE, BOC, BOJ, SEC, FCA, BIS, OFAC)
   VALIDATION_VERIFIED:     2  (BEA, SNB — validation tests with independent review)
   PROSPECTIVE_VALIDATED:   1  (CFTC — prospective prediction confirmed)
   SCREENING_ONLY:          5  (ESMA, IMF, ONS, RBA, RBNZ — Gates tested, no full qualification)
-  DISCOVERY_ONLY:        162  (identified but not tested)
+  DISCOVERY_ONLY:        161  (identified but not tested)
   TOTAL:                 178
 ```
+
+### QUALIFIED reconciliation trace (12 records)
+
+| # | Institution | Evidence commit | Evidence maturity | Qualification basis |
+|---|------------|----------------|-------------------|-------------------|
+| 1 | European Central Bank | `de64f31` | DEVELOPMENT_VERIFIED | Phase A development — pipeline built against this source |
+| 2 | US Federal Reserve | `de64f31` | DEVELOPMENT_VERIFIED | Phase A development — pipeline built against this source |
+| 3 | Bank of England | `de64f31` | DEVELOPMENT_VERIFIED | Phase A development — pipeline built against this source |
+| 4 | Bank of Canada | `de64f31` | DEVELOPMENT_VERIFIED | Phase A development — pipeline built against this source |
+| 5 | Bank of Japan | `146aa3b` | DEVELOPMENT_VERIFIED | Phase B development + Extraction Hardening |
+| 6 | US SEC | `146aa3b` | DEVELOPMENT_VERIFIED | Phase B development + Extraction Hardening |
+| 7 | UK FCA | `146aa3b` | DEVELOPMENT_VERIFIED | Phase B development + Extraction Hardening |
+| 8 | Bank for International Settlements | `146aa3b` | DEVELOPMENT_VERIFIED | Phase B development (BIS_STATS + BIS_QR source configs) |
+| 9 | US Treasury / OFAC | `146aa3b` | DEVELOPMENT_VERIFIED | Phase B development + Extraction Hardening |
+| 10 | US Bureau of Economic Analysis | `c8af140` | VALIDATION_VERIFIED | Phase 2 validation — first-attempt config-only PASS |
+| 11 | Swiss National Bank | `c09de13` | VALIDATION_VERIFIED | Phase 2B validation — config-only PASS + independent review (`332788c`) |
+| 12 | US Commodity Futures Trading Commission | `b4fabe9` | PROSPECTIVE_VALIDATED | Phase 2B prospective — prediction confirmed before configuration |
+
+Note: BIS has 2 source configs (BIS_STATS + BIS_QR) but is counted as 1 institution in the inventory. Both configs are QUALIFIED with evidence commit `146aa3b`.
+
+Note: APPLE (corporate_ir) is QUALIFIED in the pipeline but is NOT in this inventory (not yet added to the Global Source Universe). It would be added in a future inventory update.
 
 ### Record scope definition
 
