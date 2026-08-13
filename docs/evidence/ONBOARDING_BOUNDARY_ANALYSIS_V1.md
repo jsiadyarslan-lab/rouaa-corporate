@@ -1,6 +1,6 @@
-# Onboarding Boundary Analysis Protocol v1
+# Onboarding Boundary Analysis Protocol v1 (Corrected)
 
-**Status**: Draft for approval
+**Status**: Corrected per evidence review
 **Date**: 2026-08-13
 **Predecessor**: Evidence Matrix V2 (`23aeb94`), SNB Independent Validation Review (`332788c`)
 
@@ -26,154 +26,177 @@
 
 ---
 
-## Decision Tree (Proposed)
+## Decision Tree (Corrected)
 
 ```
-New Official Source
-        │
-        ├── 1. Supported access path?
-        │        │
-        │        ├── NO (JS-rendered, Akamai-blocked, auth-required)
-        │        │        → ENGINEERING (infrastructure required)
-        │        │
-        │        └── YES (RSS, HTML index, PDF — accessible via urllib)
-        │                │
-        │                ├── 2. Provenance metadata available?
-        │                │        │
-        │                │        ├── NO (no <pubDate>, no <dc:date>, no URL date pattern, no config date)
-        │                │        │        → NOT PUBLISHABLE via configuration
-        │                │        │        (extraction works, but provenance incomplete)
-        │                │        │
-        │                │        └── YES (date available via supported path)
-        │                │                │
-        │                │                ├── 3. Substantive content in static HTML/PDF?
-        │                │                │        │
-        │                │                │        ├── NO (content is JS-rendered or empty)
-        │                │                │        │        → ENGINEERING (JS execution infrastructure)
-        │                │                │        │
-        │                │                │        └── YES (static HTML or PDF with >1000 chars text)
-        │                │                │                │
-        │                │                │                ├── 4. Pattern category exists?
-        │                │                │                │        │
-        │                │                │                │        ├── NO (new domain not covered by rate/regulatory/statistical/earnings patterns)
-        │                │                │                │        │        → ENGINEERING (new pattern category + PATTERN_TYPE_METADATA)
-        │                │                │                │        │
-        │                │                │                │        └── YES (existing pattern category covers this source's content)
-        │                │                │                │                │
-        │                │                │                │                └── CONFIGURATION-ONLY CANDIDATE
-        │                │                │                │                        │
-        │                │                │                │                        └── First-attempt validation
-        │                │                │                │                                │
-        │                │                │                │                                ├── PASS → ONBOARDED
-        │                │                │                │                                └── FAIL → REVIEW (document root cause)
+New Source
+   │
+   ├─ 1. Supported access path?
+   │      NO → ACCESS / ENGINEERING REVIEW
+   │      YES
+   │
+   ├─ 2. Provenance metadata available?
+   │      NO → NOT PUBLISHABLE VIA CURRENT PATH
+   │      YES
+   │
+   ├─ 3. Machine-readable substantive content?
+   │      NO → CONTENT / ACCESS REVIEW
+   │      YES
+   │
+   ├─ 4. Existing configuration abstraction applicable?
+   │      NO → CONFIGURATION / ENGINEERING REVIEW
+   │      YES
+   │
+   └─ 5. First-attempt validation
+          │
+          ├─ PASS → CONFIG-ONLY VALIDATED
+          │
+          └─ FAIL → ROOT-CAUSE REVIEW
 ```
 
 ---
 
-## Boundary Factors (5 Gates)
+## Gate Definitions (5 Gates)
 
-Each gate is a binary decision. A source must pass ALL 5 gates to be a configuration-only candidate.
+### Gate 1: Supported access path
 
-### Gate 1: Access Path
+**Question**: Can the source be fetched via an existing adapter (RSS, HTML index, PDF) using urllib or Playwright fallback?
 
-**Question**: Can the source be fetched via an existing adapter (RSS, HTML index, PDF) using urllib?
+| Outcome | Classification |
+|---------|---------------|
+| RSS/Atom/RDF accessible via urllib | PASS gate |
+| HTML index accessible via urllib | PASS gate |
+| PDF accessible via urllib | PASS gate |
+| JS-rendered (static HTML has no data) | FAIL → CONTENT / ACCESS REVIEW |
+| Akamai/403 blocked (urllib + Playwright) | FAIL → ACCESS / ENGINEERING REVIEW |
+| Authentication required | FAIL → ACCESS / ENGINEERING REVIEW |
 
-| Outcome | Classification | Evidence |
-|---------|---------------|----------|
-| RSS/Atom/RDF accessible | PASS gate | BEA, SNB, ESMA (RSS), Phase A sources |
-| HTML index accessible | PASS gate | OFAC, ESMA (HTML) |
-| PDF accessible | PASS gate | BIS_QR, BOJ (PDF content) |
-| JS-rendered (static HTML empty) | FAIL → Engineering | ONS |
-| Akamai/403 blocked (urllib + Playwright) | FAIL → Engineering | RBA, ARAMCO, RBNZ (content URLs) |
-| Authentication required | FAIL → Engineering | (not tested) |
-
-**Supported paths**: `feed_format` = `rss` (default), `html_index`, `pdf`
-
-### Gate 2: Provenance Metadata
+### Gate 2: Provenance metadata available
 
 **Question**: Is `document_date` available through a supported extraction path?
 
 | Path | How it works | Evidence |
 |------|-------------|----------|
 | RSS `<pubDate>` | Parser extracts from feed item | BEA, Phase A sources |
-| Dublin Core `<dc:date>` | Parser extracts from feed item | **SNB** (confirmed) |
-| Atom `<published>`/`<updated>` | Parser extracts from feed entry | (supported, not yet tested) |
+| Dublin Core `<dc:date>` | Parser extracts from feed item | SNB (confirmed) |
+| Atom `<published>`/`<updated>` | Parser extracts from feed entry | Supported, not yet independently tested |
 | URL `\d{8}` date pattern | HTML index adapter extracts from URL | OFAC |
 | Config `published_at` | Manually set in source config | BIS_QR (PDF) |
-| Content text only | NOT supported by any tested path | **ESMA** (FAIL — dates in content, not in feed/URL) |
+| Content text only | NOT supported by any tested path | ESMA (FAIL) |
 
-**If NO date path**: extraction works, evidence chains build, but `chain_verified = False` → NOT PUBLISHABLE.
+**If NO date path**: extraction may work, evidence chains may build, but `chain_verified = False` → NOT PUBLISHABLE VIA CURRENT PATH.
 
-### Gate 3: Content Substance
+### Gate 3: Machine-readable substantive content
 
-**Question**: Does the fetched page contain substantive text (>1000 chars after normalization)?
+**Question**: Does the fetched page contain machine-readable substantive content through a supported access path?
 
-| Outcome | Classification | Evidence |
-|---------|---------------|----------|
-| Static HTML with >1000 chars text | PASS gate | BEA (45K), SNB (18K), ESMA (3K), OFAC (10K) |
-| PDF with extractable text | PASS gate | BIS_QR (pdfplumber), BOJ (minutes) |
-| JS-rendered (static HTML <1000 chars) | FAIL → Engineering | ONS (1995 chars of cookie/JS text) |
-| Empty content | FAIL → Review | SNB doc 10 (circular letter, 0 chars) |
-
-### Gate 4: Pattern Category Coverage
-
-**Question**: Does an existing pattern category (`rate_patterns`, `regulatory_patterns`, `statistical_patterns`, `earnings_patterns`) cover this source's content domain?
-
-| Outcome | Classification | Evidence |
-|---------|---------------|----------|
-| Existing category covers content | PASS gate | BEA (statistical), SNB (rate), ESMA (regulatory), OFAC (regulatory) |
-| New domain not covered | FAIL → Engineering | (not yet encountered — would need new `*_patterns` category + PATTERN_TYPE_METADATA entries) |
-
-**Note**: Adding a new pattern category is data-driven (add to config + metadata dict), but requires testing. It is classified as Engineering because it extends the pipeline's domain coverage, not just its source coverage.
-
-### Gate 5: First-Attempt Validation
-
-**Question**: Does the first configuration attempt produce ≥1 publishable IO?
+No numeric threshold. The content must be substantive enough for the pipeline's normalization layer to extract paragraphs that pattern matching can operate on.
 
 | Outcome | Classification |
 |---------|---------------|
-| ≥1 publishable IO (provenance complete, confidence ≥0.7) | PASS → ONBOARDED |
-| 0 publishable IOs | FAIL → REVIEW (document root cause) |
+| Static HTML with substantive text | PASS gate |
+| PDF with extractable text (pdfplumber) | PASS gate |
+| JS-rendered (static HTML contains only navigation/cookies) | FAIL → CONTENT / ACCESS REVIEW |
+| Empty content after normalization | FAIL → CONTENT / ACCESS REVIEW |
 
-**This gate is the actual test.** Gates 1-4 are pre-screening — they predict whether Gate 5 is likely to pass. If Gates 1-4 all pass but Gate 5 fails, the root cause must be documented (it may reveal a new boundary factor).
+### Gate 4: Existing configuration abstraction applicable
+
+**Question**: Does the existing configuration abstraction (pattern categories, event types, value types) cover this source's content domain?
+
+This gate distinguishes three outcomes:
+
+| Outcome | Classification | Notes |
+|---------|---------------|-------|
+| Existing pattern category covers content | PASS gate | rate_patterns, regulatory_patterns, statistical_patterns, earnings_patterns |
+| Existing abstraction can be extended with configuration | CONFIGURATION EXTENSION | Adding new patterns within existing category — still config, but requires testing |
+| Source domain not covered by any existing abstraction | FAIL → CONFIGURATION / ENGINEERING REVIEW | May need new pattern category + PATTERN_TYPE_METADATA — this is engineering because it extends domain coverage, not just source coverage |
+
+**Key distinction**: Adding a new source within an existing pattern category (e.g., a new central bank using rate_patterns) is configuration. Adding a new pattern category (e.g., "commodity_patterns" for a new domain) is engineering.
+
+### Gate 5: First-attempt validation
+
+**Question**: Does the first configuration attempt produce at least one provenance-complete, reproducible IO without core intervention?
+
+| Outcome | Classification |
+|---------|---------------|
+| ≥1 provenance-complete IO (chain_verified=True, confidence ≥0.7, reproducible) | CONFIG-ONLY VALIDATED |
+| 0 provenance-complete IOs | FAIL → ROOT-CAUSE REVIEW |
+
+**Onboarding PASS is separate from Quality and Coverage:**
+
+- **Onboarding**: Did the configuration path produce a publishable IO? (Gate 5)
+- **Quality**: Are the extracted facts semantically correct? (PASS / REVIEW / FAIL)
+- **Coverage**: What fraction of documents produced facts? (measured, never treated as onboarding success)
+
+A source can be Onboarding-PASS with Quality-REVIEW and low Coverage. These are independent dimensions.
 
 ---
 
-## Evidence Mapping
+## Boundary Validation — Retrospective Application
 
-### Sources that PASSED all 5 gates
+Applying the 5-gate decision tree to all sources with known test results. **No new assumptions — only classifying what was already observed.**
 
-| Source | Gate 1 (Access) | Gate 2 (Provenance) | Gate 3 (Content) | Gate 4 (Pattern) | Gate 5 (First attempt) |
-|--------|----------------|--------------------|--------------------|-------------------|----------------------|
-| BEA | RSS (urllib) | `<pubDate>` | 45K chars static HTML | statistical_patterns | PASS (10/10 publishable) |
-| SNB | RSS (urllib) | `<dc:date>` | 18K chars static HTML | rate_patterns | PASS (1/1 publishable) |
+### Sources that reached Gate 5
 
-### Sources that FAILED a gate
+| Source | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Gate 5 | Onboarding | Quality | Coverage |
+|--------|--------|--------|--------|--------|--------|-----------|---------|----------|
+| BEA | PASS (RSS/urllib) | PASS (`<pubDate>`) | PASS (45K static HTML) | PASS (statistical_patterns) | PASS (10/10 publishable) | PASS | PASS | 10/10 |
+| SNB | PASS (RSS/urllib) | PASS (`<dc:date>`) | PASS (18K static HTML) | PASS (rate_patterns) | PASS (1/1 publishable) | PASS | PASS | 1/9 |
+| ESMA RSS | PASS (RSS/urllib) | FAIL (no date in feed) | PASS (3K static HTML) | PASS (regulatory_patterns) | FAIL (0/10 publishable) | FAIL | n/a | 10/10 |
+| ESMA HTML | PASS (HTML/urllib) | FAIL (no date in URL) | PASS (3K static HTML) | PASS (regulatory_patterns) | FAIL (0/10 publishable) | FAIL | n/a | 10/10 |
 
-| Source | Failed gate | Root cause | Classification |
-|--------|-----------|-----------|---------------|
-| ESMA (RSS) | Gate 2 | No `<pubDate>`, no `<dc:date>` — dates in content text only | NOT PUBLISHABLE via config |
-| ESMA (HTML) | Gate 2 | No `\d{8}` in URLs — slug-based URLs | NOT PUBLISHABLE via config |
-| ONS | Gate 3 | JS-rendered — static HTML has no statistical data | Engineering (JS execution) |
-| RBA | Gate 1 | Akamai 403 on urllib + Playwright | Engineering (proxy/IP) |
-| ARAMCO | Gate 1 | Akamai 403 on urllib + Playwright | Engineering (proxy/IP) |
-| RBNZ | Gate 1 (partial) | RSS open, content URLs 403 | Engineering (proxy for content) |
+**Analysis**:
+- BEA and SNB passed all 5 gates → CONFIG-ONLY VALIDATED. Consistent.
+- ESMA failed at Gate 2 (both RSS and HTML paths) → NOT PUBLISHABLE VIA CURRENT PATH. The failure is at the provenance gate, not at extraction or access. Consistent.
+- ESMA passed Gates 1, 3, 4 but failed Gate 2 → the boundary correctly predicts the failure point.
 
-### Sources that PASSED gates 1-4 in Phase B (pre-existing)
+### Sources that failed before Gate 5
 
-| Source | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Gate 5 |
-|--------|--------|--------|--------|--------|--------|
-| ECB | RSS | `<pubDate>` | Static HTML | rate_patterns | PASS |
-| BOE | RSS | `<pubDate>` | Static HTML | rate_patterns | PASS |
-| FED | RSS | `<pubDate>` | Static HTML | rate_patterns | PASS |
-| BOC | RSS | `<pubDate>` | Static HTML | rate_patterns | PASS |
-| BOJ | RSS | `<dc:date>` | PDF | rate_patterns | PASS |
-| SEC | RSS | `<pubDate>` | Static HTML | regulatory_patterns | PASS |
-| FCA | RSS | `<pubDate>` | Static HTML | regulatory_patterns | PASS (0 facts after hardening — false positives removed) |
-| BIS_STATS | RSS | `<pubDate>` | Static HTML | statistical_patterns | PASS |
-| APPLE | Atom | `<published>` | Static HTML | earnings_patterns | PASS |
-| OFAC | HTML index | URL `\d{8}` | Static HTML | regulatory_patterns | PASS |
-| BIS_QR | PDF | Config `published_at` | PDF text | statistical_patterns | PASS |
+| Source | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Gate 5 | Classification |
+|--------|--------|--------|--------|--------|--------|---------------|
+| ONS | PASS (RSS/urllib) | PASS (`<pubDate>`) | FAIL (JS-rendered, ~2K chars of cookies/nav) | PASS (statistical_patterns) | FAIL (0 facts) | CONTENT / ACCESS REVIEW |
+| RBA | FAIL (Akamai 403) | — | — | — | — | ACCESS / ENGINEERING REVIEW |
+| ARAMCO | FAIL (Akamai 403) | — | — | — | — | ACCESS / ENGINEERING REVIEW |
+| RBNZ | PARTIAL (RSS open, content URLs 403) | — | — | — | — | ACCESS / ENGINEERING REVIEW |
+
+**Analysis**:
+- ONS failed at Gate 3 → CONTENT / ACCESS REVIEW. The boundary correctly identifies JS-rendered content as a content/access issue, not a provenance or pattern issue.
+- RBA and ARAMCO failed at Gate 1 → ACCESS / ENGINEERING REVIEW. The boundary correctly identifies Akamai blocking as an access issue.
+- RBNZ partially failed at Gate 1 → ACCESS / ENGINEERING REVIEW. RSS is open but content URLs are blocked.
+- None of these failures are at Gate 4 (pattern coverage) or Gate 5 (first-attempt validation). The boundary correctly routes them to access/content review before reaching the configuration stage.
+
+### Phase B sources (development sources, not validation sources)
+
+| Source | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Gate 5 | Consistent? |
+|--------|--------|--------|--------|--------|--------|-------------|
+| ECB | PASS | PASS (`<pubDate>`) | PASS | PASS (rate) | PASS | Yes |
+| BOE | PASS | PASS (`<pubDate>`) | PASS | PASS (rate) | PASS | Yes |
+| FED | PASS | PASS (`<pubDate>`) | PASS | PASS (rate) | PASS | Yes |
+| BOC | PASS | PASS (`<pubDate>`) | PASS | PASS (rate) | PASS | Yes |
+| BOJ | PASS | PASS (`<dc:date>`) | PASS (PDF) | PASS (rate) | PASS | Yes |
+| SEC | PASS | PASS (`<pubDate>`) | PASS | PASS (regulatory) | PASS | Yes |
+| FCA | PASS | PASS (`<pubDate>`) | PASS | PASS (regulatory) | PASS (0 facts after hardening — false positives removed) | Yes |
+| BIS_STATS | PASS | PASS (`<pubDate>`) | PASS | PASS (statistical) | PASS | Yes |
+| APPLE | PASS | PASS (Atom `<published>`) | PASS | PASS (earnings) | PASS | Yes |
+| OFAC | PASS (HTML index) | PASS (URL `\d{8}`) | PASS | PASS (regulatory) | PASS | Yes |
+| BIS_QR | PASS (PDF) | PASS (config `published_at`) | PASS (PDF text) | PASS (statistical) | PASS | Yes |
+
+**All 11 Phase B sources are consistent with the boundary.** Every source that passed Gates 1-4 also passed Gate 5 (with FCA producing 0 facts after hardening — a coverage characteristic, not an onboarding failure).
+
+---
+
+## Validation Result
+
+The 5-gate decision tree correctly classifies ALL sources with known test results:
+
+- **2 validation sources** (BEA, SNB) passed all gates → CONFIG-ONLY VALIDATED
+- **1 validation source** (ESMA) failed at Gate 2 → NOT PUBLISHABLE VIA CURRENT PATH
+- **3 validation sources** (ONS, RBA, ARAMCO) failed before Gate 5 → correctly routed to ACCESS/CONTENT review
+- **11 development sources** (Phase B) all consistent with the boundary
+
+**No source was misclassified.** No source passed Gates 1-4 but failed Gate 5 for an unexpected reason. No source failed a gate that the boundary didn't predict.
+
+**However**: This is retrospective validation, not predictive validation. The boundary explains past results; it has not yet been tested prospectively on a source whose gate outcomes were unknown before testing.
 
 ---
 
@@ -185,49 +208,40 @@ Before attempting configuration, answer 4 questions:
 
 1. **Can we fetch it?** (RSS/HTML/PDF via urllib — no JS/proxy/auth)
 2. **Can we get the date?** (`<pubDate>`, `<dc:date>`, `<published>`, URL `\d{8}`, or config `published_at`)
-3. **Is there substantive content?** (>1000 chars in static HTML or PDF)
-4. **Does a pattern category exist?** (rate/regulatory/statistical/earnings)
+3. **Is there machine-readable substantive content?** (static HTML or PDF with extractable text)
+4. **Does the existing configuration abstraction apply?** (existing pattern category covers the source's domain)
 
-If all 4 = YES → **Configuration-only candidate** → proceed to first-attempt test.
+If all 4 = YES → **Configuration-only candidate** → proceed to first-attempt test (Gate 5).
 
-If any = NO → **Engineering candidate** → document which gate failed and what engineering is needed.
+If any = NO → **Classified before onboarding** → document which gate failed and what review/engineering is needed.
 
-### Output 2: Boundary Map
+### Output 2: Independent Dimensions Recorded
 
-A decision map that tells ROUA (and the buyer):
+For every source tested:
 
-- Which source classes are likely configuration-only candidates
-- Which source characteristics require engineering
-- What type of engineering is needed (infrastructure, parser, pattern category)
+| Dimension | What it measures |
+|-----------|-----------------|
+| Onboarding | Did the configuration path produce a publishable IO without core intervention? |
+| Provenance | Is document_date available and are all chains verified? |
+| Intelligence Quality | Are the extracted facts semantically correct? (PASS/REVIEW/FAIL) |
+| Extraction Coverage | What fraction of documents produced facts? (measured, never treated as onboarding success) |
+| Reproducibility | Does re-extraction produce identical facts? |
+| Engineering intervention | Was any core code modification required? (0 / >0) |
 
 ### What This Protocol Does NOT Produce
 
 - A success rate (sample too small)
-- A guarantee (gates 1-4 passing does not guarantee gate 5 passing)
+- A guarantee (gates 1-4 passing does not guarantee gate 5 passing — they are **candidates**, not certainties)
 - Onboarding time estimates
 - A list of "supported sources" (the Contract already covers this)
 
 ---
 
-## Validation Plan
+## Commercial Implication (Corrected)
 
-To validate this boundary map, we need to test:
+> We can pre-screen a source against the currently observed access, provenance, content, and configuration criteria. Sources passing these checks become candidates for configuration-only validation; sources failing them can be classified before onboarding and routed for further engineering assessment.
 
-1. **A source that passes gates 1-4 but fails gate 5** — this would reveal a hidden boundary factor
-2. **A source that fails gate 2 but could be fixed with content-text date extraction** — this would test whether the provenance boundary is hard or soft
-3. **A source from a new institutional class not yet tested** — this would test whether gates 1-4 generalize
-
-Each validation test follows the same protocol: pre-screen against gates 1-4, then attempt first-attempt configuration, then record which gate (if any) was the failure point.
-
----
-
-## Commercial Implication
-
-This boundary analysis allows ROUA to say to a buyer:
-
-> "Before we attempt onboarding your source, we can screen it against 4 criteria. If all 4 pass, onboarding is a configuration exercise. If any fails, we can tell you exactly what engineering is needed and why."
-
-This is more valuable than a success rate because it provides **predictability** — the buyer knows what to expect before the engagement begins.
+This is less commercially exciting than "if all 4 pass, onboarding is a configuration exercise" — but it is **defensible** based on the current evidence.
 
 ---
 
