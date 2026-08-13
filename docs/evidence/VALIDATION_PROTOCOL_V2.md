@@ -53,37 +53,57 @@ The source must satisfy ALL of the following. Selection is made **before** inspe
 
 ## 3. PASS / FAIL Definition
 
-### PASS
+### Two Independent Dimensions
 
-All of the following must be true on the first configuration attempt:
+Onboarding and intelligence quality are **independent dimensions** — as established in the Supported Source Contract. A source can be onboarding-PASS with quality-REVIEW.
+
+#### Onboarding / Pipeline Compatibility
+
+**PASS** — all of the following on the first configuration attempt:
 
 1. Source config created in `source_configs.py` only (no other files modified)
 2. Pipeline produces ≥1 publishable Intelligence Object (provenance complete + confidence ≥ 0.7)
 3. Provenance: 100% of chains verified
 4. Reproducibility: PASS (deterministic re-extraction)
-5. Semantic errors: 0 critical, 0 ambiguous in sampled IOs
-6. Core intervention: 0 (no modification to `extractor.py`, `detector.py`, `fetcher.py`, `content_extractor.py`, `evidence.py`, `intelligence_object.py`, `pipeline_state.py`, `schemas.py`)
-7. Source-specific code: 0 (no `if source ==` branches)
-8. No infrastructure workaround (no JS execution, no proxy, no authentication)
+5. Core intervention: 0 (no modification to `extractor.py`, `detector.py`, `fetcher.py`, `content_extractor.py`, `evidence.py`, `intelligence_object.py`, `pipeline_state.py`, `schemas.py`)
+6. Source-specific code: 0 (no `if source ==` branches)
+7. No infrastructure workaround (no JS execution, no proxy, no authentication)
 
-### FAIL
-
-Any of the following:
+**FAIL** — any of the following:
 
 1. 0 publishable IOs after first configuration attempt
 2. Provenance < 100%
 3. Reproducibility: FAIL
-4. Critical semantic errors in sampled IOs
-5. Any core code modification required
-6. Any source-specific code required
-7. Any infrastructure workaround required
+4. Any core code modification required
+5. Any source-specific code required
+6. Any infrastructure workaround required
 
-### NOT A FAILURE (but not a PASS either)
+Note: semantic errors do NOT determine onboarding PASS/FAIL. They determine intelligence quality (below).
 
-- Source produces IOs but with extraction coverage gaps (some facts not captured) — this is a pattern coverage issue, not an onboarding failure
-- Source produces IOs but some have REVIEW intelligence quality (non-critical semantic issues) — this is an extraction quality issue, not an onboarding failure
+#### Intelligence Quality
 
-These cases are recorded as: **PASS with documented extraction gaps**.
+**PASS** — sampled IOs have:
+- 0 critical semantic errors
+- 0 ambiguous semantic errors
+- Facts verified against source text
+- Provenance excerpts traceable to source
+
+**REVIEW** — sampled IOs have:
+- 0 critical semantic errors
+- ≥1 ambiguous semantic errors (e.g., paragraph fragments, mixed roles)
+- Facts are technically extracted but require human review before publication
+
+**FAIL** — sampled IOs have:
+- ≥1 critical semantic error (false facts that would mislead a buyer)
+
+### Combined Outcome Examples
+
+| Onboarding | Quality | Meaning |
+|-----------|---------|---------|
+| PASS | PASS | Clean first-attempt onboarding with correct intelligence |
+| PASS | REVIEW | Onboarding succeeded; intelligence needs human review before publication |
+| PASS | FAIL | Onboarding succeeded; intelligence has critical errors (onboarding still PASS) |
+| FAIL | n/a | Onboarding failed; no intelligence produced to assess |
 
 ---
 
@@ -135,7 +155,7 @@ The test stops immediately (no remediation attempted) if:
 - We will NOT claim universal onboarding capability
 - We will NOT claim commercial onboarding time
 - We will NOT generalize to all central banks or all source classes
-- We WILL say: "Configuration-only onboarding has been demonstrated for 2 sources across 2 institutional classes (statistical_authority + central_bank) with complete provenance"
+- We WILL say: **If PASS, the evidence set will contain successful demonstrations across two distinct institutional classes (statistical_authority + central_bank) with complete provenance**
 
 ### If FAIL
 
