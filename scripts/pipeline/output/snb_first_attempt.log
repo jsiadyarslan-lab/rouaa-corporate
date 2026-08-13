@@ -1,0 +1,63 @@
+======================================================================
+SNB FIRST ATTEMPT — Cross-Class Validation
+======================================================================
+Source: SNB — Swiss National Bank
+Class: central_bank
+Start: 2026-08-13T08:13:51.888796
+
+[1/7] Fetching...
+  Fetching SNB (rss): https://www.snb.ch/public/rss/en/news
+  [OK] rss fetched via urllib (24490 bytes)
+  Parsed 20 items from RSS feed
+  Filtered to 10 relevant items
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/08/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/08/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/08/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/08/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/07/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/07/...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/07/...
+    Fetching full content: https://www.snb.ch/en/publications/communication/summaries/zus_20260716...
+    Fetching full content: https://www.snb.ch/en/publications/statistical-publications/data-portal/2026/07/...
+  10 docs via urllib, access=open
+[2/7] Normalizing...
+  9/10 normalized
+[3/7] Extracting facts...
+  4 facts
+[4/7] Detecting events...
+  1 events
+[5/7] Evidence + Provenance...
+  4 chains, verified=True
+[6/7] Generating IOs...
+  1 IOs (1 publishable)
+[7/7] Reproducibility...
+  PASS
+
+======================================================================
+FIRST ATTEMPT RESULTS
+======================================================================
+  Onboarding:              PASS
+  Intelligence Quality:    PASS
+  Core intervention:       0
+  Source-specific code:    0
+  Pipeline runtime:        11.17s
+  Documents fetched:       10
+  Documents normalized:    9
+  Facts:                   4
+  Events:                  1
+  Evidence chains:         4
+  IOs:                     1
+  Publishable:             1
+  Provenance:              100%
+  Reproducibility:         PASS
+  Semantic errors:         0
+
+=== IO SAMPLES ===
+  IO 1: Swiss National Bank Monetary Policy Decision
+    summary: Decision: leave | Rate: 0% | Source: Swiss National Bank | Published: 2026-07-16T07:30:00Z
+    confidence: 1.0, facts: 4, prov: True
+      rate_decision: leave (role: primary)
+      policy_rate: 0 (role: primary)
+      rate_decision: leave (role: primary)
+
+Results saved

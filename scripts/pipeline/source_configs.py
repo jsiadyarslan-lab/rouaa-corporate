@@ -520,3 +520,42 @@ PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
 
 # Source codes for Phase B (new generalization set)
 PHASE_B_SOURCES = ["BOJ", "RBNZ", "SEC", "FCA", "ONS", "BIS_STATS", "APPLE", "ARAMCO", "OFAC", "BIS_QR"]
+
+# ============================================================================
+# Phase 2B — Cross-Class Validation: SNB (Central Bank)
+# First-attempt config-only onboarding test
+# Validation Protocol v2 — APPROVED
+# ============================================================================
+
+SNB_SOURCE = {
+    "code": "SNB",
+    "name": "Swiss National Bank",
+    "type": "central_bank",
+    "country": "CH",
+    "jurisdiction": "Switzerland",
+    "trustTier": 1,
+    "websiteUrl": "https://www.snb.ch/en",
+    "feedUrl": "https://www.snb.ch/public/rss/en/news",
+    "rate_patterns": [
+        # "SNB policy rate unchanged at 0%"
+        (r"SNB\s+policy\s+rate\s+(?:unchanged|at|to)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)?", "rate_value"),
+        # "decided to leave the SNB policy rate unchanged"
+        (r"decided\s+to\s+(leave|maintain|keep|raise|cut|lower|increase|decrease)\s+(?:the\s+)?SNB\s+policy\s+rate", "rate_action"),
+        # "leave the SNB policy rate unchanged at 0%"
+        (r"(?:leave|maintain|keep|held)\s+(?:the\s+)?SNB\s+policy\s+rate\s+unchanged\s+at\s+(\d+(?:\.\d+)?)", "rate_value"),
+        # "interest rate" general
+        (r"interest\s+rate\s+(?:at|to|unchanged\s+at)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)?", "rate_value"),
+        # "expansion of monetary policy" / "restriction of monetary policy"
+        (r"(?:expansion|restriction)\s+of\s+monetary\s+policy", "rate_action"),
+        # "SARON" rate
+        (r"SARON\s+(?:at|to|stood\s+at)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)?", "rate_value"),
+        # "policy rate" generic
+        (r"policy\s+rate\s+(?:unchanged|at|to)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)?", "rate_value"),
+        # "decided to" + verb
+        (r"decided\s+to\s+(maintain|keep|raise|cut|lower|increase|decrease)\s+(?:the\s+)?(?:policy\s+)?rate", "rate_action"),
+    ],
+    "event_type": "monetary_policy_decision",
+    "content_keywords": ["rate", "monetary policy", "interest rate", "SNB", "policy rate", "SARON"],
+}
+
+SOURCES["SNB"] = SNB_SOURCE
