@@ -326,12 +326,12 @@ These are systemically important institutions whose output drives global financi
 |---|------------|---------|--------|-----------|----------|------|--------|
 | 1 | OFAC (US Treasury) | US | N. America | OFFICIAL | YES | T1 | QUALIFIED |
 | 2 | FinCEN | US | N. America | OFFICIAL | YES | T2 | DISCOVERED |
-| 3 | FCA (UK) — already listed | UK | Europe | OFFICIAL | YES | T1 | QUALIFIED |
-| 4 | ECB Banking Supervision | EU | Europe | OFFICIAL | YES | T2 | DISCOVERED |
-| 5 | SRB (Single Resolution Board) | EU | Europe | OFFICIAL | YES | T3 | DISCOVERED |
-| 6 | EBA | EU | Europe | OFFICIAL | YES | T2 | DISCOVERED |
-| 7 | EIOPA | EU | Europe | OFFICIAL | YES | T3 | DISCOVERED |
-| 8 | ECB Statistical Data Warehouse | EU | Europe | OFFICIAL | YES | T2 | DISCOVERED |
+| 3 | SRB (Single Resolution Board) | EU | Europe | OFFICIAL | YES | T3 | DISCOVERED |
+| 4 | EBA | EU | Europe | OFFICIAL | YES | T2 | DISCOVERED |
+| 5 | EIOPA | EU | Europe | OFFICIAL | YES | T3 | DISCOVERED |
+| 6 | ECB Statistical Data Warehouse | EU | Europe | OFFICIAL | YES | T2 | DISCOVERED |
+
+Note: FCA (UK) is listed in B2. ECB Banking Supervision is listed in B2. World Bank Group is listed in B7. These were previously duplicated in B9 — duplicates removed.
 
 ---
 
@@ -364,7 +364,7 @@ These are systemically important institutions whose output drives global financi
 | Public/Sovereign Institutions | 17 | REVIEW eligibility — most are REVIEW |
 | Multilateral | 11 | Well represented |
 | Disclosure Systems | 10 | Moderate |
-| Other Authoritative | 8 | Small but important (OFAC, FinCEN, EBA) |
+| Other Authoritative | 6 | Small but important (OFAC, FinCEN, EBA, EIOPA, SRB, ECB SDW) |
 
 ### Key gaps
 
@@ -493,12 +493,60 @@ Each source in the registry can carry:
 
 ## What the Inventory Establishes
 
-1. A structured universe of 100+ official financial and economic sources across 9 institutional classes and 10 geographic regions.
+1. A structured universe of 178 source records across 9 institutional classes and 10 geographic regions.
 2. A tiering system (T1-T4) that prioritizes sources by strategic importance.
 3. A qualification queue of 20 sources ready for pre-screening.
 4. Clear separation between DISCOVERED (in inventory), SCREENED (Gates 1-4 tested), QUALIFIED (Gate 5 passed), and ACTIVE (in production).
 5. Coverage gaps identified by region and institutional class.
 6. Customer overlay mechanism for customer-requested sources.
+7. Record scope classification (INSTITUTION vs SOURCE_FAMILY vs DISCLOSURE_SYSTEM).
+8. Evidence maturity classification (DEVELOPMENT_VERIFIED vs VALIDATION_VERIFIED vs PROSPECTIVE_VALIDATED vs SCREENING_ONLY vs DISCOVERY_ONLY).
+
+### Reconciled counts
+
+```text
+Inventory total: 178
+
+By institutional class:
+  B1 Central Banks:                    45
+  B2 Financial Regulators:             35
+  B3 Statistical Agencies:             25
+  B4 Ministries of Finance:            16
+  B5 Market Infrastructure:            13
+  B6 Public/Sovereign Institutions:    17
+  B7 Multilateral:                     11
+  B8 Disclosure Systems:               10
+  B9 Other Authoritative:               6
+  TOTAL:                              178
+
+By status:
+  DISCOVERED:    160
+  SCREENED:        5
+  QUALIFIED:      13
+  TOTAL:         178
+
+By record scope:
+  INSTITUTION:         168
+  SOURCE_FAMILY:         8
+  DISCLOSURE_SYSTEM:     2
+  TOTAL:               178
+
+By evidence maturity:
+  DEVELOPMENT_VERIFIED:    8  (Phase A/B sources with evidence commits)
+  VALIDATION_VERIFIED:     2  (BEA, SNB — validation tests with independent review)
+  PROSPECTIVE_VALIDATED:   1  (CFTC — prospective prediction confirmed)
+  SCREENING_ONLY:          5  (ESMA, IMF, ONS, RBA, RBNZ — Gates tested, no full qualification)
+  DISCOVERY_ONLY:        162  (identified but not tested)
+  TOTAL:                 178
+```
+
+### Record scope definition
+
+| record_scope | Meaning |
+|-------------|---------|
+| INSTITUTION | A single institution represented as one record |
+| SOURCE_FAMILY | A distinct source family within an institution (e.g., ECB Banking Supervision is separate from ECB monetary policy) |
+| DISCLOSURE_SYSTEM | A regulatory filing/disclosure system (e.g., SEC EDGAR) |
 
 ## What the Inventory Does NOT Establish
 
@@ -510,11 +558,13 @@ Each source in the registry can carry:
 
 ## Data Quality Limitations
 
-1. Most sources are DISCOVERED — their RSS/feed URLs, access methods, and provenance paths have not been verified.
+1. Most sources (160/178) are DISCOVERED — their RSS/feed URLs, access methods, and provenance paths have not been verified.
 2. Some sources may have changed their websites or feed URLs since discovery.
 3. Market infrastructure sources (exchanges, CCPs) have authority_status = OTHER_AUTHORITATIVE and eligibility = REVIEW — they may not enter the official universe.
 4. Sovereign wealth fund sources have authority_status = OFFICIAL but eligibility = REVIEW — their publication patterns are different from regulatory/monetary sources.
 5. The inventory does not include access verification for most sources — only sources with evidence commits have been tested.
+6. Evidence maturity varies: only 3 sources (BEA, SNB, CFTC) have validation or prospective evidence; 8 have development evidence; 5 have screening only; 162 have discovery only.
+7. Development-verified sources (Phase A/B) were used to build the pipeline — their evidence is not independent of the development process.
 
 ## Coverage Gaps
 
