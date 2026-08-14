@@ -544,6 +544,22 @@ GATE5_SOURCES_LIST = {
         "content_keywords": [],
     },
 
+    "BUNDESBANK": {
+        "code": "BUNDESBANK",
+        "name": "Deutsche Bundesbank",
+        "type": "central_bank",
+        "country": "DE",
+        "jurisdiction": "Germany",
+        "trustTier": 1,
+        "websiteUrl": "https://www.bundesbank.de/en/",
+        # Pre-screening found: 5 RSS feeds; "Latest" feed at /service/rss/en/633306/feed.rss
+        "feedUrl": "https://www.bundesbank.de/service/rss/en/633306/feed.rss",
+        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        "rate_patterns": [],
+        "event_type": "press_release",
+        "content_keywords": [],
+    },
+
 }
 
 # Combine all sources
