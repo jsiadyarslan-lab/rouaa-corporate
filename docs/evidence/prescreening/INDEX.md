@@ -103,10 +103,10 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 | # | Source | Country | Tier | Class | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Routing | Confidence | Record |
 |---|--------|---------|------|-------|--------|--------|--------|--------|---------|------------|--------|
 | 1 | People's Bank of China | CN | T1 | Central Bank | PASS | PASS WITH REVIEW | PASS | PASS | QUALIFICATION_READY (provenance date precedence review) | MEDIUM | `SQR_PBOC_PRESCREENING.md` |
-| 2 | US Bureau of Labor Statistics | US | T1 | Statistical | — | — | — | — | PENDING | — | — |
-| 3 | US Treasury | US | T1 | Ministry of Finance | — | — | — | — | PENDING | — | — |
-| 4 | Bundesbank | DE | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 5 | Banque de France | FR | T2 | Central Bank | — | — | — | — | PENDING | — | — |
+| 2 | US Bureau of Labor Statistics | US | T1 | Statistical | FAIL | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | KNOWN_BLOCKED | HIGH | `SQR_BLS_PRESCREENING.md` |
+| 3 | US Treasury | US | T1 | Ministry of Finance | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_US_TREASURY_PRESCREENING.md` |
+| 4 | Bundesbank | DE | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BUNDESBANK_PRESCREENING.md` |
+| 5 | Banque de France | FR | T2 | Central Bank | FAIL | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | KNOWN_BLOCKED | HIGH | `SQR_BANQUE_DE_FRANCE_PRESCREENING.md` |
 | 6 | Banca d'Italia | IT | T2 | Central Bank | — | — | — | — | PENDING | — | — |
 | 7 | Banco de España | ES | T2 | Central Bank | — | — | — | — | PENDING | — | — |
 | 8 | De Nederlandsche Bank | NL | T2 | Central Bank | — | — | — | — | PENDING | — | — |
@@ -129,9 +129,9 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 
 | Batch | Sources | Status |
 |-------|---------|--------|
-| Batch 1 (Source #1: PBoC) | 1 | COMPLETE — methodology review pending |
-| Batch 2 (Sources #2-#5) | 4 | NOT STARTED — awaiting methodology review of Batch 1 |
-| Batch 3 (Sources #6-#10) | 5 | NOT STARTED |
+| Batch 1 (Source #1: PBoC) | 1 | COMPLETE — methodology corrected (`d3910da`); user-approved corrected methodology |
+| Batch 2 (Sources #2-#5: BLS, US Treasury, Bundesbank, Banque de France) | 4 | COMPLETE — 2 QUALIFICATION_READY (US Treasury, Bundesbank), 2 KNOWN_BLOCKED (BLS, Banque de France) |
+| Batch 3 (Sources #6-#10) | 5 | NOT STARTED — awaiting user review of Batch 2 |
 | Batch 4 (Sources #11-#15) | 5 | NOT STARTED |
 | Batch 5 (Sources #16-#20) | 5 | NOT STARTED |
 
