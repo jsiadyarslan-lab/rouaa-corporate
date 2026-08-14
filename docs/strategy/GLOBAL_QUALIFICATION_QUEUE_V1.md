@@ -33,21 +33,34 @@ T3 + T4 (not in this queue):       96
 ## 3. Queue-State Counts
 
 ```text
-ALREADY_QUALIFIED:   12
-SCREENING_ONLY:       5
-DISCOVERY_ONLY:      63
-KNOWN_BLOCKED:        2
-TOTAL:               82
+ALREADY_QUALIFIED:   12  (completed — reference set, not in execution queue)
+SCREENING_ONLY:        8  (prior Gate 1-4 screening evidence exists)
+DISCOVERY_ONLY:        56  (identified but no technical screening performed)
+KNOWN_BLOCKED:         3  (confirmed access blockers)
+TOTAL:                79  (unique sources from 82 inventory rows; 3 rows are duplicates)
 ```
+
+### Queue structure
+
+The queue separates completed work from executable work:
+
+**Completed (reference set — not in execution queue):**
+- ALREADY_QUALIFIED (12 sources)
+
+**Executable qualification queue:**
+- SCREENING_ONLY (8 sources) — have partial Gate 1-4 evidence; need completion or root-cause review
+- DISCOVERY_ONLY (56 sources) — no technical screening performed; feed URLs unknown
+- KNOWN_BLOCKED (3 sources) — confirmed access blockers; not actionable until resolved
 
 ### KNOWN_BLOCKED reconciliation
 
-The inventory's Part B status for OECD and Statistics Canada is `DISCOVERED`, but Part F (Deferred/Blocked) documents known access issues. The queue reconciles this:
+The inventory's Part B status for OECD, Statistics Canada, and World Bank Group is `DISCOVERED`, but prior probing and Part F (Deferred/Blocked) document known access issues. The queue reconciles this:
 
-| Source | Part B status | Part F status | Queue status | Rationale |
-|--------|-------------|---------------|-------------|-----------|
+| Source | Part B status | Part F / probing status | Queue status | Rationale |
+|--------|-------------|------------------------|-------------|-----------|
 | OECD | DISCOVERED | BLOCKED (Gate 1 FAIL 403) | KNOWN_BLOCKED | Part F evidence supersedes Part B default |
 | Statistics Canada | DISCOVERED | DEFERRED (access timeout) | KNOWN_BLOCKED | Part F evidence supersedes Part B default |
+| World Bank Group | DISCOVERED | Feed URL not found (404 on probed paths) | KNOWN_BLOCKED | Phase 2A probing evidence supersedes Part B default |
 
 ### World Bank Group duplicate
 
@@ -108,9 +121,11 @@ These sources have passed Gate 5 (first-attempt validation). They are in the que
 
 ---
 
-## 7. SCREENING_ONLY (5 sources)
+## 7. SCREENING_ONLY (8 sources)
 
-These sources have been pre-screened (Gates 1-4 tested) but did not reach publishable output. They are in the queue for root-cause review or re-screening.
+These sources have prior Gate 1-4 screening evidence. Some have known gate failures (root-cause review needed); others have partial screening (feed URL confirmed, but full Gate 1-4 not completed).
+
+### Sources with known gate failures (5)
 
 | # | Institution | Country | Tier | Gate failed | Evidence | Notes |
 |---|------------|---------|------|------------|---------|-------|
@@ -119,6 +134,16 @@ These sources have been pre-screened (Gates 1-4 tested) but did not reach publis
 | 3 | Reserve Bank of Australia | AU | T2 | Gate 1 | Phase B | Akamai 403 — access blocked |
 | 4 | Reserve Bank of New Zealand | NZ | T2 | Gate 1 (partial) | Phase B | RSS open, content URLs 403 |
 | 5 | UK ONS | UK | T2 | Gate 3 | Phase B | JS-rendered — static HTML empty |
+
+### Sources with partial screening evidence (3)
+
+These sources were probed during source-selection activities (Gate 2/3 challenge searches). Their feed URLs and some Gate 1-4 characteristics were observed, but full qualification was not attempted.
+
+| # | Institution | Country | Tier | Screening evidence | Screening source | Notes |
+|---|------------|---------|------|---------------------|-----------------|-------|
+| 6 | Sveriges Riksbank | SE | T2 | RSS with pubDate confirmed | Phase 2A probing | Probed but not configured; RSS feed found at `https://www.riksbank.se/en-gb/rss/press-releases/` |
+| 7 | FINMA | CH | T2 | RSS confirmed | Phase 2A probing | Feed URL found at `https://www.finma.ch/en/rss/news`; pubDate confirmed |
+| 8 | Norges Bank | NO | T2 | Probed — RSS path not found | Phase 2A probing | Institution confirmed; RSS feed URL not discovered; needs further Gate 1 screening |
 
 ---
 
@@ -129,17 +154,17 @@ These are the highest-priority sources that have NOT been tested. They are order
 | # | Institution | Country | Tier | Class | Region | Why next |
 |---|------------|---------|------|-------|--------|----------|
 | 1 | People's Bank of China | CN | T1 | Central Bank | E. Asia | Systemically important; largest economy without coverage |
-| 2 | US Bureau of Labor Statistics | US | T1 | Statistical | N. America | T1 source; likely RSS with pubDate; low expected difficulty |
-| 3 | US Treasury | US | T1 | Ministry of Finance | N. America | Fiscal policy; official source; likely standard access |
+| 2 | US Bureau of Labor Statistics | US | T1 | Statistical | N. America | T1 source; high institutional importance; qualification not yet performed |
+| 3 | US Treasury | US | T1 | Ministry of Finance | N. America | Fiscal policy; high institutional importance; qualification not yet performed |
 | 4 | World Bank Group | INT | T1 | Multilateral | Global | Systemic importance; known access issues (need correct feed URL) |
-| 5 | Sveriges Riksbank | SE | T2 | Central Bank | Europe | Already probed; has RSS with pubDate; expected low difficulty |
-| 6 | FINMA | CH | T2 | Financial Regulator | Europe | Swiss regulator; RSS confirmed in screening |
-| 7 | Bundesbank | DE | T2 | Central Bank | Europe | ECB system; likely standard RSS |
-| 8 | Banque de France | FR | T2 | Central Bank | Europe | ECB system; likely standard RSS |
-| 9 | Banca d'Italia | IT | T2 | Central Bank | Europe | ECB system; major economy |
-| 10 | Banco de España | ES | T2 | Central Bank | Europe | ECB system; major economy |
-| 11 | De Nederlandsche Bank | NL | T2 | Central Bank | Europe | ECB system |
-| 12 | Norges Bank | NO | T2 | Central Bank | Europe | Probed in Phase B; RSS feed path not found but institution known |
+| 5 | Sveriges Riksbank | SE | T2 | Central Bank | Europe | Systemically important; prior screening evidence exists (RSS with pubDate confirmed) |
+| 6 | FINMA | CH | T2 | Financial Regulator | Europe | Swiss regulator; prior screening evidence exists (RSS confirmed) |
+| 7 | Bundesbank | DE | T2 | Central Bank | Europe | Major EU economy; ECB system member |
+| 8 | Banque de France | FR | T2 | Central Bank | Europe | Major EU economy; ECB system member |
+| 9 | Banca d'Italia | IT | T2 | Central Bank | Europe | Major EU economy; ECB system member |
+| 10 | Banco de España | ES | T2 | Central Bank | Europe | Major EU economy; ECB system member |
+| 11 | De Nederlandsche Bank | NL | T2 | Central Bank | Europe | ECB system member |
+| 12 | Norges Bank | NO | T2 | Central Bank | Europe | Prior screening evidence exists (probed; RSS path not found but institution confirmed) |
 | 13 | Bank of Korea | KR | T2 | Central Bank | E. Asia | Major economy; English-language publications |
 | 14 | Reserve Bank of India | IN | T2 | Central Bank | S. Asia | Major economy; fills South Asia gap |
 | 15 | MAS (Singapore) | SG | T2 | Central Bank/Regulator | SE Asia | Major APAC financial hub; dual function |
@@ -151,93 +176,94 @@ These are the highest-priority sources that have NOT been tested. They are order
 
 ---
 
-## 9. Full DISCOVERY_ONLY Queue (63 sources)
+## 9. Full DISCOVERY_ONLY Queue (56 sources)
 
-### T1 DISCOVERY_ONLY (4 unique sources — World Bank Group deduplicated)
+### T1 DISCOVERY_ONLY (3 sources)
+
+Note: Sources below have NO prior Gate 1-4 screening evidence. Their technical characteristics (access, provenance, content) are unknown. World Bank Group has been moved to KNOWN_BLOCKED (Section 10) based on prior probing (feed URL not found).
 
 | # | Institution | Country | Class | Region |
 |---|------------|---------|-------|--------|
 | 1 | People's Bank of China | CN | Central Bank | E. Asia |
 | 2 | US Bureau of Labor Statistics | US | Statistical | N. America |
 | 3 | US Treasury | US | Ministry of Finance | N. America |
-| 4 | World Bank Group | INT | Multilateral | Global |
 
-### T2 DISCOVERY_ONLY (59 sources)
+### T2 DISCOVERY_ONLY (53 sources)
+
+Note: Sources below have NO prior Gate 1-4 screening evidence. Sveriges Riksbank, FINMA, and Norges Bank have been moved to SCREENING_ONLY (Section 7) based on prior probing evidence. Statistics Canada has been moved to KNOWN_BLOCKED (Section 10) based on Part F evidence. OECD was already moved to KNOWN_BLOCKED.
 
 | # | Institution | Country | Class | Region |
 |---|------------|---------|-------|--------|
-| 1 | Sveriges Riksbank | SE | Central Bank | Europe |
-| 2 | Norges Bank | NO | Central Bank | Europe |
-| 3 | Danmarks Nationalbank | DK | Central Bank | Europe |
-| 4 | De Nederlandsche Bank | NL | Central Bank | Europe |
-| 5 | Bundesbank | DE | Central Bank | Europe |
-| 6 | Banque de France | FR | Central Bank | Europe |
-| 7 | Banca d'Italia | IT | Central Bank | Europe |
-| 8 | Banco de España | ES | Central Bank | Europe |
-| 9 | Bank of Korea | KR | Central Bank | E. Asia |
-| 10 | Reserve Bank of India | IN | Central Bank | S. Asia |
-| 11 | Banco Central do Brasil | BR | Central Bank | LATAM |
-| 12 | Bank of Mexico | MX | Central Bank | LATAM |
-| 13 | Central Bank of Russia | RU | Central Bank | Europe |
-| 14 | South African Reserve Bank | ZA | Central Bank | Africa |
-| 15 | Central Bank of the UAE | AE | Central Bank | Middle East |
-| 16 | Saudi Central Bank (SAMA) | SA | Central Bank | Middle East |
-| 17 | Central Bank of Turkey | TR | Central Bank | Middle East |
-| 18 | Central Bank of Singapore | SG | Central Bank | SE Asia |
-| 19 | FINMA | CH | Financial Regulator | Europe |
-| 20 | BaFin | DE | Financial Regulator | Europe |
-| 21 | AMF (France) | FR | Financial Regulator | Europe |
-| 22 | CONSOB (Italy) | IT | Financial Regulator | Europe |
-| 23 | ASIC (Australia) | AU | Financial Regulator | Oceania |
-| 24 | MAS (Singapore) | SG | Financial Regulator | SE Asia |
-| 25 | SFC (Hong Kong) | HK | Financial Regulator | E. Asia |
-| 26 | JFSA (Japan) | JP | Financial Regulator | E. Asia |
-| 27 | CSRC (China) | CN | Financial Regulator | E. Asia |
-| 28 | SEBI (India) | IN | Financial Regulator | S. Asia |
-| 29 | FSC (South Korea) | KR | Financial Regulator | E. Asia |
-| 30 | ECB Banking Supervision | EU | Financial Regulator | Europe |
-| 31 | Fed Banking Supervision | US | Financial Regulator | N. America |
-| 32 | OCC | US | Financial Regulator | N. America |
-| 33 | FDIC | US | Financial Regulator | N. America |
-| 34 | PRA (UK) | UK | Financial Regulator | Europe |
-| 35 | Eurostat | EU | Statistical | Europe |
-| 36 | Statistics Canada | CA | Statistical | N. America |
-| 37 | ABS (Australia) | AU | Statistical | Oceania |
-| 38 | NBS (China) | CN | Statistical | E. Asia |
-| 39 | NSO (India) | IN | Statistical | S. Asia |
-| 40 | INSEE (France) | FR | Statistical | Europe |
-| 41 | Destatis (Germany) | DE | Statistical | Europe |
-| 42 | UK HM Treasury | UK | Ministry of Finance | Europe |
-| 43 | Federal Ministry of Finance (Germany) | DE | Ministry of Finance | Europe |
-| 44 | Ministère de l'Économie (France) | FR | Ministry of Finance | Europe |
-| 45 | Ministry of Finance (Japan) | JP | Ministry of Finance | E. Asia |
-| 46 | Ministry of Finance (China) | CN | Ministry of Finance | E. Asia |
-| 47 | Ministry of Finance (India) | IN | Ministry of Finance | S. Asia |
-| 48 | Ministry of Finance (South Korea) | KR | Ministry of Finance | E. Asia |
-| 49 | Ministry of Finance (Singapore) | SG | Ministry of Finance | SE Asia |
-| 50 | Department of Finance (Canada) | CA | Ministry of Finance | N. America |
-| 51 | Department of Finance (Australia) | AU | Ministry of Finance | Oceania |
-| 52 | OECD | INT | Multilateral | Global |
-| 53 | FSB | INT | Multilateral | Global |
-| 54 | FATF | INT | Multilateral | Global |
-| 55 | SEC EDGAR | US | Disclosure System | N. America |
-| 56 | FinCEN | US | Other Authoritative | N. America |
-| 57 | EBA | EU | Other Authoritative | Europe |
-| 58 | ECB Statistical Data Warehouse | EU | Other Authoritative | Europe |
-| 59 | Federal Financial Supervisory Authority (BaFin) | DE | Financial Regulator | Europe |
+| 1 | Danmarks Nationalbank | DK | Central Bank | Europe |
+| 2 | De Nederlandsche Bank | NL | Central Bank | Europe |
+| 3 | Bundesbank | DE | Central Bank | Europe |
+| 4 | Banque de France | FR | Central Bank | Europe |
+| 5 | Banca d'Italia | IT | Central Bank | Europe |
+| 6 | Banco de España | ES | Central Bank | Europe |
+| 7 | Bank of Korea | KR | Central Bank | E. Asia |
+| 8 | Reserve Bank of India | IN | Central Bank | S. Asia |
+| 9 | Banco Central do Brasil | BR | Central Bank | LATAM |
+| 10 | Bank of Mexico | MX | Central Bank | LATAM |
+| 11 | Central Bank of Russia | RU | Central Bank | Europe |
+| 12 | South African Reserve Bank | ZA | Central Bank | Africa |
+| 13 | Central Bank of the UAE | AE | Central Bank | Middle East |
+| 14 | Saudi Central Bank (SAMA) | SA | Central Bank | Middle East |
+| 15 | Central Bank of Turkey | TR | Central Bank | Middle East |
+| 16 | Central Bank of Singapore | SG | Central Bank | SE Asia |
+| 17 | BaFin | DE | Financial Regulator | Europe |
+| 18 | AMF (France) | FR | Financial Regulator | Europe |
+| 19 | CONSOB (Italy) | IT | Financial Regulator | Europe |
+| 20 | ASIC (Australia) | AU | Financial Regulator | Oceania |
+| 21 | MAS (Singapore) | SG | Financial Regulator | SE Asia |
+| 22 | SFC (Hong Kong) | HK | Financial Regulator | E. Asia |
+| 23 | JFSA (Japan) | JP | Financial Regulator | E. Asia |
+| 24 | CSRC (China) | CN | Financial Regulator | E. Asia |
+| 25 | SEBI (India) | IN | Financial Regulator | S. Asia |
+| 26 | FSC (South Korea) | KR | Financial Regulator | E. Asia |
+| 27 | ECB Banking Supervision | EU | Financial Regulator | Europe |
+| 28 | Fed Banking Supervision | US | Financial Regulator | N. America |
+| 29 | OCC | US | Financial Regulator | N. America |
+| 30 | FDIC | US | Financial Regulator | N. America |
+| 31 | PRA (UK) | UK | Financial Regulator | Europe |
+| 32 | Eurostat | EU | Statistical | Europe |
+| 33 | ABS (Australia) | AU | Statistical | Oceania |
+| 35 | NBS (China) | CN | Statistical | E. Asia |
+| 36 | NSO (India) | IN | Statistical | S. Asia |
+| 37 | INSEE (France) | FR | Statistical | Europe |
+| 38 | Destatis (Germany) | DE | Statistical | Europe |
+| 39 | UK HM Treasury | UK | Ministry of Finance | Europe |
+| 40 | Federal Ministry of Finance (Germany) | DE | Ministry of Finance | Europe |
+| 41 | Ministère de l'Économie (France) | FR | Ministry of Finance | Europe |
+| 42 | Ministry of Finance (Japan) | JP | Ministry of Finance | E. Asia |
+| 43 | Ministry of Finance (China) | CN | Ministry of Finance | E. Asia |
+| 44 | Ministry of Finance (India) | IN | Ministry of Finance | S. Asia |
+| 45 | Ministry of Finance (South Korea) | KR | Ministry of Finance | E. Asia |
+| 46 | Ministry of Finance (Singapore) | SG | Ministry of Finance | SE Asia |
+| 47 | Department of Finance (Canada) | CA | Ministry of Finance | N. America |
+| 48 | Department of Finance (Australia) | AU | Ministry of Finance | Oceania |
+| 49 | FSB | INT | Multilateral | Global |
+| 50 | FATF | INT | Multilateral | Global |
+| 51 | SEC EDGAR | US | Disclosure System | N. America |
+| 52 | FinCEN | US | Other Authoritative | N. America |
+| 53 | EBA | EU | Other Authoritative | Europe |
+| 54 | ECB Statistical Data Warehouse | EU | Other Authoritative | Europe |
+| 55 | Federal Financial Supervisory Authority (BaFin) | DE | Financial Regulator | Europe |
 
-Note: #19 (FINMA) and #59 (Federal Financial Supervisory Authority (BaFin)) — FINMA is Swiss, BaFin is German. These are distinct institutions. The naming in the inventory should be clarified in V2.
+Note: #17 (BaFin) and #55 (Federal Financial Supervisory Authority (BaFin)) refer to the same institution — duplicate from inventory. Should be deduplicated in V2.
+
+Note: OECD is NOT in this DISCOVERY_ONLY list — it has been moved to KNOWN_BLOCKED (Section 10) based on Part F evidence.
 
 ---
 
-## 10. KNOWN_BLOCKED (2 sources)
+## 10. KNOWN_BLOCKED (3 sources)
 
 | # | Institution | Country | Tier | Blocker | Evidence |
 |---|------------|---------|------|---------|---------|
 | 1 | OECD | INT | T2 | Gate 1 FAIL (HTTP 403) | Phase B screening |
-| 2 | Statistics Canada | CA | T2 | Access timeout | Phase B screening |
+| 2 | Statistics Canada | CA | T2 | Access timeout | Phase B screening (Part F: DEFERRED) |
+| 3 | World Bank Group | INT | T1 | Feed URL not found (404 on probed paths) | Phase 2A screening |
 
-These sources have known access issues documented in Part F of the inventory. They are not ready for qualification until the access issue is resolved.
+Note: World Bank Group is T1 but has known access issues from probing — correct feed URL not discovered. It is in KNOWN_BLOCKED because Gate 1 cannot be completed without the correct feed URL.
 
 ---
 
