@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-13
 **Branch**: `global-source-inventory`
-**Status**: DRAFT FOR REVIEW (queue integrity reconciled)
+**Status**: DRAFT FOR REVIEW (semantically reconciled)
 **Source baseline**: Global Source Universe v1 (`8b1e7b4` — Data Integrity CLEARED)
 **Linked models**: Global Source Expansion Model v1 (`93de30c`), Source Qualification Report Template v1 (`f5caf57`)
 **Type**: Internal execution queue — documentation only. No onboarding, no probing, no config, no pipeline changes.
@@ -34,7 +34,7 @@ Three institutions appear as duplicate rows in the T1/T2 inventory (different na
 
 | Institution | Inventory rows | Tier | Reconciliation |
 |-------------|---------------|------|----------------|
-| World Bank Group | B6 #14 + B7 #3 | T1 | Counted once in queue (KNOWN_BLOCKED) |
+| World Bank Group | B6 #14 + B7 #3 | T1 | Counted once in queue (SCREENING_ONLY — access path unresolved, not confirmed as source-level block) |
 | BaFin | B2 #6 + B2 #35 (full name "Federal Financial Supervisory Authority (BaFin)") | T2 | Counted once in queue (DISCOVERY_ONLY) |
 | Central Bank of Brazil / Banco Central do Brasil | B1 #15 (EN) + B1 #33 (PT) | T2 | Counted once in queue (DISCOVERY_ONLY) |
 
@@ -57,10 +57,10 @@ Unique T1/T2 queue records:                                79
 
 Queue state breakdown:
   ALREADY_QUALIFIED (reference/completed — not executable):  12
-  SCREENING_ONLY (executable — prior Gate 1-4 evidence):      8
+  SCREENING_ONLY (executable — prior Gate 1-4 evidence):      10
   DISCOVERY_ONLY (executable — no technical screening):      56
-  KNOWN_BLOCKED (executable — confirmed access blockers):      3
-  TOTAL unique records:                                      79   (= 12 + 8 + 56 + 3)
+  KNOWN_BLOCKED (executable — confirmed source-level block):   1
+  TOTAL unique records:                                      79   (= 12 + 10 + 56 + 1)
 ```
 
 ### Queue structure
@@ -68,22 +68,31 @@ Queue state breakdown:
 The queue separates completed work from executable work:
 
 **Completed (reference set — not in execution queue):**
-- ALREADY_QUALIFIED (12 sources) — these have passed Gate 5 (first-attempt validation); they require no qualification work and are listed for completeness only
+- ALREADY_QUALIFIED (12 sources) — these have existing qualification evidence (see evidence_maturity column in Section 6 for the distinction between DEVELOPMENT_VERIFIED, VALIDATION_VERIFIED, and PROSPECTIVE_VALIDATED). They require no qualification work and are listed for completeness only.
 
 **Executable qualification queue:**
-- SCREENING_ONLY (8 sources) — have partial Gate 1-4 evidence; need completion or root-cause review
+- SCREENING_ONLY (10 sources) — have prior Gate 1-4 evidence; sub-categories: known gate failures (5), partial screening evidence (3), unresolved access paths (2)
 - DISCOVERY_ONLY (56 sources) — no technical screening performed; feed URLs unknown
-- KNOWN_BLOCKED (3 sources) — confirmed access blockers; not actionable until resolved
+- KNOWN_BLOCKED (1 source) — confirmed source-level access block (HTTP 403 from origin server); not actionable until resolved
 
-### KNOWN_BLOCKED reconciliation
+### KNOWN_BLOCKED reconciliation (1 source — confirmed source-level block)
 
-The inventory's Part B status for OECD, Statistics Canada, and World Bank Group is `DISCOVERED`, but prior probing and Part F (Deferred/Blocked) document known access issues. The queue reconciles this:
+The inventory's Part B status for OECD is `DISCOVERED`, but prior Phase B screening documented a confirmed HTTP 403 from the origin server. HTTP 403 is an authoritative server-level denial of access — this constitutes confirmed source-level blocking, not merely a path failure.
 
 | Source | Part B status | Part F / probing status | Queue status | Rationale |
 |--------|-------------|------------------------|-------------|-----------|
-| OECD | DISCOVERED | BLOCKED (Gate 1 FAIL 403) | KNOWN_BLOCKED | Part F evidence supersedes Part B default |
-| Statistics Canada | DISCOVERED | DEFERRED (access timeout) | KNOWN_BLOCKED | Part F evidence supersedes Part B default |
-| World Bank Group | DISCOVERED | Feed URL not found (404 on probed paths) | KNOWN_BLOCKED | Phase 2A probing evidence supersedes Part B default |
+| OECD | DISCOVERED | BLOCKED (Gate 1 FAIL — HTTP 403 from origin server) | KNOWN_BLOCKED | HTTP 403 is a confirmed source-level denial, not a path failure |
+
+### Reclassification: World Bank Group and Statistics Canada (moved to SCREENING_ONLY)
+
+In an earlier version of this queue, World Bank Group and Statistics Canada were classified as `KNOWN_BLOCKED`. Upon semantic review, this classification overclaimed what the evidence supports:
+
+| Source | Prior classification | Evidence actually shows | Reclassified to | Rationale |
+|--------|----------------------|--------------------------|------------------|-----------|
+| World Bank Group | KNOWN_BLOCKED | 404 on probed feed paths | SCREENING_ONLY | 404 on specific paths does not prove source-level block; alternative paths or feed locations may exist |
+| Statistics Canada | KNOWN_BLOCKED | Access timeout | SCREENING_ONLY | Timeout is inconclusive; could be transient network latency, slow server, or path issue — does not confirm source-level block |
+
+**Principle applied**: A failed or unknown access path does not equal a confirmed source-level block. The queue does not generalize a single path failure to a judgment about the institution as a whole. Only OECD remains in KNOWN_BLOCKED because HTTP 403 is an authoritative server-level response, not a path-level observation.
 
 ---
 
@@ -119,7 +128,14 @@ A low-priority source may be `ALREADY_QUALIFIED` (e.g., BOC is T1 but developmen
 
 ## 6. ALREADY_QUALIFIED (12 sources)
 
-These sources have passed Gate 5 (first-attempt validation). They are in the queue for completeness but do not need qualification work.
+These sources have existing qualification evidence. Evidence maturity is reported per source via the `evidence_maturity` column below — the maturity levels distinguish development-stage evidence from independent validation and prospective confirmation. They are in the queue for completeness but do not require qualification work.
+
+**Evidence maturity levels:**
+- `DEVELOPMENT_VERIFIED` — qualified through development evidence (Phase A/B pipeline baseline); evidence is not independent of pipeline development
+- `VALIDATION_VERIFIED` — independently validated (first-attempt qualification PASS using the frozen pipeline + configurable extractor, with no source-specific code changes)
+- `PROSPECTIVE_VALIDATED` — prospective confirmation (qualified against a candidate source outside the development-verified set)
+
+Note: Only `VALIDATION_VERIFIED` and `PROSPECTIVE_VALIDATED` constitute first-attempt validation in the strict sense established by the SNB Independent Review (`332788c`) and CFTC prospective validation (`b4fabe9`). `DEVELOPMENT_VERIFIED` sources are qualified but their evidence was produced as part of pipeline development, not as an independent first-attempt run.
 
 | # | Institution | Country | Tier | Evidence maturity | Evidence commit |
 |---|------------|---------|------|-------------------|----------------|
@@ -140,9 +156,13 @@ These sources have passed Gate 5 (first-attempt validation). They are in the que
 
 ---
 
-## 7. SCREENING_ONLY (8 sources)
+## 7. SCREENING_ONLY (10 sources)
 
-These sources have prior Gate 1-4 screening evidence. Some have known gate failures (root-cause review needed); others have partial screening (feed URL confirmed, but full Gate 1-4 not completed).
+These sources have prior Gate 1-4 screening evidence. The section is organized into three sub-categories reflecting the strength and nature of the evidence:
+
+1. **Known gate failures** (5) — Gate 1-4 testing was performed and a specific gate failed; root-cause review needed before re-screening
+2. **Partial screening evidence** (3) — probed during source-selection activities; feed URL and some characteristics observed, but full Gate 1-4 not completed
+3. **Unresolved access paths** (2) — probed but evidence is inconclusive (timeout or 404 on specific paths); does not confirm source-level block
 
 ### Sources with known gate failures (5)
 
@@ -163,6 +183,17 @@ These sources were probed during source-selection activities (Gate 2/3 challenge
 | 6 | Sveriges Riksbank | SE | T2 | RSS with pubDate confirmed | Phase 2A probing | Probed but not configured; RSS feed found at `https://www.riksbank.se/en-gb/rss/press-releases/` |
 | 7 | FINMA | CH | T2 | RSS confirmed | Phase 2A probing | Feed URL found at `https://www.finma.ch/en/rss/news`; pubDate confirmed |
 | 8 | Norges Bank | NO | T2 | Probed — RSS path not found | Phase 2A probing | Institution confirmed; RSS feed URL not discovered; needs further Gate 1 screening |
+
+### Sources with unresolved access paths (2)
+
+These sources were probed but the evidence is inconclusive — it proves that specific paths or requests did not yield a usable feed, but does NOT confirm that the source itself is blocked. They are classified as `SCREENING_ONLY` (not `KNOWN_BLOCKED`) because the most conservative queue state supported by the evidence is "has prior Gate 1-4 evidence; needs further screening" — not "confirmed source-level block".
+
+| # | Institution | Country | Tier | Screening evidence | Screening source | Notes |
+|---|------------|---------|------|---------------------|-----------------|-------|
+| 9 | Statistics Canada | CA | T2 | Access timeout | Phase B screening (Part F: DEFERRED) | Timeout observed during probing; does not confirm source-level block (could be transient latency, slow server, or path issue); alternative paths and retry strategies not yet tested |
+| 10 | World Bank Group | INT | T1 | 404 on probed feed paths | Phase 2A screening | 404 returned for the specific feed paths probed; alternative feed locations, page-embedded feed discovery, and HTML scraping paths not yet attempted; does not confirm source-level block |
+
+**Reclassification note**: In an earlier version of this queue, these two sources were classified as `KNOWN_BLOCKED`. They have been moved to `SCREENING_ONLY` because the evidence only proves a path-level failure, not a source-level block. Only OECD (Section 10) remains in `KNOWN_BLOCKED` because HTTP 403 is an authoritative server-level denial.
 
 ---
 
@@ -196,11 +227,12 @@ Sources classified as `SCREENING_ONLY`, `KNOWN_BLOCKED`, or `ALREADY_QUALIFIED` 
 | 20 | ASIC (Australia) | AU | T2 | Financial Regulator | Oceania | Major APAC regulator |
 
 **Sources NOT in this Top 20 (and why):**
-- World Bank Group — moved to KNOWN_BLOCKED (Section 10); feed URL not found in prior probing
+- World Bank Group — moved to SCREENING_ONLY (Section 7); probed feed paths returned 404, but path-level failure does not confirm source-level block
 - Sveriges Riksbank — moved to SCREENING_ONLY (Section 7); RSS feed confirmed in prior probing
 - FINMA — moved to SCREENING_ONLY (Section 7); RSS feed confirmed in prior probing
 - Norges Bank — moved to SCREENING_ONLY (Section 7); probed in Phase 2A (RSS path not found but institution confirmed)
-- OECD — KNOWN_BLOCKED (Gate 1 FAIL 403)
+- Statistics Canada — moved to SCREENING_ONLY (Section 7); access timeout observed but does not confirm source-level block
+- OECD — KNOWN_BLOCKED (Section 10); HTTP 403 from origin server is confirmed source-level block
 - IMF — SCREENING_ONLY (Gate 1 Akamai 403)
 - ESMA — SCREENING_ONLY (Gate 2 fail — no pubDate)
 
@@ -210,7 +242,7 @@ Sources classified as `SCREENING_ONLY`, `KNOWN_BLOCKED`, or `ALREADY_QUALIFIED` 
 
 ### T1 DISCOVERY_ONLY (3 sources)
 
-Note: Sources below have NO prior Gate 1-4 screening evidence. Their technical characteristics (access, provenance, content) are unknown. World Bank Group has been moved to KNOWN_BLOCKED (Section 10) based on prior probing (feed URL not found).
+Note: Sources below have NO prior Gate 1-4 screening evidence. Their technical characteristics (access, provenance, content) are unknown. World Bank Group has been moved to SCREENING_ONLY (Section 7) based on prior probing (404 on specific paths — does not confirm source-level block).
 
 | # | Institution | Country | Class | Region |
 |---|------------|---------|-------|--------|
@@ -220,7 +252,7 @@ Note: Sources below have NO prior Gate 1-4 screening evidence. Their technical c
 
 ### T2 DISCOVERY_ONLY (53 sources)
 
-Note: Sources below have NO prior Gate 1-4 screening evidence. Sveriges Riksbank, FINMA, and Norges Bank have been moved to SCREENING_ONLY (Section 7) based on prior probing evidence. Statistics Canada has been moved to KNOWN_BLOCKED (Section 10) based on Part F evidence. OECD was already moved to KNOWN_BLOCKED.
+Note: Sources below have NO prior Gate 1-4 screening evidence. Sveriges Riksbank, FINMA, and Norges Bank have been moved to SCREENING_ONLY (Section 7) based on prior probing evidence. Statistics Canada has been moved to SCREENING_ONLY (Section 7) — access timeout does not confirm source-level block. World Bank Group has been moved to SCREENING_ONLY (Section 7) — 404 on probed paths does not confirm source-level block. Only OECD remains in KNOWN_BLOCKED (Section 10) due to confirmed HTTP 403.
 
 The single BaFin entry below corresponds to two inventory rows (#6 + #35) — see Section 2 duplicate reconciliation.
 
@@ -286,15 +318,15 @@ Note: OECD is NOT in this DISCOVERY_ONLY list — it has been moved to KNOWN_BLO
 
 ---
 
-## 10. KNOWN_BLOCKED (3 sources)
+## 10. KNOWN_BLOCKED (1 source)
+
+A source is classified as `KNOWN_BLOCKED` only when the evidence confirms a source-level block (i.e., the origin server authoritatively denies access). Path-level failures (404 on probed paths, timeouts) do NOT qualify — those sources are classified as `SCREENING_ONLY` (Section 7) because the most conservative state supported by the evidence is "has prior Gate 1-4 evidence; needs further screening".
 
 | # | Institution | Country | Tier | Blocker | Evidence |
 |---|------------|---------|------|---------|---------|
-| 1 | OECD | INT | T2 | Gate 1 FAIL (HTTP 403) | Phase B screening |
-| 2 | Statistics Canada | CA | T2 | Access timeout | Phase B screening (Part F: DEFERRED) |
-| 3 | World Bank Group | INT | T1 | Feed URL not found (404 on probed paths) | Phase 2A screening |
+| 1 | OECD | INT | T2 | Gate 1 FAIL (HTTP 403 from origin server) | Phase B screening |
 
-Note: World Bank Group is T1 but has known access issues from probing — correct feed URL not discovered. It is in KNOWN_BLOCKED because Gate 1 cannot be completed without the correct feed URL.
+Note: HTTP 403 is an authoritative server-level denial of access — this constitutes confirmed source-level blocking. World Bank Group and Statistics Canada were previously listed here but have been reclassified to `SCREENING_ONLY` (Section 7) because their evidence (404 on paths, timeout) only proves path-level failure, not source-level block. See Section 3 reclassification table for the rationale.
 
 ---
 
@@ -313,7 +345,7 @@ They are in the queue for completeness — they represent coverage already achie
 
 ### Why SCREENING_ONLY is listed second
 
-These sources have known gate failures. They need root-cause review before they can be re-screened or classified. They are higher priority than DISCOVERY_ONLY because we already have information about them.
+These sources have prior Gate 1-4 evidence — known gate failures (5), partial screening evidence (3), or unresolved access paths (2). They need root-cause review, alternative-path probing, or completion of incomplete gates before they can be re-screened or reclassified. They are higher priority than DISCOVERY_ONLY because we already have information about them; the next action is well-defined.
 
 ### Why DISCOVERY_ONLY ordering
 
@@ -329,7 +361,7 @@ Technical difficulty is NOT assessed at this stage — it is unknown until Gate 
 
 ### Why KNOWN_BLOCKED is last
 
-These sources have confirmed access blockers. They cannot be qualified until the blocker is resolved (infrastructure investment). They are documented but not actionable.
+This category contains only sources with confirmed source-level blocks (HTTP 403 from the origin server). Sources with path-level failures (404, timeout) are NOT in this category — they are in `SCREENING_ONLY` because their evidence does not support a source-level block claim. KNOWN_BLOCKED sources cannot be qualified until the blocker is resolved; they are documented but not actionable.
 
 ---
 
@@ -337,11 +369,11 @@ These sources have confirmed access blockers. They cannot be qualified until the
 
 ### By region (T1+T2 only — 79 unique records)
 
-Counts below are recalculated from the queue sections: ALREADY_QUALIFIED (Section 6, 12 sources), SCREENING_ONLY (Section 7, 8 sources), DISCOVERY_ONLY (Section 9, 56 sources = 3 T1 + 53 T2), KNOWN_BLOCKED (Section 10, 3 sources).
+Counts below are recalculated from the queue sections: ALREADY_QUALIFIED (Section 6, 12 sources), SCREENING_ONLY (Section 7, 10 sources = 5 known gate failures + 3 partial screening + 2 unresolved access paths), DISCOVERY_ONLY (Section 9, 56 sources = 3 T1 + 53 T2), KNOWN_BLOCKED (Section 10, 1 source).
 
 | Region | ALREADY_QUALIFIED | SCREENING_ONLY | DISCOVERY_ONLY | KNOWN_BLOCKED | Total |
 |--------|-------------------|----------------|---------------|--------------|-------|
-| North America | 6 | 0 | 8 | 1 | 15 |
+| North America | 6 | 1 | 8 | 0 | 15 |
 | Europe | 4 | 5 | 20 | 0 | 29 |
 | East Asia | 1 | 0 | 10 | 0 | 11 |
 | Southeast Asia | 0 | 0 | 3 | 0 | 3 |
@@ -350,10 +382,10 @@ Counts below are recalculated from the queue sections: ALREADY_QUALIFIED (Sectio
 | Africa | 0 | 0 | 1 | 0 | 1 |
 | Latin America | 0 | 0 | 2 | 0 | 2 |
 | Oceania | 0 | 2 | 3 | 0 | 5 |
-| Multilateral/Global | 1 | 1 | 2 | 2 | 6 |
-| **TOTAL** | **12** | **8** | **56** | **3** | **79** |
+| Multilateral/Global | 1 | 2 | 2 | 1 | 6 |
+| **TOTAL** | **12** | **10** | **56** | **1** | **79** |
 
-Column sums verify: 12 + 8 + 56 + 3 = 79 ✓
+Column sums verify: 12 + 10 + 56 + 1 = 79 ✓
 
 ### Coverage gaps in the queue
 
