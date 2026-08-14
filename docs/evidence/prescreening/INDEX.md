@@ -107,11 +107,11 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 | 3 | US Treasury | US | T1 | Ministry of Finance | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_US_TREASURY_PRESCREENING.md` |
 | 4 | Bundesbank | DE | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BUNDESBANK_PRESCREENING.md` |
 | 5 | Banque de France | FR | T2 | Central Bank | FAIL | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | KNOWN_BLOCKED | HIGH | `SQR_BANQUE_DE_FRANCE_PRESCREENING.md` |
-| 6 | Banca d'Italia | IT | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 7 | Banco de España | ES | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 8 | De Nederlandsche Bank | NL | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 9 | Danmarks Nationalbank | DK | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 10 | Bank of Korea | KR | T2 | Central Bank | — | — | — | — | PENDING | — | — |
+| 6 | Banca d'Italia | IT | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BANCA_D_ITALIA_PRESCREENING.md` |
+| 7 | Banco de España | ES | T2 | Central Bank | UNRESOLVED | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | SCREENING_ONLY (unresolved access path) | MEDIUM | `SQR_BANCO_DE_ESPANA_PRESCREENING.md` |
+| 8 | De Nederlandsche Bank | NL | T2 | Central Bank | FAIL | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | KNOWN_BLOCKED | HIGH | `SQR_DNB_PRESCREENING.md` |
+| 9 | Danmarks Nationalbank | DK | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_DANMARKS_NATIONALBANK_PRESCREENING.md` |
+| 10 | Bank of Korea | KR | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BANK_OF_KOREA_PRESCREENING.md` |
 | 11 | Reserve Bank of India | IN | T2 | Central Bank | — | — | — | — | PENDING | — | — |
 | 12 | Banco Central do Brasil | BR | T2 | Central Bank | — | — | — | — | PENDING | — | — |
 | 13 | Bank of Mexico | MX | T2 | Central Bank | — | — | — | — | PENDING | — | — |
@@ -131,8 +131,8 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 |-------|---------|--------|
 | Batch 1 (Source #1: PBoC) | 1 | COMPLETE — methodology corrected (`d3910da`); user-approved corrected methodology |
 | Batch 2 (Sources #2-#5: BLS, US Treasury, Bundesbank, Banque de France) | 4 | COMPLETE — 2 QUALIFICATION_READY (US Treasury, Bundesbank), 2 KNOWN_BLOCKED (BLS, Banque de France) |
-| Batch 3 (Sources #6-#10) | 5 | NOT STARTED — awaiting user review of Batch 2 |
-| Batch 4 (Sources #11-#15) | 5 | NOT STARTED |
+| Batch 3 (Sources #6-#10: Banca d'Italia, Banco de España, DNB, Danmarks Nationalbank, Bank of Korea) | 5 | COMPLETE — 3 QUALIFICATION_READY (Banca d'Italia, Danmarks Nationalbank, Bank of Korea), 1 KNOWN_BLOCKED (DNB), 1 SCREENING_ONLY (Banco de España — unresolved access path) |
+| Batch 4 (Sources #11-#15) | 5 | NOT STARTED — awaiting user review of Batch 3 |
 | Batch 5 (Sources #16-#20) | 5 | NOT STARTED |
 
 ---
