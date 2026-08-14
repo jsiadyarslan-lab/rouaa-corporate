@@ -65,18 +65,28 @@ Source
 
 ### Per-source probing
 
-1. **Discover access path**: probe common feed paths (`/rss.xml`, `/feed.xml`, `/atom.xml`, `/rss`, `/feed`) and the source's English/primary homepage
+1. **Discover access path**: probe common feed paths (`/rss.xml`, `/feed.xml`, `/atom.xml`, `/rss`, `/feed`) and the source's English/primary homepage. The number of probes is calibrated per source based on evidence sufficiency — not a fixed count.
 2. **Test Gate 1 (Access)**: HTTP request with browser User-Agent; record HTTP status code, response size, final URL
-3. **Test Gate 2 (Provenance)**: inspect HTML `<meta>` tags for `PubDate`/`dc:date`/`createDate`; check URL pattern for embedded timestamps; check feed XML for `<pubDate>` if RSS exists
+3. **Test Gate 2 (Provenance)**: inspect HTML `<meta>` tags for `PubDate`/`dc:date`/`createDate`; check URL pattern for embedded timestamps; check feed XML for `<pubDate>` if RSS exists. **If multiple date sources are detected and they do not agree, mark Gate 2 as PASS WITH REVIEW and flag date-source precedence as a routing qualifier.** Do not describe provenance as "unambiguous" or as "redundant sources" when the sources conflict.
 4. **Test Gate 3 (Content)**: fetch sample article; verify static HTML contains title + body + metadata; flag JS-rendered pages (static HTML empty)
-5. **Assess Gate 4 (Pattern category)**: compare content structure to existing proven analogs (BEA `c8af140` statistical_authority, SNB `c09de13` central_bank, CFTC `b4fabe9` financial_regulator)
+5. **Assess Gate 4 (Pattern applicability)**: compare content structure to existing proven analogs (BEA `c8af140` statistical_authority, SNB `c09de13` central_bank, CFTC `b4fabe9` financial_regulator). **Gate 4 answers only whether a configuration category is applicable — it does NOT predict engineering effort, source-specific code needs, or Gate 5 outcome. Those are Gate 5 questions.** This preserves the separation between priority / readiness / technical difficulty (per Section 5 of the Queue).
 6. **Determine initial routing**:
    - All Gates 1-4 PASS → QUALIFICATION_READY (candidate for standard onboarding)
+   - Gates 1, 3, 4 PASS and Gate 2 PASS WITH REVIEW → QUALIFICATION_READY **with routing qualifier** (e.g., `PROVENANCE DATE PRECEDENCE REVIEW`). The qualifier does NOT add a new taxonomic state — it annotates the existing QUALIFICATION_READY classification with an unresolved item that must be addressed during qualification.
    - Gate 1-4 partial PASS, pattern category uncertain → NEEDS_CONFIG_INVESTIGATION
    - Gate 1 FAIL (HTTP 403 source-level) → KNOWN_BLOCKED
    - Gate 1 path-level failure (404, timeout) → SCREENING_ONLY (existing queue state, no promotion)
 7. **Document evidence**: HTTP probing log, HTML metadata samples, analog references
 8. **Retain priority**: Top 20 rank is preserved regardless of pre-screening result (per Section 5 critical distinctions — qualification priority is independent of technical difficulty)
+
+### Routing qualifier concept
+
+A routing qualifier is an annotation on a QUALIFICATION_READY routing that flags an unresolved item requiring review during qualification (Gate 5) or manual review before onboarding. It does NOT introduce a new routing classification — the routing remains QUALIFICATION_READY. Examples:
+
+- `PROVENANCE DATE PRECEDENCE REVIEW` — multiple date sources detected but they do not agree; which date is the official `document_date` must be resolved
+- `PATTERN CATEGORY TENTATIVE` — pattern category match is inferred but not confirmed; Gate 5 will determine if a new pattern category is required
+
+Qualifiers are recorded in the Initial Routing section of each Source Qualification Record and surfaced in the INDEX.md records table.
 
 ### Confidence levels
 
@@ -92,7 +102,7 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 
 | # | Source | Country | Tier | Class | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Routing | Confidence | Record |
 |---|--------|---------|------|-------|--------|--------|--------|--------|---------|------------|--------|
-| 1 | People's Bank of China | CN | T1 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_PBOC_PRESCREENING.md` |
+| 1 | People's Bank of China | CN | T1 | Central Bank | PASS | PASS WITH REVIEW | PASS | PASS | QUALIFICATION_READY (provenance date precedence review) | MEDIUM | `SQR_PBOC_PRESCREENING.md` |
 | 2 | US Bureau of Labor Statistics | US | T1 | Statistical | — | — | — | — | PENDING | — | — |
 | 3 | US Treasury | US | T1 | Ministry of Finance | — | — | — | — | PENDING | — | — |
 | 4 | Bundesbank | DE | T2 | Central Bank | — | — | — | — | PENDING | — | — |
