@@ -560,6 +560,26 @@ GATE5_SOURCES_LIST = {
         "content_keywords": [],
     },
 
+    "BANCA_D_ITALIA": {
+        "code": "BANCA_D_ITALIA",
+        "name": "Banca d'Italia",
+        "type": "central_bank",
+        "country": "IT",
+        "jurisdiction": "Italy",
+        "trustTier": 1,
+        "websiteUrl": "https://www.bancaditalia.it/",
+        # Pre-screening found: no RSS; HTML index at /media/comunicati/index.html with PDF press releases
+        "feedUrl": "https://www.bancaditalia.it/media/comunicati/index.html",
+        "feed_format": "html_index",
+        # Pre-screening found PDF links like /media/comunicati/documenti/2026-02/cs-13.08.2026-sup-BOT.pdf
+        "link_pattern": r"/media/comunicati/documenti/[^\"']+\.pdf",
+        "link_pattern_prefix": "https://www.bancaditalia.it",
+        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        "rate_patterns": [],
+        "event_type": "press_release",
+        "content_keywords": [],
+    },
+
 }
 
 # Combine all sources
