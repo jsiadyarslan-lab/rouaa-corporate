@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: DRAFT FOR REVIEW
+**Status**: FROZEN — Ready for operational use
 **Basis**: Source Qualification Report Template v1 (`f5caf57`), Commercial Source Qualification Model v2 Design (`cfc16b6`), Qualification v2 Operationalization Review (`982ed2d`)
 **Evidence base**: Top 20 Pre-Screening (`4443553`) + Gate 5 testing (`282de0f`, `b70171e`, `bd7285d`)
 **Type**: Operational deliverable template — NOT code, config, Contract, or website change.
@@ -403,7 +403,7 @@ This template is used by:
 
 2. **Portfolio Summary is customer-specific** — percentages are composition, not success rate. Must not be reused for other customers or marketing.
 
-3. **Gate 5 is only attempted if QUALIFICATION_READY = YES or YES WITH SEMANTIC REVIEW** — no configuration creation for sources that fail pre-Gate-5 stages.
+3. **Gate 5 is only attempted if QUALIFICATION_READY = YES or YES WITH SEMANTIC REVIEW** — no executable pipeline/source configuration is created for Gate 5 until QUALIFICATION_READY is reached. Static configuration contract verification may inspect or model a proposed configuration before Gate 5 (checking event_type, trigger_metrics, content_keywords compatibility) without creating an executable pipeline configuration.
 
 4. **Root-Cause Review is mandatory** if Gate 5 fails — no direct classification from Gate 5 failure.
 
