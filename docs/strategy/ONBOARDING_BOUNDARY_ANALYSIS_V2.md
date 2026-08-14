@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: DRAFT FOR REVIEW
+**Status**: FROZEN — Ready for operational use
 **Basis**: Onboarding Boundary Analysis v1 (`5d4cef4`), Source Qualification Report Template v2 (`a62ad65` — FROZEN), Commercial Source Qualification Model v2 Design (`cfc16b6`), Qualification v2 Operationalization Review (`982ed2d`)
 **Evidence base**: Top 20 Pre-Screening (`4443553`) + Gate 5 testing (`282de0f`, `b70171e`, `bd7285d`)
 **Type**: Methodology document — NOT code, config, Contract, or website change.
@@ -138,7 +138,7 @@ Gate 5 — First-Attempt Validation
 | Semantics | COMPATIBLE / NOT COMPATIBLE |
 | Proves | The configuration is syntactically compatible with the pipeline contract — the detector will find triggering facts if extraction produces any |
 | Does NOT prove | That the metrics semantically represent the source's intelligence (that's the Semantic Representation Assessment); that extraction will actually produce facts (content-path alignment is a prerequisite) |
-| Routing consequence | NOT COMPATIBLE → Semantic Representation Assessment (to determine if the gap is fixable by config or requires model extension) |
+| Routing consequence | NOT COMPATIBLE → see routing logic below (distinguish fixable config mismatch from representation gap) |
 
 **Methodology**:
 1. List all pattern types defined in the source config (second element of each pattern tuple)
@@ -252,9 +252,23 @@ Gate 2 PASS WITH REVIEW               → QUALIFICATION_READY with provenance re
 Gate 3 FAIL (JS-rendered)            → SCREENING_ONLY / NOT CURRENTLY SUPPORTED
 Gate 4 FAIL (no pattern category)    → QUALIFIED ENGINEERING
 Content-Path NOT ALIGNED              → CONTENT-PATH REVIEW
-Configuration NOT COMPATIBLE         → Semantic Representation Assessment
-  ├── REPRESENTATION GAP              → ENGINEERING REVIEW
-  └── INCONCLUSIVE (if config fixable)→ fix and re-verify
+Configuration NOT COMPATIBLE
+         ├── Fixable configuration mismatch
+         │   (e.g., event_type wrong but metrics exist in a supported type's triggers)
+         │   → CONFIGURATION REVIEW → correct and re-verify
+         │
+         └── No contract-compatible representation
+             (e.g., event_type supported but metrics not in triggers, or
+              no existing metric semantically fits)
+             → SEMANTIC REPRESENTATION ASSESSMENT
+             → COMPATIBLE / INCONCLUSIVE / REPRESENTATION GAP
+
+Key distinction: if the event_type is simply wrong but a supported event_type exists
+whose trigger_metrics match the extracted metrics, this is a fixable configuration
+mismatch (correct the event_type and re-verify). If no supported event_type has
+trigger_metrics that match — or if the matching is syntactic but not semantic —
+this requires Semantic Representation Assessment to determine whether the gap is
+fixable or requires model extension.
 Semantic REPRESENTATION GAP          → ENGINEERING REVIEW
 Gate 5 PASS                           → STANDARD (Quality reported separately)
 Gate 5 FAIL                           → ROOT-CAUSE REVIEW
