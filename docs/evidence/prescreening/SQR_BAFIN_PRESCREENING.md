@@ -62,29 +62,35 @@
 | Field | Value |
 |-------|-------|
 | Assessed by | Pre-screening (RSS XML + HTML metadata inspection) |
-| Date source | RSS `<pubDate>` + article HTML visible date — **all sources agree** |
-| RSS `<pubDate>` | `Thu, 13 Aug 2026 14:02:00 +0200` (RFC 822 format with timezone +0200 CEST) — sample item "capitalx(.)market: Bafin warns consumers about website and identity fraud" |
-| Article HTML visible date | `29/07/2026 | Press release` (German format DD/MM/YYYY) — on the article page for "Market surveillance of AI: Bafin granted new powers" (sampled press release) |
-| Date-source agreement | RSS `<pubDate>` for the sampled article corresponds to the article's publication date; the article HTML visible date `29/07/2026` matches the press release date |
-| Result | **PASS** — authoritative publication date sources present and machine-readable; all sources agree |
+| Date source | RSS `<pubDate>` + article HTML visible date — **date-source precedence UNRESOLVED** |
+| RSS `<pubDate>` (RSS item 1) | `Thu, 13 Aug 2026 14:02:00 +0200` (RFC 822 format with timezone +0200 CEST) — sample RSS item "capitalx(.)market: Bafin warns consumers about website and identity fraud" |
+| Article HTML visible date (sampled article) | `29/07/2026 | Press release` (German format DD/MM/YYYY) — on the article page "Market surveillance of AI: Bafin granted new powers" (URL: `pm_2026_07_29_ki_verordnung_en.html`) |
+| Date-source comparability | **The two dates are from DIFFERENT articles** — the RSS `<pubDate>` (Aug 13, 2026) is for the "capitalx(.)market" consumer warning, while the article HTML visible date (29/07/2026) is for the "Market surveillance of AI" press release. They cannot be directly compared because they do not reference the same article. |
+| Date-source agreement | **UNRESOLVED** — no single article was found in both the RSS feed sample and the article HTML sample; therefore, date-source precedence cannot be established from existing evidence |
+| Result | **PASS WITH REVIEW** — provenance metadata is available, but date-source precedence is unresolved because the RSS `<pubDate>` and article HTML visible date were observed on different articles |
 
 ### Provenance pattern assessment
 
-BaFin provides publication dates in two locations, and they **agree**:
+BaFin provides publication dates in two locations, but the pre-screening evidence does **not** confirm they agree for the same article:
 
-1. **RSS `<pubDate>`**: `Thu, 13 Aug 2026 14:02:00 +0200` — RFC 822 format with Central European Summer Time (CEST) timezone offset (+0200)
-2. **Article HTML visible date**: `29/07/2026 | Press release` — German date format (DD/MM/YYYY) with content type label, located in a `<span class="c-topline__element">` element
+1. **RSS `<pubDate>`**: `Thu, 13 Aug 2026 14:02:00 +0200` — RFC 822 format with Central European Summer Time (CEST) timezone offset (+0200). This date is for RSS item 1: "capitalx(.)market: Bafin warns consumers about website and identity fraud"
+2. **Article HTML visible date**: `29/07/2026 | Press release` — German date format (DD/MM/YYYY) with content type label, located in a `<span class="c-topline__element">` element. This date is for the sampled article: "Market surveillance of AI: Bafin granted new powers" (URL contains `2026_07_29`, matching the visible date)
 
-Both sources provide publication dates. The RSS `<pubDate>` uses RFC 822 with timezone (properly compliant, unlike RBI's RFC 822 without timezone). The article HTML visible date uses German format (DD/MM/YYYY).
+**The two dates reference different articles.** The RSS `<pubDate>` (Aug 13) is for a consumer warning published on August 13; the article HTML visible date (29/07/2026) is for a press release published on July 29. These are not the same article, so they cannot be compared to verify date-source agreement.
 
-**Note on date format**: BaFin's article HTML uses German date format (`29/07/2026` = 29 July 2026), while the RSS uses RFC 822 with English month names. Both are parseable but require different parsing logic. No date-source conflict exists — both reference the same calendar date for their respective articles.
+**Date-source precedence is unresolved.** We do not yet know:
+- Whether the RSS `<pubDate>` and article HTML visible date agree for the SAME article (no single article was found in both samples)
+- Which date source should enter provenance as the official `document_date` for the pipeline
+- Whether different content types (consumer warnings vs press releases vs supervisory announcements) use different date conventions
+
+This requires review during the qualification phase (Gate 5) or manual review before onboarding. Pre-screening cannot resolve this question without sampling the same article in both RSS and HTML.
 
 **Comparison to known cases:**
-- Bundesbank (Batch 2 — Gate 2 PASS): RSS `<pubDate>` + RSS `<dc:date>` + article HTML `metadata__date` (all agreed)
-- RBI (Batch 4 — Gate 2 PASS): RSS `<pubDate>` + article HTML visible date (both agreed)
-- BaFin (this batch — Gate 2 PASS): RSS `<pubDate>` + article HTML visible date (both agree; different date formats — RFC 822 vs German DD/MM/YYYY)
+- PBoC (Batch 1 — Gate 2 PASS WITH REVIEW): URL timestamp + `createDate` agreed, but `PubDate` differed by 1 day → date-source precedence unresolved
+- BaFin (this batch — Gate 2 PASS WITH REVIEW): RSS `<pubDate>` and article HTML visible date observed on different articles → date-source precedence unresolved because no single article was sampled in both formats
+- RBI (Batch 4 — Gate 2 PASS): RSS `<pubDate>` and article HTML visible date both for the SAME article (prid=63381) → confirmed agreement
 
-**Gate 2 conclusion**: Authoritative publication date sources are present, machine-readable, and agree. The RFC 822 `<pubDate>` (with timezone) and the German-format article HTML visible date both reference the publication date. No date-source precedence review is required.
+**Gate 2 conclusion**: Provenance metadata is available and machine-readable, but date-source precedence is unresolved because the RSS `<pubDate>` and article HTML visible date were observed on different articles. The route to a definitive `document_date` requires explicit review during qualification. Pre-screening flags this as **PASS WITH REVIEW**.
 
 ---
 
@@ -159,10 +165,10 @@ These are Gate 5 questions. Pre-screening separates **applicability** (does the 
 
 | Field | Value |
 |-------|-------|
-| Earliest blocking gate | none (Gates 1-4 all PASS) |
+| Earliest blocking gate | none (Gates 1, 3, 4 PASS; Gate 2 PASS WITH REVIEW) |
 | Initial routing | **QUALIFICATION_READY** |
-| Routing qualifier | None — all publication date sources agree |
-| Routing rationale | All Gates 1-4 PASS; provenance unambiguous (RSS `<pubDate>` RFC 822 with timezone + article HTML visible date German DD/MM/YYYY — both reference publication dates); configuration category (`PATTERN_TYPE_METADATA`, `financial_regulator` class) appears applicable with analogs in US SEC, US CFTC, SFC Hong Kong, and JFSA Japan |
+| Routing qualifier | **PROVENANCE DATE PRECEDENCE REVIEW** — Gate 2 flagged that RSS `<pubDate>` (Aug 13, for "capitalx(.)market" consumer warning) and article HTML visible date (29/07/2026, for "Market surveillance of AI" press release) were observed on different articles; date-source precedence must be resolved during qualification (Gate 5) or via manual review before onboarding by sampling the same article in both RSS and HTML |
+| Routing rationale | Gates 1, 3, 4 PASS; Gate 2 PASS WITH REVIEW (provenance available but date-source precedence unresolved because no single article was sampled in both RSS and HTML); configuration category (`PATTERN_TYPE_METADATA`, `financial_regulator` class) appears applicable |
 | Confidence | MEDIUM |
 | Confidence basis | HIGH = direct evidence from documented Gate 5 test; MEDIUM = screening + partial or retrospective evidence; LOW = inference or unresolved condition. This record is MEDIUM because it is based on pre-screening (Gate 1-4 only) without Gate 5 confirmation. |
 
@@ -175,8 +181,9 @@ These are Gate 5 questions. Pre-screening separates **applicability** (does the 
 | HTTP 200 on RSS feed | `https://www.bafin.de/EN/service/rss/_function/RSS_Presse.xml?nn=187494` (probed 2026-08-15) | Gate 1 PASS — RSS feed accessible, returns valid RSS 2.0 XML (15 KB, 20 items) |
 | HTTP 200 on RSS feeds listing | `https://www.bafin.de/EN/service/rss/rss_node_en.html` (probed 2026-08-15) | Gate 1 PASS — 4 RSS feed URLs advertised on official listing page |
 | HTTP 200 on sample press release | `https://www.bafin.de/SharedDocs/Veroeffentlichungen/EN/Pressemitteilung/2026/pm_2026_07_29_ki_verordnung_en.html?nn=161524` (probed 2026-08-15) | Gate 3 PASS — static HTML contains full article content (65 KB) |
-| RSS `<pubDate>` element | `Thu, 13 Aug 2026 14:02:00 +0200` in sample item | Gate 2 PASS — RFC 822 publication date with timezone (+0200 CEST) |
-| Article HTML visible date | `29/07/2026 | Press release` in `<span class="c-topline__element">` | Gate 2 PASS — visible publication date with content type label (German DD/MM/YYYY format) |
+| RSS `<pubDate>` element | `Thu, 13 Aug 2026 14:02:00 +0200` in RSS item 1 ("capitalx(.)market" consumer warning) | Gate 2 — RFC 822 publication date with timezone (+0200 CEST); observed on RSS item 1 |
+| Article HTML visible date | `29/07/2026 | Press release` in `<span class="c-topline__element">` on sampled article ("Market surveillance of AI") | Gate 2 — visible publication date with content type label (German DD/MM/YYYY); observed on a DIFFERENT article than the RSS `<pubDate>` sample |
+| Date-source comparability gap | RSS `<pubDate>` (Aug 13) and article HTML visible date (29/07/2026) are from different articles | Gate 2 PASS WITH REVIEW — date-source precedence unresolved; no single article was sampled in both RSS and HTML |
 | Article body content (4,546 chars) | Static HTML main content area | Gate 3 PASS — substantive content in static HTML (Government Site Builder CMS server-rendered) |
 | RSS `<description>` with article summaries | Article summary text in RSS `<description>` elements | Gate 3 PASS — content summaries available in RSS feed |
 | Pattern category match | US SEC (`146aa3b`), US CFTC (`b4fabe9`), SFC Hong Kong (this batch), JFSA Japan (this batch) | Gate 4 PASS — direct analogs exist in same class and same provenance pattern |
@@ -184,6 +191,10 @@ These are Gate 5 questions. Pre-screening separates **applicability** (does the 
 ### What this evidence does NOT prove
 
 - Does NOT prove that a Gate 5 first-attempt run will succeed (sample too small, per Governance Rule 10)
+- Does NOT prove that the pipeline's configurable extractor will handle BaFin without source-specific code (Gate 4 confirms pattern category applicability only; actual onboarding effort is a Gate 5 question)
+- Does NOT prove coverage breadth (only the press releases RSS feed was sampled in depth; BaFin has 3 additional feeds — supervisory announcements, measures, news — that may require different pattern categories or configurations)
+- Does NOT resolve whether all 4 RSS feeds share the same structure (the press releases feed uses RSS 2.0 with `<pubDate>`; other feeds were not inspected)
+- Does NOT resolve which date source (RSS `<pubDate>` or article HTML visible date) should be used as the official `document_date` — the two date sources were observed on different articles and cannot be directly compared; this requires qualification-phase review
 - Does NOT prove that the pipeline's configurable extractor will handle BaFin without source-specific code (Gate 4 confirms pattern category applicability only; actual onboarding effort is a Gate 5 question)
 - Does NOT prove coverage breadth (only the press releases RSS feed was sampled in depth; BaFin has 3 additional feeds — supervisory announcements, measures, news — that may require different pattern categories or configurations)
 - Does NOT resolve whether all 4 RSS feeds share the same structure (the press releases feed uses RSS 2.0 with `<pubDate>`; other feeds were not inspected)
@@ -233,11 +244,14 @@ RSS feeds discovered (4 total):
   3. /EN/service/rss/_function/RSS_Massnahmen.xml (Measures)
   4. /EN/service/rss/_function/rssnewsfeed.xml (News feed)
 
-Provenance detected (sample press release):
-- RSS <pubDate>: Thu, 13 Aug 2026 14:02:00 +0200 (RFC 822 with CEST timezone)
-- Article HTML visible date: <span class="c-topline__element">29/07/2026 | Press release</span>
+Provenance detected:
+- RSS <pubDate> (RSS item 1, "capitalx(.)market" consumer warning): Thu, 13 Aug 2026 14:02:00 +0200 (RFC 822 with CEST timezone)
+- Article HTML visible date (sampled article, "Market surveillance of AI" press release): <span class="c-topline__element">29/07/2026 | Press release</span>
   (German DD/MM/YYYY format with content type label)
-- Both sources reference the publication date
+- NOTE: These two dates are from DIFFERENT articles. The RSS <pubDate> (Aug 13) is for
+  the "capitalx(.)market" consumer warning; the article HTML date (29/07/2026) is for the
+  "Market surveillance of AI" press release. They cannot be directly compared.
+- Date-source precedence UNRESOLVED — no single article was sampled in both RSS and HTML
 
 Article body: 4,546 chars of substantive content (Government Site Builder CMS, server-rendered)
 ```

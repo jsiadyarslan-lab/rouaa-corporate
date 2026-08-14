@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: IN PROGRESS — Source #1 (PBoC) complete; sources #2-#20 pending methodology review
+**Status**: ALL 20 SOURCES PRE-SCREENED — semantic review required before qualification/Gate 5
 **Queue baseline**: Global Qualification Queue v1 (`92b6c4f` — FROZEN)
 **Template**: Source Qualification Report Template v1 (`f5caf57`)
 **Type**: Pre-screening execution — NOT onboarding, NOT Gate 5, NOT configuration, NOT Contract, NOT website change.
@@ -117,9 +117,9 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 | 13 | Bank of Mexico | MX | T2 | Central Bank | UNRESOLVED | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | SCREENING_ONLY (unresolved access path) | MEDIUM | `SQR_BANK_OF_MEXICO_PRESCREENING.md` |
 | 14 | South African Reserve Bank | ZA | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_SARB_PRESCREENING.md` |
 | 15 | MAS (Singapore) | SG | T2 | Central Bank/Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_MAS_SINGAPORE_PRESCREENING.md` |
-| 16 | SFC (Hong Kong) | HK | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_SFC_HONG_KONG_PRESCREENING.md` |
+| 16 | SFC (Hong Kong) | HK | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY (content-scope: high-shareholding announcements only; broader SFC news coverage unverified/JS-rendered) | MEDIUM | `SQR_SFC_HONG_KONG_PRESCREENING.md` |
 | 17 | JFSA (Japan) | JP | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_JFSA_JAPAN_PRESCREENING.md` |
-| 18 | BaFin | DE | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BAFIN_PRESCREENING.md` |
+| 18 | BaFin | DE | T2 | Financial Regulator | PASS | PASS WITH REVIEW | PASS | PASS | QUALIFICATION_READY (provenance date precedence review) | MEDIUM | `SQR_BAFIN_PRESCREENING.md` |
 | 19 | AMF (France) | FR | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_AMF_FRANCE_PRESCREENING.md` |
 | 20 | ASIC (Australia) | AU | T2 | Financial Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_ASIC_AUSTRALIA_PRESCREENING.md` |
 
@@ -147,19 +147,20 @@ After Source #1 (PBoC), the methodology was paused for user review and corrected
 ## Final Summary — Top 20 Pre-Screening Complete
 
 **Date**: 2026-08-15
-**Status**: ALL 20 SOURCES PRE-SCREENED — awaiting user review before qualification/Gate 5
+**Status**: ALL 20 SOURCES PRE-SCREENED — semantic review required before qualification/Gate 5
 
 ### Cumulative results
 
 | Routing | Count | Sources |
 |---------|-------|---------|
-| **QUALIFICATION_READY** | **14** | PBoC* (T1), US Treasury (T1), Bundesbank, Banca d'Italia, Danmarks Nationalbank, Bank of Korea, RBI, SARB, MAS Singapore, SFC Hong Kong, JFSA Japan, BaFin, AMF France, ASIC Australia |
+| **QUALIFICATION_READY** (no qualifier) | **11** | US Treasury (T1), Bundesbank, Banca d'Italia, Danmarks Nationalbank, Bank of Korea, RBI, SARB, MAS Singapore, JFSA Japan, AMF France, ASIC Australia |
+| **QUALIFICATION_READY** (with provenance date precedence review qualifier) | **2** | PBoC (URL timestamp vs. PubDate conflict), BaFin (RSS pubDate vs. article HTML visible date on different articles — precedence unresolved) |
+| **QUALIFICATION_READY** (with content-scope qualifier) | **1** | SFC Hong Kong (high-shareholding announcements only; broader SFC news coverage on apps.sfc.hk is JS-rendered and remains unverified) |
 | **SCREENING_ONLY** (newly transitioned from DISCOVERY_ONLY) | **3** | Banco de España (TCP timeout), BCB (Angular SPA — JS-rendered), Bank of Mexico (legacy subdomain 403) |
 | **KNOWN_BLOCKED** (newly transitioned from DISCOVERY_ONLY) | **3** | BLS (Akamai 403), Banque de France (Akamai 403), DNB (Akamai 403) |
-| **PASS WITH REVIEW** (Gate 2 qualifier) | **1** | PBoC (provenance date precedence review — URL timestamp vs. PubDate conflict) |
 | **TOTAL** | **20** | All Top 20 sources pre-screened |
 
-*PBoC has routing qualifier: PROVENANCE DATE PRECEDENCE REVIEW
+**Note on qualifiers**: `PASS WITH REVIEW` is NOT a separate routing classification — it is a Gate 2 qualifier that annotates a QUALIFICATION_READY routing. Sources with `PASS WITH REVIEW` are still classified as QUALIFICATION_READY; the qualifier flags an unresolved item requiring review during qualification (Gate 5). The 3 QUALIFICATION_READY sources with qualifiers (PBoC, BaFin, SFC) are included in the total of 14 QUALIFICATION_READY sources.
 
 ### By institutional class
 
@@ -172,7 +173,7 @@ After Source #1 (PBoC), the methodology was paused for user review and corrected
 
 ### Key findings across all 20 sources
 
-1. **Akamai blocking is systemic** — 4 sources blocked by AkamaiGHost (BLS, Banque de France, DNB, + IMF/OECD/RBA already in Queue v1). HTTP 403 from Akamai = confirmed source-level block → KNOWN_BLOCKED.
+1. **Akamai blocking observed in 3 of the 20 Top-20 pre-screened sources** — BLS, Banque de France, and DNB returned HTTP 403 from AkamaiGHost across all probed paths and subdomains. Additional Akamai-blocked cases exist in prior evidence outside the Top 20 (IMF, RBA in Queue v1 SCREENING_ONLY). HTTP 403 from Akamai = confirmed source-level block → KNOWN_BLOCKED. No global prevalence claim is made.
 
 2. **Angular/JS-rendered content is a methodology boundary** — 2 sources (BCB, UK ONS precedent) have content accessible at Gate 1 (HTTP 200) but static HTML is empty SPA shell → SCREENING_ONLY (not KNOWN_BLOCKED; not QUALIFICATION_READY).
 
@@ -181,18 +182,18 @@ After Source #1 (PBoC), the methodology was paused for user review and corrected
 4. **RSS feeds are the strongest access pattern** — 6 sources have RSS feeds (Bundesbank 5 feeds, RBI 6 feeds, SARB 1 feed, BaFin 4 feeds, AMF 11 feeds, + SNB/BEA/ECB in ALREADY_QUALIFIED). RSS with `<pubDate>`/`<dc:date>` provides clean provenance.
 
 5. **Publication date patterns are diverse** — observed patterns include:
-   - RSS `<pubDate>` (RFC 822) + article HTML visible date (RBI, SARB, BaFin, AMF)
-   - RSS `<pubDate>` + RSS `<dc:date>` (Bundesbank)
-   - Drupal `field-news-publication-date` + `<time>` element (US Treasury)
-   - `article:published_time` meta + `<time>` element (Danmarks Nationalbank)
-   - `dcterms.date.created` meta + `displayDate` meta (ASIC)
+   - RSS `<pubDate>` (RFC 822) + article HTML visible date for the SAME article (RBI, SARB, AMF — all agreed)
+   - RSS `<pubDate>` + RSS `<dc:date>` for the SAME item (Bundesbank — agreed)
+   - Drupal `field-news-publication-date` + `<time>` element (US Treasury — agreed)
+   - `article:published_time` meta + `<time>` element (Danmarks Nationalbank — agreed)
+   - `dcterms.date.created` meta + `displayDate` meta (ASIC — agreed)
    - Single authoritative publication date field (Banca d'Italia `bdi-titlepagev2-date`, Bank of Korea `<dd class="date">`, MAS `<span>Published Date>`)
-   - URL date pattern + article HTML visible date (JFSA)
-   - Conflicting date sources (PBoC — URL timestamp + createDate vs. PubDate)
+   - URL date pattern + article HTML visible date (JFSA — agreed)
+   - RSS `<pubDate>` + article HTML visible date on DIFFERENT articles — precedence unresolved (PBoC, BaFin)
 
 6. **Update metadata correctly excluded** — across all 20 sources, `modified`/`updated`/`Last Modified Date`/`dcterms.date.modified` meta tags were consistently classified as update metadata only, NOT counted as publication date evidence per Batch 3 established rule.
 
-7. **Financial regulators (Batch 5) achieved 5/5 QUALIFICATION_READY** — all 5 financial regulators passed Gates 1-4 without exception. This contrasts with central banks (Batch 2-4) where 3 were Akamai-blocked, 2 had access path issues, and 1 had JS-rendered content.
+7. **Financial regulators (Batch 5) achieved 5/5 QUALIFICATION_READY** — all 5 financial regulators passed Gates 1-4 (BaFin with Gate 2 PASS WITH REVIEW qualifier). This contrasts with central banks (Batches 2-4) where 3 were Akamai-blocked, 2 had access path issues, and 1 had JS-rendered content.
 
 ### Methodology fidelity
 
@@ -203,13 +204,14 @@ After Source #1 (PBoC), the methodology was paused for user review and corrected
   - Publication date: authoritative publication-date fields only; modified/updated excluded
   - Timeout / path-level access: SCREENING_ONLY unless source-level block confirmed
   - Gate 4: applicability only; no engineering prediction
+- ✅ Date-source conflict rule applied: when authoritative date sources disagree OR are observed on different articles (preventing comparison), Gate 2 = PASS WITH REVIEW with routing qualifier
 
 ### Queue state impact
 
 Pre-screening records do NOT modify the Queue v1 FROZEN baseline (`92b6c4f`). Queue state transitions will be applied as a separate documentation commit AFTER the user reviews all 20 pre-screening records and approves the methodology.
 
 Proposed queue state transitions (pending user approval):
-- DISCOVERY_ONLY → QUALIFICATION_READY: 14 sources
+- DISCOVERY_ONLY → QUALIFICATION_READY: 14 sources (11 without qualifier, 2 with provenance review qualifier, 1 with content-scope qualifier)
 - DISCOVERY_ONLY → SCREENING_ONLY: 3 sources (Banco de España, BCB, Bank of Mexico)
 - DISCOVERY_ONLY → KNOWN_BLOCKED: 3 sources (BLS, Banque de France, DNB)
 
@@ -222,11 +224,11 @@ After transitions, the Queue v1 counts would update:
 
 ### Next steps (pending user review)
 
-1. **User reviews all 20 pre-screening records** — assess methodology fidelity, routing decisions, and evidence quality
+1. **User reviews all 20 pre-screening records as a complete set** — assess methodology fidelity, routing decisions, qualifier assignments, and evidence quality
 2. **If approved**: apply queue state transitions as a separate commit (Queue v1.1 or Queue v2)
-3. **Qualification phase (Gate 5)**: for QUALIFICATION_READY sources, proceed with first-attempt validation using the Source Qualification Report Template v1 (`f5caf57`) — NOT started until user explicitly directs
+3. **Qualification phase (Gate 5)**: for QUALIFICATION_READY sources, proceed with first-attempt validation using the Source Qualification Report Template v1 (`f5caf57`) — NOT started until user explicitly directs which sources enter Gate 5 first
 
-**Per user directive: do NOT start qualification/Gate 5 before reviewing all 20 pre-screening records.**
+**Per user directive: do NOT start qualification/Gate 5 before reviewing all 20 pre-screening records as a complete set.**
 
 ---
 

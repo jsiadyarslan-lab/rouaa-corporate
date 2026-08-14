@@ -178,8 +178,8 @@ These are Gate 5 questions. Pre-screening separates **applicability** (does the 
 |-------|-------|
 | Earliest blocking gate | none (Gates 1-4 all PASS for high-shareholding announcements content type) |
 | Initial routing | **QUALIFICATION_READY** |
-| Routing qualifier | None — single content type assessed with unambiguous publication dates |
-| Routing rationale | All Gates 1-4 PASS for the high-shareholding announcements content type; authoritative publication dates present in static HTML table; configuration category (`PATTERN_TYPE_METADATA`, `financial_regulator` class) appears applicable with analogs in US SEC and US CFTC |
+| Routing qualifier | **CONTENT-SCOPE QUALIFIER — high-shareholding announcements only; broader SFC news coverage (apps.sfc.hk) remains unverified because it is JS-rendered** |
+| Routing rationale | All Gates 1-4 PASS for the high-shareholding announcements content type ONLY; authoritative publication dates present in static HTML table; configuration category (`PATTERN_TYPE_METADATA`, `financial_regulator` class) appears applicable with analogs in US SEC and US CFTC. **The SFC news application (apps.sfc.hk) is a React SPA with empty static HTML shell — its content, provenance structure, and publication date metadata were NOT verified in this pre-screening because JavaScript execution is outside the pre-screening methodology scope.** The QUALIFICATION_READY routing applies to the tested content path (high-shareholding announcements on www.sfc.hk) only; broader SFC news coverage remains unverified and requires qualification-phase investigation with JavaScript execution capability (e.g., Playwright) to assess. |
 | Confidence | MEDIUM |
 | Confidence basis | HIGH = direct evidence from documented Gate 5 test; MEDIUM = screening + partial or retrospective evidence; LOW = inference or unresolved condition. This record is MEDIUM because it is based on pre-screening (Gate 1-4 only) without Gate 5 confirmation, and because only one content type was fully assessed. |
 
@@ -278,6 +278,6 @@ Provenance detected (high-shareholding announcements):
 | Gate 4 (Configuration applicability) | PASS | Configuration category (`PATTERN_TYPE_METADATA`, `financial_regulator` class) appears applicable; analogs in US SEC, US CFTC. Gate 5 required to determine actual onboarding effort |
 | Gate 5 (First-attempt validation) | NOT ATTEMPTED | Per pre-screening scope |
 | **Initial routing** | **QUALIFICATION_READY** | All Gates 1-4 PASS for high-shareholding announcements content type |
-| **Routing qualifier** | None | Single content type assessed with unambiguous publication dates |
+| **Routing qualifier** | **CONTENT-SCOPE QUALIFIER — high-shareholding announcements only; broader SFC news coverage (apps.sfc.hk) remains unverified because it is JS-rendered** | QUALIFICATION_READY applies to the tested content path only; broader SFC news coverage requires qualification-phase investigation with JavaScript execution capability |
 | **Confidence** | MEDIUM | Based on pre-screening evidence; only one content type fully assessed |
 | **Priority retained** | Yes | Top 20 rank #16 unchanged |
