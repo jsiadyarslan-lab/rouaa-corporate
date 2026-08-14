@@ -112,11 +112,11 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 | 8 | De Nederlandsche Bank | NL | T2 | Central Bank | FAIL | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | KNOWN_BLOCKED | HIGH | `SQR_DNB_PRESCREENING.md` |
 | 9 | Danmarks Nationalbank | DK | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_DANMARKS_NATIONALBANK_PRESCREENING.md` |
 | 10 | Bank of Korea | KR | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_BANK_OF_KOREA_PRESCREENING.md` |
-| 11 | Reserve Bank of India | IN | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 12 | Banco Central do Brasil | BR | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 13 | Bank of Mexico | MX | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 14 | South African Reserve Bank | ZA | T2 | Central Bank | — | — | — | — | PENDING | — | — |
-| 15 | MAS (Singapore) | SG | T2 | Central Bank/Regulator | — | — | — | — | PENDING | — | — |
+| 11 | Reserve Bank of India | IN | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_RBI_PRESCREENING.md` |
+| 12 | Banco Central do Brasil | BR | T2 | Central Bank | PASS | NOT ASSESSED | FAIL | NOT ASSESSED | SCREENING_ONLY (JS-rendered content) | MEDIUM | `SQR_BCB_PRESCREENING.md` |
+| 13 | Bank of Mexico | MX | T2 | Central Bank | UNRESOLVED | NOT ATTEMPTED | NOT ATTEMPTED | NOT ASSESSED | SCREENING_ONLY (unresolved access path) | MEDIUM | `SQR_BANK_OF_MEXICO_PRESCREENING.md` |
+| 14 | South African Reserve Bank | ZA | T2 | Central Bank | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_SARB_PRESCREENING.md` |
+| 15 | MAS (Singapore) | SG | T2 | Central Bank/Regulator | PASS | PASS | PASS | PASS | QUALIFICATION_READY | MEDIUM | `SQR_MAS_SINGAPORE_PRESCREENING.md` |
 | 16 | SFC (Hong Kong) | HK | T2 | Financial Regulator | — | — | — | — | PENDING | — | — |
 | 17 | JFSA (Japan) | JP | T2 | Financial Regulator | — | — | — | — | PENDING | — | — |
 | 18 | BaFin | DE | T2 | Financial Regulator | — | — | — | — | PENDING | — | — |
@@ -132,8 +132,8 @@ All pre-screening records are MEDIUM confidence by default. HIGH confidence requ
 | Batch 1 (Source #1: PBoC) | 1 | COMPLETE — methodology corrected (`d3910da`); user-approved corrected methodology |
 | Batch 2 (Sources #2-#5: BLS, US Treasury, Bundesbank, Banque de France) | 4 | COMPLETE — 2 QUALIFICATION_READY (US Treasury, Bundesbank), 2 KNOWN_BLOCKED (BLS, Banque de France) |
 | Batch 3 (Sources #6-#10: Banca d'Italia, Banco de España, DNB, Danmarks Nationalbank, Bank of Korea) | 5 | COMPLETE — 3 QUALIFICATION_READY (Banca d'Italia, Danmarks Nationalbank, Bank of Korea), 1 KNOWN_BLOCKED (DNB), 1 SCREENING_ONLY (Banco de España — unresolved access path) |
-| Batch 4 (Sources #11-#15) | 5 | NOT STARTED — awaiting user review of Batch 3 |
-| Batch 5 (Sources #16-#20) | 5 | NOT STARTED |
+| Batch 4 (Sources #11-#15: RBI, BCB, Bank of Mexico, SARB, MAS Singapore) | 5 | COMPLETE — 3 QUALIFICATION_READY (RBI, SARB, MAS Singapore), 2 SCREENING_ONLY (BCB — JS-rendered content, Bank of Mexico — unresolved access path) |
+| Batch 5 (Sources #16-#20) | 5 | NOT STARTED — awaiting user review of Batch 4 |
 
 ---
 
