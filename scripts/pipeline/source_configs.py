@@ -538,10 +538,24 @@ GATE5_SOURCES_LIST = {
         # Pre-screening found press release URLs like /news/press-releases/sb0604
         "link_pattern": r"/news/press-releases/[a-z0-9]+",
         "link_pattern_prefix": "https://home.treasury.gov",
-        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        # Pre-screening found content types: press releases, sanctions (OFAC), fiscal data
+        # Minimum valid patterns derived from pre-screening evidence:
+        # - Treasury publishes sanctions designations (similar to OFAC, already in config)
+        # - Treasury publishes fiscal data with dollar amounts
         "rate_patterns": [],
-        "event_type": "press_release",
-        "content_keywords": [],
+        "regulatory_patterns": [
+            # Sanctions designations (similar to OFAC patterns)
+            (r"SDN\s+List\s*:\s*([A-Z][A-Za-z\s,'\"\-\.]{3,80}?),\s*([A-Z][a-z]+)", "designated_entity"),
+            (r"\[([A-Z][A-Z0-9\-]{2,40})\]", "sanctions_program"),
+            (r"(?:added\s+to|removed\s+from|designated\s+pursuant\s+to)", "action_type"),
+            # Dollar amounts (fiscal data, penalties)
+            (r"(?:agreed\s+to\s+pay|pay|settle|settled\s+for|ordered\s+to\s+pay|penalty\s+of)\s+(?:approximately\s+)?\$([\d,]+(?:\.\d+)?)\s+(million|billion)", "penalty_amount"),
+            (r"\$([\d,]+(?:\.\d+)?)\s+(million|billion)\s+(?:penalty|settlement|fine)", "penalty_amount"),
+            # General fiscal amounts
+            (r"(?:USD|US\$|\$)\s*([\d,]+(?:\.\d+)?)\s+(trillion|billion|million)", "usd_amount"),
+        ],
+        "event_type": "regulatory_publication",
+        "content_keywords": ["Treasury", "Secretary", "sanctions", "fiscal", "economic", "OFAC"],
     },
 
     "BUNDESBANK": {
@@ -554,10 +568,19 @@ GATE5_SOURCES_LIST = {
         "websiteUrl": "https://www.bundesbank.de/en/",
         # Pre-screening found: 5 RSS feeds; "Latest" feed at /service/rss/en/633306/feed.rss
         "feedUrl": "https://www.bundesbank.de/service/rss/en/633306/feed.rss",
-        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        # Pre-screening found content types: federal securities auctions, press releases
+        # Minimum valid patterns derived from pre-screening evidence:
+        # - Bundesbank publishes securities auction announcements with Euro amounts
         "rate_patterns": [],
-        "event_type": "press_release",
-        "content_keywords": [],
+        "statistical_patterns": [
+            (r"(?:EUR|€)\s*([\d,]+(?:\.\d+)?)\s+(billion|million)", "eur_amount"),
+            (r"([\d,]+(?:\.\d+)?)\s+(billion|million)\s+(?:EUR|€|euros?)", "eur_amount"),
+            (r"Federal\s+(?:bond|Treasury|securities?)\s+(?:discount\s+paper|bill|bond)", "securities_type"),
+            (r"(?:auction|bid|tender)\s+(?:amount|volume)\s+(?:of\s+)?(?:EUR\s*)?€?\s*([\d,]+(?:\.\d+)?)", "auction_amount"),
+            (r"(?:yield|interest\s+rate|coupon)\s+(?:of\s+|at\s+)?(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "yield_value"),
+        ],
+        "event_type": "securities_auction",
+        "content_keywords": ["auction", "Federal", "securities", "bond", "Bubills", "Bundesbank"],
     },
 
     "BANCA_D_ITALIA": {
@@ -574,10 +597,24 @@ GATE5_SOURCES_LIST = {
         # Pre-screening found PDF links like /media/comunicati/documenti/2026-02/cs-13.08.2026-sup-BOT.pdf
         "link_pattern": r"/media/comunicati/documenti/[^\"']+\.pdf",
         "link_pattern_prefix": "https://www.bancaditalia.it",
-        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        # Pre-screening found content types: BOT/BTP auctions, monetary policy, statistics
+        # Minimum valid patterns derived from pre-screening evidence:
+        # - Italian Treasury securities auctions (BOT, BTP, CCTeu)
+        # - Euro amounts for auction results
         "rate_patterns": [],
-        "event_type": "press_release",
-        "content_keywords": [],
+        "statistical_patterns": [
+            # Euro amounts
+            (r"(?:EUR|€)\s*([\d,]+(?:\.\d+)?)\s+(billion|million)", "eur_amount"),
+            (r"([\d,]+(?:\.\d+)?)\s+(billion|million)\s+(?:EUR|€|euros?)", "eur_amount"),
+            # Italian securities types
+            (r"\b(BOT|BTP|CCTeu|CTZ)\b", "securities_type"),
+            # Auction amounts
+            (r"(?:auction|asta|amount|importo)\s+(?:of\s+|di\s+)?(?:EUR\s*)?€?\s*([\d,]+(?:\.\d+)?)", "auction_amount"),
+            # Yield/interest rate
+            (r"(?:yield|rendimento|interest\s+rate|tasso)\s+(?:of\s+|at\s+|di\s+)?(\d+(?:[.,]\d+)?)\s*(?:percent|%|pct)", "yield_value"),
+        ],
+        "event_type": "securities_auction",
+        "content_keywords": ["BOT", "BTP", "CCTeu", "auction", "asta", "Treasury"],
     },
 
     "RBI": {
@@ -590,10 +627,37 @@ GATE5_SOURCES_LIST = {
         "websiteUrl": "https://www.rbi.org.in/",
         # Pre-screening found: 6 RSS feeds; press releases at rbi.org.in/pressreleases_rss.xml
         "feedUrl": "https://rbi.org.in/pressreleases_rss.xml",
-        # Gate 4 found "candidate applicability" only — no specific pattern category forced
-        "rate_patterns": [],
-        "event_type": "press_release",
-        "content_keywords": [],
+        # Pre-screening found content types: monetary policy (repo, VRRR), securities auctions, SGB
+        # Minimum valid patterns derived from pre-screening evidence:
+        # - RBI uses "repo rate", "reverse repo rate", "MSF" as policy rates
+        # - VRRR auction amounts in ₹ Crore
+        # - SGB (Sovereign Gold Bond) redemption prices in ₹
+        "rate_patterns": [
+            # Repo rate
+            (r"repo\s+rate\s+(?:at|to|of)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
+            (r"(?:maintained|kept|held|hold)\s+(?:the\s+)?repo\s+rate\s+at", "rate_maintain"),
+            (r"(?:revised|changed|adjusted)\s+(?:the\s+)?repo\s+rate", "rate_action"),
+            # Reverse repo rate
+            (r"reverse\s+repo\s+rate\s+(?:at|to|of)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
+            (r"(?:maintained|kept|held|hold)\s+(?:the\s+)?reverse\s+repo\s+rate", "rate_maintain"),
+            # Marginal Standing Facility (MSF)
+            (r"MSF\s+(?:rate\s+)?(?:at|to|of)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
+            # VRRR / monetary policy operations
+            (r"(?:VRRR|Variable\s+Rate\s+Reverse\s+Repo)\s+auction", "monetary_operation"),
+            # Policy rate decisions
+            (r"(?:decided\s+to\s+|has\s+)(maintain|keep|raise|cut|lower|increase|reduce)\s+(?:the\s+)?(?:repo|policy)\s+rate", "rate_action"),
+        ],
+        "statistical_patterns": [
+            # Rupee amounts (₹ X Crore)
+            (r"₹\s*([\d,]+(?:\.\d+)?)\s*(?:crore|Crore|crores)", "inr_amount_crore"),
+            (r"([\d,]+(?:\.\d+)?)\s*(?:crore|Crore|crores)\s*(?:₹|Rs\.?)", "inr_amount_crore"),
+            # Gold Bond redemption price
+            (r"(?:redemption\s+price|price)\s+(?:of\s+|shall\s+be\s+)?₹\s*([\d,]+(?:\.\d+)?)", "redemption_price"),
+            # Notified amount
+            (r"(?:Notified\s+Amount|notified\s+amount)\s*(?:\(₹\s*crore\))?\s*[:\s]*([\d,]+)", "notified_amount"),
+        ],
+        "event_type": "monetary_policy_operation",
+        "content_keywords": ["repo", "reverse repo", "VRRR", "auction", "rate", "Gold Bond", "RBI", "crore"],
     },
 
     "BAFIN": {
@@ -606,14 +670,27 @@ GATE5_SOURCES_LIST = {
         "websiteUrl": "https://www.bafin.de/EN/home_node_en.html",
         # Pre-screening found: 4 RSS feeds; press releases at /EN/service/rss/_function/RSS_Presse.xml
         "feedUrl": "https://www.bafin.de/EN/service/rss/_function/RSS_Presse.xml?nn=187494",
-        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        # Pre-screening found content types: consumer warnings, enforcement, supervisory announcements
+        # Minimum valid patterns derived from pre-screening evidence:
+        # - BaFin warns about unauthorized financial services (similar to SEC/FCA)
+        # - Entity/website names in warnings
+        # - Violation types (unauthorized services, identity fraud)
         # NOTE: BaFin has PROVENANCE DATE PRECEDENCE REVIEW qualifier from pre-screening
-        # (RSS pubDate and article HTML visible date were on different articles)
         # Per user constraint: do NOT manually resolve provenance ambiguity during Gate 5.
-        # Let the current path go through as-is; if intervention is needed, that's the evidence.
         "rate_patterns": [],
-        "event_type": "press_release",
-        "content_keywords": [],
+        "regulatory_patterns": [
+            # Unauthorized entity/website names
+            (r"(?:website|domain|platform)\s+([a-z0-9\.\(\)]+(?:\.[a-z]{2,}))", "entity_name"),
+            (r"(?:Bafin|BaFin)\s+(?:warns|suspects)\s+(?:consumers?\s+about\s+)?(?:the\s+)?(?:unknown\s+operators?\s+of\s+)?offering", "action_type"),
+            (r"without\s+(?:the\s+)?required\s+authorisation", "violation_type"),
+            (r"(?:financial|investment|cryptoasset)\s+services?\s+without\s+(?:the\s+)?required\s+authorisation", "violation_type"),
+            # Penalty amounts (if any)
+            (r"(?:fine[ds]?|penalty|sanction\w*)\s+(?:of\s+)?(?:€|EUR\s)?([\d,]+(?:\.\d+)?)\s*(?:million|billion|m|bn)", "penalty_amount"),
+            # Entity types
+            (r"(?:identity\s+fraud|identity\s+theft|unauthorized|unauthorised)", "violation_type"),
+        ],
+        "event_type": "regulatory_warning",
+        "content_keywords": ["Bafin", "warns", "consumers", "unauthorized", "authorisation", "website", "fraud"],
     },
 
 }
