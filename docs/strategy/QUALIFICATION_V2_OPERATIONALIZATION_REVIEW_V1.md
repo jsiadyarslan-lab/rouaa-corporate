@@ -188,7 +188,8 @@ v2 additional questions:
 7. Do the matching metrics semantically represent the source's intelligence? (Semantic Representation)
 ```
 
-If all 7 = YES → QUALIFICATION_READY (v2) → proceed to Gate 5.
+If all 7 pass (with semantic = COMPATIBLE or INCONCLUSIVE) → QUALIFICATION_READY (v2) → proceed to Gate 5.
+If semantic = INCONCLUSIVE → QUALIFICATION_READY WITH SEMANTIC REVIEW (proceed to Gate 5, but root-cause review investigates semantic representation if Gate 5 fails).
 
 If 5 = NO → CONTENT-PATH REVIEW (find the correct path or reclassify).
 
@@ -257,7 +258,7 @@ ALREADY_QUALIFIED / CONTENT-PATH REVIEW / ENGINEERING REVIEW / NOT CURRENTLY SUP
 
 | Aspect | Value |
 |--------|-------|
-| Minimum evidence | 1-3 sampled documents from the selected path verified to contain the expected intelligence type (e.g., "this RSS feed contains consumer warnings, not rate decisions") |
+| Minimum evidence | Sample enough representative documents from the selected source path to establish content-path alignment; default target = up to 3 documents when available. The standard is representativeness, not a fixed count — some RSS feeds may provide multiple document types, while other sources may offer only one suitable sample. |
 | Confidence level | MEDIUM (sampled, not exhaustive) |
 | What it proves | The selected source path leads to the content type the patterns are designed for |
 | What it does NOT prove | That extraction will produce facts, or that the event model can represent the intelligence |
