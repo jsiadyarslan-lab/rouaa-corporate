@@ -580,6 +580,42 @@ GATE5_SOURCES_LIST = {
         "content_keywords": [],
     },
 
+    "RBI": {
+        "code": "RBI",
+        "name": "Reserve Bank of India",
+        "type": "central_bank",
+        "country": "IN",
+        "jurisdiction": "India",
+        "trustTier": 1,
+        "websiteUrl": "https://www.rbi.org.in/",
+        # Pre-screening found: 6 RSS feeds; press releases at rbi.org.in/pressreleases_rss.xml
+        "feedUrl": "https://rbi.org.in/pressreleases_rss.xml",
+        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        "rate_patterns": [],
+        "event_type": "press_release",
+        "content_keywords": [],
+    },
+
+    "BAFIN": {
+        "code": "BAFIN",
+        "name": "Federal Financial Supervisory Authority (BaFin)",
+        "type": "financial_regulator",
+        "country": "DE",
+        "jurisdiction": "Germany",
+        "trustTier": 1,
+        "websiteUrl": "https://www.bafin.de/EN/home_node_en.html",
+        # Pre-screening found: 4 RSS feeds; press releases at /EN/service/rss/_function/RSS_Presse.xml
+        "feedUrl": "https://www.bafin.de/EN/service/rss/_function/RSS_Presse.xml?nn=187494",
+        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        # NOTE: BaFin has PROVENANCE DATE PRECEDENCE REVIEW qualifier from pre-screening
+        # (RSS pubDate and article HTML visible date were on different articles)
+        # Per user constraint: do NOT manually resolve provenance ambiguity during Gate 5.
+        # Let the current path go through as-is; if intervention is needed, that's the evidence.
+        "rate_patterns": [],
+        "event_type": "press_release",
+        "content_keywords": [],
+    },
+
 }
 
 # Combine all sources
