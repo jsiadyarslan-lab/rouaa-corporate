@@ -554,7 +554,7 @@ GATE5_SOURCES_LIST = {
             # General fiscal amounts
             (r"(?:USD|US\$|\$)\s*([\d,]+(?:\.\d+)?)\s+(trillion|billion|million)", "usd_amount"),
         ],
-        "event_type": "regulatory_publication",
+        "event_type": "sanctions_designation",
         "content_keywords": ["Treasury", "Secretary", "sanctions", "fiscal", "economic", "OFAC"],
     },
 
@@ -656,7 +656,7 @@ GATE5_SOURCES_LIST = {
             # Notified amount
             (r"(?:Notified\s+Amount|notified\s+amount)\s*(?:\(₹\s*crore\))?\s*[:\s]*([\d,]+)", "notified_amount"),
         ],
-        "event_type": "monetary_policy_operation",
+        "event_type": "monetary_policy_decision",
         "content_keywords": ["repo", "reverse repo", "VRRR", "auction", "rate", "Gold Bond", "RBI", "crore"],
     },
 
@@ -689,7 +689,7 @@ GATE5_SOURCES_LIST = {
             # Entity types
             (r"(?:identity\s+fraud|identity\s+theft|unauthorized|unauthorised)", "violation_type"),
         ],
-        "event_type": "regulatory_warning",
+        "event_type": "regulatory_enforcement",
         "content_keywords": ["Bafin", "warns", "consumers", "unauthorized", "authorisation", "website", "fraud"],
     },
 
