@@ -121,22 +121,27 @@ The specific source path selected for extraction (RSS feed URL, HTML index page,
 
 #### CONFIGURATION-COMPATIBLE (new in v2)
 
-The source configuration (event_type + pattern metrics) has been verified against the pipeline contract:
+The source configuration (event_type + pattern metrics) has been verified against the pipeline contract at two levels:
+
+**Contract compatibility** (static, checkable before any pipeline run):
 1. `event_type` is a supported detector event type (exists in `EVENT_TYPE_RULES`)
 2. At least one pattern's normalized metric is in the event_type's `trigger_metrics`
 3. Content keywords (if any) are compatible with the adapter's document-title behavior
 
-**Assessment**: Static verification — check pattern types against `PATTERN_TYPE_METADATA` and `EVENT_TYPE_RULES`. No pipeline run needed.
+**Semantic representation assessment** (requires judgment, not just set intersection):
+4. The matching metrics **semantically represent** the source's intelligence type — i.e., the metric's meaning in the pipeline's event model corresponds to the actual meaning of the extracted fact in the source's content
 
-**What this proves**: The configuration is contract-compatible — the detector will find triggering facts if extraction produces any.
+**Assessment**: Contract compatibility (steps 1-3) is a static verification — check pattern types against `PATTERN_TYPE_METADATA` and `EVENT_TYPE_RULES`. No pipeline run needed. Semantic representation assessment (step 4) requires human judgment: does the metric-to-trigger intersection represent a genuine semantic fit, or merely a syntactic overlap?
 
-**What this does NOT prove**: That extraction will actually produce facts (content-path alignment is a prerequisite), or that the event model semantically represents the source's intelligence type.
+**What this proves**: The configuration is contract-compatible — the detector will find triggering facts if extraction produces any. Combined with semantic assessment, this provides reasonable confidence that the configuration is meaningful.
+
+**What this does NOT prove**: That extraction will actually produce facts (content-path alignment is a prerequisite). That contract compatibility alone guarantees semantic correctness — a metric may be in `trigger_metrics` without semantically representing the source's content (e.g., `eur_amount` is not in any trigger set, but even if it were added, calling EUR-denominated securities auction amounts `usd_amount` would be semantically incorrect).
 
 **Evidence from Gate 5**:
-- BaFin: configuration-compatible ✅ (event_type=regulatory_enforcement, metrics match triggers)
-- US Treasury: configuration-compatible ✅ (event_type=sanctions_designation, metrics match triggers — but content-path not aligned)
-- RBI: configuration-compatible ✅ (event_type=monetary_policy_decision, metrics match triggers via normalization — but content-path not aligned)
-- Bundesbank: configuration-NOT-compatible ❌ (eur_amount, securities_type, auction_amount, yield_value not in any trigger_metrics)
+- BaFin: configuration-compatible ✅ (event_type=regulatory_enforcement, metrics match triggers, semantic fit: consumer warnings → regulatory enforcement is a natural representation)
+- US Treasury: configuration-compatible ✅ (event_type=sanctions_designation, metrics match triggers, semantic fit: sanctions patterns → sanctions event type — but content-path not aligned)
+- RBI: configuration-compatible ✅ (event_type=monetary_policy_decision, metrics match triggers via normalization, semantic fit: rate patterns → rate decision event type — but content-path not aligned)
+- Bundesbank: configuration-NOT-compatible ❌ (eur_amount, securities_type, auction_amount, yield_value not in any trigger_metrics — AND no existing metric semantically fits without distortion)
 - Banca d'Italia: configuration-NOT-compatible ❌ (same metrics as Bundesbank)
 
 #### QUALIFICATION_READY (v2 redefined)
@@ -146,7 +151,7 @@ A source is QUALIFICATION_READY (v2) when ALL THREE conditions are met:
 2. CONTENT-PATH ALIGNED (selected path contains the assumed intelligence type)
 3. CONFIGURATION-COMPATIBLE (event_type + metrics match pipeline contract)
 
-**What this means commercially**: The source is ready for a Gate 5 first-attempt validation with a high probability of producing publishable IOs, assuming no semantic quality issues.
+**What this means commercially**: The source is ready for Gate 5 first-attempt validation with pre-Gate-5 compatibility checks completed. No probability of success is claimed — Gate 5 may still fail due to content-path mismatch discovered at runtime, semantic quality issues, or other unknown factors.
 
 **What this does NOT guarantee**: Gate 5 PASS (quality issues may still prevent publication), or that no engineering will be needed (unknown until Gate 5 is attempted).
 
@@ -250,12 +255,16 @@ GATE 5 (First attempt)
 | Banque de France | central_bank | `4443553` — Top 20 pre-screening | Access blocked (Akamai 403) |
 | DNB | central_bank | `4443553` — Top 20 pre-screening | Access blocked (Akamai 403) |
 
-### QUALIFIED ENGINEERING — demonstrated (new in v2)
+### QUALIFIED ENGINEERING — evidence-supported routing (new in v2)
 
-| Source | Class | Evidence | Engineering type |
-|--------|-------|----------|-----------------|
-| Bundesbank | central_bank | `bd7285d` — Gate 5 config contract verification | Event-model extension (EUR amounts, securities auction metrics) |
-| Banca d'Italia | central_bank | `bd7285d` — Gate 5 config contract verification | Event-model extension + HTML index keyword behavior |
+These sources have been routed to Engineering Review based on evidence that the current configuration/pipeline cannot represent their intelligence type through config-only onboarding. **No engineering work package has been executed for these sources** — the evidence proves the need for review, not the size or type of the engineering package.
+
+| Source | Class | Evidence | Routing reason |
+|--------|-------|----------|---------------|
+| Bundesbank | central_bank | `bd7285d` — Gate 5 config contract verification | Event-model representation gap: EUR amounts and securities auction metrics have no semantically compatible trigger in any existing event type |
+| Banca d'Italia | central_bank | `bd7285d` — Gate 5 config contract verification | Event-model representation gap (same as Bundesbank) + HTML index keyword behavior boundary |
+
+**Important**: The routing is evidence-supported, not engineering-demonstrated. The evidence proves that config-only onboarding cannot succeed for these sources with the current event model. The solution (new event types, new trigger metrics, or different metric usage) is a product/architecture decision that has not been made.
 
 ### CONTENT-PATH REVIEW — demonstrated (new classification path in v2)
 
@@ -284,7 +293,7 @@ GATE 5 (First attempt)
 
 > "ROUA supports all official sources." — Not tested; not claimed.
 
-> "Onboarding is always configuration-only." — Bundesbank and Banca d'Italia require event-model extension.
+> "Onboarding is always configuration-only." — Bundesbank and Banca d'Italia have been routed to Engineering Review (evidence-supported, not executed).
 
 > "X% of sources can be onboarded automatically." — Sample too small; no success rate claimed.
 
@@ -310,7 +319,7 @@ This is stronger than v1 because it reflects what Gate 5 testing actually proved
 | QUALIFICATION_READY | Output of Gates 1-4 | Output of Gates 1-4 + content-path + config compatibility |
 | Gate 5 failures | All routed to root-cause review | Separated into content-path mismatch, config incompatibility, and other root causes |
 | Event-model representation | Not assessed | Separate assessment (not a gate, but a classification input) |
-| QUALIFIED ENGINEERING | Theoretical (0 examples) | Demonstrated (2 examples: Bundesbank, Banca d'Italia) |
+| QUALIFIED ENGINEERING | Theoretical (0 examples) | Evidence-supported routing (2 examples: Bundesbank, Banca d'Italia — routed, not executed) |
 | STANDARD | 3 examples (BEA, SNB, CFTC) | 4 examples (BEA, SNB, CFTC, BaFin) |
 | Commercial promise | "Pre-screen and tell you if it's ready" | "Qualify the source path, content type, provenance, extraction applicability, and configuration compatibility before committing" |
 
@@ -332,19 +341,23 @@ This is stronger than v1 because it reflects what Gate 5 testing actually proved
 
 ## 9. Implementation Note
 
-This is a **design document**, not an implementation. The v2 model describes how qualification should work based on Gate 5 evidence. It does NOT:
+**This is a DESIGN ONLY document — NOT OPERATIONALIZED.**
+
+The v2 model describes how qualification should work based on Gate 5 evidence. It does NOT:
 - Modify the pipeline
 - Add new gates
 - Change the Queue
 - Create new config files
 - Modify existing configs
+- Update the Source Qualification Report Template
+- Update the pre-screening methodology
 
-The v2 model will be **operationalized** when:
+The v2 model will be **operationalized** when (each step requires separate user approval):
 1. The Source Qualification Report Template is updated to v2 (adding content-path alignment and configuration compatibility sections)
 2. The pre-screening methodology is updated to include content-path verification
 3. The configuration contract verification (static check of event_type + trigger_metrics) becomes a standard pre-Gate-5 step
 
-These operationalization steps are **not authorized by this document** — they require separate user approval.
+**No operationalization is authorized by this document.**
 
 ---
 
