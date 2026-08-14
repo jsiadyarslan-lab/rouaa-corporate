@@ -512,8 +512,43 @@ PHASE_B_SOURCES_LIST = {
     },
 }
 
-# Combine Phase A and Phase B sources (Phase A retained for regression)
+# ============================================================================
+# Gate 5 Validation Sources — Representative Sample of 5
+# Base: Queue V1.1 (001d349)
+# Purpose: Test whether QUALIFICATION_READY from Gates 1-4 predicts Gate 5
+# Constraint: Minimum configuration based on pre-screening findings only.
+#             No pattern category forced in advance.
+#             No source-specific code.
+#             No remediation within the same source attempt.
+# ============================================================================
+
+GATE5_SOURCES_LIST = {
+
+    "US_TREASURY": {
+        "code": "US_TREASURY",
+        "name": "US Department of the Treasury",
+        "type": "ministry_of_finance",
+        "country": "US",
+        "jurisdiction": "United States",
+        "trustTier": 1,
+        "websiteUrl": "https://home.treasury.gov",
+        # Pre-screening found: no RSS feed; HTML index at /news/press-releases
+        "feedUrl": "https://home.treasury.gov/news/press-releases",
+        "feed_format": "html_index",
+        # Pre-screening found press release URLs like /news/press-releases/sb0604
+        "link_pattern": r"/news/press-releases/[a-z0-9]+",
+        "link_pattern_prefix": "https://home.treasury.gov",
+        # Gate 4 found "candidate applicability" only — no specific pattern category forced
+        "rate_patterns": [],
+        "event_type": "press_release",
+        "content_keywords": [],
+    },
+
+}
+
+# Combine all sources
 SOURCES.update(PHASE_B_SOURCES_LIST)
+SOURCES.update(GATE5_SOURCES_LIST)
 
 # Source codes for Phase A (regression set)
 PHASE_A_SOURCES = ["ECB", "BOE", "FED", "BOC", "RBA"]
