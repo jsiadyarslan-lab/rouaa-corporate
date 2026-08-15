@@ -2,9 +2,10 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: V1 — CORRECTED DRAFT FOR RATIFICATION (corrected per user review of `bc8c12c`)
+**Status**: V1 — FROZEN (design constraints ratified by user)
 **Type**: Design constraint document — NOT the framework. Does NOT modify any frozen artifact.
 **Purpose**: Establish the mandatory design rules that must govern the Capability Investment Decision Framework before that framework is built.
+**Freeze directive**: Per user CONDITIONAL RATIFICATION of `da123d4` with one final correction applied (Evidence Confidence → derived reporting field, NOT an independent evidence dimension). The 6 constraints are now FROZEN and ready to govern the framework build.
 
 ---
 
@@ -43,9 +44,12 @@ The framework MUST separate four layers explicitly. No layer may be collapsed in
 
 ```text
 Evidence Layer
-├── Evidence Strength
+├── Evidence Strength Profile
 ├── Evidence Coverage
 └── Evidence Diversity
+
+Derived reporting (NOT an independent dimension, NOT an investment-weighting input):
+└── Evidence Confidence
 
 Decision Layer
 ├── Strategic Value
@@ -69,6 +73,8 @@ Decision Readiness
 ```
 
 ### 3.1 Evidence Layer
+
+The Evidence Layer contains THREE independent dimensions: Evidence Strength Profile, Evidence Coverage, Evidence Diversity. Evidence Confidence is NOT a fourth dimension — it is a derived reporting field (Section 3.1.4).
 
 #### 3.1.1 Evidence Strength / State (per-case, qualitative)
 
@@ -127,6 +133,34 @@ Provenance:
     Level 3 (HIGH-CONFIDENCE VALIDATED): 1 (SNB)
     Total confirmed cases:              3
     Highest evidence state observed:    HIGH-CONFIDENCE VALIDATED (descriptive only)
+```
+
+#### 3.1.4 Evidence Confidence (derived reporting field — NOT an independent dimension)
+
+**CRITICAL RULE — Evidence Confidence is a derived reporting summary of the evidence profile, NOT an independent decision input and NOT an additional evidence dimension.**
+
+Evidence Confidence is computed FROM the Evidence Strength Profile (Section 3.1.1). It is a human-readable summary of the distribution — for example, "High (1 HIGH-CONFIDENCE VALIDATED + 2 OBSERVED)" or "High for existence (4 VALIDATED cases)".
+
+**Evidence Confidence MUST NOT**:
+- Be treated as an independent evidence dimension (it is derived from Evidence Strength Profile).
+- Be used as an investment-weighting input (Decision Readiness is derived from Evidence Profile + Coverage + Diversity — NOT from a separate Confidence weight).
+- Re-weight the evidence a second time (the Evidence Profile already captures the distribution; Confidence merely summarizes it).
+
+**Why this rule exists**: If Evidence Confidence were treated as an independent dimension, the framework would risk re-introducing the overlap problem we are trying to prevent. Confidence is meaningfully derived from Strength Profile — treating it as independent would double-count the same evidence under two names.
+
+**Evidence Confidence scale** (derived, descriptive): `High` / `Medium` / `Low` — based on the Evidence Strength Profile distribution. The derivation rule is NOT numerically fixed (per Open Design Gap — Decision-Readiness Calibration, Section 9); the user assigns the descriptive label based on the profile.
+
+**Example**:
+```text
+Provenance:
+  Evidence Strength Profile:
+    Level 0 (HYPOTHESIS):              0
+    Level 1 (OBSERVED):                2 (ESMA, BaFin)
+    Level 2 (VALIDATED):               0
+    Level 3 (HIGH-CONFIDENCE VALIDATED): 1 (SNB)
+  Evidence Confidence (derived): High
+    — because 1 case at HIGH-CONFIDENCE VALIDATED + 2 at OBSERVED
+      provides strong evidence for the boundary, even with only 3 cases
 ```
 
 #### 3.1.2 Evidence Coverage (capability-level, knowledge-boundary)
@@ -334,30 +368,39 @@ Each confirmed case is represented by a (Evidence Strength, Resolution Status) t
 
 ---
 
-## 4. Mandatory Design Constraint #2 — Confidence ≠ Coverage ≠ Diversity
+## 4. Mandatory Design Constraint #2 — Confidence is Derived; Coverage and Diversity are Independent
 
-The framework MUST NOT use a single field called `confidence` that hides the distinction between Evidence Confidence, Evidence Coverage, and Evidence Diversity.
+The framework MUST NOT treat Evidence Confidence as an independent dimension co-equal with Evidence Coverage and Evidence Diversity.
 
-**Mandatory separation**:
+**Mandatory structure**:
 
-| Field | What it measures | Scale |
-|-------|------------------|-------|
-| `Evidence Confidence` | How strong is the evidence for the cases we have? (Based on Evidence Strength distribution.) | High / Medium / Low |
-| `Evidence Coverage` | How much do we know vs. what is unknown? (Based on Coverage fields — NOT a percentage.) | Limited / Moderate / Wide / UNKNOWN |
-| `Evidence Diversity` | How broad is the evidence base? (Based on Diversity fields.) | Narrow / Moderate / Broad |
-| `Decision Readiness` | What decision level does the evidence support? | See Section 6 |
+| Field | Type | What it measures | Scale |
+|-------|------|------------------|-------|
+| `Evidence Strength Profile` | Independent dimension (per-case) | Distribution of cases across epistemic strength levels | 4-level scale (Section 3.1.1) |
+| `Evidence Coverage` | Independent dimension (capability-level) | How much do we know vs. what is unknown? | Limited / Moderate / Wide / UNKNOWN (NOT a percentage) |
+| `Evidence Diversity` | Independent dimension (capability-level) | How broad is the evidence base? | Narrow / Moderate / Broad |
+| `Evidence Confidence` | **Derived reporting field** (NOT a dimension) | Summary of the Evidence Strength Profile | High / Medium / Low (derived, descriptive only) |
+| `Decision Readiness` | Output (per Section 6) | What decision level does the evidence support? | 5-level ladder (Section 6) |
+
+**CRITICAL RULE**:
+
+> **Evidence Confidence is a derived reporting summary of the evidence profile, not an independent decision input and not an additional evidence dimension.**
+
+Decision Readiness is derived from **Evidence Profile + Coverage + Diversity** — NOT from a separate Confidence weight that re-weights the evidence a second time.
 
 **Example (formalized per user directive)**:
 
-| Capability | Evidence Confidence | Evidence Coverage | Evidence Diversity | Decision Readiness |
-|------------|---------------------|-------------------|-------------------|-------------------|
-| Provenance | High (SNB HIGH-CONFIDENCE VALIDATED) | Limited | Moderate | Evidence-supported |
-| Content-Path | High | Moderate | Moderate | Evidence-supported |
-| Pattern Specificity | High for FED_ENF only | Very limited | Narrow | Partial |
-| Browser Rendering | High for existence | Very limited | Broad | Investment candidate |
-| Language | High for confirmed gaps | Very limited | Broad | Investment candidate |
-| Event-Model | High for 3 confirmed gaps | Limited | Moderate | Investment candidate |
-| Configuration Contract Compatibility | High | Moderate | Moderate | Evidence-supported |
+| Capability | Evidence Strength Profile | Evidence Confidence (derived) | Evidence Coverage | Evidence Diversity | Decision Readiness |
+|------------|---------------------------|------------------------------|-------------------|-------------------|-------------------|
+| Provenance | 1 HIGH-CONFIDENCE VALIDATED + 2 OBSERVED | High (derived) | Limited | Moderate | Evidence-supported |
+| Content-Path | 7 VALIDATED + 1 OBSERVED | High (derived) | Moderate | Moderate | Evidence-supported |
+| Pattern Specificity | 1 VALIDATED + 1 HYPOTHESIS | High for FED_ENF only (derived) | Very limited | Narrow | Partial |
+| Browser Rendering | 4 VALIDATED | High for existence (derived) | Very limited | Broad | Investment candidate |
+| Language | 7 OBSERVED | High for confirmed gaps (derived) | Very limited | Broad | Investment candidate |
+| Event-Model | 3 VALIDATED + 4 OBSERVED | High for 3 confirmed gaps (derived) | Limited | Moderate | Investment candidate |
+| Configuration Contract Compatibility | 7 VALIDATED | High (derived) | Moderate | Moderate | Evidence-supported |
+
+Note: Evidence Confidence in this table is **derived from the Strength Profile** — it is NOT a separate weighting. The Decision Readiness column is derived from **Evidence Profile + Coverage + Diversity** (plus Decision Layer inputs per Section 3.2), NOT from Confidence as an independent weight.
 
 ---
 
@@ -482,11 +525,12 @@ This Open Design Gap is **intentionally left unresolved**. It is better to have 
 ## 11. What This Document DOES Do
 
 - Establishes 6 mandatory design constraints that the Capability Investment Decision Framework MUST satisfy.
-- Prevents the framework from repeating the quantitative survey's methodological errors (case-count weighting, coverage-as-prevalence, conflating epistemic strength with resolution state).
+- Prevents the framework from repeating the quantitative survey's methodological errors (case-count weighting, coverage-as-prevalence, conflating epistemic strength with resolution state, treating derived confidence as an independent weight).
 - Separates the framework into 4 layers: Evidence Layer / Decision Layer / Resolution Layer / Decision Readiness.
 - Separates Evidence Strength (epistemic) from Resolution Status (status-of-the-issue) as independent axes.
 - Replaces the misleading "MAX Evidence Strength" aggregate with Evidence Profile / Distribution.
 - Adds Evidence Diversity as a separate field (breadth-of-evidence, independent of case count).
+- **Classifies Evidence Confidence as a derived reporting field — NOT an independent evidence dimension, NOT an investment-weighting input.**
 - Renames Capability 7 consistently to `Configuration Contract Compatibility`.
 - Replaces the direct `BUILD NOW` jump with a 5-level decision ladder.
 - Establishes that Coverage is a knowledge-boundary (NOT a prevalence percentage).
@@ -498,62 +542,53 @@ This Open Design Gap is **intentionally left unresolved**. It is better to have 
 
 ## 12. Next Step (Per User Directive)
 
-This document is a **design constraint**, not the framework. The next step — ONLY after user ratification of these constraints — is to build the **Capability Investment Decision Framework** that satisfies these 6 constraints.
+This document is a **design constraint**, now FROZEN. The user has ratified the 6 constraints and authorized building the **Capability Investment Decision Framework v1** in accordance with these constraints.
 
 The framework will:
 1. Take the Capability Evidence Registry V1 (FROZEN) as evidence input.
 2. Take the Global Source Universe V1 as scope input.
 3. Take the Commercial Model as strategic input.
 4. Apply the 6 mandatory design constraints from this document.
-5. Produce per-capability Evidence Profile + Resolution Profile + Coverage + Diversity + Decision Layer + Decision Readiness assignment.
+5. Produce per-capability Evidence Profile + Resolution Profile + Coverage + Diversity + Decision Layer + Decision Readiness assignment (with Evidence Confidence as a derived reporting field, NOT an input).
 6. NOT make automatic BUILD NOW decisions — the user makes the final manual decision per capability.
-
-**The framework is NOT authorized yet.** This document only establishes the constraints. The user must ratify these constraints AND authorize building the framework in a separate directive.
+7. NOT establish decision-readiness thresholds (Open Design Gap — Section 9).
 
 ---
 
 ## 13. Document Status
 
-**CAPABILITY_INVESTMENT_FRAMEWORK_DESIGN_CONSTRAINTS_V1 — CORRECTED DRAFT FOR RATIFICATION.**
+**CAPABILITY_INVESTMENT_FRAMEWORK_DESIGN_CONSTRAINTS_V1 — FROZEN (design constraints ratified by user).**
 
-Per user review of `bc8c12c` (NOT YET RATIFIED), three mandatory corrections have been applied:
+Per user CONDITIONAL RATIFICATION of `da123d4` with one final correction applied:
 
-1. **Evidence Strength separated from Resolution Status**: Removed the 0-4 scale that combined epistemic strength with resolution state. Established two independent axes:
-   - **Evidence Strength** (epistemic): HYPOTHESIS → OBSERVED → VALIDATED → HIGH-CONFIDENCE VALIDATED
-   - **Resolution Status** (status-of-the-issue): UNTESTED → CONFIG-ONLY REMEDIATION VALIDATED → ENGINEERING REQUIRED → ENGINEERING REMEDIATION VALIDATED
+**Evidence Confidence reclassified as derived reporting field — NOT an independent evidence dimension, NOT an investment-weighting input.**
 
-2. **Removed "MAX Evidence Strength" aggregate**: Replaced with Evidence Profile / Distribution (per-case (Evidence, Resolution) tuples). The "Highest evidence state observed" field is descriptive only, NOT an aggregate strength.
+> **Evidence Confidence is a derived reporting summary of the evidence profile, not an independent decision input and not an additional evidence dimension.**
 
-3. **Renamed Capability 7 consistently to `Configuration Contract Compatibility`**: The artifact is `Configuration Contract`; the capability is `Configuration Contract Compatibility`. BaFin's remediation evidence is attributed to this capability.
+This prevents the framework from re-introducing the overlap problem: Confidence is meaningfully derived from the Strength Profile, so treating it as an independent dimension would double-count the same evidence under two names. Decision Readiness is derived from **Evidence Profile + Coverage + Diversity** (plus Decision Layer inputs), NOT from a separate Confidence weight.
 
-Plus one addition:
+**Cumulative corrections across the document's evolution**:
+1. Evidence Strength separated from Resolution Status (per `da123d4`)
+2. Removed MAX aggregate; replaced with Evidence Profile / Distribution (per `da123d4`)
+3. Renamed Capability 7 to `Configuration Contract Compatibility` consistently (per `da123d4`)
+4. Added Evidence Diversity as a separate field (per `da123d4`)
+5. Documented Decision-Readiness Calibration as Open Design Gap (per `da123d4`)
+6. **Evidence Confidence reclassified as derived reporting field, NOT an independent dimension (this commit)**
 
-4. **Added Evidence Diversity as a separate field**: 3 cases from 3 countries and 2 institutional classes is broader evidence than 3 cases from 1 institution — NOT because of higher prevalence, but because of breadth of evidence. Diversity is independent of Coverage.
-
-Plus one explicit Open Design Gap:
-
-5. **Decision-Readiness Calibration documented as unresolved**: No fixed number of cases, coverage band, geography count, or institutional-class count is currently authorized as a transition threshold. Thresholds will be designed in a later calibration step after sufficient decision evidence exists.
-
-**Cumulative constraints (6 total)**:
+**6 ratified mandatory design constraints**:
 1. Four-layer separation (Evidence Layer / Decision Layer / Resolution Layer / Decision Readiness)
-2. Confidence ≠ Coverage ≠ Diversity
+2. Confidence is derived; Coverage and Diversity are independent (NOT Confidence as a co-equal dimension)
 3. Capability naming consistency (`Configuration Contract Compatibility`)
 4. Decision Readiness ladder (NOT direct BUILD NOW)
 5. No prevalence inference
 6. Remediation attribution
 
-This document now correctly separates epistemic strength from resolution state, prevents case-count weighting, prevents coverage-as-prevalence, and documents the unresolved Decision-Readiness Calibration as an explicit Open Design Gap.
+**Explicitly ratified Open Design Gap**:
+- Decision-Readiness Calibration — thresholds not yet established; no numerical transition rules authorized.
 
-The user is asked to:
-1. Ratify the 6 mandatory design constraints (Sections 3-8).
-2. Confirm the 4-layer structure (Section 3).
-3. Confirm the Evidence Strength scale (Section 3.1.1) and Resolution Status scale (Section 3.3) as independent axes.
-4. Confirm the Evidence Profile / Distribution replacement for "MAX Evidence Strength" (Section 3.1.1).
-5. Confirm the Evidence Diversity field (Section 3.1.3).
-6. Confirm Capability 7 naming as `Configuration Contract Compatibility` (Section 5).
-7. Confirm the 5-level decision ladder (Section 6).
-8. Confirm the Open Design Gap — Decision-Readiness Calibration (Section 9).
-9. Authorize (or not) building the Capability Investment Decision Framework that satisfies these constraints.
+**Final status: Capability Investment Framework — Design Constraints V1 — FROZEN.**
+
+The 6 constraints are now FROZEN and ready to govern the framework build. The user has authorized building the **Capability Investment Decision Framework v1** in accordance with these constraints.
 
 ---
 
@@ -564,9 +599,11 @@ The user is asked to:
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Status | CORRECTED DRAFT FOR RATIFICATION |
+| Status | FROZEN (design constraints ratified by user) |
 | Base | Capability Evidence Registry V1 (FROZEN at `dd66cc1`) |
 | Type | Design constraint document — NOT the framework |
-| Corrections applied | 3 mandatory (Evidence Strength ≠ Resolution Status; removed MAX aggregate; renamed Cap 7) + 1 addition (Evidence Diversity) + 1 Open Design Gap (Decision-Readiness Calibration) |
+| Evolution | `bc8c12c` (initial draft) → `da123d4` (corrected: Evidence ≠ Resolution; removed MAX; renamed Cap 7; added Diversity; Open Design Gap) → this commit (frozen: Evidence Confidence reclassified as derived reporting field) |
+| Ratified constraints | 6 (Four-layer separation; Confidence is derived; Configuration Contract Compatibility naming; Decision ladder; No prevalence inference; Remediation attribution) |
+| Ratified Open Design Gap | Decision-Readiness Calibration (no numerical thresholds authorized) |
 | Does NOT modify | Capability Evidence Registry V1, Capability Gap Portfolio V1, Capability Survey Results V1/V1.1, Survey Protocols V1/V1.1, Queue V1/V1.1, v2 Qualification framework, pipeline/config, Contract, Commercial Model, website |
-| Next step (per user directive) | NOT a direct BUILD NOW decision. Build a Capability Investment Decision Framework that satisfies these 6 constraints — but only after user ratification of these constraints. |
+| Next step (per user directive) | Build Capability Investment Decision Framework v1 in accordance with these FROZEN constraints. |
