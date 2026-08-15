@@ -192,28 +192,24 @@ Capability
 
 **Affected source cases**: FED_ENF (resolved config-only), ABS (untested hypothesis).
 
-**Current capability**: NO capability exists to detect content-regex specificity gaps before Gate 5. v2 pre-screening does NOT inspect actual content phrasing — it only checks that pattern categories exist and metrics match trigger_metrics.
+**Current capability**: Pattern authoring is an operational onboarding capability. The v2 framework treats content-regex specificity as a Gate 5 root-cause category — pattern refinement is performed at the source-configuration level (`source_configs.py`), not at the platform level. There is NO pre-Gate-5 stage that detects phrasing mismatches (by design — pattern execution readiness is a Gate 5 concern, not a pre-screening concern).
 
-**Observed boundary**: Content-regex specificity is the gap between "category-level applicability" (Gate 4 + Configuration Contract) and "pattern-level execution readiness" (Gate 5). Pre-screening proved category applicability; Gate 5 proved the patterns didn't match the actual phrasing. This boundary is NOT covered by any v2 stage.
+**Observed boundary**: Content-regex specificity is the gap between "category-level applicability" (Gate 4 + Configuration Contract) and "pattern-level execution readiness" (Gate 5). Pre-screening proved category applicability; Gate 5 proved the patterns didn't match the actual phrasing. This boundary is NOT covered by any v2 stage — and per the v2 design, it should NOT be. Pattern execution readiness is a Gate 5 root-cause category.
 
-**Reuse potential**: MEDIUM. Content-regex specificity gaps are common (every source has its own phrasing) but each is resolvable through per-source pattern adjustment (config-only). The capability needed is not "build a new pipeline module" — it is "establish a pattern-authoring discipline / tooling that detects phrasing mismatches before Gate 5."
+**Reuse potential**: MEDIUM per source (each source has its own phrasing), but the remediation pattern is reusable — the Phase B diagnostic script written for FED_ENF can be reused as a pre-flight tool for any future source. This is an **operational authoring capability**, not a platform engineering capability.
 
 **Institutional value**: MEDIUM. Reduces remediation cycles but doesn't change the product boundary.
 
-**Engineering implication**: LOW-MEDIUM. Two possible directions:
-1. **Pattern-authoring tooling**: a diagnostic that samples source content, runs candidate patterns against it, and predicts pattern-match rate before Gate 5. (The Phase B diagnostic written for FED_ENF already proves this approach works.)
-2. **Per-source pattern library**: a curated set of patterns per event_type with multiple phrasings (US-style, EU-style, AU-style, etc.) that can be selected per source.
+**Engineering implication**: NONE for platform engineering. This is a source-configuration authoring capability. The Phase B diagnostic script (already in the repo) can serve as the seed for any future pre-flight tooling — but that is utility-script work, not core pipeline work.
 
-Both are additive — they don't require core pipeline changes. Could be implemented as utility scripts (no fetcher/extractor/detector changes).
+**Confidence**: HIGH. FED_ENF proved config-only remediation works. ABS remains an untested hypothesis but the remediation pattern (refine patterns, re-run Gate 5) is well-established.
 
-**Confidence**: HIGH that the capability gap exists (FED_ENF proved it). MEDIUM on the right solution (tooling vs library).
-
-**Decision**: **ENGINEERING CANDIDATE — Track for future engineering prioritization.** Evidence supports the gap (FED_ENF: config-only remediation confirmed; ABS: untested hypothesis). Building pattern-authoring tooling or a per-source pattern library would reduce remediation cycles. BUT strategic value depends on how many future sources hit this gap — sample size is 1 confirmed + 1 hypothesized. Defer BUILD NOW decision until more onboarding evidence accumulates. The Phase B diagnostic script (already in the repo) can serve as the seed for any future tooling.
+**Decision**: **Already Operational — Configuration Authoring Required.** Pattern specificity is a Gate 5 root-cause category, not a platform engineering candidate. The remediation pattern (refine `source_configs.py` patterns, re-run Gate 5) is operational and proven (FED_ENF). ABS remains an untested hypothesis — when probed, it will follow the same config-only remediation pattern. This classification prevents converting every source's phrasing differences into platform-engineering backlog items.
 
 **Sub-classification**:
-- Content-regex specificity, US-English sources: validated config-only fixable (FED_ENF). LOW priority for new capability — config-only remediation already works.
-- Content-regex specificity, non-US English phrasing (AU, UK, IN): untested (ABS hypothesis). MEDIUM priority — may benefit from a phrasing library.
-- Content-regex specificity, non-English sources: see Capability 5 (Language Coverage).
+- Content-regex specificity, US-English sources: validated config-only fixable (FED_ENF). No action needed — remediation pattern works.
+- Content-regex specificity, non-US English phrasing (AU, UK, IN): untested (ABS hypothesis). Will follow the same config-only remediation pattern when probed.
+- Content-regex specificity, non-English sources: see Capability 5 (Language Coverage) — these are a different capability because they require per-language pattern libraries, not per-source pattern adjustment.
 
 ---
 
@@ -272,7 +268,7 @@ Both are additive — they don't require rewriting the fetcher, just adding a ne
 
 **Observed boundary**: The boundary is between "source publishes in English" (covered) and "source publishes in another language" (not covered). This is invisible at pre-screening if the source has an English version (TCMB has English; INSEE has English summaries but substantive content is French).
 
-**Reuse potential**: HIGH if ROUAA's market includes non-English-speaking jurisdictions (which it does — global expansion is the strategic frame). A French pattern library would unlock INSEE + Banque de France + AMF. A German library would unlock Bundesbank + BaFin German content. A Spanish library would unlock Banco de España + BCB Portuguese-adjacent. Etc.
+**Reuse potential**: HIGH if ROUAA's market includes non-English-speaking jurisdictions (which it does — global expansion is the strategic frame). A French pattern library would unlock INSEE + Banque de France + AMF. A German library would unlock Bundesbank + BaFin German content. Language coverage should be prioritized by verified source-language inventory, not assumed regional similarity — the count of sources per language is currently hypothesized, not quantified.
 
 **Institutional value**: HIGH. Global expansion into non-English jurisdictions is core to the commercial strategy.
 
@@ -282,7 +278,7 @@ Both are additive — they don't require rewriting the fetcher, just adding a ne
 
 **Confidence**: HIGH that the gap exists (INSEE confirmed). MEDIUM on the strategic priority (depends on which jurisdictions are prioritized for global expansion).
 
-**Decision**: **ENGINEERING CANDIDATE — Evidence-Supported.** INSEE confirms the gap. Building a French pattern library would unlock INSEE + Banque de France + AMF (3 sources). Building broader multilingual coverage would unlock 7+ sources. BUT this is substantial work (linguistic + pattern authoring) and the priority depends on the global expansion sequence. Defer BUILD NOW decision until the global expansion roadmap is set. Track as Engineering Candidate with HIGH reuse potential.
+**Decision**: **ENGINEERING CANDIDATE — Evidence-Supported.** INSEE confirms the gap. Building a French pattern library would unlock INSEE + Banque de France + AMF (3 sources). Broader multilingual coverage would unlock a hypothesized set of sources — the count remains a hypothesis pending a verified source-language inventory, NOT a quantified reuse estimate. This is substantial work (linguistic + pattern authoring) and the priority depends on the global expansion sequence. Defer BUILD NOW decision until the global expansion roadmap is set AND a verified source-language inventory is completed. Track as Engineering Candidate with HIGH reuse potential (hypothesis, not yet quantified).
 
 **Sub-classification**:
 - French language coverage: 1 confirmed gap (INSEE). 3 sources likely affected (INSEE, Banque de France, AMF). HIGH priority IF EU expansion is prioritized.
@@ -347,24 +343,25 @@ No core architectural changes — the existing config-driven architecture handle
 **Evidence**:
 - BaFin: initial Gate 5 run flagged provenance ambiguity (the BaFin RSS feed had unusual `<pubDate>` formatting). Resolved in Gate 5 Re-run 2 — was a configuration issue, not a fundamental gap.
 - OCC: TCP timeout during screening — Gate 2 never reached. Not a provenance compatibility issue.
-- TCMB: dates ARE present in the static HTML (DD.MM.YYYY format) — Gate 2 PASS. But provenance compatibility for browser-rendered sources is UNTESTED (the rendered HTML may have different date metadata than the static HTML).
-- Other sources: most central banks / regulators expose `<pubDate>` in RSS or visible dates in HTML. No confirmed provenance compatibility failure in the current evidence base.
+- TCMB: dates ARE present in the static HTML (DD.MM.YYYY format) — Gate 2 PASS. Provenance compatibility for browser-rendered sources is UNTESTED (the rendered HTML may have different date metadata than the static HTML) — but this is subsumed under Capability 4 (Adapter / Browser Rendering), not a separate provenance gap.
+- ESMA: confirmed in earlier RSS/HTML testing that the source was not publishable because `document_date` was not available via the tested path. This is an actual documented provenance boundary — the source hit a real Gate 2 boundary, even though it did not escalate to an engineering requirement. This is a confirmed case, not a hypothesis.
+- Other sources: most central banks / regulators expose `<pubDate>` in RSS or visible dates in HTML.
 
-**Affected source cases**: 0 confirmed provenance compatibility failures in the current evidence base. BaFin was a configuration issue (resolved). The capability gap is HYPOTHESIZED for browser-rendered sources (TCMB-class) and for sources with non-standard date formats — but no confirmed case.
+**Affected source cases**: ESMA (confirmed provenance boundary — `document_date` not available via tested path), BaFin (resolved via configuration), plus the hypothesized browser-rendered-source case (subsumed under Capability 4).
 
-**Current capability**: Gate 2 (Provenance) is operational. The normalizer handles RSS `<pubDate>`, Atom `<published>`, RDF `<dc:date>`, and visible dates in HTML. BaFin's `<pubDate>` formatting issue was resolved by config adjustment.
+**Current capability**: Gate 2 (Provenance) is operational. The normalizer handles RSS `<pubDate>`, Atom `<published>`, RDF `<dc:date>`, and visible dates in HTML. BaFin's `<pubDate>` formatting issue was resolved by config adjustment. The ESMA case demonstrated the documented failure path: when provenance metadata is unavailable via the tested path, the source is correctly classified as not publishable — no engineering escalation, no platform change required.
 
-**Observed boundary**: The boundary is between "source exposes standard provenance metadata" (covered) and "source uses non-standard date format / dynamic date rendering / no date metadata" (not covered). No confirmed case in the current evidence base — boundary is hypothesized.
+**Observed boundary**: The boundary is between "source exposes provenance metadata via a supported format" (covered) and "source does not expose provenance metadata via the tested path" (correctly classified as not publishable). This boundary is known, documented, and operational — Gate 2 surfaces it cleanly.
 
-**Reuse potential**: LOW based on current evidence. Most sources in the Global Source Universe expose standard provenance metadata. Browser-rendered sources (TCMB-class) MIGHT have different date metadata in rendered vs static HTML — untested.
+**Reuse potential**: LOW for additional engineering. The current Gate 2 implementation correctly handles the provenance cases observed. The ESMA boundary is a routing outcome (source not publishable via this path), not an engineering gap.
 
-**Institutional value**: LOW based on current evidence. No confirmed blocked source.
+**Institutional value**: LOW for additional engineering. No confirmed case requires new provenance tooling.
 
-**Engineering implication**: UNKNOWN. No specific engineering work has been identified — the gap is hypothesized, not characterized.
+**Engineering implication**: NONE demonstrated. Gate 2 is operational. The ESMA case demonstrated the documented failure path (source not publishable via this path) — this is a routing outcome, not an engineering gap. No specific engineering work has been identified.
 
-**Confidence**: LOW. No confirmed case. The capability gap is plausible but unproven.
+**Confidence**: HIGH. The capability is operational. The known boundary (ESMA case) is documented. No engineering work is currently justified.
 
-**Decision**: **DEFER.** No confirmed provenance compatibility failure exists in the current evidence base. The capability gap is hypothesized for browser-rendered sources and for sources with non-standard date formats, but no source has actually hit this boundary. Defer classification until a confirmed case emerges. Do NOT build speculative provenance tooling.
+**Decision**: **Already Operational — Known Boundary.** Gate 2 (Provenance) is operational. The ESMA case provides a documented failure path when provenance metadata is unavailable via the tested path — the source is correctly classified as not publishable, with no engineering escalation required. There is currently no evidence justifying the creation of a new provenance engineering capability. This classification replaces the earlier `DEFER` — the boundary is not hypothetical, it is known and operational.
 
 ---
 
@@ -374,65 +371,70 @@ No core architectural changes — the existing config-driven architecture handle
 |---|------------|----------|------------|------------------|-----------------|
 | 1 | Content-Path Qualification | Already operational | HIGH | 4 mismatches caught | HIGH (universal) |
 | 2 | Configuration Contract Compatibility | Already operational | HIGH | 4 incompatibilities caught | HIGH (universal) |
-| 3 | Content-Regex Pattern Specificity | ENGINEERING CANDIDATE | HIGH (gap exists) / MEDIUM (solution) | 1 confirmed (FED_ENF) + 1 hypothesized (ABS) | MEDIUM |
+| 3 | Content-Regex Pattern Specificity | Already Operational — Configuration Authoring Required | HIGH | 1 confirmed (FED_ENF) + 1 hypothesized (ABS) | MEDIUM (per-source authoring, not platform) |
 | 4 | Adapter / Browser Rendering | ENGINEERING CANDIDATE — Evidence-Supported | HIGH (gap exists) / LOW (strategic value) | 1 confirmed (TCMB) | UNKNOWN — needs survey |
-| 5 | Language / Multilingual Coverage | ENGINEERING CANDIDATE | HIGH (gap exists) / MEDIUM (priority) | 1 confirmed (INSEE) + 7+ hypothesized | HIGH |
-| 6 | Event-Model Representation | ENGINEERING CANDIDATE | HIGH (gap exists) / MEDIUM (which types) | 3 confirmed + 1 compounded | MEDIUM-HIGH (varies by type) |
-| 7 | Provenance Metadata Compatibility | DEFER | LOW (no confirmed case) | 0 confirmed | LOW (hypothesized) |
+| 5 | Language / Multilingual Coverage | ENGINEERING CANDIDATE — Evidence-Supported | HIGH (gap exists) / MEDIUM (priority) | 1 confirmed (INSEE) + hypothesized (count unverified) | HIGH (hypothesis, not quantified) |
+| 6 | Event-Model Representation | ENGINEERING CANDIDATE — Evidence-Supported | HIGH (gap exists) / MEDIUM (which types) | 3 confirmed + 1 compounded | MEDIUM-HIGH (varies by type) |
+| 7 | Provenance Metadata Compatibility | Already Operational — Known Boundary | HIGH | 1 confirmed (ESMA — routing outcome, no engineering) | LOW (no engineering needed) |
 
 ### Engineering Candidates Registry (Evidence-Supported)
 
-The following capabilities have evidence supporting a real gap but do NOT have sufficient strategic-value evidence to justify BUILD NOW. They are tracked here as candidates for future engineering prioritization:
+Three capabilities have evidence supporting a real platform-capability gap but do NOT have sufficient strategic-value evidence to justify BUILD NOW. They are tracked here as candidates for future engineering prioritization:
 
 | Capability | Confirmed source cases | Estimated reuse | Next evidence needed |
 |------------|------------------------|-----------------|----------------------|
-| Content-Regex Pattern Specificity | FED_ENF (config-only resolved), ABS (untested) | MEDIUM | More onboarding attempts to quantify frequency |
-| Adapter / Browser Rendering | TCMB (engineering required) | UNKNOWN | Survey Global Source Universe for browser-rendering requirement |
-| Language / Multilingual Coverage | INSEE (French gap), Banca d'Italia (compounded) | HIGH (7+ sources likely) | Global expansion roadmap to prioritize jurisdictions |
-| Event-Model Representation | Bundesbank, FSB, UK HM Treasury (3 confirmed) | MEDIUM-HIGH (2-3 sources per new event type) | Global expansion roadmap + Source Universe survey |
+| Adapter / Browser Rendering | TCMB (engineering required) | UNKNOWN | Survey Global Source Universe for browser-rendering requirement (per `CAPABILITY_SURVEY_PROTOCOL_V1`) |
+| Language / Multilingual Coverage | INSEE (French gap), Banca d'Italia (compounded) | HIGH (hypothesis — count unverified) | Verified source-language inventory of Global Source Universe |
+| Event-Model Representation | Bundesbank, FSB, UK HM Treasury (3 confirmed) | MEDIUM-HIGH (2-3 sources per new event type) | Survey of uncovered intelligence types in Global Source Universe |
 
 **TCMB is NOT auto-added to the engineering backlog.** TCMB is the evidence base for the Adapter / Browser Rendering capability candidate. Whether to build that capability depends on the reuse survey — not on TCMB's institutional value alone.
+
+**Capabilities 3 (Content-Regex Specificity) and 7 (Provenance Compatibility) are NOT engineering candidates.** Capability 3 is an operational onboarding authoring capability (config-only remediation pattern proven by FED_ENF). Capability 7 is operational with a known boundary (ESMA case — routing outcome, no engineering). Neither belongs in the engineering backlog.
 
 ---
 
 ## 8. What This Portfolio Does NOT Decide
 
-- Does NOT decide BUILD NOW for any capability. All engineering candidates require the user's evaluation matrix (institutional value × reuse potential × blocked-source count × implementation risk) before promotion.
-- Does NOT modify the v2 qualification framework. Capabilities 1 and 2 are already operationalized as v2 stages — no change.
-- Does NOT recommend probing ABS. ABS appears as a hypothesized case for Capability 3 (Content-Regex Specificity) — classification remains DEFER per the user's "stop remediation" directive.
+- Does NOT decide BUILD NOW for any capability. The three engineering candidates require the user's evaluation matrix (institutional value × reuse potential × blocked-source count × implementation risk) before promotion.
+- Does NOT modify the v2 qualification framework. Capabilities 1, 2, and 7 are already operationalized as v2 stages or known boundaries — no change.
+- Does NOT recommend probing ABS. ABS appears as a hypothesized case for Capability 3 (Content-Regex Specificity) — classification remains as an untested hypothesis per the user's "stop remediation" directive.
 - Does NOT update the Commercial Model. The commercial promise stands unchanged.
 - Does NOT prioritize capabilities. The order in this document is the user's original list order, not a priority ranking.
+- Does NOT treat content-regex phrasing differences as platform engineering. Per Capability 3's revised classification: pattern specificity is an operational authoring capability, not an engineering candidate. This prevents converting every source's phrasing differences into engineering backlog items.
 
 ---
 
 ## 9. Recommended Next Actions (For User Decision)
 
-1. **Survey the Global Source Universe for browser-rendering requirement**: probe the 178 records to estimate how many sources return empty static HTML. This is the single highest-value evidence-gathering action — it converts Capability 4 from "UNKNOWN reuse" to a quantified estimate, which is the prerequisite for any BUILD NOW / CUSTOMER-SPECIFIC decision.
+1. **Author `CAPABILITY_SURVEY_PROTOCOL_V1` before any survey execution.** A defensible sampling framework must be defined BEFORE probing the 178-source Universe — not after. The survey question is not only "does this source need browser rendering?" but the broader question: is there sufficient **reuse-adjusted platform value** to justify building a general capability? The protocol must define: sampling strategy, per-capability survey questions, evidence thresholds for BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC, and the evaluation matrix application.
 
-2. **Survey the Global Source Universe for non-English primary language**: count sources by primary language. Prerequisite for prioritizing Capability 5 (Language Coverage).
+2. **Execute the three surveys per the protocol** (only after the protocol is ratified):
+   - Browser-rendering requirement survey (feeds Capability 4)
+   - Non-English primary language inventory (feeds Capability 5)
+   - Uncovered intelligence types inventory (feeds Capability 6)
 
-3. **Survey the Global Source Universe for intelligence types not covered by the 6 existing event types**: count sources producing fiscal policy, financial policy coordination, prudential supervision, etc. Prerequisite for prioritizing Capability 6 (Event-Model Representation).
+3. **No action on Capability 3 (Content-Regex Specificity) or Capability 7 (Provenance Compatibility).** Both are operational — Capability 3 has a working config-only remediation pattern (FED_ENF); Capability 7 has a known boundary (ESMA case — routing outcome). Neither requires engineering work or survey action.
 
-4. **Defer Capability 3 (Content-Regex Specificity) and Capability 7 (Provenance Compatibility) action**: Capability 3 has a working remediation pattern (FED_ENF proved config-only remediation works); Capability 7 has no confirmed case. Both can wait for more onboarding evidence.
-
-5. **Do NOT open an engineering work package for TCMB specifically.** TCMB is evidence for Capability 4 — it is not itself a work item. The work item (if approved) is "browser-rendered ingestion capability" — a platform capability that may or may not include TCMB depending on the survey results.
+4. **Do NOT open an engineering work package for TCMB specifically.** TCMB is evidence for Capability 4 — it is not itself a work item. The work item (if approved post-survey) is "browser-rendered ingestion capability" — a platform capability that may or may not include TCMB depending on the survey results.
 
 ---
 
 ## 10. Document Status
 
-**CAPABILITY_GAP_PORTFOLIO_V1 — DRAFT FOR USER RATIFICATION**
+**CAPABILITY_GAP_PORTFOLIO_V1 — CORRECTED per user review of `9e0733c`**
 
-This portfolio provides:
-- Evidence-supported gap identification for 7 capabilities
-- Preliminary classifications (2 already operational, 4 engineering candidates, 1 deferred)
-- Per-capability rationale with the structure requested by the user
-- A clear separation between **evidence-supported** (gap confirmed by a real source case) and **engineering-demonstrated** (capability built and proven)
+User review identified three corrections (applied in this version):
+1. **Capability 7 (Provenance)** reclassified from `DEFER` to `Already Operational — Known Boundary`. The ESMA case provides a documented failure path (`document_date` not available via tested path) — this is a confirmed boundary, not a hypothesis. Gate 2 is operational; no engineering work is justified.
+2. **Capability 3 (Content-Regex Specificity)** reclassified from `ENGINEERING CANDIDATE` to `Already Operational — Configuration Authoring Required`. FED_ENF proved the problem is config-only remediable. Pattern specificity is a Gate 5 root-cause category, not a platform engineering candidate. This prevents converting every source's phrasing differences into engineering backlog items.
+3. **Capability 5 (Language Coverage)** wording corrected. Removed the inaccurate "Spanish library would unlock BCB Portuguese-adjacent" claim (BCB is Brazilian/Portuguese, not Spanish-adjacent). Tightened the reuse estimate from "7+ sources" (quantified) to "hypothesis — count unverified". Language coverage should be prioritized by verified source-language inventory, not assumed regional similarity.
 
-The user is asked to ratify or override the preliminary classifications. Specifically:
-- Are the 4 ENGINEERING CANDIDATE classifications correct, or should any be promoted to BUILD NOW / downgraded to DEFER / CUSTOMER-SPECIFIC?
-- Is the DEFER classification for Capability 7 (Provenance Compatibility) correct, or is there evidence of a confirmed case I missed?
-- Should the survey actions in Section 9 be authorized as the next workstream?
+Final classification summary:
+- 4 capabilities **Already Operational** (1, 2, 3, 7) — including 2 with known boundaries (3: config authoring; 7: provenance routing)
+- 3 capabilities **ENGINEERING CANDIDATE — Evidence-Supported** (4, 5, 6)
+- 0 capabilities **BUILD NOW** (no platform engineering is currently justified)
+- 0 capabilities **DEFER** (Capability 7 promoted out of DEFER per user review)
+
+The user is asked to ratify these corrected classifications. The next step (per Section 9) is to author `CAPABILITY_SURVEY_PROTOCOL_V1` before any survey execution.
 
 ---
 
@@ -443,7 +445,7 @@ The user is asked to ratify or override the preliminary classifications. Specifi
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Base commits | `3a759cd` (Replication Batch) → `b59ab3f` (phrasing correction) → `f16bc00` (FED_ENF remediation) → `04289d2` (TCMB remediation) → `45bbd88` (TCMB phrasing corrections) |
-| Evidence base | 15 Gate 5 source cases (BaFin, Eurostat, US Treasury, RBI, Bundesbank, Banca d'Italia, OCC, SEBI, PRA, INSEE, FSB, UK HM Treasury, FED_ENF, ABS, TCMB) |
+| Base commits | `3a759cd` (Replication Batch) → `b59ab3f` (phrasing correction) → `f16bc00` (FED_ENF remediation) → `04289d2` (TCMB remediation) → `45bbd88` (TCMB phrasing corrections) → `9e0733c` (Portfolio V1 initial) → this commit (Portfolio V1 corrected) |
+| Evidence base | 16 source cases (BaFin, Eurostat, US Treasury, RBI, Bundesbank, Banca d'Italia, OCC, SEBI, PRA, INSEE, FSB, UK HM Treasury, FED_ENF, ABS, TCMB, ESMA) |
 | Methodology | v2 qualification framework (FROZEN) |
 | Does NOT modify | v2 framework, Queue V1.1, pipeline code, source_configs.py, Contract, Commercial Model, website |
