@@ -80,26 +80,30 @@ Open questions
 
 **Current status**: ALREADY OPERATIONAL — KNOWN BOUNDARY
 
-**Evidence strength**: HIGH — Gate 2 surfaces provenance boundaries cleanly. ESMA case provides a documented failure path (routing outcome, not engineering escalation). BaFin case provides a documented resolution path (configuration adjustment).
+**Evidence strength**: HIGH — Gate 2 surfaces provenance boundaries cleanly. ESMA case provides a documented failure path (routing outcome, not engineering escalation). SNB case provides a documented positive compatibility path (dc:date available, provenance complete, reproducibility verified). BaFin's RSS feed exposes `<pubDate>` (provenance metadata is available), but the remediation that resolved BaFin's Gate 5 failure was NOT a provenance fix — it was a Configuration Contract fix (event_type misconfiguration, attributed to Capability 7).
 
 **Confirmed cases**:
 
 | # | Source | State | Intelligence type | Evidence commit(s) | Observed failure/boundary | Successful remediation evidence |
 |---|--------|-------|-------------------|---------------------|---------------------------|----------------------------------|
 | 1 | ESMA | `OBSERVED` | Provenance (publish date metadata) | **Primary evidence**: `27294db` (ESMA RSS FAIL — financial_regulator, provenance gap); `8041cda` (ESMA HTML FAIL — same provenance gap, second tested path). Documented in Evidence Matrix V1 (`934feb7`). Later referenced in Survey V1 Results correction (`e2479fb`) as a confirmed boundary — but `e2479fb` is a documentation reference, NOT the primary evidence. | `document_date` not available via EITHER tested path (RSS or HTML). Source not publishable — correctly classified by Gate 2 as not publishable. No engineering escalation. | NONE — routing outcome, not engineering issue. Both tested paths failed for the same root cause. |
-| 2 | BaFin | `REMEDIATION-VALIDATED` | Provenance (RSS `<pubDate>` formatting) + Configuration Contract (`event_type` mismatch) | **Primary evidence**: Gate 5 Re-run 1 (`3bc9448`) — initial BaFin FAIL with provenance qualifier untested. **Configuration Contract Verification V1** (`bd7285d`) — established that BaFin's `event_type` was misconfigured (`regulatory_warning` instead of `regulatory_enforcement`). **Remediation commit**: Gate 5 Re-run 2 (`282de0f`) — config-only change applied: `event_type: regulatory_warning → regulatory_enforcement`. **Result**: BaFin PUBLISHABLE PASS with 9 IOs, 52 facts, 9 events. | Initial Gate 5 run flagged provenance ambiguity (unusual `<pubDate>` formatting in BaFin RSS feed). Configuration Contract Verification (`bd7285d`) revealed the actual root cause was `event_type` misconfiguration, NOT provenance format. | YES — REMEDIATION-VALIDATED as CONFIG-ONLY. The remediation in `282de0f` changed `event_type: regulatory_warning → regulatory_enforcement` in `source_configs.py` (3-line change). This was driven by the static contract verification in `bd7285d`, which established that BaFin's pattern metrics were not in the `regulatory_warning` trigger_metrics. 0 engineering intervention, 0 source-specific code. |
+| 2 | SNB (Swiss National Bank) | `VALIDATED` | Provenance (`dc:date` available, provenance complete) | **Primary evidence**: `c09de13` (Phase 2B — SNB Cross-Class Validation PASS, Onboarding + Quality). **Independent Validation Review**: `332788c` (SNB Independent Validation Review — CLEARED, 10/10 checks PASS). Documented in Evidence Matrix V3 (`7384033` — FROZEN) and Global Source Universe V1 (`8b1e7b4` — VALIDATION_VERIFIED). | NO boundary — positive compatibility case. SNB's RSS feed exposes `dc:date` metadata. The Independent Validation Review (`332788c`) explicitly confirmed: Check 5 — `document_date from dc:date (not fallback) CONFIRMED PASS`; Check 7 — `Provenance 100% + reproducibility PASS`. | N/A — positive case, no remediation needed. SNB achieved PUBLISHABLE PASS via config-only onboarding (`c09de13`). |
+| 3 | BaFin | `OBSERVED` (provenance-positive/compatibility case — remediation NOT attributed to Provenance) | Provenance (RSS `<pubDate>` formatting — observed but not the actual root cause) | **Primary evidence**: Gate 5 Re-run 1 (`3bc9448`) — initial BaFin FAIL flagged provenance ambiguity. **IMPORTANT**: The actual remediation for BaFin was NOT a provenance fix — it was a Configuration Contract fix (event_type misconfiguration). See Capability 7 for the full remediation evidence (`bd7285d` + `282de0f`). | Initial Gate 5 run flagged provenance ambiguity (unusual `<pubDate>` formatting in BaFin RSS feed). Configuration Contract Verification (`bd7285d`) later revealed this was a symptom, NOT the root cause — the actual root cause was `event_type` misconfiguration (`regulatory_warning` instead of `regulatory_enforcement`). BaFin's RSS feed DOES expose `<pubDate>` (provenance metadata is available), so BaFin is recorded here as a provenance-positive/compatibility case (the metadata exists) — but the remediation that resolved BaFin's Gate 5 failure is attributed to Capability 7 (Configuration Contract), NOT to Provenance. | NONE for provenance. The remediation in `282de0f` is attributed to Capability 7 (Configuration Contract Compatibility) — it changed `event_type: regulatory_warning → regulatory_enforcement`, NOT provenance handling. BaFin is recorded here as a provenance-positive case (its RSS feed exposes `<pubDate>`) but NOT as a provenance-remediation case. |
 
-**Source / intelligence type**: Central bank / financial regulator RSS feeds with `<pubDate>` metadata
+**Source / intelligence type**: Central bank / financial regulator RSS/Atom feeds with publish date metadata (`<pubDate>` for RSS, `dc:date` for RDF/Atom, `<published>` for Atom).
 
-**Evidence commit(s)**: ESMA — primary: `27294db`, `8041cda`; documentation: `934feb7`, `e2479fb`. BaFin — `3bc9448` (Re-run 1 FAIL), `bd7285d` (Contract Verification — root cause identified), `282de0f` (Re-run 2 remediation PASS).
+**Evidence commit(s)**: 
+- ESMA — primary: `27294db`, `8041cda`; documentation: `934feb7`, `e2479fb`.
+- SNB — primary: `c09de13` (Phase 2B PASS); independent review: `332788c` (10/10 checks CLEARED, including Check 5: `document_date from dc:date (not fallback) CONFIRMED PASS` and Check 7: `Provenance 100% + reproducibility PASS`). Documented in Evidence Matrix V3 (`7384033` — FROZEN) and Global Source Universe V1 (`8b1e7b4` — VALIDATION_VERIFIED).
+- BaFin — `3bc9448` (Re-run 1 FAIL — flagged provenance ambiguity as symptom). The actual remediation (`bd7285d` + `282de0f`) is attributed to Capability 7 (Configuration Contract), NOT to Provenance.
 
-**Observed failure/boundary**: The boundary is between "source exposes provenance metadata via a supported format" (covered by Gate 2) and "source does not expose provenance metadata via the tested path" (correctly classified as not publishable by Gate 2). This boundary is known, documented, and operational — Gate 2 surfaces it cleanly.
+**Observed failure/boundary**: The boundary is between "source exposes provenance metadata via a supported format" (covered by Gate 2 — confirmed by SNB positive case) and "source does not expose provenance metadata via the tested path" (correctly classified as not publishable by Gate 2 — confirmed by ESMA boundary case). This boundary is known, documented, and operational — Gate 2 surfaces it cleanly.
 
-**Successful remediation evidence**: BaFin — the remediation in `282de0f` was NOT a provenance-format change. The Configuration Contract Verification (`bd7285d`) revealed that BaFin's actual root cause was `event_type` misconfiguration (`regulatory_warning` instead of `regulatory_enforcement`), not `<pubDate>` formatting. The remediation commit `282de0f` changed `event_type: regulatory_warning → regulatory_enforcement` in `source_configs.py` (3-line config-only change). After this change, BaFin achieved PUBLISHABLE PASS with 9 IOs. The initial "provenance ambiguity" flagged in Re-run 1 (`3bc9448`) was a symptom; the contract verification in `bd7285d` identified the actual cause; the remediation in `282de0f` confirmed config-only resolution.
+**Successful remediation evidence**: NONE for provenance specifically. SNB is a positive compatibility case (no remediation needed — provenance metadata was available and complete). BaFin's remediation is attributed to Capability 7 (Configuration Contract), NOT to Provenance — the `event_type` misconfiguration was the root cause, not `<pubDate>` formatting.
 
-**Reuse potential**: LOW for additional engineering. The current Gate 2 implementation correctly handles the provenance cases observed. The ESMA boundary is a routing outcome (source not publishable via this path), not an engineering gap.
+**Reuse potential**: LOW for additional engineering. The current Gate 2 implementation correctly handles the provenance cases observed. The ESMA boundary is a routing outcome (source not publishable via this path), not an engineering gap. SNB confirms the positive path (provenance metadata available + complete + reproducible).
 
-**Known affected sources**: ESMA (confirmed boundary), BaFin (resolved via configuration)
+**Known affected sources**: ESMA (confirmed boundary — `document_date` unavailable via both tested paths), SNB (confirmed positive compatibility — `dc:date` available, provenance complete), BaFin (provenance-positive/compatibility case — `<pubDate>` is available; actual remediation attributed to Capability 7)
 
 **Engineering implication**: NONE demonstrated. Gate 2 is operational. No confirmed case requires new provenance tooling.
 
@@ -387,9 +391,9 @@ No core architectural changes — the existing config-driven architecture handle
 
 ### Capability 7 — Configuration Contract Compatibility
 
-**Current status**: ALREADY OPERATIONAL — v2 Configuration Contract Verification stage validated
+**Current status**: ALREADY OPERATIONAL — v2 Configuration Contract Verification stage validated. Includes the BaFin remediation evidence (the `event_type` misconfiguration root cause identified in `bd7285d` and resolved in `282de0f` — this is the actual remediation that resolved BaFin's Gate 5 failure, NOT a provenance fix).
 
-**Evidence strength**: HIGH — v2 Configuration Contract Verification stage (static check, deterministic, HIGH confidence) validated across 4 incompatible cases + multiple compatible cases. All 4 incompatible cases were routed to ENGINEERING REVIEW before Gate 5.
+**Evidence strength**: HIGH — v2 Configuration Contract Verification stage (static check, deterministic, HIGH confidence) validated across 4 incompatible cases + multiple compatible cases. All 4 incompatible cases were routed to ENGINEERING REVIEW before Gate 5. The BaFin case provides REMEDIATION-VALIDATED evidence that the Configuration Contract Verification correctly identifies the root cause and enables config-only remediation.
 
 **Confirmed cases**:
 
@@ -399,7 +403,7 @@ No core architectural changes — the existing config-driven architecture handle
 | 2 | Banca d'Italia | `VALIDATED` (incompatible) | EUR monetary statistics + Italian keyword boundary | Configuration Contract Verification V1 (`bd7285d`); Prospective v2 (`3a759cd`) | Same EUR-metric gap as Bundesbank + HTML index keyword boundary (Italian-language titles rejected by the keyword filter). Static contract: NOT COMPATIBLE. | NONE — routed to ENGINEERING REVIEW. |
 | 3 | FSB | `VALIDATED` (incompatible) | Financial policy coordination | Configuration Contract Verification V1 (`bd7285d`); Prospective v2 (`3a759cd`) | Configured event type was `regulatory_enforcement`, but FSB content is financial policy coordination — no existing event type semantically represents this. Static contract: NOT COMPATIBLE. | NONE — routed to ENGINEERING REVIEW. |
 | 4 | UK HM Treasury | `VALIDATED` (incompatible) | Fiscal policy / government guidance | Configuration Contract Verification V1 (`bd7285d`); Prospective v2 (`3a759cd`) | Configured event type was `regulatory_enforcement`, but HMT content is fiscal policy / guidance — no existing event type for "fiscal policy" or "government economic guidance". Static contract: NOT COMPATIBLE. | NONE — routed to ENGINEERING REVIEW. |
-| 5 | BaFin | `VALIDATED` (compatible) | Regulatory enforcement | Gate 5 Re-run 2 (`282de0f`); Configuration Contract Verification V1 (`bd7285d`) | Contract compatible. BaFin achieved PUBLISHABLE PASS in Gate 5 Re-run 2. | YES — Gate 5 PASS (`282de0f`), 9 IOs, config-only onboarding. |
+| 5 | BaFin | `REMEDIATION-VALIDATED` (config-only) | Regulatory enforcement (`event_type` misconfiguration) | **Configuration Contract Verification V1** (`bd7285d`) — established that BaFin's `event_type` was misconfigured (`regulatory_warning` instead of `regulatory_enforcement`). **Remediation commit**: Gate 5 Re-run 2 (`282de0f`) — config-only change applied: `event_type: regulatory_warning → regulatory_enforcement`. **Result**: BaFin PUBLISHABLE PASS with 9 IOs, 52 facts, 9 events. Earlier Gate 5 Re-run 1 (`3bc9448`) had flagged provenance ambiguity — but `bd7285d` revealed this was a symptom, NOT the root cause; the actual root cause was the `event_type` misconfiguration. | Initial Gate 5 run flagged "provenance ambiguity" (symptom). Configuration Contract Verification (`bd7285d`) revealed the actual root cause was `event_type` misconfiguration (`regulatory_warning` instead of `regulatory_enforcement`), NOT provenance format. Static contract verification established that BaFin's pattern metrics were not in the `regulatory_warning` trigger_metrics. | YES — REMEDIATION-VALIDATED as CONFIG-ONLY. The remediation in `282de0f` changed `event_type: regulatory_warning → regulatory_enforcement` in `source_configs.py` (3-line change). This was driven by the static contract verification in `bd7285d`. 0 engineering intervention, 0 source-specific code. **This remediation is attributed to Capability 7 (Configuration Contract), NOT to Capability 1 (Provenance)** — the root cause was contract incompatibility, not provenance format. |
 | 6 | Eurostat | `VALIDATED` (compatible) | Statistical release | Gate 5 PASS (`3454603`); Configuration Contract Verification V1 (`bd7285d`) | Contract compatible. Eurostat achieved PUBLISHABLE PASS. | YES — Gate 5 PASS (`3454603`), 1 IO, config-only onboarding. |
 | 7 | FED_ENF | `VALIDATED` (compatible) | Regulatory enforcement | FED_ENF Remediation Test (`f16bc00`) | Contract compatible. Initial Gate 5 FAIL was due to pattern specificity (Capability 3), NOT contract incompatibility. | YES — FED_ENF remediation PASS (`f16bc00`), config-only. |
 
@@ -433,13 +437,13 @@ The v2 Configuration Contract Verification stage (static check, deterministic, H
 
 | # | Capability | Confirmed cases | Evidence states | Decision readiness |
 |---|------------|-----------------|------------------|-------------------|
-| 1 | Provenance Metadata Compatibility | 2 (ESMA, BaFin) | 1 OBSERVED (ESMA, primary evidence `27294db`+`8041cda`) + 1 REMEDIATION-VALIDATED (BaFin, config-only `282de0f`) | EVIDENCE-SUPPORTED |
+| 1 | Provenance Metadata Compatibility | 3 (ESMA, SNB, BaFin) | 1 OBSERVED (ESMA boundary, primary `27294db`+`8041cda`) + 1 VALIDATED (SNB positive, `c09de13`+`332788c`) + 1 OBSERVED (BaFin provenance-positive/compatibility, remediation attributed to Capability 7) | EVIDENCE-SUPPORTED |
 | 2 | Content-Path Boundary | 8 (4 mismatches + 4 aligned) | 7 VALIDATED + 1 OBSERVED | EVIDENCE-SUPPORTED |
 | 3 | Pattern Specificity | 2 (FED_ENF, ABS) | 1 REMEDIATION-VALIDATED + 1 HYPOTHESIS/UNKNOWN | EVIDENCE-SUPPORTED (FED_ENF); EVIDENCE-INCOMPLETE (ABS) |
 | 4 | Adapter / Browser Rendering | 4 (TCMB, NSO India, Basel, EIOPA) | 1 ENGINEERING-REQUIRED + 3 VALIDATED | ENGINEERING-REQUIRED CASE CONFIRMED (TCMB); REUSE UNKNOWN |
 | 5 | Language / Multilingual Boundary | 7 confirmed gaps across 6 languages + 1 non-English observed (NOT a gap) | 7 OBSERVED (confirmed gaps) + 1 OBSERVED (non-gap, English=YES) | EVIDENCE-SUPPORTED; REUSE UNKNOWN |
 | 6 | Event-Model Representation | 3 confirmed representation gaps + 4 observed potential uncovered types | 3 OBSERVED (confirmed gaps) + 4 OBSERVED (potential, NOT confirmed) | EVIDENCE-SUPPORTED (3 confirmed); EVIDENCE-INCOMPLETE (4 observed potential) |
-| 7 | Configuration Contract Compatibility | 7 (4 incompatible + 3 compatible) | 7 VALIDATED | EVIDENCE-SUPPORTED |
+| 7 | Configuration Contract Compatibility | 7 (4 incompatible + 3 compatible/remediated) | 4 VALIDATED (incompatible) + 1 REMEDIATION-VALIDATED (BaFin config-only `bd7285d`+`282de0f`) + 2 VALIDATED (compatible) | EVIDENCE-SUPPORTED |
 
 ---
 
@@ -449,13 +453,13 @@ For each capability, the decision readiness is classified using ONLY these label
 
 | Capability | Decision readiness |
 |------------|-------------------|
-| 1 — Provenance Metadata Compatibility | `EVIDENCE-SUPPORTED` (ESMA boundary with primary evidence `27294db`+`8041cda`; BaFin remediation validated `282de0f`) |
+| 1 — Provenance Metadata Compatibility | `EVIDENCE-SUPPORTED` (ESMA boundary with primary evidence `27294db`+`8041cda`; SNB positive validation `c09de13`+`332788c` — `dc:date` available, provenance 100%, reproducibility PASS; BaFin provenance-positive/compatibility case — actual remediation attributed to Capability 7) |
 | 2 — Content-Path Boundary | `EVIDENCE-SUPPORTED` (4 mismatches + 4 aligned, v2 stage validated) |
 | 3 — Pattern Specificity | `EVIDENCE-SUPPORTED` for FED_ENF remediation pattern; `EVIDENCE-INCOMPLETE` for ABS hypothesis |
 | 4 — Adapter / Browser Rendering | `ENGINEERING-REQUIRED CASE CONFIRMED` (TCMB); `REUSE UNKNOWN` (prevalence cannot be measured from this environment) |
 | 5 — Language / Multilingual Boundary | `EVIDENCE-SUPPORTED` (7 confirmed gaps across 6 languages: French, Italian, German×2, Arabic, Dutch, Chinese); `REUSE UNKNOWN` (prevalence cannot be measured). Banco Central do Brasil is non-English observed but NOT a confirmed gap (English=YES). |
 | 6 — Event-Model Representation | `EVIDENCE-SUPPORTED` for 3 confirmed representation gaps (Bundesbank, FSB, HMT — independently verified via v2 contract/semantic); `EVIDENCE-INCOMPLETE` for 4 observed potential uncovered types (Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee — V1.1 content inspection only, NOT confirmed via v2 contract verification). INSEE is compounded — NOT independently confirmed as a representation gap. `REUSE UNKNOWN` for all. |
-| 7 — Configuration Contract Compatibility | `EVIDENCE-SUPPORTED` (4 incompatible + 3 compatible, v2 stage validated) |
+| 7 — Configuration Contract Compatibility | `EVIDENCE-SUPPORTED` (4 incompatible + 1 REMEDIATION-VALIDATED BaFin config-only `bd7285d`+`282de0f` + 2 compatible; v2 stage validated). BaFin's remediation is correctly attributed to Configuration Contract, NOT Provenance. |
 
 ### What "Decision Readiness" means
 
@@ -507,29 +511,42 @@ Per user directive:
 
 ## 7. Document Status
 
-**CAPABILITY_EVIDENCE_REGISTRY_V1 — CORRECTED DRAFT FOR REVIEW.**
+**CAPABILITY_EVIDENCE_REGISTRY_V1 — APPROVED / READY TO FREEZE.**
 
-Per user review of `309d1ac` (CONDITIONAL APPROVAL), four evidence-level corrections have been applied:
+Per user review of `3b3dc76` (CONDITIONAL APPROVAL), one final evidence-level correction has been applied:
 
-1. **ESMA primary evidence references corrected**: Replaced `e2479fb` (which is a Survey V1 Results correction document, NOT primary evidence) with the actual primary evidence commits `27294db` (ESMA RSS FAIL) and `8041cda` (ESMA HTML FAIL). Both are referenced in Evidence Matrix V1 (`934feb7`). `e2479fb` is retained only as a later documentation reference.
+**BaFin remediation correctly attributed to Capability 7 (Configuration Contract), NOT Capability 1 (Provenance)**:
 
-2. **BaFin remediation precise linkage**: The remediation in `282de0f` was NOT a provenance-format change. The Configuration Contract Verification (`bd7285d`) revealed that BaFin's actual root cause was `event_type` misconfiguration (`regulatory_warning` instead of `regulatory_enforcement`), not `<pubDate>` formatting. The remediation commit `282de0f` changed `event_type: regulatory_warning → regulatory_enforcement` in `source_configs.py` (3-line config-only change). The initial "provenance ambiguity" flagged in Re-run 1 (`3bc9448`) was a symptom; the contract verification in `bd7285d` identified the actual cause; the remediation in `282de0f` confirmed config-only resolution.
+- In Capability 1 (Provenance), BaFin has been reclassified from `REMEDIATION-VALIDATED` to `OBSERVED` (provenance-positive/compatibility case). BaFin's RSS feed DOES expose `<pubDate>` (provenance metadata is available), so BaFin is recorded as a provenance-positive case — but the actual remediation that resolved BaFin's Gate 5 failure is NOT a provenance fix. It is a Configuration Contract fix (`event_type: regulatory_warning → regulatory_enforcement`).
 
-3. **Capability 5 language count corrected**: Distinguished `non-English observed` from `confirmed language coverage gap`. Banco Central do Brasil (Portuguese, English=YES) is NOT a confirmed language gap — moved to a separate "Non-English Observed (NOT confirmed gaps)" table. Confirmed language coverage gap count is now **7 sources across 6 languages** (French: INSEE; Italian: Banca d'Italia; German: FSO + BaFin; Arabic: Saudi MoF; Dutch: CBS Netherlands; Chinese: CSRC). The earlier "8 across 6 languages" was incorrect — it counted Banco Central do Brasil as a gap when English version was YES.
+- **SNB (Swiss National Bank) added to Capability 1 as `VALIDATED` positive provenance case**. SNB's RSS feed exposes `dc:date` metadata. The Independent Validation Review (`332788c`) explicitly confirmed:
+  - Check 5: `document_date from dc:date (not fallback) CONFIRMED PASS`
+  - Check 7: `Provenance 100% + reproducibility PASS`
+  SNB achieved PUBLISHABLE PASS via config-only onboarding (`c09de13`). This provides balanced evidence for Capability 1:
+  - Positive compatibility: SNB (`dc:date` available, provenance complete, reproducibility verified)
+  - Boundary/failure: ESMA (`document_date` unavailable via both tested paths)
 
-4. **Capability 6 representation gap vs content observation separated**: Split into two distinct sections:
-   - **Confirmed Representation Gaps** (3 cases: Bundesbank, FSB, UK HM Treasury — independently supported by v2 Configuration Contract Verification + Semantic Representation Assessment). INSEE is NOT counted as a confirmed representation gap because its representation failure is compounded with the language gap and cannot be independently isolated.
-   - **Observed Potentially Uncovered Intelligence Types** (4 cases: Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee — V1.1 content inspection only, NOT confirmed via v2 contract verification). These are recorded as `OBSERVED — potential uncovered intelligence type`, NOT as confirmed representation gaps.
+- In Capability 7 (Configuration Contract Compatibility), BaFin is now recorded as `REMEDIATION-VALIDATED` (config-only) with full evidence chain: `bd7285d` (Configuration Contract Verification — root cause identified as `event_type` misconfiguration) + `282de0f` (remediation commit — `event_type: regulatory_warning → regulatory_enforcement`, 3-line config-only change, BaFin PUBLISHABLE PASS with 9 IOs). The earlier "provenance ambiguity" flagged in `3bc9448` is explicitly noted as a symptom, NOT the root cause.
 
-5. **Speculative reuse numbers removed**: All hypothetical reuse counts (e.g., "would unlock Bundesbank + Banca d'Italia + Banque de France") replaced with `UNKNOWN / HYPOTHESIS`. Only confirmed affected sources are listed as known; potential reuse is explicitly labeled UNKNOWN.
+**Cumulative corrections applied across the Registry's evolution**:
+1. ESMA primary evidence: `27294db` + `8041cda` (not `e2479fb`)
+2. BaFin remediation precise linkage: `event_type` misconfiguration (not provenance format) — config-only via `bd7285d` + `282de0f`
+3. Capability 5: 7 confirmed gaps across 6 languages (Banco Central do Brasil removed — English=YES)
+4. Capability 6: 3 confirmed representation gaps + 4 observed potential types (separated)
+5. Speculative reuse numbers → UNKNOWN/HYPOTHESIS
+6. **BaFin remediation correctly attributed to Capability 7, NOT Capability 1; SNB added to Capability 1 as VALIDATED positive case**
 
-This registry now meets the stricter evidence standard required for an evidence ledger:
+This registry now meets the strictest evidence-ledger standard:
 - Primary evidence commits are exact (not documentation references)
 - Confirmed gaps are distinguished from non-English observations
 - Confirmed representation gaps are distinguished from content-type observations
 - Reuse potential is UNKNOWN / HYPOTHESIS unless actual remediation test confirms affected sources
+- **Every remediation is attributed to the capability that the test proved caused or resolved the issue** (BaFin's remediation → Configuration Contract, NOT Provenance)
+- **Positive compatibility cases are included alongside boundary cases** (SNB positive + ESMA boundary) to provide balanced evidence
 
-The user is asked to review the corrected registry and confirm it meets the evidence-ledger standard before any future use as evidence input for capability roadmap decisions.
+Final status: **Capability Evidence Registry v1 — APPROVED / READY TO FREEZE.**
+
+The registry is now a clean evidence ledger: every remediation is attributed to the capability that the test proved caused the problem or solved it. It can serve as the evidence baseline for future capability roadmap decisions.
 
 ---
 
