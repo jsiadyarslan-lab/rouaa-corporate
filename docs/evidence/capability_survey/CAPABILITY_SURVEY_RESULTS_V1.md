@@ -203,54 +203,71 @@ Per protocol Section 4.3:
 - 1 source → CUSTOMER-SPECIFIC
 - 0 sources observed → no evidence of reuse
 
-**Observed:**
-- **financial_coordination**: 5 sources → **BUILD NOW candidate** band (just meets threshold)
-- **market_structure**: 5 sources → **BUILD NOW candidate** band (just meets threshold)
-- **fiscal_policy**: 3 sources → **ENGINEERING CANDIDATE** band
+**Observed: NONE — protocol deviation invalidates band application.**
 
-**Critical caveats**:
-1. **Stratum-based heuristic, not content inspection.** The protocol required content inspection; we used stratum as a proxy. This is conservative — actual content may produce additional uncovered types or fewer of some types.
-2. **Counts are by stratum, not by actual content.** A B4 Ministry of Finance may produce only fiscal_policy (count=1) or only financial_coordination (count=1) — the stratum heuristic assumes both.
-3. **B7 multilateral classification.** Basel Committee and G20 are classified as producing both financial_coordination and statistical_release. Actual content may differ.
-4. **No INCONCLUSIVE impact.** Stratum is known for all 32 sources regardless of fetch outcome — so this capability has 0 INCONCLUSIVE cases.
+The protocol Section 4.3 required content inspection ("Sample 1-3 document titles + summaries from the source's content path. Classify the intelligence type"). The execution script did NOT perform content inspection due to the 53% INCONCLUSIVE rate — most content paths failed to fetch. Instead, the script used a **stratum-based heuristic** (intelligence type inferred from `institutional_class` rather than from actual content).
 
-**Honest conclusion**: Two uncovered intelligence types (financial_coordination, market_structure) meet the ≥5 threshold for BUILD NOW candidate band. One type (fiscal_policy) is in the ENGINEERING CANDIDATE band. BUT these counts are by stratum, not by content inspection — a follow-up survey with actual content inspection may produce different counts. The stratum-based classification should be treated as a HYPOTHESIS for follow-up, not as confirmed evidence.
+The stratum-based counts (which would have been: financial_coordination=5, market_structure=5, fiscal_policy=3) are NOT valid survey measurements of intelligence types. They are an inference about what each stratum *typically* produces, not what each source *actually* produces.
+
+**Correct classification**: **INCONCLUSIVE — protocol deviation**
+
+**Reason**: The question the protocol asked ("what intelligence types does this source produce?") was not measured. The stratum-based counts are a hypothesis, not a measurement. They cannot be used as input to the predefined prioritization bands.
+
+**What would be needed**: A follow-up survey that performs actual content inspection (fetch 1-3 documents per source, classify intelligence type from titles/summaries) — see Follow-up Survey Protocol V1.1.
 
 ---
 
 ## 5. Summary of Predefined-Band Routing
 
-| Capability | Observed | Band | Confidence |
-|------------|----------|------|------------|
-| 4 — Browser Rendering | 3/32 = 9.4% confirmed Browser-rendered | CUSTOMER-SPECIFIC (<10%) | LOW — 53% INCONCLUSIVE; floor estimate only |
-| 5 — Language (Chinese) | 1 source, no English | ENGINEERING CANDIDATE | LOW — 50% language-UNKNOWN; floor estimate |
-| 5 — Language (German) | 1 source, no English | ENGINEERING CANDIDATE | LOW — same as above |
-| 5 — Language (Arabic) | 1 source, no English | ENGINEERING CANDIDATE | LOW — same as above |
-| 6 — Event-Model (financial_coordination) | 5 sources (stratum heuristic) | BUILD NOW candidate | LOW — stratum proxy, not content inspection |
-| 6 — Event-Model (market_structure) | 5 sources (stratum heuristic) | BUILD NOW candidate | LOW — same as above |
-| 6 — Event-Model (fiscal_policy) | 3 sources (stratum heuristic) | ENGINEERING CANDIDATE | LOW — same as above |
+**Per user review of `2ac5d04`: the predefined-band routing table below is INVALIDATED. The bands cannot be applied because the underlying measurements are insufficient.**
 
-**Matrix inputs** (per protocol Section 5):
+The user's review identified three critical problems:
+1. Capability 6 used stratum-based heuristic, not content inspection — the question was not measured.
+2. Browser Rendering has 53% INCONCLUSIVE — the 9.4% confirmed rate is a floor estimate, not a measurement of prevalence.
+3. Language Coverage has 50% UNKNOWN — the 1-source-per-language count is a lower-bound observation, not a survey result.
 
-| Capability | Institutional value | Reuse potential (observed) | Blocked source count | Implementation risk |
-|------------|---------------------|----------------------------|----------------------|----------------------|
-| 4 — Browser Rendering | HIGH if applies to G20; LOW otherwise | 3 confirmed new cases + TCMB = 4 total | 4 confirmed (TCMB, NSO India, Basel Committee, EIOPA) | MEDIUM (Playwright already a dependency) |
-| 5 — Language (per language) | VARIES by jurisdiction priority | 1 confirmed per language (zh, de, ar) | 3 confirmed (CSRC, FSO, Saudi MoF) | MEDIUM-HIGH (linguistic + pattern authoring) |
-| 6 — Event-Model (per type) | HIGH for fiscal/coordination (G7); MEDIUM for market_structure | 5 (stratum heuristic) for coord/market; 3 for fiscal | 5+5+3 = 13 (stratum heuristic) | MEDIUM per event type |
+### Corrected classifications (per user review)
+
+| Capability | Corrected classification | Reason |
+|------------|--------------------------|--------|
+| 4 — Browser Rendering | **INCONCLUSIVE / insufficient measurement coverage** | 53% INCONCLUSIVE; 4 confirmed cases (incl. TCMB) exist but reuse rate in untested population is unknown |
+| 5 — Language (Chinese) | **INCONCLUSIVE; confirmed gap exists, prevalence unknown** | 1 confirmed case; 50% UNKNOWN language; lower-bound observation only |
+| 5 — Language (German) | **INCONCLUSIVE; confirmed gap exists, prevalence unknown** | Same as above |
+| 5 — Language (Arabic) | **INCONCLUSIVE; confirmed gap exists, prevalence unknown** | Same as above |
+| 6 — Event-Model (all types) | **INCONCLUSIVE — protocol deviation** | Stratum-based heuristic used; content inspection NOT performed per protocol Section 4.3 |
+
+### Survey completion vs. survey validity for decision
+
+Per user review, the distinction between **Survey Completion** and **Survey Validity for Decision** is the key framing:
+
+| Metric | Value |
+|--------|-------|
+| Execution completeness | 32/32 (100%) — every sampled source was attempted |
+| Measurement completeness | 15/32 (46.9%) — only 15 sources produced a usable measurement (8 STATIC_SUFFICIENT + 3 BROWSER_RENDERED + 4 SPARSE_CONTENT) |
+| Decision sufficiency | **NO** — the matrix cannot be applied with confidence |
+
+The matrix requires reliable inputs for `reuse potential` and `blocked source count`. Both depend on measurement completeness, which is 46.9% — too low for confident decision-making.
+
+### Matrix inputs — NOT APPLICABLE
+
+Per user directive: **the evaluation matrix is NOT applied.** The matrix inputs (reuse potential, blocked source count) cannot be derived with confidence from this survey. Applying the matrix now would produce a recommendation based on insufficient data, which the user has explicitly forbidden.
 
 ---
 
 ## 6. What the Sample Supports
 
-The sample supports the following claims:
+The sample supports the following **lower-bound observations** (NOT prevalence estimates):
 
-1. **4 confirmed Browser-rendered sources** exist in the untested population (NSO India, Basel Committee, EIOPA — newly confirmed; TCMB — prior evidence). This is real, evidence-supported data.
+1. **4 confirmed Browser-rendered sources** exist in the cumulative evidence base (NSO India, Basel Committee, EIOPA — newly confirmed in this survey; TCMB — prior remediation evidence). These are real, evidence-supported data points.
 
-2. **3 confirmed non-English source-language gaps** exist (CSRC Chinese, FSO German, Saudi MoF Arabic) — each with 1 source and no English version. Each is in the ENGINEERING CANDIDATE band.
+2. **3 confirmed non-English source-language gaps** exist (CSRC Chinese, FSO German, Saudi MoF Arabic) — each with 1 source and no English version. These are confirmed observations, not prevalence estimates.
 
-3. **2 uncovered intelligence types meet the BUILD NOW candidate threshold** (financial_coordination, market_structure — 5 sources each by stratum heuristic). fiscal_policy has 3 sources (ENGINEERING CANDIDATE band).
+3. **No capability can be promoted to BUILD NOW based on this survey.** The user's review explicitly established that the survey is **not valid as a basis for BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC promotion** because:
+   - Capability 4: 53% INCONCLUSIVE — insufficient measurement coverage.
+   - Capability 5: 50% UNKNOWN language — lower-bound observations only.
+   - Capability 6: protocol deviation — the question was not measured.
 
-4. **The browser-rendering capability gap is real but small in confirmed count.** 4 confirmed cases (including TCMB) do not, by themselves, justify a platform capability (BUILD NOW). They justify customer-specific scope unless the matrix evaluation produces a different conclusion.
+4. **The survey IS valid as evidence-gathering.** The 4 confirmed Browser-rendered cases and 3 confirmed non-English gaps are real additions to the cumulative evidence base. They are not sufficient for decision-making, but they are not worthless — they will be combined with follow-up survey evidence in V1.1.
 
 ---
 
@@ -274,34 +291,51 @@ The sample does NOT support the following claims (per anti-overclaiming rules, p
 
 ## 8. Recommendations
 
-Based on the survey evidence (with all limitations acknowledged):
+Per user review of `2ac5d04`:
 
-1. **Capability 4 (Browser Rendering)**: 4 confirmed cases total (TCMB + 3 new). This is real evidence but does not by itself justify BUILD NOW. **Recommend**: defer BUILD NOW decision; consider customer-specific scope unless a customer explicitly requests one of these sources.
+1. **Do NOT apply the evaluation matrix now.** The matrix requires reliable inputs for `reuse potential` and `blocked source count` — both depend on measurement completeness (46.9%) which is too low for confident decision-making.
 
-2. **Capability 5 (Language Coverage)**: 3 confirmed non-English gaps (1 each for Chinese, German, Arabic). All in ENGINEERING CANDIDATE band. **Recommend**: defer; bundle with customer requests. No language reaches the ≥3 threshold for BUILD NOW candidate.
+2. **Do NOT promote any capability based on this survey.** All three engineering candidates are reclassified to INCONCLUSIVE.
 
-3. **Capability 6 (Event-Model Representation)**: 2 uncovered types meet BUILD NOW candidate threshold (financial_coordination, market_structure — 5 sources each by stratum heuristic). BUT these are stratum-based counts, not content-inspected counts. **Recommend**: perform a follow-up content-inspection survey to validate the stratum-based counts before any BUILD NOW decision.
+3. **Authorize Follow-up Survey V1.1** (recommended by user) with these constraints:
+   - **Same original sample** (32 sources from V1) — preserve comparability.
+   - **Do NOT re-sample or replace** — keep the original selection (seed=20260815).
+   - **Re-run only INCONCLUSIVE sources** (17 sources from V1 that failed measurement) — improving URL discovery to reduce the INCONCLUSIVE rate.
+   - **Perform actual content inspection for Event-Model** (Capability 6) — fetch 1-3 documents per source and classify intelligence type from titles/summaries, per protocol Section 4.3 (which V1 deviated from).
+   - This produces a **comparable second pass** — same sample, higher measurement completeness, with the question actually measured.
 
-4. **Follow-up survey recommended**: A second-pass survey with better URL discovery (crawl each source's homepage to find the actual press-release path) would reduce the 53% INCONCLUSIVE rate and may produce different band assignments. This is the highest-value next evidence-gathering action.
+4. **After V1.1**: re-evaluate measurement completeness. If measurement completeness reaches an acceptable threshold (e.g., ≥80%), the matrix can be applied with confidence. If it remains low, a third pass or a different survey strategy may be needed.
+
+5. **No Commercial Model update** at any point until the matrix is applied and the user makes a manual decision per capability.
 
 ---
 
 ## 9. Document Status
 
-**CAPABILITY_SURVEY_RESULTS_V1 — COMPLETE / FOR DECISION REVIEW**
+**CAPABILITY_SURVEY_RESULTS_V1 — EVIDENCE-GATHERING ARTIFACT ONLY. NOT VALID AS BASIS FOR BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC PROMOTION.**
+
+Per user review of `2ac5d04`:
+
+> "الـsurvey ناجح كعملية جمع أدلة، لكنه غير صالح بعد لاتخاذ قرارات BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC."
+
+Three critical problems identified and applied as corrections:
+1. **Capability 6** reclassified to **INCONCLUSIVE — protocol deviation**. The protocol required content inspection; the execution used stratum-based heuristic. The question was not measured. The stratum-based counts (financial_coordination=5, market_structure=5, fiscal_policy=3) are NOT valid survey measurements.
+2. **Capability 4 (Browser Rendering)** reclassified to **INCONCLUSIVE / insufficient measurement coverage**. 53% INCONCLUSIVE means the 9.4% confirmed Browser-rendered rate is a floor estimate, not a prevalence measurement. 4 confirmed cases exist (incl. TCMB) but reuse rate in the untested population is unknown.
+3. **Capability 5 (Language Coverage)** reclassified to **INCONCLUSIVE; confirmed gaps exist, prevalence unknown**. 50% UNKNOWN language means the 1-source-per-language observations are lower-bound only.
+
+**Survey completion vs. survey validity for decision**:
+- Execution completeness: 32/32 (100%)
+- Measurement completeness: 15/32 (46.9%)
+- Decision sufficiency: **NO**
 
 This document:
-- Reports the survey execution results honestly, including the 53% INCONCLUSIVE limitation
-- Applies the predefined prioritization bands per protocol
-- Provides matrix inputs for the user's evaluation
-- Does NOT make any BUILD NOW decision
+- Reports the survey execution results honestly, including the 53% INCONCLUSIVE limitation and the stratum-based heuristic protocol deviation
+- Does NOT apply the evaluation matrix (per user directive)
+- Does NOT promote any capability to BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC
 - Does NOT modify any frozen artifact (v2 framework, Queue, Contract, Commercial Model)
+- Is valid as **evidence-gathering artifact** but NOT as **basis for capability roadmap decisions**
 
-The user is asked to:
-1. Review the survey results with the limitations acknowledged
-2. Apply the evaluation matrix per capability (institutional value × reuse × blocked count × risk)
-3. Make the final BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC call per capability
-4. Decide whether to authorize a follow-up survey to reduce the INCONCLUSIVE rate
+The next step is Follow-up Survey V1.1 (per user recommendation): same sample, re-run only INCONCLUSIVE sources, perform actual content inspection for Event-Model, do not re-sample.
 
 ---
 
@@ -322,5 +356,6 @@ The user is asked to:
 | Selection script | `/home/z/my-project/scripts/capability_survey_select.py` |
 | Execution script | `/home/z/my-project/scripts/capability_survey_execute.py` |
 | Deduplication script | `/home/z/my-project/scripts/capability_survey_dedupe.py` |
-| Limitations | 53.1% INCONCLUSIVE rate (URL-fetch failures); stratum-based intelligence-type heuristic (not content inspection per protocol) |
+| Limitations | 53.1% INCONCLUSIVE rate (URL-fetch failures); stratum-based intelligence-type heuristic (PROTOCOL DEVIATION from required content inspection); 50% UNKNOWN language rate |
+| Validity | Evidence-gathering artifact ONLY — NOT valid as basis for BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC promotion (per user review of 2ac5d04) |
 | Does NOT modify | v2 framework, Queue V1.1, pipeline code, source_configs.py, Contract, Commercial Model, website, Portfolio V1 classifications |
