@@ -1,11 +1,24 @@
 # CROSS-JURISDICTION CAPABILITY VALIDATION EXPANSION V1
 
-**Status:** EXECUTED — EVIDENCE ARTIFACT (execution-only, evidence-only)
+**Status:** EXECUTED — EVIDENCE-COMMITTED (13/15) · INCONCLUSIVE (1: S6 DMO) · UNMEASURED (1: S13 CBUAE)
 **Date:** 2026-08-15
 **Directive:** EXECUTION DIRECTIVE — CROSS-JURISDICTION CAPABILITY VALIDATION EXPANSION V1 (user-issued verbatim)
 **Scope discipline:** No modifications to any FROZEN artifact. No new capability added to the framework. No investment decision produced. No prevalence inferred. No denominator used. Per-case evidence profiles only.
 
 **Environment note (reproducibility):** All probes executed via direct HTTP (curl, default UA overridden with a standard browser UA, `--max-time 15–40s`, redirects followed). Playwright/browser-rendered acquisition was NOT performed in this round. "Evidence commit" for every case below is **THIS COMMIT** — the artifact and its evidence were pushed together in one commit; the exact probe commands are recorded per case for reproducibility.
+
+## Evidence Commit Map (directive: EVIDENCE EXPANSION V1 COMMIT — Section 3 resolution)
+
+Per-source evidence records with reproduction commands, observed structures, metadata, timestamps, and limitations are committed at:
+`docs/evidence/cross_jurisdiction/EVIDENCE_RECORDS_V1.md` — commit **73b7668** (dual-session verified 2026-08-15T20:55:44–20:58Z).
+
+| Source | Evidence status | Record |
+|---|---|---|
+| S1 BMF, S2 BdF, S3 DG Trésor, S4 ISTAT, S5 MEF, S7 OBR, S8 LSE, S9 FDIC, S10 FINRA, S11 MoF-JP, S12 JSB, S14 SCA, S15 DFSA | EVIDENCE-COMMITTED | EVIDENCE_RECORDS_V1 @ 73b7668 |
+| S6 DMO | INCONCLUSIVE (anti-bot; Rule 2 applied) | EVIDENCE_RECORDS_V1 @ 73b7668 |
+| S13 CBUAE | UNMEASURED (network failure; zero inference) | EVIDENCE_RECORDS_V1 @ 73b7668 |
+
+No commits were manufactured for evidence that does not exist. Substantive findings of sections A–N below are UNCHANGED by this map.
 
 ---
 
