@@ -730,6 +730,84 @@ GATE5_SOURCES_LIST = {
         "content_keywords": ["Eurostat", "statistics", "statistical", "economic", "data", "indicator"],
     },
 
+    "FED_ENF": {
+        "code": "FED_ENF",
+        "name": "Federal Reserve Enforcement Actions",
+        "type": "financial_regulator",
+        "country": "US",
+        "jurisdiction": "United States",
+        "trustTier": 1,
+        "websiteUrl": "https://www.federalreserve.gov",
+        # Same RSS as FED (ALREADY_QUALIFIED) — but extracting enforcement content
+        "feedUrl": "https://www.federalreserve.gov/feeds/press_all.xml",
+        # v2 Content-Path: RSS confirmed to contain 7 enforcement items (titles with "enforcement action")
+        # v2 Config Contract: event_type=regulatory_enforcement, regulatory_patterns metrics match trigger_metrics
+        "rate_patterns": [],
+        "regulatory_patterns": [
+            # Defendant names: "enforcement action with X" / "against X"
+            (r"(?:enforcement\s+action\s+(?:with|against))\s+([A-Z][A-Za-z\s,&\.\-]{5,80}?)(?:\s+(?:and|Former|former))", "defendant_name"),
+            (r"(?:issued|assessed|imposed)\s+(?:a\s+)?(?:consent\s+)?(?:order|civil\s+money\s+penalty|fine|prohibition)", "action_type"),
+            # Violation types
+            (r"(?:for|due\s+to|related\s+to)\s+([a-z\s,]{10,60}(?:fraud|violation|breach|misconduct|deficiency))", "violation_type"),
+            # Penalty amounts (if any)
+            (r"(?:agreed\s+to\s+pay|pay|penalty\s+of)\s+(?:approximately\s+)?\$([\d,]+(?:\.\d+)?)\s+(million|billion)", "penalty_amount"),
+            (r"\$([\d,]+(?:\.\d+)?)\s+(million|billion)\s+(?:penalty|fine|civil\s+money)", "penalty_amount"),
+        ],
+        "event_type": "regulatory_enforcement",
+        "content_keywords": ["Federal Reserve", "enforcement", "action", "order", "penalty", "bank", "consent"],
+    },
+
+    "ABS": {
+        "code": "ABS",
+        "name": "Australian Bureau of Statistics",
+        "type": "statistical_authority",
+        "country": "AU",
+        "jurisdiction": "Australia",
+        "trustTier": 1,
+        "websiteUrl": "https://www.abs.gov.au",
+        # No RSS found; HTML index at CPI latest release page
+        "feedUrl": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/latest-release",
+        "feed_format": "html_index",
+        # Link pattern for ABS statistics pages
+        "link_pattern": r"/statistics/[^\"']+(?:release|latest)[^\"']*",
+        "link_pattern_prefix": "https://www.abs.gov.au",
+        "rate_patterns": [],
+        "statistical_patterns": [
+            (r"(?:CPI|Consumer\s+Price\s+Index)\s+(?:inflation|annual|rate|growth)\s+(?:was\s+|of\s+|rose\s+|stood\s+at\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "inflation_rate"),
+            (r"annual\s+(?:rate\s+of\s+)?inflation\s+(?:was\s+|of\s+|stood\s+at\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "inflation_rate"),
+            (r"(?:inflation|CPI)\s+(?:rose|increased|fell|decreased)\s+(?:to\s+|by\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "inflation_rate"),
+            (r"GDP\s+(?:grew|fell|rose|declined|increased|decreased)\s+by\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "gdp_growth"),
+            (r"unemployment\s+rate\s+(?:was\s+|of\s+|stood\s+at\s+|fell\s+to\s+|rose\s+to\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "unemployment_rate"),
+            (r"([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)\s+(?:of\s+GDP|year[- ]on[- ]year|yoy|compared\s+with|over\s+the\s+year)", "percentage_statistic"),
+            (r"(?:estimated|recorded|reported|stood\s+at)\s+(?:at\s+|of\s+)?([+-]?[\d,]+(?:\.\d+)?)\s*(?:million|billion|thousand)", "statistic_value"),
+        ],
+        "event_type": "statistical_release",
+        "content_keywords": ["ABS", "statistics", "statistical", "Consumer Price", "inflation", "economic", "Australia"],
+    },
+
+    "TCMB": {
+        "code": "TCMB",
+        "name": "Central Bank of the Republic of Turkey",
+        "type": "central_bank",
+        "country": "TR",
+        "jurisdiction": "Turkey",
+        "trustTier": 1,
+        "websiteUrl": "https://www.tcmb.gov.tr",
+        # No RSS; HTML index at press releases listing
+        "feedUrl": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Main+Menu/Announcements/Press+Releases/",
+        "feed_format": "html_index",
+        "link_pattern": r"/wps/wcm/connect/[^\"']+Press\+Releases/2026/[^\"']+",
+        "link_pattern_prefix": "https://www.tcmb.gov.tr",
+        "rate_patterns": [
+            (r"(?:policy\s+rate|interest\s+rate|one[- ]week\s+repo)\s+(?:at|to|of)\s+(\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "rate_value"),
+            (r"(?:maintained|kept|held|hold)\s+(?:the\s+)?(?:policy\s+rate|interest\s+rate|one[- ]week\s+repo)\s+at", "rate_maintain"),
+            (r"(?:raised|increased|cut|lowered|reduced|tightened)\s+(?:the\s+)?(?:policy\s+rate|interest\s+rate)", "rate_action"),
+            (r"(?:decided\s+to\s+|has\s+)(maintain|keep|raise|cut|lower|increase|reduce)\s+(?:the\s+)?(?:policy|interest)\s+rate", "rate_action"),
+        ],
+        "event_type": "monetary_policy_decision",
+        "content_keywords": ["TCMB", "Central Bank", "interest rate", "policy rate", "monetary", "Press Release"],
+    },
+
 }
 
 # Combine all sources
