@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: V1 — DRAFT FOR REVIEW
+**Status**: V1 — CORRECTED DRAFT FOR REVIEW (corrected per user review of `9450647`)
 **Type**: Strategy framework — decision framework, NOT a decision machine. Does NOT modify any frozen artifact.
 **Base**:
 - Capability Evidence Registry V1 (FROZEN at `dd66cc1`)
@@ -38,6 +38,14 @@ The following 9 rules from the FROZEN design constraints (`bb3f43a`) are applied
 8. Strategic Value may prioritize capabilities within the same decision level, but may not promote weak evidence to a higher level.
 9. Do not make automatic BUILD NOW decisions.
 
+**Additional rules applied per user review of `9450647` (CORRECTED DRAFT)**:
+
+10. **Evidence State ≠ Remediation Applicability**: Evidence Strength measures epistemic confidence; Resolution Status measures what happened with remediation. A case that does not need remediation (e.g., a positive compatibility case like SNB, or a boundary routing outcome like ESMA) is `NOT APPLICABLE` for Resolution Status — it is NOT `UNTESTED`. `UNTESTED` means remediation was applicable but not attempted.
+11. **Coverage labels are qualitative descriptors only** — NOT calibrated thresholds. Labels like `Limited`, `Moderate`, `Very limited` are descriptive judgments under the uncalibrated framework; they do NOT imply a numerical standard.
+12. **Customer demand triggers manual re-evaluation, not automatic promotion**. A confirmed customer demand signal may materially change the Decision Layer and trigger a manual re-evaluation of Decision Readiness — but it does NOT automatically promote a capability to a higher decision level.
+13. **Line-count implementation estimates are NOT investment inputs**. Engineering Cost/Risk is expressed as a qualitative level (LOW/MEDIUM/HIGH) with implementation options noted as detail; actual production cost/risk is `UNCALIBRATED` until separately assessed.
+14. **All Decision Readiness classifications are provisional** under the uncalibrated framework. They represent the current manual classification based on available evidence — NOT a predictive or calibrated assessment.
+
 **Decision ladder** (per `bb3f43a` Section 6):
 
 ```text
@@ -47,6 +55,20 @@ CUSTOMER-SPECIFIC
 INVESTMENT CANDIDATE
 INVESTMENT DECISION READY
 ```
+
+**Resolution Status scale** (per this corrected framework — separated from Evidence Strength):
+
+```text
+NOT APPLICABLE          — remediation not needed (positive case, boundary routing outcome, or no boundary observed)
+UNTESTED                — remediation was applicable but not attempted
+CONFIG-ONLY REMEDIATION VALIDATED — remediation attempted AND succeeded via config-only change
+ENGINEERING REQUIRED    — remediation attempted AND failed because engineering required
+ENGINEERING REMEDIATION VALIDATED — engineering work executed AND succeeded
+```
+
+**Coverage label rule** (per correction #4):
+
+> Coverage labels (Limited / Moderate / Very limited / Broad / UNKNOWN) are qualitative descriptors only until Decision-Readiness Calibration is separately established. They do NOT represent calibrated thresholds.
 
 ---
 
@@ -84,14 +106,15 @@ Highest evidence state observed:     HIGH-CONFIDENCE VALIDATED (descriptive only
 
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              3 (ESMA, SNB, BaFin)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      0
-State 2 (ENGINEERING REQUIRED):                   0
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            3
+NOT APPLICABLE:                                    3 (ESMA — boundary routing outcome, no remediation needed; SNB — positive case, no remediation needed; BaFin — provenance-positive/compatibility, remediation attributed to Capability 7)
+UNTESTED:                                          0
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             3
 ```
 
-**Evidence Coverage**: Limited. 3 confirmed cases; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably).
+**Evidence Coverage**: Limited *(qualitative descriptor — NOT a calibrated threshold)*. 3 confirmed cases; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably).
 
 **Evidence Diversity**: Moderate.
 - Distinct institutions: 3 (ESMA, SNB, BaFin)
@@ -127,23 +150,26 @@ Evidence is strong (HIGH-CONFIDENCE VALIDATED + confirmed boundary + positive ca
 **Evidence Profile**:
 ```text
 Level 0 (HYPOTHESIS):                0
-Level 1 (BSERVED):                   1 (ABS — aligned but untested remediation)
-Level 2 (VALIDATED):                 7 (US Treasury, RBI, SEBI, PRA — mismatches; BaFin, Eurostat, FED_ENF — aligned)
+Level 1 (OBSERVED):                  0
+Level 2 (VALIDATED):                 8 (US Treasury, RBI, SEBI, PRA — mismatches; BaFin, Eurostat, FED_ENF, ABS — aligned)
 Level 3 (HIGH-CONFIDENCE VALIDATED): 0
 Total confirmed cases:               8
 Highest evidence state observed:     VALIDATED (descriptive only)
 ```
 
+Note: ABS passed Content-Path Alignment in the prospective v2 run — its content-path was aligned. ABS is VALIDATED for Content-Path Boundary. ABS's untested remediation for Pattern Specificity (Capability 3) does NOT affect its Evidence Strength for Content-Path (Capability 2). Evidence State for one capability does not transfer to or from another.
+
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              8 (all — mismatches are routing outcomes; aligned cases have no remediation needed)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      0
-State 2 (ENGINEERING REQUIRED):                   0
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            8
+NOT APPLICABLE:                                    8 (all — 4 mismatches are routing outcomes, no remediation needed; 4 aligned cases have no boundary to remediate)
+UNTESTED:                                          0
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             8
 ```
 
-**Evidence Coverage**: Moderate. 8 confirmed cases across 4 mismatches + 4 aligned; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN.
+**Evidence Coverage**: Moderate *(qualitative descriptor — NOT a calibrated threshold)*. 8 confirmed cases across 4 mismatches + 4 aligned; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN.
 
 **Evidence Diversity**: Moderate.
 - Distinct institutions: 8 (US Treasury, RBI, SEBI, PRA, BaFin, Eurostat, FED_ENF, ABS)
@@ -152,7 +178,7 @@ Total confirmed cases:                            8
 - Distinct intelligence types: 3 (sanctions_designation, monetary_policy_decision, regulatory_enforcement, statistical_release)
 - Independent validation reviews: 0
 
-**Derived Evidence Confidence**: High. 7 VALIDATED cases across 4 institutional classes and 4 intelligence types. The v2 Content-Path Alignment stage is the most validated component of the v2 framework.
+**Derived Evidence Confidence**: High. 8 VALIDATED cases across 4 institutional classes and 4 intelligence types. The v2 Content-Path Alignment stage is the most validated component of the v2 framework.
 
 **Decision Layer**:
 - **Strategic Value**: HIGH. Content-path qualification prevents wasted Gate 5 attempts. Universal pre-Gate-5 check.
@@ -162,7 +188,7 @@ Total confirmed cases:                            8
 
 **Decision Readiness**: `EVIDENCE-ONLY`
 
-Evidence is strong (7 VALIDATED + 1 OBSERVED, 4 institutional classes). The capability is already operational as the v2 Content-Path Alignment stage. No investment decision is warranted.
+Evidence is strong (8 VALIDATED, 4 institutional classes). The capability is already operational as the v2 Content-Path Alignment stage. No investment decision is warranted.
 
 **Evidence gaps**:
 - Whether the v2 stage produces false negatives (aligned paths that actually contain mixed content) — no confirmed false negative.
@@ -178,9 +204,9 @@ Evidence is strong (7 VALIDATED + 1 OBSERVED, 4 institutional classes). The capa
 
 **Evidence Profile**:
 ```text
-Level 0 (HYPOTHESIS):                1 (ABS — untested hypothesis)
+Level 0 (HYPOTHESIS):                1 (ABS — untested hypothesis for Pattern Specificity; ABS's content-path was aligned but its pattern-content match was not tested)
 Level 1 (OBSERVED):                  0
-Level 2 (VALIDATED):                 1 (FED_ENF — remediation test confirmed the boundary)
+Level 2 (VALIDATED):                 1 (FED_ENF — remediation test confirmed the pattern-specificity boundary)
 Level 3 (HIGH-CONFIDENCE VALIDATED): 0
 Total confirmed cases:               2 (1 confirmed + 1 hypothesis)
 Highest evidence state observed:     VALIDATED (descriptive only — FED_ENF)
@@ -188,14 +214,15 @@ Highest evidence state observed:     VALIDATED (descriptive only — FED_ENF)
 
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              1 (ABS — hypothesis, no remediation attempted)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      1 (FED_ENF — `f16bc00`)
-State 2 (ENGINEERING REQUIRED):                   0
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            2
+NOT APPLICABLE:                                    0
+UNTESTED:                                          1 (ABS — remediation applicable but not attempted)
+CONFIG-ONLY REMEDIATION VALIDATED:                 1 (FED_ENF — `f16bc00`)
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             2
 ```
 
-**Evidence Coverage**: Very limited. 2 cases (1 confirmed + 1 hypothesis); universe prevalence unknown.
+**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 2 cases (1 confirmed + 1 hypothesis); universe prevalence unknown.
 
 **Evidence Diversity**: Narrow.
 - Distinct institutions: 2 (Federal Reserve, ABS)
@@ -240,14 +267,15 @@ Highest evidence state observed:     VALIDATED (descriptive only)
 
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              3 (NSO India, Basel Committee, EIOPA — validated but no remediation attempted)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      0
-State 2 (ENGINEERING REQUIRED):                   1 (TCMB — `04289d2`, `45bbd88`)
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            4
+NOT APPLICABLE:                                    3 (NSO India, Basel Committee, EIOPA — validated boundary, no remediation attempted; these are positive observations of the gap, not cases requiring remediation)
+UNTESTED:                                          0
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              1 (TCMB — `04289d2`, `45bbd88`)
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             4
 ```
 
-**Evidence Coverage**: Very limited. 4 confirmed cases; universe prevalence UNKNOWN. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably — 53.1% INCONCLUSIVE in V1.1).
+**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 4 confirmed cases; universe prevalence UNKNOWN. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably — 53.1% INCONCLUSIVE in V1.1).
 
 **Evidence Diversity**: Broad.
 - Distinct institutions: 4 (TCMB, NSO India, Basel Committee, EIOPA)
@@ -261,7 +289,7 @@ Total confirmed cases:                            4
 **Decision Layer**:
 - **Strategic Value**: HIGH if applies to G20 economies; UNKNOWN for broader source universe.
 - **Reuse Potential**: UNKNOWN / HYPOTHESIS. Building the capability would solve 4 confirmed cases. Whether it would unlock more sources is unknown — the survey could not measure prevalence.
-- **Engineering Cost/Risk**: MEDIUM. Two options identified: `force_browser` config flag (~10 lines in `fetcher.py`); new `html_index_js` feed_format (~25 lines in `fetcher.py`). Playwright is already a dependency. Risk: throughput drop for browser-rendered sources; reproducibility may vary with timing.
+- **Engineering Cost/Risk**: MEDIUM. Known implementation options exist (`force_browser` config flag; `html_index_js` feed_format — see Registry for detail). Actual production cost/risk: UNCALIBRATED — line-count estimates from the TCMB diagnostic are implementation detail, NOT investment inputs. Risk factors: throughput drop for browser-rendered sources; reproducibility may vary with timing.
 - **Strategic Alignment**: Global expansion (Turkey, India, multilateral institutions). Customer demand signals for one of the 4 confirmed sources would create strategic alignment.
 
 **Decision Readiness**: `INVESTMENT CANDIDATE`
@@ -275,11 +303,11 @@ Evidence supports considering the capability for platform investment. The gap is
 - Whether modern SPA-heavy bank/regulator websites require browser rendering — unverified hypothesis.
 
 **Required additional evidence** (to change decision level):
-- **Customer demand signal**: If a customer explicitly requests TCMB (or NSO India, Basel Committee, EIOPA), the decision level could be promoted to CUSTOMER-SPECIFIC or INVESTMENT DECISION READY (for that customer's scope).
+- **Customer demand signal**: A confirmed customer demand signal for TCMB (or NSO India, Basel Committee, EIOPA) may materially change the Decision Layer and trigger a manual re-evaluation of Decision Readiness — but does NOT automatically promote the capability to a higher level.
 - **Manual URL discovery per source**: A human-curated survey of the 149 untested sources (V1.2 with manual URL discovery) could estimate prevalence — but this is NOT recommended with the automated approach (per user directive: V1.2 universe survey NOT RECOMMENDED).
 - **Different execution environment**: A survey from an environment with unrestricted network access could reduce the 53% INCONCLUSIVE rate and provide a prevalence estimate.
 
-**Recommended next action**: WAIT for customer demand signal OR strategic priority for one of the 4 confirmed sources. If TCMB or another confirmed case is requested, execute engineering work (~10-25 lines in `fetcher.py`). Do NOT build the capability speculatively.
+**Recommended next action**: WAIT for customer demand signal OR strategic priority for one of the 4 confirmed sources. If TCMB or another confirmed case is requested, a manual re-evaluation of Decision Readiness would be triggered — engineering work may then be authorized. Do NOT build the capability speculatively.
 
 ---
 
@@ -299,14 +327,15 @@ Note: Banco Central do Brasil is non-English observed but NOT a confirmed gap (E
 
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              7 (all — no remediation attempted)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      0
-State 2 (ENGINEERING REQUIRED):                   0
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            7
+NOT APPLICABLE:                                    0
+UNTESTED:                                          7 (all — remediation applicable but not attempted; no per-language pattern library built)
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             7
 ```
 
-**Evidence Coverage**: Very limited. 7 confirmed gaps across 6 languages; universe prevalence UNKNOWN. 53.1% of V1.1 sources had UNKNOWN language — actual non-English count likely higher.
+**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 7 confirmed gaps across 6 languages; universe prevalence UNKNOWN. 53.1% of V1.1 sources had UNKNOWN language — actual non-English count likely higher.
 
 **Evidence Diversity**: Broad.
 - Distinct institutions: 7 (INSEE, Banca d'Italia, FSO, BaFin, Saudi MoF, CBS Netherlands, CSRC)
@@ -321,7 +350,7 @@ Total confirmed cases:                            7
 **Decision Layer**:
 - **Strategic Value**: HIGH if ROUAA's market includes non-English-speaking jurisdictions (which it does — global expansion is the strategic frame).
 - **Reuse Potential**: UNKNOWN / HYPOTHESIS. Building a per-language pattern library for any specific language would unlock the confirmed-gap sources in that language. Broader reuse is unknown.
-- **Engineering Cost/Risk**: MEDIUM-HIGH. Per-language pattern libraries require linguistic expertise + substantial pattern authoring. HTML index keyword filter internationalization is a small code change (~5 lines) + per-source config data.
+- **Engineering Cost/Risk**: MEDIUM-HIGH. Per-language pattern libraries require linguistic expertise + substantial pattern authoring. HTML index keyword filter internationalization is a known implementation option (small code change + per-source config data — see Registry for detail). Actual production cost/risk: UNCALIBRATED.
 - **Strategic Alignment**: Global expansion roadmap (EU, China, Middle East). Customer demand for a specific jurisdiction would create strategic alignment.
 
 **Decision Readiness**: `INVESTMENT CANDIDATE`
@@ -335,8 +364,8 @@ Evidence supports considering the capability for platform investment. 7 confirme
 - Whether building any single language library unlocks enough sources to justify the work — UNKNOWN.
 
 **Required additional evidence** (to change decision level):
-- **Global expansion roadmap decision**: If a specific jurisdiction (e.g., EU, China, Middle East) is prioritized, the corresponding language library becomes an INVESTMENT DECISION READY candidate for that language only.
-- **Customer demand signal**: If a customer explicitly requests a non-English source, the corresponding language library becomes a CUSTOMER-SPECIFIC candidate.
+- **Global expansion roadmap decision** prioritizing a specific jurisdiction (e.g., EU, China, Middle East) may materially change the Decision Layer and trigger a manual re-evaluation of Decision Readiness for that language — but does NOT automatically promote to a higher level.
+- **Customer demand signal** for a non-English source may trigger a manual re-evaluation.
 - **Remediation test**: A per-language pattern library for one language (e.g., French for INSEE) would provide REMEDIATION-VALIDATED evidence, strengthening the case for that language.
 
 **Recommended next action**: WAIT for global expansion roadmap decision or customer demand signal for a specific jurisdiction. When a jurisdiction is prioritized, the corresponding language library becomes a BUILD NOW candidate for that language only. Do NOT build all 6 language libraries speculatively.
@@ -367,14 +396,15 @@ Total observed potential types:      4
 
 **Resolution Profile**:
 ```text
-State 0 (UNTESTED):                              7 (all — no remediation attempted; no new event type built)
-State 1 (CONFIG-ONLY REMEDIATION VALIDATED):      0
-State 2 (ENGINEERING REQUIRED):                   0
-State 3 (ENGINEERING REMEDIATION VALIDATED):      0
-Total confirmed cases:                            7
+NOT APPLICABLE:                                    0
+UNTESTED:                                          7 (all — remediation applicable but not attempted; no new event type built)
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total confirmed cases:                             7
 ```
 
-**Evidence Coverage**: Limited. 3 confirmed representation gaps + 4 observed potential types; universe prevalence UNKNOWN. V1.1 content inspection only 28.1% complete.
+**Evidence Coverage**: Limited *(qualitative descriptor — NOT a calibrated threshold)*. 3 confirmed representation gaps + 4 observed potential types; universe prevalence UNKNOWN. V1.1 content inspection only 28.1% complete.
 
 **Evidence Diversity**: Moderate.
 - Distinct institutions: 7 (Bundesbank, FSB, HMT, Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee)
@@ -388,7 +418,7 @@ Total confirmed cases:                            7
 **Decision Layer**:
 - **Strategic Value**: HIGH for fiscal policy (G7 coverage) and financial coordination (FSB, BIS). MEDIUM for EUR monetary statistics (overlaps with ECB already qualified). MEDIUM for prudential supervision and consumer protection (fewer confirmed cases).
 - **Reuse Potential**: UNKNOWN / HYPOTHESIS per event type. Building an event type for one confirmed gap (e.g., fiscal policy) would unlock that source. Broader reuse unknown.
-- **Engineering Cost/Risk**: MEDIUM per event type (~10 lines in `detector.py` + ~5 lines per metric in `PATTERN_TYPE_METADATA` + pattern library + SQR template update). No core architectural changes — config-driven architecture handles new event types cleanly.
+- **Engineering Cost/Risk**: MEDIUM per event type. Known implementation options exist (`EVENT_TYPE_RULES` entry + `PATTERN_TYPE_METADATA` entries + pattern library + SQR template update — see Registry for detail). No core architectural changes — config-driven architecture handles new event types. Actual production cost/risk: UNCALIBRATED.
 - **Strategic Alignment**: G7 coverage (fiscal policy), multilateral institutions (financial coordination), EU expansion (EUR monetary statistics).
 
 **Decision Readiness**: `INVESTMENT CANDIDATE`
@@ -402,9 +432,9 @@ Evidence supports considering the capability for platform investment. 3 confirme
 - Whether Banca d'Italia's EUR-metric issue is the same representation gap as Bundesbank's — UNKNOWN (compounded with Italian language gap; not independently isolated).
 
 **Required additional evidence** (to change decision level):
-- **Strategic priority for a specific intelligence type**: If fiscal policy (for G7 coverage) or financial coordination (for FSB/BIS) is prioritized, the corresponding event type becomes an INVESTMENT DECISION READY candidate.
+- **Strategic priority for a specific intelligence type**: A strategic priority for fiscal policy (G7 coverage) or financial coordination (FSB/BIS) may materially change the Decision Layer and trigger a manual re-evaluation of Decision Readiness — but does NOT automatically promote to a higher level.
 - **Route 4 observed potential types through v2 contract verification**: Would confirm/deny whether they are true representation gaps. This is a qualification exercise, not a survey.
-- **Customer demand signal**: If a customer explicitly requests a source that produces an uncovered intelligence type, the corresponding event type becomes a CUSTOMER-SPECIFIC candidate.
+- **Customer demand signal** for a source that produces an uncovered intelligence type may trigger a manual re-evaluation.
 
 **Recommended next action**: WAIT for strategic priority identifying a specific intelligence type. When prioritized, route the observed potential types through v2 contract verification to confirm, then build the event type for the confirmed case. Do NOT build event types speculatively.
 
