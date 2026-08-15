@@ -101,7 +101,7 @@ The TCMB page loads two custom JavaScript files:
 - `basin-duyurulari-filter.js` (1.1 KB) — purely client-side filtering of already-rendered DOM elements. No AJAX calls.
 - `sublanding.js` (10.7 KB) — navigation, mega-menus, sub-left-link behavior. No AJAX calls. Declares `var pageContent = "N"; /*Page does not include ajax*/` (overridden to `"A"` in an inline script on the actual page).
 
-A search of the rendered HTML for `<iframe>`, `data-src`, `data-url`, and `fetch(` patterns found no additional content-loading mechanism. The press release URLs appear to be inserted into the DOM by the WebSphere Portal server-side rendering layer (which is invoked by the JavaScript on the client side, requiring browser execution).
+A search of the rendered HTML for `<iframe>`, `data-src`, `data-url`, and `fetch(` patterns found no additional content-loading mechanism. The exact internal mechanism that produces the rendered DOM (server-side rendering invoked by client-side JavaScript, client-side template rendering, or some combination) is not established by this test — only the observable fact is confirmed: the required URLs are unavailable in the static HTTP representation and become available only after browser rendering.
 
 ---
 
@@ -111,7 +111,7 @@ A search of the rendered HTML for `<iframe>`, `data-src`, `data-url`, and `fetch
 
 The original classification of "link-pattern mismatch" was incorrect. The accurate classification is:
 
-> **JavaScript-rendered content requirement.** The TCMB Press Releases page returns only a navigation skeleton via static HTTP; the actual press release URLs are populated by client-side JavaScript. `urllib` cannot execute JavaScript, so no `link_pattern` (no matter how broad or refined) can match URLs that aren't present in the static HTML.
+> **Required content unavailable to static adapter.** The TCMB Press Releases page returns only a navigation skeleton via static HTTP; the actual press release URLs are unavailable in the static representation and become available only after browser rendering. `urllib` cannot execute JavaScript, so no `link_pattern` (no matter how broad or refined) can match URLs that aren't present in the static HTML. The precise DOM-generation mechanism (server-side rendering invoked by client-side JavaScript, client-side template rendering, or combination) is not established by this test.
 
 ---
 
@@ -159,9 +159,9 @@ Estimated lines of code changed in `fetcher.py`: ~25 lines.
 
 ### Option C: Discover a hidden JSON/XML API endpoint
 
-The TCMB JS files (`basin-duyurulari-filter.js`, `sublanding.js`) contain NO AJAX calls. The WebSphere Portal CMS renders the content server-side into the JavaScript-rendered DOM. There is no JSON/XML API endpoint discoverable from the page's JavaScript.
+The TCMB JS files (`basin-duyurulari-filter.js`, `sublanding.js`) contain NO AJAX calls. No API endpoint was identified through the inspected page/JS assets.
 
-**This option is not viable** — no API endpoint exists.
+**This option is not viable on the evidence available** — no API endpoint was identified through the inspected page/JS assets. This does not establish that no API exists outside those assets (e.g., a separate REST endpoint not referenced by the page's JS).
 
 ---
 
@@ -171,13 +171,13 @@ The TCMB JS files (`basin-duyurulari-filter.js`, `sublanding.js`) contain NO AJA
 
 > "if any core engineering is required: STOP"
 
-All viable resolution options (A and B) require core pipeline changes to `fetcher.py`. Option C is not viable. The test is STOPPED at the diagnostic phase.
+All viable resolution options (A and B) require core pipeline changes to `fetcher.py`. Option C identified no API endpoint through the inspected assets. The test is STOPPED at the diagnostic phase.
 
 ### Final Classification
 
 > **ENGINEERING REQUIRED**
 
-The TCMB Gate 5 failure is NOT a pattern-specificity issue (as originally classified). It is a **JavaScript-rendered content requirement** that requires core pipeline changes to `fetcher.py` to enable Playwright fetching for sources that return only navigation skeletons via static HTTP.
+The TCMB Gate 5 failure is NOT a pattern-specificity issue (as originally classified). It is a **required content unavailable to static adapter** issue: the press release URLs are unavailable in the static HTTP representation and become available only after browser rendering. This requires core pipeline changes to `fetcher.py` to enable Playwright fetching for sources that return only a navigation skeleton via static HTTP.
 
 ---
 
@@ -194,17 +194,17 @@ This test does NOT prove:
 
 ## What This Test DOES Prove
 
-1. **The original classification was wrong.** The Replication Batch Summary (`3a759cd`, corrected at `b59ab3f`) classified TCMB as "link-pattern mismatch (WebSphere Portal URL encoding)". The accurate classification is "JavaScript-rendered content requirement". The pattern itself was correct.
+1. **The original classification was wrong.** The Replication Batch Summary (`3a759cd`, corrected at `b59ab3f`) classified TCMB as "link-pattern mismatch (WebSphere Portal URL encoding)". The accurate classification is "required content unavailable to static adapter" (the URLs are unavailable in the static HTTP representation and become available only after browser rendering). The link_pattern itself was correct — the pattern matched all 33 URLs once the rendered HTML was available.
 
 2. **A config-only `link_pattern` change CANNOT resolve this failure.** No matter how the `link_pattern` is adjusted, urllib returns only the static HTML which contains zero press release URLs. The URLs only appear after JavaScript rendering.
 
-3. **TCMB is a fundamentally different failure mode from FED_ENF.** FED_ENF was a content-regex specificity issue (config-only fix). TCMB is a JavaScript-rendering requirement (engineering required).
+3. **TCMB is a fundamentally different failure mode from FED_ENF.** FED_ENF was a content-regex specificity issue (config-only fix). TCMB is a required-content-unavailable-to-static-adapter issue (engineering required). This distinction separates **configuration expressiveness** (can the regex/config express what's needed?) from **adapter capability** (can the fetcher reach the content at all?) — these are two different dimensions of failure.
 
 4. **Pattern-Specificity is NOT a single homogeneous category.** Within the "pattern-specificity" bucket identified in the Replication Batch Summary, there are at least two distinct sub-types:
    - **Content-regex specificity** (FED_ENF) — config-only remediable
-   - **Link-pattern + JS rendering** (TCMB) — engineering required
+   - **Link/discovery + adapter capability** (TCMB) — engineering required (the URLs are unavailable to the static adapter; this is an adapter-capability gap, not a pattern-expressiveness gap)
    
-   This has implications for treating Pattern-Specificity as a Gate 5 root-cause category — it may need sub-classification.
+   This has implications for treating Pattern-Specificity as a Gate 5 root-cause category — it may need sub-classification, with adapter-capability issues separated from configuration-expressiveness issues.
 
 ---
 
@@ -263,10 +263,60 @@ After this test, the cumulative evidence base for Pattern-Specificity remediatio
 |--------|----------------|------------------------|------------------|----------------|
 | Eurostat | QUALIFICATION_READY | PASS | (not attempted — already PASS) | n/a |
 | FED_ENF | QUALIFICATION_READY | FAIL (pattern-phrasing) | **PASS (config-only)** | Content-regex specificity — config-only |
-| TCMB | QUALIFICATION_READY | FAIL (link-pattern) | **ENGINEERING REQUIRED** | Link-pattern + JS rendering — engineering required |
+| TCMB | QUALIFICATION_READY | FAIL (link-pattern) | **ENGINEERING REQUIRED** | Required content unavailable to static adapter — engineering required |
 | ABS | QUALIFICATION_READY | FAIL (terminology) | not attempted | untested hypothesis |
 
 **Two distinct Pattern-Specificity sub-types are now empirically distinguished.** Future remediation tests on additional sources will help determine whether these sub-types generalize.
+
+---
+
+## User Decision (Recorded)
+
+Per user review of `04289d2`:
+
+> **TCMB remediation test = CLEARED / ENGINEERING REQUIRED**
+
+The two phrasing corrections requested by the user (don't assert DOM generation mechanism; soften Option C wording from "no API exists" to "no API endpoint identified through inspected assets") have been applied to this document (correction commit pending).
+
+### Decision: STOP remediation testing
+
+> **توقف هنا عن remediation. لا تختبر ABS الآن.**
+
+The user explicitly directed that ABS will NOT be tested at this time. The evidence base now consists of two distinct cases (FED_ENF config-only, TCMB engineering-required), which is sufficient to establish the key finding:
+
+> ليس كل Gate 5 failure مشكلة configuration، وليس كل pattern-specificity failure من النوع نفسه.
+
+(Not every Gate 5 failure is a configuration problem, and not every pattern-specificity failure is the same type.)
+
+### Decision: NO new gate, NO v2 methodology change
+
+Per user directive, no Gate 4.5 / Pattern-Specificity Gate is added. The v2 workflow is unchanged.
+
+### Decision: root-cause taxonomy update deferred
+
+The user proposed a future Gate 5 root-cause taxonomy (when sufficient evidence accumulates), structured as:
+
+```
+Gate 5 Root Cause
+├── Content-path mismatch
+├── Configuration contract
+├── Pattern/content specificity
+│   ├── Content-regex
+│   └── Link/discovery
+├── Adapter/rendering capability
+├── Semantic representation
+└── Provenance
+```
+
+This taxonomy is NOT applied now (sample size = 2). It is documented here as the user's proposed structure for future consideration when more remediation evidence accumulates.
+
+### Decision: NO Commercial Model update
+
+> **لا نُحدّث الـCommercial Model بعد؛ العينة ما زالت صغيرة.**
+
+The commercial promise stands unchanged:
+
+> ROUAA can qualify source access, provenance, content-path alignment, configuration compatibility, and semantic representation before onboarding; Gate 5 remains the validation step for source-specific extraction behavior.
 
 ---
 
@@ -286,18 +336,11 @@ Anyone can re-run the diagnostics on this branch and observe the same results.
 
 ---
 
-## Next Steps (User Decision Pending)
+## Scope of This Commit
 
-This test is complete and stopped at the diagnostic phase per user constraint. The user may now decide:
-
-1. **Stop remediation testing here**: We now have evidence for two distinct Pattern-Specificity sub-types (FED_ENF config-only, TCMB engineering-required). The classification of ABS remains a hypothesis.
-
-2. **Test ABS**: Run a third remediation test on ABS (terminology mismatch — Australian statistical phrasing). This may reveal a third sub-type or confirm that ABS is also config-only (like FED_ENF).
-
-3. **Engineering decision for TCMB**: If TCMB is strategically important, the engineering options (A or B) can be designed and approved in a separate work package. This would NOT be part of the v2 qualification methodology — it would be a pipeline enhancement.
-
-Per the user's original directive, this test does NOT modify:
+Per the user's original directive and review, this test does NOT modify:
 - `source_configs.py` (no config changes applied — none would help)
 - `fetcher.py` (no core pipeline changes)
 - Any other pipeline file
 - The v2 methodology / SQR / Queue / Contract / website
+- The Commercial Model
