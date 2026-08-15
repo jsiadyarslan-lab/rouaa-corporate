@@ -743,14 +743,24 @@ GATE5_SOURCES_LIST = {
         # v2 Content-Path: RSS confirmed to contain 7 enforcement items (titles with "enforcement action")
         # v2 Config Contract: event_type=regulatory_enforcement, regulatory_patterns metrics match trigger_metrics
         "rate_patterns": [],
+        # REMEDIATION TEST (FED_ENF): patterns adjusted to match actual Fed enforcement phrasing.
+        # Original patterns expected "enforcement action with X" / "enforcement action against X" — but
+        # Fed's actual phrasing is "Consent Prohibition against X", "Consent Order against X",
+        # "Written Agreement with X", "Civil Money Penalty against X".
+        # This is a CONFIG-ONLY remediation — no extractor/detector changes.
+        # See: REMEDIATION_TEST_FINDINGS_V1.md
         "regulatory_patterns": [
-            # Defendant names: "enforcement action with X" / "against X"
-            (r"(?:enforcement\s+action\s+(?:with|against))\s+([A-Z][A-Za-z\s,&\.\-]{5,80}?)(?:\s+(?:and|Former|former))", "defendant_name"),
-            (r"(?:issued|assessed|imposed)\s+(?:a\s+)?(?:consent\s+)?(?:order|civil\s+money\s+penalty|fine|prohibition)", "action_type"),
-            # Violation types
-            (r"(?:for|due\s+to|related\s+to)\s+([a-z\s,]{10,60}(?:fraud|violation|breach|misconduct|deficiency))", "violation_type"),
-            # Penalty amounts (if any)
-            (r"(?:agreed\s+to\s+pay|pay|penalty\s+of)\s+(?:approximately\s+)?\$([\d,]+(?:\.\d+)?)\s+(million|billion)", "penalty_amount"),
+            # Defendant names: capture individual/bank name after "against" in enforcement context.
+            # Matches: "Consent Prohibition against Elazia Jones", "Consent Order against First Federal Bank"
+            (r"(?:Consent\s+(?:Prohibition|Order|Cease\s+and\s+Desist\s+Order|Written\s+Agreement)|Cease\s+and\s+Desist\s+Order|Civil\s+Money\s+Penalty)\s+(?:Issued\s+Against\s+|against\s+)([A-Z][A-Za-z0-9\s,&\.\-]{3,100}?)(?:[,\n\.])", "defendant_name"),
+            # Action type: detect the enforcement instrument (Consent Prohibition, Consent Order, Written Agreement, etc.)
+            (r"\b(Consent\s+(?:Prohibition|Order|Cease\s+and\s+Desist)|Cease\s+and\s+Desist\s+Order|Civil\s+Money\s+Penalty|Written\s+Agreement|Removal\s+and\s+Prohibition|Order\s+of\s+Prohibition)\b", "action_type"),
+            # Violation types: substantive issue with broader matching (BSA/AML/unsafe practices)
+            (r"(?:for|due\s+to|related\s+to|based\s+on|in\s+connection\s+with)\s+([a-z\s,]{8,80}(?:fraud|violation|breach|misconduct|deficiency|unsafe\s+or\s+unsound\s+practice|Bank\s+Secrecy\s+Act|BSA|AML|anti-money\s+laundering))", "violation_type"),
+            # Violation types: standalone BSA/AML patterns (Fed enforcement is heavy on BSA/AML)
+            (r"\b(Bank\s+Secrecy\s+Act|BSA|AML|anti-money\s+laundering|unsafe\s+or\s+unsound\s+practice[s]?)\b", "violation_type"),
+            # Penalty amounts: "$X million civil money penalty"
+            (r"(?:agreed\s+to\s+pay|pay|penalty\s+of|civil\s+money\s+penalty\s+of)\s+(?:approximately\s+)?\$([\d,]+(?:\.\d+)?)\s+(million|billion)", "penalty_amount"),
             (r"\$([\d,]+(?:\.\d+)?)\s+(million|billion)\s+(?:penalty|fine|civil\s+money)", "penalty_amount"),
         ],
         "event_type": "regulatory_enforcement",
