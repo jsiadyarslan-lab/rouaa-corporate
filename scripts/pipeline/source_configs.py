@@ -693,6 +693,43 @@ GATE5_SOURCES_LIST = {
         "content_keywords": ["Bafin", "warns", "consumers", "unauthorized", "authorisation", "website", "fraud"],
     },
 
+    "EUROSTAT": {
+        "code": "EUROSTAT",
+        "name": "Eurostat",
+        "type": "statistical_authority",
+        "country": "EU",
+        "jurisdiction": "European Union",
+        "trustTier": 1,
+        "websiteUrl": "https://ec.europa.eu/eurostat",
+        # Pre-screening found: no standard RSS; HTML news listing at /eurostat/news
+        "feedUrl": "https://ec.europa.eu/eurostat/news",
+        "feed_format": "html_index",
+        # Pre-screening found article URLs like /eurostat/web/products-eurostat-news/w/ddn-20260814-2
+        "link_pattern": r"/eurostat/web/products-eurostat-news/w/[^\"']+",
+        "link_pattern_prefix": "https://ec.europa.eu",
+        # Configuration contract verified statically (bd7285d, 18e9897):
+        # event_type = statistical_release (supported, trigger_metrics match)
+        # Pattern types use existing PATTERN_TYPE_METADATA entries (all normalized, all in trigger_metrics)
+        # Content: statistical releases with percentages, GDP, inflation data
+        "rate_patterns": [],
+        "statistical_patterns": [
+            # Inflation rate
+            (r"(?:inflation|HICP|consumer\s+price)\s+(?:rate|annual|growth)\s+(?:was\s+|of\s+|stood\s+at\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "inflation_rate"),
+            (r"annual\s+(?:rate\s+of\s+)?inflation\s+(?:was\s+|of\s+|stood\s+at\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "inflation_rate"),
+            # GDP growth
+            (r"GDP\s+(?:grew|fell|rose|declined|increased|decreased)\s+by\s+([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "gdp_growth"),
+            (r"gdp\s+growth\s+(?:of\s+|was\s+|rate\s+of\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "gdp_growth"),
+            # Unemployment rate
+            (r"unemployment\s+rate\s+(?:was\s+|of\s+|stood\s+at\s+)([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)", "unemployment_rate"),
+            # Generic percentage statistic (currency-neutral — works for EUR content)
+            (r"([+-]?\d+(?:\.\d+)?)\s*(?:percent|%|pct)\s+(?:of\s+GDP|year[- ]on[- ]year|yoy|compared\s+with)", "percentage_statistic"),
+            # Generic numeric statistic
+            (r"(?:estimated|recorded|reported|stood\s+at)\s+(?:at\s+|of\s+)?([+-]?[\d,]+(?:\.\d+)?)\s*(?:million|billion|thousand)", "statistic_value"),
+        ],
+        "event_type": "statistical_release",
+        "content_keywords": ["Eurostat", "statistics", "statistical", "economic", "data", "indicator"],
+    },
+
 }
 
 # Combine all sources

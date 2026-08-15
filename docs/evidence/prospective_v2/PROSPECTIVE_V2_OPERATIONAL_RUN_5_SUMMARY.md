@@ -143,7 +143,7 @@ This confirms that predictions should remain UNKNOWN — the test scenarios were
 
 ## Final Status
 
-**Prospective v2 Operational Run — 5 Sources — COMPLETE**
+**Prospective v2 Operational Run — 5 Sources + Eurostat Gate 5 — COMPLETE**
 
 | Metric | Value |
 |--------|-------|
@@ -153,9 +153,31 @@ This confirms that predictions should remain UNKNOWN — the test scenarios were
 | Configuration Compatible | 2/5 |
 | Semantic Compatible | 1/5 |
 | QUALIFICATION_READY | 1/5 (Eurostat) |
-| Gate 5 reached | 0/5 (not executed in this batch) |
-| Engineering intervention | 0/5 |
+| Gate 5 reached | 1/5 (Eurostat) |
+| Gate 5 PASS | 1/5 (Eurostat — PUBLISHABLE, 1 IO, config-only, 0 engineering) |
+| Engineering intervention executed | 0/5 |
+| Engineering routed | 3 (INSEE, FSB, UK HM Treasury) |
+| Content-path review | 1 (PRA) |
 | Root causes: content-path mismatch | 1 (PRA) |
 | Root causes: representation gap (language) | 1 (INSEE) |
 | Root causes: representation gap (event model) | 2 (FSB, UK HM Treasury) |
-| Root causes: no failure | 1 (Eurostat) |
+| Root causes: no failure | 1 (Eurostat — Gate 5 PASS) |
+
+### Eurostat Gate 5 result (added after initial batch)
+
+Eurostat was the only source to reach QUALIFICATION_READY = YES in this batch. Gate 5 was subsequently executed:
+
+- Pipeline state: **PUBLISHABLE**
+- Facts extracted: 2
+- Events detected: 1
+- Evidence records: 2
+- Provenance chains: 2 (verified = True)
+- Intelligence Objects: 1 (meets quality threshold)
+- Output quality: accept
+- Source-specific code: 0
+- Engineering intervention: False
+- Onboarding classification: config_only
+- Reproducible: True
+- **Gate 5 result: PASS**
+
+This is the first prospective v2 QUALIFICATION_READY → Gate 5 PASS on a source not involved in v2 methodology design.
