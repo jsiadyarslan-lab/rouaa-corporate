@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: V1 — CORRECTED DRAFT FOR REVIEW (corrected per user review of `9450647`)
+**Status**: V1 — READY FOR FREEZE REVIEW (corrected per user review of `2e964df`)
 **Type**: Strategy framework — decision framework, NOT a decision machine. Does NOT modify any frozen artifact.
 **Base**:
 - Capability Evidence Registry V1 (FROZEN at `dd66cc1`)
@@ -175,7 +175,7 @@ Total confirmed cases:                             8
 - Distinct institutions: 8 (US Treasury, RBI, SEBI, PRA, BaFin, Eurostat, FED_ENF, ABS)
 - Distinct institutional classes: 4 (B1, B2, B3, B4)
 - Distinct geographies: 6+ (US, IN, INT, UK, DE, EU, AU)
-- Distinct intelligence types: 3 (sanctions_designation, monetary_policy_decision, regulatory_enforcement, statistical_release)
+- Distinct intelligence types: 4 (sanctions_designation, monetary_policy_decision, regulatory_enforcement, statistical_release)
 - Independent validation reviews: 0
 
 **Derived Evidence Confidence**: High. 8 VALIDATED cases across 4 institutional classes and 4 intelligence types. The v2 Content-Path Alignment stage is the most validated component of the v2 framework.
@@ -208,21 +208,22 @@ Level 0 (HYPOTHESIS):                1 (ABS — untested hypothesis for Pattern 
 Level 1 (OBSERVED):                  0
 Level 2 (VALIDATED):                 1 (FED_ENF — remediation test confirmed the pattern-specificity boundary)
 Level 3 (HIGH-CONFIDENCE VALIDATED): 0
-Total confirmed cases:               2 (1 confirmed + 1 hypothesis)
+Confirmed evidence cases:            1 (FED_ENF)
+Hypothesis cases (NOT counted as evidence): 1 (ABS)
 Highest evidence state observed:     VALIDATED (descriptive only — FED_ENF)
 ```
 
 **Resolution Profile**:
 ```text
 NOT APPLICABLE:                                    0
-UNTESTED:                                          1 (ABS — remediation applicable but not attempted)
+UNTESTED:                                          1 (ABS — remediation applicable but not attempted; hypothesis, not yet confirmed as a boundary)
 CONFIG-ONLY REMEDIATION VALIDATED:                 1 (FED_ENF — `f16bc00`)
 ENGINEERING REQUIRED:                              0
 ENGINEERING REMEDIATION VALIDATED:                 0
-Total confirmed cases:                             2
+Total confirmed evidence cases:                   1
 ```
 
-**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 2 cases (1 confirmed + 1 hypothesis); universe prevalence unknown.
+**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 1 confirmed evidence case (FED_ENF); universe prevalence unknown. ABS is a hypothesis — NOT counted as evidence.
 
 **Evidence Diversity**: Narrow.
 - Distinct institutions: 2 (Federal Reserve, ABS)
@@ -394,15 +395,27 @@ Total observed potential types:      4
 
 **Combined Evidence Profile**: 3 VALIDATED + 4 OBSERVED = 7 cases (but the 4 OBSERVED are potential, not confirmed representation gaps).
 
-**Resolution Profile**:
+**Resolution Profile** (Confirmed Representation Gaps):
 ```text
 NOT APPLICABLE:                                    0
-UNTESTED:                                          7 (all — remediation applicable but not attempted; no new event type built)
+UNTESTED:                                          3 (Bundesbank, FSB, UK HM Treasury — remediation/extension applicable but not attempted; no new event type built)
 CONFIG-ONLY REMEDIATION VALIDATED:                 0
 ENGINEERING REQUIRED:                              0
 ENGINEERING REMEDIATION VALIDATED:                 0
-Total confirmed cases:                             7
+Total confirmed representation gaps:              3
 ```
+
+**Resolution Profile** (Observed Potentially Uncovered Intelligence Types):
+```text
+NOT APPLICABLE / NOT YET ASSESSED:                 4 (Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee — these are content observations from V1.1; applicability as representation gaps has NOT been established because they have not been routed through v2 contract verification. It is NOT established that remediation is applicable — the observation itself is potential, not confirmed.)
+UNTESTED:                                          0
+CONFIG-ONLY REMEDIATION VALIDATED:                 0
+ENGINEERING REQUIRED:                              0
+ENGINEERING REMEDIATION VALIDATED:                 0
+Total observed potential types:                     4
+```
+
+**Critical distinction**: The 4 observed potential types are `NOT APPLICABLE / NOT YET ASSESSED` — NOT `UNTESTED`. `UNTESTED` implies remediation was applicable but not attempted. For the 4 observed potential types, applicability itself has not been established — they may or may not be true representation gaps. Placing them under `UNTESTED` would incorrectly imply that they are confirmed gaps awaiting remediation, when in fact they are content observations that require v2 contract verification to determine whether they are representation gaps at all.
 
 **Evidence Coverage**: Limited *(qualitative descriptor — NOT a calibrated threshold)*. 3 confirmed representation gaps + 4 observed potential types; universe prevalence UNKNOWN. V1.1 content inspection only 28.1% complete.
 
@@ -499,10 +512,10 @@ Evidence is strong (7 VALIDATED cases across multiple institutional classes). Th
 |---|------------|-----------------------------|------------------------------|----------|-----------|---------------------|-------------------|
 | 1 | Provenance Metadata Compatibility | 1 HIGH-CONFIDENCE + 2 OBSERVED | 3 UNTESTED | Limited | Moderate | High | `EVIDENCE-ONLY` |
 | 2 | Content-Path Boundary | 7 VALIDATED + 1 OBSERVED | 8 UNTESTED | Moderate | Moderate | High | `EVIDENCE-ONLY` |
-| 3 | Pattern Specificity | 1 VALIDATED + 1 HYPOTHESIS | 1 UNTESTED + 1 CONFIG-ONLY | Very limited | Narrow | High for FED_ENF only | `EVIDENCE-ONLY` |
+| 3 | Pattern Specificity | 1 VALIDATED (+ 1 HYPOTHESIS) | 1 UNTESTED + 1 CONFIG-ONLY | Very limited | Narrow | High for FED_ENF only | `EVIDENCE-ONLY` |
 | 4 | Adapter / Browser Rendering | 4 VALIDATED | 3 UNTESTED + 1 ENG-REQUIRED | Very limited | Broad | High for existence | `INVESTMENT CANDIDATE` |
 | 5 | Language / Multilingual Boundary | 7 OBSERVED | 7 UNTESTED | Very limited | Broad | High for confirmed gaps | `INVESTMENT CANDIDATE` |
-| 6 | Event-Model Representation | 3 VALIDATED + 4 OBSERVED | 7 UNTESTED | Limited | Moderate | High for 3 confirmed; MEDIUM for 4 observed | `INVESTMENT CANDIDATE` |
+| 6 | Event-Model Representation | 3 VALIDATED + 4 OBSERVED | 3 UNTESTED + 4 NOT YET ASSESSED | Limited | Moderate | High for 3 confirmed; MEDIUM for 4 observed | `INVESTMENT CANDIDATE` |
 | 7 | Configuration Contract Compatibility | 7 VALIDATED | 6 UNTESTED + 1 CONFIG-ONLY | Moderate | Moderate | High | `EVIDENCE-ONLY` |
 
 **Decision ladder distribution**:
@@ -653,18 +666,28 @@ This framework applies the Open Design Gap by:
 
 ## 8. Document Status
 
-**CAPABILITY_INVESTMENT_DECISION_FRAMEWORK_V1 — DRAFT FOR REVIEW.**
+**CAPABILITY_INVESTMENT_DECISION_FRAMEWORK_V1 — READY FOR FREEZE REVIEW.**
+
+Per user review of `2e964df` (CONDITIONALLY APPROVED), 3 final corrections have been applied:
+
+1. **Capability 3 — HYPOTHESIS excluded from confirmed-case counts**: ABS is now recorded as a hypothesis case (NOT counted as evidence). Confirmed evidence cases = 1 (FED_ENF only). Coverage, diversity, and all downstream calculations now reference 1 confirmed case, not 2.
+
+2. **Capability 6 — Resolution applicability separated for confirmed gaps vs observed potential types**: Confirmed representation gaps (3: Bundesbank, FSB, HMT) = `UNTESTED` (remediation applicable but not attempted). Observed potentially uncovered intelligence types (4: Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee) = `NOT APPLICABLE / NOT YET ASSESSED` (applicability as representation gaps has NOT been established — these are content observations, not confirmed gaps). This preserves the distinction: observed content type ≠ confirmed representation gap.
+
+3. **Capability 2 — intelligence type count corrected**: Distinct intelligence types = 4 (was incorrectly stated as 3). The 4 types are: sanctions_designation, monetary_policy_decision, regulatory_enforcement, statistical_release.
+
+These 3 corrections are local fixes — they do not alter the underlying evidence, the 15-field structure, or the FROZEN design constraints. After these corrections, the framework is ready for freeze review.
 
 This framework:
 - Applies the 6 FROZEN design constraints from `bb3f43a`.
 - Documents 7 capabilities with the 15-field structure.
-- Assigns Decision Readiness levels: 4 `EVIDENCE-ONLY` + 3 `INVESTMENT CANDIDATE` + 0 `INVESTMENT DECISION READY`.
+- Assigns Decision Readiness levels (provisional): 4 `EVIDENCE-ONLY` + 3 `INVESTMENT CANDIDATE` + 0 `INVESTMENT DECISION READY`.
 - Does NOT make BUILD NOW decisions.
 - Does NOT establish numerical decision-readiness thresholds (Open Design Gap).
 - Does NOT modify any frozen artifact.
 
 The user is asked to:
-1. Review the per-capability Decision Readiness assignments.
+1. Review the corrected per-capability Decision Readiness assignments (provisional).
 2. Confirm the Decision Gaps & Evidence Acquisition Plan (Section 5).
 3. Provide strategic context for the 3 INVESTMENT CANDIDATES (customer demand, global expansion roadmap, intelligence type priority) — or confirm that no strategic priority exists yet.
 4. Decide whether to authorize any engineering work based on the framework + strategic context.
@@ -678,10 +701,10 @@ The user is asked to:
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Status | DRAFT FOR REVIEW |
+| Status | READY FOR FREEZE REVIEW |
 | Type | Strategy framework — decision framework, NOT a decision machine |
 | Inputs | Capability Evidence Registry V1 (FROZEN `dd66cc1`); Global Source Universe V1 (`8b1e7b4`); Commercial Source Qualification Model v1/v2; Design Constraints V1 (FROZEN `bb3f43a`) |
 | Does NOT modify | Registry, Design Constraints, Portfolio, Queue, Qualification v2, pipeline, config, Contract, Commercial Model, website |
-| Decision Readiness distribution | 4 EVIDENCE-ONLY + 3 INVESTMENT CANDIDATE + 0 INVESTMENT DECISION READY |
+| Decision Readiness distribution (provisional) | 4 EVIDENCE-ONLY + 3 INVESTMENT CANDIDATE + 0 INVESTMENT DECISION READY |
 | Open Design Gap | Decision-Readiness Calibration (no numerical thresholds) |
 | Next step | User reviews framework, provides strategic context, decides whether to authorize engineering work |
