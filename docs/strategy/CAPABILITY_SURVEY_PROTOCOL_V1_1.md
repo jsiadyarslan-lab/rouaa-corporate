@@ -99,17 +99,34 @@ For each INCONCLUSIVE source, fetch the homepage (base URL from `INSTITUTION_URL
 - URL is on the same domain as the homepage (not external)
 - URL path depth ≥ 1 (not just the root)
 
-### Stage 2: Probe candidate content paths
+### Stage 2: Probe candidate content paths (with semantic relevance guard)
 
-For each candidate URL found in Stage 1, attempt static fetch. If successful (HTTP 200, > 1000 bytes), use this URL as the "selected content path" for the source. If multiple candidates succeed, pick the one with the highest document-URL count.
+For each candidate URL found in Stage 1, attempt static fetch. If successful (HTTP 200, > 1000 bytes), the candidate is eligible for selection.
 
-### Stage 3: Playwright fallback
+**Semantic relevance guard (mandatory before tie-break by volume):** If multiple candidates succeed, document-URL count is a **secondary** criterion. The selected path must FIRST be plausibly relevant to an institutional intelligence type (e.g., for a central bank: monetary policy decisions, statistical releases, regulatory enforcement; for a Ministry of Finance: fiscal policy, financial coordination; for a market infrastructure: market structure). Volume alone MUST NOT determine path selection.
+
+This guard prevents repeating the US Treasury / RBI content-path mismatch observed earlier: the most voluminous path is not necessarily the correct path for the target intelligence type.
+
+**Selection procedure**:
+1. Identify which candidates are semantically relevant to the source's institutional intelligence type (per `institutional_class` from the sample manifest).
+2. Among the semantically-relevant candidates, pick the one with the highest document-URL count.
+3. If no candidate is semantically relevant, mark the source as INCONCLUSIVE (do NOT fall back to volume-only selection).
+
+### Stage 3: Playwright fallback (for URL discovery only — does NOT classify as BROWSER_RENDERED)
 
 If no Stage 2 candidate succeeds, attempt Playwright rendering of the homepage to discover additional candidate URLs (some sites have JS-rendered navigation).
 
+**CRITICAL RULE — Discovery vs Ingestion Distinction:**
+
+> Use of Playwright for URL discovery does NOT classify the source as BROWSER_RENDERED. A source is classified as BROWSER_RENDERED only when the **selected content path itself** exposes the target document URLs or document content only after browser rendering — i.e., the static fetch of the selected content path produces ≤3 document URLs AND the Playwright-rendered fetch of that SAME content path exposes ≥5 target documents that were absent from the static HTML.
+
+This distinction is essential because the survey measures **platform capability** (does ingestion require browser rendering?), not whether Playwright is used as a discovery tool. A source whose homepage requires Playwright to discover content paths — but whose selected content path is statically fetchable — is NOT BROWSER_RENDERED.
+
 ### Stage 4: Final classification
 
-If all stages fail, the source is recorded as INCONCLUSIVE again — but this is expected to be rarer than V1 due to the homepage-crawl strategy.
+If all stages fail (no candidate URL succeeds statically AND no Playwright-discovered URL succeeds statically), the source is recorded as INCONCLUSIVE again — but this is expected to be rarer than V1 due to the homepage-crawl strategy.
+
+If the selected content path produces ≤3 document URLs statically, then a Playwright render of the **selected content path** (not the homepage) is performed to determine BROWSER_RENDERED classification per the rule in Stage 3.
 
 ---
 
@@ -269,19 +286,25 @@ After ratification, the next step is V1.1 execution per Section 6.
 
 ## 12. Document Status
 
-**CAPABILITY_SURVEY_PROTOCOL_V1_1 — DRAFT FOR USER RATIFICATION**
+**CAPABILITY_SURVEY_PROTOCOL_V1_1 — FROZEN / READY FOR EXECUTION**
 
-This protocol defines:
-- A follow-up to V1 with the same sample (no re-sampling)
-- Re-run of 17 INCONCLUSIVE sources with improved URL discovery
-- Content inspection for ALL 32 sources (NEW — addresses V1 protocol deviation for Capability 6)
-- Decision sufficiency thresholds (≥80% measurement completeness per capability)
+Per user review of `7dba672` (CONDITIONAL APPROVAL), two documentation-only corrections have been applied:
+
+1. **Discovery vs Ingestion Distinction (Section 4, Stage 3)**: Use of Playwright for URL discovery does NOT classify a source as BROWSER_RENDERED. A source is classified as BROWSER_RENDERED only when the **selected content path itself** exposes target documents only after browser rendering. This protects the survey's purpose: measuring platform capability (ingestion requirement), not Playwright-as-tool usage.
+
+2. **Semantic relevance guard for content-path selection (Section 4, Stage 2)**: When multiple candidate content paths succeed, document-URL count is a SECONDARY criterion. The selected path must FIRST be plausibly relevant to the source's institutional intelligence type (per `institutional_class`). Volume alone MUST NOT determine path selection. This prevents repeating the US Treasury / RBI content-path mismatch (most voluminous path ≠ correct path for target intelligence type).
+
+All other V1.1 design elements preserved unchanged:
+- Same 32-source sample (seed=20260815) — no re-sampling
+- Re-run only 17 INCONCLUSIVE sources for Browser Rendering + Language
+- Content inspection (NEW) for ALL 32 sources for Event-Model
+- Decision sufficiency thresholds (≥80% measurement completeness per capability before matrix application)
 - Anti-overclaiming rules carried forward from V1
 - Surveyor discipline carried forward from V1
 
-This protocol does NOT execute any survey, does NOT modify any frozen artifact, and does NOT pre-decide any classification.
+Final status: **FROZEN / READY FOR EXECUTION.**
 
-The user is asked to ratify or override the protocol design. Once ratified, V1.1 execution can proceed per Section 6.
+The user has approved execution of V1.1 on the same 32 sources only. V1.1 execution can proceed per Section 6.
 
 ---
 
@@ -292,7 +315,8 @@ The user is asked to ratify or override the protocol design. Once ratified, V1.1
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Base commits | `2e33039` (Survey Protocol V1 corrected) → `2ac5d04` (Survey Results V1) → `e2479fb` (Survey Results V1 corrected) → this commit (Survey Protocol V1.1) |
+| Base commits | `2e33039` (Survey Protocol V1 corrected) → `2ac5d04` (Survey Results V1) → `e2479fb` (Survey Results V1 corrected) → `7dba672` (Survey Protocol V1.1 initial) → this commit (Survey Protocol V1.1 corrected / FROZEN) |
 | Depends on | Capability Survey Protocol V1 (corrected at `2e33039`) + Capability Survey Results V1 (corrected at `e2479fb`) |
 | Sample | SAME as V1 (32 sources, seed=20260815) — NOT re-sampled |
-| Does NOT modify | v2 framework, Queue V1.1, pipeline code, source_configs.py, Contract, Commercial Model, website, Portfolio V1 classifications |
+| Status | FROZEN / READY FOR EXECUTION (per user CONDITIONAL APPROVAL) |
+| Does NOT modify | v2 framework, Queue V1.1, pipeline code, source_configs.py, Contract, Commercial Model, website, Portfolio V1 classifications, Capability Survey Results V1 |
