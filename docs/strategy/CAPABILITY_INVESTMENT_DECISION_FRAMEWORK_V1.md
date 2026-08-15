@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: V1 — READY FOR FREEZE REVIEW (corrected per user review of `2e964df`)
+**Status**: V1 — FROZEN (framework ratified by user)
 **Type**: Strategy framework — decision framework, NOT a decision machine. Does NOT modify any frozen artifact.
 **Base**:
 - Capability Evidence Registry V1 (FROZEN at `dd66cc1`)
@@ -114,7 +114,7 @@ ENGINEERING REMEDIATION VALIDATED:                 0
 Total confirmed cases:                             3
 ```
 
-**Evidence Coverage**: Limited *(qualitative descriptor — NOT a calibrated threshold)*. 3 confirmed cases; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably).
+**Evidence Coverage**: Limited *(qualitative descriptor — NOT a calibrated threshold)*. 3 confirmed cases; universe prevalence unknown. substantial portion of the Global Source Universe remains unmeasured; universe prevalence UNKNOWN.
 
 **Evidence Diversity**: Moderate.
 - Distinct institutions: 3 (ESMA, SNB, BaFin)
@@ -169,7 +169,7 @@ ENGINEERING REMEDIATION VALIDATED:                 0
 Total confirmed cases:                             8
 ```
 
-**Evidence Coverage**: Moderate *(qualitative descriptor — NOT a calibrated threshold)*. 8 confirmed cases across 4 mismatches + 4 aligned; universe prevalence unknown. 149 untested sources; prevalence UNKNOWN.
+**Evidence Coverage**: Moderate *(qualitative descriptor — NOT a calibrated threshold)*. 8 confirmed cases across 4 mismatches + 4 aligned; universe prevalence unknown. substantial portion of the Global Source Universe remains unmeasured; universe prevalence UNKNOWN.
 
 **Evidence Diversity**: Moderate.
 - Distinct institutions: 8 (US Treasury, RBI, SEBI, PRA, BaFin, Eurostat, FED_ENF, ABS)
@@ -276,7 +276,7 @@ ENGINEERING REMEDIATION VALIDATED:                 0
 Total confirmed cases:                             4
 ```
 
-**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 4 confirmed cases; universe prevalence UNKNOWN. 149 untested sources; prevalence UNKNOWN (survey could not measure reliably — 53.1% INCONCLUSIVE in V1.1).
+**Evidence Coverage**: Very limited *(qualitative descriptor — NOT a calibrated threshold)*. 4 confirmed cases; universe prevalence UNKNOWN. substantial portion of the Global Source Universe remains unmeasured; universe prevalence UNKNOWN (survey V1.1 measurement completeness was insufficient — see Survey Results V1.1).
 
 **Evidence Diversity**: Broad.
 - Distinct institutions: 4 (TCMB, NSO India, Basel Committee, EIOPA)
@@ -285,7 +285,7 @@ Total confirmed cases:                             4
 - Distinct intelligence types: 4 (monetary_policy, statistical_release, financial_coordination, regulatory_enforcement)
 - Independent validation reviews: 0
 
-**Derived Evidence Confidence**: High for existence. 4 VALIDATED cases confirm the capability gap exists. However, coverage is very limited — prevalence in the 149-source untested population is UNKNOWN.
+**Derived Evidence Confidence**: High for existence. 4 VALIDATED cases confirm the capability gap exists. However, coverage is very limited — prevalence in the untested population is UNKNOWN.
 
 **Decision Layer**:
 - **Strategic Value**: HIGH if applies to G20 economies; UNKNOWN for broader source universe.
@@ -298,14 +298,14 @@ Total confirmed cases:                             4
 Evidence supports considering the capability for platform investment. The gap is real (4 VALIDATED cases across 4 institutional classes, 4 geographies, 4 intelligence types — broad diversity). TCMB provides ENGINEERING REQUIRED evidence (config-only cannot resolve). HOWEVER, Evidence Coverage is very limited (prevalence UNKNOWN), and no customer demand signal has been received for any of the 4 confirmed sources. Strategic Value cannot promote this to INVESTMENT DECISION READY.
 
 **Evidence gaps**:
-- Prevalence in the 149-source untested population — UNKNOWN and cannot be reliably measured from this execution environment.
+- Prevalence in the untested population — UNKNOWN and cannot be reliably measured from this execution environment.
 - Whether the 4 confirmed cases are outliers or representative — UNKNOWN.
 - Whether WebSphere Portal CMS (used by TCMB) is also used by other central banks — unverified hypothesis.
 - Whether modern SPA-heavy bank/regulator websites require browser rendering — unverified hypothesis.
 
 **Required additional evidence** (to change decision level):
 - **Customer demand signal**: A confirmed customer demand signal for TCMB (or NSO India, Basel Committee, EIOPA) may materially change the Decision Layer and trigger a manual re-evaluation of Decision Readiness — but does NOT automatically promote the capability to a higher level.
-- **Manual URL discovery per source**: A human-curated survey of the 149 untested sources (V1.2 with manual URL discovery) could estimate prevalence — but this is NOT recommended with the automated approach (per user directive: V1.2 universe survey NOT RECOMMENDED).
+- **Manual URL discovery per source**: A human-curated survey of the untested population (V1.2 with manual URL discovery) could estimate prevalence — but this is NOT recommended with the automated approach (per user directive: V1.2 universe survey NOT RECOMMENDED).
 - **Different execution environment**: A survey from an environment with unrestricted network access could reduce the 53% INCONCLUSIVE rate and provide a prevalence estimate.
 
 **Recommended next action**: WAIT for customer demand signal OR strategic priority for one of the 4 confirmed sources. If TCMB or another confirmed case is requested, a manual re-evaluation of Decision Readiness would be triggered — engineering work may then be authorized. Do NOT build the capability speculatively.
@@ -359,7 +359,7 @@ Total confirmed cases:                             7
 Evidence supports considering the capability for platform investment. 7 confirmed gaps across 6 languages with broad institutional, geographic, and linguistic diversity. HOWEVER, Evidence Coverage is very limited (prevalence UNKNOWN), all cases are at OBSERVED level (no remediation-tested), and no strategic priority for a specific jurisdiction has been established. Strategic Value cannot promote this to INVESTMENT DECISION READY.
 
 **Evidence gaps**:
-- Prevalence in the 149-source untested population — UNKNOWN (53.1% UNKNOWN language in V1.1).
+- Prevalence in the untested population — UNKNOWN (V1.1 language detection was insufficient — see Survey Results V1.1).
 - Which jurisdictions are prioritized for global expansion — strategic decision, not measurement.
 - Whether sources with an English version can be onboarded via English patterns + Capability 3 authoring — likely YES but unverified.
 - Whether building any single language library unlocks enough sources to justify the work — UNKNOWN.
@@ -666,17 +666,29 @@ This framework applies the Open Design Gap by:
 
 ## 8. Document Status
 
-**CAPABILITY_INVESTMENT_DECISION_FRAMEWORK_V1 — READY FOR FREEZE REVIEW.**
+**CAPABILITY_INVESTMENT_DECISION_FRAMEWORK_V1 — FROZEN.**
 
-Per user review of `2e964df` (CONDITIONALLY APPROVED), 3 final corrections have been applied:
+Per user review of `c59d04d` (READY FOR FREEZE), one final data-reconciliation correction has been applied, then the framework has been FROZEN.
 
-1. **Capability 3 — HYPOTHESIS excluded from confirmed-case counts**: ABS is now recorded as a hypothesis case (NOT counted as evidence). Confirmed evidence cases = 1 (FED_ENF only). Coverage, diversity, and all downstream calculations now reference 1 confirmed case, not 2.
+**Final correction — denominator reconciliation**:
+All references to a specific untested-source count (`149 untested sources`) have been replaced with the non-numeric statement: "substantial portion of the Global Source Universe remains unmeasured; universe prevalence UNKNOWN." This prevents an undocumented denominator from being embedded in the framework's Coverage descriptions. No denominator is invented or inferred.
 
-2. **Capability 6 — Resolution applicability separated for confirmed gaps vs observed potential types**: Confirmed representation gaps (3: Bundesbank, FSB, HMT) = `UNTESTED` (remediation applicable but not attempted). Observed potentially uncovered intelligence types (4: Bangladesh Bank, Central Bank of Egypt, CBS Netherlands, Basel Committee) = `NOT APPLICABLE / NOT YET ASSESSED` (applicability as representation gaps has NOT been established — these are content observations, not confirmed gaps). This preserves the distinction: observed content type ≠ confirmed representation gap.
+**Cumulative corrections across the framework's evolution** (10 total):
+1. Evidence State separated from Remediation Applicability (NOT APPLICABLE added) — per `2e964df`
+2. ABS reclassified (Content-Path = VALIDATED; Pattern Specificity = HYPOTHESIS) — per `2e964df`
+3. NOT APPLICABLE in Resolution Profile — per `2e964df`
+4. Coverage labels = qualitative descriptors — per `2e964df`
+5. Customer demand → manual re-evaluation (not automatic promotion) — per `2e964df`
+6. Line-count estimates → UNCALIBRATED cost/risk language — per `2e964df`
+7. Decision Readiness = provisional — per `2e964df`
+8. HYPOTHESIS excluded from confirmed-case counts (Capability 3) — per `c59d04d`
+9. Resolution applicability separated for confirmed gaps vs observed potential types (Capability 6) — per `c59d04d`
+10. Intelligence type count corrected (Capability 2: 3 → 4) — per `c59d04d`
+11. **Denominator reconciliation: undocumented `149` replaced with non-numeric statement (this commit)**
 
-3. **Capability 2 — intelligence type count corrected**: Distinct intelligence types = 4 (was incorrectly stated as 3). The 4 types are: sanctions_designation, monetary_policy_decision, regulatory_enforcement, statistical_release.
+**Final status: Capability Investment Decision Framework V1 — FROZEN.**
 
-These 3 corrections are local fixes — they do not alter the underlying evidence, the 15-field structure, or the FROZEN design constraints. After these corrections, the framework is ready for freeze review.
+Per user directive: "جمّد الإطار. لا أريد دورة تصحيحات تصميمية إضافية."
 
 This framework:
 - Applies the 6 FROZEN design constraints from `bb3f43a`.
@@ -701,7 +713,7 @@ The user is asked to:
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Status | READY FOR FREEZE REVIEW |
+| Status | FROZEN |
 | Type | Strategy framework — decision framework, NOT a decision machine |
 | Inputs | Capability Evidence Registry V1 (FROZEN `dd66cc1`); Global Source Universe V1 (`8b1e7b4`); Commercial Source Qualification Model v1/v2; Design Constraints V1 (FROZEN `bb3f43a`) |
 | Does NOT modify | Registry, Design Constraints, Portfolio, Queue, Qualification v2, pipeline, config, Contract, Commercial Model, website |
