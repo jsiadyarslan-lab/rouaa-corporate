@@ -2,9 +2,10 @@
 
 **Date**: 2026-08-15
 **Branch**: `top20-prescreening`
-**Status**: V1 — DRAFT FOR REVIEW
+**Status**: V1 — FROZEN (evidence baseline)
 **Type**: Evidence artifact — documentation only. Does NOT modify any other artifact.
 **Purpose**: Document the actual confirmed evidence for each capability boundary, distinct from the Capability Gap Portfolio's capability-importance view.
+**Freeze directive**: Per user approval of `ea5d5f4`. No further edits to this Registry — including wording improvements — without explicit user authorization. This is now the evidence baseline.
 
 ---
 
@@ -511,9 +512,17 @@ Per user directive:
 
 ## 7. Document Status
 
-**CAPABILITY_EVIDENCE_REGISTRY_V1 — APPROVED / READY TO FREEZE.**
+**CAPABILITY_EVIDENCE_REGISTRY_V1 — FROZEN (evidence baseline).**
 
-Per user review of `3b3dc76` (CONDITIONAL APPROVAL), one final evidence-level correction has been applied:
+Per user approval of `ea5d5f4` (APPROVED / READY TO FREEZE) and user freeze directive: **the Registry is now FROZEN as the evidence baseline.** No further edits — including wording improvements — without explicit user authorization.
+
+The correction history below is preserved as the record of how the Registry reached its frozen state.
+
+---
+
+### Correction history (preserved as record — no further edits)
+
+Per user review of `3b3dc76` (CONDITIONAL APPROVAL), one final evidence-level correction was applied before freeze:
 
 **BaFin remediation correctly attributed to Capability 7 (Configuration Contract), NOT Capability 1 (Provenance)**:
 
@@ -526,9 +535,9 @@ Per user review of `3b3dc76` (CONDITIONAL APPROVAL), one final evidence-level co
   - Positive compatibility: SNB (`dc:date` available, provenance complete, reproducibility verified)
   - Boundary/failure: ESMA (`document_date` unavailable via both tested paths)
 
-- In Capability 7 (Configuration Contract Compatibility), BaFin is now recorded as `REMEDIATION-VALIDATED` (config-only) with full evidence chain: `bd7285d` (Configuration Contract Verification — root cause identified as `event_type` misconfiguration) + `282de0f` (remediation commit — `event_type: regulatory_warning → regulatory_enforcement`, 3-line config-only change, BaFin PUBLISHABLE PASS with 9 IOs). The earlier "provenance ambiguity" flagged in `3bc9448` is explicitly noted as a symptom, NOT the root cause.
+- In Capability 7 (Configuration Contract Compatibility), BaFin is recorded as `REMEDIATION-VALIDATED` (config-only) with full evidence chain: `bd7285d` (Configuration Contract Verification — root cause identified as `event_type` misconfiguration) + `282de0f` (remediation commit — `event_type: regulatory_warning → regulatory_enforcement`, 3-line config-only change, BaFin PUBLISHABLE PASS with 9 IOs). The earlier "provenance ambiguity" flagged in `3bc9448` is explicitly noted as a symptom, NOT the root cause.
 
-**Cumulative corrections applied across the Registry's evolution**:
+**Cumulative corrections applied across the Registry's evolution (before freeze)**:
 1. ESMA primary evidence: `27294db` + `8041cda` (not `e2479fb`)
 2. BaFin remediation precise linkage: `event_type` misconfiguration (not provenance format) — config-only via `bd7285d` + `282de0f`
 3. Capability 5: 7 confirmed gaps across 6 languages (Banco Central do Brasil removed — English=YES)
@@ -536,7 +545,7 @@ Per user review of `3b3dc76` (CONDITIONAL APPROVAL), one final evidence-level co
 5. Speculative reuse numbers → UNKNOWN/HYPOTHESIS
 6. **BaFin remediation correctly attributed to Capability 7, NOT Capability 1; SNB added to Capability 1 as VALIDATED positive case**
 
-This registry now meets the strictest evidence-ledger standard:
+This registry meets the strictest evidence-ledger standard:
 - Primary evidence commits are exact (not documentation references)
 - Confirmed gaps are distinguished from non-English observations
 - Confirmed representation gaps are distinguished from content-type observations
@@ -544,9 +553,11 @@ This registry now meets the strictest evidence-ledger standard:
 - **Every remediation is attributed to the capability that the test proved caused or resolved the issue** (BaFin's remediation → Configuration Contract, NOT Provenance)
 - **Positive compatibility cases are included alongside boundary cases** (SNB positive + ESMA boundary) to provide balanced evidence
 
-Final status: **Capability Evidence Registry v1 — APPROVED / READY TO FREEZE.**
+**Final status: Capability Evidence Registry v1 — FROZEN (evidence baseline).**
 
-The registry is now a clean evidence ledger: every remediation is attributed to the capability that the test proved caused the problem or solved it. It can serve as the evidence baseline for future capability roadmap decisions.
+The registry is now a clean evidence ledger: every remediation is attributed to the capability that the test proved caused the problem or solved it. It serves as the evidence baseline for future capability roadmap decisions.
+
+**Per user directive: the next step is NOT a direct BUILD NOW decision.** The next step is an independent strategic decision: take the Registry + Global Source Universe + Commercial Model and transform them into a **Capability Investment Decision Framework** that decides which capabilities deserve investment — rather than continuously discovering new capabilities.
 
 ---
 
@@ -557,7 +568,9 @@ The registry is now a clean evidence ledger: every remediation is attributed to 
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Base commits | All prior capability workstream commits through `98c9a94` (Capability Evidence Registry strategic-shift commit, docs/strategy/) → this commit (Capability Evidence Registry V1 evidence artifact, docs/evidence/) |
+| Status | FROZEN (evidence baseline) — per user approval of `ea5d5f4` and freeze directive |
+| Base commits | All prior capability workstream commits through `98c9a94` (Capability Evidence Registry strategic-shift commit, docs/strategy/) → `309d1ac` (Registry V1 DRAFT) → `3b3dc76` (Registry V1 CORRECTED DRAFT) → `ea5d5f4` (Registry V1 APPROVED) → this commit (Registry V1 FROZEN) |
 | Evidence base | 16+ confirmed source cases across 7 capabilities, with exact commit references |
 | Distinguishes from | docs/strategy/CAPABILITY_GAP_PORTFOLIO_V1.md (Portfolio = capability-importance view; Registry = evidence-confirmation view) |
 | Does NOT modify | Capability Gap Portfolio V1, Capability Survey Results V1/V1.1, Survey Protocols V1/V1.1, Queue V1/V1.1, v2 Qualification framework, pipeline/config, Contract, Commercial Model, website |
+| Next step (per user directive) | NOT a direct BUILD NOW decision. Transform Registry + Global Source Universe + Commercial Model into a Capability Investment Decision Framework — an independent strategic decision, separate from capability discovery. |
