@@ -96,12 +96,14 @@ All 3 Gate 5 failures were caused by pattern-specificity issues, not by v2 quali
 
 These are NOT v2 methodology failures — the v2 stages correctly assessed that these sources have the right content type, compatible configuration, and semantically fitting event model. The failures are at the pattern-specificity level (regex patterns need to match the source's specific language/phrasing).
 
-### No engineering needed
+### No engineering intervention was executed
 
-All 3 failures required 0 engineering, 0 source-specific code. The issues are at the configuration/pattern level:
-- FED_ENF: pattern phrasing needs adjustment (config change, not code change)
-- ABS: pattern terminology needs adjustment (config change, not code change)
-- TCMB: link pattern needs adjustment (config change, not code change)
+No engineering intervention was executed during these attempts. The observed failures are currently classified as configuration/pattern-specificity issues pending remediation validation. This classification has not been validated through remediation:
+- FED_ENF: pattern phrasing mismatch (candidate configuration fix, untested)
+- ABS: terminology mismatch (candidate configuration fix, untested)
+- TCMB: link-pattern mismatch (candidate configuration fix, untested)
+
+Because no remediation was attempted, it is not yet known whether each failure is fully configuration-only or whether one may later reveal a pipeline limitation. The classification stands as a hypothesis to be tested.
 
 ### No remediation performed
 
@@ -141,6 +143,8 @@ Per constraints, no remediation was performed during the first attempt. All 3 re
 - Does NOT calculate a success rate (n=3, not valid for statistics)
 - Does NOT prove v2 is wrong (v2 correctly qualified all 3 sources — the failures are at pattern-specificity, not at qualification)
 - Does NOT prove that the sources cannot produce IOs (pattern adjustment was not attempted — no remediation)
+- Does NOT prove the pipeline architecture is sound (no remediation was attempted; classification as configuration-only is a hypothesis pending validation)
+- Does NOT prove that the failures are configuration-only (one or more may reveal pipeline limitations when remediation is attempted)
 
 ---
 
@@ -150,9 +154,17 @@ Per constraints, no remediation was performed during the first attempt. All 3 re
 
 2. **QUALIFICATION_READY ≠ guaranteed Gate 5 PASS**: 3/3 QUALIFICATION_READY sources failed Gate 5 due to pattern-specificity gaps. This confirms that v2's pre-Gate-5 stages are necessary but not sufficient — the patterns themselves must match the source's specific language.
 
-3. **Pattern-specificity is a distinct failure mode**: unlike content-path mismatch (wrong path) or representation gap (no event model), pattern-specificity is when the content type and event model are correct, but the regex patterns don't match the source's specific phrasing. This is a configuration authoring issue, not an architecture issue.
+3. **Pattern-specificity is a distinct failure mode**: unlike content-path mismatch (wrong path) or representation gap (no event model), pattern-specificity is when the content type and event model are correct, but the regex patterns don't match the source's specific phrasing. The v2 pre-screening stages proved content/model compatibility; they did NOT prove pattern execution readiness. This classification is currently a hypothesis pending remediation validation, not an architecture-disproving finding.
 
-4. **No engineering needed**: all 3 failures are at the pattern/config level, not at the code level. The pipeline architecture is sound; the patterns need refinement.
+4. **No engineering intervention was executed**: all 3 failures are currently classified as pattern-specificity issues pending remediation validation. The pipeline architecture has neither been proven sound nor proven deficient — only that no engineering intervention was required to reach the current observation. Whether remediation can resolve each case through configuration-only changes remains to be tested.
+
+5. **New boundary discovered (Pattern-Specificity / Execution Readiness)**: this batch identifies a distinct boundary between QUALIFICATION_READY and Gate 5 PASS. The pre-screening stages (Gates 1-4 → Content-Path → Configuration Contract → Semantic Representation) establish content/model compatibility; pattern execution readiness is a separate concern that pre-screening does not cover.
+    - Per current decision, Pattern-Specificity is treated as a **Gate 5 root-cause category / qualification risk**, NOT as a new gate.
+    - No Gate 4.5 / Pattern-Specificity Gate is added at this time.
+    - This boundary will be measured on additional samples before any v2 change.
+
+6. **Honest commercial promise update**: this batch clarifies that v2's verified capability is pre-onboarding qualification of source access, provenance, content-path alignment, configuration compatibility, and semantic representation. Gate 5 remains the validation step for source-specific extraction behavior. QUALIFICATION_READY is NOT a guarantee of publishable IOs — it is a routing state that authorizes a Gate 5 attempt.
+    - Updated commercial framing: *ROUAA can qualify source access, provenance, content-path alignment, configuration compatibility, and semantic representation before onboarding; Gate 5 remains the validation step for source-specific extraction behavior.*
 
 ---
 
@@ -170,7 +182,7 @@ Per constraints, no remediation was performed during the first attempt. All 3 re
 | Gate 5 FAIL (pattern-specificity) | 3/3 |
 | Engineering intervention | 0/3 |
 
-**Replication result**: v2 qualification correctly identifies QUALIFICATION_READY sources, but QUALIFICATION_READY does not guarantee Gate 5 PASS. Pattern-specificity gaps can cause Gate 5 failure even when all v2 stages pass. This is a configuration authoring issue, not a methodology or architecture issue.
+**Replication result**: v2 qualification correctly identifies QUALIFICATION_READY sources, but QUALIFICATION_READY does not guarantee Gate 5 PASS. Pattern-specificity gaps can cause Gate 5 failure even when all v2 stages pass. No engineering intervention was executed during these attempts; the observed failures are currently classified as configuration/pattern-specificity issues pending remediation validation. The classification stands as a hypothesis — whether remediation resolves each case through configuration-only changes or reveals pipeline limitations remains to be tested.
 
 **Cumulative v2 Gate 5 results** (including Eurostat):
 - QUALIFICATION_READY → Gate 5 PASS: 1 (Eurostat)
