@@ -122,7 +122,7 @@ Gate 5 — First-Attempt Validation
 
 **Methodology**:
 1. Identify the expected intelligence type from the source's institutional class and the patterns being considered (e.g., central bank → rate decisions; financial regulator → enforcement actions; statistical authority → statistical releases)
-2. Fetch 1-3 representative documents from the selected source path (the RSS feed, HTML index page, or PDF URL identified during Gate 1)
+2. Fetch enough representative documents from the selected source path to establish alignment; default target = up to 3 documents when available. The count is not a minimum or mandatory requirement.
 3. Inspect document titles and content to determine the actual content type
 4. Compare actual content type to expected intelligence type
 5. If they match → ALIGNED; if they don't → NOT ALIGNED; if unclear from sample → INCONCLUSIVE
@@ -507,7 +507,7 @@ This methodology does NOT:
 
 ```text
 Boundary framework v1              CLEARED (historical)
-Boundary framework v2              DRAFT FOR REVIEW
+Boundary framework v2              FROZEN
 Retrospective consistency (v1)     CLEARED
 Retrospective consistency (v2)     CLEARED (5 worked examples match evidence)
 Prospective prediction (v1)        PARTIALLY VALIDATED
