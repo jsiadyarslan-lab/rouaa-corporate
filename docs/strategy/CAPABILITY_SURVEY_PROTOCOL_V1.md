@@ -47,37 +47,39 @@ This protocol addresses three failure modes that 178 unframed HTTP probes would 
 
 The Global Source Universe contains 178 records. Probing all 178 is:
 - Expensive (178 HTTP probes + per-capability analysis per source)
-- Statistically unnecessary (a defensible sample can estimate population parameters with bounded confidence)
 - Strategically wrong (the question is "platform value", not "individual source behavior")
 
 **Sampling strategy: Stratified random sample.**
 
-Stratify by source class (central_bank, financial_regulator, statistical_authority, etc.) to ensure the sample represents the class distribution of the Universe. Random selection within each stratum avoids selection bias.
+Stratify by `institutional_class` (the exact field defined in Global Source Universe v1) to ensure the sample represents the class distribution of the Universe. Random selection within each stratum avoids selection bias.
 
-**Sample size target**: 30 sources (≈17% of the Universe). Rationale:
-- Sufficient for estimating a population proportion with 95% confidence and ±15% margin of error (binomial — for a 50/50 outcome, n=30 gives ±18%; for skewed distributions, narrower).
-- Sufficient for stratified comparison (5 sources per major stratum).
-- Resource-bounded: 30 sources × 3 surveys × ~10 min/source = ~15 hours of analysis. Achievable in a focused workstream.
-- Defensible: a documented random sample is more credible than "we probed all 178 but only analyzed the ones that looked interesting".
+**Sample size target**: 30 sources (≈17% of the Universe). This is a **pragmatic evidence-gathering sample, not a statistically powered estimate of the 178-source universe.** No formal population prevalence estimate will be claimed from n=30. The sample is sized for capability prioritization evidence — not for statistical inference about the Universe as a whole. The survey's scope of inference is explicitly limited to the **untested population** (see Section 3.2).
 
-**Stratification**: based on the existing source class field in the Global Source Universe. Approximate strata (counts to be verified against the Universe):
+**Stratification**: uses the exact `institutional_class` field from Global Source Universe v1. The 9 institutional classes and their counts (as frozen in `8b1e7b4`) are:
 
-| Stratum | Estimated count | Sample target |
-|---------|-----------------|----------------|
-| central_bank | ~40 | 8 |
-| financial_regulator | ~35 | 7 |
-| statistical_authority | ~20 | 4 |
-| securities_regulator | ~15 | 3 |
-| treasury / finance_ministry | ~15 | 3 |
-| international_body (BIS, IMF, FSB, OECD) | ~10 | 2 |
-| Other (corporate, market_data) | ~43 | 3 |
-| **Total** | **~178** | **30** |
+| `institutional_class` | Count in Universe | Sample target |
+|---|---|---|
+| B1 — Central Banks | 45 | 8 |
+| B2 — Financial Regulators | 35 | 7 |
+| B3 — Statistical Agencies | 25 | 4 |
+| B4 — Ministries of Finance | 16 | 3 |
+| B5 — Market Infrastructure | 13 | 2 |
+| B6 — Public/Sovereign Institutions | 17 | 3 |
+| B7 — Multilateral | 11 | 2 |
+| B8 — Disclosure Systems | 10 | 2 |
+| B9 — Other Authoritative | 6 | 1 |
+| **TOTAL** | **178** | **32** |
+
+Sample targets use proportional allocation (roughly 17% per stratum), rounded up to a minimum floor of 1 source per stratum (to ensure all classes are represented even for the smallest strata). The total sample target is 32 (not exactly 30 — the floor constraint forces a small overshoot). This is acceptable and documented.
+
+No other stratification fields are invented. The protocol uses ONLY the `institutional_class` field from Global Source Universe v1.
 
 ### 3.2 Selection Discipline
 
-- Random selection within stratum using a fixed random seed (documented in the survey execution artifact). The seed ensures reproducibility — anyone re-running the selection gets the same 30 sources.
+- Random selection within stratum using a fixed random seed (documented in the survey execution artifact). The seed ensures reproducibility — anyone re-running the selection gets the same sources.
 - Sources already Gate 5 tested (BaFin, Eurostat, FED_ENF, ABS, TCMB, US Treasury, RBI, Bundesbank, Banca d'Italia, OCC, SEBI, PRA, INSEE, FSB, UK HM Treasury) are EXCLUDED from the sample — they are already evidence in the Portfolio. Replacing them would inflate the sample with redundant data.
-- If a selected source is KNOWN_BLOCKED (Queue state), it is replaced with the next random selection in the same stratum. Documented in the execution artifact.
+- **The survey estimates evidence within the untested population only.** Previously tested sources remain historical evidence and are excluded from sampling. No population-wide prevalence claim is made for the full 178. The survey's scope of inference is the untested population (178 minus the ~15 already-tested sources ≈ 163 untested sources).
+- If a selected source is KNOWN_BLOCKED (Queue state), it is recorded as "inconclusive (access blocked)" and is NOT replaced. The sample is NOT re-padded for blocked sources — this would bias the sample toward accessible sources. The classification accounts for inconclusive cases explicitly (see Section 4).
 
 ### 3.3 What Is Recorded Per Source
 
@@ -103,29 +105,33 @@ For each sampled source, the survey records:
 
 ### 4.1 Capability 4 — Adapter / Browser Rendering
 
-**Primary question**: How many sources in the sample return a navigation skeleton via static HTTP (low document-URL count in static HTML) but expose document URLs after browser rendering?
+**Primary question**: Within the untested population sample, how many sources return a navigation skeleton via static HTTP (low document-URL count in static HTML) but expose document URLs after browser rendering?
 
 **Measurement protocol per source**:
 1. Fetch the selected content path via `urllib` (static).
-2. Count document-URL candidates in the static HTML (heuristic: `<a href>` URLs whose anchor text or URL path suggests an individual press release / statistical release / enforcement action, NOT a navigation link).
-3. If static count ≤ 3, fetch the same path via Playwright (rendered).
+2. Count document-URL candidates in the static HTML. A "document-URL candidate" is an `<a href>` whose anchor text or URL path suggests an individual target document (a specific press release, statistical release, enforcement action, etc.) — NOT a navigation link (not "About", "Contact", "Press Releases" section page, etc.).
+3. If static count ≤ 3, fetch the same path via Playwright (rendered) and wait for `networkidle` plus a brief fixed delay.
 4. Count document-URL candidates in the rendered HTML using the same heuristic.
-5. Classification:
+5. **Measurement validity rule**: the rendered document URLs must correspond to the same selected content path and represent individual target documents. If the rendered HTML merely exposes additional navigation links (e.g., mega-menu expansion) rather than individual target documents, the source is NOT classified as Browser-rendered. A source is Browser-rendered ONLY when rendered HTML exposes individual target documents that were absent from the static HTML.
+6. Classification:
    - **Static-sufficient**: static count ≥ 5 → browser rendering NOT required
-   - **Browser-rendered**: static count ≤ 3 AND rendered count ≥ 5 → browser rendering required
-   - **Sparse-content**: static count ≤ 3 AND rendered count ≤ 3 → likely wrong content path; route to CONTENT-PATH REVIEW (not a browser-rendering case)
-   - **Inconclusive**: cannot determine (e.g., JS errors, timeouts) → mark inconclusive
+   - **Browser-rendered**: static count ≤ 3 AND rendered count ≥ 5 (with the measurement-validity rule satisfied) → browser rendering required
+   - **Sparse-content**: static count ≤ 3 AND rendered count ≤ 3 (or rendered URLs are navigation-only) → likely wrong content path; route to CONTENT-PATH REVIEW (not a browser-rendering case)
+   - **Inconclusive**: cannot determine (e.g., JS errors, timeouts, KNOWN_BLOCKED) → mark inconclusive
 
-**Evidence threshold**:
-- If sample shows ≥30% of sources are Browser-rendered → capability has HIGH platform value → BUILD NOW candidate (subject to engineering risk review)
-- If sample shows 10-30% are Browser-rendered → capability has MEDIUM platform value → ENGINEERING CANDIDATE (defer; re-evaluate after customer demand signals)
-- If sample shows <10% are Browser-rendered → capability has LOW platform value → CUSTOMER-SPECIFIC (build per-customer when a specific customer requests a browser-rendered source)
-- If sample shows 0% are Browser-rendered → TCMB is an outlier; do NOT build the capability
+**Predefined prioritization bands** (triage rules, NOT empirically calibrated breakpoints):
+- If the sample shows ≥30% of sources are Browser-rendered → capability has HIGH platform value → BUILD NOW candidate (subject to engineering risk review)
+- If the sample shows 10-30% are Browser-rendered → capability has MEDIUM platform value → ENGINEERING CANDIDATE (defer; re-evaluate after customer demand signals)
+- If the sample shows <10% are Browser-rendered → capability has LOW platform value → CUSTOMER-SPECIFIC (build per-customer when a specific customer requests a browser-rendered source)
+- If 0 Browser-rendered sources are observed → **no evidence of reuse in the sampled population**; the capability is not justified by this survey. TCMB remains a single confirmed case; the survey provides no additional evidence for or against the capability.
+
+These bands are predefined prioritization bands / triage rules, not empirically calibrated breakpoints. They guide the matrix evaluation but do not bind the user's decision.
 
 **Important caveats**:
 - A source being Browser-rendered does NOT mean it is strategically valuable. The count is necessary but not sufficient.
 - Apply the user's evaluation matrix AFTER the count: institutional value × reuse × blocked count × risk.
-- The threshold is a triage rule, not an automatic promotion — even ≥30% requires the user's matrix evaluation before BUILD NOW.
+- Even ≥30% requires the user's matrix evaluation before BUILD NOW.
+- The bands do NOT claim statistical prevalence in the 178-source Universe. They describe observed evidence within the untested-population sample.
 
 ### 4.2 Capability 5 — Language / Multilingual Coverage
 
@@ -137,10 +143,12 @@ For each sampled source, the survey records:
 3. Check for an English version: look for an `/en/` path, a language switcher link, or an English RSS feed.
 4. Record: primary language, English version availability.
 
-**Evidence threshold** (per language):
+**Predefined prioritization bands** (per language — triage rules, NOT empirically calibrated breakpoints):
 - ≥3 sources publishing in language X with NO English version → building a language-X pattern library has HIGH platform value → BUILD NOW candidate (subject to global expansion roadmap priority)
 - 1-2 sources publishing in language X with NO English version → MEDIUM platform value → ENGINEERING CANDIDATE (defer; bundle with adjacent language libraries if a customer requests)
-- 0 sources in language X with NO English version → language X has LOW platform value → CUSTOMER-SPECIFIC (most non-English sources have an English version, in which case Capability 5 is not the gap)
+- 0 sources in language X with NO English version observed → **no evidence of reuse for language X in the sampled population**; language X is not justified by this survey (most non-English sources may have an English version, in which case Capability 5 is not the gap)
+
+These bands are predefined prioritization bands / triage rules, not empirically calibrated breakpoints.
 
 **Important caveats**:
 - Sources with an English version are NOT counted as language-coverage gaps (they can be onboarded via English patterns, possibly with Capability 3 authoring for non-US English phrasing).
@@ -169,10 +177,13 @@ For each sampled source, the survey records:
    - `market_structure` (UNCOVERED — market structure reports, competition assessments)
    - `other` (UNCOVERED — document for review)
 
-**Evidence threshold** (per uncovered intelligence type):
+**Predefined prioritization bands** (per uncovered intelligence type — triage rules, NOT empirically calibrated breakpoints):
 - ≥5 sources producing intelligence type Y with no existing event type fits → building event type Y has HIGH platform value → BUILD NOW candidate (subject to global expansion roadmap priority)
 - 2-4 sources producing intelligence type Y with no existing event type fits → MEDIUM platform value → ENGINEERING CANDIDATE (defer; bundle with adjacent event types if a customer requests)
 - 1 source producing intelligence type Y with no existing event type fits → LOW platform value → CUSTOMER-SPECIFIC
+- 0 sources producing intelligence type Y observed → **no evidence of reuse for event type Y in the sampled population**; event type Y is not justified by this survey
+
+These bands are predefined prioritization bands / triage rules, not empirically calibrated breakpoints.
 
 **Important caveats**:
 - A source producing uncovered intelligence type Y does NOT mean Y should be built. The count is necessary but not sufficient.
@@ -232,9 +243,11 @@ The three surveys are executed in a single pass over the 30-source sample. Each 
 ### 6.4 Anti-overclaiming
 
 The survey execution artifact MUST NOT:
-- Claim "X% of all sources need browser rendering" (the survey is a sample, not a census — claim "X% of the 30-source sample, with [confidence interval]").
+- Claim "X% of all sources" (the survey covers the untested population sample, not the full 178-source Universe — claim "X of N sampled sources in the untested population" with the explicit N).
+- Claim statistical prevalence in the 178-source Universe from n=30. The sample is for capability prioritization, not for population estimation.
 - Promote any capability to BUILD NOW without the user's matrix evaluation.
 - Compare the survey count to the confirmed cases in the Portfolio (the confirmed cases are NOT a random sample — they are sources selected for specific strategic reasons).
+- Use the word "outlier" for sources that don't match the survey pattern. A single confirmed case (e.g., TCMB) with 0 additional survey evidence is "no evidence of reuse in the sampled population", NOT "TCMB is an outlier".
 - Update the Commercial Model. The commercial promise stands unchanged until the user explicitly authorizes a Commercial Model update.
 
 ---
@@ -266,8 +279,8 @@ After the survey is executed per this protocol (after ratification), the followi
 
 Before any survey execution:
 
-1. **Ratify the sampling strategy** (Section 3): is stratified random sample of 30 sources correct, or should the sample size / stratification be different?
-2. **Ratify the per-capability survey questions** (Section 4): are the measurements correct, and are the evidence thresholds defensible?
+1. **Ratify the sampling strategy** (Section 3): is stratified random sample of ~32 sources (using the exact `institutional_class` field from Global Source Universe v1, with minimum floor of 1 per stratum) correct, or should the sample size / stratification be different?
+2. **Ratify the per-capability survey questions** (Section 4): are the measurements correct, are the measurement-validity rules (especially for Browser Rendering — Section 4.1 step 5) defensible, and are the predefined prioritization bands reasonable as triage rules?
 3. **Ratify the evaluation matrix application** (Section 5): is the matrix correctly structured, and are the per-capability inputs correct?
 4. **Ratify the survey execution discipline** (Section 6): are the anti-overclaiming rules and reproducibility requirements correct?
 
@@ -277,28 +290,34 @@ After ratification, the next step is survey execution per Section 7.
 
 ## 9. What This Protocol Does NOT Pre-Decide
 
-- Does NOT pre-decide the survey results. The thresholds in Section 4 are triage rules, not conclusions.
+- Does NOT pre-decide the survey results. The predefined prioritization bands in Section 4 are triage rules, not conclusions.
 - Does NOT pre-decide the matrix recommendations. The matrix inputs in Section 5 are placeholders — actual values come from the survey.
 - Does NOT pre-decide the per-capability BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC classification. The user makes the final call after the matrix evaluation.
 - Does NOT pre-decide that any capability will be built. Even if the survey shows high reuse, the user may defer for strategic reasons (e.g., focus on customer-acquisition before platform-expansion).
 - Does NOT pre-decide the sequence of capability work. Three BUILD NOW capabilities are NOT three parallel workstreams — they are sequenced by separate strategic priority.
+- Does NOT claim statistical prevalence in the 178-source Universe. The sample is for capability prioritization, not population estimation.
 
 ---
 
 ## 10. Document Status
 
-**CAPABILITY_SURVEY_PROTOCOL_V1 — DRAFT FOR USER RATIFICATION**
+**CAPABILITY_SURVEY_PROTOCOL_V1 — CORRECTED DRAFT FOR RATIFICATION**
 
-This protocol defines:
-- A defensible sampling framework (stratified random, n=30, documented seed)
-- Per-capability survey questions with measurable signals
-- Pre-defined evidence thresholds (triage rules, not conclusions)
-- An evaluation matrix application structure
-- Anti-overclaiming rules for the survey execution
+Per user review of `6f421ea`, five methodological corrections have been applied:
 
-This protocol does NOT execute any survey, does NOT modify any frozen artifact, and does NOT pre-decide any classification.
+1. **Removed statistical claims** (95% CI, ±15/18% margin of error). The protocol now explicitly states that n=30 is a **pragmatic evidence-gathering sample, not a statistically powered population estimate**. No formal prevalence claim is made from n=30.
 
-The user is asked to ratify or override the protocol design. Once ratified, survey execution can proceed per Section 7.
+2. **Stratification aligned to Global Source Universe v1**. The protocol now uses the exact `institutional_class` field from Global Source Universe v1 (frozen at `8b1e7b4`), with the exact counts (B1=45, B2=35, B3=25, B4=16, B5=13, B6=17, B7=11, B8=10, B9=6, TOTAL=178). No invented strata. Sample target = 32 (proportional allocation with minimum floor of 1 per stratum).
+
+3. **Survey scope of inference explicitly limited**. Previously tested sources are excluded from sampling; the survey estimates evidence within the **untested population only** (178 − ~15 already-tested sources ≈ 163 sources). No population-wide prevalence claim is made for the full 178.
+
+4. **Threshold language corrected**. All thresholds renamed to **predefined prioritization bands / triage rules, not empirically calibrated breakpoints**. "0% → TCMB is an outlier" replaced with **"0 observed → no evidence of reuse in the sampled population"**. The word "outlier" is explicitly forbidden in the anti-overclaiming rules.
+
+5. **Browser-rendering measurement validity rule added** (Section 4.1, step 5). The rendered document URLs must correspond to the same selected content path AND represent individual target documents — not merely additional navigation links. This prevents measuring navigation expansion rather than browser-required content.
+
+Final status: the protocol is methodologically sound. The evaluation matrix remains a recommendation only; the final BUILD NOW / ENGINEERING CANDIDATE / CUSTOMER-SPECIFIC decision remains the user's manual call.
+
+The user is asked to ratify or override the corrected protocol design. Once ratified, survey execution can proceed per Section 7.
 
 ---
 
@@ -309,6 +328,6 @@ The user is asked to ratify or override the protocol design. Once ratified, surv
 | Author | main (Super Z) |
 | Date | 2026-08-15 |
 | Branch | `top20-prescreening` |
-| Base commits | `9e0733c` (Portfolio V1 initial) → `bace0e2` (Portfolio V1 corrected) → this commit (Survey Protocol V1) |
-| Depends on | CAPABILITY_GAP_PORTFOLIO_V1 (corrected at `bace0e2`) — three engineering candidates (Capabilities 4, 5, 6) |
+| Base commits | `9e0733c` (Portfolio V1 initial) → `bace0e2` (Portfolio V1 corrected) → `6f421ea` (Survey Protocol V1 initial) → this commit (Survey Protocol V1 corrected) |
+| Depends on | CAPABILITY_GAP_PORTFOLIO_V1 (corrected at `bace0e2`) — three engineering candidates (Capabilities 4, 5, 6) AND Global Source Universe v1 (frozen at `8b1e7b4`) — exact `institutional_class` field and counts |
 | Does NOT modify | v2 framework, Queue V1.1, pipeline code, source_configs.py, Contract, Commercial Model, website, Portfolio V1 classifications |
