@@ -97,10 +97,10 @@ All routing to ENGINEERING REVIEW is evidence-supported (representation gap iden
 
 **Yes.** Under v1, all 5 sources would have been classified as "QUALIFICATION_READY" after Gates 1-4 (all passed). v2 differentiated them:
 - 1 source (Eurostat) reached QUALIFICATION_READY — would proceed to Gate 5
-- 1 source (PRA) was correctly stopped at Content-Path Alignment — content-path mismatch discovered before Gate 5
-- 3 sources (INSEE, FSB, UK HM Treasury) were correctly stopped at Semantic Representation — representation gap discovered before Gate 5
+- 1 source (PRA) was stopped at Content-Path Alignment — content-path mismatch discovered before Gate 5
+- 3 sources (INSEE, FSB, UK HM Treasury) were stopped at Semantic Representation — representation gap discovered before Gate 5
 
-Under v1, all 5 would have proceeded to Gate 5, where 4 would have failed (0 facts extracted for PRA/FSB/HMT; language mismatch for INSEE). v2 prevented 4 unnecessary Gate 5 attempts by catching issues at earlier stages.
+Under the v1 routing logic, all five would have been eligible for Gate 5 after Gates 1–4; their actual Gate 5 outcomes were not tested in this run. v2 routed four sources before Gate 5 based on observed pre-Gate-5 conditions.
 
 ### Were the "test scenarios" (case types) predictive?
 
@@ -119,15 +119,15 @@ This confirms that predictions should remain UNKNOWN — the test scenarios were
 
 1. **v2 methodology is operational**: all 5 sources were assessed through the frozen v2 stages. The methodology correctly differentiated sources at different stages (content-path, configuration contract, semantic representation).
 
-2. **v2 prevents unnecessary Gate 5 attempts**: 4 of 5 sources were correctly stopped before Gate 5, saving pipeline execution time and avoiding config authoring for sources that would not produce IOs.
+2. **v2 routed 4 of 5 sources before Gate 5**: based on identified pre-Gate-5 conditions (content-path mismatch, representation gaps). This reduced Gate 5 executions in this batch; it does not establish that those sources would have failed Gate 5.
 
 3. **Content-Path Alignment is a real boundary**: PRA's failure (RSS contains general publications, not enforcement actions) is the 4th content-path mismatch observed (after US Treasury, RBI, SEBI). This is a consistent pattern.
 
-4. **Semantic Representation catches event-model gaps**: 3 of 5 sources have representation gaps (INSEE: language; FSB: policy/coordination; HMT: fiscal policy). These would have been 0-facts Gate 5 failures under v1.
+4. **Semantic Representation catches event-model gaps**: 3 of 5 sources have representation gaps (INSEE: language; FSB: policy/coordination; HMT: fiscal policy). These were identified before Gate 5 through the v2 semantic assessment stage.
 
 5. **v2 stages work prospectively**: the methodology was applied to 5 completely new sources from 4 different institutional classes, and produced evidence-driven outcomes without assumptions.
 
-6. **No engineering needed**: all 5 sources required 0 engineering, 0 source-specific code, 0 core pipeline changes. All issues are at the configuration/model layer.
+6. **No engineering intervention was executed**: no engineering was performed during this run. Three sources were routed to Engineering Review based on evidence-supported representation findings. All issues are at the configuration/model layer.
 
 ---
 
