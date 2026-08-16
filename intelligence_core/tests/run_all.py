@@ -10,6 +10,7 @@ if __name__ == "__main__":
         loader.loadTestsFromName("intelligence_core.tests.test_temporal"),
         loader.loadTestsFromName("intelligence_core.tests.test_governance"),
         loader.loadTestsFromName("intelligence_core.tests.test_pipeline"),
+        loader.loadTestsFromName("intelligence_core.tests.test_hardening"),
     ])
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)

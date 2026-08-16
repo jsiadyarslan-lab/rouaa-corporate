@@ -12,6 +12,26 @@ from .health import SourceHealth
 from .temporal import parse_rfc822_pubdate, parse_iso_or_date
 
 
+def ensure_source(store, cfg, institution) -> None:
+    """L-SRC fix: the Core pipeline persists the resolved Source itself (D6/Core
+    boundary). Idempotent: same source_id + same institution -> no duplicate row.
+    Called ONLY after entity resolution succeeded (failed resolution -> no row)."""
+    from .contracts import Source
+    existing = store.latest_by_id("sources", "source_id").get(cfg.code)
+    if existing is not None:
+        if existing["institution_id"] != cfg.institution_id:
+            raise RuntimeError(
+                f"source '{cfg.code}' already registered to "
+                f"{existing['institution_id']}, refusing rebind to "
+                f"{cfg.institution_id} (D6; supersede explicitly)")
+        return
+    store.append("sources", Source(
+        source_id=cfg.code, institution_id=cfg.institution_id,
+        source_path=cfg.source_path, source_type="official",
+        acquisition_method="direct_http",
+        configuration_version=cfg.configuration_version).to_dict())
+
+
 def _record_representation(store, fetch: dict, source_id: str) -> None:
     """D1: append-only; identical content re-fetch reuses the same representation id."""
     if fetch["representation_id"] not in store.latest_by_id("representations", "representation_id"):
@@ -93,6 +113,7 @@ def run_source(store, registry, cfg, transport=None, run_id: str = "run") -> dic
         if inst.institution_id != cfg.institution_id:
             raise RuntimeError(f"entity mismatch: config binds {cfg.institution_id}, "
                                f"domain verified to {inst.institution_id}")
+        ensure_source(store, cfg, inst)
         fetch = adapter.fetch(cfg.source_path, run_id=run_id)
         health.transition("ACCESSIBLE")
         xml_text = fetch["bytes"].decode("utf-8", errors="replace")
@@ -100,8 +121,11 @@ def run_source(store, registry, cfg, transport=None, run_id: str = "run") -> dic
         if cfg.feed_format == "rss":
             items = parse_rss_items(xml_text)
         else:
+            from .acquisition import resolve_index_link
             links = find_html_links(xml_text, cfg.link_pattern, cfg.source_path)
-            items = [{"link": l, "title": "", "guid": "", "pubDate": ""} for l in links]
+            # L-REL fix: absolutize against the index page before Document fetch
+            items = [{"link": resolve_index_link(l, cfg.source_path),
+                      "title": "", "guid": "", "pubDate": ""} for l in links]
         for item in items:
             if not item.get("link"):
                 continue

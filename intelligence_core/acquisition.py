@@ -89,6 +89,14 @@ def parse_rss_items(xml_text: str) -> list:
         return items
 
 
+def resolve_index_link(href: str, index_url: str) -> str:
+    """L-REL fix: normalize an html_index href against the index page URL before
+    fetching. Supports absolute, root-relative (/path), path-relative (path),
+    and ../ forms. Canonicalization still passes through NR-v1 at fetch time."""
+    from urllib.parse import urljoin
+    return urljoin(index_url, href.strip())
+
+
 def find_html_links(html: str, link_pattern: str, base: str) -> list:
     """OFAC-style html_index discovery: anchors matching a configured pattern."""
     out = []

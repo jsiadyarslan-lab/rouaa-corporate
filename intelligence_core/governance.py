@@ -55,24 +55,49 @@ def supersede_fact_by_source(store: AppendOnlyStore, old_fact_id: str,
     return closed
 
 
+def _resolve_active_fact(store: AppendOnlyStore, fact_id: str,
+                         _seen: set | None = None) -> dict | None:
+    """L-EVT-PROP fix: follow the supersession chain (same-id version bumps AND
+    cross-representation superseded_by links) to the terminal ACTIVE fact.
+    Returns None only for INVALIDATED chains (withdrawn without successor)."""
+    seen = _seen or set()
+    if fact_id in seen:
+        return None                      # cycle guard (defensive; links are append-only)
+    seen.add(fact_id)
+    cur = store.current_fact(fact_id)
+    if cur is None:
+        return None
+    if cur["status"] == ObjState.ACTIVE.value:
+        return cur
+    if cur["status"] == ObjState.SUPERSEDED.value and cur.get("superseded_by"):
+        # same-id version path: "fact-x:vN" -> same fact_id; cross-id path: raw fact_id
+        nxt = cur["superseded_by"].split(":v")[0]
+        return _resolve_active_fact(store, nxt, seen)
+    return None                          # INVALIDATED (no successor)
+
+
 def recompute_event(store: AppendOnlyStore, event_id: str,
                     derived_at: str = "") -> dict | None:
-    """D2 propagation: rebuild derivation from CURRENT ACTIVE facts referenced by the event.
-    Appends event_version+1 with a fresh snapshot; prior version remains reproducible."""
+    """D2 propagation (L-EVT-PROP fixed): rebuild the derivation by resolving every
+    snapshot fact through its supersession chain to the current ACTIVE successors.
+    Appends event_version+1; the prior version remains exactly reproducible.
+    An event never silently disappears: if every chain is INVALIDATED (withdrawn
+    without successor), an INVALIDATED event version is appended instead."""
     versions = store.event_versions(event_id)
     if not versions:
         raise ValueError(f"unknown event {event_id}")
     latest = versions[-1]
-    active_facts = []
+    resolved, invalidated = [], 0
     for ref in latest["fact_version_snapshot"]:
-        cur = store.current_fact(ref["fact_id"])
-        if cur and cur["status"] == ObjState.ACTIVE.value:
-            active_facts.append(cur)
-    snapshot = [{"fact_id": r["fact_id"], "fact_version": r["fact_version"]} for r in active_facts]
-    if not active_facts:
-        return None
-    if snapshot == latest["fact_version_snapshot"]:
-        return latest  # no change — no new version (idempotent)
+        cur = _resolve_active_fact(store, ref["fact_id"])
+        if cur is not None:
+            resolved.append(cur)
+        else:
+            invalidated += 1
+    snapshot = [{"fact_id": r["fact_id"], "fact_version": r["fact_version"]}
+                for r in resolved]
+    if snapshot == latest["fact_version_snapshot"] and invalidated == 0:
+        return latest  # no change — no new version (idempotent, Case F)
     new_version = latest["event_version"] + 1
     # close old version FIRST (append-only: last row per id = current view)
     closing = dict(latest)
@@ -81,9 +106,12 @@ def recompute_event(store: AppendOnlyStore, event_id: str,
     store.append("events", closing)
     row = dict(latest)
     row.update({"event_version": new_version, "fact_version_snapshot": snapshot,
-                "status": ObjState.ACTIVE.value, "derived_at": derived_at})
+                "status": ObjState.ACTIVE.value if snapshot else ObjState.INVALIDATED.value,
+                "derived_at": derived_at})
     store.append("events", row)
-    store.audit("EVENT_RECOMPUTED", {"event_id": event_id, "new_version": new_version})
+    store.audit("EVENT_RECOMPUTED", {"event_id": event_id, "new_version": new_version,
+                                     "resolved_facts": len(snapshot),
+                                     "invalidated_chains": invalidated})
     return store.current_event(event_id)
 
 

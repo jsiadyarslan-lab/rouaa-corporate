@@ -281,10 +281,11 @@ def make_fixtures(capdir: Path, ledger: list, captured: dict) -> dict:
             head = text.split("<item>")[0]
             fixtures[s["url"]] = (head + "".join(items) + "</channel></rss>").encode("utf-8")
         else:
-            base = s.get("base_override", s["url"])
-            links = info["items"]
+            # L-REL live proof: fixture carries the RAW relative hrefs from the real
+            # body; the Core pipeline resolves them (resolve_index_link) itself.
+            raw = find_html_links(text, s["link_pattern"], s["url"])[: s["n"]]
             page = "<html><body>" + "".join(
-                f'<a href="{i["link"]}">doc</a>' for i in links) + "</body></html>"
+                f'<a href="{h}">doc</a>' for h in raw) + "</body></html>"
             fixtures[s["url"]] = page.encode("utf-8")
     return fixtures
 
@@ -292,7 +293,8 @@ def make_fixtures(capdir: Path, ledger: list, captured: dict) -> dict:
 def execute_suite(store_dir: str, capdir: Path, ledger: list, fixtures: dict,
                   run_id="phase2-run") -> dict:
     store = AppendOnlyStore(store_dir)
-    register_sources(store, build_registry())
+    # L-SRC fixed: the Core pipeline persists Source rows itself (ensure_source);
+    # explicit harness registration removed.
     t = CachedTransport(capdir, ledger, fixtures)
     reg = build_registry()
     results = {}
